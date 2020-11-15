@@ -1,0 +1,8 @@
+.PeopleTable {
+  border-collapse: collapse;
+  margin-top: 10px;
+
+  &__heading {
+    text-transform: uppercase;
+  }
+}
