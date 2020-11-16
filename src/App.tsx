@@ -16,6 +16,7 @@ const App: React.FC = () => (
       <Route path="/" exact component={HomePage} />
       <Route path="/people" component={PeoplePage} />
       <Redirect path="/home" to="/" />
+      <Redirect path="/react_people-table-basics" to="/" />
       <NotFoundPage />
     </Switch>
   </div>
