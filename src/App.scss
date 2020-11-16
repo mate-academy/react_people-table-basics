@@ -1,1 +1,30 @@
 // styles go here
+.navbar-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  line-height: 1.5;
+  }
+
+h2, h1 {
+  text-align: center;
+}
+
+.is-active {
+  color: rgb(12, 40, 247);
+}
+
+.PeopleTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 4px double black;
+  th { 
+    text-align: left;
+    background: #ccc;
+    padding: 5px;
+    border: 1px solid black; 
+   }
+   td { 
+    padding: 5px;
+    border: 1px solid black;
+   }
+}
