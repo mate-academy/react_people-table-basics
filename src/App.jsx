@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
 import { NotFoundPage } from './components/NotFoundPage';
@@ -25,6 +25,8 @@ const App = () => (
       >
         <HomePage />
       </Route>
+
+      <Redirect path="/home" to="/" />
 
       <NotFoundPage />
     </Switch>
