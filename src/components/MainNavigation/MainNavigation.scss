@@ -1,0 +1,21 @@
+.MainNavigation {
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+    margin: 5px auto;
+    text-transform: uppercase;
+  }
+
+  &__link {
+    text-decoration: none;
+
+    &:hover {
+      color: pink;
+    }
+  }
+}
+
+.is-active {
+  color: pink;
+}
