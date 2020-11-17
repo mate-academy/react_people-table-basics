@@ -9,7 +9,6 @@ export const PeoplePage = () => {
   useEffect(() => {
     const getPeopleFromServer = async() => {
       const people = await getPeople();
-
       const preparedPeople = people.map((person: People) => {
         const preparedPerson = {
           ...person,
@@ -23,10 +22,8 @@ export const PeoplePage = () => {
 
         return { ...preparedPerson };
       });
-
       setPeople(preparedPeople);
     };
-
     getPeopleFromServer();
   }, []);
 

@@ -13,27 +13,31 @@ import { PeoplePage } from './components/PeoplePage';
 const App = () => (
   <div className="App">
     <MainNavigation />
+
     <h1>People table</h1>
 
-    <Switch>
+    <div className="columns">
+      <div className="column">
 
-    <Route
-      path="/"
-      exact
-      component={HomePage}
-    />
+        <Switch>
+          <Route
+            path="/"
+            exact
+            component={HomePage}
+          />
 
-    <Route
-      path="/people"
-      exact
-      component={PeoplePage}
-    />
+          <Route
+            path="/people"
+            exact
+            component={PeoplePage}
+          />
 
-    <Redirect path="/home" to="/" />
+          <Redirect path="/home" to="/" />
 
-    <NotFoundPage />
-    </Switch>
-
+          <NotFoundPage />
+        </Switch>
+      </div>
+    </div>
   </div>
 );
 
