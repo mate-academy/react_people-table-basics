@@ -1,0 +1,15 @@
+.nav {
+  height: 50px;
+  border-style: solid;
+  display: flex;
+  justify-content: space-around;
+  background: #e25644;
+  color: #fff;
+}
+
+.nav__item {
+  font-size: 32px;
+  background: #e25644;
+  color: #fff;
+  margin: 5px;
+}
