@@ -1,1 +1,23 @@
 // styles go here
+
+.container {
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  background-color: rgb(139, 245, 1);
+}
+
+.navbar-item {
+  color: black;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.active {
+  padding-bottom: 1px;
+  border-bottom: 1px black solid;
+}
