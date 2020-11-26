@@ -1,0 +1,10 @@
+.PeopleTable {
+  margin: 0 auto;
+  border-collapse: collapse;
+
+  &__heading {
+    padding: 10px 15px;
+    color: #e50916;
+    border: 1px solid #e50916;
+  }
+}
