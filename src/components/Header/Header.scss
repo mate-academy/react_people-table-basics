@@ -1,0 +1,29 @@
+.navigation {
+  &__list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 30px 0;
+    margin: 0;
+    background: linear-gradient(to bottom, 000 0%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  &__item {
+    padding: 10px 15px;
+  }
+  
+  &__link {
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    font-size: 14px;
+    transition: .2s ease-out;
+
+    &--active,
+    &:hover {
+      color: #e50916;
+      border-bottom: 3px solid #e50916;
+    }
+  }
+}
