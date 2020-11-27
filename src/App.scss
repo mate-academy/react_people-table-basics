@@ -1,1 +1,23 @@
-// styles go here
+.App {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+html {
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
