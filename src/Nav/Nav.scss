@@ -1,0 +1,23 @@
+.nav {
+  padding: 20px;
+  background-color: #a5a5a5;
+
+  &__list {
+    display: flex;
+  }
+
+  &__item {
+    margin-right: 14px;
+  }
+
+  &__link {
+    padding: 10px;
+    font-weight: bold;
+    color: #fff;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #000;
+    }
+  }
+}
