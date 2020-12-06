@@ -1,0 +1,21 @@
+.nav {
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+
+  &__item {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 32px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: blue;
+    margin: 5px;
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+    
+    
+  }
+}
