@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { PersonRow } from '../PersonRow';
 
 export function PeopleTable({ people }) {
   return (
@@ -15,13 +16,7 @@ export function PeopleTable({ people }) {
       </thead>
       <tbody>
         {people.map(person => (
-          <tr key={person.id}>
-            <td>{person.name}</td>
-            <td>{person.died - person.born}</td>
-            <td>{person.sex}</td>
-            <td>{person.motherName}</td>
-            <td>{person.fatherName}</td>
-          </tr>
+          <PersonRow key={person.id} person={person} />
         ))}
       </tbody>
     </table>
@@ -32,11 +27,12 @@ PeopleTable.propTypes = {
   people: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-      died: PropTypes.string.isRequired,
-      born: PropTypes.string.isRequired,
-      motherName: PropTypes.string.isRequired,
-      fatherName: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      died: PropTypes.number,
+      born: PropTypes.number.isRequired,
+      motherName: PropTypes.string,
+      fatherName: PropTypes.string,
+      sex: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
 };
