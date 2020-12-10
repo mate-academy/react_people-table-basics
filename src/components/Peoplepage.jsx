@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { PersonRow } from './PersonRow';
 
 export const Peoplepage = ({ people }) => {
   if (!people) {
@@ -17,10 +18,22 @@ export const Peoplepage = ({ people }) => {
             <th>Born</th>
             <th>Died</th>
             <th>Mother</th>
-            <th>Fathe</th>
+            <th>Father</th>
           </tr>
         </thead>
-        <tbody />
+        <tbody>
+          {people.map((person, index) => (
+            <PersonRow
+              key={index}
+              name={person.name}
+              sex={person.sex}
+              born={person.born}
+              died={person.died}
+              mother={person.motherName}
+              father={person.fatherName}
+            />
+          ))}
+        </tbody>
       </table>
     </div>
   );

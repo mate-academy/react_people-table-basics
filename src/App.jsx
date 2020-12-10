@@ -26,7 +26,7 @@ const App = () => {
 
       <section>
         <div>
-          <h1>Header</h1>
+          <h1>Welcome</h1>
         </div>
       </section>
 
