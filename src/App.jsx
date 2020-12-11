@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Redirect, Route, Switch } from 'react-router-dom';
+import { NavLink, Redirect, Route, Switch } from 'react-router-dom';
 import { Homepage } from './components/Homepage';
 import { Peoplepage } from './components/Peoplepage';
 import { getPeople } from './api/API';
@@ -18,15 +18,25 @@ const App = () => {
   }, []);
 
   return (
-    <div className="app">
-      <nav className="navigation">
-        <Link className="navigation__link" to="/">Home</Link>
-        <Link className="navigation__link" to="/people">People</Link>
-      </nav>
+    <div className="app section">
+      <div className="tabs">
+        <ul>
+          <li>
+            <NavLink to="/" activeClassName="is-active" exact>
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/people" activeClassName="is-active" exact>
+              People
+            </NavLink>
+          </li>
+        </ul>
+      </div>
 
       <section>
         <div>
-          <h1>Welcome</h1>
+          <h1 className="title is-2">Welcome</h1>
         </div>
       </section>
 
@@ -39,7 +49,7 @@ const App = () => {
 
         <Redirect path="/home" to="/" />
 
-        <p>Not found page!</p>
+        <p className="paragraph">Not found page!</p>
       </Switch>
     </div>
   );

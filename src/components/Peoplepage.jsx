@@ -8,9 +8,9 @@ export const Peoplepage = ({ people }) => {
   }
 
   return (
-    <div>
-      <h1>People page</h1>
-      <table className="PeopleTable">
+    <div className="section">
+      <h1 className="title is-3">People page</h1>
+      <table className="table is-bordered">
         <thead>
           <tr>
             <th>Name</th>
@@ -22,9 +22,9 @@ export const Peoplepage = ({ people }) => {
           </tr>
         </thead>
         <tbody>
-          {people.map((person, index) => (
+          {people.map(person => (
             <PersonRow
-              key={index}
+              key={person.name}
               name={person.name}
               sex={person.sex}
               born={person.born}
