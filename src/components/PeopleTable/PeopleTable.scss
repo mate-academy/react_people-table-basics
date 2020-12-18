@@ -1,0 +1,24 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  justify-content: center;
+}
+
+thead {
+  font-family: "Times New Roman", Times, serif;
+  color: #30336b;
+  border-bottom: 1px solid #30336b;
+}
+
+table tbody {
+  display: block;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+table thead,
+table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
