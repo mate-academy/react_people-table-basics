@@ -17,5 +17,5 @@ export const PersonRow = ({ person }) => {
 };
 
 PersonRow.propTypes = {
-  person: PropTypes.object.isRequired,
+  person: PropTypes.shape().isRequired,
 };

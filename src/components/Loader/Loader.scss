@@ -1,0 +1,26 @@
+.Loader {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+
+  &__content {
+    border-radius: 50%;
+    width: 2.5em;
+    height: 2.5em;
+    margin: 1em auto;
+    border: 0.5em solid rgb(232, 230, 242);
+    border-left-color: blue;
+    animation: load8 1.2s infinite linear;
+  }
+}
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
