@@ -1,1 +1,36 @@
-// styles go here
+.App {
+  text-align: center;
+  margin-top: 40px;
+}
+
+h2 {
+  color: blue;
+}
+
+.Header {
+  margin: 20px;
+  font-size: 18px;
+  color: black;
+  text-align: center;
+}
+
+.is-active {
+  background: blue;
+  color: white;
+  padding: 5px;
+}
+
+.Person {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.PeopleTable {
+  border-collapse: collapse;
+  margin: auto;
+}
+
+.person {
+  background: blue;
+  color: white;
+}
