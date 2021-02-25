@@ -1,6 +1,6 @@
 # React - People table
 - Replace `<your_account>` with your Github username in the
-  [DEMO LINK](https://<your_account>.github.io/react_people-table-basics/)
+  [DEMO LINK](https://sasha39612.github.io/react_people-table-basics/)
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
 ## If you don't use **Typescript**
@@ -34,6 +34,26 @@
         <tbody>...</tbody>
       </table>
       ```
+    - add `border-collapse: collapse` style to the table
+1. Implement `PersonRow` component accepting a `person` and displaying all the data described above
+    ```html
+    <tr class="Person">
+      <td></td>
+      ...
+      <td></td>
+    </tr>
+    ```
+
+
+
+
+
+1. Add a `Header` visible everywhere with navigation links to both pages
+1. Create `getPeople` method fetching `people` from [API](https://mate-academy.github.io/react_people-table/api/people.json)
+  when `PeoplePage` is opened
+    'How to thansfer components to diferen pages????'
+1. Implement `PeopleTable` component accepting an array of people as a param and rendering them in a table
+  
     - add `border-collapse: collapse` style to the table
 1. Implement `PersonRow` component accepting a `person` and displaying all the data described above
     ```html
