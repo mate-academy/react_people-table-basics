@@ -30,4 +30,3 @@ export const PeopleTable: React.FC<PeopleProps> = ({people}) => {
     </div>
   );
 };
-
