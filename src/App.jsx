@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Header } from './components/Header';
 import { HomePage } from './components/HomePage';
-// eslint-disable-next-line import/named
 import { PeoplePage } from './components/PeoplePage';
 
 import './App.scss';
