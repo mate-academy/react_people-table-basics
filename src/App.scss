@@ -1,1 +1,31 @@
-// styles go here
+
+.navbar {
+  display: flex;
+  justify-content: flex-start;
+
+  &__item {
+    padding: 20px;
+  }
+}
+
+.PeopleTable {
+  border: 2mm ridge rgba(50, 138, 220, 0.795);;
+  background-color: #ff33cc;
+  border-collapse: collapse;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #0fa0b9;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #e495e4;
+}
+
+tbody tr {
+  background-image: grey;
+}
+
+th, td {
+  padding: 20px;
+}
