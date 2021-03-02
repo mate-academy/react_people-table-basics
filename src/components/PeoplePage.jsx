@@ -9,8 +9,8 @@ export const PeoplePage = () => {
     getPeople().then((people) => {
       const peopleAddedParam = people.map(person => ({
         ...person,
-        father: people.filter(father => father.name === person.fatherName)[0],
-        mother: people.filter(mother => mother.name === person.motherName)[0],
+        father: people.find(father => father.name === person.fatherName),
+        mother: people.find(mother => mother.name === person.motherName),
       }));
 
       setPeople(peopleAddedParam);
