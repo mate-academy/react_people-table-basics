@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ObjectType } from '../../types';
+import { PersonRow } from '../PersonRow';
 
 import './PeopleTable.scss';
-
-import { PersonRow } from '../PersonRow';
 
 export const PeopleTable = ({ people }) => (
   <div className="container">
@@ -22,7 +21,11 @@ export const PeopleTable = ({ people }) => (
       </thead>
       <tbody>
         {people.map((person, index) => (
-          <PersonRow person={person} index={index + 1} key={person.name} />
+          <PersonRow
+            person={person}
+            index={index + 1}
+            key={person.name}
+          />
         ))}
       </tbody>
     </table>

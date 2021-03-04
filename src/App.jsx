@@ -1,7 +1,8 @@
 import React from 'react';
-import './App.scss';
 
+import './App.scss';
 import 'bulma';
+
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { People } from './components/People';
