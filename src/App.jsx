@@ -9,7 +9,11 @@ import { People } from './components/People';
 import { HomePage } from './components/HomePage';
 import { NotFoundPage } from './components/NotFoundPage';
 
-const App = () => (
+interface Props {
+  userId: number;
+}
+
+const App: FC<Props> = ({ userId }) => (
   <div className="App">
     <Navigation />
     <Switch>
