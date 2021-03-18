@@ -1,1 +1,26 @@
-// styles go here
+.App {
+  margin: 0 5rem;
+  border: 2px solid lightgray;
+}
+
+.header {
+  background-color: lightgray;
+  height: 80px;
+}
+
+.button.is-dark {
+  float: right;
+  margin: 1rem 1rem 0 0;
+}
+
+h2 {
+  text-align: center;
+}
+
+.table_root {
+  margin: 10px;
+}
+
+.table td {
+  color: grey;
+}
