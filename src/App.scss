@@ -1,1 +1,58 @@
-// styles go here
+* {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.app__Header {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.pageTitle {
+  font-size: 20px !important;
+ padding: 0px 0px 0px 30px !important;
+}
+
+.peopleTable {
+  &__Header {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+  &__Body {
+    border-collapse: collapse;
+    border: 1px solid rgb(207, 207, 207);
+    margin: 0 auto;
+  }
+  &__rowsHeader {
+    padding: 0px 20px;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid rgb(207, 207, 207);
+  }
+  &__cell {
+    padding: 0px 20px;
+  }
+
+  &__Person {
+    text-align: left;
+    border: 1px solid rgb(207, 207, 207);
+  }
+
+  &__Person:hover {
+   background-color: rgb(207, 207, 207);
+  }
+}
+
+.navbar-item.is-tab.is-active {
+  background-color: transparent;
+  border-bottom-color: #949496 !important;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
+  color: #747474!important;
+  padding-bottom: calc(0.5rem - 3px);
+}
+.navbar-item.is-tab {
+  border-bottom-color: #a1a1a1 !important;
+  color: #747474!important;
+}
