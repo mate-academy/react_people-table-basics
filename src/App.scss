@@ -29,17 +29,16 @@
     font-weight: bold;
     text-align: left;
     border: 1px solid rgb(207, 207, 207);
-    &__cell {
-      padding: 0px 20px;
-    }
   }
+  &__cell {
+    padding: 0px 20px;
+  }
+
   &__Person {
     text-align: left;
     border: 1px solid rgb(207, 207, 207);
-    &__cell {
-      padding: 0px 20px;
-    }
   }
+
   &__Person:hover {
    background-color: rgb(207, 207, 207);
   }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { PersonRow } from './PersonRow';
 
+const tableHeaders = ['Name','Sex','Born','Died','Mother','Father'];
+
 export type Person = {
   name: string,
   sex: string,
@@ -21,12 +23,14 @@ export const PeopleTable: React.FC<People> = ({ people }) => (
     <table className="peopleTable__Body">
       <thead>
         <tr className="peopleTable__rowsHeader">
-        <td className="peopleTable__rowsHeader__cell">Name</td>
-        <td className="peopleTable__rowsHeader__cell">Sex</td>
-        <td className="peopleTable__rowsHeader__cell">Born</td>
-        <td className="peopleTable__rowsHeader__cell">Died</td>
-        <td className="peopleTable__rowsHeader__cell">Mother</td>
-        <td className="peopleTable__rowsHeader__cell">Father</td>
+          {tableHeaders.map(header => (
+            <td
+              key={header} 
+              className="peopleTable__rowsHeader peopleTable__cell"
+            >
+              {header}
+            </td>
+          ))}
         </tr>
       </thead>
 

@@ -11,8 +11,6 @@ export const PeoplePage = () => {
       .then(setPeople)
   }, [])
 
-  console.log(people);
-
   return (
     <div>
       <h2 className="pageTitle">People page</h2>
