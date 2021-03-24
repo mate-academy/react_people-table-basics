@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css';
 import App from './App';
 
 ReactDOM.render(
-  <HashRouter basename="/react_people-table-basics/">
+  <HashRouter basename="/">
     <App />
   </HashRouter>,
   document.getElementById('root'),
