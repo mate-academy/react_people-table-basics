@@ -4,10 +4,19 @@ import { NavLink } from 'react-router-dom';
 export function Header() {
   return (
     <>
-      <NavLink to="/">
+      <NavLink
+        to="/"
+        exact
+        activeClassName="is-active"
+        className="link"
+      >
         Home Page
       </NavLink>
-      <NavLink to="/people">
+      <NavLink
+        to="/people"
+        activeClassName="is-active"
+        className="link"
+      >
         Peaple Page
       </NavLink>
     </>
