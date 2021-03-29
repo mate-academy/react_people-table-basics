@@ -17,7 +17,7 @@ export function Header() {
         activeClassName="is-active"
         className="link"
       >
-        Peaple Page
+        People Page
       </NavLink>
     </>
   );
