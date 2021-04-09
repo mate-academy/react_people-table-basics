@@ -19,7 +19,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => (
       </tr>
     </thead>
     <tbody>
-      {people.length && people.map((person: Person) => (
+      {people.length && people.map(person => (
         <PersonRow
           key={person.slug}
           person={person}
