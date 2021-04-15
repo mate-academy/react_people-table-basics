@@ -1,0 +1,18 @@
+.PeopleTable {
+  border-collapse: collapse;
+  margin: auto;
+}
+
+.PeopleTable thead {
+  background: azure;
+}
+
+.PeopleTable td,
+.PeopleTable tr {
+  border: 2px solid black;
+}
+
+.PeopleTable td {
+  padding: 10px;
+  width: 150px;
+}

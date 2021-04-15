@@ -1,0 +1,21 @@
+.Navigation {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.Navigation a {
+  color: black;
+  padding: 20px;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.Navigation .Active {
+  border-bottom: 2px solid aqua;
+  color: burlywood;
+}
+
+.Navigation a:hover {
+  border-bottom: 2px solid aqua;
+  color: burlywood;
+}
