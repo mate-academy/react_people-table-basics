@@ -6,6 +6,7 @@ import './PeoplePage.css';
 export const PeoplePage = () => {
   const [people, setPeople] = useState([]);
   const [error, setError] = useState(false);
+  let headerTableData = [];
 
   useEffect(() => {
     getPeople()
@@ -13,15 +14,28 @@ export const PeoplePage = () => {
       .catch(e => setError(true));
   }, []);
 
+  if (people.length) {
+    headerTableData = (Object.keys(people[0]))
+      .filter(el => el !== 'motherName'
+        && el !== 'slug'
+        && el !== 'fatherName');
+  }
+
+  console.log(headerTableData);
+
   return (
     <div className="PeoplePage">
       <h1>People Page</h1>
       <h2>People table</h2>
       {!error
-        ? <PeopleTable people={people} />
+        ? (
+          <PeopleTable
+            people={people}
+            headerTableData={headerTableData}
+          />
+        )
         : <p>Something is wrong, try load page later!</p>
       }
     </div>
   );
 };
-

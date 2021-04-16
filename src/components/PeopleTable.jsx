@@ -1,21 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './PeopleTable.css';
 
-export const PeopleTable = ({people}) => (
+export const PeopleTable = ({ people, headerTableData }) => (
   <table className="PeopleTable">
     <thead>
       <tr>
-        <td>name</td>
-        <td>sex</td>
-        <td>born</td>
-        <td>died</td>
-        <td>mother</td>
-        <td>father</td>
+        {headerTableData.map(header => (
+          <td key={header}>
+            {header.toUpperCase()}
+          </td>
+        ))}
       </tr>
     </thead>
     <tbody>
       {people.map(person => (
-        <tr className="Person">
+        <tr className="Person" key={person.name}>
           <td>{person.name}</td>
           <td>{person.sex}</td>
           <td>{person.born}</td>
@@ -27,3 +27,8 @@ export const PeopleTable = ({people}) => (
     </tbody>
   </table>
 );
+
+PeopleTable.propTypes = {
+  people: PropTypes.arrayOf().isRequired,
+  headerTableData: PropTypes.arrayOf().isRequired,
+};
