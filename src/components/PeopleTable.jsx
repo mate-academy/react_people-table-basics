@@ -29,6 +29,6 @@ export const PeopleTable = ({ people, headerTableData }) => (
 );
 
 PeopleTable.propTypes = {
-  people: PropTypes.arrayOf().isRequired,
-  headerTableData: PropTypes.arrayOf().isRequired,
+  people: PropTypes.arrayOf(PropTypes.object).isRequired,
+  headerTableData: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

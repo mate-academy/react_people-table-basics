@@ -21,8 +21,6 @@ export const PeoplePage = () => {
         && el !== 'fatherName');
   }
 
-  console.log(headerTableData);
-
   return (
     <div className="PeoplePage">
       <h1>People Page</h1>
