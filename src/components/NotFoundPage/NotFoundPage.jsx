@@ -1,5 +1,5 @@
 import React from 'react';
-import './PeoplePage.scss';
+import './NotFoundPage.scss';
 import { Route } from 'react-router-dom';
 
 export const NotFoundPage = () => (
