@@ -1,0 +1,35 @@
+.header {
+  &__line {
+    height: 2px;
+    background-color: transparent;
+    box-shadow: 3px 3px 3px rgba(12, 0, 0, 0.45);
+  }
+
+  &__icon {
+    height: 30px;
+  }
+
+  &__item {
+    display: inline-block;
+    margin: 10px 10px 0;
+    padding: 10px;
+
+    cursor: pointer;
+    font-size: 1.2rem;
+    border: 1px transparent solid;
+    transition: border 0.3s;
+
+    &:hover {
+      border: 1px rgba(0, 0, 0, 0.26) solid;
+    }
+  }
+
+  &__link {
+    color: rgb(20, 82, 182);
+    transition: color 0.3s;
+
+    &:hover {
+      color: rgb(100, 9, 160);
+    }
+  }
+}
