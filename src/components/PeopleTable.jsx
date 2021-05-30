@@ -5,7 +5,7 @@ import 'bulma';
 import { PersonRow } from './PersonRow';
 
 const COLUMN_NAMES = [
-  'Name', 'Sex', 'Born', 'Died', 'Father', 'Mother',
+  'Name', 'Sex', 'Born', 'Died', 'Mother', 'Father',
 ];
 
 export const PeopleTable = ({ people }) => (
