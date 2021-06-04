@@ -1,0 +1,44 @@
+.PeopleTable {
+  margin-top: 50px;
+  border-collapse: collapse;
+  border: none;
+
+  tr:nth-child(odd) {
+    background-color: transparentize(#fff, 0.2);
+  }
+  tr:nth-child(even) {
+    background-color: transparentize(#fff, 0.6);
+  }
+
+  thead tr {
+    border-bottom: 3px solid #e4dfd3;
+  }
+
+  th, td {
+    padding: 8px;
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  th {
+    text-transform: capitalize;
+  }
+
+  @media (min-width: 768px) {
+    th, td {
+      padding: 10px 12px;
+    }
+  }
+
+  @media (min-width: 991px) {
+    margin-top: 60px;
+
+    th, td {
+      padding: 10px 15px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    margin-top: 70px;
+  }
+}
