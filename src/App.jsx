@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
