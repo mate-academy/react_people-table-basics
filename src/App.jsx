@@ -19,6 +19,7 @@ const App = () => (
       <Route path="/people" component={PeoplePage} />
 
       <Redirect from="/home" to="/" />
+      <Redirect from="/react_people-table-basics/" to="/" />
 
       <NotFoundPage />
     </Switch>
