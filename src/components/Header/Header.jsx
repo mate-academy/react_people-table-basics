@@ -9,7 +9,7 @@ export const Header = () => (
       <li className="header__item">
         <Link
           className="header__link"
-          to="/"
+          to="react_people-table-basics/"
         >
           Home
         </Link>
@@ -17,7 +17,7 @@ export const Header = () => (
       <li>
         <Link
           className="header__link"
-          to='/people'
+          to='react_people-table-basics/people'
         >
           People
         </Link>

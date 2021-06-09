@@ -14,11 +14,11 @@ const App = () => (
 
     <Switch>
 
-      <Route path="/" exact>
+      <Route path="/react_people-table-basics/" exact>
         <HomePage />
       </Route>
 
-      <Route path="/people" exact>
+      <Route path="react_people-table-basics/people" exact>
         <PeoplePage />
       </Route>
 
