@@ -1,0 +1,17 @@
+.PeopleTable {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 3px;
+  border: 1px solid black;
+  background: skyblue;
+}
+
+tbody {
+  &:hover {
+    color: white;
+    background-color: skyblue;
+  }
+}
