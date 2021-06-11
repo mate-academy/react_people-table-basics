@@ -1,41 +1,16 @@
 import React from 'react';
-import { Switch, Route, NavLink, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
+import { Header } from './components/Header';
 import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
+import { NotFoundPage } from './components/NotFoundPage';
 
 import './App.scss';
 
 const App = () => (
   <div className="App">
-    <header>
-      <h1 className="main-title">People table</h1>
-
-      <nav className="navigation">
-        <ul className="nav nav-pills">
-          <li className="nav-item">
-            <NavLink
-              to="/"
-              exact
-              className="nav-link"
-              activeClassName="active"
-            >
-              Home
-            </NavLink>
-          </li>
-
-          <li className="nav-item">
-            <NavLink
-              to="/people"
-              className="nav-link"
-              activeClassName="active"
-            >
-              People
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <Header />
 
     <Switch>
       <Route path="/" exact>
@@ -48,7 +23,7 @@ const App = () => (
 
       <Redirect path="/home" to="/" />
 
-      <h2>Page not found</h2>
+      <NotFoundPage />
     </Switch>
   </div>
 );
