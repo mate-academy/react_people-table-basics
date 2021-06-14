@@ -6,6 +6,7 @@ import './App.scss';
 import { Header } from './components/Header';
 import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
+import { NotFoundPage } from './components/NotFoundPage';
 
 const App = () => (
   <div className="App">
@@ -17,7 +18,7 @@ const App = () => (
         <Route path="/" component={HomePage} exact />
         <Route path="/people" component={PeoplePage} />
 
-        <p>Page not found</p>
+        <NotFoundPage />
       </Switch>
     </section>
   </div>
