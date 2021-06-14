@@ -13,17 +13,10 @@ const App = () => (
     <Header className="header"/>
 
     <Switch>
-
-      <Route path="/" exact>
-        <HomePage />
-      </Route>
-
-      <Route path="/people" exact>
-        <PeoplePage />
-      </Route>
+      <Route path="/" exact component={HomePage} />
+      <Route path="/people" exact component={PeoplePage} />
 
       <NotFoundPage />
-
     </Switch>
   </div>
 );
