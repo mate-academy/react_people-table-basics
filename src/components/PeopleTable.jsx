@@ -17,7 +17,7 @@ export const PeopleTable = ({ people }) => (
     </thead>
     <tbody>
       {people.map(person => (
-        <PersonRow person={person} key={person.name} />
+        <PersonRow person={person} key={person.slug} />
       ))}
     </tbody>
   </table>
