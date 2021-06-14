@@ -1,1 +1,35 @@
 // styles go here
+.nav {
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+  font-size: 25px;
+}
+
+.nav a {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  padding: 10px;
+
+  &:hover {
+    background-color: #f3f4f4;
+  }
+}
+
+.link {
+  border-bottom: 1px solid black;
+}
+
+.active {
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: none;
+}
+
+.line {
+  height: 49px;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
