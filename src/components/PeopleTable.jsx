@@ -7,9 +7,11 @@ import { PersonRow } from './PersonRow';
 
 export const PeopleTable = ({ people }) => {
   const preparedPeople = people
-    .filter(child => people
-      .find(parent => parent.name === child.motherName
-        || parent.name === child.fatherName));
+    .map(person => ({
+      ...person,
+      mother: people.find(parent => parent.name === person.motherName),
+      father: people.find(parent => parent.name === person.fatherName),
+    }));
 
   return (
     <table className="PeopleTable">
