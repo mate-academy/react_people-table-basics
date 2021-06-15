@@ -1,11 +1,8 @@
 import React from 'react';
-import {
-  Switch,
-  Route,
-  Link,
-} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { HomePage } from './components/HomePage/HomePage';
+import { Header } from './components/Header/Header';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { NotFoundPage } from './components/NotFounPage/NotFoundPage';
 
@@ -13,25 +10,10 @@ import './App.scss';
 
 const App = () => (
   <div className="App">
-    <header>
-      <nav>
-        <ul className="nav nav-tabs">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">Home</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/people">People</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <Header />
     <Switch>
-      <Route path="/people">
-        <PeoplePage />
-      </Route>
-      <Route path="/" exact>
-        <HomePage />
-      </Route>
+      <Route path="/people" component={PeoplePage} />
+      <Route path="/" component={HomePage} exact />
       <NotFoundPage />
     </Switch>
   </div>

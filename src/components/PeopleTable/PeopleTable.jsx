@@ -17,7 +17,7 @@ export const PeopleTable = ({ people }) => (
     </thead>
     <tbody>
       {people.map(person => (
-        <PersonRow key={person.name} {...person} />
+        <PersonRow key={person.slug} {...person} />
       ))}
     </tbody>
   </table>
@@ -25,6 +25,6 @@ export const PeopleTable = ({ people }) => (
 
 PeopleTable.propTypes = {
   people: PropTypes.arrayOf(
-    PropTypes.shape({}).isRequired,
+    PropTypes.shape().isRequired,
   ).isRequired,
 };
