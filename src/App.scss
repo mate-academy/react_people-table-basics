@@ -1,1 +1,29 @@
 // styles go here
+.App {
+  &__button {
+    padding: 10px;
+    margin: 10px;
+
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+
+    &--is_active {
+      background-color: yellowgreen;
+    }
+
+    &:hover {
+      background-color: gray;
+      color: white;
+    }
+  }
+}
+
+.PeopleTable {
+  border-collapse: collapse;
+
+  &__item, &__head {
+    padding: 5px;
+    border: 1px solid black;
+  }
+}
