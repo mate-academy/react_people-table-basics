@@ -9,7 +9,6 @@ export const Header = () => (
       to="/"
       exact
       className="navbar-item is-tab"
-
     >
       Home
     </NavLink>

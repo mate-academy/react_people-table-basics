@@ -14,8 +14,8 @@ export const PersonRow = ({
     <td>{sex}</td>
     <td>{born}</td>
     <td>{died}</td>
-    <td>{mother}</td>
-    <td>{father}</td>
+    <td>{mother ? mother.name : ''}</td>
+    <td>{father ? father.name : ''}</td>
   </tr>
 );
 
@@ -24,11 +24,13 @@ PersonRow.propTypes = {
   sex: PropTypes.string.isRequired,
   born: PropTypes.number.isRequired,
   died: PropTypes.number.isRequired,
-  motherName: PropTypes.string,
+  motherName: PropTypes.shape({}),
   fatherName: PropTypes.string,
 };
 
 PersonRow.defaultProps = {
-  motherName: null,
+  motherName: {
+    name: null,
+  },
   fatherName: null,
 };

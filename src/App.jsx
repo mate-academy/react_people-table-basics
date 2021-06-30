@@ -14,14 +14,11 @@ const App = () => (
   <>
     <Header />
     <div className="App">
-      {/* <h1>People table</h1> */}
       <Switch>
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route path="/people">
-          <PeoplePage />
-        </Route>
+        <Route path="/people" component={PeoplePage} />
         <Redirect path="/home" to="/" />
         <NotFoundPage />
       </Switch>
