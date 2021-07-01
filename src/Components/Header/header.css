@@ -1,0 +1,23 @@
+.header {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  color: blueviolet;
+  border: 2px solid black;
+  background-color: burlywood;
+}
+
+.header__link {
+  font-size: 18px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.header__link:hover {
+  transform: scale(1.2);
+}
+
+.active {
+  text-decoration: underline;
+}

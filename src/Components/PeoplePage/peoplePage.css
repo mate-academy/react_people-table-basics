@@ -1,0 +1,9 @@
+.table {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.col {
+  padding: 10px 10px 10px 0;
+  text-align: start;
+}
