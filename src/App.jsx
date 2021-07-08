@@ -1,22 +1,35 @@
 import React from 'react';
-import { Link, Redirect, Route, Switch } from 'react-router-dom';
-import { HomePage } from './HomePage';
-import { PeoplePage } from './PeoplePage';
-import { NotFoundPage } from './NotFoundPage';
-
+import { Link, NavLink, Redirect, Route, Switch } from 'react-router-dom';
+import { HomePage } from './components/HomePage';
+import { PeoplePage } from './components/PeoplePage';
+import { NotFoundPage } from './components/NotFoundPage';
 import './App.scss';
+
+import logo from './images/svg-2.svg';
 
 export const App = () => (
   <div className="App">
-    <header>
+    <header className="header header--theme_light header--size_l">
+      <Link to="/">
+        <img src={logo} alt="logo" />
+      </Link>
       <nav className="nav">
         <div className="nav__list">
-          <Link className="nav__item" to="/home">
+          <NavLink
+            to="/"
+            exact
+            className="nav__item"
+            activeClassName="is-active"
+          >
             Home
-          </Link>
-          <Link className="nav__item" to="/people">
+          </NavLink>
+          <NavLink
+            to="/people"
+            className="nav__item"
+            activeClassName="is-active"
+          >
             People
-          </Link>
+          </NavLink>
         </div>
       </nav>
     </header>

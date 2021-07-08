@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getPeople } from './api';
+import { getPeople } from '../../api/api';
+import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState([]);
@@ -9,9 +10,12 @@ export const PeoplePage = () => {
       .then(result => setPeople(result));
   }, []);
 
-  console.log(people);
-
   return (
-    <h1>People page</h1>
+    <>
+      <h1 className="title">People page</h1>
+      {(people.length !== 0) && (
+      <PeopleTable people={people} />
+      )}
+    </>
   );
 };
