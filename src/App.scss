@@ -1,1 +1,20 @@
 // styles go here
+.header {
+  background-color: rgb(194, 196, 174);
+  color: antiquewhite;
+  border: 1px solid;
+  border-radius: 20px;
+  box-shadow: 4px 4px 4px black;
+  padding: 40px
+}
+
+.link {
+  text-decoration: none;
+  font-size: 20px;
+  color: rgb(4, 24, 24);
+  background-color: rgb(110, 110, 110);
+  border-radius: 10px;
+  box-shadow: 4px 4px 4px black;
+  padding: 5px;
+  margin: 5px;
+}
