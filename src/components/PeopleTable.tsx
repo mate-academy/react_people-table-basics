@@ -9,8 +9,6 @@ export interface PeopleTableProps {
 export const PeopleTable = ({ people }: PeopleTableProps) => {
   const columnNames = ['name', 'sex', 'born', 'died', 'mother', 'father'];
 
-  console.log(people)
-
   return (
     <table className="PeopleTable table is-hoverable">
       <thead className="thead">
@@ -25,7 +23,7 @@ export const PeopleTable = ({ people }: PeopleTableProps) => {
         </tr>
       </thead>
       <tbody className="tbody">
-        {people.map(person => <PersonRow key={person.name} person={person}/>)}
+        {people.map(person => <PersonRow key={person.name} person={person} />)}
       </tbody>
     </table>
   )

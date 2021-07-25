@@ -2,20 +2,24 @@ import React, {useEffect, useState} from 'react';
 import { getPeople } from '../api';
 import { PeopleTable } from './PeopleTable';
 
+type Person = {
+  [key: string]: any
+}
+
 export const PeoplePage = () => {
   const [people, setPeople] = useState([]);
   useEffect(() => {
     getPeople()
       .then(result => result
-        .map((person: {[key: string]: any}) => ({
+        .map((person: Person) => ({
           ...person,
           mother: result
-            .find((mother: {[key: string]: any}) => mother.name === person.motherName),
+            .find((mother: Person) => mother.name === person.motherName),
           father: result
-            .find((father: {[key: string]: any}) => father.name === person.fatherName),
+            .find((father: Person) => father.name === person.fatherName),
           }
         )))
-      .then(setPeople)
+      .then(setPeople);
   }, []);
   
   return (
