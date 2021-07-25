@@ -1,18 +1,18 @@
 import React from 'react';
 import {
   Switch, Route,
-  Redirect, Link,
+  Redirect, Link, NavLink,
 } from 'react-router-dom';
 
 import './App.scss';
-import { PeoplePage } from './components/PeoplePage';
+import { PeoplePage } from './components/PeoplePage/PeoplePage';
 
 const App = () => (
   <div className="App">
     <header className="header">
       <h1>header</h1>
-      <Link to="/" className="link">To home page</Link>
-      <Link to="/people" className="link">To people table</Link>
+      <NavLink to="/" className="link">To home page</NavLink>
+      <NavLink to="/people" className="link">To people table</NavLink>
     </header>
     <Switch>
 
