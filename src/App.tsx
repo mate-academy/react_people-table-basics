@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Switch, Route,
-  Redirect, Link, NavLink,
+  Redirect, NavLink,
 } from 'react-router-dom';
 
 import './App.scss';
