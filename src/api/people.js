@@ -1,5 +1,5 @@
 export const getPeople = () => (
-  fetch('../../api/people.json')
+  fetch('react_people-table-basics/blob/gh-pages/api/people.json')
     .then(response => response.json())
     .then(persons => persons.map(person => ({
       ...person,
