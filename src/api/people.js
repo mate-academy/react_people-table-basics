@@ -1,6 +1,6 @@
 export const getPeople = () => (
   // eslint-disable-next-line
-  fetch('https://Artem20201610.github.io/react_people-table-basics/api/people.json')
+  fetch('https://mate-academy.github.io/react_people-table/api/people.json')
     .then(response => response.json())
     .then(persons => persons.map(person => ({
       ...person,
