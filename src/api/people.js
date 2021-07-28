@@ -1,5 +1,6 @@
 export const getPeople = () => (
-  fetch('react_people-table-basics/blob/gh-pages/api/people.json')
+  // eslint-disable-next-line
+  fetch('https://Artem20201610.github.io/react_people-table-basics/api/people.json')
     .then(response => response.json())
     .then(persons => persons.map(person => ({
       ...person,
