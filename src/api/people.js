@@ -1,5 +1,5 @@
 export const getPeople = () => (
-  fetch('/api/people.json')
+  fetch('people.json')
     .then(response => response.json())
     .then(persons => persons.map(person => ({
       ...person,
