@@ -17,14 +17,14 @@ const App = () => (
     <section className="section">
       <div className="container">
         <Switch>
-          <Route path="/people">
+          <Route path="#/people">
             <PeoplePage />
           </Route>
-          <Route path="/" exact>
+          <Route path="#/" exact>
             <HomePage />
           </Route>
 
-          <Redirect path="/home" to="/" exact/>
+          <Redirect path="#/home" to="#/" exact/>
 
           <NotFoundPage />
         </Switch>
