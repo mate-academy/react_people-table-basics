@@ -20,11 +20,11 @@ const App = () => (
           <Route path="/people">
             <PeoplePage />
           </Route>
-          <Route path="/home">
+          <Route path="/" exact>
             <HomePage />
           </Route>
 
-          <Redirect path="/" to="/home" exact/>
+          <Redirect path="/home" to="/" exact/>
 
           <NotFoundPage />
         </Switch>
