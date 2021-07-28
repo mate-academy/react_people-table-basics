@@ -24,7 +24,7 @@ const App = () => (
             <HomePage />
           </Route>
 
-          <Redirect path="/" to="/home" />
+          <Redirect path="/" to="/home" exact/>
 
           <NotFoundPage />
         </Switch>
