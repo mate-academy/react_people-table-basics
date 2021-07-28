@@ -17,25 +17,14 @@ const App = () => (
     <section className="section">
       <div className="container">
         <Switch>
-          <Route
-            // eslint-disable-next-line
-            path="https://Artem20201610.github.io/react_people-table-basics/people"
-          >
+          <Route path="/people">
             <PeoplePage />
           </Route>
-          <Route
-            path="https://Artem20201610.github.io/react_people-table-basics/"
-            exact
-          >
+          <Route path="/" exact>
             <HomePage />
           </Route>
 
-          <Redirect
-            // eslint-disable-next-line
-            path="https://Artem20201610.github.io/react_people-table-basics/home"
-            to="https://Artem20201610.github.io/react_people-table-basics/"
-            exact
-          />
+          <Redirect path="/home" to="/" exact />
 
           <NotFoundPage />
         </Switch>

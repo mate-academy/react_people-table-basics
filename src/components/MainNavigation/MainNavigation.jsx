@@ -7,7 +7,7 @@ import './MainNavigation.scss';
 export const MainNavigation = () => (
   <nav className="navbar">
     <NavLink
-      to="https://Artem20201610.github.io/react_people-table-basics/"
+      to="/"
       className="navbar-item is-tab"
       activeClassName="is-active"
       exact
@@ -15,7 +15,7 @@ export const MainNavigation = () => (
       Home
     </NavLink>
     <NavLink
-      to="https://Artem20201610.github.io/react_people-table-basics/people"
+      to="/people"
       className="navbar-item is-tab"
       activeClassName="is-active"
       exact
