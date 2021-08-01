@@ -7,21 +7,22 @@ import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
 import './App.scss';
 
+// eslint-disable-next-line arrow-body-style
 const App = () => {
-  const domain = '/react_people-table-basics/';
+  // const domain = '/react_people-table-basics/';
 
   return (
     <div className="App">
       <header className="main-header">
         <NavLink
-          to={domain}
+          to="/"
           exact
           activeClassName="selected"
         >
           Home
         </NavLink>
         <NavLink
-          to={`${domain}people`}
+          to="/people"
           exact
           activeClassName="selected"
         >
@@ -30,19 +31,19 @@ const App = () => {
       </header>
       <Switch>
         <Route
-          path={domain}
+          path="/"
           exact
           component={HomePage}
         />
         <Route
-          path={`${domain}people`}
+          path="/people"
           exact
           component={PeoplePage}
         />
 
         <Redirect
-          path={`${domain}home`}
-          to={domain}
+          path="/home"
+          to="/"
         />
 
         <NotFoundPage />
