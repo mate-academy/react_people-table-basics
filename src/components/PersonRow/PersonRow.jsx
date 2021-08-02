@@ -4,7 +4,7 @@ import { PersonType } from '../../types';
 import 'bulma';
 import './PersonRow.scss';
 
-export const PersonRow = ({ person }) => (
+export const PersonRow = React.memo(({ person }) => (
   <tr className="Person">
     <td>{person.name}</td>
     <td>{person.sex}</td>
@@ -13,7 +13,7 @@ export const PersonRow = ({ person }) => (
     <td>{person.motherName}</td>
     <td>{person.fatherName}</td>
   </tr>
-);
+));
 
 PersonRow.propTypes = {
   person: PersonType.isRequired,
