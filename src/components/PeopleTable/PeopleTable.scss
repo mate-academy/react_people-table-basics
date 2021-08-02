@@ -1,0 +1,20 @@
+.PeopleTable {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+
+    thead {
+      background-color: #f8ddd3;
+
+      td {
+        padding: 10px 5px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+
+    td {
+        width: calc(100% / 6);
+        text-align: center;
+    }
+}

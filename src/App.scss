@@ -1,1 +1,33 @@
-// styles go here
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.main-header {
+    display: flex;
+    background-color: #ffffff;
+
+    a {
+        flex: 1 1 50%;
+        padding: 20px;
+        border-bottom: 5px solid coral;
+        color: coral;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 700;
+        font-size: 20px;
+        transition: background-color 400ms;
+
+        &:hover {
+            background-color: rgb(248, 221, 211);
+        }
+
+        &.selected {
+            background-color: coral;
+            color: #ffffff;
+        }
+    }
+}
