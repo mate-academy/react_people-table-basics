@@ -1,1 +1,14 @@
-// styles go here
+.App {
+  padding: 20px 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & h1 {
+    padding-bottom: 30px;
+  }
+}
+
+.header {
+  align-self: flex-end;
+}
