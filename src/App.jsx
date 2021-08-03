@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import { HomePage } from './components/HomePage/Home';
 import { PeoplePage } from './components/PeoplePage/People';
 import { getPeople } from './people/people';
+import WrongPage from './components/NotFoundPage/NotFoundPage';
 
 import './App.scss';
 
@@ -32,9 +33,7 @@ const App = () => {
 
         <Redirect path="/home" to="/" />
 
-        <h2>
-          Page not found
-        </h2>
+        <Route component={ WrongPage }></Route>
       </Switch>
     </>
   );
