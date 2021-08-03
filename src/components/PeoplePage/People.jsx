@@ -13,25 +13,27 @@ function People({ people }) {
       >
         People info
       </h1>
-      <table className="table">
-        <thead>
-          <tr className="table__head-row">
-            {tableHead.map(word => (
-              <td className="table__cell" key={word}>
-                {word}
-              </td>
+      {people
+        ? <table className="table">
+          <thead>
+            <tr className="table__head-row">
+              {tableHead.map(word => (
+                <td className="table__cell" key={word}>
+                  {word}
+                </td>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {people.map(person => (
+              <PersonRow
+                key={person.slug}
+                person={person}
+              />
             ))}
-          </tr>
-        </thead>
-        <tbody>
-          {people.map(person => (
-            <PersonRow
-              key={person.slug}
-              person={person}
-            />
-          ))}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+        : <p>Somothing went wrong...</p>}
     </>
 
   );
