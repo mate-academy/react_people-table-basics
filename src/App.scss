@@ -1,1 +1,68 @@
 // styles go here
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-style: italic;
+}
+
+body {
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  gap: 20px;
+  padding-left: 50px;
+  background-color: burlywood;
+  height: 50px;
+
+  &__link {
+    text-decoration: none;
+    color: blue;
+    font-size: 36px;
+    position: relative;
+    opacity: 0.6;
+  }
+}
+
+.active {
+  opacity: 1;
+  &::after {
+    content: "";
+    width: 100%;
+    height: 5px;
+    border-radius: 20px;
+    background-color: blue;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.home__title {
+  text-align: center;
+}
+
+.people__title {
+  text-align: center;
+}
+
+.table {
+  margin: 0 auto;
+  border: 1px solid grey;
+  border-collapse: collapse;
+
+  &__cell {
+    padding: 5px 20px;
+    border: 1px solid grey;
+    text-align: center;
+    color: #fff;
+    
+  }
+  &__head-row {
+    background-color: chartreuse;
+  }
+  &__body-row {
+    background-color: chocolate;
+  }
+}
