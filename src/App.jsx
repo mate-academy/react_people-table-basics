@@ -13,7 +13,7 @@ const App = () => {
 
   useEffect(() => {
     getPeople()
-      .then(peopleFromServer => setPeople(peopleFromServer));
+      .then(setPeople);
   }, []);
 
   return (
