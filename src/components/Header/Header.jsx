@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-export const Header = () => {
-  return (
-    <>
-      <Link to="/">Home</Link>
-      <Link to="/people">People</Link>
-    </>
-  );
-};
+export const Header = () => (
+  <ul className="nav nav-tabs">
+    <li className="nav-item">
+      <NavLink className="nav-link" exact to="/">Home</NavLink>
+    </li>
+    <li className="nav-item">
+      <NavLink className="nav-link" to="/people">People</NavLink>
+    </li>
+  </ul>
+);

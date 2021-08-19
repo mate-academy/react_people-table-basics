@@ -6,14 +6,19 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState([]);
 
   useEffect(() => {
-    const addPeople = async() => setPeople(await getPeople());
+    const addPeople = async() => {
+      const humans = await getPeople();
+      const peopleWithParents = humans.map(person => ({
+        ...person,
+        mother: humans.find(woman => person.motherName === woman.name),
+        father: humans.find(man => person.fatherName === man.name),
+      }));
+
+      setPeople(peopleWithParents);
+    };
 
     addPeople();
   }, []);
-
-  const addParrents = () => {
-
-  };
 
   return (
     <div className="App">
