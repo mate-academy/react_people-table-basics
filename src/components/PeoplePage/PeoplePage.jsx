@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getPeople } from '../../api';
+import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState([]);
@@ -10,12 +11,14 @@ export const PeoplePage = () => {
     addPeople();
   }, []);
 
+  const addParrents = () => {
+
+  };
+
   return (
     <div className="App">
       <h1>People Page</h1>
-      {people.map(person => (
-        <p key={person.name}>{person.name}</p>
-      ))}
+      <PeopleTable people={people} />
     </div>
   );
 };
