@@ -1,0 +1,20 @@
+.header {
+  border-bottom: 1px solid black;
+  padding: 20px 0;
+}
+
+.active {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.7;
+}
+
+.nav-link {
+  display: inline-block;
+  border: 1px solid #000;
+  margin-right: 10px;
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+}
