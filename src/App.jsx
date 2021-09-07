@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  HashRouter,
   Switch,
   Route,
   NavLink,
@@ -13,21 +13,21 @@ import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 
 const App = () => (
-  <Router basename="/react_people-table-basics">
+  <HashRouter>
     <div className="App">
       <Header />
       <Switch>
-        <Route path="/people">
-          <PeoplePage />
-        </Route>
         <Route path="/" exact>
           <HomePage />
+        </Route>
+        <Route path="/people">
+          <PeoplePage />
         </Route>
         <Redirect path="/home" to="/" />
         <NotFoundPage />
       </Switch>
     </div>
-  </Router>
+  </HashRouter>
 );
 
 const Header = () => (
