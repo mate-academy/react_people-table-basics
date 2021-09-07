@@ -13,7 +13,7 @@ import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 
 const App = () => (
-  <Router>
+  <Router basename="/react_people-table-basics">
     <div className="App">
       <Header />
       <Switch>
