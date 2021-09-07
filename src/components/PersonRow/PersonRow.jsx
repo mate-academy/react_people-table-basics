@@ -6,7 +6,7 @@ export const PersonRow = ({ people }) => people.map(person => (
     <td>{person.sex}</td>
     <td>{person.born}</td>
     <td>{person.died}</td>
-    <td>{person.fatherName}</td>
-    <td>{person.mothername}</td>
+    <td>{person.motherName || (<b>MOTHER IS NOT DEFINED</b>)}</td>
+    <td>{person.fatherName || (<b>FATHER IS NOT DEFINED</b>)}</td>
   </tr>
 ));
