@@ -4,7 +4,7 @@ import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState([] as Person[]);
+  const [people, setPeople] = useState<Person []>([]);
   const [loader, setLoader] = useState(false);
 
   const peopleWithParents = (people: Person[]) => {
@@ -16,17 +16,23 @@ export const PeoplePage: React.FC = () => {
   }
 
   useEffect(() => {
-    getPeople()
-      .then(people => {
-        setPeople(peopleWithParents(people));
+    (async function getData() {
+      try {
+        const response = (await getPeople()).json();
+
+        setPeople(peopleWithParents(await response));
         setLoader(true);
-      })
+      } catch {
+        setPeople([]);
+        setLoader(true);
+      }
+    })()
   }, []);
 
   return (
     <>
       {loader
-        ? <PeopleTable people={people}/>
+        ? people.length ? <PeopleTable people={people}/> : <h1 className="title">Can`t upload people</h1>
         : <Loader />
       }
     </>
