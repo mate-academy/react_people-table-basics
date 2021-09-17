@@ -1,5 +1,4 @@
 import React from "react";
-import { uuid } from 'uuidv4';
 import { PersonRow } from "../PersonRow";
 import './PeopleTable.scss';
 
@@ -23,7 +22,7 @@ export const PeopleTable: React.FC<Props> = (props) => {
     </thead>
     <tbody>
       {people.map(person => (
-        <PersonRow key={uuid()} person={person} />
+        <PersonRow key={person.id} person={person} />
       ))}
     </tbody>
     </table>

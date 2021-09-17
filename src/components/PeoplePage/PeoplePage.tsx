@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getPeople } from "../../api";
 import { PeopleTable } from "../PeopleTable";
+import { uuid } from 'uuidv4';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -15,6 +16,7 @@ export const PeoplePage: React.FC = () => {
           ...person,
           father: peopleFromServer.find(man => man.name === person.fatherName) || null,
           mother: peopleFromServer.find(woman => woman.name === person.motherName) || null,
+          id: uuid(),
         }));
 
         setPeople(peopleWithParents);
