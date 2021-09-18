@@ -1,6 +1,6 @@
 {
   "name": "react_people-table",
-  "homepage": "https://lera-yaskevych.github.io/react_people-table-basics/",
+  "homepage": ".",
   "version": "0.1.0",
   "keywords": [],
   "author": "Mate Academy",
@@ -28,8 +28,6 @@
     "stylelint": "^13.0.0"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
