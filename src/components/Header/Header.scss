@@ -1,0 +1,25 @@
+a {
+  text-decoration: none;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: #bccfc4;
+
+  &__link {
+    font-size: 16px;
+    color: #26302a;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #587061;
+    }
+
+    &--active {
+      color: #587061;
+      border-bottom: 1px solid #587061;
+    }
+  }
+}
