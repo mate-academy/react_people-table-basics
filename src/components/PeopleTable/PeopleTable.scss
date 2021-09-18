@@ -1,0 +1,23 @@
+.container {
+  margin: 0 auto;
+}
+
+.PeopleTable {
+  border: 4px dashed #587061;
+  width: 80%;
+  background-color: #bccfc4;
+
+  &__title {
+    padding: 20px;
+  }
+
+  &__property {
+    text-align: center;
+    padding: 10px 20px;
+  }
+
+  &__head {
+    color: #eee;
+    background-color: #587061;
+  }
+}
