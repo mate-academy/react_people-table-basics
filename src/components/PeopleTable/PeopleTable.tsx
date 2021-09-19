@@ -10,7 +10,8 @@ export const PeopleTable: React.FC<Props> = (props) => {
 
   const tableHead: string[] = Object.keys(people[0])
     .filter(key => key !== 'fatherName'
-      && key !== 'motherName');
+      && key !== 'motherName'
+      && key !== 'slug');
 
   return (
     <table className="table is-striped is-bordered mb-6 myTable">
@@ -38,7 +39,6 @@ export const PeopleTable: React.FC<Props> = (props) => {
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
-            <td>{person.slug}</td>
             <td>
               {person.motherName
                 ? people.some(woman => woman.name === person.motherName)
