@@ -1,10 +1,31 @@
 import React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { Header } from './components/Header/Header';
+import { HomePage } from './components/HomePage/HomePage';
+import { PeoplePage } from './components/PeoplePage/PeoplePage';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
 import './App.scss';
 
-const App = () => (
+const App: React.FC = () => (
   <div className="App">
-    <h1>People table</h1>
+    <Header />
+
+    <Switch>
+      <Redirect exact from="/" to="/home" />
+
+      <Route exact path="/home">
+        <HomePage />
+      </Route>
+
+      <Route exact path="/people">
+        <PeoplePage />
+      </Route>
+
+      <Route>
+        <NotFoundPage />
+      </Route>
+    </Switch>
   </div>
 );
 

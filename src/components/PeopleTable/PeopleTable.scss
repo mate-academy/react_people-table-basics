@@ -1,0 +1,22 @@
+.PeopleTable {
+  border-collapse: collapse;
+  border: 1px solid black;
+
+  &__head {
+    background-color: rgb(228, 225, 225);
+  }
+
+  .head-cell {
+    border: 2px solid gray;
+    padding: 0 5px;
+  }
+
+  .cell {
+    border: 1px solid gray;
+    padding: 2px 5px;
+  }
+
+  .center {
+    text-align: center;
+  }
+}
