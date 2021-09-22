@@ -12,7 +12,6 @@ const App: React.FC = () => (
     <Header />
 
     <Switch>
-      <Redirect exact from="/" to="/home" />
 
       <Route exact path="/home">
         <HomePage />
@@ -22,9 +21,9 @@ const App: React.FC = () => (
         <PeoplePage />
       </Route>
 
-      <Route>
-        <NotFoundPage />
-      </Route>
+      <Redirect exact from="/" to="/home" />
+
+      <NotFoundPage />
     </Switch>
   </div>
 );
