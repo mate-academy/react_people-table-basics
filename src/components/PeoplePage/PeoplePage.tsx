@@ -11,8 +11,8 @@ export const PeoplePage: React.FC = () => {
       .then(requestPeople => {
 
         const newPeople: Array<PersonWithParents> = requestPeople.map((person: Person) => {
-          const father: Person | undefined = requestPeople.find(({ name }: Person) => name === person.fatherName);
-          const mother: Person | undefined = requestPeople.find(({ name }: Person) => name === person.motherName);
+          const father: Person = requestPeople.find(({ name }: Person) => name === person.fatherName);
+          const mother: Person = requestPeople.find(({ name }: Person) => name === person.motherName);
 
           return {
             ...person,
