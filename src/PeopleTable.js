@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import PersonRow from './PersonRow';
 
@@ -25,7 +25,10 @@ const PeopleTable = ({ people }) => (
 );
 
 PeopleTable.propTypes = {
-  people: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  people: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    born: PropTypes.number,
+  })).isRequired,
 };
 
-export default PeopleTable;
+export default memo(PeopleTable);

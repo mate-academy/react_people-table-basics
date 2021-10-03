@@ -7,8 +7,8 @@ const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getPeople().then((res) => {
-      setPeople(res);
+    getPeople().then((response) => {
+      setPeople(response);
       setIsLoading(false);
     });
   }, []);
