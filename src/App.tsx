@@ -1,10 +1,37 @@
-import React from 'react';
-
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { Header } from './components/Header';
+import { HomePage } from './components/HomePage/index';
+import { PeoplePage } from './components/PeoplePage/index';
+import { NotFoundPage } from './components/NotFoundPage/index';
+import '@fortawesome/fontawesome-free/css/all.css';
 import './App.scss';
 
-const App = () => (
+const App: React.FC = () => (
   <div className="App">
-    <h1>People table</h1>
+    <Header />
+    <Switch>
+      <Route
+        path="/"
+        exact
+      >
+        <HomePage />
+      </Route>
+      <Route
+        path="/people"
+        exact
+      >
+        <PeoplePage />
+      </Route>
+
+      <Redirect
+        path="/home"
+        to="/"
+      />
+
+      <Route>
+        <NotFoundPage />
+      </Route>
+    </Switch>
   </div>
 );
 
