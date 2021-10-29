@@ -1,0 +1,17 @@
+.navbar {
+  margin: 0 auto 10px;
+  max-width: 700px;
+}
+
+.navbar__brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #00d1b2;
+  padding: 10px;
+}
+
+.navbar__item {
+  color: #fff;
+}
