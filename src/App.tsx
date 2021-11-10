@@ -27,7 +27,7 @@ const App: React.FC = () => {
             type="button"
             onClick={() => getUsers()}
           >
-            <a href="/#/people" className="button__link"> PeoplePage </a>
+            <a href="/people" className="button__link"> PeoplePage </a>
           </button>
         </nav>
       </header>
