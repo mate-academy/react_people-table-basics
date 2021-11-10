@@ -30,6 +30,11 @@ th {
   padding: 18px;
 }
 
+thead {
+  font-weight: bold;
+  border-bottom: grey 2px solid;
+}
+
 h1 {
   font-family: Arial, Helvetica, sans-serif;
   &:hover {
