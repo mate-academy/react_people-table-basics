@@ -11,8 +11,10 @@
     "@types/react-dom": "^17.0.9",
     "bulma": "^0.9.3",
     "node-sass": "^6.0.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "4.0.3",
     "typescript": "^4.3.5"
   },
@@ -75,6 +77,6 @@
   },
   "mateAcademy": {
     "_comment": "Replace 'reactTypescript' with 'react' if you want use React without Typescript",
-    "projectType": "reactTypescript"
+    "projectType": "react"
   }
 }
