@@ -16,7 +16,12 @@ export function PeopleTable({ people }) {
         <th>father</th>
       </thead>
       <tbody>
-        {people.map(person => <PersonRow person={person} />)}
+        {people.map(person => (
+          <PersonRow
+            person={person}
+            key={person.slug}
+          />
+        ))}
       </tbody>
     </table>
   );
