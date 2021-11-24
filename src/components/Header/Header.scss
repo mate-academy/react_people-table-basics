@@ -1,0 +1,22 @@
+.header {
+  max-width: 200px;
+  margin: 0 auto;
+  &--nav {
+ 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.link {
+  width: max-content;
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.link.is-active {
+  border-bottom: 1px solid red;
+}
+
