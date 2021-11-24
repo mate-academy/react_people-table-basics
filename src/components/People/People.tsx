@@ -14,10 +14,6 @@ export const People: React.FC = () => {
 
   useEffect(() => {
     loadPeople();
-
-    return () => {
-
-    };
   }, []);
 
   const preparedPeople: PreparedHuman[] = people.map(person => {
