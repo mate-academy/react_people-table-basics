@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export const Header: FC = () => (
+export const Header: FC = React.memo(() => (
   <nav className="navbar">
     <div className="navbar-brand">
       <a href="/" className="navbar-item">
@@ -30,4 +30,4 @@ export const Header: FC = () => (
       </NavLink>
     </div>
   </nav>
-);
+));

@@ -1,4 +1,3 @@
-// import React from 'react';
 import {
   Redirect, Route, Switch,
 } from 'react-router-dom';
@@ -6,10 +5,9 @@ import 'bulma';
 
 import './App.scss';
 import { FC } from 'react';
-import { HomePage } from './components/HomePage';
-import { NotFoundPage } from './components/NotFoundPage';
-import { Header } from './components/Header';
-import { PeoplePage } from './components/PeoplePage';
+import {
+  HomePage, NotFoundPage, Header, PeoplePage,
+} from './components';
 
 const App: FC = () => (
   <div className="App">
@@ -20,6 +18,7 @@ const App: FC = () => (
         <h1 className="title">
           Mate Academy
         </h1>
+
         <Switch>
           <Route path="/" exact>
             <HomePage />
@@ -33,7 +32,6 @@ const App: FC = () => (
 
           <NotFoundPage />
         </Switch>
-
       </div>
     </section>
   </div>

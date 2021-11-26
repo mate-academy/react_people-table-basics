@@ -1,10 +1,8 @@
-import {
-  FC, useState,
-} from 'react';
+import { FC, useState } from 'react';
 import useAsyncEffect from 'use-async-effect';
 import { getPeople } from '../services/api';
 import { PersonFull } from '../services/types';
-import { PeopleTable } from './PeopleTable/PeopleTable';
+import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<PersonFull[]>([]);

@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 
-export const PeopleTableHeaders: FC = () => (
+export const PeopleTableHeaders: FC = React.memo(() => (
   <thead>
     <tr>
       <th>Name</th>
@@ -11,4 +11,4 @@ export const PeopleTableHeaders: FC = () => (
       <th>Mother</th>
     </tr>
   </thead>
-);
+));
