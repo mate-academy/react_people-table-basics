@@ -1,9 +1,15 @@
 import { Person, PersonFull } from './types';
 
-const BASE_URL = 'https://mate-academy.github.io/react_people-table/api/people.json';
+const BASE_URL = 'https://mate-academy.github.io/react_people-table/api/people.jsonw';
 
 export async function getPeople(): Promise<PersonFull[]> {
-  const people: Person[] = await fetch(BASE_URL).then(data => data.json());
+  const response: Response = await fetch(BASE_URL);
+
+  if (!response.ok) {
+    throw new Error('Error fetching data from server');
+  }
+
+  const people: Person[] = await response.json();
 
   return people.map((person) => ({
     ...person,

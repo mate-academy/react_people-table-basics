@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import useAsyncEffect from 'use-async-effect';
 import { getPeople } from '../services/api';
 import { PersonFull } from '../services/types';
@@ -9,7 +9,7 @@ export const PeoplePage: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const getPeopleFromServer = async () => {
+  const getPeopleFromServer = useCallback(async () => {
     setIsLoading(true);
 
     try {
@@ -21,7 +21,7 @@ export const PeoplePage: FC = () => {
       setIsLoading(false);
       setIsError(true);
     }
-  };
+  }, []);
 
   useAsyncEffect(getPeopleFromServer, []);
 
