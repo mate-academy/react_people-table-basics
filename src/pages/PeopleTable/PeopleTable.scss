@@ -1,0 +1,29 @@
+tr {
+  display: flex;
+  gap: 10px;
+}
+
+.table-header {
+  display: block;
+  padding-bottom: 24px;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+.person {
+  margin-bottom: 6px;
+  border-bottom: 1px solid black;
+}
+
+.person,
+.table-header {
+  td {
+    min-width: 200px;
+  }
+
+  td:nth-child(n+2):nth-child(-n+4) {
+    min-width: 60px;
+  }
+}
