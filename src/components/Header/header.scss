@@ -1,0 +1,32 @@
+.header {
+  background-color: var(--dark);
+
+  &__body {
+    height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.header-nav {
+  display: flex;
+
+  &__link {
+    padding: 0 10px;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &--active {
+      color: var(--hover);
+    }
+
+    @media (any-hover: hover) {
+      &:hover{
+        color: var(--hover);
+      }
+    }
+  }
+}
