@@ -1,1 +1,56 @@
 // styles go here
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.App {
+  &__title {
+    margin: 20px;
+  }
+}
+
+.page {
+  &__title {
+    margin: 10px 20px;
+  }
+}
+
+.nav {
+  background-color: darkblue;
+  padding: 10px 50px;
+  &-my_site {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+
+    &:hover {
+      color: darkslategray;
+    }
+  }
+}
+
+.PeopleTable {
+  border-collapse: collapse;
+  margin: 20px 10px;
+
+  &__head {
+    background-color: #3f87a6;
+    color: #fff;
+  }
+
+  &__body {
+    background-color: #e4f0f5;
+  }
+}
+
+td,
+th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 5px 10px;
+}
