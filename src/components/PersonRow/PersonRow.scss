@@ -1,0 +1,11 @@
+.PersonRow {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #dee1eb;
+  }
+
+  &__row-data {
+    padding: 20px;
+  }
+}
