@@ -1,0 +1,29 @@
+.PeopleTable {
+  border-collapse: collapse;
+  box-shadow: 0 5px 10px #eee;
+  border-radius: 8px;
+
+  background-color: #fff;
+
+  text-align: left;
+
+  overflow: hidden;
+
+  &__header {
+    box-shadow: 0 5px 10px #eee;
+  }
+
+  &__header-data {
+    padding: 20px;
+  }
+
+  &__row:nth-child(even) {
+    background-color: #f4f6fb;
+  }
+
+  &__row {
+    &:hover {
+      background-color: #ecf1fd;
+    }
+  }
+}
