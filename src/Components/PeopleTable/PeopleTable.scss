@@ -1,0 +1,44 @@
+.table {
+  table-layout: fixed;
+  background-color: rgb(243, 209, 238);
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 5px 10px rgb(98, 45, 100);
+  border-radius: 8px;
+  text-align: left;
+
+  &__header {
+    position: relative;
+    z-index: 2; 
+    box-shadow: 0 5px 10px rgb(98, 45, 100);
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  &__header-data {
+    padding: 15px 15px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &__main {
+    position: relative;
+    z-index: 1;
+
+    &:nth-child(2n) {
+      background-color: rgb(224, 173, 217);
+    }
+
+    &:hover {
+      background-color: rgb(245, 188, 236);
+
+      &:nth-child(2n) {
+        background-color: rgb(209, 146, 201);
+      }
+    }
+  }
+
+  &__main-data {
+    padding: 10px 15px;
+  }
+}
