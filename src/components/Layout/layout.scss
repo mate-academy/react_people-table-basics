@@ -1,0 +1,11 @@
+.header-nav {
+  background-color: #000;
+  &__link {
+    display: inline-block;
+    color: #fff;
+    padding: 20px;
+    &:hover {
+      color: rgb(124, 52, 52);
+    }
+  }
+}
