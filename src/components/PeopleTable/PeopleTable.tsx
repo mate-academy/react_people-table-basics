@@ -13,11 +13,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>sex</th>
-            <th>born</th>
-            <th>died</th>
-            <th>mother</th>
-            <th>father</th>
+            <th>Sex</th>
+            <th>Born</th>
+            <th>Died</th>
+            <th>Mother</th>
+            <th>Father</th>
           </tr>
         </thead>
         <tbody>

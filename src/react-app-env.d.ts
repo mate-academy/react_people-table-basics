@@ -1,4 +1,4 @@
-src/react-app-env.d.ts// eslint-disable-next-line
+// eslint-disable-next-line
 /// <reference types="react-scripts" />
 type Person = {
   name: string;
