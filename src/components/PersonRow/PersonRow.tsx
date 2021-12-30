@@ -1,10 +1,12 @@
+import './personRow.css';
+
 type Props = {
   person: Person;
 };
 
 export const PersonRow: React.FC<Props> = ({ person }) => {
   return (
-    <tr>
+    <tr className="table-row">
       <td>{person.name}</td>
       <td>{person.sex}</td>
       <td>{person.born}</td>
