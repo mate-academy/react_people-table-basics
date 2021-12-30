@@ -1,0 +1,7 @@
+.table-row {
+  transition: background-color, 0.3s;
+}
+
+.table-row:hover {
+  background-color: #eee;
+}
