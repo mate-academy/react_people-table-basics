@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useAsyncEffect from 'use-async-effect';
 import { getPeople } from '../../api/apiPeople';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
+import { Loader } from '../Loader/Loader';
 import './peoplePage.scss';
 
 export const PeoplePage: React.FC = () => {
@@ -30,7 +31,7 @@ export const PeoplePage: React.FC = () => {
         </p>
       )}
 
-      {isLoading && 'loader'}
+      {isLoading && <Loader />}
 
       {people && <PeopleTable people={people} />}
     </div>
