@@ -6,13 +6,11 @@ type Props = {
 };
 
 const unknowName = () => (
-  <span style={{ color: '#bc544b' }}>
-    unknown
-  </span>
+  <span className="error-message">-unknown-</span>
 );
 
 export const PeopleRow: React.FC<Props> = ({ people }) => (
-  <tr key={people.slug}>
+  <tr>
     <th>{people.name}</th>
     <th>
       {people.sex === 'm'

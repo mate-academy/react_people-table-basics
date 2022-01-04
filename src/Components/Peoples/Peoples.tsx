@@ -35,7 +35,7 @@ export const Peoples:React.FC<Props> = ({ people }) => (
       </tfoot>
       <tbody>
         {people.map(p => (
-          <PeopleRow people={p} />
+          <PeopleRow people={p} key={p.slug} />
         ))}
       </tbody>
     </table>

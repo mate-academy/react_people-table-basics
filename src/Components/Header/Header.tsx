@@ -2,6 +2,7 @@ import React from 'react';
 import 'bulma';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 import './Header.scss';
 
@@ -24,18 +25,18 @@ export const Header: React.FC = () => (
       <div className="navbar-start">
         <NavLink
           to="/"
-          className={({ isActive }) => (
-            isActive ? 'navbar-item navbar-item--active' : 'navbar-item'
-          )}
+          className={({ isActive }) => classNames('navbar-item', {
+            'navbar-item--active': isActive,
+          })}
         >
           Home
         </NavLink>
 
         <NavLink
           to="/people"
-          className={({ isActive }) => (
-            isActive ? 'navbar-item navbar-item--active' : 'navbar-item'
-          )}
+          className={({ isActive }) => classNames('navbar-item', {
+            'navbar-item--active': isActive,
+          })}
         >
           People
         </NavLink>
