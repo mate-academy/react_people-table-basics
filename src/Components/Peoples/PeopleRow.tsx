@@ -12,7 +12,7 @@ const unknowName = () => (
 );
 
 export const PeopleRow: React.FC<Props> = ({ people }) => (
-  <tr>
+  <tr key={people.slug}>
     <th>{people.name}</th>
     <th>{people.sex}</th>
     <th>{people.born}</th>
