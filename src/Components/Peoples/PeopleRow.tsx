@@ -14,7 +14,11 @@ const unknowName = () => (
 export const PeopleRow: React.FC<Props> = ({ people }) => (
   <tr key={people.slug}>
     <th>{people.name}</th>
-    <th>{people.sex}</th>
+    <th>
+      {people.sex === 'm'
+        ? <i className="fas fa-male" />
+        : <i className="fas fa-female" /> }
+    </th>
     <th>{people.born}</th>
     <th>{people.died}</th>
     <th>{people.fatherName || unknowName()}</th>
