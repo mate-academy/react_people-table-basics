@@ -1,1 +1,57 @@
-// styles go here
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+
+  background-color: rgb(153, 211, 172);
+}
+
+.button {
+  margin: 0 20px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+
+  &__link {
+    text-decoration: none;
+    font-size: 24px;
+    color: rgb(89, 79, 236);
+
+    &:active {
+      color: rgb(98, 117, 96);
+    }
+  }
+}
+
+.head {
+  text-align: center;
+  font-size: 44px;
+}
+
+.notFound {
+  text-align: center;
+  color: red;
+  font-size: 44px;
+}
+
+table {
+  margin: 20px;
+  width: 100%;
+  border-collapse: collapse
+}
+
+thead {
+  width: 100%;
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+th {
+  text-transform: uppercase;
+}
+
+td {
+  margin: 40px;
+}
