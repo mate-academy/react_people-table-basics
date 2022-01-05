@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, NavLink } from 'react-router-dom';
 import { PeopleTable } from './PeopleTable';
 import './App.scss';
 
@@ -19,7 +19,7 @@ const App: React.FC = () => {
       <header>
         <nav className="navigation">
           <button className="button" type="button">
-            <a href="/" className="button__link"> Home Page </a>
+            <NavLink to="/" className="button__link"> Home Page </NavLink>
           </button>
 
           <button
@@ -27,7 +27,7 @@ const App: React.FC = () => {
             type="button"
             onClick={() => getUsers()}
           >
-            <a href="/people" className="button__link"> PeoplePage </a>
+            <NavLink to="/people" className="button__link"> PeoplePage </NavLink>
           </button>
         </nav>
       </header>
