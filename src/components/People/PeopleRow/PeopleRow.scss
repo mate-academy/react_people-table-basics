@@ -1,0 +1,26 @@
+td {
+  text-align: center;
+}
+
+span {
+  font-weight: bold;
+  animation: color-change 3s infinite;
+
+  @keyframes color-change {
+    0% {
+      color: transparent;
+    }
+    25% {
+      color: red;
+    }
+    50% {
+      color: darkred;
+    }
+    75% {
+      color: red;
+    }
+    100% {
+      color: transparent;
+    }
+  }
+}
