@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+
+.peopleTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 2px dotted black;
+  border-bottom: 2px dotted black;
+
+  &__header {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px dotted black;
+    border-bottom: 1px dotted black;
+    background-color: darkorange;
+
+    &::before {
+      content: "< ";
+    }
+
+    &::after {
+      content: " >";
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  th {
+    padding: 10px;
+    border: 1px solid black;
+    background-color: darkorange;
+  }
+
+  td {
+    padding: 5px 10px;
+    border: 1px solid black;
+  }
+
+  &__return-to-top {
+    width: 100%;
+    margin: 10px 0;
+    padding: 5px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: darkorange;
+
+    &:active {
+      background-color: chartreuse;
+    }
+  }
+}

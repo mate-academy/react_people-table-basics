@@ -1,0 +1,13 @@
+.homepage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    font-size: 36px;
+    text-decoration: underline;
+    padding: 30px;
+    border: 1px dotted black;
+    border-radius: 20px;
+  }
+}
