@@ -1,0 +1,41 @@
+.table {
+
+	width: 100%;
+
+	margin-bottom: 20px;
+
+	border-collapse: collapse; 
+
+}
+
+.table th {
+
+	font-weight: bold;
+
+	padding: 5px;
+
+	background: #efefef;
+
+	border: 1px solid #dddddd;
+
+}
+
+.table td {
+
+	border: 1px solid #dddddd;
+
+	padding: 5px;
+
+}
+
+.table tr td:first-child, .table tr th:first-child {
+
+	border-left: none;
+
+}
+
+.table tr td:last-child, .table tr th:last-child {
+
+	border-right: none;
+
+}

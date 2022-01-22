@@ -1,1 +1,11 @@
 // styles go here
+.navigation {
+  display: flex;
+  gap: 20px;
+}
+
+.link {
+  color: black;
+  font-size: 20px;
+  text-decoration: none;
+}
