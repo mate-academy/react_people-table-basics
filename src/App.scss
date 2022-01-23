@@ -1,1 +1,10 @@
-// styles go here
+.App {
+  &__content {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px
+  }
+}

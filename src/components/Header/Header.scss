@@ -1,0 +1,36 @@
+.Header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 255, 0.747);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 0 4px 0 black;
+}
+
+.Nav {
+  display: flex;
+  gap: 30px;
+  padding-left: 40px;
+
+  &__link {
+    text-decoration: none;
+    color: #fff;
+
+    &:hover {
+      transition: all 0.3s;
+      color:rgb(167, 162, 162);
+    }
+
+    &--active {
+      &::after {
+        content: '';
+        position: relative;
+        display: block;
+        background-color: #fff;
+        height: 2px;
+        border-radius: 3px;
+        bottom: -2px;
+      }
+    }
+  }
+}
