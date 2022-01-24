@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { Header } from './components/Header';
 import { HomePage } from './components/HomePage';
@@ -20,9 +20,8 @@ const App: React.FC = () => {
       <div className="App__content">
         <Routes>
           <Route path="/" element={<HomePage active={activePage} />} />
+          <Route path="/home" element={<HomePage active={activePage} />} />
           <Route path="people" element={<PeoplePage active={activePage} />} />
-
-          <Route path="/home" element={<Navigate to="/" />} />
 
           <Route
             path="*"

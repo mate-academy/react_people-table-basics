@@ -13,7 +13,7 @@ export const Header: React.FC<Props> = ({ hash }) => (
     <nav className="Nav">
       <Link
         to="/"
-        className={classNames('Nav__link', { 'Nav__link--active': hash === '#/' })}
+        className={classNames('Nav__link', { 'Nav__link--active': hash === '#/' || hash === '/home' || hash === '' })}
       >
         Home
       </Link>
