@@ -1,14 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-type Props = {
-  active: () => void,
-};
-
-export const HomePage: React.FC<Props> = ({ active }) => {
-  useEffect(() => {
-    active();
-  }, []);
-
+export const HomePage: React.FC = () => {
   return (
     <h2>Home Page</h2>
   );

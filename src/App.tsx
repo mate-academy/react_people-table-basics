@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { Header } from './components/Header';
@@ -8,20 +8,14 @@ import { PeoplePage } from './components/PeoplePage';
 import './App.scss';
 
 const App: React.FC = () => {
-  const [hash, setHash] = useState('');
-
-  const activePage = () => {
-    setHash(document.location.hash);
-  };
-
   return (
     <div className="App">
-      <Header hash={hash} />
+      <Header />
       <div className="App__content">
         <Routes>
-          <Route path="/" element={<HomePage active={activePage} />} />
-          <Route path="/home" element={<HomePage active={activePage} />} />
-          <Route path="people" element={<PeoplePage active={activePage} />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="people" element={<PeoplePage />} />
 
           <Route
             path="*"

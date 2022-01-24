@@ -1,28 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
 
 import './Header.scss';
 
-type Props = {
-  hash: string,
-};
-
-export const Header: React.FC<Props> = ({ hash }) => (
+export const Header: React.FC = () => (
   <div className="Header">
     <nav className="Nav">
-      <Link
+      <NavLink
         to="/"
-        className={classNames('Nav__link', { 'Nav__link--active': hash === '#/' || hash === '/home' || hash === '' })}
+        className={
+          ({ isActive }) => (isActive ? 'Nav__link Nav__link--active' : 'Nav__link')
+        }
+        // active="selected"
+        // className="Nav__link"
+        // activeClassName="Nav__link--active"
       >
         Home
-      </Link>
-      <Link
+      </NavLink>
+      <NavLink
         to="/people"
-        className={classNames('Nav__link', { 'Nav__link--active': hash === '#/people' })}
+        className={
+          ({ isActive }) => (isActive ? 'Nav__link Nav__link--active' : 'Nav__link')
+        }
       >
         People
-      </Link>
+      </NavLink>
     </nav>
   </div>
 );

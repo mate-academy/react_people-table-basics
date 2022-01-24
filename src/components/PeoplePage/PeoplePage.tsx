@@ -3,11 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { getPeople } from '../../API/api-people';
 import { PeopleTable } from '../PeopleTable';
 
-type Props = {
-  active: () => void,
-};
-
-export const PeoplePage: React.FC<Props> = ({ active }) => {
+export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
 
   const fetchPeople = async () => {
@@ -17,7 +13,6 @@ export const PeoplePage: React.FC<Props> = ({ active }) => {
   };
 
   useEffect(() => {
-    active();
     fetchPeople();
   }, []);
 
