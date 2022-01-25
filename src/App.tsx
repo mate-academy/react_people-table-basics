@@ -7,23 +7,25 @@ import './App.scss';
 
 const App = () => (
   <div className="App">
-    <header className="Header block">
-      <nav className="navbar has-shadow">
-        <ul className="navbar-menu">
-          <li className="navbar-item">
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li className="navbar-item">
-            <NavLink to="/people">People</NavLink>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <div className="container">
+      <header className="Header">
+        <nav className="navbar block has-shadow">
+          <ul className="navbar-menu">
+            <li>
+              <NavLink to="/" className="navbar-item">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/people" className="navbar-item">People</NavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
 
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/people" element={<PeoplePage />} />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/people" element={<PeoplePage />} />
+      </Routes>
+    </div>
   </div>
 );
 

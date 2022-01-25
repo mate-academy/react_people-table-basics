@@ -20,7 +20,7 @@ export const PeoplePage = () => {
   }, []);
 
   return (
-    <div className="box">
+    <div className="PeoplePage">
       <h2 className="title is-3">People page</h2>
 
       {hasError && (
