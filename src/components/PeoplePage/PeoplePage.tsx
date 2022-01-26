@@ -21,7 +21,7 @@ export const PeoplePage = () => {
 
   return (
     <div className="PeoplePage">
-      <h2 className="title is-3">People page</h2>
+      <h3 className="title is-3">People page</h3>
 
       {hasError && (
         <p className="error-message">

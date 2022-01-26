@@ -1,7 +1,10 @@
-import { Routes, Route, NavLink } from 'react-router-dom';
+import {
+  Routes, Route, NavLink, Navigate,
+} from 'react-router-dom';
 
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
 import './App.scss';
 
@@ -24,6 +27,8 @@ const App = () => (
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/people" element={<PeoplePage />} />
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/home" element={<Navigate to="/" />} />
       </Routes>
     </div>
   </div>
