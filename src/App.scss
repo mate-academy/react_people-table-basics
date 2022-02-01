@@ -1,1 +1,11 @@
-// styles go here
+.App {
+  height: 100%;
+
+  &__home-page {
+    position: relative;
+    top: 200px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+  }
+}

@@ -1,0 +1,33 @@
+.nav {
+  margin-bottom: 30px;
+  background-color: lightblue;
+  padding: 10px;
+
+  &__list {
+    display: flex;
+  }
+
+  &__item {
+    list-style: none;
+    margin-right: 30px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #fff;
+
+    &.active {
+      border: 1px solid rgb(28, 141, 179);
+      background-color: rgb(28, 141, 179);
+      border-radius: 8px;
+    }
+  }
+}
