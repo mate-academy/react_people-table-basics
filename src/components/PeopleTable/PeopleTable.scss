@@ -1,0 +1,14 @@
+.table {
+  border-collapse: collapse;
+  max-width: 1200px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0 auto;
+
+  & th {
+    background: #73b5f0;
+    color: white;
+    padding: 10px 20px;
+    text-align: start;
+    border-bottom: 3px solid black;
+  }
+}

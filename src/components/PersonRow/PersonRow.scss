@@ -1,0 +1,11 @@
+.table {
+
+  &__row:nth-child(even) {
+    background: #d9e8f5;
+  }
+
+  &__cell {
+    padding: 10px 20px;
+    text-align: start;
+  }
+}
