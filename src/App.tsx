@@ -1,3 +1,4 @@
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import 'bulma/css/bulma.css';
 import './App.scss';
 
