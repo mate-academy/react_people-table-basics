@@ -1,0 +1,25 @@
+.section {
+  display: flex;
+  color: whitesmoke;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(101, 101, 255);
+  flex-grow: 1;
+  border-radius: 10px;
+}
+
+.people__page {
+  flex-direction: column;
+}
+
+.PeopleTable {
+  border-collapse: collapse;
+  border: 1px solid whitesmoke;
+  table-layout: fixed;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid whitesmoke;
+}

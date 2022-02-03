@@ -1,1 +1,13 @@
-// styles go here
+body {
+  box-sizing: border-box;
+  background-color: whitesmoke;
+  padding: 10px;
+}
+
+.App {
+  height: calc(100vh - 20px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
