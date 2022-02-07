@@ -1,1 +1,25 @@
-// styles go here
+.Header {
+  &__Nav {
+    display: flex;
+  }
+
+  &__Link {
+    margin-right: 30px;
+  }
+}
+
+.PeopleTable {
+  border-collapse: collapse;
+  
+  &__Title {
+    padding: 5px;
+    border: 1px solid black;
+    background-color: aquamarine;
+  }
+
+  &__Person {
+    padding: 5px;
+    border: 1px solid black;
+    background-color: lavender;
+  }
+}
