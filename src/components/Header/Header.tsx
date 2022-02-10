@@ -7,7 +7,6 @@ export const Header: React.FC = () => {
       <nav className="navbar-brand">
         <NavLink
           to="/"
-          end
           className={
             ({ isActive }) => (isActive ? 'navbar-item is-tab is-active' : 'navbar-item is-tab')
           }

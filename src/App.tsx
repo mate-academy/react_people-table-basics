@@ -9,9 +9,9 @@ import './App.scss';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <div>
       <Header />
-      <div className="App__content">
+      <div>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
