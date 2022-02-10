@@ -1,6 +1,6 @@
 # React - People table
 - Replace `<your_account>` with your Github username in the
-  [DEMO LINK](https://<your_account>.github.io/react_people-table-basics/)
+  [DEMO LINK](https://robert-krukau.github.io/react_people-table-basics/)
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
 ## If you don't use **Typescript**
@@ -10,7 +10,7 @@
 ## Basic tasks
 1. Install all the NPM packages you need and types for them.
 1. Implement `HomePage` available at `/` with just a title `Home page`
-1. Implement `PeoplePage` available at `/people` with a title `Peope page`
+1. Implement `PeoplePage` available at `/people` with a title `People page`
 1. Redirect to `/` from `/home`
 1. Implement `NotFoundPage` with a title `Page not found` that is shown for all the other URLs
 1. Add a `Header` visible everywhere with navigation links to both pages
