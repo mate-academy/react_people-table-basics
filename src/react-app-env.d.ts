@@ -1,2 +1,11 @@
-// eslint-disable-next-line
+/* eslint-disable linebreak-style */
 /// <reference types="react-scripts" />
+
+interface Person {
+  name: string,
+  sex: string,
+  born: number,
+  died: number,
+  motherName: string,
+  fatherName: string,
+}
