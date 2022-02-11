@@ -1,1 +1,14 @@
 // styles go here
+.App {
+
+  &__body {
+    padding: 12px 24px;
+  }
+
+  &__navbar-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+}
