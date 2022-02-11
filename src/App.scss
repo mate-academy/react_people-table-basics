@@ -1,1 +1,12 @@
-// styles go here
+@import '~bulma/bulma.sass';
+
+.nav {
+  &__list {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__item {
+    padding: 10px;
+  }
+}
