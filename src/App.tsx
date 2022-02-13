@@ -2,48 +2,32 @@ import { FC } from 'react';
 import {
   Routes,
   Route,
-  Link,
   Navigate,
 } from 'react-router-dom';
 
 import './App.scss';
+import { Header } from './components/Header';
+import { HomePage } from './components/HomePage';
+import { NotFoundPage } from './components/NotFoundPage';
+import { PeoplePage } from './components/PeoplePage';
 import { PeopleTable } from './components/PeopleTable';
 
 const App: FC = () => (
   <div className="App">
-    <header>
-      <nav className="App__nav nav box">
-        <ul className="nav__list">
-          <li className="nav__item">
-            <Link to="/">Home</Link>
-          </li>
-
-          <li className="nav__item">
-            <Link to="/people">People</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <Header />
 
     <Routes>
       <Route
         path="/"
-        element={(
-          <h2 className="title is-2 has-text-centered">
-            Home page
-          </h2>
-        )}
+        element={<HomePage />}
       />
 
       <Route
         path="/people"
-        element={(
-          <>
-            <h2 className="title is-2 has-text-centered">People table</h2>
-            <PeopleTable />
-          </>
-        )}
-      />
+        element={<PeoplePage />}
+      >
+        <Route path="" element={<PeopleTable />} />
+      </Route>
 
       <Route
         path="/home"
@@ -52,11 +36,7 @@ const App: FC = () => (
 
       <Route
         path="*"
-        element={(
-          <h2 className="title is-2 has-text-centered">
-            <h2>Page not found</h2>
-          </h2>
-        )}
+        element={<NotFoundPage />}
       />
     </Routes>
   </div>
