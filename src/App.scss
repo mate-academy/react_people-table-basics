@@ -1,1 +1,21 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+
+  &__nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: #0088dc;
+    border-radius: 16px;
+
+    &-link {
+      color: yellow;
+    }
+  }
+
+  &__subtitle {
+    margin-top: 20px;
+  }
+}
