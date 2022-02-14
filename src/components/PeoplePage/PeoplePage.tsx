@@ -16,10 +16,11 @@ export const PeoplePage: React.FC = () => {
       setIsLoading(true);
 
       try {
-        const peopleFromServer = await getPeople();
-        setPeople(peopleFromServer);
+        await getPeople()
+          .then(setPeople);
+
         setIsLoading(false);
-      } catch (error) {
+      } catch {
         setHasLoadingError(true);
         setIsLoading(false);
       }
@@ -28,22 +29,20 @@ export const PeoplePage: React.FC = () => {
   }, []);
 
   return (
-    <div className="columns">
-      <div className="column">
-        <h1 className="title">People page</h1>
+    <div>
+      <h1 className="title">People page</h1>
 
-        {isLoading && (
-          <TailSpin color="#485FC7" height={40} width={40} />
-        )}
+      {isLoading && (
+        <TailSpin color="#485FC7" height={40} width={40} />
+      )}
 
-        {people.length > 0 && (
-          <PeopleTable people={people} />
-        )}
+      {people.length > 0 && (
+        <PeopleTable people={people} />
+      )}
 
-        {hasLoadingError && (
-          <LoadingError />
-        )}
-      </div>
+      {hasLoadingError && (
+        <LoadingError />
+      )}
     </div>
   );
 };

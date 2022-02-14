@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import 'bulma';
 import '@fortawesome/fontawesome-free/css/all.css';
@@ -13,7 +13,9 @@ export const App: React.FC = () => (
   <Routes>
     <Route path="/" element={<Layout />}>
       <Route index element={<HomePage />} />
-      <Route path="/home" element={<HomePage />} />
+      <Route path="/home" element={
+        <Navigate to="/" replace />
+      } />
       <Route path="people" element={<PeoplePage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Route>
