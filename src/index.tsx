@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 
 ReactDOM.render(
-  <Router>
+  <Router basename="/react_people-table-basics/">
     <App />
   </Router>,
   document.getElementById('root'),
