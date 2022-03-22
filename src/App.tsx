@@ -21,10 +21,7 @@ const App: React.FC = () => (
       <Route path="/people" element={<PeoplePage />} />
 
       <Route path="/home" element={<Navigate to="/" replace />} />
-      <Route {
-        ...<p>Page Not Found</p>
-      }
-      />
+      <Route path="*" element={<h1>Page Not Found</h1>} />
     </Routes>
   </div>
 );
