@@ -1,0 +1,10 @@
+.people {
+  border-collapse: collapse;
+  border: 15px solid rgb(222, 184, 135);
+  background-color: rgb(245, 222, 179);
+  color: rgb(138, 109, 71);
+
+  &__header-cell {
+    border: 10px inset burlywood;
+  }
+}
