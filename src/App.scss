@@ -1,1 +1,50 @@
 // styles go here
+.nav {
+  height: 50px;
+  background-color: yellowgreen;
+
+  display: flex;
+  align-items: center;
+  gap: 50px;
+
+  padding-left: 20px;
+
+  &__link {
+    font-family: Impact, 'Arial Narrow Bold', sans-serif;
+    font-size: 26px;
+    text-decoration: none;
+    color: #fff;
+
+    &:hover {
+      color: #000;
+    }
+  }
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid #000;
+  letter-spacing: 1px;
+}
+
+td {
+  border: 1px solid #000;
+  padding: 10px 20px;
+}
+
+td {
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #fff;
+}
+
+tr:nth-child(odd) {
+  background-color: yellowgreen;
+}
+
+caption {
+  padding: 10px;
+}
+
