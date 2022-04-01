@@ -2,7 +2,7 @@ import React from 'react';
 import { PersonRow } from './PersonRow';
 
 export const PeopleTable:
-React.FC<{ peopleFromServer: UserFromServerType[] }> = ({ peopleFromServer }) => (
+React.FC<Props> = ({ peopleFromServer }) => (
   <table style={{ borderCollapse: 'collapse' }}>
     <thead>
       <tr>
