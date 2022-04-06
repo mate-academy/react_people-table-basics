@@ -43,7 +43,9 @@ export const PeoplePage: React.FC = () => {
   return (
     <>
       <h1>People page</h1>
-      <PeopleTable people={people} />
+      <PeopleTable
+        people={people}
+      />
     </>
   );
 };
