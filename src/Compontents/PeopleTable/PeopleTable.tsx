@@ -9,9 +9,11 @@ type Props = {
 export const PeopleTable: React.FC<Props> = ({ humans }) => {
   return (
     <table className="PeopleTable">
-      {humans.map(human => (
-        <PersonRow person={human} />
-      ))}
+      <tbody>
+        {humans.map(human => (
+          <PersonRow person={human} key={human.id} />
+        ))}
+      </tbody>
     </table>
   );
 };
