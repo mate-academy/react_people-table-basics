@@ -1,0 +1,17 @@
+.nav {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+
+  &__link {
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 40px;
+
+    transition: color 0.3s;
+
+    &:hover {
+      color: #f43493;
+    }
+  }
+}
