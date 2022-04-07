@@ -1,5 +1,6 @@
 export const getPeople = async () => {
-  const response = await (await fetch('https://mate-academy.github.io/react_people-table/api/people.json')).json();
+  const response = await
+  fetch('https://mate-academy.github.io/react_people-table/api/people.json');
 
-  return response;
+  return response.json();
 };

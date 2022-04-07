@@ -6,4 +6,6 @@ export interface Person {
   motherName: string,
   fatherName: string,
   id: number,
+  mother: Person,
+  father: Person,
 }

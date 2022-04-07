@@ -10,7 +10,13 @@ export const PeoplePage: React.FC = () => {
     getPeople().then(peoplesFromServer => setPeople(peoplesFromServer
       .map((human: Person) => ({
         ...human,
-        key: peoplesFromServer.indexOf(human),
+        id: peoplesFromServer.indexOf(human),
+        mother: peoplesFromServer
+          .find((mom: Person) => mom.name === human.motherName)
+          || 'cannot found Mom',
+        father: peoplesFromServer
+          .find((dad: Person) => dad.name === human.fatherName)
+          || 'cannot found Dad',
       }))));
   }, []);
 

@@ -11,7 +11,9 @@ export const PeopleTable: React.FC<Props> = ({ humans }) => {
     <table className="PeopleTable">
       <tbody>
         {humans.map(human => (
-          <PersonRow person={human} key={human.id} />
+          <tr className="PeopleTable__person" key={human.id}>
+            <PersonRow person={human} />
+          </tr>
         ))}
       </tbody>
     </table>

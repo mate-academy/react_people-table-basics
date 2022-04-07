@@ -1,12 +1,11 @@
 import { Person } from '../../types/Person';
-import './PersonRow.scss';
 
 type Props = {
   person: Person;
 };
 
 export const PersonRow: React.FC<Props> = ({ person }) => (
-  <tr className="person">
+  <>
     <td>
       name:
       {person.name}
@@ -31,5 +30,5 @@ export const PersonRow: React.FC<Props> = ({ person }) => (
       father:
       {person.fatherName}
     </td>
-  </tr>
+  </>
 );
