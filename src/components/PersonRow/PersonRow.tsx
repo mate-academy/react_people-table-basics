@@ -1,3 +1,4 @@
+import React from 'react';
 import { FullPerson } from '../../types/Person';
 
 export const PersonRow: React.FC<Props> = ({ person }) => {
@@ -16,12 +17,8 @@ export const PersonRow: React.FC<Props> = ({ person }) => {
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
-      <td>{motherName || '-------'}</td>
-      <td>
-        {fatherName}
-        {' '}
-        || '
-      </td>
+      <td>{motherName}</td>
+      <td>{fatherName}</td>
     </tr>
   );
 };

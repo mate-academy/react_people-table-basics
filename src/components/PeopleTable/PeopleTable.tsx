@@ -1,3 +1,4 @@
+import React from 'react';
 import { FullPerson } from '../../types/Person';
 import { PersonRow } from '../PersonRow/PersonRow';
 
