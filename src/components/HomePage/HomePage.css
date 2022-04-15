@@ -1,0 +1,16 @@
+.home-page {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+
+.picture {
+  display: block;
+  width: 35%;
+  margin: 0 auto;
+  opacity: 0.7;
+}
+
+.picture:hover {
+  opacity: 1;
+}

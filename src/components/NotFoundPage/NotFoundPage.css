@@ -1,0 +1,11 @@
+.page-not-found {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+
+.picture-error {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+}
