@@ -20,7 +20,9 @@ const PeopleTable: React.FC<Props> = ({ people }) => (
       <tbody>
         {
           people.map((person) => (
-            <PersonRow person={person} />
+            <tr key={person.slug} className="Person">
+              <PersonRow person={person} />
+            </tr>
           ))
         }
       </tbody>
