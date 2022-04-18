@@ -1,5 +1,7 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
-export const HomePage: FC = () => (
+const HomePage: FC = memo(() => (
   <h2>Home Page</h2>
-);
+));
+
+export default HomePage;

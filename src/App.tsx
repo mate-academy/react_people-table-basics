@@ -1,31 +1,18 @@
-import { NavLink, Outlet } from 'react-router-dom';
-import cn from 'classnames';
+import { memo } from 'react';
+import { Outlet } from 'react-router-dom';
 import 'bulma/css/bulma.css';
+import { Header } from './components';
 import './App.scss';
-// import { HomePage } from './components/HomePage';
 
-const App = () => {
+const App = memo(() => {
   return (
     <div className="App">
-      <NavLink
-        to="/home"
-        className={({ isActive }) => cn('Link', { isActive })}
-      >
-        Home
-      </NavLink>
-      {' '}
-      |
-      {' '}
-      <NavLink
-        to="/people"
-        className={({ isActive }) => cn('Link', { isActive })}
-      >
-        People
-      </NavLink>
+
+      <Header />
 
       <Outlet />
     </div>
   );
-};
+});
 
 export default App;

@@ -1,15 +1,17 @@
-import { FC, useState, useEffect } from 'react';
+import {
+  FC, useState, useEffect, memo,
+} from 'react';
 import { getPeople } from '../data';
-import { PeopleTable } from './PeopleTable';
+import PeopleTable from './PeopleTable';
 
-export const PeoplePage: FC = () => {
+const PeoplePage: FC = memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
 
   useEffect(() => {
-    getPeople().then(data => setPeople(data));
+    getPeople().then(setPeople);
   }, []);
 
-  return (
-    <PeopleTable people={people} />
-  );
-};
+  return <PeopleTable people={people} />;
+});
+
+export default PeoplePage;

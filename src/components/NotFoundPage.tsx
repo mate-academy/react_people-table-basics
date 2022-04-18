@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
-export const NotFoundPage: FC = () => {
-  return (
-    <div>NotFoundPage </div>
-  );
-};
+const NotFoundPage: FC = memo(() => (
+  <div>NotFoundPage </div>
+));
+
+export default NotFoundPage;

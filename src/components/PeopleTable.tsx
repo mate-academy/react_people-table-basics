@@ -1,33 +1,40 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
+import PersonRow from './PersonRow';
 
 type Props = {
   people: Person[];
 };
 
-export const PeopleTable: FC<Props> = ({ people }) => (
-  <table className="table is-narrow table is-hoverable table is-fullwidth">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Sex</th>
-        <th>Born</th>
-        <th>Died</th>
-        <th>Father</th>
-        <th>Mother</th>
-      </tr>
-    </thead>
+const PeopleTable: FC<Props> = memo(({ people }) => (
+  <>
+    {people.length > 0 && (
+      <table className="
+            table
+            is-narrow
+            is-hoverable
+            is-fullwidth"
+      >
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Sex</th>
+            <th>Born</th>
+            <th>Died</th>
+            <th>Father</th>
+            <th>Mother</th>
+          </tr>
+        </thead>
+        <tbody>
+          {people.map((person) => (
+            <PersonRow
+              key={person.slug}
+              person={person}
+            />
+          ))}
+        </tbody>
+      </table>
+    )}
+  </>
+));
 
-    <tbody>
-      {people.map((user) => (
-        <tr key={user.slug}>
-          <td>{user.name}</td>
-          <td>{user.sex}</td>
-          <td>{user.born}</td>
-          <td>{user.died}</td>
-          <td>{user.fatherName}</td>
-          <td>{user.motherName}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-);
+export default PeopleTable;
