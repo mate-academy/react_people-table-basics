@@ -15,7 +15,7 @@ render(
         <Route path="people" element={<PeoplePage />} />
       </Route>
 
-      <Route path="/not" element={<NotFoundPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   </HashRouter>,
   rootElement,

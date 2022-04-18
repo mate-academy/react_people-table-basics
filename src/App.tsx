@@ -16,7 +16,6 @@ const App = () => {
       {' '}
       |
       {' '}
-      People
       <NavLink
         to="/people"
         className={({ isActive }) => cn('Link', { isActive })}

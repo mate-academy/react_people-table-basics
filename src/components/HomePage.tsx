@@ -1,7 +1,5 @@
 import { FC } from 'react';
 
-export const HomePage: FC = () => {
-  return (
-    <h2>Home Page</h2>
-  );
-};
+export const HomePage: FC = () => (
+  <h2>Home Page</h2>
+);
