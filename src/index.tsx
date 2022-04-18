@@ -1,8 +1,22 @@
-import ReactDOM from 'react-dom';
-
+import { render } from 'react-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
+import { HomePage } from './components/HomePage';
+import { NotFoundPage } from './components/NotFoundPage';
+import { PeoplePage } from './components/PeoplePage';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root'),
+const rootElement = document.getElementById('root');
+
+render(
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route path="home" element={<HomePage />} />
+        <Route path="people" element={<PeoplePage />} />
+      </Route>
+
+      <Route path="/not" element={<NotFoundPage />} />
+    </Routes>
+  </BrowserRouter>,
+  rootElement,
 );
