@@ -5,7 +5,7 @@ import cn from 'classnames';
 const Nav: FC = memo(() => (
   <nav>
     <NavLink
-      to="/home"
+      to="/"
       className={({ isActive }) => cn('Link', { isActive })}
     >
       Home
