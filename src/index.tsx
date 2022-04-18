@@ -1,5 +1,5 @@
 import { render } from 'react-dom';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 import { HomePage } from './components/HomePage';
 import { NotFoundPage } from './components/NotFoundPage';
@@ -8,7 +8,7 @@ import { PeoplePage } from './components/PeoplePage';
 const rootElement = document.getElementById('root');
 
 render(
-  <BrowserRouter>
+  <HashRouter>
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="home" element={<HomePage />} />
@@ -17,6 +17,6 @@ render(
 
       <Route path="/not" element={<NotFoundPage />} />
     </Routes>
-  </BrowserRouter>,
+  </HashRouter>,
   rootElement,
 );
