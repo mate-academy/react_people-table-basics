@@ -20,7 +20,7 @@ const App: React.FC = () => {
           <ul className="nav-bar">
             <li>
               <Link
-                to="/"
+                to="/home"
                 className="nav-bar__link"
                 title="Visit Home Page"
               >
@@ -41,8 +41,8 @@ const App: React.FC = () => {
       </Header>
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/" element={<Navigate replace to="/home" />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="/people" element={<PeoplePage />} />
 
         <Route path="*" element={<NotFoundPage />} />
