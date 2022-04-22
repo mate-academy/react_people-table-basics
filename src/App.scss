@@ -1,1 +1,38 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: grey;
+}
+
+.title {
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.PeopleTable {
+  border: 1px solid red;
+  background: linear-gradient(#e66465, #9198e5);
+}
+
+.Person:hover {
+  border: 2px solid red;
+  cursor: pointer;
+}
+
+.nav-bar {
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
+  list-style: none;
+
+  &__link {
+    text-decoration: none;
+    color: red;
+    font-size: 20px;
+  }
+}
