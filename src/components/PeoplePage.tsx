@@ -12,7 +12,7 @@ export const PeoplePage: React.FC = () => {
       .then((res: Person[]) => res.map(person => ({
         ...person,
         father: res.find(m => m.name === person.fatherName),
-        mother: res.find(f => f.name === person.fatherName),
+        mother: res.find(f => f.name === person.motherName),
       })))
       .then(setPeople);
   }, []);

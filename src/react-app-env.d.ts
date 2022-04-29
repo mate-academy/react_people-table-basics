@@ -6,8 +6,8 @@ interface Person {
   sex: string;
   born: number;
   died: number;
-  motherName: string;
-  fatherName: string;
+  motherName: string | null;
+  fatherName: string | null;
   slug: string;
   father?: Person;
   mother?: Person;
