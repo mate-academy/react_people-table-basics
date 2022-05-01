@@ -1,0 +1,28 @@
+.PeopleTable {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #deb6ab;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f8ecd1;
+}
+
+tr:hover {
+  background-color: #deb6ab;
+}
+
+thead {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+  background-color: #85586f;
+}
