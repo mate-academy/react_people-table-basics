@@ -6,13 +6,13 @@ type Props = {
 
 export const PeopleRow: React.FC<Props> = ({ person }) => {
   const {
-    name, sex, born, died, fatherName, motherName, slug,
+    name, sex, born, died, fatherName, motherName,
   } = person;
 
   return (
     <tr
       className="Person"
-      key={slug}
+      // key={slug}
     >
       <td>{name}</td>
       <td>{sex}</td>

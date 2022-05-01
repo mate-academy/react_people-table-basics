@@ -15,41 +15,21 @@ const App: React.FC = () => {
   const [updatedPeople, setUpdatedPeople] = useState<UpdatedPersons[]>([]);
 
   const addParents = (persons: People[]) => {
-    const updatedPersons = persons.map((person) => {
-      const mother = people.find(
+    return persons.map((person) => {
+      const father = persons.find(
+        (child: People) => (child.fatherName === person.name),
+      );
+
+      const mother = persons.find(
         (child: People) => (child.motherName === person.name),
       );
 
-      const father = people.find(
-        (child: People) => (child.motherName === person.name),
-      );
-
-      const {
-        name,
-        sex,
-        born,
-        died,
-        fatherName,
-        motherName,
-        slug,
-      } = person;
-
-      const updatedPerson = {
-        name,
-        sex,
-        born,
-        died,
-        fatherName,
-        motherName,
-        slug,
+      return {
+        ...person,
         mother,
         father,
       };
-
-      return updatedPerson;
     });
-
-    return updatedPersons;
   };
 
   const onAdd = () => {
@@ -83,7 +63,6 @@ const App: React.FC = () => {
 
       <div className="App">
         <Routes>
-          {/* <Route path="/people" element={<p>People page</p>} /> */}
           <Route
             path="/people"
             element={
