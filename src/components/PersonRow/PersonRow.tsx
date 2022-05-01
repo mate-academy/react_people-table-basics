@@ -12,7 +12,6 @@ export const PeopleRow: React.FC<Props> = ({ person }) => {
   return (
     <tr
       className="Person"
-      // key={slug}
     >
       <td>{name}</td>
       <td>{sex}</td>
