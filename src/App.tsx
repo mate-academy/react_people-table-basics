@@ -1,9 +1,9 @@
 import './App.scss';
 import {
-  Link,
   Route,
   Routes,
   Navigate,
+  NavLink,
 } from 'react-router-dom';
 import { Home } from './components/Home/Home';
 import { People } from './components/People/People';
@@ -14,16 +14,44 @@ const App: React.FC = () => {
     <div className="App">
       <nav>
         <div className="nav">
-          <Link className="nav__link" to="/">Home page</Link>
-          <Link className="nav__link" to="/people">People page</Link>
+          <NavLink
+            className="nav__link"
+            style={
+              ({ isActive }) => (
+                isActive
+                  ? {
+                    color: 'brown',
+                  }
+                  : {}
+              )
+            }
+            to="/"
+          >
+            Home page
+          </NavLink>
+          <NavLink
+            className="nav__link"
+            style={
+              ({ isActive }) => (
+                isActive
+                  ? {
+                    color: 'brown',
+                  }
+                  : {}
+              )
+            }
+            to="/people"
+          >
+            People page
+          </NavLink>
         </div>
       </nav>
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/people" element={<People />} />
-        <Route path="*" element={<NotFoundPage />} />
         <Route path="/home" element={<Navigate replace to="/" />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
