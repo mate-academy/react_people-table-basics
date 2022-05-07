@@ -16,30 +16,12 @@ const App: React.FC = () => {
         <div className="nav">
           <NavLink
             className="nav__link"
-            style={
-              ({ isActive }) => (
-                isActive
-                  ? {
-                    color: 'brown',
-                  }
-                  : {}
-              )
-            }
             to="/"
           >
             Home page
           </NavLink>
           <NavLink
             className="nav__link"
-            style={
-              ({ isActive }) => (
-                isActive
-                  ? {
-                    color: 'brown',
-                  }
-                  : {}
-              )
-            }
             to="/people"
           >
             People page
