@@ -1,0 +1,21 @@
+.PeopleTable {
+  border-collapse: collapse;
+}
+
+thead {
+  font-size: 30px;
+  display: inline-block;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+table {
+  border-collapse: collapse;
+  text-indent: initial;
+  border-spacing: 2px;
+  width: 100%;
+}
+
+tbody tr:nth-child(odd) {
+  background: #eee;
+}
