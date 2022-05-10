@@ -17,8 +17,8 @@ const App = () => (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/people" element={<PeoplePage />} />
-      <Route path="/home" element={<Navigate replace to="/" />} />
       <Route path="*" element={<p>Page not found</p>} />
+      <Route path="/home" element={<Navigate replace to="/" />} />
     </Routes>
   </div>
 );
