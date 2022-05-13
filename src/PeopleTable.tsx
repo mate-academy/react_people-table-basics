@@ -1,8 +1,7 @@
-import {useEffect, useState} from 'react';
-import {getPeople} from './api';
-import {People} from './type'
-import {PersonRow} from './PersonRow'
-
+import { useEffect, useState } from 'react';
+import { getPeople } from './api';
+import { People } from './type';
+import { PersonRow } from './PersonRow';
 
 export const PeopleTable = () => {
   const [people, setPeople] = useState<People[]>([]);
@@ -29,9 +28,9 @@ export const PeopleTable = () => {
           </tr>
         </thead>
         <tbody>
-          {people.map(man => <PersonRow person={man}/>)}
+          {people.map(man => <PersonRow person={man} />)}
         </tbody>
       </table>
     </>
-  )
+  );
 };

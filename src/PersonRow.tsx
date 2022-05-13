@@ -1,11 +1,10 @@
-import {People} from './type';
+import { People } from './type';
 
 interface Props {
   person: People
 }
 
-
-export const PersonRow: React.FC<Props> = ({person}) => (
+export const PersonRow: React.FC<Props> = ({ person }) => (
   <tr>
     <td>{person.name}</td>
     <td>{person.sex}</td>
