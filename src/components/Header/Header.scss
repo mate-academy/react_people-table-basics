@@ -1,0 +1,12 @@
+.LinksContainer {
+  display: flex;
+}
+
+.Link {
+  margin: 0 10px;
+  font-size: 20px;
+
+  &:visited {
+    color: black;
+  }
+}
