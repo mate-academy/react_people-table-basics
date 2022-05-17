@@ -9,15 +9,15 @@
 
 ## Basic tasks
 1. Install all the NPM packages you need and types for them.
-1. Implement `HomePage` available at `/` with just a title `Home page`
-1. Implement `PeoplePage` available at `/people` with a title `Peope page`
-1. Redirect to `/` from `/home`
-1. Implement `NotFoundPage` with a title `Page not found` that is shown for all the other URLs
-1. Add a `Header` visible everywhere with navigation links to both pages
-1. Create `getPeople` method fetching `people` from [API](https://mate-academy.github.io/react_people-table/api/people.json)
+2. Implement `HomePage` available at `/` with just a title `Home page`
+3. Implement `PeoplePage` available at `/people` with a title `Peope page`
+4. Redirect to `/` from `/home`
+5. Implement `NotFoundPage` with a title `Page not found` that is shown for all the other URLs
+6. Add a `Header` visible everywhere with navigation links to both pages
+7. Create `getPeople` method fetching `people` from [API](https://mate-academy.github.io/react_people-table/api/people.json)
   when `PeoplePage` is opened
     - Find a `mother` and a `father` by `motherName` and `fatherName` and add them to the person for future use
-1. Implement `PeopleTable` component accepting an array of people as a param and rendering them in a table
+8. Implement `PeopleTable` component accepting an array of people as a param and rendering them in a table
   It should show these columns:
     - `name`
     - `sex`
@@ -30,12 +30,12 @@
       ```
       ```html
       <table className="PeopleTable">
-        <thead>...</thead>
+        <th>...</th>
         <tbody>...</tbody>
       </table>
       ```
     - add `border-collapse: collapse` style to the table
-1. Implement `PersonRow` component accepting a `person` and displaying all the data described above
+9. Implement `PersonRow` component accepting a `person` and displaying all the data described above
     ```html
     <tr class="Person">
       <td></td>
