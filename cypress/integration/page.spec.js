@@ -1,4 +1,5 @@
 // WRITE TESTS HERE
+
 describe('Page', () => {
   beforeEach(() => {
     cy.intercept('**/people.json', { fixture: 'people' });
