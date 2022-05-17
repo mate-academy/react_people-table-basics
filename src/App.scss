@@ -1,1 +1,26 @@
 // styles go here
+// styles go here
+.App {
+  font-family: monospace;
+}
+  
+.header {
+  padding: 15px;
+  border: 15px solid rgb(222, 184, 135);
+  background-color: rgb(245, 222, 179);
+}
+  
+.nav {
+  display: flex;
+  justify-content: space-around;
+  
+  &__link {
+    color: rgb(138, 109, 71);
+    font-size: 24px;
+    text-decoration: none;
+  
+    &:hover {
+      color: rgb(211, 169, 115);
+    }
+  }
+}
