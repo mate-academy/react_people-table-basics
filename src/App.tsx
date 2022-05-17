@@ -12,10 +12,22 @@ const App: React.FC = () => (
     <Header />
 
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/people" element={<PeoplePage />} />
-      <Route path="/home" element={<Navigate to="/" />} />
-      <Route path="*" element={<NotFoundPage />} />
+      <Route
+        path="/react_people-table-basics"
+        element={<HomePage />}
+      />
+      <Route
+        path="/react_people-table-basics/people"
+        element={<PeoplePage />}
+      />
+      <Route
+        path="/react_people-table-basics/home"
+        element={<Navigate to="/react_people-table-basics" />}
+      />
+      <Route
+        path="/react_people-table-basics/*"
+        element={<NotFoundPage />}
+      />
     </Routes>
   </div>
 );
