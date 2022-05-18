@@ -1,5 +1,3 @@
-// WRITE TESTS HERE
-
 describe('Page', () => {
   beforeEach(() => {
     cy.intercept('**/people.json', { fixture: 'people' });
@@ -24,6 +22,8 @@ describe('Page', () => {
     cy.visit('/home');
     cy.get('h1')
       .should('contain', 'Home Page');
+      cy.url()
+        .should('not.contain', '/home')
   });
 
   it('should open the "Home" page', () => {
