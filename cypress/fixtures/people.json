@@ -1,0 +1,29 @@
+[
+    {
+      "name": "Carolus Haverbeke",
+      "sex": "m",
+      "born": 1832,
+      "died": 1905,
+      "fatherName": "Carel Haverbeke",
+      "motherName": "Maria van Brussel",
+      "slug": "carolus-haverbeke-1832"
+    },
+    {
+      "name": "Joanna Claes",
+      "sex": "f",
+      "born": 1876,
+      "died": 1956,
+      "fatherName": "Petrus de Milliano",
+      "motherName": "Sophia van Damme",
+      "slug": "emma-de-milliano-1876"
+    },
+    {
+      "name": "Maria de Rycke",
+      "sex": "f",
+      "born": 1683,
+      "died": 1724,
+      "fatherName": "Frederik de Rycke",
+      "motherName": "Laurentia van Vlaenderen",
+      "slug": "maria-de-rycke-1683"
+    }
+]
