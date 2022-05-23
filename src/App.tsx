@@ -17,7 +17,7 @@ const App = () => (
 
       <Route path="/people" element={<PeoplePage />} />
 
-      <Route path="/*" element={<NotFoundPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   </div>
 );
