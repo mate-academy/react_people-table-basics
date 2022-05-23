@@ -8,9 +8,7 @@ import { useState } from 'react';
 
 type Props = Data;
 
-export const Password: React.FC<Props> = ({
-  title,
-}) => {
+const Password: React.FC<Props> = () => {
   const [type, setType] = useState('password');
 
   const handleClick = () => {
@@ -26,9 +24,9 @@ export const Password: React.FC<Props> = ({
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridAddress1">
           <Form.Label>Service</Form.Label>
-          <Form.Control placeholder="Describe what service this data is for">
-            {title}
-          </Form.Control>
+          <Form.Control
+            placeholder="Describe what service this data is for"
+          />
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridEmail">
@@ -51,3 +49,5 @@ export const Password: React.FC<Props> = ({
     </Form>
   );
 };
+
+export default Password;

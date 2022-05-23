@@ -1,12 +1,18 @@
 import { Form, Button } from 'react-bootstrap';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import './Login.css';
 
+type ContextType = {
+  isAuthorized: boolean,
+  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>,
+};
+
 export default function Login() {
-  const [myEmail, setEmail] = useState('');
-  const [myPassword, setPassword] = useState('');
+  const [myEmail, setMyEmail] = useState('');
+  const [myPassword, setMyPassword] = useState('');
   const navigate = useNavigate();
+  const { isAuthorized, setIsAuthorized } = useOutletContext<ContextType>();
 
   const handleSubmit = (event: React.FormEvent) => {
     const realEmail = JSON.parse(window.localStorage.getItem('email') || '');
@@ -16,10 +22,11 @@ export default function Login() {
     event.preventDefault();
 
     if (realEmail === myEmail && realPassword === myPassword) {
+      setIsAuthorized(!isAuthorized);
       navigate('/dashboard');
     } else {
       // eslint-disable-next-line no-console
-      console.log(realEmail, myEmail, realPassword, myPassword);
+      console.log('Wrong password or email');
     }
   };
 
@@ -30,7 +37,7 @@ export default function Login() {
         <Form.Control
           type="email"
           placeholder="Enter email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setMyEmail(e.target.value)}
         />
       </Form.Group>
 
@@ -39,7 +46,7 @@ export default function Login() {
         <Form.Control
           type="password"
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setMyPassword(e.target.value)}
         />
       </Form.Group>
 

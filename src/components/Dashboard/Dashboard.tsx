@@ -1,51 +1,40 @@
-import {
-  Form,
-  Button,
-  Row,
-  Col,
-} from 'react-bootstrap';
-import { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import Password from '../Password/Password';
+
+type ContextType = {
+  data: Data[],
+  setData: React.Dispatch<React.SetStateAction<Data>>,
+};
 
 export default function Dashboard() {
-  const [type, setType] = useState('password');
+  const { data, setData } = useOutletContext<ContextType>();
 
   const handleClick = () => {
-    if (type === 'password') {
-      setType('text');
-    } else {
-      setType('password');
+    const newItem: Data = {
+      title: '',
+      password: '',
+      login: '',
+    };
+
+    if (newItem.title && newItem.login && newItem.password) {
+      setData([...data, newItem]);
     }
   };
 
   return (
-    <Form>
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formGridAddress1">
-          <Form.Label>Service</Form.Label>
-          <Form.Control placeholder="Describe what service this data is for" />
-        </Form.Group>
+    <div>
+      {data.map(item => (
+        <Password data={item} />
+      ))}
 
-        <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Label>Login</Form.Label>
-          <Form.Control type="email" placeholder="Enter login" />
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridPassword">
-          <Form.Label>Enter password</Form.Label>
-          <Form.Control type={type} placeholder="Password" />
-          <Button
-            variant="info"
-            type="button"
-            onClick={handleClick}
-          >
-            Show password
-          </Button>
-        </Form.Group>
-      </Row>
-
-      <Button variant="primary" type="submit">
+      <Button
+        variant="primary"
+        type="submit"
+        onClick={handleClick}
+      >
         Add more
       </Button>
-    </Form>
+    </div>
   );
 }
