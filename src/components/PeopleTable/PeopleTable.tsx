@@ -17,12 +17,12 @@ export const PeopleTable: React.FC<Props> = ({
     <table className="PeopleTable">
       <thead className="PeopleTable__head">
         <tr className="PeopleTable__row">
-          <th className="PeopleTable__cell">name</th>
-          <th className="PeopleTable__cell">sex</th>
-          <th className="PeopleTable__cell">born</th>
-          <th className="PeopleTable__cell">died</th>
-          <th className="PeopleTable__cell">mother</th>
-          <th className="PeopleTable__cell">father</th>
+          <th className="PeopleTable__cell">Name</th>
+          <th className="PeopleTable__cell">Sex</th>
+          <th className="PeopleTable__cell">Born</th>
+          <th className="PeopleTable__cell">Died</th>
+          <th className="PeopleTable__cell">Mother</th>
+          <th className="PeopleTable__cell">Father</th>
         </tr>
       </thead>
       {peoples && (

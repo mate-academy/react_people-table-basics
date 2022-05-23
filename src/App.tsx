@@ -15,9 +15,9 @@ const App = () => (
 
       <Route path="/home" element={<Navigate to="/" />} />
 
-      <Route path="/people/*" element={<PeoplePage />} />
+      <Route path="/people" element={<PeoplePage />} />
 
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="/*" element={<NotFoundPage />} />
     </Routes>
   </div>
 );
