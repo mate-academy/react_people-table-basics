@@ -1,0 +1,12 @@
+.people-table {
+  border-collapse: collapse;
+
+  &__head {
+    border-spacing: 10px;
+    background-color: grey;
+
+    & th {
+      padding: 5px 10px;
+    }
+  }
+}
