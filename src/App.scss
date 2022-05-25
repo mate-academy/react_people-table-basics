@@ -1,1 +1,19 @@
 // styles go here
+body {
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  background-color: #f8ecd1;
+
+  &__link {
+    color: #e04d01;
+    text-decoration: none;
+    padding: 10px;
+  }
+}
+
+.active {
+  color: brown;
+}
