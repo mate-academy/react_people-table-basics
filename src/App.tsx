@@ -18,8 +18,8 @@ export const App = () => (
     <Switch>
       <Route path="/" exact component={HomePage} />
       <Route path="/people" exact component={PeoplePage} />
-      <NotFoundPage />
       <Redirect path="/home" to="/" />
+      <NotFoundPage />
     </Switch>
   </div>
 );
