@@ -1,0 +1,12 @@
+.PersonRow {
+  border-bottom: 1px solid black;
+
+  &:hover {
+    background-color: lightgray;
+  }
+
+  td {
+    text-transform: uppercase;
+    text-align: center;
+  }
+}

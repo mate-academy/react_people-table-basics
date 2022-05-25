@@ -1,0 +1,14 @@
+.PeopleTable {
+  width: 100%;
+  padding: 10px 20px;
+  border: 1px solid black;
+  border-collapse: collapse;
+
+  th {
+    padding: 10px 0;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: green;
+    border-bottom: 1px solid black;
+  }
+}
