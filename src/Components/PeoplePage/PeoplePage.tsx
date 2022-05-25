@@ -5,16 +5,25 @@ import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<PeopleType[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getPeopleFromServer = async () => {
-      const peopleFromServer = await getPeople();
+      try {
+        const peopleFromServer = await getPeople();
 
-      setPeople(peopleFromServer);
+        setPeople(peopleFromServer);
+      } catch {
+        setError('Cannot load data from server');
+      }
     };
 
     getPeopleFromServer();
   }, []);
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <>
