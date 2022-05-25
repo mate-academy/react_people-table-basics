@@ -20,9 +20,7 @@ const App = () => (
 
       <Redirect path="/home" to="/" />
 
-      <Route path="/">
-        <NotFoundPage />
-      </Route>
+      <NotFoundPage />
     </Switch>
   </div>
 );
