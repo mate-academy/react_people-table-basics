@@ -11,9 +11,9 @@ const App = () => (
     <Header />
 
     <Routes>
-      <Route path="/" element={<HomePage />} />
-
       <Route path="/home" element={<Navigate to="/" />} />
+
+      <Route path="/" element={<HomePage />} />
 
       <Route path="/people" element={<PeoplePage />} />
 

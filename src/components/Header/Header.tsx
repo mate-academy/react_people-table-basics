@@ -5,7 +5,7 @@ import './Header.scss';
 export const Header: React.FC = () => {
   return (
     <nav className="header">
-      <NavLink to="/home" className="header__link">
+      <NavLink to="/" className="header__link">
         HOME
       </NavLink>
 
