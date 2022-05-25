@@ -8,7 +8,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 const Root = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="*" element={<App />}>
+      <Route path="/" element={<App />}>
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
