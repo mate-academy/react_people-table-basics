@@ -8,18 +8,10 @@ import Dashboard from './components/Dashboard/Dashboard';
 const Root = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}>
+      <Route path="*" element={<App />}>
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
-        <Route
-          path="*"
-          element={(
-            <main style={{ padding: '1rem' }}>
-              <p>There is nothing here!</p>
-            </main>
-          )}
-        />
       </Route>
     </Routes>
   </BrowserRouter>

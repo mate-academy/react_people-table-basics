@@ -1,7 +1,7 @@
 import { Form, Button } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import './Login.css';
+import './Login.scss';
 
 type ContextType = {
   isAuthorized: boolean,
@@ -25,8 +25,8 @@ export default function Login() {
       setIsAuthorized(!isAuthorized);
       navigate('/dashboard');
     } else {
-      // eslint-disable-next-line no-console
-      console.log('Wrong password or email');
+      // eslint-disable-next-line no-alert
+      alert('Wrong email or password');
     }
   };
 
@@ -50,8 +50,8 @@ export default function Login() {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Login
+      <Button variant="success" type="submit">
+        Log in
       </Button>
     </Form>
   );

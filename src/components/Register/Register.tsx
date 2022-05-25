@@ -40,10 +40,10 @@ export default function Register() {
       </Form.Group>
 
       <Button
-        variant="primary"
+        variant="success"
         type="submit"
       >
-        Register me
+        Sign up
       </Button>
     </Form>
   );

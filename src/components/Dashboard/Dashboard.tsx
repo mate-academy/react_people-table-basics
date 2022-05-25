@@ -1,10 +1,11 @@
+import './Dashboard.scss';
 import { useOutletContext } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import Password from '../Password/Password';
+import Content from '../Content/Content';
 
 type ContextType = {
   data: Data[],
-  setData: React.Dispatch<React.SetStateAction<Data>>,
+  setData: React.Dispatch<React.SetStateAction<Data[]>>,
 };
 
 export default function Dashboard() {
@@ -12,26 +13,26 @@ export default function Dashboard() {
 
   const handleClick = () => {
     const newItem: Data = {
+      id: data.length + 1,
       title: '',
       password: '',
       login: '',
     };
 
-    if (newItem.title && newItem.login && newItem.password) {
-      setData([...data, newItem]);
-    }
+    setData([...data, newItem]);
   };
 
   return (
     <div>
       {data.map(item => (
-        <Password data={item} />
+        <Content item={item} />
       ))}
 
       <Button
         variant="primary"
         type="submit"
         onClick={handleClick}
+        className="Dashboard__add"
       >
         Add more
       </Button>
