@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  gap: 30px;
+  padding: 30px;
+
+  background-color: rgb(42, 42, 42);
+  border-radius: 0 0 10px 10px;
+
+  &__link {
+    text-decoration: none;
+    color: aliceblue;
+    font-weight: 700;
+    font-size: 35px;
+    transition: color 0.5s;
+
+    &:hover {
+      color: aqua;
+    }
+  }
+}
+
+.active {
+  color: rgb(12, 128, 126);
+}
