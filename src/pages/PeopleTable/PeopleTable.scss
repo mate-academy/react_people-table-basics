@@ -75,3 +75,14 @@
     }
   }
 }
+
+.error-loading-data {
+  text-align: center;
+  padding: 50px 0 0;
+}
+
+.reload-button {
+  &:hover {
+    background-color: rgb(87, 154, 255);
+  }
+}
