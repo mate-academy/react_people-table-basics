@@ -1,0 +1,36 @@
+.PeopleTable {
+  box-sizing: border-box;
+  justify-items: center;
+  margin: 30px auto 50px;
+  border-collapse: collapse;
+
+  &__head {
+    background-color: rgb(228, 173, 230);
+    font-weight: 700;
+    color: rgb(46, 43, 43);
+    user-select: none;
+
+    & :first-child {
+      border-top-left-radius: 10px;
+    }
+
+    & :last-child {
+      border-top-right-radius: 10px;
+    }
+  }
+
+  &__row {
+    padding: 20px;
+    text-transform: uppercase;
+  }
+
+  &__cell {
+    padding: 20px;
+
+    text-align: left;
+  }
+
+  &__icon {
+    margin-left: 5px;
+  }
+}
