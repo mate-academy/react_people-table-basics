@@ -1,4 +1,5 @@
 import React from 'react';
+import { PersonRow } from '../PersonRow';
 import './PeopleTable.scss';
 
 type Props = {
@@ -23,14 +24,10 @@ export const PeopleTable: React.FC<Props> = ({
 
       <tbody>
         {people.map(human => (
-          <tr className="Person" key={human.name}>
-            <td>{human.name}</td>
-            <td>{human.sex}</td>
-            <td>{human.born}</td>
-            <td>{human.died}</td>
-            <td>{human.motherName}</td>
-            <td>{human.fatherName}</td>
-          </tr>
+          <PersonRow
+            key={human.name}
+            human={human}
+          />
         ))}
       </tbody>
     </table>

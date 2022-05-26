@@ -1,20 +1,21 @@
 .PeopleTable {
   width: 100%;
 
-  &>thead>tr>th {
-    text-align: center;
-  }
-
-  & td, th {
-    padding: 10px;
-    border: 1px solid #fff;
-  }
-
   &__title th {
     background-color: #9c9c9c;
     text-transform: uppercase;
     text-align: center;
     font-weight: bold;
+  }
+
+  & td,
+  & th {
+    padding: 10px;
+    border: 1px solid #fff;
+  }
+
+  & > thead > tr > th {
+    text-align: center;
   }
 
   border-collapse: collapse;
