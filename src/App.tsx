@@ -5,6 +5,7 @@ import {
 import {
   Routes,
   Route,
+  Navigate,
 } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { PeopleTable } from './pages/PeopleTable';
@@ -24,7 +25,7 @@ const App: FC = () => {
 
         <Route
           path="/home"
-          element={<HomePage />}
+          element={<Navigate replace to="/" />}
         />
 
         <Route path="/people" element={<PeopleTable />} />
