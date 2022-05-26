@@ -1,0 +1,18 @@
+.NotFoundPage {
+  background-image: url("https://i.pinimg.com/originals/5f/1a/0b/5f1a0bab5420cee609429b6c3a222fa3.gif");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+
+  &__title {
+    margin-top: 50px;
+    color: #fff;
+    text-align: center;
+    font-size: 60px;
+  }
+
+  &__image {
+    margin: auto;
+  }
+}

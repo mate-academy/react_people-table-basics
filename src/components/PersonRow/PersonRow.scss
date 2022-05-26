@@ -1,0 +1,23 @@
+.Person {
+  background-color: rgb(54, 51, 51);
+  color: aliceblue;
+  transition: background-color 0.5s;
+
+  &:nth-child(2n + 1) {
+    background-color: aliceblue;
+    color: rgb(42, 42, 42);
+  }
+
+  &:hover {
+    background-color: rgb(228, 173, 230);
+    cursor: pointer;
+  }
+
+  &:last-child :first-child {
+    border-bottom-left-radius: 10px;
+  }
+
+  &:last-child :last-child {
+    border-bottom-right-radius: 10px;
+  }
+}

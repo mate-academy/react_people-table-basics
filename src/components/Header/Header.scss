@@ -1,0 +1,49 @@
+* {
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+@mixin link-main {
+  font-weight: 700;
+  font-size: 30px;
+
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+}
+
+.Header {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(206, 178, 201);
+  padding: 20px 10px;
+
+  &__is-active {
+    color: rgba(15, 15, 14, 0.75);
+    border-bottom: 1px solid black;
+    @include link-main;
+  }
+
+  &__link {
+    color: rgba(240, 248, 255, 0.81);
+    @include link-main;
+    transition: color 0.5s;
+    padding-bottom: 5px;
+
+    &:hover {
+      color: rgb(115, 131, 131);
+    }
+  }
+
+  &__icon {
+    margin-left: 10px;
+  }
+}
+
+.active {
+  color: rgb(12, 128, 126);
+}
