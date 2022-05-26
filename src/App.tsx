@@ -3,44 +3,18 @@ import {
   FC,
 } from 'react';
 import {
-  NavLink,
   Routes,
   Route,
 } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { PeopleTable } from './pages/PeopleTable';
 import { NotFound } from './pages/NotFound';
+import { Navigation } from './components/Navigation/Navigation';
 
 const App: FC = () => {
   return (
     <div className="App">
-      <nav className="App__navigation">
-        <NavLink
-          to="/"
-          className={
-            ({ isActive }: { isActive: boolean }): string | undefined => {
-              return isActive
-                ? 'App__navigation-link active'
-                : 'App__navigation-link';
-            }
-          }
-        >
-          Home
-        </NavLink>
-
-        <NavLink
-          to="/people"
-          className={
-            ({ isActive }: { isActive: boolean }): string | undefined => {
-              return isActive
-                ? 'App__navigation-link active'
-                : 'App__navigation-link';
-            }
-          }
-        >
-          People
-        </NavLink>
-      </nav>
+      <Navigation />
 
       <Routes>
         <Route
