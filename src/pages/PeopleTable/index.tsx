@@ -12,7 +12,6 @@ export const PeopleTable: FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isShowInfo, setIsShowInfo] = useState<boolean>(false);
   const [currentPerson, setCurrentPerson] = useState<Human | null>(null);
-  const [reload, setReload] = useState<boolean>(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -21,14 +20,13 @@ export const PeopleTable: FC = () => {
 
         setPeople(response);
         setError(null);
-        setReload(false);
       } catch {
         setError('Loading failed 🙃 Please try again');
       }
     };
 
     getData();
-  }, [reload]);
+  }, []);
 
   const showPersonInfo = (name: string): void => {
     setIsShowInfo(true);
@@ -49,14 +47,6 @@ export const PeopleTable: FC = () => {
           <h3 className="error-loading-data">
             {error}
           </h3>
-
-          <button
-            type="button"
-            className="PersonInfo__button reload-button"
-            onClick={() => setReload(true)}
-          >
-            Reload
-          </button>
         </>
 
       )}
