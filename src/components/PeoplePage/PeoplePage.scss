@@ -1,0 +1,15 @@
+.people {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 180px;
+
+  &__title {
+    align-self: center;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}
