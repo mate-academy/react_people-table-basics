@@ -36,7 +36,7 @@ export const PeoplePage: FC = () => {
   return (
     <div>
       <h1 className="page-title">Peope page</h1>
-      {people ? <PeopleTable people={people} /> : <Oval />}
+      {people.length ? <PeopleTable people={people} /> : <Oval />}
     </div>
   );
 };
