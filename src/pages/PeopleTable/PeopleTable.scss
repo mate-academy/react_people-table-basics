@@ -1,0 +1,88 @@
+.PeopleTable {
+  border-collapse: collapse;
+  width: 100%;
+  border-left: 3px solid rgb(87, 154, 255);
+  border-right: 3px solid rgb(87, 154, 255);
+
+  &__head-cell {
+    padding: 20px;
+    border-bottom: 1px solid #dadada;
+
+    &:not(:first-child) {
+      border-left: 1px solid #dadada;
+    }
+  }
+
+  &__body-row {
+    transition: background-color 300ms ease;
+
+    &:hover {
+      background-color: rgb(240, 240, 240);
+    }
+  }
+
+  &__body-cell {
+    padding: 20px;
+    border-bottom: 1px solid #dadada;
+    cursor: pointer;
+
+    &:not(:first-child) {
+      border-left: 1px solid #dadada;
+    }
+  }
+}
+
+.blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: 0.3;
+  z-index: 2;
+}
+
+.PersonInfo {
+  position: fixed;
+  top: 200px;
+  left: 30%;
+  width: 500px;
+  padding: 20px;
+  background-color: #fff;
+  z-index: 5;
+  border: 2px solid rgb(87, 154, 255);
+
+  &__desc {
+    color: rgb(87, 154, 255);
+  }
+
+  &__button {
+    display: block;
+    margin: 0 auto;
+    outline: none;
+    border: 1px solid #dadada;
+    color: rgb(59, 59, 59);
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color, color, 300ms ease;
+
+    &:hover {
+      background-color: rgb(255, 52, 52);
+      color: #fff;
+    }
+  }
+}
+
+.error-loading-data {
+  text-align: center;
+  padding: 50px 0 0;
+}
+
+.reload-button {
+  &:hover {
+    background-color: rgb(87, 154, 255);
+  }
+}
