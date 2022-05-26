@@ -16,7 +16,7 @@ const App: FC = () => {
     <div className="App">
       <nav className="App__navigation">
         <NavLink
-          to="/home"
+          to="/"
           className={
             ({ isActive }: { isActive: boolean }): string | undefined => {
               return isActive

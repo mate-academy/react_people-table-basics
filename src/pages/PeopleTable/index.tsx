@@ -91,45 +91,46 @@ export const PeopleTable: FC = () => {
         </>
       )}
 
-      <table className="PeopleTable">
-        <thead className="PeopleTable__head">
-          <tr className="PeopleTable__head-row">
-            <th className="PeopleTable__head-cell">
-              #
-            </th>
-            <th className="PeopleTable__head-cell">
-              Name
-            </th>
-            <th className="PeopleTable__head-cell">
-              Sex
-            </th>
-            <th className="PeopleTable__head-cell">
-              Born
-            </th>
-            <th className="PeopleTable__head-cell">
-              Died
-            </th>
-            <th className="PeopleTable__head-cell">
-              Mother
-            </th>
-            <th className="PeopleTable__head-cell">
-              Father
-            </th>
-          </tr>
-        </thead>
-        <tbody className="PeopleTable__body">
-          {people && (
-            people.map((human, i) => (
-              <PersonRow
-                human={human}
-                i={i}
-                showPersonInfo={showPersonInfo}
-              />
-            ))
-          )}
-        </tbody>
-      </table>
+      {!error && (
+        <table className="PeopleTable">
+          <thead className="PeopleTable__head">
+            <tr className="PeopleTable__head-row">
+              <th className="PeopleTable__head-cell">
+                #
+              </th>
+              <th className="PeopleTable__head-cell">
+                Name
+              </th>
+              <th className="PeopleTable__head-cell">
+                Sex
+              </th>
+              <th className="PeopleTable__head-cell">
+                Born
+              </th>
+              <th className="PeopleTable__head-cell">
+                Died
+              </th>
+              <th className="PeopleTable__head-cell">
+                Mother
+              </th>
+              <th className="PeopleTable__head-cell">
+                Father
+              </th>
+            </tr>
+          </thead>
+          <tbody className="PeopleTable__body">
+            {people && (
+              people.map((human, i) => (
+                <PersonRow
+                  human={human}
+                  i={i}
+                  showPersonInfo={showPersonInfo}
+                />
+              ))
+            )}
+          </tbody>
+        </table>
+      )}
     </>
-
   );
 };
