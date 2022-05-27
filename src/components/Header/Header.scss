@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__nav {
+    font-size: 35px;
+    margin-right: 40px;
+    color: rgb(55, 108, 108);
+  }
+}
