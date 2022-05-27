@@ -1,0 +1,15 @@
+@import "../../Variables.scss";
+
+.Person {
+  background-color: $main-color;
+  border-collapse: collapse;
+
+  &:nth-child(even) {
+    background-color: #fff;
+  }
+
+  &__title {
+    padding: 10px;
+    border-right: 1px solid $main-color;
+  }
+}
