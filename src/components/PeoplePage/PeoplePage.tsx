@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getPeople } from '../../api/api';
 import { PeopleTable } from '../PeopleTable';
 
@@ -10,6 +10,10 @@ export const PeoplePage: React.FC = () => {
 
     setPeople(peopleFromServer);
   };
+
+  useEffect(() => {
+    getPeople();
+  }, []);
 
   getPeopleFromServer();
 
