@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './PeoplePage.scss';
+
 import { getPeople } from '../../api/api';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
+import { ModalError } from '../ModalError/ModalError';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
+  const [isLoadingPeopleError, setIsLoadingPeopleError] = useState(false);
 
   useEffect(() => {
     const response = async () => {
@@ -13,8 +16,7 @@ export const PeoplePage: React.FC = () => {
 
         setPeople(result);
       } catch {
-        // eslint-disable-next-line no-alert
-        alert('Cant load people from server');
+        setIsLoadingPeopleError(true);
       }
     };
 
@@ -29,6 +31,10 @@ export const PeoplePage: React.FC = () => {
 
       <PeopleTable
         people={people}
+      />
+
+      <ModalError
+        isLoadingPeopleError={isLoadingPeopleError}
       />
     </div>
   );
