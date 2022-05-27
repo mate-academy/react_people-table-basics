@@ -9,7 +9,7 @@ type Props = {
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   return (
     <>
-      <h1>People table</h1>
+      <h1 className="peopleTable__title">People table</h1>
       <table
         className="peopleTable"
         style={{ borderCollapse: 'collapse' }}

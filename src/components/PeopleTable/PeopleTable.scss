@@ -8,8 +8,14 @@
   &__name {
     padding: 10px;
   }
+
+  &__title {
+    font-size: 30px;
+  }
 }
 
-.table, tr, th {
+.table,
+tr,
+th {
   border: 1px solid black;
 }
