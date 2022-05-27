@@ -14,8 +14,8 @@ export const PeoplePage: React.FC = () => {
         const recivedPeoples = await getPeople();
 
         setPeoples(recivedPeoples);
-      } catch (erro: any) {
-        setError(`Can not load data from server:  ${erro.message}`);
+      } catch (Error: any) {
+        setError(`Can not load data from server:  ${Error.message as string | unknown}`);
       }
     };
 
@@ -26,13 +26,13 @@ export const PeoplePage: React.FC = () => {
     <>
       <h2>People Page</h2>
       {error
-        ? <h1>{error}</h1>
+        ? <h2>{error}</h2>
         : peoples
           ? <PeopleTablePage peoples={peoples} />
           : (
             <Oval
-              height="100"
-              width="100"
+              height="200"
+              width="200"
               color="grey"
               ariaLabel="loading"
             />

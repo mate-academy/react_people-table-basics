@@ -1,0 +1,17 @@
+@import "../../Variables.scss";
+
+.PeopleTable {
+  border-collapse: collapse;
+  width: fit-content;
+}
+
+.table-header {
+  &__title {
+    border: 1px solid $main-color;
+    padding: 5px 20px;
+  }
+}
+
+.table-body {
+  border: 1px solid $main-color;
+}

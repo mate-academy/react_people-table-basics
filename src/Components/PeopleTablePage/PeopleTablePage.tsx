@@ -1,4 +1,5 @@
 import React from 'react';
+import './PeopleTablePage.scss';
 import { PersonalRow } from '../PersonalRow/PersonalRow';
 
 type Props = {
@@ -9,17 +10,17 @@ export const PeopleTablePage: React.FC<Props> = ({ peoples }) => {
   return (
     <table className="PeopleTable">
       <thead>
-        <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+        <tr className="table-header">
+          <th className="table-header__title">Name</th>
+          <th className="table-header__title">Sex</th>
+          <th className="table-header__title">Born</th>
+          <th className="table-header__title">Died</th>
+          <th className="table-header__title">Mother</th>
+          <th className="table-header__title">Father</th>
         </tr>
       </thead>
 
-      <tbody>
+      <tbody className="table-body">
         {peoples.map(person => (
           <PersonalRow
             key={person.slug}

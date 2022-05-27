@@ -9,11 +9,11 @@ import { NotFoundPage } from './Components/NotFoundPage/NotFoundPage';
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Link to="/home">
+      <Link to="/" className="nav-link">
         Home Page
       </Link>
 
-      <Link to="/peoples">
+      <Link to="/peoples" className="nav-link">
         Peoples
       </Link>
 
