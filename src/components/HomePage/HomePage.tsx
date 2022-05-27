@@ -1,7 +1,5 @@
 import React from 'react';
 import './HomePage.scss';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 
 export const HomePage: React.FC = () => {
   return (
