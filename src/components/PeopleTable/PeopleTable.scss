@@ -1,0 +1,15 @@
+.peopleTable {
+  &__head {
+    font-weight: bold;
+    font-size: 20px;
+    background-color: rgb(216, 236, 216);
+  }
+
+  &__name {
+    padding: 10px;
+  }
+}
+
+.table, tr, th {
+  border: 1px solid black;
+}

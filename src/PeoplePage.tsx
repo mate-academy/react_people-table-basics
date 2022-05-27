@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getPeople } from './api/api';
-import { PeopleTable } from './PeopleTable';
+import { PeopleTable } from './components/PeopleTable/PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);

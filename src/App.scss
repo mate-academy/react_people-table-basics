@@ -1,1 +1,8 @@
-// styles go here
+.app {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 30px;
+
+  &__homePageTitle {
+    font-size: 30px;
+  }
+}

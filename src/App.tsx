@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import { Header } from './Header';
+import { Header } from './components/Header/Header';
 import { HomePage } from './HomePage';
 import { PeoplePage } from './PeoplePage';
 import { NotFoundPage } from './NotFoundPage';
