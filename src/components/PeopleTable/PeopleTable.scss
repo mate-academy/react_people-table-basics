@@ -1,0 +1,31 @@
+.PeopleTable {
+
+  &__title-page {
+    text-align: center;
+  }
+
+  &__title-table {
+    margin-bottom: 5px;
+    font-weight: bolder;
+    font-size: 25px;
+    color: rgb(237, 173, 11);
+  }
+
+  &__frame {
+    border-spacing: 0;
+    width: 80%;
+    border-collapse: collapse;
+  }
+
+  &__head-row {
+    border: 1px solid blue;
+  }
+
+  &__head-cell {
+    border: 1px solid blue;
+  }
+
+  &__personRow--dark {
+    background-color: rgba(207, 202, 196, 0.6);
+  }
+}
