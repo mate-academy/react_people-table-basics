@@ -1,1 +1,34 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+
+  &__link {
+    display: flex;
+    border: 1px solid red;
+    border-radius: 5px;
+    justify-content: center;
+    text-decoration: none;
+    padding: 10px;
+    margin: 20px;
+    font-size: large;
+    text-transform: uppercase;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: red;
+      transform: scale(1.2);
+    }
+  }
+}
+
+.table,
+.row {
+  border: 1px solid black;
+  margin: 0;
+  background-color: yellowgreen;
+}
