@@ -1,11 +1,11 @@
 # React - People table
 - Replace `<your_account>` with your Github username in the
-  [DEMO LINK](https://<your_account>.github.io/react_people-table-basics/)
+  [DEMO LINK](https://SeKaM0.github.io/react_people-table-basics/)
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
 ## If you don't use **Typescript**
 1. Rename `.tsx` files to `.jsx`
-1. use `eslint-config-react` in `.eslintrs.js` 
+1. use `eslint-config-react` in `.eslintrs.js`
 
 ## Basic tasks
 1. Install all the NPM packages you need and types for them.
@@ -33,7 +33,7 @@
       <table className="PeopleTable">
         <th>...</th>
         <tbody>...</tbody>
-      </table>
+      </table>fxg
       ```
     - add `border-collapse: collapse` style to the table
 9. Implement `PersonRow` component accepting a `person` and displaying all the data described above
