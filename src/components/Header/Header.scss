@@ -6,11 +6,27 @@
 
     margin: 0;
     padding: 20px;
+
     list-style: none;
+
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &__item {
+    color: blue;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.3s;
+
+    &:hover {
+      border-bottom: 1px solid blue;
+    }
   }
 
   &__item--active {
     pointer-events: none;
+    color: black;
     text-decoration: none;
   }
 }

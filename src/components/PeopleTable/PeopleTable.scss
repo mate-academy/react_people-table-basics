@@ -1,4 +1,18 @@
 .people-table {
-  margin: 0 auto;
+  box-sizing: border-box;
+  margin: 1% auto;
+
+  text-align: left;
   border-collapse: collapse;
+
+  &__head {
+    padding: 0 10px;
+    font-size: 1.2em;
+    text-transform: capitalize;
+    background-color: #eee;
+  }
+
+  &__cell {
+    padding: 15px 5px 15px 10px;
+  }
 }
