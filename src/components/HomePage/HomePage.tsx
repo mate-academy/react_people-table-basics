@@ -1,7 +1,9 @@
 import React from 'react';
 
 export const HomePage: React.FC = () => (
-  <h2>
-    Home page
-  </h2>
+  <section className="home-page">
+    <h2 className="home-page__title">
+      Home page
+    </h2>
+  </section>
 );
