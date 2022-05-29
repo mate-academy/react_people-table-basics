@@ -1,1 +1,30 @@
-// styles go here
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 35px;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 850px;
+}
+
+// .link {
+//   margin-left: 6px;
+//   padding: 10px;
+//   font-size: 15px;
+//   border-bottom: 1px solid rgb(49, 140, 206);
+
+// }

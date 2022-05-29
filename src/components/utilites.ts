@@ -1,11 +1,4 @@
-const API_BASE
-  = 'https://mate-academy.github.io/react_people-table/api/people.json';
-
-const getPeople = async (): Promise<Person[]> => {
-  const response = await fetch(API_BASE);
-
-  return response.json();
-};
+import { getPeople } from './API/api';
 
 export const preparedPeople = async (): Promise<Person[]> => {
   const peopleFromServer = await getPeople();

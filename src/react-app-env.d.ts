@@ -8,4 +8,5 @@ interface Person {
   died: number;
   motherName: string | Person;
   fatherName: string | Person;
+  slug: string,
 }
