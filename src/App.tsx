@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from 'react-router-dom';
 
 import './App.scss';
+import { PeoplePage } from './components/PeoplePage';
 
 const App = () => (
   <div className="App">
@@ -14,7 +15,7 @@ const App = () => (
 
     <Routes>
       <Route path="/" element={<h1>Home page</h1>} />
-      <Route path="people" element={<h1>People page</h1>} />
+      <Route path="people" element={<PeoplePage />} />
 
       <Route path="*" element={<h1>Home page</h1>} />
     </Routes>
