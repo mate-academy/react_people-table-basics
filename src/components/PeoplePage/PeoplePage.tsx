@@ -1,4 +1,5 @@
 import React from 'react';
+import './PeoplePage.scss';
 
 export const PeoplePage: React.FC = () => (
   <section className="people-page">

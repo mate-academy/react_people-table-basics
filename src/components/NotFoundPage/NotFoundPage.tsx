@@ -1,4 +1,5 @@
 import React from 'react';
+import './NotFoundPage.scss';
 
 export const NotFoundPage: React.FC = () => (
   <section className="not-found-page">
