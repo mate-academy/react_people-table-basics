@@ -1,7 +1,5 @@
 import './App.scss';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
@@ -11,15 +9,13 @@ const App = () => (
   <div className="App">
     <Header />
 
-    <Switch>
-      <Route path="/" exact component={HomePage} />
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/people" element={<PeoplePage />} />
 
-      <Route path="/people" component={PeoplePage} />
-
-      <Redirect path="/home" to="/" />
-
-      <NotFoundPage />
-    </Switch>
+      <Route path="/home" element={<Navigate to="/" />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   </div>
 );
 
