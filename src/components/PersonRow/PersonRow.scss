@@ -1,0 +1,7 @@
+.person {
+  font-size: 1.2em;
+
+  &:nth-child(2n) {
+    background-color: azure;
+  }
+}
