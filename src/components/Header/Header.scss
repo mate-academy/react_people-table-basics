@@ -8,4 +8,9 @@
     padding: 20px;
     list-style: none;
   }
+
+  &__item--active {
+    pointer-events: none;
+    text-decoration: none;
+  }
 }
