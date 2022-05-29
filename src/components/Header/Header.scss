@@ -1,0 +1,11 @@
+.main-navigation {
+  &__list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    margin: 0;
+    padding: 20px;
+    list-style: none;
+  }
+}
