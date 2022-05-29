@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { getPeople } from '../../api/people';
-import { People, PeopleWithParents } from '../../types/People';
+import { Person, PersonWithParents } from '../../types/Person';
 import { PeopleTable } from '../PeopleTable';
 import './PeoplePage.scss';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<People[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -13,13 +13,13 @@ export const PeoplePage: React.FC = () => {
     try {
       setIsLoading(true);
       const peopleFromServer = await getPeople();
-      const peopleWithParents: PeopleWithParents[]
+      const peopleWithParents: PersonWithParents[]
         = peopleFromServer.map((child) => {
           const parent = peopleFromServer.find((person) => (
             person.name === child.fatherName
             || person.name === child.motherName
           ));
-          const childWithParents: PeopleWithParents = { ...child };
+          const childWithParents: PersonWithParents = { ...child };
 
           if (parent && parent.sex === 'm') {
             childWithParents.father = parent;

@@ -1,9 +1,9 @@
 import React from 'react';
-import { PeopleWithParents } from '../../types/People';
+import { PersonWithParents } from '../../types/Person';
 import './PeopleTable.scss';
 
 type Props = {
-  people: PeopleWithParents[];
+  people: PersonWithParents[];
 };
 
 export const PeopleTable: React.FC<Props> = () => (

@@ -1,4 +1,4 @@
-export interface People {
+export interface Person {
   name: string,
   sex: 'm' | 'f',
   born: number,
@@ -8,7 +8,7 @@ export interface People {
   slug: string,
 }
 
-export interface PeopleWithParents extends People {
-  father?: People,
-  mother?: People,
+export interface PersonWithParents extends Person {
+  father?: Person,
+  mother?: Person,
 }
