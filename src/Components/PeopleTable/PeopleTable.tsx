@@ -12,9 +12,9 @@ interface Props {
 }
 
 export const PeopleTable:React.FC<Props> = ({ people }) => (
-  <table>
-    <thead>
-      <tr>
+  <table className="people-table table is-fullwidth is-bordered">
+    <thead className="people-table__head">
+      <tr className="people-table__row is-selected">
         <th className="people-table__cell">name</th>
         <th className="people-table__cell">sex</th>
         <th className="people-table__cell">born</th>
@@ -23,7 +23,7 @@ export const PeopleTable:React.FC<Props> = ({ people }) => (
         <th className="people-table__cell">father</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody className="people-table__body">
       { people.map((person, i) => (
         <PersonRow
           person={person}

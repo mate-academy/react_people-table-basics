@@ -2,7 +2,9 @@ import './HomePage.scss';
 import React from 'react';
 
 export const HomePage: React.FC = () => (
-  <h2 className="app__homePageTitle">
-    Home page
-  </h2>
+  <section className="home-page">
+    <h2 className="home-page__title">
+        Home page
+    </h2>
+  </section>
 );
