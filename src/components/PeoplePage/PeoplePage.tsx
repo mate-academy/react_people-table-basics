@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { getPeople } from '../../api/people';
 import { People, PeopleWithParents } from '../../types/People';
+import { PeopleTable } from '../PeopleTable';
 import './PeoplePage.scss';
 
 export const PeoplePage: React.FC = () => {
@@ -49,6 +50,9 @@ export const PeoplePage: React.FC = () => {
       <h2 className="people-page__title">
         People page
       </h2>
+      {(!isError && !isLoading) && <PeopleTable people={people} />}
+      {isLoading && 'Loading...'}
+      {isError && 'Can\'t load data from server'}
     </section>
   );
 };
