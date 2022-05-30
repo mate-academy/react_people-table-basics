@@ -1,0 +1,22 @@
+.Header {
+  &__navbar {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__link {
+    padding: 8px 15px;
+    background-color: #ff8c8c;
+    text-decoration: none;
+    border-radius: 3px;
+    color: black;
+  }
+
+  &__is-active {
+    padding: 8px 15px;
+    background-color: #ff5d5d;
+    text-decoration: none;
+    border-radius: 3px;
+    color: black;
+  }
+}
