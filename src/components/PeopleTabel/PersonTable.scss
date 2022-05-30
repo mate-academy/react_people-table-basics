@@ -1,0 +1,19 @@
+.peopletable {
+  box-sizing: border-box;
+  border-collapse: collapse;
+
+  margin: 40px auto;
+
+  gap: 30px;
+
+  &__titles {
+    border: 1px solid white;
+    border-radius: 5px;
+  }
+
+  &__cell {
+    padding: 40px;
+    text-align: left;
+    border-right: 1px solid white;
+  }
+}
