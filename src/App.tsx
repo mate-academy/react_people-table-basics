@@ -12,6 +12,10 @@ const App: React.FC = () => {
       element: <Home />,
     },
     {
+      path: '/home',
+      element: <Home />,
+    },
+    {
       path: '/people',
       element: <PeoplePage />,
     },

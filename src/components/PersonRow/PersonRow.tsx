@@ -5,14 +5,18 @@ type Props = {
 };
 
 export const PersonRow: React.FC<Props> = ({ person }) => {
+  const {
+    name, sex, born, died, fatherName, motherName,
+  } = person;
+
   return (
     <tr>
-      <td>{person.name}</td>
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-      <td>{person.motherName || 'no information' }</td>
-      <td>{person.fatherName || 'no information' }</td>
+      <td>{name}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>{motherName || 'no information' }</td>
+      <td>{fatherName || 'no information' }</td>
     </tr>
   );
 };
