@@ -5,6 +5,8 @@ import { getPeople } from '../../api/api';
 import { People, PeopleParents } from '../../types/types';
 import { PeopleTable } from '../PeopleTable';
 
+import './PeoplePage.scss';
+
 export const PeoplePage: React.FC = () => {
   const [peoples, setPeoples] = useState<PeopleParents[] | null>(null);
 
@@ -38,7 +40,7 @@ export const PeoplePage: React.FC = () => {
 
   return (
     <div>
-      <h1>
+      <h1 className="people__title">
         People table
       </h1>
 

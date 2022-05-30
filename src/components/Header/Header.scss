@@ -2,4 +2,18 @@
   display: flex;
   justify-content: center;
   gap: 20px;
+  border-bottom: 2px solid black;
+  border-radius: 20px;
+
+  &__link {
+    &--image {
+      width: 54px;
+      height: 54px;
+      transition: all 0.3s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
 }

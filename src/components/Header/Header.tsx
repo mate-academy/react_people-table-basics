@@ -6,11 +6,19 @@ export const Header: React.FC = () => {
   return (
     <nav className="header">
       <NavLink to="/" className="header__link">
-        HOME
+        <img
+          src="https://img.icons8.com/cotton/64/000000/home--v3.png"
+          alt="Home"
+          className="header__link--image"
+        />
       </NavLink>
 
       <NavLink to="/people" className="header__link">
-        PEOPLE
+        <img
+          src="https://img.icons8.com/doodle/96/000000/crowd.png"
+          alt="People"
+          className="header__link--image"
+        />
       </NavLink>
     </nav>
   );
