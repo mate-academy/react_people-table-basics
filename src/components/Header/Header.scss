@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  width: 100%;
+  border: 1px grey solid;
+  border-radius: 10px;
+}
+
+.nav {
+  margin: 25px;
+}
+
+a {
+  color: #545e6f;
+  text-decoration: none;
+}
+
+.nav a {
+  background: #f0f0f0;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin-right: 10px;
+}
+
+.active {
+  color: rgb(177, 88, 165);
+}
