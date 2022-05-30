@@ -3,8 +3,9 @@ import { NavLink } from 'react-router-dom';
 import './Nav.scss';
 
 export const Nav: React.FC = () => {
-  const activeLink = 'nav__link nav__link--active'
-  const inActiveLink = 'nav__link'
+  const activeLink = 'nav__link nav__link--active';
+  const inActiveLink = 'nav__link';
+
   return (
     <nav className="nav">
       <ul className="nav__list">

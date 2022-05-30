@@ -9,7 +9,6 @@ import { Nav } from './Components/Navigation';
 import './App.scss';
 import 'bulma';
 
-
 const App: React.FC = () => (
   <div className="app">
     <header className="app__header">
