@@ -7,9 +7,11 @@ export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
 
   useEffect(() => {
-    getPeople().then((peopleFS: Person[]) => {
-      setPeople(peopleFS);
-    });
+    const receivePeople = async () => {
+      setPeople(await getPeople());
+    };
+
+    receivePeople();
   }, []);
 
   const preparedPeople = people.map(person => {
