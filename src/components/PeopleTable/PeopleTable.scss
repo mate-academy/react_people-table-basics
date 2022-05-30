@@ -1,0 +1,17 @@
+.table {
+  table-layout: fixed;
+  width: 100%;
+  border: 5px solid #fff;
+  border-collapse: collapse;
+  outline: 3px solid #ffd300;
+
+  margin-top: 50px;
+
+  &-header {
+    font-size: 16px;
+    letter-spacing: 2px;
+    padding: 20px;
+    font-family: "Rock Salt", cursive;
+    background-color: #ffd300;
+  }
+}

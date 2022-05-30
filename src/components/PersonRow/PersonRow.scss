@@ -1,0 +1,22 @@
+.table-row {
+  &:hover {
+    transform: scale(1.01);
+    transition: 0.3s;
+    border-bottom: 1px solid yellow;
+  }
+
+  &:nth-child(odd) {
+    background: #fff;
+  }
+
+  &:nth-child(even) {
+    background: #f7f7f7;
+  }
+
+  &__data {
+    letter-spacing: 1px;
+    text-align: center;
+
+    padding: 15px;
+  }
+}
