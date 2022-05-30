@@ -12,10 +12,8 @@ export const PeoplePage: React.FC = () => {
   };
 
   useEffect(() => {
-    getPeople();
+    getPeopleFromServer();
   }, []);
-
-  getPeopleFromServer();
 
   return (
     <>
