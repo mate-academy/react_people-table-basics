@@ -17,7 +17,7 @@ const App:React.FC = () => (
 
       <Route path="/people" element={<PeoplePage />} />
 
-      <Route path="/notfound" element={<NotFoundPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   </>
 );
