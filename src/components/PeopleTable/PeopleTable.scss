@@ -1,0 +1,36 @@
+.PeopleTable {
+  width: 100%;
+
+  &__title th {
+    background-color: #9c9c9c;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  & td,
+  & th {
+    padding: 10px;
+    border: 1px solid #fff;
+  }
+
+  & > thead > tr > th {
+    text-align: center;
+  }
+
+  border-collapse: collapse;
+}
+
+.Person {
+  & td {
+    padding: 10px;
+  }
+
+  &:nth-child(2n) {
+    background-color: #d0d0d0;
+  }
+
+  &:nth-child(2n-1) {
+    background-color: #e6e5e5;
+  }
+}
