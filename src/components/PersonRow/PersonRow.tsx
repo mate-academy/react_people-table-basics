@@ -1,17 +1,19 @@
 import React from 'react';
 import { Person } from '../../react-app-env';
 
+import './PersonRow.scss';
+
 interface Props {
   person: Person,
 }
 
 export const PersonRow:React.FC<Props> = ({ person }) => (
-  <tr>
-    <td>{person.name}</td>
-    <td>{person.sex}</td>
-    <td>{person.born}</td>
-    <td>{person.died}</td>
-    <td>{person.motherName}</td>
-    <td>{person.fatherName}</td>
+  <tr className="person__row">
+    <td className="person__cell">{person.name}</td>
+    <td className="person__cell">{person.sex}</td>
+    <td className="person__cell">{person.born}</td>
+    <td className="person__cell">{person.died}</td>
+    <td className="person__cell">{person.motherName || 'no data'}</td>
+    <td className="person__cell">{person.fatherName || 'no data'}</td>
   </tr>
 );

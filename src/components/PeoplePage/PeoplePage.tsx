@@ -44,8 +44,8 @@ export const PeoplePage: React.FC = () => {
   }, []);
 
   return (
-    <div className="peoplePage">
-      <h1 className="peoplePage__title">
+    <div>
+      <h1>
         People table
       </h1>
 

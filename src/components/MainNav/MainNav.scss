@@ -1,7 +1,32 @@
 .navbar {
-  text-align: center;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 50px;
+  padding: 10px;
+
+  background-color: #e8e8e8;
+
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  border-bottom: 1px solid #fff;
+  box-shadow: 0 7px 7px -7px #333;
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+  }
 
   &__link {
-    text-transform: uppercase;
+    text-decoration: none;
+    color: #9cf;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__is-active {
+    color: #9cf;
   }
 }

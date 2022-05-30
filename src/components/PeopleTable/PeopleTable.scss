@@ -1,0 +1,24 @@
+.peopleTable {
+  box-sizing: border-box;
+  margin: 20px auto;
+  border-collapse: collapse;
+  gap: 30px;
+  background-color: #e8e8e8;
+
+  &__names {
+    border: 1px solid #000;
+    background-color: #9cf;
+    color: #fff;
+  }
+
+  &__cell {
+    padding: 20px;
+    text-align: center;
+    border-left: 1px solid #000;
+  }
+
+  &__body {
+    border: 1px solid #000;
+    border-radius: 10px;
+  }
+}

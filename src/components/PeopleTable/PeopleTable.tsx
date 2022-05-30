@@ -2,14 +2,16 @@ import React from 'react';
 import { PersonWithParents } from '../../react-app-env';
 import { PersonRow } from '../PersonRow/PersonRow';
 
+import './PeopleTable.scss';
+
 interface Props {
   people: PersonWithParents[],
 }
 
 export const PeopleTable: React.FC<Props> = ({ people }) => (
   <table className="peopleTable">
-    <thead>
-      <tr>
+    <thead className="peopleTable__names">
+      <tr className="peopleTable__rows">
         <th className="peopleTable__cell">Name</th>
         <th className="peopleTable__cell">Sex</th>
         <th className="peopleTable__cell">Born</th>
