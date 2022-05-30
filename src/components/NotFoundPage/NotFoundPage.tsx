@@ -1,5 +1,6 @@
 import React from 'react';
+import './NotFoundPage.scss';
 
 export const NotFoundPage: React.FC = () => (
-  <p>Page is not found</p>
+  <div className="not-found-page__img" />
 );
