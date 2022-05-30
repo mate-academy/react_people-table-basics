@@ -1,0 +1,30 @@
+.nav {
+  text-align: center;
+
+  &__list {
+    display: flex;
+    justify-content: space-around;
+    font-size: 18px;
+
+    list-style: none;
+
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &__link {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 20px 50px;
+    text-decoration: none;
+    background-color: #ccc;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.3s;
+  }
+
+  &__link--active {
+    pointer-events: none;
+    color: rgba(17, 190, 135, 0.93);
+    text-decoration: none;
+  }
+}
