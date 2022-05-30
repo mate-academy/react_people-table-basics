@@ -1,6 +1,6 @@
 describe('Page', () => {
   beforeEach(() => {
-    cy.intercept('**/people.json', { fixture: 'people' });
+    cy.intercept('**/person.ts.json', { fixture: 'person.ts' });
     cy.visit('/');
   });
 
@@ -32,7 +32,7 @@ describe('Page', () => {
   });
 
   it('should open the table, which contains Name, Sex, Born, Died, Mother, Father', () => {
-    cy.visit('/people');
+    cy.visit('/person.ts');
     head.getCell(0)
       .should('contain', 'Name');
     head.getCell(1)
@@ -48,7 +48,7 @@ describe('Page', () => {
 });
 
   it ('should open the table with personal data', () => {
-    cy.visit('/people');
+    cy.visit('/person.ts');
     person.getCell(0)
       .should('contain', 'Carolus Haverbeke')
       .and('contain', 'm')
