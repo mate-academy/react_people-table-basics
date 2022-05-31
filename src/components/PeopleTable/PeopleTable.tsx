@@ -9,14 +9,14 @@ interface Props {
 const PeopleTable: React.FC<Props> = ({ people }) => {
   return (
     <table className="people-table table">
-      <thead className="table-head">
-        <tr className="table-categories">
-          <th className="table__name">Name</th>
-          <th className="table__sex">Sex</th>
-          <th className="table__born">Born</th>
-          <th className="table__died">Died</th>
-          <th className="table__mother">Mother</th>
-          <th className="table__father">Father</th>
+      <thead className="table__head">
+        <tr className="table__categories categories">
+          <th className="categories__item">Name</th>
+          <th className="categories__item">Sex</th>
+          <th className="categories__item">Born</th>
+          <th className="categories__item">Died</th>
+          <th className="categories__item">Mother</th>
+          <th className="categories__item">Father</th>
         </tr>
       </thead>
 
