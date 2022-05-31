@@ -1,1 +1,18 @@
-// styles go here
+.App {
+
+  &__people {
+    text-align: center;
+  }
+
+  &__home {
+    text-align: center;
+  }
+
+  &__unknown {
+    text-align: center;
+
+    color: red;
+    font-size: 25px;
+    font-weight: bold;
+  }
+}
