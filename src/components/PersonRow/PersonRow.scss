@@ -1,0 +1,5 @@
+.person {
+  &:nth-child(odd) {
+    background: rgba(39, 38, 38, 0.14);
+  }
+}
