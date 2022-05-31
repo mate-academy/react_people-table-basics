@@ -5,9 +5,14 @@ import { PeopleTable } from '../PeopleTable/PeopleTable';
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<People[] | null>([]);
 
+  const peopleFromServer = async () => {
+    const getPeoples = await getPeople();
+
+    setPeople(getPeoples);
+  };
+
   useEffect(() => {
-    getPeople()
-      .then(human => setPeople(human));
+    peopleFromServer();
   }, []);
 
   return (
