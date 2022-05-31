@@ -1,0 +1,21 @@
+.Header {
+  position: sticky;
+  top: 10px;
+
+  &__list {
+    display: flex;
+    justify-content: right;
+
+    padding-right: 35px;
+  }
+
+  &__item {
+    display: block;
+    margin: 25px;
+
+    color: red;
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: bold;
+  }
+}

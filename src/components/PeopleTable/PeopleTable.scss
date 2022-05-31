@@ -6,14 +6,16 @@
 
   &__title-table {
     margin-bottom: 5px;
+
     font-weight: bolder;
     font-size: 25px;
     color: rgb(237, 173, 11);
   }
 
   &__frame {
-    border-spacing: 0;
     width: 80%;
+
+    border-spacing: 0;
     border-collapse: collapse;
   }
 
@@ -25,7 +27,11 @@
     border: 1px solid blue;
   }
 
-  &__personRow--dark {
-    background-color: rgba(207, 202, 196, 0.6);
+  &__personRow {
+    
+    &:nth-child(2n) {
+      background-color: rgba(207, 202, 196, 0.6);
+    }
   }
+
 }

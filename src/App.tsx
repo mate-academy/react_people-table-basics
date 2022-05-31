@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import './App.scss';
 import {
-  Link, Redirect, Route, Switch,
+  Redirect, Route, Switch,
 } from 'react-router-dom';
 import { PeopleTable } from './components/PeopleTable';
+import { Header } from './components/Header';
 import { getPeople } from './api';
 import { Person } from './PersonType';
 
@@ -28,18 +29,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="App__header">
-        <nav className="navbar">
-          <div className="navbar__list">
-            <Link to="/home" className="navbar__item">
-              Home
-            </Link>
-            <Link to="/people" className="navbar__item">
-              People
-            </Link>
-          </div>
-        </nav>
-      </header>
+      <Header />
 
       <Switch>
         <Route path="/" exact>

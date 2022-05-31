@@ -1,6 +1,5 @@
 import React from 'react';
 import './PeopleTable.scss';
-import classNames from 'classnames';
 import { Person } from '../../PersonType';
 import { PersonRow } from '../PersonRow';
 
@@ -9,7 +8,7 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  let numberLineTable = 0;
+  let line = 0;
 
   return (
     <div className="PeopleTable">
@@ -49,21 +48,16 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
         <tbody className="PeopleTable__body">
           {people && (
             people.map((person) => {
-              numberLineTable += 1;
+              line += 1;
 
               return (
                 <tr
-                  className={classNames(
-                    'PeopleTable__personRow',
-                    {
-                      'PeopleTable__personRow--dark': numberLineTable % 2 === 0,
-                    },
-                  )}
+                  className="PeopleTable__personRow"
                   key={person.name}
                 >
                   <PersonRow
-                    line={numberLineTable}
                     person={person}
+                    line={line}
                   />
                 </tr>
               );

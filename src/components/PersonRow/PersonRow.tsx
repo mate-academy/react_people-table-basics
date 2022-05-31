@@ -3,11 +3,11 @@ import './PersonRow.scss';
 import { Person } from '../../PersonType';
 
 type Props = {
-  line: number,
   person: Person
+  line: number,
 };
 
-export const PersonRow: React.FC<Props> = ({ line, person }) => {
+export const PersonRow: React.FC<Props> = ({ person, line }) => {
   return (
     <>
       <td className="PersonRow__cell">{line}</td>
