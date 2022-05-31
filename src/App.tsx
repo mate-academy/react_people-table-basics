@@ -1,4 +1,3 @@
-import './App.scss';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
