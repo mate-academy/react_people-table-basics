@@ -5,23 +5,17 @@ type Props = {
 };
 
 export const PersonRow: FC<Props> = ({ person }) => {
-  const {
-    name,
-    sex,
-    born,
-    died,
-    motherName,
-    fatherName,
-  } = person;
+  const valuesOfPerson = Object.values(person);
+
+  valuesOfPerson.pop();
 
   return (
     <tr className="person-row">
-      <td>{name}</td>
-      <td>{sex}</td>
-      <td>{born}</td>
-      <td>{died}</td>
-      <td>{motherName || '-/-'}</td>
-      <td>{fatherName || '-/-'}</td>
+      {
+        valuesOfPerson.map(value => (
+          <td>{value || '-/-'}</td>
+        ))
+      }
     </tr>
   );
 };

@@ -15,7 +15,6 @@ const App = () => (
         >
           Home page
         </Link>
-        {' '}
         <Link
           className="navbar-item navbar-link"
           to="/people"
@@ -29,7 +28,7 @@ const App = () => (
       <Route path="/" element={<h1>Home page</h1>} />
       <Route path="people" element={<PeoplePage />} />
 
-      <Route path="*" element={<h1>Home page</h1>} />
+      <Route path="*" element={<h1>Page not found</h1>} />
     </Routes>
   </div>
 );
