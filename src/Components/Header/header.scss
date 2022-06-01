@@ -11,12 +11,12 @@
     border-radius: 3px;
     color: black;
   }
+}
 
-  &__is-active {
-    padding: 8px 15px;
-    background-color: #ff5d5d;
-    text-decoration: none;
-    border-radius: 3px;
-    color: black;
-  }
+.active {
+  padding: 8px 15px;
+  background-color: #ff5d5d;
+  text-decoration: none;
+  border-radius: 3px;
+  color: black;
 }

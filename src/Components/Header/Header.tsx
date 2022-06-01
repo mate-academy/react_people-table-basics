@@ -2,26 +2,22 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './header.scss';
 
-export const Header: React.FC = () => {
-  const activeClassName = 'Header__is-active';
-
+export const Header: React.FC = React.memo(() => {
   return (
     <nav className="Header__navbar">
       <NavLink
         to="/"
-        className={({ isActive }) => (
-          isActive ? activeClassName : 'Header__link')}
+        className="Header__link"
       >
         Home
       </NavLink>
 
       <NavLink
         to="/people"
-        className={({ isActive }) => (
-          isActive ? activeClassName : 'Header__link')}
+        className="Header__link"
       >
         People
       </NavLink>
     </nav>
   );
-};
+});
