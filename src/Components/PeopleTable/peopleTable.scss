@@ -1,0 +1,15 @@
+.PeopleTable {
+  &__head {
+    background-color: #ffe3a9;
+  }
+
+  &__cell {
+    border-top: 2px solid #ffc3c3;
+    border-bottom: 2px solid #ffc3c3;
+    text-align: center;
+
+    &:first-child {
+      text-align: left;
+    }
+  }
+}
