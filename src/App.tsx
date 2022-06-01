@@ -12,7 +12,7 @@ const App = () => (
       <Route path="/" element={<Home />} />
       <Route path="/people" element={<PeoplePage />} />
       <Route path="*" element={<NotFoundPage />} />
-      <Route path="/home" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>
   </div>
 );
