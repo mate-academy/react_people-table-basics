@@ -1,1 +1,25 @@
-// styles go here
+.PeopleTable {
+  width: 100%,;
+  border: 1px solid black;
+
+  &__title {
+    border: 1px solid black;
+    color: rgb(245, 64, 64);
+  }
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+
+  &__link{
+    color: brown;
+    font-size: 40px;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    &:hover {
+      color:rgb(246, 61, 61)
+    }
+  }
+}
