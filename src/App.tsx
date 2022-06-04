@@ -22,16 +22,6 @@ const App = () => (
       <Link to="/people" className="mdc-button__label button">People page</Link>
     </button>
 
-    <button type="button" className="mdc-button mdc-button--outlined">
-      <span className="mdc-button__ripple" />
-      <Link to="/not" className="mdc-button__label button">Not Found page</Link>
-    </button>
-
-    <button type="button" className="mdc-button mdc-button--outlined">
-      <span className="mdc-button__ripple" />
-      <Link to="/home" className="mdc-button__label button">Home</Link>
-    </button>
-
     <br />
 
     <Routes>
