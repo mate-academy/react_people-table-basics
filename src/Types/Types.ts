@@ -3,8 +3,7 @@ export interface Person {
   sex: string,
   born: number,
   died: number,
-  slug: string,
-  email: string,
   fatherName: string,
   motherName: string,
+  slug: string,
 }

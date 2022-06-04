@@ -6,7 +6,9 @@ type Props = {
   people: Person[],
 };
 
-const tableHead = ['Name', 'Sex', 'Born', 'Died', 'Slug', 'Email'];
+const tableHead = [
+  'Name', 'Sex', 'Born', 'Died', 'Father Name', 'Mother Name', 'Slug',
+];
 
 export const Table: React.FC<Props> = ({ people }) => {
   return (
