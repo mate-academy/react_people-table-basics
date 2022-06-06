@@ -18,7 +18,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           <td>Died</td>
           <td>Mother</td>
           <td>Father</td>
-          {/* <td>Info</td> */}
+          <td>Info</td>
         </tr>
       </thead>
       <tbody>
@@ -34,7 +34,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           <td>Died</td>
           <td>Mother</td>
           <td>Father</td>
-          {/* <td>Info</td> */}
+          <td>Info</td>
         </tr>
       </tfoot>
     </table>
