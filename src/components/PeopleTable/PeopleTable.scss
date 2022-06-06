@@ -1,0 +1,13 @@
+.PeopleTable {
+  border-collapse: collapse;
+}
+
+tr td {
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  padding: 2px 8px;
+}
+
+thead tr td,
+tfoot tr td {
+  font-weight: bold;
+}
