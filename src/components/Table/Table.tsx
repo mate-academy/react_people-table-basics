@@ -26,7 +26,6 @@ export const Table: React.FC<Props> = ({ people }) => {
                   {item}
                 </th>
               ))}
-
             </tr>
           </thead>
           <tbody className="mdc-data-table__content">
