@@ -1,1 +1,14 @@
-// styles go here
+html {
+  overflow-y: scroll;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.Page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
