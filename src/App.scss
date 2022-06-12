@@ -1,1 +1,16 @@
-// styles go here
+
+body {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.header {
+  &__btn {
+    border: 0;
+    padding: 10px;
+    background-color: #6eb46e;
+    font-size: 18px;
+    margin: 0 10px;
+    border-radius: 10px;
+  }
+}
