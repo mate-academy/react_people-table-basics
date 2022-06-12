@@ -1,24 +1,29 @@
 import './App.scss';
 import 'bulma';
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { PeopleTable } from './components/PeopleTable/PeopleTable';
-import { HomePage } from './HomePage/HomePage';
-import { Navigation } from './components/Navigate/Navigation';
-import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
+import { Link, Outlet } from 'react-router-dom';
 import { Header } from './Header/Header';
 
 const App = () => {
   return (
     <>
       <Header />
-      <Navigation />
-
-      <Routes>
-        <Route path="/*" element={<NotFoundPage />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/home" element={<Navigate to="/" replace />} />
-        <Route path="people" element={<PeopleTable />} />
-      </Routes>
+      <nav className="has-text-centered my-5">
+        <div>
+          <Link
+            className="button is-primary mx-6"
+            to="/home"
+          >
+            Home page
+          </Link>
+          <Link
+            className="button is-primary mx-6"
+            to="people"
+          >
+            People Page
+          </Link>
+        </div>
+      </nav>
+      <Outlet />
     </>
   );
 };
