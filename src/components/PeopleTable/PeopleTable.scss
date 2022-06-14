@@ -1,0 +1,22 @@
+.peopleTable {
+  border: 2px solid rgb(11, 97, 168);
+  border-collapse: collapse;
+
+  &__header {
+    border: 1px solid rgb(11, 97, 168);
+  }
+
+  &__cell {
+    padding: 20px;
+    background: rgb(11, 97, 168);
+    color: #fff;
+  }
+
+  &__row {
+    color: rgb(11, 97, 168);
+    
+    &:nth-child(2n) {
+      background: rgb(227, 233, 238);
+    }
+  }
+}
