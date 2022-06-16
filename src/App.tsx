@@ -1,7 +1,7 @@
 import './App.scss';
 import 'bulma';
 import { Link, Outlet } from 'react-router-dom';
-import { Header } from './Header/Header';
+import { Header } from './components/Header/Header';
 
 const App = () => {
   return (

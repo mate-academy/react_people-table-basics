@@ -5,4 +5,5 @@ export interface Persone {
   died: number,
   fatherName: string,
   motherName: string,
+  slug: string,
 }
