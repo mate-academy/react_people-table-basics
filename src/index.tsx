@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import {
-  BrowserRouter,
+  HashRouter,
   Outlet,
   Route,
   Routes,
@@ -12,7 +12,7 @@ import { PeopleTable } from './components/PeopleTable/PeopleTable';
 import { HomePage } from './components/HomePage/HomePage';
 
 ReactDOM.render(
-  <BrowserRouter>
+  <HashRouter>
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="home" element={<HomePage />} />
@@ -23,6 +23,6 @@ ReactDOM.render(
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
-  </BrowserRouter>,
+  </HashRouter>,
   document.getElementById('root'),
 );
