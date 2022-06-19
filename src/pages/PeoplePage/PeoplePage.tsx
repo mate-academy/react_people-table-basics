@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { PersonRow } from '../PersonRow';
-import { Peoples } from '../../types/Peoples';
+import { Person } from '../../types/Person';
+import { getPeoplesList } from '../../api/api';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<Peoples[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
 
   useEffect(() => {
-    const url = `https://mate-academy.github.io/react_people-table
-/api/people.json`;
-
-    fetch(url)
-      .then(resp => resp.json())
-      .then(data => setPeople(data));
+    getPeoplesList(setPeople);
   }, []);
 
   return (
     <div className="peoplePage">
-      <h1>People page</h1>
-      {people
+      <h1 className="title">People page</h1>
+      {people.length > 0
       && (
-        <table>
+        <table className="peoplePage__table">
           <thead>
-            <tr>
+            <tr className="peoplePage__row">
               <td>
                 name
               </td>

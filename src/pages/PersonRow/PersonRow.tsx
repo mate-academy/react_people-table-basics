@@ -1,8 +1,8 @@
 import React from 'react';
-import { Peoples } from '../../types/Peoples';
+import { Person } from '../../types/Person';
 
 type Props = {
-  people: Peoples[];
+  people: Person[];
 };
 
 export const PersonRow: React.FC<Props> = ({ people }) => {
