@@ -7,7 +7,7 @@ import { HomePage } from './components';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { NotFoundPage } from './components/PageNotFound/PageNotFound';
 
-const Relocated = () => {
+const Redirect = () => {
   const { type } = useParams();
 
   return (
@@ -37,7 +37,7 @@ export const App: React.FC = () => {
       </nav>
 
       <Routes>
-        <Route path=":type" element={<Relocated />} />
+        <Route path=":type" element={<Redirect />} />
       </Routes>
       <Routes>
         <Route path="/" element={<HomePage />} />
