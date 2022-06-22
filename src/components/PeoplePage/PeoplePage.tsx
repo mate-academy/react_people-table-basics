@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getPeople } from '../../api';
-import { PersonRow } from './PersonRow';
+import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState([]);
@@ -25,21 +25,7 @@ export const PeoplePage = () => {
       {error.length === 0 ? (
         <div className="People__content">
           <h2 className="title is-2">People page</h2>
-          <table className="table is-bordered">
-            <tr>
-              <th>Name</th>
-              <th>Sex</th>
-              <th>Born</th>
-              <th>Died</th>
-              <th>Mother</th>
-              <th>Father</th>
-            </tr>
-            {people.map((person) => {
-              return (
-                <PersonRow person={person} />
-              );
-            })}
-          </table>
+          <PeopleTable people={people} />
         </div>
       ) : (
         <h2>{error}</h2>
