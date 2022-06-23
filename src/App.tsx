@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { Header } from './components/Header/Header';
 import { HomePage } from './components/HomePage/HomePage';
@@ -12,7 +12,7 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
 
         <Route path="/people" element={<PeoplePage />} />
 
