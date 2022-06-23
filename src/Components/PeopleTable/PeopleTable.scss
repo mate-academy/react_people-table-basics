@@ -1,0 +1,14 @@
+.people-table {
+  border-collapse: collapse;
+  border: 1px solid gray;
+
+  &-head {
+    height: 40px;
+    border: 2px solid gray;
+    background-color: whitesmoke;
+  }
+}
+
+td {
+  border: 1px solid gray;
+}
