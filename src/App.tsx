@@ -1,5 +1,4 @@
 import './App.scss';
-// import React from 'react';
 import {
   Routes, Route, Link, Navigate,
 } from 'react-router-dom';
@@ -11,8 +10,8 @@ const App = () => {
       <h1>People table</h1>
       <header>
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/people">People</Link>
+          <Link to="/" className="App_link">Home</Link>
+          <Link to="/people" className="App_link">People</Link>
         </nav>
       </header>
 

@@ -10,7 +10,7 @@ export const PersonRow: React.FC<Props> = ({ person }) => (
     <td>{person.sex}</td>
     <td>{person.born}</td>
     <td>{person.died}</td>
-    <td>{person.mother}</td>
-    <td>{person.father}</td>
+    <td>{person.mother?.name || '-'}</td>
+    <td>{person.father?.name || '-'}</td>
   </tr>
 );

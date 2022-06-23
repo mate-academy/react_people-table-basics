@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PersonRow } from '../PersonRow/PersonRow';
 import { getPeople } from '../../people';
+import './PeopleTable.scss';
 
 export const PeopleTable: React.FC = () => {
   const [people, setPeople] = useState<PersonWithParents[]>([]);
