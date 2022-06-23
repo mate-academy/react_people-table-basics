@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getPeople } from '../../api';
+import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [people,
@@ -28,35 +29,7 @@ export const PeoplePage: React.FC = () => {
   return (
     <>
       <h2>People Page</h2>
-      {people && (
-        <table className="PeopleTable">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Sex</th>
-              <th>Born</th>
-              <th>Died</th>
-              <th>Mother</th>
-              <th>Father</th>
-            </tr>
-          </thead>
-          <tbody>
-            {people.map(person => (
-              <tr
-                key={person.slug}
-                className="Person"
-              >
-                <td>{person.name}</td>
-                <td>{person.sex}</td>
-                <td>{person.born}</td>
-                <td>{person.died}</td>
-                <td>{person.mother?.name || 'no mother'}</td>
-                <td>{person.father?.name || 'no father'}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+      {people && <PeopleTable people={people} />}
     </>
   );
 };
