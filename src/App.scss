@@ -1,1 +1,19 @@
 // styles go here
+
+
+.button {
+  display: inline-block;
+  font-family: Roboto, sans-serif;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: 1px solid #2b74b1;
+  background-color: #2b74b1;
+  color: #fff;
+  text-decoration: none;
+  transition: .3s;
+  margin: 10px;
+  &:hover {
+    background-color: #fff;
+    color: #2b74b1;
+  }
+}
