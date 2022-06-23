@@ -1,0 +1,32 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.td_bold {
+  font-size: 18px;
+  font-weight: bold;
+}
+.PeopleTable {
+  line-height: 30px;
+  font-family: Roboto, sans-serif;
+  margin: 30px;
+  border-collapse: collapse;
+}
+
+.unknown {
+  color: red;
+}
+
+.td_name,
+.td_motherName,
+.td_fatherName {
+  width: 280px;
+}
+
+.td_sex,
+.td_born,
+.td_died {
+  width: 80px;
+}
