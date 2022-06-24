@@ -1,20 +1,25 @@
 import { NavLink } from 'react-router-dom';
 
 export const Header: React.FC = () => (
-  <nav className="tabs is-centered">
-    <ul>
-      <li>
+  <nav className="tabs is-centered ml-0">
+    <ul className="ml-0">
+      <li className="title is-4 pb-0 navbar-item mr-2 mb-0">
         <NavLink
           to="/"
-          className="navbar-item"
+          className={({ isActive }) => (
+            isActive ? 'has-text-link' : 'has-text-grey-dark'
+          )}
         >
           Home page
         </NavLink>
       </li>
-      <li>
+
+      <li className="title is-4 pb-0 navbar-item">
         <NavLink
           to="/people"
-          className="navbar-item"
+          className={({ isActive }) => (
+            isActive ? 'has-text-link' : 'has-text-grey-dark'
+          )}
         >
           People page
         </NavLink>

@@ -8,7 +8,9 @@ interface Props {
 
 export const PeopleTable: React.FC <Props> = ({ people }) => {
   return (
-    <table className="table is-bordered is-striped is-hoverable">
+    <table className="table is-bordered is-striped is-hoverable
+      column is-half is-offset-one-quarter"
+    >
       <thead>
         <tr className="is-selected">
           <th>Name</th>

@@ -12,7 +12,7 @@ export const PersonRow: React.FC<Props> = ({ person }) => (
     <td>{person.died}</td>
     <td>
       {person.mother !== null ? (
-        <ul style={{ listStyleType: 'none' }}>
+        <ul className="m-0" style={{ listStyleType: 'none' }}>
           <li>{person.mother.name}</li>
           <li>{`Born: ${person.mother.born}`}</li>
           <li>{`Died: ${person.mother.died}`}</li>
@@ -23,7 +23,7 @@ export const PersonRow: React.FC<Props> = ({ person }) => (
     </td>
     <td>
       {person.father !== null ? (
-        <ul style={{ listStyleType: 'none' }}>
+        <ul className="m-0" style={{ listStyleType: 'none' }}>
           <li>{person.father.name}</li>
           <li>{`Born: ${person.father.born}`}</li>
           <li>{`Died: ${person.father.died}`}</li>
