@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  NavLink, Routes, Route, Navigate, useParams,
+  Routes, Route, Navigate, useParams,
 } from 'react-router-dom';
 import './App.scss';
+import { Header } from './components/Header/Header';
 import { HomePage } from './components';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { NotFoundPage } from './components/PageNotFound/PageNotFound';
@@ -22,20 +23,7 @@ const Redirect = () => {
 export const App: React.FC = () => {
   return (
     <div className="App">
-      <nav>
-        <NavLink
-          to="/"
-        >
-          Home
-        </NavLink>
-        {' '}
-        <NavLink
-          to="/people"
-        >
-          People page
-        </NavLink>
-      </nav>
-
+      <Header />
       <Routes>
         <Route path=":type" element={<Redirect />} />
       </Routes>

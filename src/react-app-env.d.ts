@@ -7,4 +7,6 @@ type Person = {
   fatherName: string;
   motherName: string;
   slug: string;
+  mother?: Person,
+  father?: Person,
 };

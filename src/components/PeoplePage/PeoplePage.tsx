@@ -3,21 +3,30 @@ import { getPeople } from '../../api';
 import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage = () => {
-  const [people, setPeople] = useState([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    async function result() {
-      try {
-        const peopleFromServer = await getPeople();
+  const getAllPeople = async () => {
+    try {
+      await getPeople()
+        .then(result => setPeople(result.map((person: Person) => {
+          const mother = result.find((mom: Person) => {
+            return person.motherName === mom.name;
+          });
 
-        setPeople(peopleFromServer);
-      } catch {
-        setError('Cannot load people');
-      }
+          const father = result.find((dad: Person) => {
+            return person.fatherName === dad.name;
+          });
+
+          return { ...person, mother, father };
+        })));
+    } catch {
+      setError('Cannot load people');
     }
+  };
 
-    result();
+  useEffect(() => {
+    getAllPeople();
   }, []);
 
   return (
