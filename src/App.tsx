@@ -1,5 +1,5 @@
 import './App.scss';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { HomePage } from './HomePage';
 import { PeoplePage } from './PeoplePage';
 import { NotFoundPage } from './NotFoundPage';
@@ -11,6 +11,7 @@ const App = () => {
       <NavigationLink />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="people" element={<PeoplePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
