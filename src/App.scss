@@ -1,1 +1,23 @@
 // styles go here
+th,
+td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid rgb(189, 186, 186);
+}
+
+.button {
+  background-color: #fff;
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+
+  &:hover {
+    background-color: rgb(245, 245, 245);
+  }
+}
+
+.PeopleTable {
+  border-collapse: collapse;
+}
