@@ -1,1 +1,27 @@
-// styles go here
+.nav {
+  margin-bottom: 10px;
+
+  &__link {
+    margin-right: 5px;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+
+    }
+  }
+}
+
+.PeopleTable {
+  width: 80%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.table__row-title {
+  border: 1px solid black;
+}
+
+.table__column-title {
+  border: 1px solid black;
+}
