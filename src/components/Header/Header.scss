@@ -1,0 +1,18 @@
+.Header {
+  margin: 0 auto;
+  &__nav {
+    display: flex;
+    gap: 50px;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: #254e58;
+    text-align: 24px;
+    border-bottom: 2px solid transparent;
+
+    &:hover {
+      border-color: #254e58;
+    }
+  }
+}

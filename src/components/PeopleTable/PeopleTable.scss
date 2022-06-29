@@ -1,0 +1,13 @@
+.PeopleTable {
+  border-collapse: collapse;
+  border: 2px solid #2b7a78;
+
+  &__head {
+    background-color: #2b7a78;
+    font-weight: 800;
+  }
+
+  &__cell {
+    padding: 6px;
+  }
+}

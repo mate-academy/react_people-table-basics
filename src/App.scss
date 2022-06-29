@@ -1,1 +1,9 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0 auto;
+  background-color: #88bdbc;
+  border-radius: 6px;
+  padding: 60px;
+}
