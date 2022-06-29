@@ -10,8 +10,10 @@
     color: #254e58;
     text-align: 24px;
     border-bottom: 2px solid transparent;
+    padding: 3px;
 
-    &:hover {
+    &:hover,
+    &--active {
       border-color: #254e58;
     }
   }
