@@ -6,13 +6,13 @@ export const Header = () => {
       <h1>People table</h1>
       <nav className="nav">
         <Link
-          to="/"
+          to="/home"
           className="nav__link"
         >
           Home
         </Link>
         <Link
-          to="peoplepage"
+          to="people"
           className="nav__link"
         >
           People

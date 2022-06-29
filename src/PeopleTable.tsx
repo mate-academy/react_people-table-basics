@@ -18,7 +18,10 @@ export const PeopleTable: React.FC <Props> = ({ people }) => {
       </tr>
 
       {people.map((person) => (
-        <tr className="table__row-title">
+        <tr
+          className="table__row-title"
+          key={person.name}
+        >
           <PersonRow title={person.name} />
           <PersonRow title={person.sex} />
           <PersonRow title={person.born} />
