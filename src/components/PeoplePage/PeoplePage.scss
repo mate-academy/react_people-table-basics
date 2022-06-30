@@ -1,6 +1,9 @@
-body {
+.people-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+}
+
+.title {
+  align-self: center;
 }
