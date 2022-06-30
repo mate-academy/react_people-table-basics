@@ -1,0 +1,26 @@
+.navLink {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 20px;
+  margin: 0 10px;
+  color: rgb(0, 128, 187);
+  border-bottom: 1px solid white;
+
+  &:hover {
+    border-bottom: 1px solid rgb(0, 128, 187);
+  }
+
+  &_isActive {
+    color: #10c4db;
+    border-bottom: 1px solid #0098d4;
+
+    &:hover {
+      border-bottom: 1px solid #0991c7;
+    }
+  }
+}

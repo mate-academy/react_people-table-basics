@@ -1,0 +1,18 @@
+.table {
+  box-shadow: 0 0 20px rgba(141, 4, 253, 0.15);
+  min-width: 600px;
+  max-width: 1200px;
+  margin: 16px auto;
+
+  tbody tr {
+    border-bottom: 1px solid #ddd;
+
+    &:nth-of-type(even) {
+      background-color: #3801ff09;
+    }
+
+    &:last-of-type {
+      border-bottom: 2px solid #0098d4;
+    }
+  }
+}
