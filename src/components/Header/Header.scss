@@ -1,0 +1,22 @@
+.navbar {
+  &-menu {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+
+    margin: 24px 0;
+  }
+
+  &-link {
+    padding: 10px 20px;
+    font-weight: 600;
+    color: #000;
+    background-color: rgba(220, 220, 220, 0.3);
+    text-decoration: none;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+
+    &.active {
+      background-color: rgb(0, 255, 251);
+    }
+  }
+}

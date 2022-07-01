@@ -1,0 +1,26 @@
+.table {
+  width: calc(100vw - 20px - 14px);
+  padding: 0 20px;
+
+  & thead {
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+
+    & tr {
+      & th {
+        text-align: left;
+        padding: 4px 0 4px 6px ;
+      }
+    }
+  }
+
+  &-person {
+    background-color: rgb(33, 215, 212);
+
+    & td {
+      text-align: left;
+      letter-spacing: 1px;
+      padding: 4px 0 4px 6px ;
+    }
+  }
+}
