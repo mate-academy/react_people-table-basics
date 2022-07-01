@@ -39,5 +39,3 @@ export const PeopleTable: React.FC<Props> = ({ filteredPeople }) => {
     </>
   );
 };
-
-// export const MemoizedPeopleTable = React.memo(PeopleTable);
