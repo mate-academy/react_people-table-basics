@@ -6,14 +6,14 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const peopleWithParents = people.map(child => {
-    child.mother = people.find(parent => parent.name === child.motherName)
-     || null;
+  const peopleWithParents = [...people].map(child => {
+    const childWithParents = {
+      ...child,
+      mother: people.find(parent => parent.name === child.motherName),
+      father: people.find(parent => parent.name === child.fatherName),
+    };
 
-    child.father = people.find(parent => parent.name === child.fatherName)
-     || null;
-
-    return child;
+    return childWithParents;
   });
 
   return (
