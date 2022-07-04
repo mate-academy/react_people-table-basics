@@ -9,6 +9,6 @@ interface People {
   fatherName: string,
   motherName: string,
   slug: string,
-  mother?: People | null,
-  father?: People | null,
+  mother: People | undefined,
+  father: People | undefined,
 }

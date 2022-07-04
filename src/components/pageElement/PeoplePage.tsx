@@ -10,10 +10,20 @@ export const PeoplePage = () => {
       .then(peopleFromServer => setPeople(peopleFromServer));
   }, []);
 
+  const peopleWithParents = people.map(child => {
+    const childWithParents = {
+      ...child,
+      mother: people.find(parent => parent.name === child.motherName),
+      father: people.find(parent => parent.name === child.fatherName),
+    };
+
+    return childWithParents;
+  });
+
   return (
     <>
       <h1>People page</h1>
-      <PeopleTable people={people} />
+      <PeopleTable people={peopleWithParents} />
     </>
   );
 };
