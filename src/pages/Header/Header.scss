@@ -1,0 +1,13 @@
+.header {
+  border-bottom: 2px solid rgb(48, 190, 173);
+  padding: 30px 0;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+
+  &__item {
+    margin-right: 30px;
+  }
+}
