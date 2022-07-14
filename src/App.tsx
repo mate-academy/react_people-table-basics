@@ -8,8 +8,6 @@ import 'bulma';
 const App = () => {
   return (
     <div className="App">
-      <h1 className="title is-1">People table</h1>
-
       <Header />
 
       <div>
