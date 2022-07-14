@@ -1,1 +1,13 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+
+  &__main {
+    margin: 32px;
+  }
+
+  &__table {
+    display: flex;
+    margin-top: 32px;
+  }
+}

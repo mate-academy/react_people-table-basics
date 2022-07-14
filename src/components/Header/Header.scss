@@ -1,0 +1,36 @@
+$c-hover-color: #0ff;
+$transition-duration: 0.5s;
+
+.Header {
+  position: relative;
+  top: 0;
+
+  &__nav {
+    margin: 0 32px;
+  }
+}
+
+.Nav {
+  display: flex;
+  gap: 20px;
+
+  &__link {
+    text-decoration: none;
+    padding: 20px 0;
+    border-bottom: 2px transparent solid;
+    color: #494949;
+    font-weight: 600;
+    transition: color ease-in-out $transition-duration,
+      border-bottom-color ease-in-out $transition-duration;
+
+    &:hover {
+      color: $c-hover-color;
+      border-bottom-color: $c-hover-color;
+    }
+  }
+}
+
+.active {
+  color: $c-hover-color;
+  border-bottom-color: $c-hover-color;
+}
