@@ -1,0 +1,14 @@
+.Header {
+  position: relative;
+  top: 0;
+}
+
+.Nav {
+  display: flex;
+  gap: 20px;
+
+  &__link {
+    text-decoration: none;
+    color: #000;
+  }
+}

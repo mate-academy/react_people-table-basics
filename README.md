@@ -1,6 +1,6 @@
 # React - People table
 - Replace `<your_account>` with your Github username in the
-  [DEMO LINK](https://<your_account>.github.io/react_people-table-basics/)
+  [DEMO LINK](https://MabuzaM.github.io/react_people-table-basics/)
 - Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
 ## If you don't use **Typescript**
@@ -11,7 +11,7 @@
 1. Install all the NPM packages you need and types for them.
 2. Use HashRouter on `src/index.tsx`
 3. Implement `HomePage` available at `/` with just a title `Home page`
-4. Implement `PeoplePage` available at `/people` with a title `Peope page`
+4. Implement `PeoplePage` available at `/people` with a title `People page`
 5. Redirect to `/` from `/home` (use [Navigate](https://reactrouter.com/docs/en/v6/components/navigate))
 6. Implement `NotFoundPage` with a title `Page not found` that is shown for all the other URLs
 7. Add a `Header` visible everywhere with navigation links to both pages
