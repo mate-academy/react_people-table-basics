@@ -1,18 +1,18 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Header.scss';
 
 export const Header: FC = () => {
   return (
     <header className="Header">
       <nav className="Nav Header__nav">
-        <Link to="/" className="Nav__link">
+        <NavLink to="/" className="Nav__link">
           Home
-        </Link>
+        </NavLink>
 
-        <Link to="/people" className="Nav__link">
+        <NavLink to="/people" className="Nav__link">
           People
-        </Link>
+        </NavLink>
       </nav>
     </header>
   );

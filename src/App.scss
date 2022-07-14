@@ -1,9 +1,13 @@
 .App {
   display: flex;
   flex-direction: column;
-  padding: 32px;
+
+  &__main {
+    margin: 32px;
+  }
 
   &__table {
     display: flex;
+    margin-top: 32px;
   }
 }
