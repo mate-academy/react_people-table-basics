@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './peoplePage.scss';
 
 import { getPeople } from '../../api/fetch';
 import { PeopleTable } from '../4_PeopleTable/PeopleTable';
