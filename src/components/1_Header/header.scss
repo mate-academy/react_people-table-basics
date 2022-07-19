@@ -1,11 +1,18 @@
 .nav {
   display: flex;
   list-style-type: none;
+  border-bottom: 1px solid lightblue;
 
   &__item {
     margin: 20px;
     text-decoration: none;
-    padding: 20px;
-    // border: 1px solid black;
+    padding: 10px;
+    background-color: lightblue;
+    border: 2px solid lightblue;
+    border-radius: 10px;
+  }
+
+  .active {
+    background-color: yellow;
   }
 }

@@ -6,4 +6,6 @@ export interface IPeople {
   fatherName: string,
   motherName: string,
   slug: string,
+  mother: {} | null,
+  father: {} | null,
 }
