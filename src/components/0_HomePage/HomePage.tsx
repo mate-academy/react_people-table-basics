@@ -4,7 +4,7 @@ import './homePage.scss';
 export const HomePage: React.FC = () => {
   return (
     <>
-      <div>Home page</div>
+      <h1>Home page</h1>
     </>
   );
 };

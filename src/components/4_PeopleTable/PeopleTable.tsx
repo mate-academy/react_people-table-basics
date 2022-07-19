@@ -31,8 +31,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       <thead>
         <th>Name</th>
         <th>Sex</th>
-        <th>Mather name</th>
-        <th>Father name</th>
+        <th>Mother</th>
+        <th>Father</th>
         <th>Born</th>
         <th>Died</th>
         <th>Slug</th>
