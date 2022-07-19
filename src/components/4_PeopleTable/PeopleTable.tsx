@@ -29,13 +29,16 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
   return (
     <table className="PeopleTable">
       <thead>
-        <th>Name</th>
-        <th>Sex</th>
-        <th>Mother</th>
-        <th>Father</th>
-        <th>Born</th>
-        <th>Died</th>
-        <th>Slug</th>
+        <tr>
+          <th>Name</th>
+          <th>Sex</th>
+          <th>Mother</th>
+          <th>Father</th>
+          <th>Born</th>
+          <th>Died</th>
+          <th>Slug</th>
+        </tr>
+
       </thead>
       <tbody>
         {analyticsPeople.map((person: IPeople) => (
