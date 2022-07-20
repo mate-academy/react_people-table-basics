@@ -1,0 +1,10 @@
+.PeopleTable {
+  margin: 0 auto;
+  border-bottom: 2px solid lightblue;
+}
+
+.PeopleTable tr {
+  &:hover {
+    background-color: lightgrey;
+  }
+}
