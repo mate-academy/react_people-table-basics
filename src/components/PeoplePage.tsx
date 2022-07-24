@@ -3,7 +3,7 @@ import { getPeople } from '../api/people';
 import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<People[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
 
   const loadPage = useCallback(
     async () => {

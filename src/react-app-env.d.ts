@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 /// <reference types="react-scripts" />
 
-interface People {
+interface Person {
   name: string;
   sex: string;
   born: number;
