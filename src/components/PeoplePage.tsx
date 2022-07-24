@@ -23,7 +23,7 @@ export const PeoplePage: React.FC = () => {
 
   return (
     <>
-      <p className="title has-title-centered">People Page</p>
+      <p className="title has-text-centered">People Page</p>
 
       <PeopleTable people={people} />
     </>
