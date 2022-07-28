@@ -1,1 +1,11 @@
 // styles go here
+iframe {
+  pointer-events: none;
+}
+
+a {
+  text-decoration: none;
+  margin: 10px;
+  font-size: 20px;
+  color: #000;
+}
