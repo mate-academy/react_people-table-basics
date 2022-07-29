@@ -6,10 +6,10 @@ import {
   Navigate,
 } from 'react-router-dom';
 import 'bulma';
-import { HomePage } from './components/HomePage';
-import { PeoplePage } from './components/PeoplePage';
-import { NotFoundPage } from './components/NotFoundPage';
-import { ParentInfo } from './components/ParentInfo';
+import { HomePage } from './components/HomePage/HomePage';
+import { PeoplePage } from './components/PeoplePages/PeoplePage';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
+import { ParentInfo } from './components/PeoplePages/ParentInfo';
 
 const App = () => (
   <div className="App">
