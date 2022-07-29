@@ -11,6 +11,8 @@ export const ParentInfo = () => {
 
   const { slug } = useParams();
   const parent = people.find(par => par.slug === slug);
+  const children = people.filter(kid => kid.motherName === parent?.name
+    || kid.fatherName === parent?.name);
 
   useEffect(() => {
     getPeople()
@@ -18,7 +20,7 @@ export const ParentInfo = () => {
 
     setTimeout(() => (
       setLoading(false)
-    ), 100);
+    ), 200);
   }, []);
 
   if (isLoading) {
@@ -34,6 +36,14 @@ export const ParentInfo = () => {
             <div className="media">
               <div className="media-content">
                 <p className="title is-4">{`${parent.name}`}</p>
+
+                {children.map(child => (
+                  <p className="content">
+                    {child?.sex === 'f'
+                      ? `Daughter: ${child.name}`
+                      : `Son: ${child.name}`}
+                  </p>
+                ))}
               </div>
             </div>
 
