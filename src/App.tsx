@@ -1,6 +1,6 @@
 import './App.scss';
 import {
-  Routes, Route, Link, Navigate,
+  Routes, Route, NavLink, Navigate,
 } from 'react-router-dom';
 import PeoplePage from './components/PeoplePage/PeoplePage';
 
@@ -8,8 +8,20 @@ const App:React.FC = () => {
   return (
     <div className="App subtitle is-3">
       <nav className="nav">
-        <Link className="button is-link" to="/">Home page</Link>
-        <Link className="button is-info" to="/people">People page</Link>
+        <NavLink
+          className={({ isActive }) => (isActive
+            ? 'button is-link' : 'button is-info')}
+          to="/"
+        >
+          Home page
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive
+            ? 'button is-link' : 'button is-info')}
+          to="/people"
+        >
+          People page
+        </NavLink>
       </nav>
       <Routes>
         <Route path="/" element={<h1>Home page</h1>} />
