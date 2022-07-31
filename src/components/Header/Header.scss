@@ -1,0 +1,30 @@
+.header {
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  &__nav {
+    &-list {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    &-link {
+      padding: 5px;
+      text-decoration: none;
+      color: #000;
+      font-size: 20px;
+      transition: 0.3s;
+      
+      &:hover {
+        color: #00000036;
+      }
+    }
+  }
+}
+
+.is-active {
+  transform: scale(1.1);
+  font-weight: bold;
+  color: #00000073;
+}
