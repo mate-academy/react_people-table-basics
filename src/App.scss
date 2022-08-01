@@ -1,1 +1,29 @@
-// styles go here
+$violetDark: #8d06fb;
+$violetLight: #de98f0;
+$darkColor: #22021a;
+
+html {
+  padding: 20px;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  font-size: 30px;
+
+  &__link {
+    padding: 20px;
+    text-decoration: none;
+    color: $darkColor;
+    background-color: $violetLight;
+    border-radius: 10px;
+    transition: transform 200ms;
+
+    &:hover {
+      transform: scale(1.1);
+      background-color: $violetDark;
+    }
+  }
+}
