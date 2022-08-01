@@ -1,10 +1,14 @@
+body {
+  width: 100%;
+  height: 250vh;
+  background-color: #7a7672;
+}
+
 .App {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  background-color: #7a7672;
 
   &__header {
     display: flex;

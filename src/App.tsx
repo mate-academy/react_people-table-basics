@@ -4,10 +4,15 @@ import { NavLink, Route, Routes } from 'react-router-dom';
 import 'bulma/css/bulma.css';
 
 import { getPeople } from './api';
-import { PeopleTable } from './components/PeopleTable';
+import { PeopleTable } from './components/PeopleTable/PeopleTable';
+import { Loader } from './components/Loader';
 
-const App:React.FC = () => {
+export const App:React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
+
+  const activeLink = ({ isActive }: any) => (isActive
+    ? 'title is-1 has-text-primary'
+    : 'title is-1 has-text-white');
 
   useEffect(() => {
     getPeople().then(data => setPeople(data));
@@ -18,17 +23,13 @@ const App:React.FC = () => {
       <header className="App__header ">
         <nav className="App__nav">
           <NavLink
-            className={({ isActive }) => (isActive
-              ? 'title is-1 has-text-primary'
-              : 'title is-1 has-text-white')}
+            className={activeLink}
             to="/"
           >
             HomePage
           </NavLink>
           <NavLink
-            className={({ isActive }) => (isActive
-              ? 'title is-1 has-text-primary'
-              : 'title is-1 has-text-white')}
+            className={activeLink}
             to="/people"
           >
             PeoplePage
@@ -49,13 +50,9 @@ const App:React.FC = () => {
         />
         <Route
           path="*"
-          element={
-            <h1 className="title is-3 has-text-white">Page not found</h1>
-          }
+          element={<Loader />}
         />
       </Routes>
     </div>
   );
 };
-
-export default App;
