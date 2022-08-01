@@ -1,1 +1,60 @@
-// styles go here
+body {
+  margin: 0;
+  font-size: 18px;
+}
+
+.page-title {
+  margin-left: 20px;
+  font-size: 30px;
+}
+
+.Header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+  height: 70px;
+  background-color: black;
+}
+
+.Header__title {
+  margin-left: 20px;
+  font-size: 28px;
+  color: white;
+}
+
+.Header__link {
+  text-decoration: none;
+  color: white;
+}
+
+.active-link {
+  text-decoration: none;
+  color: rgb(64, 64, 168);
+}
+
+.PeopleTable {
+  margin-left: 20px;
+  border-collapse: collapse;
+}
+
+.PeopleTable__title {
+  margin-top: 20px;
+  font-size: 30px;
+}
+
+.PeopleTable__row {
+  border-bottom: 2px solid black;
+}
+
+.PeopleTable__item {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.Person__item {
+  font-size: 20px;
+  text-align: center;
+  border-bottom: 0.5px solid black;
+}
