@@ -1,1 +1,22 @@
-// styles go here
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #7a7672;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 15px;
+  }
+}
+
+.PeopleTable {
+  border-collapse: collapse;
+}
