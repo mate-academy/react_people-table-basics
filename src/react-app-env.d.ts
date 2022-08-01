@@ -8,4 +8,4 @@ type Person = {
   fatherName: string,
   motherName: string,
   slug: string,
-}
+};
