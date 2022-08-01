@@ -1,1 +1,18 @@
-// styles go here
+body {
+  width: 1200px;
+  margin: 0 auto;
+  font-size: 18px;
+}
+
+.App {
+  padding: 50px;
+}
+
+.Link {
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.isActive {
+  color: #f05;
+}
