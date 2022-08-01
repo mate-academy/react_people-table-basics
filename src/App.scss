@@ -1,1 +1,35 @@
-// styles go here
+.container {
+  margin: 20px auto;
+  padding: 50px;
+  background-color: aliceblue;
+}
+
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2.6px;
+}
+
+.subtitle {
+  padding: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.nav {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  padding: 20px 10px;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2.6px;
+}
+
+.people_table {
+  margin: auto;
+  border-collapse: collapse;
+}
