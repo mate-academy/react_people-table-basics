@@ -1,1 +1,46 @@
-// styles go here
+@import "../node_modules/bulma/bulma.sass";
+
+.App {
+  margin-bottom: 20px;
+}
+
+.table {
+  border-collapse: collapse;
+  margin: auto;
+}
+
+.header {
+  font-size: 30px;
+  margin: 25px 0;
+  display: flex;
+  width: 51vw;
+  margin-left: 20px;
+}
+
+.title {
+  margin: 25px 0 25px 25px;
+  color: gray;
+  font-size: 28px;
+  width: max-content;
+  padding: 10px;
+  margin-left: 20px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: rgb(72, 130, 110);
+
+  &__item {
+    color: rgb(72, 130, 110);
+    border: 2px dotted white;
+    padding: 10px;
+  }
+}
+
+.active {
+  border: 2px dotted rgb(236, 162, 162);
+  width: max-content;
+  padding: 10px;
+}
