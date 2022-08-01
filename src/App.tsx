@@ -1,9 +1,9 @@
-import classNames from 'classnames';
 import React from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
+import * as PeopleTable from './components/PeopleTable';
 import './App.scss';
-import { PeopleTable } from './components/PeopleTable';
 
 export const App: React.FC = () => {
   const getLinkClass = ({ isActive }: { isActive: boolean }): string => {
@@ -45,7 +45,7 @@ export const App: React.FC = () => {
                 People page
               </h1>
 
-              <PeopleTable />
+              <PeopleTable.PeopleTable />
             </>
           )}
         />
