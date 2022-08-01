@@ -4,19 +4,20 @@ import 'bulma/css/bulma.min.css';
 import {
   Routes,
   Route,
-  Link,
   Navigate,
+  NavLink,
 } from 'react-router-dom';
 import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
+import { NotFoundPage } from './components/NotFoundPage';
 
 const App = () => {
   return (
     <div className="App">
       <header>
         <nav className="navbar">
-          <Link className="navbar-item" to="/">Home page</Link>
-          <Link className="navbar-item" to="/people">Peope page</Link>
+          <NavLink className="navbar-item" to="/">Home page</NavLink>
+          <NavLink className="navbar-item" to="/people">Peope page</NavLink>
         </nav>
       </header>
 
@@ -24,10 +25,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="people" element={<PeoplePage />} />
-        <Route
-          path="*"
-          element={<p>Page not found</p>}
-        />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
