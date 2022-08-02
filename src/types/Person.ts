@@ -1,3 +1,5 @@
+import { PersonFromServer } from './PersonFromServer';
+
 export interface Person {
   name: string,
   sex: string,
@@ -6,6 +8,6 @@ export interface Person {
   fatherName: string,
   motherName: string,
   slug: string
-  mother: Person | {},
-  father: Person | {},
+  mother: PersonFromServer | undefined,
+  father: PersonFromServer | undefined,
 }
