@@ -10,11 +10,11 @@ export const PeopleList: React.FC = () => {
 
     if (Array.isArray(peopleFromServer)) {
       const resultPeopleList = peopleFromServer
-        .map((people, _, peoplesList) => {
-          const mother = peoplesList.find(person => (
+        .map((people, _, personList) => {
+          const mother = personList.find(person => (
             person.name === person.motherName
           ));
-          const father = peoplesList.find(person => (
+          const father = personList.find(person => (
             person.name === people.fatherName
           ));
 
