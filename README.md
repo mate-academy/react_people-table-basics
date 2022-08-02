@@ -1,20 +1,13 @@
 # React - People table
-- Replace `<your_account>` with your Github username in the
-  [DEMO LINK](https://<your_account>.github.io/react_people-table-basics/)
-- Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
-## If you don't use **Typescript**
-1. Rename `.tsx` files to `.jsx`
-1. use `eslint-config-react` in `.eslintrs.js` 
+Implement the `App` with `Home page` available at `/` and `People page`
+available at `/people`. Each page should have a corresponding title (`h1`).
 
-## Basic tasks
-1. Install all the NPM packages you need and types for them.
-2. Use HashRouter on `src/index.tsx`
-3. Implement `HomePage` available at `/` with just a title `Home page`
-4. Implement `PeoplePage` available at `/people` with a title `Peope page`
-5. Redirect to `/` from `/home` (use [Navigate](https://reactrouter.com/docs/en/v6/components/navigate))
-6. Implement `NotFoundPage` with a title `Page not found` that is shown for all the other URLs
+1. Add the `nav` with 2 links `Home` and `People`
+5. If the users enters the `/home` URL use the [Navigate](https://reactrouter.com/docs/en/v6/components/navigate)) component
+  to the `/` page;
 7. Add a `Header` visible everywhere with navigation links to both pages
+2. Use `HashRouter` so the link to each page on Github Pages work as expected;
 8. Create `getPeople` method fetching `people` from [API](https://mate-academy.github.io/react_people-table/api/people.json)
   when `PeoplePage` is opened
     - Find a `mother` and a `father` by `motherName` and `fatherName` and add them to the person for future use
@@ -44,3 +37,11 @@
       <td></td>
     </tr>
     ```
+
+## Instructions
+
+- Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
+- Use the [React TypeScript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript).
+- Open one more terminal and run tests with `npm test` to ensure your solution is correct.
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_people-table-basics/) and add it to the PR description.
+
