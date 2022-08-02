@@ -1,10 +1,13 @@
 import './App.scss';
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, NavLink } from 'react-router-dom';
+import {
+  Route, Routes, NavLink, Navigate,
+} from 'react-router-dom';
 import 'bulma/css/bulma.css';
 import classNames from 'classnames';
 import { PeoplePage } from './elements/PeoplePage';
 import { Persone } from './react-app-env';
+import { NotFoundPage } from './elements/NotFoundPage';
 
 // eslint-disable-next-line max-len
 const API_URL = 'https://mate-academy.github.io/react_people-table/api/people.json';
@@ -71,6 +74,14 @@ const App: React.FC = () => {
               <PeoplePage people={people} />
             </>
           )}
+        />
+        <Route
+          path="/home"
+          element={<Navigate to="/" />}
+        />
+        <Route
+          path="*"
+          element={<NotFoundPage />}
         />
       </Routes>
     </div>
