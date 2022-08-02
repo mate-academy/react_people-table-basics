@@ -1,7 +1,6 @@
 import React from 'react';
 import { Person } from '../../types/Person';
 import { PersonRow } from '../PersonRow';
-import './PeopleTable.scss';
 
 type Props = {
   people: Person[]

@@ -11,6 +11,9 @@ export const PeoplePage:React.FC = () => {
   }, []);
 
   return (
-    <PeopleTable people={people} />
+    <>
+      <h1>People Page</h1>
+      <PeopleTable people={people} />
+    </>
   );
 };

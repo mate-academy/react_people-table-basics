@@ -3,6 +3,9 @@ export interface Person {
   sex: string,
   born: number,
   died: number,
-  mother: string,
-  father: string,
+  fatherName: string,
+  motherName: string,
+  slug: string
+  mother: Person | {},
+  father: Person | {},
 }

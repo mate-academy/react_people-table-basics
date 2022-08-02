@@ -9,15 +9,15 @@ export const PersonRow: React.FC<Props> = ({ people }) => {
   return (
     <>
       {people.map(({
-        name, sex, born, died, mother, father,
+        name, sex, born, died, motherName, fatherName, slug,
       }) => (
-        <tr key={name}>
+        <tr key={slug}>
           <td>{name}</td>
           <td>{sex}</td>
           <td>{born}</td>
           <td>{died}</td>
-          <td>{mother}</td>
-          <td>{father}</td>
+          <td>{motherName}</td>
+          <td>{fatherName}</td>
         </tr>
       ))}
     </>
