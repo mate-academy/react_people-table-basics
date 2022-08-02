@@ -5,8 +5,8 @@
 
 ## If you don't use **Typescript**
 1. Rename `.tsx` files to `.jsx`
-1. use `eslint-config-react` in `.eslintrs.js` 
-
+1. use `eslint-config-react` in `.eslintrs.js`
+ 
 ## Basic tasks
 1. Install all the NPM packages you need and types for them.
 2. Use HashRouter on `src/index.tsx`
