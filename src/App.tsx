@@ -42,7 +42,7 @@ const App = () => {
         />
 
         <Route
-          path=""
+          path="*"
           element={<h1 className="title">Page not found</h1>}
         />
 
