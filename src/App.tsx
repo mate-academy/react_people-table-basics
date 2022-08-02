@@ -1,66 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import './App.scss';
-import { NavLink, Route, Routes } from 'react-router-dom';
-import { Person, Status } from './type/type';
+import { Route, Routes } from 'react-router-dom';
 import { PeopleTable } from './components/PeopleTable';
-import { getPeople } from './api/api';
 import 'bulma';
+import { Header } from './components/Header';
+import { HomePage } from './components/HomePage';
+import { Error } from './components/Error';
 
 const App: React.FC = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const getLinkStyle = (status: Status): React.CSSProperties => {
-    return status.isActive ? { backgroundColor: '#ccc' } : {};
-  };
-
-  useEffect(() => {
-    getPeople().then(person => setPeople(person));
-  }, []);
-
   return (
     <div className="App">
-      <nav className="nav">
-        <NavLink
-          to="/"
-          style={getLinkStyle}
-          className="nav__page"
-        >
-          Home
-        </NavLink>
-
-        <NavLink
-          to="people"
-          style={getLinkStyle}
-          className="nav__page"
-        >
-          People
-        </NavLink>
-      </nav>
+      <Header />
 
       <Routes>
-        <Route
-          path="/"
-          element={(
-            <p className="nav__text">Home page</p>
-          )}
-        />
-
-        <Route
-          path="/people"
-          element={(
-            <>
-              <p className="nav__text">People Page</p>
-              <PeopleTable people={people} />
-            </>
-          )}
-        />
-
-        <Route
-          path="*"
-          element={(
-            <p className="nav__text">Not Found Page</p>
-          )}
-        />
+        <Route path="/" element={(<HomePage />)} />
+        <Route path="/people" element={(<PeopleTable />)} />
+        <Route path="*" element={(<Error />)} />
       </Routes>
     </div>
   );
