@@ -1,11 +1,16 @@
+import { useEffect, useState } from 'react';
+import { getPeople } from '../api/api';
 import { Person } from '../react-app-env';
 import { PersonRow } from './PersonRow';
 
-export type Props = {
-  people: Person[],
-};
+export const PeopleTable: React.FC = () => {
+  const [people, setPeople] = useState<Person[]>([]);
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
+  useEffect(() => {
+    getPeople()
+      .then(peopleFromServer => setPeople(peopleFromServer));
+  }, []);
+
   return (
     <>
       <h2 className="title notification is-large is-success">TableList</h2>
@@ -22,9 +27,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           </tr>
 
           {people.map(person => (
-            <PersonRow person={person} />
+            <PersonRow person={person} key={person.slug} />
           ))}
-
         </tbody>
       </table>
     </>
