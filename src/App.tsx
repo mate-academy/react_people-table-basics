@@ -23,12 +23,12 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <h1>People table</h1>
+      <h1 className="title is-1">People table</h1>
 
       <header>
-        <nav>
-          <NavLink to="/">HomePage</NavLink>
-          <NavLink to="/people">PeoplePage</NavLink>
+        <nav className="navbar">
+          <NavLink to="/" className="subtitle">HomePage</NavLink>
+          <NavLink to="/people" className="subtitle">PeoplePage</NavLink>
         </nav>
       </header>
 
@@ -36,7 +36,7 @@ const App: React.FC = () => {
         <Route
           path="/"
           element={(
-            <div>Home page</div>
+            <div className="title">Home page</div>
           )}
         />
 
@@ -44,7 +44,7 @@ const App: React.FC = () => {
           path="people"
           element={(
             <>
-              <div>Peope page</div>
+              <div className="title">Peope page</div>
 
               {people && (
                 <PeopleTable people={people} />
@@ -56,7 +56,7 @@ const App: React.FC = () => {
         <Route
           path=":invoiceId"
           element={(
-            <div>Page not found</div>
+            <div className="title">Page not found</div>
           )}
         />
       </Routes>
