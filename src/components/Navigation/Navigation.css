@@ -1,0 +1,14 @@
+.nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: #6767ff;
+  height: 60px;
+  align-items: center;
+  font-size: 22px;
+  margin-bottom: 30px;
+  border-bottom: 3px solid #4059cc;
+}
+
+.nav__link {
+  color: white;
+}
