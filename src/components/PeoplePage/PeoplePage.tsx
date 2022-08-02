@@ -20,7 +20,7 @@ export const PeoplePage: React.FC = () => {
     };
 
     loadPeople();
-  });
+  }, []);
 
   return (
     <>
