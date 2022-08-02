@@ -1,22 +1,20 @@
 import './App.scss';
-import { useEffect, useState } from 'react';
-import { NavLink, Route, Routes } from 'react-router-dom';
+import {
+  Navigate,
+  NavLink,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import 'bulma/css/bulma.css';
 
-import { getPeople } from './api';
 import { PeopleTable } from './components/PeopleTable/PeopleTable';
-import { Loader } from './components/Loader';
+import { HomePage } from './components/HomePage/HomePage';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
 export const App:React.FC = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-
-  const activeLink = ({ isActive }: any) => (isActive
+  const activeLink = ({ isActive }: { isActive: boolean }) => (isActive
     ? 'title is-1 has-text-primary'
     : 'title is-1 has-text-white');
-
-  useEffect(() => {
-    getPeople().then(data => setPeople(data));
-  }, []);
 
   return (
     <div className="App">
@@ -40,17 +38,19 @@ export const App:React.FC = () => {
       <Routes>
         <Route
           path="/"
-          element={
-            <h1 className="title is-3 has-text-white">Home Page</h1>
-          }
+          element={<HomePage />}
         />
         <Route
           path="people"
-          element={<PeopleTable people={people} />}
+          element={<PeopleTable />}
+        />
+        <Route
+          path="/home"
+          element={<Navigate to="/" />}
         />
         <Route
           path="*"
-          element={<Loader />}
+          element={<NotFoundPage />}
         />
       </Routes>
     </div>

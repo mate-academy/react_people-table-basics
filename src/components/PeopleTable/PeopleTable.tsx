@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getPeople } from '../../api';
 import { PersonRow } from '../PersonRow/PersonRow';
 
-type Props = {
-  people: Person[],
-};
+export const PeopleTable: React.FC = () => {
+  const [people, setPeople] = useState<Person[]>([]);
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
+  useEffect(() => {
+    getPeople().then(data => setPeople(data));
+  }, []);
+
   return (
     <table
       className="table PeopleTable"

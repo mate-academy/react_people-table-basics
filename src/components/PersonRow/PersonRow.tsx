@@ -3,14 +3,23 @@ type Props = {
 };
 
 export const PersonRow:React.FC<Props> = ({ person }) => {
+  const {
+    name,
+    sex,
+    born,
+    died,
+    motherName,
+    fatherName,
+  } = person;
+
   return (
-    <tr className="Person" key={person.slug}>
-      <td>{person.name}</td>
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-      <td>{person.motherName}</td>
-      <td>{person.fatherName}</td>
+    <tr className="person" key={person.slug}>
+      <td>{name}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>{motherName}</td>
+      <td>{fatherName}</td>
     </tr>
   );
 };

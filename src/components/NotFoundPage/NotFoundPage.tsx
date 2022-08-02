@@ -1,7 +1,7 @@
 import React from 'react';
-import './Loader.scss';
+import './NotFoundPage.scss';
 
-export const Loader: React.FC = () => (
+export const NotFoundPage: React.FC = () => (
   <div className="Loader">
     <h1 className="title is-3 has-text-white">Page not found</h1>
 
