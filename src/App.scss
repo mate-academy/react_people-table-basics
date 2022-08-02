@@ -1,1 +1,11 @@
-// styles go here
+.app {
+  &__title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+  }
+}
+
+.people-table {
+  border-collapse: collapse;
+}
