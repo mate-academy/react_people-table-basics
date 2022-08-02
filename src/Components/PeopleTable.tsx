@@ -18,12 +18,12 @@ export const PeopleTable: React.FC = () => {
       <table className="PeopleTable table">
         <tbody className="tbody">
           <tr className="tr">
-            <td className="td">Name</td>
-            <td className="td">Sex</td>
-            <td className="td">Born</td>
-            <td className="td">Died</td>
-            <td className="td">Mother</td>
-            <td className="td">Father</td>
+            <th className="td">Name</th>
+            <th className="td">Sex</th>
+            <th className="td">Born</th>
+            <th className="td">Died</th>
+            <th className="td">Mother</th>
+            <th className="td">Father</th>
           </tr>
 
           {people.map(person => (

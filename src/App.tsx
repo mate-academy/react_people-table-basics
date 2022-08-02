@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { Header } from './Components/Header';
+import { HomePage } from './Components/HomePage';
+import { NoPageFound } from './Components/NoPageFound';
 import { PeopleTable } from './Components/PeopleTable';
 
 const App: React.FC = () => {
@@ -11,21 +13,13 @@ const App: React.FC = () => {
       <Routes>
         <Route
           path="/"
-          element={(
-            <h1 className="title notification is-large is-success">
-              Home Page
-            </h1>
-          )}
+          element={<HomePage />}
         />
         <Route path="/home" element={<Navigate to="/" />} />
         <Route path="people" element={<PeopleTable />} />
         <Route
           path="*"
-          element={(
-            <h3 className="title notification is-danger is-light">
-              Page not found
-            </h3>
-          )}
+          element={<NoPageFound />}
         />
       </Routes>
     </div>
