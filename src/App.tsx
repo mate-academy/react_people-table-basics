@@ -20,6 +20,7 @@ const App = () => (
               <span className="is-size-1">Home</span>
             </Link>
           </div>
+
           <div id="navbarMenuHeroB" className="navbar-menu">
             <div className="navbar-end">
               <NavLink

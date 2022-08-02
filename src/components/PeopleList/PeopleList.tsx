@@ -3,28 +3,29 @@ import { getPeople } from '../../api/api';
 import { PeopleTable } from '../PeopleTable';
 
 export const PeopleList: React.FC = () => {
-  const [peopleList, setpeopleList] = useState<People[]>([]);
+  const [peopleList, setPeopleList] = useState<People[]>([]);
 
   async function loader() {
-    const usersFromServer = await getPeople();
+    const peopleFromServer = await getPeople();
 
-    if (Array.isArray(usersFromServer)) {
-      const resultPeopleList = usersFromServer.map((people, _, peoplesList) => {
-        const mother = peoplesList.find(person => (
-          person.name === person.motherName
-        ));
-        const father = peoplesList.find(person => (
-          person.name === people.fatherName
-        ));
+    if (Array.isArray(peopleFromServer)) {
+      const resultPeopleList = peopleFromServer
+        .map((people, _, peoplesList) => {
+          const mother = peoplesList.find(person => (
+            person.name === person.motherName
+          ));
+          const father = peoplesList.find(person => (
+            person.name === people.fatherName
+          ));
 
-        return {
-          ...people,
-          mother: mother || null,
-          father: father || null,
-        };
-      });
+          return {
+            ...people,
+            mother: mother || null,
+            father: father || null,
+          };
+        });
 
-      setpeopleList(resultPeopleList);
+      setPeopleList(resultPeopleList);
     }
   }
 
@@ -35,7 +36,7 @@ export const PeopleList: React.FC = () => {
   return (
 
     <div className="container">
-      <PeopleTable peoples={peopleList} />
+      <PeopleTable people={peopleList} />
     </div>
   );
 };

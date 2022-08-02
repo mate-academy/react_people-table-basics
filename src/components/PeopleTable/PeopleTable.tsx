@@ -2,10 +2,10 @@ import React from 'react';
 import { PersonRow } from '../PersonRow';
 
 interface Props {
-  peoples: People[]
+  people: People[]
 }
 
-export const PeopleTable: React.FC<Props> = ({ peoples }) => (
+export const PeopleTable: React.FC<Props> = ({ people }) => (
   <table className="table">
     <thead>
       <tr>
@@ -20,8 +20,8 @@ export const PeopleTable: React.FC<Props> = ({ peoples }) => (
 
     <tbody>
       {
-        peoples.map(people => {
-          return (<PersonRow people={people} key={people.name} />);
+        people.map(person => {
+          return (<PersonRow people={person} key={person.name} />);
         })
       }
 
