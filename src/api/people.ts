@@ -15,7 +15,7 @@ export const getPeople = (): Promise<PersonFromServer[]> => {
     .then(response => response.json());
 };
 
-export const getPeopleWithParents = (): Promise<Person[]> => {
+export const getPeopleWithParentsObjects = (): Promise<Person[]> => {
   return getPeople()
     .then(people => people
       .map((person, _i, arr) => ({

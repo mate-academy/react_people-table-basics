@@ -1,17 +1,15 @@
 import './App.scss';
 import {
-  HashRouter as Router, Navigate, NavLink, Route, Routes,
+  HashRouter as Router, Navigate, Route, Routes,
 } from 'react-router-dom';
 import { PeoplePage } from './components/PeoplePage';
+import { Header } from './components/Header';
 
-export const App = () => {
+const App = () => {
   return (
     <Router>
       <div className="App">
-        <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/people">People</NavLink>
-        </nav>
+        <Header />
 
         <Routes>
           <Route path="/" element={<h1>Homepage</h1>} />
