@@ -3,9 +3,9 @@ import {
   NavLink,
   Routes,
   Route,
-  useNavigate,
+  Navigate,
 } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { HomePage } from './components/HomePage';
 import { PeopleTable } from './components/PeopleTable';
 import { PageNotFound } from './components/PageNotFound';
@@ -14,12 +14,7 @@ import { Person } from './Types/Person';
 import 'bulma/css/bulma.css';
 
 export const App = () => {
-  const redirect = useNavigate();
   const [people, setPeople] = useState<Person[]>([]);
-
-  useEffect(() => {
-    redirect('/');
-  }, []);
 
   getPeople()
     .then(peopleFromServer => setPeople(peopleFromServer));
@@ -48,6 +43,7 @@ export const App = () => {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<Navigate to="/" />} />
         <Route
           path="/people"
           element={<PeopleTable people={preparedPeople} />}
