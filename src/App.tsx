@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { getFather, getMother, getPeople } from './api';
 import './App.scss';
-import { PeopleTable } from './components/PeopleTable';
+import { Header } from './components/Header/Header';
+import { PeopleTable } from './components/PeopleTable/PeopleTable';
 import { Person } from './types/Person';
 
 const App: React.FC = () => {
@@ -25,12 +26,7 @@ const App: React.FC = () => {
     <div className="App">
       <h1 className="title is-1">People table</h1>
 
-      <header>
-        <nav className="navbar">
-          <NavLink to="/" className="subtitle">HomePage</NavLink>
-          <NavLink to="/people" className="subtitle">PeoplePage</NavLink>
-        </nav>
-      </header>
+      <Header />
 
       <Routes>
         <Route
@@ -38,6 +34,11 @@ const App: React.FC = () => {
           element={(
             <div className="title">Home page</div>
           )}
+        />
+
+        <Route
+          path="/home"
+          element={<Navigate to="/" />}
         />
 
         <Route
