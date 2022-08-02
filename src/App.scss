@@ -1,1 +1,17 @@
-// styles go here
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__link {
+    padding: 10px;
+    margin: 0 10px;
+
+    color: #000;
+    font-weight: 700;
+
+    &:hover {
+      background-color: #eee;
+    }
+  }
+}
