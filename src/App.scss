@@ -1,1 +1,21 @@
-// styles go here
+.App {
+  &__container {
+    margin: 0 auto;
+    max-width: 890px;
+    background: rgb(235, 231, 231);
+  }
+
+  &__title {
+    margin-bottom: 32px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+.title {
+  padding: 30px;
+  text-align: center;
+  font-size: 28px;
+}

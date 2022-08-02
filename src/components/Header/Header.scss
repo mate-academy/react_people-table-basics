@@ -1,0 +1,16 @@
+.container {
+  margin: 0 auto;
+  width: 300px;
+}
+
+.header {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__link {
+    padding: 15px 20px;
+    color: black;
+  }
+}
