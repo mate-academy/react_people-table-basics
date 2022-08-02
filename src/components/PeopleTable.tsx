@@ -1,11 +1,21 @@
+import { useState } from 'react';
+import { getPeople } from '../api';
 import { PreparedPerson } from '../Types/PreparedPerson';
 import { PersonRow } from './PersonRow';
 
-type Props = {
-  people: PreparedPerson[];
-};
+export const PeopleTable: React.FC = () => {
+  const [people, setPeople] = useState<PreparedPerson[]>([]);
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
+  getPeople()
+    .then(peopleFromServer => setPeople(peopleFromServer));
+
+  const preparedPeople = people
+    .map(currentPerson => ({
+      ...currentPerson,
+      mother: people.find(person => person.name === currentPerson.motherName),
+      father: people.find(person => person.name === currentPerson.fatherName),
+    }));
+
   return (
     <div className="container">
       <h1 className="title">People table</h1>
@@ -17,8 +27,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
         <th>Mother</th>
         <th>Father</th>
         <tbody>
-          {people
-            .map(person => <PersonRow key={person.slug} person={person} />)}
+          {preparedPeople.map(person => (
+            <PersonRow key={person.slug} person={person} />
+          ))}
         </tbody>
       </table>
     </div>
