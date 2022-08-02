@@ -4,7 +4,7 @@ type Props = {
   person: Person,
 };
 
-export const PersonRaw: React.FC<Props> = ({ person }) => {
+export const PersonRow: React.FC<Props> = ({ person }) => {
   const {
     name,
     died,

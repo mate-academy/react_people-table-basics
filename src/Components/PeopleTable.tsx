@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getPeople } from '../api/api';
 import { Person } from '../Types/Person';
-import { PersonRaw } from './PersonRow';
+import { PersonRow } from './PersonRow';
 
-type Props = {
-  people: Person[] | null;
-};
+export const PeopleTable: React.FC = () => {
+  const [people, setPeople] = useState<Person[] | null>([]);
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
+  useEffect(() => {
+    getPeople()
+      .then(setPeople);
+  }, []);
+
   return (
     <div className="container">
       <table className="table is-hoverable is-fullwidth">
@@ -22,7 +26,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
         </thead>
         <tbody>
           {people?.map(person => (
-            <PersonRaw person={person} key={person.slug} />
+            <PersonRow person={person} key={person.slug} />
           ))}
         </tbody>
       </table>

@@ -1,34 +1,19 @@
-import React, { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.scss';
 import 'bulma/css/bulma.min.css';
 
 import { Header } from './Components/Header';
 import { PeopleTable } from './Components/PeopleTable';
-import { getPeople } from './api/api';
-import { Person } from './Types/Person';
+import { HomePage } from './Components/HomePage';
+import { Page404 } from './Components/Page404';
 
 export const App: React.FC = () => {
-  const [people, setPeople] = useState<Person[] | null>([]);
-
-  useEffect(() => {
-    getPeople()
-      .then(setPeople);
-  }, []);
-
   return (
     <div className="App">
       <div className="container is-max-desktop">
         <Header />
         <Routes>
-          <Route
-            path="/"
-            element={(
-              <h1 className="title has-text-centered notification is-primary">
-                Home Page
-              </h1>
-            )}
-          />
+          <Route path="/" element={<HomePage />} />
 
           <Route
             path="people"
@@ -37,20 +22,12 @@ export const App: React.FC = () => {
                 <h1 className="title has-text-centered notification is-primary">
                   People Table
                 </h1>
-                <PeopleTable people={people} />
+                <PeopleTable />
               </div>
             )}
           />
 
-          <Route
-            path="*"
-            element={(
-              <h1 className="title has-text-centered notification is-danger">
-                Page Not Found
-              </h1>
-            )}
-          />
-
+          <Route path="*" element={<Page404 />} />
           <Route path="/home" element={<Navigate to="/" />} />
         </Routes>
       </div>
