@@ -8,6 +8,10 @@ export const PeoplePage = () => {
   useEffect(() => {
     getPeople()
       .then((loadedPeople) => {
+        if ('Error' in loadedPeople) {
+          return;
+        }
+
         const preparedPeople = [...loadedPeople].map(person => ({
           ...person,
           mother: loadedPeople
