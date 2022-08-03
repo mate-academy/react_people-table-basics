@@ -1,9 +1,11 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import 'bulma';
 import { Header } from './components/Header';
 import { PeoplePage } from './components/PeoplePage';
+import { HomePage } from './components/HomePage';
+import { NotFoundPage } from './components/NotFoundPage';
 
 const App: React.FC = () => (
   <div className="App">
@@ -14,19 +16,19 @@ const App: React.FC = () => (
       <Routes>
         <Route
           path="/"
-          element={(
-            <h1 className="title">Home page</h1>
-          )}
+          element={<HomePage />}
         />
         <Route
           path="people"
           element={<PeoplePage />}
         />
         <Route
+          path="/home"
+          element={<Navigate to="/" replace />}
+        />
+        <Route
           path="*"
-          element={(
-            <h1 className="title">Page not found</h1>
-          )}
+          element={<NotFoundPage />}
         />
       </Routes>
     </div>
