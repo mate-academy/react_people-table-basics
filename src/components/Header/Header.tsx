@@ -8,7 +8,6 @@ export const Header: React.FC = () => (
         <div className="navbar-start">
           <NavLink
             to="/"
-            // className="navbar-item is-tab"
             className={({ isActive }) => (
               `navbar-item is-tab ${isActive ? ' is-active' : ''}`
             )}
