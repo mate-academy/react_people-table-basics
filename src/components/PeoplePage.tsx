@@ -6,9 +6,18 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
 
   useEffect(() => {
-    getPeople().then((loadedPeople) => {
-      setPeople(loadedPeople);
-    });
+    getPeople()
+      .then((loadedPeople) => {
+        const preparedPeople = [...loadedPeople].map(person => ({
+          ...person,
+          mother: loadedPeople
+            .find(loadPerson => loadPerson.name === person.motherName) || null,
+          father: loadedPeople
+            .find(loadPerson => loadPerson.name === person.fatherName) || null,
+        }));
+
+        setPeople(preparedPeople);
+      });
   }, []);
 
   return (

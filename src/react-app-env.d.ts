@@ -6,9 +6,11 @@ interface Person {
   sex: 'm' | 'f',
   born: number,
   died: number,
-  fatherName: string,
-  motherName: string,
+  fatherName?: string,
+  motherName?: string,
   slug: string,
+  mother?: Person | null;
+  father?: Person | null;
 }
 
 interface ResponseError {

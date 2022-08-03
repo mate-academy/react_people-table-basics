@@ -1,3 +1,5 @@
+import { PersonRow } from './PersonRow';
+
 type Props = {
   people: Person[];
 };
@@ -24,14 +26,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => (
 
     <tbody>
       {people.map(person => (
-        <tr key={person.slug}>
-          <td>{person.name}</td>
-          <td>{person.sex}</td>
-          <td>{person.born}</td>
-          <td>{person.died}</td>
-          <td>{person.motherName}</td>
-          <td>{person.fatherName}</td>
-        </tr>
+        <PersonRow person={person} key={person.slug} />
       ))}
     </tbody>
   </table>
