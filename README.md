@@ -1,5 +1,14 @@
 # React - People table
 
+- Replace `<your_account>` with your Github username in the
+  [DEMO LINK](https://LAndrikevych.github.io/react_people-table-basics/)
+- Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
+
+## If you don't use **Typescript**
+1. Rename `.tsx` files to `.jsx`
+1. use `eslint-config-react` in `.eslintrs.js`
+=======
+
 1. Install all the NPM packages you need;
 1. Implement `HomePage` available at `/` with just a title `Home Page`
 1. Implement `PeoplePage` available at `/people` with a title `People Page`
@@ -18,10 +27,3 @@
     - `Mother` - only the name
     - `Father` - only the name
 1. Add the `person` class to each `<tr>` containing a person;
-
-## Instructions
-
-- Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
-- Use the [React TypeScript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript).
-- Open one more terminal and run tests with `npm test` to ensure your solution is correct.
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_people-table-basics/) and add it to the PR description.
