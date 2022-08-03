@@ -2,20 +2,9 @@ import './App.scss';
 import {
   Routes, Route, Navigate, Link,
 } from 'react-router-dom';
-import React from 'react';
 import { PeoplePage } from './PeoplePage';
-
-export const Home: React.FC = () => (
-  <div className="Home People">
-    <h2>Home page</h2>
-  </div>
-);
-
-export const NotFoundPage: React.FC = () => (
-  <div className="NotFoundPage People">
-    <h2>Page not found</h2>
-  </div>
-);
+import { NotFoundPage } from './NotFoundPage';
+import { Home } from './Home';
 
 export const App = () => (
   <>
@@ -29,12 +18,11 @@ export const App = () => (
     </header>
 
     <div className="App">
-      {/* <h1>People table</h1> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
           path="/home"
-          element={<Navigate to="/" />}
+          element={<Navigate to="/" replace />}
         />
         <Route path="/people" element={<PeoplePage />} />
         <Route path="*" element={<NotFoundPage />} />
