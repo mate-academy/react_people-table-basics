@@ -1,0 +1,14 @@
+.header {
+  margin: 10px;
+}
+
+.navbar {
+
+  &-item {
+    font-weight: bold;
+
+    &:not(:last-child) {
+      margin-right: 30px;
+    }
+  }
+}
