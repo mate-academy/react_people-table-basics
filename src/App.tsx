@@ -5,21 +5,16 @@ import {
   Routes,
   Route,
   Navigate,
-  NavLink,
 } from 'react-router-dom';
 import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
 import { NotFoundPage } from './components/NotFoundPage';
+import { Header } from './components/Header';
 
 const App = () => {
   return (
     <div className="App">
-      <header>
-        <nav className="navbar">
-          <NavLink className="navbar-item" to="/">Home page</NavLink>
-          <NavLink className="navbar-item" to="/people">Peope page</NavLink>
-        </nav>
-      </header>
+      <Header />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
