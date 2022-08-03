@@ -8,12 +8,14 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
   return (
     <table className="table is-bordered">
       <thead>
-        <th>name</th>
-        <th>sex</th>
-        <th>born</th>
-        <th>died</th>
-        <th>mother</th>
-        <th>father</th>
+        <tr>
+          <th>name</th>
+          <th>sex</th>
+          <th>born</th>
+          <th>died</th>
+          <th>mother</th>
+          <th>father</th>
+        </tr>
       </thead>
       <tbody>
         {
