@@ -1,6 +1,6 @@
 import { PersonInterface } from '../../react-app-env';
 import { TableHeader } from '../TableHeader/TableHeader';
-import { Person } from '../Person/Person';
+import { PersonRow } from '../PersonRow/PersonRow';
 
 type Props = {
   people: PersonInterface[],
@@ -13,7 +13,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => (
     <tbody>
       {people.map(person => (
         <tr key={person.name} className="person">
-          <Person person={person} />
+          <PersonRow person={person} />
         </tr>
       ))}
     </tbody>

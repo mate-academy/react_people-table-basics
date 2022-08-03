@@ -22,7 +22,7 @@ export const Header: React.FC = () => (
               `navbar-item is-tab ${isActive ? ' is-active' : ''}`
             )}
           >
-            Peope page
+            People page
           </NavLink>
         </div>
       </div>

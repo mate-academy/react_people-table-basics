@@ -3,5 +3,5 @@ const BASE_URL = 'https://mate-academy.github.io/react_people-table/api/people.j
 
 export function getPeople() {
   return fetch(BASE_URL)
-    .then(res => res.json());
+    .then(people => people.json());
 }

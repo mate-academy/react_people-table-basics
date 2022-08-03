@@ -6,7 +6,7 @@ type Props = {
 
 const getFirstName = (fullName: string): string => fullName.split(' ')[0];
 
-export const Person: React.FC<Props> = ({ person }) => (
+export const PersonRow: React.FC<Props> = ({ person }) => (
   <>
     <th>
       {person.name}
