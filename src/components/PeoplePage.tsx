@@ -1,38 +1,47 @@
-import React from 'react';
+import { useState } from 'react';
+import { getPeople } from '../api';
 import { Person } from '../types/Person';
 import { PersonRow } from './PersonRow';
 
-type Props = {
-  people: Person[],
+let data: Person[] | (() => Person[]);
+
+const loadData = async () => {
+  data = await getPeople();
 };
 
-export const PeoplePage: React.FC<Props> = ({ people }) => (
-  <>
-    <h1 className="subtitle is-3">People page</h1>
-    <table
-      className="
-        PeopleTable
-        people_table
-        table
-        is-bordered
-      "
-    >
+loadData();
 
-      <thead className="thead">
-        <th>name</th>
-        <th>sex</th>
-        <th>born</th>
-        <th>died</th>
-        <th>mother</th>
-        <th>father</th>
-      </thead>
+export const PeoplePage = () => {
+  const [people] = useState<Person[]>(data);
 
-      <tbody>
-        {people.map(person => (
-          <PersonRow key={person.slug} person={person} />
-        ))}
-      </tbody>
+  return (
+    <>
+      <h1 className="subtitle is-3">People page</h1>
+      <table
+        className="
+          PeopleTable
+          people_table
+          table
+          is-bordered
+        "
+      >
 
-    </table>
-  </>
-);
+        <thead className="thead">
+          <th>name</th>
+          <th>sex</th>
+          <th>born</th>
+          <th>died</th>
+          <th>mother</th>
+          <th>father</th>
+        </thead>
+
+        <tbody>
+          {people.map(person => (
+            <PersonRow key={person.slug} person={person} />
+          ))}
+        </tbody>
+
+      </table>
+    </>
+  );
+};
