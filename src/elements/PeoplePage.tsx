@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { PersonRow } from './PersonRow';
-import { Persone } from '../react-app-env';
+import { Person } from '../react-app-env';
+import { getPeople } from '../API_URL';
 
-type Props = {
-  people: Persone[]
-};
+export const PeoplePage: React.FC = () => {
+  const [people, setPeople] = useState<Person[]>([]);
 
-export const PeoplePage: React.FC<Props> = ({ people }) => {
+  useEffect(() => {
+    getPeople().then(peple => {
+      setPeople(peple);
+    });
+  }, []);
+
   return (
     <table className="table">
       <thead>
@@ -23,7 +28,6 @@ export const PeoplePage: React.FC<Props> = ({ people }) => {
         {people.map(person => (
           <PersonRow key={person.slug} person={person} />
         ))}
-
       </tbody>
     </table>
   );

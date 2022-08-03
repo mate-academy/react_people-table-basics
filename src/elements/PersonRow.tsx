@@ -1,8 +1,8 @@
 import React from 'react';
-import { Persone } from '../react-app-env';
+import { Person } from '../react-app-env';
 
 type Props = {
-  person: Persone;
+  person: Person;
 };
 
 export const PersonRow: React.FC<Props> = ({ person }) => {

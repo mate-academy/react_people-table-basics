@@ -1,65 +1,18 @@
 import './App.scss';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
-  Route, Routes, NavLink, Navigate,
+  Route, Routes, Navigate,
 } from 'react-router-dom';
 import 'bulma/css/bulma.css';
-import classNames from 'classnames';
 import { PeoplePage } from './elements/PeoplePage';
-import { Persone } from './react-app-env';
 import { NotFoundPage } from './elements/NotFoundPage';
-
-// eslint-disable-next-line max-len
-const API_URL = 'https://mate-academy.github.io/react_people-table/api/people.json';
-
-const getPeople = async () => {
-  const res = await fetch(API_URL);
-
-  return res.json();
-};
+import { Header } from './elements/Header';
 
 const App: React.FC = () => {
-  const [people, setPeople] = useState<Persone[]>([]);
-  const [activeLi, setActiveLi] = useState(false);
-
-  useEffect(() => {
-    getPeople().then(peple => {
-      setPeople(peple);
-    });
-  }, []);
-
-  const getLinkClass = ({ isActive }: { isActive: boolean }) => {
-    return (isActive ? 'is-active' : '');
-  };
-
   return (
     <div className="App">
       <h1>People table</h1>
-
-      <div className="tabs is-centered is-boxed">
-        <ul>
-          <li
-            className={classNames('', { 'is-active': !activeLi })}
-          >
-            <NavLink
-              to="/"
-              className={getLinkClass}
-              onClick={() => setActiveLi(!activeLi)}
-            >
-              Home
-            </NavLink>
-          </li>
-          <li className={classNames('', { 'is-active': activeLi })}>
-            <NavLink
-              to="/people"
-              className={getLinkClass}
-              onClick={() => setActiveLi(!activeLi)}
-            >
-              People
-            </NavLink>
-          </li>
-        </ul>
-      </div>
+      <Header />
 
       <Routes>
         <Route
@@ -67,16 +20,16 @@ const App: React.FC = () => {
           element={<p className="some-title">Home Page</p>}
         />
         <Route
-          path="/people"
+          path="people"
           element={(
             <>
-              <p className="some-title">Peopple List</p>
-              <PeoplePage people={people} />
+              <p className="some-title">People List</p>
+              <PeoplePage />
             </>
           )}
         />
         <Route
-          path="/home"
+          path="home"
           element={<Navigate to="/" />}
         />
         <Route
