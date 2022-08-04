@@ -1,21 +1,15 @@
 import './App.scss';
 import {
-  Routes, Route, Navigate, Link,
+  Routes, Route, Navigate,
 } from 'react-router-dom';
 import { PeoplePage } from './PeoplePage';
 import { NotFoundPage } from './NotFoundPage';
 import { Home } from './Home';
+import { Header } from './Header';
 
 export const App = () => (
   <>
-    <header className="Header">
-      <nav className="Nav">
-        <Link to="/home" className="Nav Nav__link">Home</Link>
-        &nbsp;
-        <Link to="/people" className="Nav Nav__link">People</Link>
-        &nbsp;
-      </nav>
-    </header>
+    <Header />
 
     <div className="App">
       <Routes>
@@ -29,5 +23,4 @@ export const App = () => (
       </Routes>
     </div>
   </>
-
 );
