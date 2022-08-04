@@ -7,17 +7,15 @@ const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
 
   useEffect(() => {
-    const fetchPeoples = async () => {
+    const fetchPeople = async () => {
       const response = await getPeople();
 
       setPeople(response);
     };
 
-    try {
-      fetchPeoples();
-    } catch (error) {
-      throw new Error(`${error}`);
-    }
+    fetchPeople().catch((requestError) => {
+      throw new Error(requestError);
+    });
   }, []);
 
   return (
