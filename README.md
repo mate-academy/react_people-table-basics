@@ -1,23 +1,24 @@
-# React - People table
+# React People Table
 
-1. Install all the NPM packages you need;
-1. Implement `HomePage` available at `/` with just a title `Home Page`
-1. Implement `PeoplePage` available at `/people` with a title `People Page`
+> Here is [the working example](https://mate-academy.github.io/react_people-table-basics/)
+
+Implement the `App` with 2 pages and ability to select a person in the table.
+
+1. Create the `HomePage` available at `/` with just a title `Home Page`
+1. Create the `PeoplePage` available at `/people` with a title `People Page`
 1. Use [Navigate](https://reactrouter.com/docs/en/v6/components/navigate) component to redirect from `/home` to `/`;
-    - add `replace` attribute to not save `/home` route in [browser history](https://reactrouter.com/docs/en/v6/getting-started/concepts#history-and-locations) and avoid navigation loop
-1. Implement `NotFoundPage` with a title `Page not found` that is shown for all the other URLs
-1. Add a `Header` visible everywhere with navigation links to both pages;
-1. Fetch `people` from [API](https://mate-academy.github.io/react_people-table/api/people.json) when `PeoplePage` is opened;
-1. Use `HashRouter` to have navigation correctly working on Github pages; 
-1. Implement `PeopleTable` component receiving an array of people and rendering them in a [Bulma table](https://bulma.io/documentation/elements/table/)
-1. The table should have these columns (tests expect these names wraped with `<th>` tag):
-    - `Name`
-    - `Sex`
-    - `Born`
-    - `Died`
-    - `Mother` - only the name
-    - `Father` - only the name
-1. Add the `person` class to each `<tr>` containing a person;
+    - add `replace` attribute not to save `/home` URL in the [browser history](https://reactrouter.com/docs/en/v6/getting-started/concepts#history-and-locations) and avoid navigation loop when you press browser `Go back` button.
+1. Implement `NotFoundPage` with a title `Page not found` that is shown for all the other URLs;
+1. Add the `Navbar` with 2 links `Home` and `People`. Active one should have the `has-background-grey-lighter` class;
+1. Use `HashRouter` to be able to share a link to any page on Github pages; 
+1. Fetch `people` from [the API](https://mate-academy.github.io/react_people-table/api/people.json) when `PeoplePage` is opened;
+1. Pass `people` to `PeopleTable` component and render as a table (see the given markup);
+1. Make each name in the table a link a to `/people/:slug` (including mother and father)
+    - create the `<PersonLink person={person} />` and use it for all existing people;
+    - add the `has-text-danger` class for women names;
+    - if there is no person with a given name among the people just keep the name as a text (not a link);
+    - if the motherName or fatherName is empty put `-` to the table
+1. Highlight the row of the selected person with the `has-background-warning` class;
 
 ## Instructions
 
