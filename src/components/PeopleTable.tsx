@@ -12,8 +12,10 @@ export const PeopleTable: React.FC = () => {
   const preparedPeople = people
     .map(currentPerson => ({
       ...currentPerson,
-      mother: people.find(person => person.name === currentPerson.motherName),
-      father: people.find(person => person.name === currentPerson.fatherName),
+      mother: people
+        .find(person => person.name === currentPerson.motherName) || null,
+      father: people
+        .find(person => person.name === currentPerson.fatherName) || null,
     }));
 
   return (
