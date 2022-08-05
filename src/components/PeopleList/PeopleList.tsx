@@ -3,7 +3,7 @@ import { getPeople } from '../../api/api';
 import { PeopleTable } from '../PeopleTable';
 
 export const PeopleList: React.FC = () => {
-  const [peopleList, setPeopleList] = useState<People[]>([]);
+  const [peopleList, setPeopleList] = useState<Person[]>([]);
 
   async function loader() {
     const peopleFromServer = await getPeople();

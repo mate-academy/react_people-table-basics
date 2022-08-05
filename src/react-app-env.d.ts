@@ -1,12 +1,15 @@
 // eslint-disable-next-line
 /// <reference types="react-scripts" />
-interface People {
+interface PersonaData {
   name: string;
   sex: 'm' | 'f';
   born: number;
   died: number;
   fatherName: string;
   motherName: string;
-  mother: Person | null;
-  father: Person | null;
+}
+
+interface Person extends PersonaData {
+  mother: PersonaData | null;
+  father: PersonaData | null;
 }

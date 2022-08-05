@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-  people: People
+  people: PersonaData
 }
 
 export const PersonRow: React.FC<Props> = ({ people }) => (

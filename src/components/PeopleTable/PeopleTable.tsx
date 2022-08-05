@@ -2,7 +2,7 @@ import React from 'react';
 import { PersonRow } from '../PersonRow';
 
 interface Props {
-  people: People[]
+  people: Person[]
 }
 
 export const PeopleTable: React.FC<Props> = ({ people }) => (
