@@ -7,3 +7,7 @@ export interface Person {
   motherName: string,
   slug: string,
 }
+
+export interface PeopleTableProps {
+  people: Person[],
+}
