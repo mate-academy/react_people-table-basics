@@ -1,4 +1,4 @@
-import { Route, Routes, NavLink } from 'react-router-dom';
+import { Route, Routes, NavLink, Navigate } from 'react-router-dom';
 import './App.scss';
 import { HomePage } from './components/HomePage/HomePage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
@@ -28,6 +28,7 @@ const App: React.FC = () => {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="/people" element={<PeoplePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
