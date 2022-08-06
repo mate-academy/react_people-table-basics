@@ -1,7 +1,12 @@
 import React from 'react';
 import './App.scss';
 import 'bulma';
-import { Link, Route, Routes } from 'react-router-dom';
+import {
+  Link,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import { PeopleTable } from './components/PeopleTable';
 import { HomePage } from './components/HomePage';
 import { NotFoundPage } from './components/NotFoundPage';
@@ -21,6 +26,7 @@ const App: React.FC = () => {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="/people" element={<PeopleTable />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
