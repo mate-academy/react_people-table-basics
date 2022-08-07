@@ -7,7 +7,7 @@ const API_URL
 const findParent = (arr: PersonFromServer[], parentName: string) => {
   return arr.find(
     (parent: PersonFromServer) => parentName === parent.name,
-  );
+  ) || null;
 };
 
 export const getPeople = (): Promise<PersonFromServer[]> => {
@@ -18,9 +18,9 @@ export const getPeople = (): Promise<PersonFromServer[]> => {
 export const getPeopleWithParentsObjects = (): Promise<Person[]> => {
   return getPeople()
     .then(people => people
-      .map((person, _i, arr) => ({
+      .map((person) => ({
         ...person,
-        mother: findParent(arr, person.motherName),
-        father: findParent(arr, person.fatherName),
+        mother: findParent(people, person.motherName),
+        father: findParent(people, person.fatherName),
       })));
 };

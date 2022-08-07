@@ -1,6 +1,6 @@
 import { PersonFromServer } from './PersonFromServer';
 
 export interface Person extends PersonFromServer {
-  mother: PersonFromServer | undefined,
-  father: PersonFromServer | undefined,
+  mother: PersonFromServer | null,
+  father: PersonFromServer | null,
 }
