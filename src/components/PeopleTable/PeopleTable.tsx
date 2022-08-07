@@ -1,5 +1,5 @@
-import { PeopleInfo } from './PeopleInfo';
-import { Person } from '../types/Person';
+import { PeopleInfo } from '../PeopleInfo/PeopleInfo';
+import { Person } from '../../types/Person';
 
 type Props = {
   people: Person[],
