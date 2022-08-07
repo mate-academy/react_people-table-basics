@@ -6,7 +6,7 @@ type Props = {
 };
 
 const PeopleTable:React.FC<Props> = ({ people }) => (
-  <table className="PeopleTable table table-striped">
+  <table className="table table-striped">
     <thead>
       <tr>
         <th>Name</th>
@@ -18,7 +18,11 @@ const PeopleTable:React.FC<Props> = ({ people }) => (
       </tr>
     </thead>
     <tbody>
-      <TableBody people={people} />
+      {people.map(person => (
+        <tr key={person.slug}>
+          <TableBody person={person} />
+        </tr>
+      ))}
     </tbody>
   </table>
 );
