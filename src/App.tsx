@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { PeopleTable } from './components/PeoplePage';
-import { NotFoundPage } from './components/NotFoundPage';
+import { PageNotFound } from './components/PageNotFound';
 
 const App = () => (
   <div className="App">
@@ -24,7 +24,7 @@ const App = () => (
         element={<PeopleTable />}
       />
 
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   </div>
 );
