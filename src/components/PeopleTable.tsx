@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PersonRow } from './PersonRow';
 
-const getPeople = (): Promise<People[]> => {
+const getPeople = (): Promise<Person[]> => {
   // eslint-disable-next-line max-len
   const API_URL
   = 'https://mate-academy.github.io/react_people-table/api/people.json';
@@ -15,52 +15,53 @@ const getPeople = (): Promise<People[]> => {
 };
 
 export const PeopleTable: React.FC = () => {
-  const [peoples, setPeoples] = useState<People[] | undefined>();
-  const [peoplesError, setPeoplesrror] = useState(false);
+  const [people, setPeople] = useState<Person[] | undefined>();
+  const [peopleError, setPeopleError] = useState(false);
+  const isLoading = !people && !peopleError;
 
   useEffect(() => {
     getPeople()
       .then(peopleFromServer => {
         if ('Error' in peopleFromServer) {
-          setPeoplesrror(true);
+          setPeopleError(true);
 
           return;
         }
 
-        setPeoples(peopleFromServer);
+        setPeople(peopleFromServer);
       });
   }, []);
 
   return (
     <>
-      {!peoples && !peoplesError && (
+      {isLoading && (
         <div className="Loader">
           <div className="Loader__content" />
         </div>
       )}
 
-      {!peoples && peoplesError && (
+      {!people && peopleError && (
         <div className="subtitle is-4 is- m-5">
           Peoples not found
         </div>
       )}
 
-      {peoples && !peoplesError && (
+      {people && !peopleError && (
         <table
           className="PeopleTable table is-bordered ml-3"
         >
           <thead className="table table-head">
             <tr>
               <th>Name</th>
-              <td>Sex</td>
-              <td>Born</td>
-              <td>Died</td>
-              <td>Mother</td>
-              <td>Father</td>
+              <th>Sex</th>
+              <th>Born</th>
+              <th>Died</th>
+              <th>Mother</th>
+              <th>Father</th>
             </tr>
           </thead>
           <tbody>
-            {peoples.map(person => (
+            {people.map(person => (
               <PersonRow person={person} key={person.slug} />
             ))}
           </tbody>

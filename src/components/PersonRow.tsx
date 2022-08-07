@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-  person: People,
+  person: Person,
 }
 
 export const PersonRow: React.FC<Props> = ({ person }) => (
