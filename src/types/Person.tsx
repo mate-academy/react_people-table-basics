@@ -1,5 +1,5 @@
 export interface Person {
-  'name': string,
+  name: string,
   'sex': string,
   'born': number,
   'died': number,
