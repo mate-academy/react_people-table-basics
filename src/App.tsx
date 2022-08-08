@@ -1,31 +1,18 @@
 import './App.scss';
 import {
-  Routes, Route, NavLink, Navigate,
+  Routes, Route, Navigate,
 } from 'react-router-dom';
 import PeoplePage from './components/PeoplePage/PeoplePage';
+import Header from './components/Header/Header';
 
 const App:React.FC = () => {
   return (
     <div className="App subtitle is-3">
-      <nav className="nav">
-        <NavLink
-          className={({ isActive }) => (isActive
-            ? 'button is-link is-active' : 'button is-warning')}
-          to="/"
-        >
-          Home page
-        </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive
-            ? 'button is-link is-active' : 'button is-warning')}
-          to="/people"
-        >
-          People page
-        </NavLink>
-      </nav>
+      <Header />
+
       <Routes>
         <Route path="/" element={<h1>Home page</h1>} />
-        <Route path="/home" element={<Navigate to="/" />} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="/people" element={<PeoplePage />} />
 
         <Route
