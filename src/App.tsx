@@ -1,4 +1,6 @@
-import { Route, Routes, NavLink, Navigate } from 'react-router-dom';
+import {
+  Route, Routes, NavLink, Navigate,
+} from 'react-router-dom';
 import './App.scss';
 import { HomePage } from './components/HomePage/HomePage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
