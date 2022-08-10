@@ -1,0 +1,27 @@
+td {
+  margin: 20px;
+}
+
+.nav {
+  &__link {
+    width: 200px;
+    background-color: #b3b9c2;
+  }
+}
+
+.title {
+  margin: 20px;
+}
+
+.columns {
+  background-color: #508a7c;
+
+  &__item {
+    padding: 10px;
+  }
+}
+
+.list {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
