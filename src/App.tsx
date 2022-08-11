@@ -38,7 +38,7 @@ const App: React.FC = () => {
 
         <Route
           path="/home"
-          element={<Navigate to="/" />}
+          element={<Navigate to="/" replace />}
         />
 
         <Route
@@ -55,7 +55,7 @@ const App: React.FC = () => {
         />
 
         <Route
-          path=":invoiceId"
+          path="*"
           element={(
             <div className="title">Page not found</div>
           )}
