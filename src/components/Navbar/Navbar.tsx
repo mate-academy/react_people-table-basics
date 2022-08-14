@@ -1,12 +1,11 @@
+import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 
 export const Navbar = () => {
   const applyClassName = (props: { isActive: boolean }) => {
-    if (props.isActive) {
-      return 'has-background-grey-lighter navbar-item';
-    }
-
-    return 'navbar-item';
+    return classNames(
+      'navbar-item', { 'has-background-grey-lighter': props.isActive },
+    );
   };
 
   return (
