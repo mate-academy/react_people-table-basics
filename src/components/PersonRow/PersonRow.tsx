@@ -1,45 +1,40 @@
+import classNames from 'classnames';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types/Person';
+import { PersonLink } from '../Links/PersonLink';
 
 type Props = {
   person: Person
-  father: Person | string
-  mother: Person | string
 };
 
-export const PersonRow: React.FC<Props> = ({ person, father, mother }) => {
+export const PersonRow: React.FC<Props> = ({ person }) => {
+  const { slug } = useParams();
+
   return (
     <>
-      <tr>
+      <tr className={classNames({ 'is-selected': slug === person.slug })}>
         <th>
-          <Link to={`/people/${person.slug}`}>
-            {person.name}
-          </Link>
+          <PersonLink person={person} />
         </th>
         <th>{person.sex}</th>
         <th>{person.born}</th>
         <th>{person.died}</th>
-        {typeof father === 'object'
-          ? (
+        {!person.father
+          ? (<th>{person.fatherName}</th>)
+          : (
             <th>
-              <Link to={`/people/${father.slug}`}>
-                {father.name}
-              </Link>
+              <PersonLink person={person.father} />
             </th>
-          )
-          : (<th>{father}</th>)}
-        {typeof mother === 'object'
-          ? (
+          )}
+        {!person.mother
+          ? (<th>{person.motherName}</th>)
+          : (
             <th>
-              <Link to={`/people/${mother.slug}`}>
-                {mother.name}
-              </Link>
+              <PersonLink person={person.mother} />
             </th>
-          )
-          : (<th>{mother}</th>)}
+          )}
       </tr>
     </>
-
   );
 };

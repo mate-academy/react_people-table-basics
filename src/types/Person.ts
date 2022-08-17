@@ -3,7 +3,9 @@ export type Person = {
   sex: string,
   born: number,
   died: number,
-  fatherName: Person | string,
-  motherName: Person | string,
+  fatherName: string,
+  motherName: string,
+  father: Person | null,
+  mother: Person | null,
   slug: string
 };
