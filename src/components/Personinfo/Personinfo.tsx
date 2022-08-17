@@ -39,10 +39,10 @@ export const PersonInfo: React.FC = () => {
                     {`Lived: ${person.born} - ${person.died}`}
                   </p>
                   <p>
-                    {`Father: ${person.fatherName}`}
+                    {`Father: ${person.fatherName || '--John Doe--'}` }
                   </p>
                   <p>
-                    {`Mother: ${person.motherName}`}
+                    {`Mother: ${person.motherName || '--Jane Doe--'}` }
                   </p>
                 </div>
 

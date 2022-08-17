@@ -40,8 +40,8 @@ export const PeopleTable: React.FC = () => {
             <th title="sex">Sex</th>
             <th title="born">Born</th>
             <th title="died">Died</th>
-            <th title="mother">Mother</th>
             <th title="father">Father</th>
+            <th title="mother">Mother</th>
           </tr>
         </thead>
         <tbody>
