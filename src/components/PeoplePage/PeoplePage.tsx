@@ -5,7 +5,7 @@ import { getPeople } from '../../api';
 import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage = () => {
-  const [people, setPeople] = useState<Person[]>([]);
+  const [people, setPeople] = useState<Person[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -49,7 +49,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!isEmpty && !hasError && (
+          {people && (
             <PeopleTable people={people} />
           )}
         </div>
