@@ -5,6 +5,7 @@ import {
   useState,
 } from 'react';
 import cn from 'classnames';
+import { useParams } from 'react-router-dom';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
@@ -14,7 +15,7 @@ export const PeoplePage: FC = memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
+  const { slug: selectedSlug } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
@@ -78,16 +79,12 @@ export const PeoplePage: FC = memo(() => {
                     key={person.slug}
                     className={cn(
                       {
-                        'has-background-warning':
-                          selectedPerson?.name === person.name,
+                        'has-background-warning': selectedSlug === person.slug,
                       },
                     )}
                   >
                     <td>
-                      <PersonLink
-                        person={person}
-                        onSelect={setSelectedPerson}
-                      />
+                      <PersonLink person={person} />
                     </td>
 
                     <td>{person.sex}</td>
@@ -95,22 +92,12 @@ export const PeoplePage: FC = memo(() => {
                     <td>{person.died}</td>
                     <td>
                       {person.mother
-                        ? (
-                          <PersonLink
-                            person={person.mother}
-                            onSelect={setSelectedPerson}
-                          />
-                        )
+                        ? (<PersonLink person={person.mother} />)
                         : (person.motherName || '-')}
                     </td>
                     <td>
                       {person.father
-                        ? (
-                          <PersonLink
-                            person={person.father}
-                            onSelect={setSelectedPerson}
-                          />
-                        )
+                        ? (<PersonLink person={person.father} />)
                         : (person.fatherName || '-')}
                     </td>
                   </tr>
