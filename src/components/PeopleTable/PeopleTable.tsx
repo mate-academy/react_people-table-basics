@@ -1,13 +1,13 @@
 import { FC, useState } from 'react';
 import classNames from 'classnames';
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink/PersonLink';
+import { PersonLink } from '../PersonLink';
 
 interface Props {
   people: Person[];
 }
 
-export const MyComponent: FC<Props> = ({ people }) => {
+export const PeopleTable: FC<Props> = ({ people }) => {
   const [selectedPerson, setSelectedPerson] = useState('');
 
   return (
@@ -81,5 +81,3 @@ export const MyComponent: FC<Props> = ({ people }) => {
     </table>
   );
 };
-
-export default MyComponent;

@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
-import PeopleTable from '../PeopleTable/PeopleTable';
+import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
