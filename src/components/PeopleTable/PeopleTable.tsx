@@ -1,5 +1,6 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
@@ -8,7 +9,7 @@ interface Props {
 }
 
 export const PeopleTable: FC<Props> = ({ people }) => {
-  const [selectedPerson, setSelectedPerson] = useState('');
+  const { slug: selectedPersonSlug } = useParams();
 
   return (
     <table
@@ -44,35 +45,25 @@ export const PeopleTable: FC<Props> = ({ people }) => {
               data-cy="person"
               key={slug}
               className={classNames({
-                'has-background-warning': selectedPerson === slug,
+                'has-background-warning': selectedPersonSlug === slug,
               })}
             >
               <td>
-                <PersonLink person={person} selectPerson={setSelectedPerson} />
+                <PersonLink person={person} />
               </td>
 
               <td>{sex}</td>
               <td>{born}</td>
               <td>{died}</td>
               <td>
-                {mother ? (
-                  <PersonLink
-                    person={mother}
-                    selectPerson={setSelectedPerson}
-                  />
-                ) : (
-                  motherName || '-'
-                )}
+                {mother
+                  ? (<PersonLink person={mother} />)
+                  : (motherName || '-')}
               </td>
               <td>
-                {father ? (
-                  <PersonLink
-                    person={father}
-                    selectPerson={setSelectedPerson}
-                  />
-                ) : (
-                  fatherName || '-'
-                )}
+                {father
+                  ? (<PersonLink person={father} />)
+                  : (fatherName || '-')}
               </td>
             </tr>
           );

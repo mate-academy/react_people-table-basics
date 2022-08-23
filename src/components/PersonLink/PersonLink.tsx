@@ -5,10 +5,9 @@ import { Person } from '../../types';
 
 type Props = {
   person: Person;
-  selectPerson: (slug: string) => void;
 };
 
-export const PersonLink: FC<Props> = ({ person, selectPerson }) => {
+export const PersonLink: FC<Props> = ({ person }) => {
   const { slug, sex, name } = person;
 
   return (
@@ -17,7 +16,6 @@ export const PersonLink: FC<Props> = ({ person, selectPerson }) => {
       className={classNames({
         'has-text-danger': sex === 'f',
       })}
-      onClick={() => selectPerson(slug)}
     >
       {name}
     </NavLink>
