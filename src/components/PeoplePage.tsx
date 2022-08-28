@@ -39,7 +39,7 @@ export const PeoplePage = () => {
               </p>
             )}
 
-          {people.length === 0 && !hasError
+          {people.length === 0 && !hasError && isLoaded
             && (
               <p data-cy="noPeopleMessage" className="has-text-danger">
                 no people
