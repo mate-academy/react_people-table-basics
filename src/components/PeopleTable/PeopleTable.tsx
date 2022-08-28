@@ -1,16 +1,12 @@
 import { FC } from 'react';
-import classNames from 'classnames';
-import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink';
+import { PersonInfo } from '../PersonInfo';
 
 interface Props {
   people: Person[];
 }
 
 export const PeopleTable: FC<Props> = ({ people }) => {
-  const { slug: selectedPersonSlug } = useParams();
-
   return (
     <table
       data-cy="peopleTable"
@@ -28,46 +24,7 @@ export const PeopleTable: FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => {
-          const {
-            slug,
-            sex,
-            born,
-            died,
-            fatherName,
-            motherName,
-            mother,
-            father,
-          } = person;
-
-          return (
-            <tr
-              data-cy="person"
-              key={slug}
-              className={classNames({
-                'has-background-warning': selectedPersonSlug === slug,
-              })}
-            >
-              <td>
-                <PersonLink person={person} />
-              </td>
-
-              <td>{sex}</td>
-              <td>{born}</td>
-              <td>{died}</td>
-              <td>
-                {mother
-                  ? (<PersonLink person={mother} />)
-                  : (motherName || '-')}
-              </td>
-              <td>
-                {father
-                  ? (<PersonLink person={father} />)
-                  : (fatherName || '-')}
-              </td>
-            </tr>
-          );
-        })}
+        {people.map(person => <PersonInfo key={person.slug} person={person} />)}
       </tbody>
     </table>
   );
