@@ -1,5 +1,5 @@
 // import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
@@ -10,9 +10,9 @@ import { App } from './App';
 // @ts-ignore
 ReactDOM.createRoot(document.querySelector('#root'))
   .render(
-    <BrowserRouter>
+    <HashRouter>
       <App />
-    </BrowserRouter>,
+    </HashRouter>,
   );
 
 /* original code below ⬇
