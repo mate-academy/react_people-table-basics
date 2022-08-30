@@ -1,10 +1,11 @@
 // eslint-disable-next-line object-curly-newline
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
+import classNames from 'classnames';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { NotFoundPage } from './components/NotFound/NotFound';
-import { CustomPersonPage }
-  from './components/CustomPersonPage/CustomPersonPage';
+// eslint-disable-next-line max-len
+import { CustomPersonPage } from './components/CustomPersonPage/CustomPersonPage';
 
 export const App = () => {
   return (
@@ -19,18 +20,20 @@ export const App = () => {
           <div className="navbar-brand">
             <NavLink
               to="/"
-              className={({ isActive }) => `
-              navbar-item
-              ${!isActive && 'has-background-grey-lighter'}`}
+              className={({ isActive }) => classNames(
+                'navbar-item',
+                { 'has-background-grey-lighter': !isActive },
+              )}
             >
               Home
             </NavLink>
 
             <NavLink
-              className={({ isActive }) => `
-              navbar-item
-              ${!isActive && 'has-background-grey-lighter'}`}
               to="/people"
+              className={({ isActive }) => classNames(
+                'navbar-item',
+                { 'has-background-grey-lighter': !isActive },
+              )}
             >
               People
             </NavLink>

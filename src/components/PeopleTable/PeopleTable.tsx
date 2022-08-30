@@ -50,11 +50,11 @@ export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
         <td>{person.motherName ? findPerson(person.motherName) : '-'}</td>
         <td>{person.fatherName ? findPerson(person.fatherName) : '-'}</td>
         <td>
-          <a
-            href={`/people/personalPage/${person.slug}`}
+          <Link
+            to={`/people/personalPage/${person.slug}`}
           >
             Link
-          </a>
+          </Link>
         </td>
       </tr>
     );
