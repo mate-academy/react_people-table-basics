@@ -17,9 +17,6 @@ const getFather = (people: Person[], fatherName: string): Person | null => {
 export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingError, setIsLoadingError] = useState(false);
-  // const [
-  //   selectedPersonSlug,
-  // ] = useState<string | null>(null);
   const [people, setPeople] = useState<Person[]>([]);
   const { personSlug = '' } = useParams();
 
