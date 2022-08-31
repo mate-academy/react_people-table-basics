@@ -4,31 +4,36 @@ import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
 
+const updatePeople = (loadPeople: Person[]) => {
+  const updatedPeople = loadPeople.map(person => {
+    return {
+      ...person,
+      mother:
+        loadPeople.find(mother => mother.name === person.motherName),
+      father:
+        loadPeople.find(father => father.name === person.fatherName),
+    };
+  });
+
+  return updatedPeople;
+};
+
 export const PeoplePage = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [error, setError] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [people, setPeople] = useState<Person[] | null>(null);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { slug = '' } = useParams();
 
   useEffect(() => {
+    setIsLoading(true);
     const loadData = async () => {
       try {
         const loadPeople = await getPeople();
 
-        const updatedPeople = loadPeople.map(person => {
-          return {
-            ...person,
-            mother:
-              loadPeople.find(mother => mother.name === person.motherName),
-            father:
-              loadPeople.find(father => father.name === person.fatherName),
-          };
-        });
-
-        setPeople(updatedPeople);
+        setPeople(updatePeople(loadPeople));
         setIsLoading(false);
       } catch {
-        setError(true);
+        setHasError(true);
       }
     };
 
@@ -41,7 +46,7 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {error
+          {hasError
             ? (
               <p data-cy="peopleLoadingError" className="has-text-danger">
                 Something went wrong

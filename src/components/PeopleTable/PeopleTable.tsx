@@ -3,7 +3,7 @@ import { List } from '../List/List';
 import { Loader } from '../Loader';
 
 type Props = {
-  people: Person[];
+  people: Person[] | null;
   selectedPerson: string;
   isLoading: boolean;
 };

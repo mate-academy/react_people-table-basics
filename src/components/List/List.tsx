@@ -4,11 +4,20 @@ import { Person } from '../../types';
 import { PersonalLink } from '../PersonalLink/PersonalLink';
 
 type Props = {
-  people: Person[];
+  people: Person[] | null;
   selectedPerson: string;
 };
 
-export const List: React.FC<Props> = ({ people, selectedPerson }) => {
+export const List: React.FC<Props> = (
+  {
+    people,
+    selectedPerson,
+  },
+) => {
+  if (!people) {
+    return null;
+  }
+
   return (
     <>
       {people.length === 0
