@@ -1,15 +1,16 @@
-// eslint-disable-next-line object-curly-newline
-import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
+import {
+  NavLink, Navigate, Route, Routes,
+} from 'react-router-dom';
 import classNames from 'classnames';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { NotFoundPage } from './components/NotFound/NotFound';
-// eslint-disable-next-line max-len
-import { CustomPersonPage } from './components/CustomPersonPage/CustomPersonPage';
+import { CustomPersonPage }
+  from './components/CustomPersonPage/CustomPersonPage';
 
 export const App = () => {
   return (
-    <>
+    <div data-cy="app">
       <nav
         data-cy="nav"
         className="navbar is-fixed-top has-shadow"
@@ -22,7 +23,7 @@ export const App = () => {
               to="/"
               className={({ isActive }) => classNames(
                 'navbar-item',
-                { 'has-background-grey-lighter': !isActive },
+                { 'has-background-grey-lighter': isActive },
               )}
             >
               Home
@@ -32,7 +33,7 @@ export const App = () => {
               to="/people"
               className={({ isActive }) => classNames(
                 'navbar-item',
-                { 'has-background-grey-lighter': !isActive },
+                { 'has-background-grey-lighter': isActive },
               )}
             >
               People
@@ -40,29 +41,27 @@ export const App = () => {
           </div>
         </div>
       </nav>
-      <div data-cy="app">
-        <main className="section">
-          <div className="container">
-            <div className="block">
-              <div className="box table-container">
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="people">
-                    <Route index element={<PeoplePage />} />
-                    <Route path=":id" element={<PeoplePage />} />
-                    <Route
-                      path="personalPage/:slug"
-                      element={<CustomPersonPage />}
-                    />
-                  </Route>
-                  <Route path="/home" element={<Navigate to="/" replace />} />
-                  <Route path="*" element={<NotFoundPage />} />
-                </Routes>
-              </div>
+      <main className="section">
+        <div className="container">
+          <div className="block">
+            <div className="box table-container">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="people">
+                  <Route index element={<PeoplePage />} />
+                  <Route path=":id" element={<PeoplePage />} />
+                  <Route
+                    path="personalPage/:slug"
+                    element={<CustomPersonPage />}
+                  />
+                </Route>
+                <Route path="/home" element={<Navigate to="/" replace />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
             </div>
           </div>
-        </main>
-      </div>
-    </>
+        </div>
+      </main>
+    </div>
   );
 };

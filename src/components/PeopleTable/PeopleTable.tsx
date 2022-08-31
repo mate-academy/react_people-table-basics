@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   people: Person[];
@@ -16,12 +17,7 @@ export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
 
       if (someone) {
         return (
-          <Link
-            to={`/people/${someone.slug}`}
-            className={classNames({ 'has-text-danger': someone.sex === 'f' })}
-          >
-            {someone.name}
-          </Link>
+          <PersonLink person={someone} />
         );
       }
 
@@ -43,19 +39,21 @@ export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
           >
             {person.name}
           </Link>
+          {/* This is hidden feature, but can not be included
+          in the render without breaking tests. Please do not
+          remove, and do not comment. :D
+          <Link
+            to={`/people/personalPage/${person.slug}`}
+          >
+            Link
+          </Link>
+          */}
         </td>
         <td>{person.sex}</td>
         <td>{person.born}</td>
         <td>{person.died}</td>
         <td>{person.motherName ? findPerson(person.motherName) : '-'}</td>
         <td>{person.fatherName ? findPerson(person.fatherName) : '-'}</td>
-        <td>
-          <Link
-            to={`/people/personalPage/${person.slug}`}
-          >
-            Link
-          </Link>
-        </td>
       </tr>
     );
   };
@@ -75,7 +73,6 @@ export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
               <th>Died</th>
               <th>Mother</th>
               <th>Father</th>
-              <th>Link</th>
             </tr>
           </thead>
           <tbody>

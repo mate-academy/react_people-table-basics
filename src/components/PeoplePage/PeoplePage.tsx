@@ -15,13 +15,13 @@ export const PeoplePage: React.FC = () => {
 
   const loadPeople = () => {
     setLoading(true);
-    getPeople().then(people => {
-      if (people.length > 0) {
+    getPeople()
+      .then(people => {
         setLoadedPeople(people);
-      } else {
+      })
+      .catch(() => {
         setError(true);
-      }
-    })
+      })
       .finally(() => {
         setLoading(false);
         setRequestStatus(true);
