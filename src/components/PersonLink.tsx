@@ -43,7 +43,12 @@ export const PersonLink: React.FC<Props> = ({
       <td>{died}</td>
       {perentsMother ? (
         <td>
-          <NavLink to={`../${perentsMother.slug}`}>
+          <NavLink
+            to={`../${perentsMother.slug}`}
+            className={() => classNames(
+              { 'has-text-danger': perentsMother.sex === 'f' },
+            )}
+          >
             {motherName}
           </NavLink>
         </td>
