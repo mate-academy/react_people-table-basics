@@ -7,6 +7,8 @@ import classNames from 'classnames';
 import { PeoplesPage } from './components/PeoplesPage';
 import { getPeople } from './api';
 import { Person } from './types';
+import { HomePage } from './components/HomePage';
+import { NotFoundPage } from './components/NotFoundPage';
 
 export const App = () => {
   const [peoples, setPeoples] = useState<Person[] | []>([]);
@@ -56,14 +58,12 @@ export const App = () => {
           <Route
             path="*"
             element={
-              <h1 className="title">Page not found</h1>
+              <NotFoundPage />
             }
           />
           <Route
             path="/"
-            element={
-              <h1 className="title">Home Page</h1>
-            }
+            element={<HomePage />}
 
           />
           <Route
