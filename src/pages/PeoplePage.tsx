@@ -38,15 +38,15 @@ export const PeoplePage = () => {
           {isLoading && <Loader />}
 
           {hasError && (
-            <>
-              <p data-cy="peopleLoadingError" className="has-text-danger">
-                Something went wrong
-              </p>
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )}
 
-              <p data-cy="noPeopleMessage">
-                There are no people on the server
-              </p>
-            </>
+          {people?.length === 0 && (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
+            </p>
           )}
 
           {people && <PeopleTable people={people} />}
