@@ -1,4 +1,6 @@
 import { Loader } from './components/Loader';
+import {Routes, Link, Route} from 'react-router-dom';
+import './index.css';
 
 export const App = () => (
   <div data-cy="app">
@@ -10,25 +12,39 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
+          <Link to="/" className="navbar-item">
             Home
-          </a>
+          </Link>
 
-          <a
+          <Link
+            to="/people"
             className="navbar-item has-background-grey-lighter"
-            href="#/people"
           >
             People
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
 
     <main className="section">
       <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
+        <Routes>
+          <Route
+            path="/"
+            element={<h1 className="title">Home Page</h1>}
+          />
+          <Route
+            path="/people"
+            element={<h1 className="title">People Page</h1>}
+          />
+          <Route
+            path="*"
+            element={<h1 className="title">Page not found</h1>}
+          />
+        </Routes>
+
+
+
 
         <div className="block">
           <div className="box table-container">
