@@ -1,6 +1,9 @@
-import {Routes, Link, Route, Navigate} from 'react-router-dom';
+import {
+  Routes, Link, Route, Navigate, NavLink,
+} from 'react-router-dom';
 import { Loader } from './components/Loader';
 import './index.css';
+import classNames from 'classnames';
 
 export const App = () => (
   <div data-cy="app">
@@ -12,16 +15,25 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <Link to="/" className="navbar-item">
+          <NavLink
+            to="/"
+            className={({ isActive }) => (
+              classNames('navbar-item',
+                { 'has-background-grey-lighter': isActive})
+            )}
+          >
             Home
-          </Link>
+          </NavLink>
 
-          <Link
+          <NavLink
             to="/people"
-            className="navbar-item has-background-grey-lighter"
+            className={({ isActive }) => (
+              classNames('navbar-item',
+                { 'has-background-grey-lighter': isActive})
+            )}
           >
             People
-          </Link>
+          </NavLink>
         </div>
       </div>
     </nav>
