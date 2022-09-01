@@ -48,7 +48,7 @@ export const PeoplePage = () => {
 
           {isError && (
             <p
-              data-cy="peopleLoadingisError"
+              data-cy="peopleLoadingError"
               className="has-text-danger"
             >
               Something went wrong
