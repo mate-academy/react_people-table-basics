@@ -1,4 +1,4 @@
-import { Routes, Link, Route } from 'react-router-dom';
+import {Routes, Link, Route, Navigate} from 'react-router-dom';
 import { Loader } from './components/Loader';
 import './index.css';
 
@@ -33,6 +33,7 @@ export const App = () => (
             path="/"
             element={<h1 className="title">Home Page</h1>}
           />
+          <Route path="home" element={<Navigate to="/" replace />} />
           <Route
             path="/people"
             element={(
@@ -52,7 +53,11 @@ export const App = () => (
 
                     <table
                       data-cy="peopleTable"
-                      className="table is-striped is-hoverable is-narrow is-fullwidth"
+                      className="table
+                      is-striped
+                      is-hoverable
+                      is-narrow
+                      is-fullwidth"
                     >
                       <thead>
                         <tr>
