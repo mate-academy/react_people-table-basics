@@ -11,7 +11,7 @@ export const PeoplePage: FC = () => {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { slug } = useParams();
+  const { slug = '' } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
@@ -31,10 +31,25 @@ export const PeoplePage: FC = () => {
   };
 
   const isSelected = (person: Person) => person.slug === slug;
+  const absentSlug = () => people.find(person => person.slug === slug);
 
   return (
     <>
       <h1 className="title">People Page</h1>
+      {slug.length > 0 && !absentSlug() && (
+        <p style={
+          {
+            fontSize: '25px',
+            marginBottom: '20px',
+            fontWeight: 'bold',
+            color: 'red',
+          }
+        }
+        >
+          There are no people on the server according to your request
+        </p>
+      )}
+
       <div className="block">
         <div className="box table-container">
           {isLoading && <Loader />}
@@ -46,7 +61,7 @@ export const PeoplePage: FC = () => {
             </p>
           )}
 
-          {people.length === 0
+          {people.length === 0 && !isLoading
           && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
