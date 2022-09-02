@@ -13,6 +13,7 @@ export const PeopleList: React.FC = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    setIsLoading(true);
     getPeople()
       .then(res => {
         setPeople(res);
@@ -67,72 +68,83 @@ export const PeopleList: React.FC = () => {
               </p>
             )}
 
-          <table
-            data-cy="peopleTable"
-            className="table is-striped is-hoverable is-narrow is-fullwidth"
-          >
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {peopleWithLinks.map(person => (
-                <tr
-                  data-cy="person"
-                  key={person.slug}
-                  className={classNames(
-                    { 'has-background-warning': person.slug === slug },
-                  )}
+          {
+            !isLoading && !error && !notFoundPeople
+              && (
+                <table
+                  data-cy="peopleTable"
+                  className="
+                    table
+                    is-striped
+                    is-hoverable
+                    is-narrow
+                    is-fullwidth
+                  "
                 >
-                  <td>
-                    <Link
-                      className={classNames(
-                        { 'has-text-danger': person.sex === 'f' },
-                      )}
-                      to={`../${person.slug}`}
-                    >
-                      {person.name}
-                    </Link>
-                  </td>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Sex</th>
+                      <th>Born</th>
+                      <th>Died</th>
+                      <th>Mother</th>
+                      <th>Father</th>
+                    </tr>
+                  </thead>
 
-                  <td>{person.sex}</td>
-                  <td>{person.born}</td>
-                  <td>{person.died}</td>
-                  <td>
-                    {person.mother
-                      ? (
-                        <Link
-                          to={`../${person.mother.slug}`}
-                          className="has-text-danger"
-                        >
-                          {person.mother.name}
-                        </Link>
-                      )
-                      : person.motherName || '-'}
-                  </td>
+                  <tbody>
+                    {peopleWithLinks.map(person => (
+                      <tr
+                        data-cy="person"
+                        key={person.slug}
+                        className={classNames(
+                          { 'has-background-warning': person.slug === slug },
+                        )}
+                      >
+                        <td>
+                          <Link
+                            className={classNames(
+                              { 'has-text-danger': person.sex === 'f' },
+                            )}
+                            to={`../${person.slug}`}
+                          >
+                            {person.name}
+                          </Link>
+                        </td>
 
-                  <td>
-                    {person.father
-                      ? (
-                        <Link
-                          to={`../${person.father.slug}`}
-                        >
-                          {person.father.name}
-                        </Link>
-                      )
-                      : person.fatherName || '-'}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                        <td>{person.sex}</td>
+                        <td>{person.born}</td>
+                        <td>{person.died}</td>
+                        <td>
+                          {person.mother
+                            ? (
+                              <Link
+                                to={`../${person.mother.slug}`}
+                                className="has-text-danger"
+                              >
+                                {person.mother.name}
+                              </Link>
+                            )
+                            : person.motherName || '-'}
+                        </td>
+
+                        <td>
+                          {person.father
+                            ? (
+                              <Link
+                                to={`../${person.father.slug}`}
+                              >
+                                {person.father.name}
+                              </Link>
+                            )
+                            : person.fatherName || '-'}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              )
+          }
         </div>
       </div>
     </>
