@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 import { getPeople } from '../api';
 import { Person } from '../types';
@@ -8,12 +9,21 @@ export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<Person[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [selectedPersonSlug, setPersonSlug] = useState<string | undefined>('');
 
   useEffect(() => {
     setIsLoading(true);
     getPeople().then(setPeople).catch(() => setError(true))
       .finally(() => setIsLoading(false));
   }, []);
+
+  const getParent = (parentName: string | null) => {
+    if (parentName && people) {
+      return people.find(person => person.name === parentName);
+    }
+
+    return undefined;
+  };
 
   return (
     <>
@@ -55,16 +65,46 @@ export const PeoplePage: FC = () => {
                         <tr
                           data-cy="person"
                           key={person.slug}
+                          className={classNames({
+                            // eslint-disable-next-line max-len
+                            'has-background-warning': selectedPersonSlug === person.slug
+                          },
+                          )}
                         >
                           <td>
-                            <PersonLink person={person} />
+                            <PersonLink
+                              person={person}
+                              setSelectedPersonSlug={setPersonSlug}
+                            />
                           </td>
 
                           <td>{person.sex}</td>
                           <td>{person.born}</td>
                           <td>{person.died}</td>
-                          <td>{person.motherName}</td>
-                          <td>{person.fatherName}</td>
+                          <td>
+                            {getParent(person.motherName) && (
+                              <PersonLink
+                                person={{
+                                  ...person,
+                                  mother: getParent(person.motherName),
+                                }.mother}
+                                setSelectedPersonSlug={setPersonSlug}
+                              />
+                            )}
+                            {person.motherName ? person.motherName : '-'}
+                          </td>
+                          <td>
+                            {getParent(person.fatherName) && (
+                              <PersonLink
+                                person={{
+                                  ...person,
+                                  father: getParent(person.fatherName),
+                                }.father}
+                                setSelectedPersonSlug={setPersonSlug}
+                              />
+                            )}
+                            {person.fatherName ? person.fatherName : '-'}
+                          </td>
                         </tr>
                       </>
                     ))
