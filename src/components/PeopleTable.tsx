@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
 
@@ -11,7 +11,9 @@ interface Props {
 export const PeopleTable: FC<Props> = (props) => {
   const { people, selectedPersonSlug } = props;
 
-  const isSelected = (person: Person) => person.slug === selectedPersonSlug;
+  const isSelected = useCallback((person: Person) => (
+    person.slug === selectedPersonSlug
+  ), []);
 
   return (
     <table
