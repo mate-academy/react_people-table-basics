@@ -1,5 +1,7 @@
 import { Loader } from './components/Loader';
 
+import './App.scss';
+
 export const App = () => (
   <div data-cy="app">
     <nav
