@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { HomePage } from './HomePage';
 import { Nav } from './Nav';
 import { People } from './People';
 
@@ -11,7 +12,7 @@ export const App = () => (
         <Routes>
           <Route
             path="/"
-            element={<h1 className="title">Home Page</h1>}
+            element={<HomePage />}
           />
           <Route
             path="home"
