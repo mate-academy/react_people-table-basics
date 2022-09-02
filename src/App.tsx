@@ -1,6 +1,7 @@
+import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import {
-  Link, Navigate, Route, Routes, useParams,
+  Navigate, NavLink, Route, Routes, useParams,
 } from 'react-router-dom';
 import { getPeople } from './api';
 import { Loader } from './components/Loader';
@@ -47,16 +48,22 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <Link className="navbar-item" to="/">
+            <NavLink
+              to="/"
+              className={({ isActive }) => classNames('navbar-item',
+                { 'has-background-grey-lighter': isActive })}
+            >
               Home
-            </Link>
+            </NavLink>
 
-            <Link
-              className="navbar-item has-background-grey-lighter"
+            <NavLink
+              end
               to="/people"
+              className={({ isActive }) => classNames('navbar-item',
+                { 'has-background-grey-lighter': isActive })}
             >
               People
-            </Link>
+            </NavLink>
           </div>
         </div>
       </nav>
