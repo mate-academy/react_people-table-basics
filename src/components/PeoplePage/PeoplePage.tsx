@@ -36,7 +36,7 @@ export const PeoplePage: FC = () => {
   return (
     <>
       <h1 className="title">People Page</h1>
-      {slug.length > 0 && !absentSlug() && (
+      {slug.length > 0 && people.length > 0 && !absentSlug() && (
         <p style={
           {
             fontSize: '25px',
