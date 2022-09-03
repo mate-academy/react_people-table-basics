@@ -1,15 +1,17 @@
 import classNames from 'classnames';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { getPeople } from '../api';
-import { Person } from '../types';
 import { Loader } from './Loader';
 import { PersonLink } from './PersonLink';
+import { Person } from '../types';
 
 export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<Person[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [selectedPersonSlug, setPersonSlug] = useState<string | undefined>('');
+
+  const { personSlug } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
@@ -67,15 +69,11 @@ export const PeoplePage: FC = () => {
                           key={person.slug}
                           className={classNames({
                             // eslint-disable-next-line max-len
-                            'has-background-warning': selectedPersonSlug === person.slug
-                          },
-                          )}
+                            'has-background-warning': person.slug === personSlug,
+                          })}
                         >
                           <td>
-                            <PersonLink
-                              person={person}
-                              setSelectedPersonSlug={setPersonSlug}
-                            />
+                            <PersonLink person={person} />
                           </td>
 
                           <td>{person.sex}</td>
@@ -88,7 +86,6 @@ export const PeoplePage: FC = () => {
                                   ...person,
                                   mother: getParent(person.motherName),
                                 }.mother}
-                                setSelectedPersonSlug={setPersonSlug}
                               />
                             )}
                             {person.motherName ? person.motherName : '-'}
@@ -100,7 +97,6 @@ export const PeoplePage: FC = () => {
                                   ...person,
                                   father: getParent(person.fatherName),
                                 }.father}
-                                setSelectedPersonSlug={setPersonSlug}
                               />
                             )}
                             {person.fatherName ? person.fatherName : '-'}
@@ -113,110 +109,6 @@ export const PeoplePage: FC = () => {
                         There are no people on the server
                       </p>
                     )}
-
-                  {/* <tr data-cy="person">
-                <td>
-                  <a href="#/people/jan-van-brussel-1714">
-                    Jan van Brussel
-                  </a>
-                </td>
-
-                <td>m</td>
-                <td>1714</td>
-                <td>1748</td>
-                <td>Joanna van Rooten</td>
-                <td>Jacobus van Brussel</td>
-              </tr>
-
-              <tr data-cy="person">
-                <td>
-                  <a href="#/people/philibert-haverbeke-1907">
-                    Philibert Haverbeke
-                  </a>
-                </td>
-
-                <td>m</td>
-                <td>1907</td>
-                <td>1997</td>
-
-                <td>
-                  <a
-                    className="has-text-danger"
-                    href="#/people/emma-de-milliano-1876"
-                  >
-                    Emma de Milliano
-                  </a>
-                </td>
-
-                <td>
-                  <a href="#/people/emile-haverbeke-1877">
-                    Emile Haverbeke
-                  </a>
-                </td>
-              </tr>
-
-              <tr data-cy="person" className="has-background-warning">
-                <td>
-                  <a href="#/people/jan-frans-van-brussel-1761">
-                    Jan Frans van Brussel
-                  </a>
-                </td>
-
-                <td>m</td>
-                <td>1761</td>
-                <td>1833</td>
-                <td>-</td>
-
-                <td>
-                  <a href="#/people/jacobus-bernardus-van-brussel-1736">
-                    Jacobus Bernardus van Brussel
-                  </a>
-                </td>
-              </tr>
-
-              <tr data-cy="person">
-                <td>
-                  <a
-                    className="has-text-danger"
-                    href="#/people/lievijne-jans-1542"
-                  >
-                    Lievijne Jans
-                  </a>
-                </td>
-
-                <td>f</td>
-                <td>1542</td>
-                <td>1582</td>
-                <td>-</td>
-                <td>-</td>
-              </tr>
-
-              <tr data-cy="person">
-                <td>
-                  <a href="#/people/bernardus-de-causmaecker-1721">
-                    Bernardus de Causmaecker
-                  </a>
-                </td>
-
-                <td>m</td>
-                <td>1721</td>
-                <td>1789</td>
-
-                <td>
-                  <a
-                    className="has-text-danger"
-                    href="#/people/livina-haverbeke-1692"
-                  >
-                    Livina Haverbeke
-                  </a>
-                </td>
-
-                <td>
-                  <a href="#/people/lieven-de-causmaecker-1696">
-                    Lieven de Causmaecker
-                  </a>
-                </td>
-              </tr> */}
                 </tbody>
               </table>
             )}

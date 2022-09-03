@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { NavBar } from './components/NavBar';
 import { PeoplePage } from './components/PeoplePage';
+// import { PersonLink } from './components/PersonLink';
 
 export const App = () => {
   return (
@@ -25,12 +26,20 @@ export const App = () => {
               path="home"
               element={<Navigate to="/" replace />}
             />
-            <Route
-              path="/people"
-              element={(
-                <PeoplePage />
-              )}
-            />
+            <Route path="people">
+              <Route
+                index
+                element={(
+                  <PeoplePage />
+                )}
+              />
+              <Route
+                path=":personSlug"
+                element={(
+                  <PeoplePage />
+                )}
+              />
+            </Route>
           </Routes>
         </div>
       </main>
