@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useEffect, useState } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
@@ -14,9 +13,11 @@ export const PeoplePage = () => {
   useEffect(() => {
     getPeople()
       .then(response => {
-        response.length > 0
-          ? setPeopleList(response)
-          : setIsEmpty(true);
+        if (response.length > 0) {
+          setPeopleList(response);
+        } else {
+          setIsEmpty(true);
+        }
       })
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
@@ -40,13 +41,13 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {isEmpty && (
+          {isEmpty ? (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
+          ) : (
+            <PeopleTable peopleList={peopleList} />
           )}
-
-          <PeopleTable peopleList={peopleList} />
         </div>
       </div>
     </>
