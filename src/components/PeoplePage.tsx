@@ -88,7 +88,8 @@ export const PeoplePage: FC = () => {
                                 }.mother}
                               />
                             )}
-                            {person.motherName ? person.motherName : '-'}
+                            {!getParent(person.motherName)
+                              && person.motherName ? person.motherName : '-'}
                           </td>
                           <td>
                             {getParent(person.fatherName) && (
@@ -99,7 +100,8 @@ export const PeoplePage: FC = () => {
                                 }.father}
                               />
                             )}
-                            {person.fatherName ? person.fatherName : '-'}
+                            {!getParent(person.fatherName)
+                              && person.fatherName ? person.fatherName : '-'}
                           </td>
                         </tr>
                       </>
