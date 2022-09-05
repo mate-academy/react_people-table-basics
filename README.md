@@ -1,6 +1,6 @@
 # React People Table
 
-> Here is [the working example](https://mate-academy.github.io/react_people-table-basics/)
+> Here is [the working example](https://mate-academy.github.io/react_people-table-basics npm install react-router-dom@6ics/)
 
 Implement the `App` with 2 pages and ability to select a person in the table.
 
