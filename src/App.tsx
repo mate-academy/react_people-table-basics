@@ -1,30 +1,13 @@
-import { FC, useEffect, useState } from 'react';
-import classNames from 'classnames';
+import { FC } from 'react';
 import {
   Navigate,
-  NavLink,
   Route,
   Routes,
 } from 'react-router-dom';
-import { PeopleTable } from './components/PeopleTable';
-import { Person } from './types';
-import { getPeople } from './api';
+import { PageNavLinks } from './components/PageNavLinks';
+import { PeoplePage } from './components/PeoplePage/PeoplePage';
 
 export const App: FC = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  // const [personSlug, setPersonSlug] = useState('');
-
-  useEffect(() => {
-    setIsLoading(true);
-
-    getPeople()
-      .then(setPeople)
-      .catch(() => setHasError(true))
-      .finally(() => setIsLoading(false));
-  }, []);
-
   return (
     <div data-cy="app">
       <nav
@@ -34,31 +17,7 @@ export const App: FC = () => {
         aria-label="main navigation"
       >
         <div className="container">
-          <div className="navbar-brand">
-            <NavLink
-              className={({ isActive }) => (
-                classNames(
-                  'navbar-item',
-                  { 'has-background-grey-lighter': isActive },
-                )
-              )}
-              to="/"
-            >
-              Home
-            </NavLink>
-
-            <NavLink
-              className={({ isActive }) => (
-                classNames(
-                  'navbar-item',
-                  { 'has-background-grey-lighter': isActive },
-                )
-              )}
-              to="people"
-            >
-              People
-            </NavLink>
-          </div>
+          <PageNavLinks />
         </div>
       </nav>
 
@@ -83,13 +42,7 @@ export const App: FC = () => {
                 element={(
                   <>
                     <h1 className="title">People Page</h1>
-                    <PeopleTable
-                      people={people}
-                      isLoading={isLoading}
-                      hasError={hasError}
-                      // personSlug={personSlug}
-                      // setPersonSlug={setPersonSlug}
-                    />
+                    <PeoplePage />
                   </>
                 )}
               />
@@ -98,11 +51,7 @@ export const App: FC = () => {
                 element={(
                   <>
                     <h1 className="title">People Page</h1>
-                    <PeopleTable
-                      people={people}
-                      isLoading={isLoading}
-                      hasError={hasError}
-                    />
+                    <PeoplePage />
                   </>
                 )}
               />
