@@ -9,13 +9,39 @@ export const PeoplePage: React.FC = () => {
   const { slug } = useParams();
   const [people, setPeople] = useState<Person[]>([]);
 
-  const getParent = (name: string) => (
-    people.find(person => person.name === name)
-  );
+  const setParentName = (person: Person | undefined, name: string | null) => {
+    if (person) {
+      return <PersonLink person={person} />;
+    }
+
+    return name || '-';
+  };
 
   useEffect(() => {
     getPeople()
-      .then((response) => setPeople(response));
+      .then(res => {
+        setPeople(res.map(person => {
+          const result = person;
+
+          const mother = res.find(
+            parent => parent.name === person.motherName,
+          );
+
+          const father = res.find(
+            parent => parent.name === person.fatherName,
+          );
+
+          if (mother) {
+            result.mother = mother;
+          }
+
+          if (father) {
+            result.father = father;
+          }
+
+          return result;
+        }));
+      });
   }, []);
 
   return (
@@ -52,24 +78,10 @@ export const PeoplePage: React.FC = () => {
               <td>{person.born}</td>
               <td>{person.died}</td>
               <td>
-                {
-                  person.motherName
-                  && getParent(person.motherName) !== undefined
-                    ? (
-                      <PersonLink person={getParent(person.motherName)} />
-                    )
-                    : (person.motherName)
-                }
+                {setParentName(person.mother, person.motherName)}
               </td>
               <td>
-                {
-                  person.fatherName
-                  && getParent(person.fatherName) !== undefined
-                    ? (
-                      <PersonLink person={getParent(person.fatherName)} />
-                    )
-                    : (person.fatherName)
-                }
+                {setParentName(person.father, person.fatherName)}
               </td>
             </tr>
           ))}
