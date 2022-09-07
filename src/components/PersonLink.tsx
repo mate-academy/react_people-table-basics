@@ -3,8 +3,8 @@ import { Person } from '../types/Person';
 
 type Props = {
   person: Person,
-  onMotherFind: (motherName: string) => string,
-  onFatherFind: (fatherName:string) => string,
+  onMotherFind: (motherName: string | undefined) => string | undefined,
+  onFatherFind: (fatherName:string | undefined) => string | undefined,
 };
 
 export const PersonLink: React.FC<Props> = ({
@@ -13,8 +13,8 @@ export const PersonLink: React.FC<Props> = ({
   onFatherFind,
 }) => {
   const { slug } = useParams();
-  const motherAsPerson = onMotherFind(person.motherName || '');
-  const fatherAsPerson = onFatherFind(person.fatherName || '');
+  const motherAsPerson = onMotherFind(person.motherName || undefined);
+  const fatherAsPerson = onFatherFind(person.fatherName || undefined);
   let personMother;
   let personFather;
 

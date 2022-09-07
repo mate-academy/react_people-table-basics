@@ -9,13 +9,13 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people, error }) => {
-  const handleMotherFind = (motherName: string) => {
+  const handleMotherFind = (motherName: string | undefined) => {
     const mother = people.find(person => person.name === motherName)?.slug;
 
     return mother;
   };
 
-  const handleFatherFind = (fatherName: string) => {
+  const handleFatherFind = (fatherName: string | undefined) => {
     const father = people.find(person => person.name === fatherName)?.slug;
 
     return father;
