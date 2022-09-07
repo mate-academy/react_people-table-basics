@@ -30,7 +30,8 @@ export const PeopleTable: React.FC<Props> = ({ people, error }) => {
       <div className="block">
         <div className="box table-container">
 
-          <Error error={error} />
+          {error
+            && <Error error={error} />}
 
           <table
             data-cy="peopleTable"

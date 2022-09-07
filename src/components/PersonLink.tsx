@@ -15,37 +15,6 @@ export const PersonLink: React.FC<Props> = ({
   const { slug } = useParams();
   const motherAsPerson = onMotherFind(person.motherName || undefined);
   const fatherAsPerson = onFatherFind(person.fatherName || undefined);
-  let personMother;
-  let personFather;
-
-  if (!person.motherName) {
-    personMother = <td>-</td>;
-  } else {
-    personMother = motherAsPerson
-      ? (
-        <td>
-          <Link
-            to={`/people/${motherAsPerson}`}
-            className="has-text-danger"
-          >
-            {person.motherName}
-          </Link>
-        </td>
-      ) : <td>{person.motherName}</td>;
-  }
-
-  if (!person.fatherName) {
-    personFather = <td>-</td>;
-  } else {
-    personFather = fatherAsPerson
-      ? (
-        <td>
-          <Link to={`/people/${fatherAsPerson}`}>
-            {person.fatherName}
-          </Link>
-        </td>
-      ) : <td>{person.fatherName}</td>;
-  }
 
   return (
     <tr
@@ -74,9 +43,26 @@ export const PersonLink: React.FC<Props> = ({
       <td>{person.born}</td>
       <td>{person.died}</td>
 
-      {personMother}
+      {motherAsPerson
+        ? (
+          <td>
+            <Link
+              to={`/people/${motherAsPerson}`}
+              className="has-text-danger"
+            >
+              {person.motherName}
+            </Link>
+          </td>
+        ) : <td>{person.motherName || '-'}</td>}
 
-      {personFather}
+      {fatherAsPerson
+        ? (
+          <td>
+            <Link to={`/people/${fatherAsPerson}`}>
+              {person.fatherName}
+            </Link>
+          </td>
+        ) : <td>{person.fatherName || '-'}</td>}
     </tr>
   );
 };

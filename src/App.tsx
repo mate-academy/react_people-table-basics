@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import {
   Navigate, Route, Routes, useNavigate,
 } from 'react-router-dom';
@@ -21,11 +22,9 @@ export const App = () => {
   const handlePeopleSave = async () => {
     await getPeople()
       .then(person => {
-        if (person.length > 0) {
-          setPeople(person);
-        }
-
-        setError('There are no people on the server');
+        person.length > 0
+          ? setPeople(person)
+          : setError('There are no people on the server');
       })
       .catch(() => setError('Something went wrong'));
   };
