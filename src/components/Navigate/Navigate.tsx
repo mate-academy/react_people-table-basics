@@ -1,10 +1,5 @@
 import { PageNavLink } from '../PageNavLink/PageNavLink';
 
-export type Props = {
-  to: string,
-  text: string,
-};
-
 export const Navigate = () => (
   <nav
     data-cy="nav"

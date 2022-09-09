@@ -8,7 +8,6 @@ import { PeopleTable } from '../PeopleTable/PeopleTable';
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const { personSlug } = useParams();
 
@@ -17,7 +16,6 @@ export const PeoplePage = () => {
       .then(res => {
         setPeople(res);
         setIsLoading(false);
-        setIsLoaded(true);
       })
       .catch(() => {
         setHasError(true);
@@ -39,14 +37,14 @@ export const PeoplePage = () => {
               </p>
             )}
 
-          {people.length === 0 && !hasError && isLoaded
+          {!people.length && !hasError && !isLoading
             && (
               <p data-cy="noPeopleMessage">
                 There are no people on the server
               </p>
             )}
 
-          {isLoaded && people.length > 0
+          {!isLoading && people.length > 0
               && (
                 <PeopleTable people={people} selectedSlug={personSlug} />
               )}
