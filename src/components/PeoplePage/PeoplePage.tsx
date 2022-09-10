@@ -44,7 +44,7 @@ export const PeoplePage = () => {
               </p>
             )}
 
-          {!isLoading && people.length > 0
+          {!isLoading && people.length
               && (
                 <PeopleTable people={people} selectedSlug={personSlug} />
               )}

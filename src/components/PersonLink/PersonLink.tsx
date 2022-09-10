@@ -5,10 +5,12 @@ import { Person } from '../../types';
 type Props = {
   people: Person[],
   person: Person,
-  isSelected: (person: Person) => boolean,
+  getIsSelected: (person: Person) => boolean,
 };
 
-export const PersonLink: React.FC<Props> = ({ people, person, isSelected }) => {
+export const PersonLink: React.FC<Props> = ({
+  people, person, getIsSelected,
+}) => {
   const mother = people.find(pers => pers.name === person.motherName);
   const father = people.find(pers => pers.name === person.fatherName);
 
@@ -16,7 +18,7 @@ export const PersonLink: React.FC<Props> = ({ people, person, isSelected }) => {
     <tr
       data-cy="person"
       className={classNames(
-        { 'has-background-warning': isSelected(person) },
+        { 'has-background-warning': getIsSelected(person) },
       )}
     >
       <td>

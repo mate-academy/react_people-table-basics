@@ -30,7 +30,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
           <PersonLink
             people={people}
             person={person}
-            isSelected={isSelected}
+            getIsSelected={isSelected}
             key={person.slug}
           />
         ))}
