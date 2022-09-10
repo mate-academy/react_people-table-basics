@@ -1,10 +1,11 @@
-/* eslint-disable */ 
+/* eslint-disable */
 import {
   Navigate, Route, Routes, useNavigate,
 } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { PeopleTable } from './components/PeopleTable';
-import { HomePage } from './components/HomePage';
+import { HomePage } from './components/Pages/HomePage';
+import { PeoplePage } from './components/Pages/PeoplePage';
+import { NotFoundPage } from './components/Pages/NotFoundPage';
 import { Navbar } from './components/Navbar';
 import { Person } from './types';
 import './App.scss';
@@ -21,9 +22,9 @@ export const App = () => {
 
   const handlePeopleSave = async () => {
     await getPeople()
-      .then(person => {
-        person.length > 0
-          ? setPeople(person)
+      .then(people => {
+        people.length > 0
+          ? setPeople(people)
           : setError('There are no people on the server');
       })
       .catch(() => setError('Something went wrong'));
@@ -46,15 +47,25 @@ export const App = () => {
             />
             <Route
               path="people"
-              element={<PeopleTable people={people} error={error} />}
+              element={(
+                <PeoplePage
+                  people={people}
+                  error={error}
+                />
+              )}
             />
             <Route
               path="people/:slug"
-              element={<PeopleTable people={people} error={error} />}
+              element={(
+                <PeoplePage
+                  people={people}
+                  error={error}
+                />
+              )}
             />
             <Route
               path="*"
-              element={<h1 className="title">Page not found</h1>}
+              element={<NotFoundPage />}
             />
           </Routes>
         </div>

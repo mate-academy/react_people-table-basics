@@ -7,7 +7,10 @@ export const Error: React.FC<Props> = ({ error }) => {
     <>
       {error === 'Something went wrong'
         && (
-          <p data-cy="peopleLoadingError" className="has-text-danger">
+          <p
+            data-cy="peopleLoadingError"
+            className="has-text-danger"
+          >
             {error}
           </p>
         )}
