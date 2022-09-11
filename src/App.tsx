@@ -1,29 +1,14 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import {
-  Navigate, NavLink, Route, Routes, useParams,
+  Navigate, NavLink, Route, Routes,
 } from 'react-router-dom';
 import { getPeople } from './api';
 import { Loader } from './components/Loader';
-import { PeopleTable } from './PeopleTable';
+import { PeoplePage } from './PeoplePage';
 import { Person } from './types';
 
-interface Props {
-  people: Person[];
-}
-export const PeoplePage: React.FC<Props> = ({ people }) => {
-  const { slug = '' } = useParams();
-
-  return (
-    <>
-      <h1 className="title">People Page</h1>
-
-      <PeopleTable people={people} selectedPerson={slug} />
-    </>
-  );
-};
-
-export const App = () => {
+export const App: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -84,7 +69,7 @@ export const App = () => {
                 <p data-cy="noPeopleMessage">
                   There are no people on the server
                 </p>
-              ) }
+              )}
 
               <Routes>
                 <Route
