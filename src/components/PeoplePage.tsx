@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { PeopleTable } from './PeopleTable';
-import { Person } from './types';
+import { Person } from '../types';
 
 interface Props {
   people: Person[];

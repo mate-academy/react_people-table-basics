@@ -1,11 +1,11 @@
-import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import {
-  Navigate, NavLink, Route, Routes,
+  Navigate, Route, Routes,
 } from 'react-router-dom';
 import { getPeople } from './api';
 import { Loader } from './components/Loader';
-import { PeoplePage } from './PeoplePage';
+import { Navigation } from './components/Navigation';
+import { PeoplePage } from './components/PeoplePage';
 import { Person } from './types';
 
 export const App: React.FC = () => {
@@ -25,33 +25,8 @@ export const App: React.FC = () => {
 
   return (
     <div data-cy="app">
-      <nav
-        data-cy="nav"
-        className="navbar is-fixed-top has-shadow"
-        role="navigation"
-        aria-label="main navigation"
-      >
-        <div className="container">
-          <div className="navbar-brand">
-            <NavLink
-              to="/"
-              className={({ isActive }) => classNames('navbar-item',
-                { 'has-background-grey-lighter': isActive })}
-            >
-              Home
-            </NavLink>
 
-            <NavLink
-              end
-              to="/people"
-              className={({ isActive }) => classNames('navbar-item',
-                { 'has-background-grey-lighter': isActive })}
-            >
-              People
-            </NavLink>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       <main className="section">
         <div className="container">
@@ -62,12 +37,6 @@ export const App: React.FC = () => {
               {isError && (
                 <p data-cy="peopleLoadingError" className="has-text-danger">
                   Something went wrong
-                </p>
-              )}
-
-              {people.length === 0 && (
-                <p data-cy="noPeopleMessage">
-                  There are no people on the server
                 </p>
               )}
 
