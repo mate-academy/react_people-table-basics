@@ -1,7 +1,7 @@
-import { Person } from '../../types/Person';
-import { Error } from '../Error';
-import { Loader } from '../Loader';
-import { PeopleTable } from '../PeopleTable';
+import { Person } from '../types/Person';
+import { Error } from '../components/Error';
+import { Loader } from '../components/Loader';
+import { PeopleTable } from '../components/PeopleTable';
 
 type Props = {
   people: Person[],

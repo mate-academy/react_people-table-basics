@@ -3,9 +3,9 @@ import {
   Navigate, Route, Routes, useNavigate,
 } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { HomePage } from './components/Pages/HomePage';
-import { PeoplePage } from './components/Pages/PeoplePage';
-import { NotFoundPage } from './components/Pages/NotFoundPage';
+import { HomePage } from './Pages/HomePage';
+import { PeoplePage } from './Pages/PeoplePage';
+import { NotFoundPage } from './Pages/NotFoundPage';
 import { Navbar } from './components/Navbar';
 import { Person } from './types';
 import './App.scss';
