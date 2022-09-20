@@ -1,5 +1,3 @@
-// import { Loader } from './components/Loader';
-
 import { Outlet } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 

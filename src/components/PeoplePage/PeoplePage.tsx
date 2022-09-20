@@ -48,7 +48,7 @@ export const PeoplePage = () => {
 
           {isLoader && <Loader />}
 
-          {(!peopleError && persons.length > 0)
+          {(!peopleError && persons.length === 0)
             && <PeopleTable persons={persons} selectedSlug={personSlug} />}
         </div>
       </div>
