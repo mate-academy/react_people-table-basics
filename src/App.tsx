@@ -1,29 +1,12 @@
-import {
-  Navigate, NavLink, Route, Routes,
-} from 'react-router-dom';
-import classNames from 'classnames';
-import { FC, useState } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
 import { Loader } from './components/Loader';
 import { getPeople } from './api';
 import './App.scss';
 import { Person } from './types/Person';
-
-type Props = {
-  to: string;
-  text: string;
-};
-
-export const PageNavLink: FC<Props> = ({ to, text }) => (
-  <NavLink
-    to={to}
-    end
-    className={({ isActive }) => classNames(
-      'navbar-item', { 'has-background-grey-lighter': isActive },
-    )}
-  >
-    {text}
-  </NavLink>
-);
+import { PageNavLink } from './components/PageNavLink';
+import { PeopleTable } from './components/PeopleTable';
+import { LoadingError } from './components/LoadingError';
 
 export const App = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
@@ -66,87 +49,35 @@ export const App = () => {
 
           <Route path="home" element={<Navigate to="/" replace />} />
 
-          <Route
-            path="people"
-            element={(
-              <div className="container">
-                <h1 className="title">People Page</h1>
-                {(!people && !error) && <Loader />}
+          <Route path="people">
+            <Route
+              index
+              element={(
+                <div className="container">
+                  <h1 className="title">People Page</h1>
+                  {(!people && !error) && <Loader />}
 
-                {error && (
-                  <>
-                    <p
-                      data-cy="peopleLoadingError"
-                      className="has-text-danger"
-                    >
-                      Something went wrong
-                    </p>
+                  {error && <LoadingError /> }
 
-                    <p data-cy="noPeopleMessage">
-                      There are no people on the server
-                    </p>
-                  </>
-                )}
+                  {people && <PeopleTable people={people} />}
+                </div>
+              )}
+            />
 
-                {people && (
-                  <div className="block">
-                    <div className="box table-container">
-                      <table
-                        data-cy="peopleTable"
-                        className="table is-striped
-                        is-hoverable is-narrow is-fullwidth"
-                      >
-                        <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>Sex</th>
-                            <th>Born</th>
-                            <th>Died</th>
-                            <th>Mother</th>
-                            <th>Father</th>
-                          </tr>
-                        </thead>
+            <Route
+              path=":slug"
+              element={(
+                <div className="container">
+                  <h1 className="title">People Page</h1>
+                  {(!people && !error) && <Loader />}
 
-                        <tbody>
-                          {people.map(person => {
-                            const {
-                              name,
-                              sex,
-                              born,
-                              died,
-                              motherName,
-                              fatherName,
-                            } = person;
+                  {error && <LoadingError /> }
 
-                            const linkName = name
-                              .toLowerCase()
-                              .split(' ')
-                              .join('-');
-
-                            return (
-                              <tr data-cy="person">
-                                <td>
-                                  <a href={`#/people/${linkName}-${born}`}>
-                                    {name}
-                                  </a>
-                                </td>
-
-                                <td>{sex}</td>
-                                <td>{born}</td>
-                                <td>{died}</td>
-                                <td>{motherName || '-'}</td>
-                                <td>{fatherName || '-'}</td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-          />
+                  {people && <PeopleTable people={people} />}
+                </div>
+              )}
+            />
+          </Route>
 
           <Route
             path="*"
