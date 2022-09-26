@@ -16,7 +16,17 @@ export const App = () => {
     try {
       const data = await getPeople();
 
-      setPeople(data);
+      const visiblePeople = data.map(person => ({
+        ...person,
+        mother: data.find(
+          mother => mother.name === person.motherName,
+        ),
+        father: data.find(
+          father => father.name === person.fatherName,
+        ),
+      }));
+
+      setPeople(visiblePeople);
     } catch (err) {
       setError(true);
     }
@@ -58,6 +68,12 @@ export const App = () => {
                   {(!people && !error) && <Loader />}
 
                   {error && <LoadingError /> }
+
+                  {(people && people.length < 1) && (
+                    <p data-cy="noPeopleMessage">
+                      There are no people on the server
+                    </p>
+                  )}
 
                   {people && <PeopleTable people={people} />}
                 </div>

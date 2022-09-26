@@ -29,8 +29,31 @@ export const PersonLink: FC<PropsLink> = ({ to, person }) => {
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
-      <td>{person.motherName || '-'}</td>
-      <td>{person.fatherName || '-'}</td>
+      <td>
+        {person.mother
+          ? (
+            <NavLink
+              to={`/people/${person.mother.slug}`}
+              className={classNames(
+                { 'has-text-danger': person.mother.sex === 'f' },
+              )}
+            >
+              {person.mother.name}
+            </NavLink>
+          )
+          : person.motherName || '-'}
+      </td>
+      <td>
+        {person.father
+          ? (
+            <NavLink
+              to={`/people/${person.father.slug}`}
+            >
+              {person.father.name}
+            </NavLink>
+          )
+          : person.fatherName || '-'}
+      </td>
     </tr>
   );
 };
