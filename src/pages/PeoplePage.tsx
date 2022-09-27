@@ -32,7 +32,7 @@ export const PeoplePage = () => {
   uploadPeople();
 
   return (
-    <div className="container">
+    <>
       <h1 className="title">People Page</h1>
       {(!people && !error) && <Loader />}
 
@@ -41,7 +41,6 @@ export const PeoplePage = () => {
       {(people && people.length < 1) && <NoPeopleMessage /> }
 
       {people && <PeopleTable people={people} />}
-    </div>
-
+    </>
   );
 };
