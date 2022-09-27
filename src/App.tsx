@@ -11,7 +11,7 @@ export const App = () => (
 
     <main className="section">
       <div className="container">
-      <Routes>
+        <Routes>
           <Route
             path="/"
             element={<HomePage />}
