@@ -4,7 +4,7 @@ import { Loader } from './components/Loader';
 import { getPeople } from './api';
 import './App.scss';
 import { Person } from './types/Person';
-import { PageNavLink } from './components/PageNavLink';
+import { PageNavLink, PageNavLink2 } from './components/PageNavLink';
 import { PeopleTable } from './components/PeopleTable';
 import { LoadingError } from './components/LoadingError';
 
@@ -45,7 +45,7 @@ export const App = () => {
         <div className="container">
           <div className="navbar-brand">
             <PageNavLink to="/" text="Home" />
-            <PageNavLink to="people" text="People" />
+            <PageNavLink2 to="people" text="People" />
           </div>
         </div>
       </nav>
