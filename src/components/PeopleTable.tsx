@@ -1,62 +1,6 @@
 import { FC } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import classNames from 'classnames';
 import { Person } from '../types';
-
-type PropsLink = {
-  to: string;
-  person: Person;
-};
-
-export const PersonLink: FC<PropsLink> = ({ to, person }) => {
-  const location = useLocation().pathname;
-
-  return (
-    <tr
-      data-cy="person"
-      className={(`/people/${person.slug}` === location && 'has-background-warning') || ''}
-    >
-      <td>
-        <NavLink
-          to={to}
-          className={classNames(
-            { 'has-text-danger': person.sex === 'f' },
-          )}
-        >
-          {person.name}
-        </NavLink>
-      </td>
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-      <td>
-        {person.mother
-          ? (
-            <NavLink
-              to={`/people/${person.mother.slug}`}
-              className={classNames(
-                { 'has-text-danger': person.mother.sex === 'f' },
-              )}
-            >
-              {person.mother.name}
-            </NavLink>
-          )
-          : person.motherName || '-'}
-      </td>
-      <td>
-        {person.father
-          ? (
-            <NavLink
-              to={`/people/${person.father.slug}`}
-            >
-              {person.father.name}
-            </NavLink>
-          )
-          : person.fatherName || '-'}
-      </td>
-    </tr>
-  );
-};
+import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[];
