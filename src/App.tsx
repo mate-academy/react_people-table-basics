@@ -1,104 +1,26 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
-import { Loader } from './components/Loader';
-import { getPeople } from './api';
 import './App.scss';
-import { Person } from './types/Person';
-import { PageNavLink, PageNavLink2 } from './components/PageNavLink';
-import { PeopleTable } from './components/PeopleTable';
-import { LoadingError } from './components/LoadingError';
+import { Navigation } from './components/Navigation';
+import { HomePage } from './pages/HomePage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { PeoplePage } from './pages/PeoplePage';
 
 export const App = () => {
-  const [people, setPeople] = useState<Person[] | null>(null);
-  const [error, setError] = useState(false);
-
-  const uploadPeople = async () => {
-    try {
-      const data = await getPeople();
-
-      const visiblePeople = data.map(person => ({
-        ...person,
-        mother: data.find(
-          mother => mother.name === person.motherName,
-        ),
-        father: data.find(
-          father => father.name === person.fatherName,
-        ),
-      }));
-
-      setPeople(visiblePeople);
-    } catch (err) {
-      setError(true);
-    }
-  };
-
-  uploadPeople();
-
   return (
     <div data-cy="app">
-      <nav
-        data-cy="nav"
-        className="navbar is-fixed-top has-shadow"
-        role="navigation"
-        aria-label="main navigation"
-      >
-        <div className="container">
-          <div className="navbar-brand">
-            <PageNavLink to="/" text="Home" />
-            <PageNavLink2 to="people" text="People" />
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       <main className="section">
         <Routes>
-          <Route
-            path="/"
-            element={<h1 className="title">Home Page</h1>}
-          />
-
+          <Route path="/" element={<HomePage />} />
           <Route path="home" element={<Navigate to="/" replace />} />
 
           <Route path="people">
-            <Route
-              index
-              element={(
-                <div className="container">
-                  <h1 className="title">People Page</h1>
-                  {(!people && !error) && <Loader />}
-
-                  {error && <LoadingError /> }
-
-                  {(people && people.length < 1) && (
-                    <p data-cy="noPeopleMessage">
-                      There are no people on the server
-                    </p>
-                  )}
-
-                  {people && <PeopleTable people={people} />}
-                </div>
-              )}
-            />
-
-            <Route
-              path=":slug"
-              element={(
-                <div className="container">
-                  <h1 className="title">People Page</h1>
-                  {(!people && !error) && <Loader />}
-
-                  {error && <LoadingError /> }
-
-                  {people && <PeopleTable people={people} />}
-                </div>
-              )}
-            />
+            <Route index element={<PeoplePage />} />
+            <Route path=":slug" element={<PeoplePage />} />
           </Route>
 
-          <Route
-            path="*"
-            element={<h1 className="title">Page not found</h1>}
-          />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
     </div>

@@ -5,22 +5,12 @@ import { FC } from 'react';
 type Props = {
   to: string;
   text: string;
+  end: boolean;
 };
 
-export const PageNavLink: FC<Props> = ({ to, text }) => (
+export const PageNavLink: FC<Props> = ({ to, text, end }) => (
   <NavLink
-    end
-    to={to}
-    className={({ isActive }) => classNames(
-      'navbar-item', { 'has-background-grey-lighter': isActive },
-    )}
-  >
-    {text}
-  </NavLink>
-);
-
-export const PageNavLink2: FC<Props> = ({ to, text }) => (
-  <NavLink
+    end={end}
     to={to}
     className={({ isActive }) => classNames(
       'navbar-item', { 'has-background-grey-lighter': isActive },
