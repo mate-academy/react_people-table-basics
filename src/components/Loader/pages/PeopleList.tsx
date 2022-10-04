@@ -1,28 +1,24 @@
+import { NavLink } from 'react-router-dom';
 import { Person } from '../../../types';
 import { Loader } from '../Loader';
 
 type Props = {
   people: Person[] | null;
   errorMessage: string;
-  isError: boolean;
 };
 
-export const PeopleList: React.FC<Props> = () => {
+export const PeopleList: React.FC<Props> = ({
+  people,
+}) => {
   return (
     <>
       <h1 className="title">People Page</h1>
 
       <div className="block">
         <div className="box table-container">
-          <Loader />
-
-          <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
-          </p>
-
-          <p data-cy="noPeopleMessage">
-            There are no people on the server
-          </p>
+          {!people?.length && (
+            <Loader />
+          )}
 
           <table
             data-cy="peopleTable"
@@ -40,6 +36,23 @@ export const PeopleList: React.FC<Props> = () => {
             </thead>
 
             <tbody>
+              {people?.map(person => (
+                <tr data-cy="person">
+                  <td>
+                    <NavLink to={`/people/${person.slug}`}>
+                      {person.name}
+                    </NavLink>
+                  </td>
+
+                  <td>{person.sex}</td>
+                  <td>{person.born}</td>
+                  <td>{person.died}</td>
+                  <td>
+                    {person.motherName || '-'}
+                  </td>
+                  {person.fatherName || '-'}
+                </tr>
+              ))}
               <tr data-cy="person">
                 <td>
                   <a href="#/people/jan-van-brussel-1714">

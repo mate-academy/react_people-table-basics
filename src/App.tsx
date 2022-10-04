@@ -10,14 +10,12 @@ import { Person } from './types';
 export const App = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [isError, setIsError] = useState<boolean>(false);
 
   const loadPeople = () => {
     getPeople()
       .then(peopleFromServer => setPeople(peopleFromServer))
       .catch(() => {
         setErrorMessage('Something went wrong');
-        setIsError(true);
       });
   };
 
@@ -45,7 +43,6 @@ export const App = () => {
                   <PeopleList
                     people={people}
                     errorMessage={errorMessage}
-                    isError={isError}
                   />
                 )}
               />
