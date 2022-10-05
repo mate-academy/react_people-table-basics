@@ -46,6 +46,15 @@ export const App = () => {
                   />
                 )}
               />
+              <Route
+                path=":slug"
+                element={(
+                  <PeopleList
+                    people={people}
+                    errorMessage={errorMessage}
+                  />
+                )}
+              />
             </Route>
           </Routes>
         </div>

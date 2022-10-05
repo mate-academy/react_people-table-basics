@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+import { useState } from 'react';
 import { Person } from '../../../types';
 import { Loader } from '../Loader';
 import { PersonLink } from './PersonLink';
@@ -11,13 +13,20 @@ export const PeopleList: React.FC<Props> = ({
   people,
   errorMessage,
 }) => {
+  const [select, setSelect] = useState<string>('');
+
   const findParents = (
     parentName: string | null,
   ): string | JSX.Element | null => {
     const parentObj = people?.find(({ name }) => name === parentName);
 
     return parentObj
-      ? (<PersonLink person={parentObj} />)
+      ? (
+        <PersonLink
+          person={parentObj}
+          setSelectedSlug={setSelect}
+        />
+      )
       : parentName;
   };
 
@@ -37,7 +46,7 @@ export const PeopleList: React.FC<Props> = ({
             </p>
           )}
 
-          {people?.length !== 0
+          {(people?.length !== 0)
             ? (
               <table
                 data-cy="peopleTable"
@@ -55,11 +64,19 @@ export const PeopleList: React.FC<Props> = ({
                 </thead>
 
                 <tbody>
-
                   {people?.map(person => (
-                    <tr data-cy="person">
+                    <tr
+                      data-cy="person"
+                      className={classNames(
+                        { 'has-background-warning': select === person.slug },
+                      )}
+                      key={person.slug}
+                    >
                       <td>
-                        <PersonLink person={person} />
+                        <PersonLink
+                          person={person}
+                          setSelectedSlug={setSelect}
+                        />
                       </td>
 
                       <td>{person.sex}</td>

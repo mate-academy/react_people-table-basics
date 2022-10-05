@@ -1,17 +1,18 @@
 import classNames from 'classnames';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Person } from '../../../types';
 
 type Props = {
   person: Person;
+  setSelectedSlug: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const PersonLink: React.FC<Props> = ({ person }) => {
-  const [isClick, setIsClick] = useState<boolean>(false);
-
-  const handleClick = (): void => {
-    setIsClick(!isClick);
+export const PersonLink: React.FC<Props> = ({
+  person,
+  setSelectedSlug,
+}) => {
+  const handleClick = (slug: string): void => {
+    setSelectedSlug(slug);
   };
 
   return (
@@ -19,9 +20,8 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       to={`/people/${person.slug}`}
       className={classNames({
         'has-text-danger': person.sex === 'f',
-        'has-background-warning': isClick,
       })}
-      onClick={handleClick}
+      onClick={() => handleClick(person.slug)}
     >
       {person.name}
     </Link>
