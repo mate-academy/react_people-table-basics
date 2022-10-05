@@ -11,6 +11,16 @@ export const PeopleList: React.FC<Props> = ({
   people,
   errorMessage,
 }) => {
+  const findParents = (
+    parentName: string | null,
+  ): string | JSX.Element | null => {
+    const parentObj = people?.find(({ name }) => name === parentName);
+
+    return parentObj
+      ? (<PersonLink person={parentObj} />)
+      : parentName;
+  };
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -54,9 +64,9 @@ export const PeopleList: React.FC<Props> = ({
                       <td>{person.born}</td>
                       <td>{person.died}</td>
                       <td>
-                        {person.motherName || '-'}
+                        {findParents(person.motherName) || '-'}
                       </td>
-                      {person.fatherName || '-'}
+                      {findParents(person.fatherName) || '-'}
                     </tr>
                   ))}
 
