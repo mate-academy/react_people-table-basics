@@ -1,4 +1,4 @@
-import { PageNavLink } from "./PageNavLink";
+import { PageNavLink } from '../pages/PageNavLink';
 
 export const Navigation = () => (
   <nav
@@ -9,8 +9,8 @@ export const Navigation = () => (
   >
     <div className="container">
       <div className="navbar-brand">
-        <PageNavLink to={'/'} text={'Home'} end={true} />
-        <PageNavLink to={'people'} text={'People'} end={false} />
+        <PageNavLink to="/" text="Home" end />
+        <PageNavLink to="people" text="People" end={false} />
       </div>
     </div>
   </nav>

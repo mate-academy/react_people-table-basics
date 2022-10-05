@@ -5,7 +5,7 @@ export const PeopleLoadingError = () => (
 );
 
 export const NoPeopleMessage = () => (
-  <p data-cy="noPeopleMessage">
+  <p data-cy="noPeopleMessage" className="has-text-danger">
     There are no people on the server
   </p>
 );
