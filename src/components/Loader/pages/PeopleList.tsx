@@ -1,7 +1,6 @@
-import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import { Person } from '../../../types';
 import { Loader } from '../Loader';
+import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[] | null;
@@ -10,6 +9,7 @@ type Props = {
 
 export const PeopleList: React.FC<Props> = ({
   people,
+  errorMessage,
 }) => {
   return (
     <>
@@ -17,8 +17,14 @@ export const PeopleList: React.FC<Props> = ({
 
       <div className="block">
         <div className="box table-container">
-          {!people && (
+          {(!people && !errorMessage.length) && (
             <Loader />
+          )}
+
+          {errorMessage.length > 0 && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              {errorMessage}
+            </p>
           )}
 
           {people?.length !== 0
@@ -42,16 +48,7 @@ export const PeopleList: React.FC<Props> = ({
 
                   {people?.map(person => (
                     <tr data-cy="person">
-                      <td>
-                        <Link
-                          to={`/people/${person.slug}`}
-                          className={classNames({
-                            'has-text-danger': person.sex === 'f',
-                          })}
-                        >
-                          {person.name}
-                        </Link>
-                      </td>
+                      <PersonLink person={person} />
 
                       <td>{person.sex}</td>
                       <td>{person.born}</td>
