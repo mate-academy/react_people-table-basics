@@ -46,58 +46,57 @@ export const PeopleList: React.FC<Props> = ({
             </p>
           )}
 
-          {(people?.length !== 0)
-            ? (
-              <table
-                data-cy="peopleTable"
-                className="table is-striped is-hoverable is-narrow is-fullwidth"
-              >
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Born</th>
-                    <th>Died</th>
-                    <th>Mother</th>
-                    <th>Father</th>
+          {(people && people?.length > 0) && (
+            <table
+              data-cy="peopleTable"
+              className="table is-striped is-hoverable is-narrow is-fullwidth"
+            >
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sex</th>
+                  <th>Born</th>
+                  <th>Died</th>
+                  <th>Mother</th>
+                  <th>Father</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {people?.map(person => (
+                  <tr
+                    data-cy="person"
+                    className={classNames(
+                      { 'has-background-warning': select === person.slug },
+                    )}
+                    key={person.slug}
+                  >
+                    <td>
+                      <PersonLink
+                        person={person}
+                        setSelectedSlug={setSelect}
+                      />
+                    </td>
+
+                    <td>{person.sex}</td>
+                    <td>{person.born}</td>
+                    <td>{person.died}</td>
+                    <td>
+                      {findParents(person.motherName) || '-'}
+                    </td>
+                    <td>
+                      {findParents(person.fatherName) || '-'}
+                    </td>
                   </tr>
-                </thead>
-
-                <tbody>
-                  {people?.map(person => (
-                    <tr
-                      data-cy="person"
-                      className={classNames(
-                        { 'has-background-warning': select === person.slug },
-                      )}
-                      key={person.slug}
-                    >
-                      <td>
-                        <PersonLink
-                          person={person}
-                          setSelectedSlug={setSelect}
-                        />
-                      </td>
-
-                      <td>{person.sex}</td>
-                      <td>{person.born}</td>
-                      <td>{person.died}</td>
-                      <td>
-                        {findParents(person.motherName) || '-'}
-                      </td>
-                      <td>
-                        {findParents(person.fatherName) || '-'}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )
-            : (
-              <p data-cy="noPeopleMessage">
-                There are no people on the server
-              </p>
-            )}
+                ))}
+                {(people && people?.length === 0) && (
+                  <p data-cy="noPeopleMessage">
+                    There are no people on the server
+                  </p>
+                )}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </>
