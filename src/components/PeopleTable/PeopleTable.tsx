@@ -36,7 +36,9 @@ export const PeopleTable: React.FC<Props> = ({ selectedPersonName = '' }) => {
       ? (
         <Link
           to={`../${parentName}`}
-          className="has-text-danger"
+          className={classNames(
+            { 'has-text-danger': temp.sex === 'f' },
+          )}
         >
           {parentName}
         </Link>
