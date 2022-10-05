@@ -19,35 +19,6 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
           {person.name}
         </Link>
       </td>
-
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-      <td>
-        {
-          person.motherName?.length
-            ? (
-              (
-                <Link
-                  to={`../${person.motherName}`}
-                  className="has-text-danger"
-                >
-                  {person.motherName}
-                </Link>
-              )
-            )
-            : '-'
-        }
-      </td>
-      <td>
-        <Link to={`../${person.fatherName}`}>
-          {
-            person.fatherName?.length
-              ? person.fatherName
-              : '-'
-          }
-        </Link>
-      </td>
     </>
   );
 };

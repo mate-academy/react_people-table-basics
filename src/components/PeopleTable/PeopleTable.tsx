@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
@@ -25,6 +26,23 @@ export const PeopleTable: React.FC<Props> = ({ selectedPersonName = '' }) => {
   }, []);
 
   const isSelected = (person: Person) => selectedPersonName === person.name;
+
+  const findParents = (
+    parentName: string | null,
+  ) => {
+    const temp = people?.find(({ name }) => name === parentName);
+
+    return temp
+      ? (
+        <Link
+          to={`../${parentName}`}
+          className="has-text-danger"
+        >
+          {parentName}
+        </Link>
+      )
+      : <td>{parentName}</td>;
+  };
 
   return (
     <>
@@ -63,6 +81,16 @@ export const PeopleTable: React.FC<Props> = ({ selectedPersonName = '' }) => {
                           person={person}
                           key={person.slug}
                         />
+
+                        <td>{person.sex}</td>
+                        <td>{person.born}</td>
+                        <td>{person.died}</td>
+                        <td>
+                          {findParents(person.motherName) || '-'}
+                        </td>
+                        <td>
+                          {findParents(person.fatherName) || '-'}
+                        </td>
                       </tr>
                     ))
                   }
