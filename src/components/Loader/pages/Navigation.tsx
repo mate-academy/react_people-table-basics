@@ -1,29 +1,11 @@
-import classNames from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { NavigationItem } from './NavigationItem';
 
 export const Navigation = () => {
   return (
     <div className="container">
       <div className="navbar-brand">
-        <NavLink
-          to="/"
-          className={({ isActive }) => classNames(
-            'navbar-item',
-            { 'has-background-grey-lighter': isActive },
-          )}
-        >
-          Home
-        </NavLink>
-
-        <NavLink
-          to="/people"
-          className={({ isActive }) => classNames(
-            'navbar-item',
-            { 'has-background-grey-lighter': isActive },
-          )}
-        >
-          People
-        </NavLink>
+        <NavigationItem to="/" content="Home" />
+        <NavigationItem to="/people" content="People" />
       </div>
     </div>
   );

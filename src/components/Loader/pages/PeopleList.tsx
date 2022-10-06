@@ -1,19 +1,26 @@
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getPeople } from '../../../api';
 import { Person } from '../../../types';
 import { Loader } from '../Loader';
 import { PersonLink } from './PersonLink';
 
-type Props = {
-  people: Person[] | null;
-  errorMessage: string;
-};
-
-export const PeopleList: React.FC<Props> = ({
-  people,
-  errorMessage,
-}) => {
+export const PeopleList = () => {
   const [select, setSelect] = useState<string>('');
+  const [people, setPeople] = useState<Person[] | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const loadPeople = () => {
+    getPeople()
+      .then(peopleFromServer => setPeople(peopleFromServer))
+      .catch(() => {
+        setErrorMessage('Something went wrong');
+      });
+  };
+
+  useEffect(() => {
+    loadPeople();
+  }, []);
 
   const findParents = (
     parentName: string | null,
