@@ -9,7 +9,6 @@ export const PeoplePage:React.FC = () => {
   const [isLoader, setLoader] = useState(true);
   const [isError, setError] = useState(true);
   const [messageError, setMessageError] = useState('');
-
   const { slug = '' } = useParams();
 
   useEffect(() => {
