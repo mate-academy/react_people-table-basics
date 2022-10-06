@@ -1,11 +1,11 @@
-import { FC } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { Person } from "../types";
+import { FC } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Person } from '../types';
 
 type Props = {
   person: Person;
   people: Person[];
-}
+};
 
 export const PersonLink: FC<Props> = ({ person, people }) => {
   const {
@@ -50,18 +50,16 @@ export const PersonLink: FC<Props> = ({ person, people }) => {
             >
               {motherName}
             </Link>
-          ) : motherName || '-'
-        }
+          ) : motherName || '-'}
       </td>
 
       <td>
         {father
           ? (
-            <Link to={`/people/${father.slug}`} >
+            <Link to={`/people/${father.slug}`}>
               {fatherName}
             </Link>
-          ) : fatherName || '-'
-        }
+          ) : fatherName || '-'}
       </td>
     </tr>
   );

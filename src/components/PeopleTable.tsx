@@ -1,7 +1,7 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import { Person } from "../../types";
-import { PersonLink } from "../PersonLink";
+import { Person } from '../types';
+import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[] | null;
@@ -25,7 +25,12 @@ export const PeopleTable: FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people?.map(person => (<PersonLink person={person} people={people}/>))}
+        {people?.map(person => (
+          <PersonLink
+            person={person}
+            people={people}
+          />
+        ))}
       </tbody>
     </table>
   );
