@@ -1,4 +1,5 @@
 import React from 'react';
+import { PageNavLink } from '../PageNavLink';
 
 export const Navbar: React.FC = () => (
   <nav
@@ -9,16 +10,8 @@ export const Navbar: React.FC = () => (
   >
     <div className="container">
       <div className="navbar-brand">
-        <a className="navbar-item" href="#/">
-          Home
-        </a>
-
-        <a
-          className="navbar-item has-background-grey-lighter"
-          href="#/people"
-        >
-          People
-        </a>
+        <PageNavLink to="/" label="Home" />
+        <PageNavLink to="people" label="People" />
       </div>
     </div>
   </nav>

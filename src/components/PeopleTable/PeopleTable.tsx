@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { PersonItem } from '../Person';
+import { PeopleContext } from '../../context';
 import { Person } from '../../types';
 
-type Props = {
-  people: Person[];
-}
-
-export const PeopleTable: React.FC<Props> = ({ people }) => {
+export const PeopleTable: React.FC = () => {
   const tableTitles = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+  const people = useContext(PeopleContext);
 
   return (
     <table
@@ -21,8 +19,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <PersonItem key={person.slug} person={person} />
+        {people.map((person: Person) => (
+          <PersonItem
+            key={person.slug}
+            person={person}
+          />
         ))}
       </tbody>
     </table>

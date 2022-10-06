@@ -3,7 +3,8 @@ import { getPeople } from '../../api';
 import { ErrorNotification } from '../../components/ErrorNotification';
 import { Loader } from '../../components/Loader';
 import { PeopleTable } from '../../components/PeopleTable';
-import { Person } from '../../types/Person'
+import { PeopleContext } from '../../context';
+import { Person } from '../../types/Person';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -16,9 +17,10 @@ export const PeoplePage: React.FC = () => {
     const getPeopleAsync = async () => {
       try {
         const receivedPeople = await getPeople();
-        console.log('receivedPeople: ', receivedPeople);
-        setPeople(receivedPeople);
-        if (people.length) {
+
+        if (receivedPeople.length) {
+          setPeople(receivedPeople);
+        } else {
           setErrorMessage('There are no people on the server');
         }
       } catch {
@@ -26,21 +28,24 @@ export const PeoplePage: React.FC = () => {
       } finally {
         setIsPeopleLoaded(false);
       }
-    }
+    };
+
     getPeopleAsync();
   }, []);
 
   return (
-    <>
-      <h1 className="title">People Page</h1>
+    <PeopleContext.Provider value={people}>
+      <>
+        <h1 className="title">People Page</h1>
 
-      <div className="block">
-        <div className="box table-container">
-          {isPeopleLoaded && <Loader />}
-          {errorMessage && <ErrorNotification message={errorMessage} />}
-          {!!people.length && <PeopleTable people={people} />}
+        <div className="block">
+          <div className="box table-container">
+            {isPeopleLoaded && <Loader />}
+            {errorMessage && <ErrorNotification message={errorMessage} />}
+            {!!people.length && <PeopleTable />}
+          </div>
         </div>
-      </div>
-    </>
-  )
+      </>
+    </PeopleContext.Provider>
+  );
 };
