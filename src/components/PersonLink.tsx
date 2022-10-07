@@ -25,7 +25,9 @@ export const PersonLink: FC<Props> = ({ to, person }) => {
   return (
     <tr
       data-cy="person"
-      className={(`/people/${slug}` === location && 'has-background-warning') || ''}
+      className={classNames(
+        { 'has-background-warning': `/people/${slug}` === location },
+      )}
     >
       <td>
         <NavLink

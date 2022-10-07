@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getPeople } from '../api';
 import { Person } from '../types/Person';
 import { Loader } from '../components/Loader';
@@ -8,33 +8,40 @@ import { PeopleTable } from '../components/PeopleTable';
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
   const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const uploadPeople = async () => {
-    try {
-      const data = await getPeople();
+  useEffect(() => {
+    setIsLoading(true);
 
-      const visiblePeople = data.map(person => ({
-        ...person,
-        mother: data.find(
-          mother => mother.name === person.motherName,
-        ),
-        father: data.find(
-          father => father.name === person.fatherName,
-        ),
-      }));
+    const uploadPeople = async () => {
+      try {
+        const data = await getPeople();
 
-      setPeople(visiblePeople);
-    } catch (err) {
-      setError(true);
-    }
-  };
+        const visiblePeople = data.map(person => ({
+          ...person,
+          mother: data.find(
+            mother => mother.name === person.motherName,
+          ),
+          father: data.find(
+            father => father.name === person.fatherName,
+          ),
+        }));
 
-  uploadPeople();
+        setPeople(visiblePeople);
+      } catch (err) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    uploadPeople();
+  }, []);
 
   return (
     <>
       <h1 className="title">People Page</h1>
-      {(!people && !error) && <Loader />}
+      {isLoading && <Loader />}
 
       {error && <LoadingError /> }
 
