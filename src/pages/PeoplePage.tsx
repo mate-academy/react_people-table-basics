@@ -9,7 +9,7 @@ import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types';
 
 export const PeoplePage = () => {
-  const [people, setPeople] = useState<Person[] | null>(null);
+  const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,7 +39,7 @@ export const PeoplePage = () => {
 
         {error && <PeopleLoadingError />}
 
-        {people && people.length < 1 && <NoPeopleMessage />}
+        {!isLoading && people.length < 1 && !error && <NoPeopleMessage />}
 
         {people && people.length > 0 && <PeopleTable people={people} />}
       </div>

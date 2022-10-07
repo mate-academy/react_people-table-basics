@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Person } from '../types';
@@ -26,12 +27,16 @@ export const PersonLink: FC<Props> = ({ person, people }) => {
   return (
     <tr
       data-cy="person"
-      className={(`/people/${slug}` === location && 'has-background-warning') || ''}
+      className={classNames(
+        { 'has-background-warning': `/people/${slug}` === location },
+      )}
     >
       <td>
         <NavLink
           to={`/people/${slug}`}
-          className={sex === 'f' ? 'has-text-danger' : ''}
+          className={classNames(
+            { 'has-text-danger': sex === 'f' },
+          )}
         >
           {name}
         </NavLink>

@@ -4,7 +4,7 @@ import { Person } from '../types';
 import { PersonLink } from './PersonLink';
 
 type Props = {
-  people: Person[] | null;
+  people: Person[];
 };
 
 export const PeopleTable: FC<Props> = ({ people }) => {
