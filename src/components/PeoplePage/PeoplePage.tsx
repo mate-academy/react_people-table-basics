@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import classNames from 'classnames';
+// import { useParams } from 'react-router-dom';
+// import classNames from 'classnames';
 import { Loader } from '../Loader';
 import { getPeople } from '../api/api';
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink';
+// import { PersonLink } from '../PersonLink';
+import { PersonDetails } from '../PersonDetails';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -18,13 +19,7 @@ export const PeoplePage: React.FC = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const { slug = '' } = useParams();
-
   const noPeopleCondition = !isLoading && people.length === 0 && !hasError;
-
-  const findPerson = (list: Person[], targetName: string) => {
-    return list.find(person => person.name === targetName) || null;
-  };
 
   return (
     <>
@@ -70,49 +65,10 @@ export const PeoplePage: React.FC = () => {
 
                   <tbody>
                     {people.map(person => (
-                      <tr
-                        data-cy="person"
-                        key={person.name}
-                        className={classNames({
-                          'has-background-warning': person.slug === slug,
-                        })}
-                      >
-                        <td>
-                          <PersonLink person={person} />
-                        </td>
-
-                        <td>{person.sex}</td>
-
-                        <td>{person.born}</td>
-
-                        <td>{person.died}</td>
-
-                        <td>
-                          {person.motherName ? (
-                            <PersonLink
-                              person={
-                                findPerson([...people], person.motherName)
-                              }
-                              parentName={person.motherName}
-                            />
-                          ) : (
-                            '-'
-                          )}
-                        </td>
-
-                        <td>
-                          {person.fatherName ? (
-                            <PersonLink
-                              person={
-                                findPerson([...people], person.fatherName)
-                              }
-                              parentName={person.fatherName}
-                            />
-                          ) : (
-                            '-'
-                          )}
-                        </td>
-                      </tr>
+                      <PersonDetails
+                        person={person}
+                        people={people}
+                      />
                     ))}
                   </tbody>
                 </table>
