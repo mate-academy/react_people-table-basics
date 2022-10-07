@@ -1,10 +1,7 @@
 import classNames from 'classnames';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const Navigation = () => {
-  const [selectedNavLink, setSelectedNavLink] = useState<string>('');
-
   return (
     <nav
       data-cy="nav"
@@ -14,27 +11,25 @@ export const Navigation = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <Link
-            className={classNames(
+          <NavLink
+            className={({ isActive }) => classNames(
               'navbar-item',
-              { 'has-background-grey-lighter': selectedNavLink === 'Home' },
+              { 'has-background-grey-lighter': isActive },
             )}
             to="/"
-            onClick={() => setSelectedNavLink('Home')}
           >
             Home
-          </Link>
+          </NavLink>
 
-          <Link
-            className={classNames(
+          <NavLink
+            className={({ isActive }) => classNames(
               'navbar-item',
-              { 'has-background-grey-lighter': selectedNavLink === 'People' },
+              { 'has-background-grey-lighter': isActive },
             )}
             to="people"
-            onClick={() => setSelectedNavLink('People')}
           >
             People
-          </Link>
+          </NavLink>
         </div>
       </div>
     </nav>
