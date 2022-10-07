@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import classNames from 'classnames';
 import { Loader } from '../Loader';
 import { getPeople } from '../api/api';
 import { Person } from '../../types';
-// import { PersonLink } from '../PersonLink';
 import { PersonDetails } from '../PersonDetails';
 
 export const PeoplePage: React.FC = () => {
