@@ -7,7 +7,7 @@ type Props = {
   textLink: string;
 };
 
-export const PageNavKink: React.FC<Props> = ({
+export const PageNavLink: React.FC<Props> = ({
   to, textLink,
 }) => (
   <NavLink
