@@ -55,6 +55,7 @@ export const App = () => {
             <PageNavLink
               to="/"
               text="Home"
+              end
             />
             <PageNavLink
               to="/people"
@@ -92,15 +93,14 @@ export const App = () => {
           </Routes>
 
           {
-            isError || isLoading
-              ? (
-                <MessageBlock
-                  isError={isError}
-                  isLoading={isLoading}
-                  peopleTable={peopleTable}
-                />
-              )
-              : <></>
+            (isError || isLoading)
+            && (
+              <MessageBlock
+                isError={isError}
+                isLoading={isLoading}
+                peopleTable={peopleTable}
+              />
+            )
           }
         </div>
       </main>
