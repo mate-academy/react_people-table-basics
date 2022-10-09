@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink.tsx';
 
 type Props = {
   people: Person[]
@@ -9,7 +10,7 @@ type Props = {
 
 export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
   const existingPerson = (personsParent: string | null) => {
-    return people.find(parent => parent.name === personsParent);
+    return people.find(person => person.name === personsParent);
   };
 
   const activePerson = people.find(
@@ -59,33 +60,15 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
                 <td>{person.sex}</td>
                 <td>{person.born}</td>
                 <td>{person.died}</td>
-                <td>
-                  {!person.motherName
-                    && '-' }
-                  {existingPerson(person.motherName)
-                    ? (
-                      <Link
-                        className="has-text-danger"
-                        to={`/people/${existingPerson(person.motherName)?.slug}`}
-                      >
-                        {person.motherName}
-                      </Link>
-                    )
-                    : person.motherName}
-                </td>
-                <td>
-                  {!person.fatherName
-                    && '-' }
-                  {existingPerson(person.fatherName)
-                    ? (
-                      <Link
-                        to={`/people/${existingPerson(person.fatherName)?.slug}`}
-                      >
-                        {person.fatherName}
-                      </Link>
-                    )
-                    : person.fatherName}
-                </td>
+                <PersonLink
+                  parent={person.motherName}
+                  existingPerson={existingPerson}
+                />
+
+                <PersonLink
+                  parent={person.fatherName}
+                  existingPerson={existingPerson}
+                />
               </tr>
             ))}
 
