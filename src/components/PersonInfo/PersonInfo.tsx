@@ -1,13 +1,35 @@
 import classNames from 'classnames';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 
-type Props = {
+type PropsInfo = {
   person: Person,
   selectedPersonSlug: string;
 };
 
-export const PersonInfo: React.FC<Props> = ({ person, selectedPersonSlug }) => {
+type PropsLink = {
+  to: string,
+  sex: string,
+  name: string,
+};
+
+const PersonLink: React.FC<PropsLink> = ({ to, sex, name }) => {
+  return (
+    <Link
+      to={`/people/${to}`}
+      className={classNames(
+        { 'has-text-danger': sex === 'f' },
+      )}
+    >
+      {name}
+    </Link>
+  );
+};
+
+export const PersonInfo: React.FC<PropsInfo> = ({
+  person, selectedPersonSlug,
+}) => {
   const {
     name,
     sex,
@@ -28,34 +50,37 @@ export const PersonInfo: React.FC<Props> = ({ person, selectedPersonSlug }) => {
       className={classNames({ 'has-background-warning': isSelected })}
     >
       <td>
-        <Link
-          to={`/people/${slug}`}
-          className={classNames(
-            { 'has-text-danger': sex === 'f' },
-          )}
-        >
-          {name}
-        </Link>
+        <PersonLink
+          to={slug}
+          sex={sex}
+          name={name}
+        />
       </td>
 
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {mother ? (
-          <Link to={`/people/${mother.slug}`} className="has-text-danger">
-            {mother.name}
-          </Link>
-        )
+        {mother
+          ? (
+            <PersonLink
+              to={mother.slug}
+              sex={mother.sex}
+              name={mother.name}
+            />
+          )
           : motherName || '-'}
 
       </td>
       <td>
-        {father ? (
-          <Link to={`/people/${father.slug}`}>
-            {father.name}
-          </Link>
-        )
+        {father
+          ? (
+            <PersonLink
+              to={father.slug}
+              sex={father.sex}
+              name={father.name}
+            />
+          )
           : fatherName || '-'}
       </td>
     </tr>
