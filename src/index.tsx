@@ -1,15 +1,17 @@
-import { createRoot } from "react-dom/client";
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { createRoot } from 'react-dom/client';
+import {
+  HashRouter, Routes, Route, Navigate,
+} from 'react-router-dom';
 
-import "bulma/css/bulma.css";
-import "@fortawesome/fontawesome-free/css/all.css";
+import 'bulma/css/bulma.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 
-import { App } from "./App";
-import { PeoplePage } from "./pages/PeoplePage";
-import { HomePage } from "./pages/HomePage";
-import { NotFoundPage } from "./pages/NotFoundPage";
+import { App } from './App';
+import { PeoplePage } from './pages/PeoplePage';
+import { HomePage } from './pages/HomePage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
-createRoot(document.getElementById("root") as HTMLDivElement).render(
+createRoot(document.getElementById('root') as HTMLDivElement).render(
   <HashRouter>
     <Routes>
       <Route path="/" element={<App />}>
@@ -23,5 +25,5 @@ createRoot(document.getElementById("root") as HTMLDivElement).render(
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
-  </HashRouter>
+  </HashRouter>,
 );

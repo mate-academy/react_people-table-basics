@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { Loader } from "../components/Loader";
-import { PeopleTable } from "../components/PeopleTable";
-import { getPeople } from "../api";
-import { Person } from "../types/Person";
+import { useState, useEffect } from 'react';
+import { Loader } from '../components/Loader';
+import { PeopleTable } from '../components/PeopleTable';
+import { getPeople } from '../api';
+import { Person } from '../types/Person';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [errorNotification, setErrorNotification] = useState("");
+  const [errorNotification, setErrorNotification] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const loadPeople = async () => {
@@ -19,17 +19,17 @@ export const PeoplePage = () => {
           return {
             ...persone,
             mother: peopleFromServer.find(
-              (mother) => persone.motherName === mother.name
+              (mother) => persone.motherName === mother.name,
             ),
 
             father: peopleFromServer.find(
-              (father) => persone.fatherName === father.name
+              (father) => persone.fatherName === father.name,
             ),
           };
-        })
+        }),
       );
     } catch (error) {
-      setErrorNotification("Unable to update a todo");
+      setErrorNotification('Unable to update a todo');
     }
   };
 

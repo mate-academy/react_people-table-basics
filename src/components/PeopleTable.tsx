@@ -1,7 +1,7 @@
-import classNames from "classnames";
-import { useParams } from "react-router-dom";
-import { Person } from "../types/Person";
-import { PersonLink } from "./PersonLink";
+import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
+import { Person } from '../types/Person';
+import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[];
@@ -31,7 +31,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           <tr
             data-cy="person"
             className={classNames({
-              "has-background-warning": person.slug === slug,
+              'has-background-warning': person.slug === slug,
             })}
             key={person.slug}
           >
