@@ -5,7 +5,7 @@ import { PersonLink } from './PersonLink';
 
 interface Props {
   peopleTable: Person[],
-  slugPersone: string,
+  slugPersone: string | null,
 }
 
 export const PeopleTable: React.FC<Props> = ({

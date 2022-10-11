@@ -6,7 +6,7 @@ interface Props {
   peopleTable: Person[],
 }
 export const TodoPage: React.FC<Props> = ({ peopleTable }) => {
-  const { slug = 'carolus-haverbeke-1832' } = useParams();
+  const { slug = null } = useParams();
 
   return (
     (
