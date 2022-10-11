@@ -9,34 +9,24 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const { slug = '' } = useParams();
   const [loading, setLoading] = useState(false);
-  const [showPeople, setShowPeople] = useState(false);
   const [dropError, setDropError] = useState(false);
 
   useEffect(() => {
-    setShowPeople(false);
     setLoading(true);
     setDropError(false);
-    const fetchPeople = async () => {
-      try {
-        const peopleFromServer = await getPeople();
-
-        setPeople(peopleFromServer);
-        setLoading(false);
-        setShowPeople(true);
-      } catch (error) {
-        setLoading(false);
-        setDropError(true);
-      }
-    };
-
-    fetchPeople();
+    getPeople()
+      .then(res => {
+        setPeople(res);
+      })
+      .catch(() => setDropError(true))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
     <>
       <h1 className="title">People Page</h1>
 
-      {showPeople && (
+      {!loading && (
         !people.length ? (
           <p data-cy="noPeopleMessage">
             There are no people on the server

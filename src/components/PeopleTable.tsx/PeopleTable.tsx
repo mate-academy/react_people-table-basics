@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
-  const existingPerson = (personsParent: string | null) => {
+  const getPersonByParent = (personsParent: string | null) => {
     return people.find(person => person.name === personsParent);
   };
 
@@ -37,37 +37,45 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
           </thead>
 
           <tbody>
-            {people.map(person => (
+            {people.map(({
+              name,
+              sex,
+              born,
+              died,
+              motherName,
+              fatherName,
+              slug,
+            }) => (
               <tr
                 data-cy="person"
-                key={person.slug}
+                key={slug}
                 className={classNames({
                   'has-background-warning':
-                  person.slug === activePerson?.slug,
+                  slug === activePerson?.slug,
                 })}
               >
                 <td>
                   <Link
-                    className={classNames(
-                      { 'has-text-danger': person.sex === 'f' },
-                    )}
-                    to={`/people/${person.slug}`}
+                    className={classNames({
+                      'has-text-danger': sex === 'f',
+                    })}
+                    to={`/people/${slug}`}
                   >
-                    {person.name}
+                    {name}
                   </Link>
                 </td>
 
-                <td>{person.sex}</td>
-                <td>{person.born}</td>
-                <td>{person.died}</td>
+                <td>{sex}</td>
+                <td>{born}</td>
+                <td>{died}</td>
                 <PersonLink
-                  parent={person.motherName}
-                  existingPerson={existingPerson}
+                  parent={motherName}
+                  getPersonByParent={getPersonByParent}
                 />
 
                 <PersonLink
-                  parent={person.fatherName}
-                  existingPerson={existingPerson}
+                  parent={fatherName}
+                  getPersonByParent={getPersonByParent}
                 />
               </tr>
             ))}

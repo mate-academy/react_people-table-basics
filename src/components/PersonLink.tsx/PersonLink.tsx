@@ -5,29 +5,31 @@ import { Person } from '../../types';
 
 type Props = {
   parent: string | null
-  existingPerson: (value: string | null) => Person | undefined
+  getPersonByParent: (value: string | null) => Person | undefined
 };
 
 export const PersonLink: React.FC<Props> = ({
   parent,
-  existingPerson,
+  getPersonByParent,
 }) => {
+  const personIsParent = getPersonByParent(parent);
+
+  if (!parent) {
+    return (
+      <td> - </td>
+    );
+  }
+
   return (
     <td>
-      {!parent
-        && '-' }
-      {existingPerson(parent)
-        ? (
-          <Link
-            className={classNames(
-              { 'has-text-danger': existingPerson(parent)?.sex === 'f' },
-            )}
-            to={`/people/${existingPerson(parent)?.slug}`}
-          >
-            {parent}
-          </Link>
-        )
-        : parent}
+      <Link
+        className={classNames({
+          'has-text-danger': personIsParent?.sex === 'f',
+        })}
+        to={`/people/${personIsParent?.slug}`}
+      >
+        {parent}
+      </Link>
     </td>
   );
 };
