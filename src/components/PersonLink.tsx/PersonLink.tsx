@@ -22,14 +22,16 @@ export const PersonLink: React.FC<Props> = ({
 
   return (
     <td>
-      <Link
-        className={classNames({
-          'has-text-danger': personIsParent?.sex === 'f',
-        })}
-        to={`/people/${personIsParent?.slug}`}
-      >
-        {parent}
-      </Link>
+      {personIsParent ? (
+        <Link
+          className={classNames({
+            'has-text-danger': getPersonByParent(parent)?.sex === 'f',
+          })}
+          to={`/people/${getPersonByParent(parent)?.slug}`}
+        >
+          {parent}
+        </Link>
+      ) : parent}
     </td>
   );
 };

@@ -3,7 +3,7 @@ import {
 } from 'react-router-dom';
 
 import './App.scss';
-import { PeoplePage } from './Pages.tsx';
+import { PeoplePage } from './Pages';
 import { MainNav } from './components/MainNav';
 import { PageNotFound } from './components/PageNotFound';
 import { HomePage } from './components/HomePage';
