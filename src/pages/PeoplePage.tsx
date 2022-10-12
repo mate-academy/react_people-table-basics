@@ -6,7 +6,7 @@ import { Person } from '../types/Person';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [errorNotification, setErrorNotification] = useState('');
+  const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const loadPeople = async () => {
@@ -15,21 +15,21 @@ export const PeoplePage = () => {
 
       setIsLoading(true);
       setPeople(
-        peopleFromServer.map((persone) => {
+        peopleFromServer.map((person) => {
           return {
-            ...persone,
+            ...person,
             mother: peopleFromServer.find(
-              (mother) => persone.motherName === mother.name,
+              (mother) => person.motherName === mother.name,
             ),
 
             father: peopleFromServer.find(
-              (father) => persone.fatherName === father.name,
+              (father) => person.fatherName === father.name,
             ),
           };
         }),
       );
     } catch (error) {
-      setErrorNotification('Unable to update a todo');
+      setIsError(true);
     }
   };
 
@@ -42,7 +42,7 @@ export const PeoplePage = () => {
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {errorNotification && (
+          {isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
