@@ -25,9 +25,9 @@ export const PersonLink: React.FC<Props> = ({
       {personIsParent ? (
         <Link
           className={classNames({
-            'has-text-danger': getPersonByParent(parent)?.sex === 'f',
+            'has-text-danger': personIsParent?.sex === 'f',
           })}
-          to={`/people/${getPersonByParent(parent)?.slug}`}
+          to={`/people/${personIsParent?.slug}`}
         >
           {parent}
         </Link>
