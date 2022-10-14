@@ -1,30 +1,11 @@
 import classNames from 'classnames';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink';
 
 type PropsInfo = {
   person: Person,
   selectedPersonSlug: string;
-};
-
-type PropsLink = {
-  to: string,
-  sex: string,
-  name: string,
-};
-
-const PersonLink: React.FC<PropsLink> = ({ to, sex, name }) => {
-  return (
-    <Link
-      to={`/people/${to}`}
-      className={classNames(
-        { 'has-text-danger': sex === 'f' },
-      )}
-    >
-      {name}
-    </Link>
-  );
 };
 
 export const PersonInfo: React.FC<PropsInfo> = ({
