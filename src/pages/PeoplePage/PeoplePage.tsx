@@ -6,22 +6,25 @@ import PeopleTable from './PeopleTable';
 
 const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [peopel, setPeople] = useState<IPerson[] | null>(null);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [people, setPeople] = useState<IPerson[]>([]);
 
   const handleGetPeople = async () => {
     try {
       setIsLoading(true);
       const data = await getPeople();
 
-      const dataWithParens = data.map(persone => {
+      const dataWithParens = data.map(person => {
         return {
-          ...persone,
-          mother: data.find(per => per.name === persone.motherName),
-          father: data.find(per => per.name === persone.fatherName),
+          ...person,
+          mother: data.find(per => per.name === person.motherName),
+          father: data.find(per => per.name === person.fatherName),
         };
       });
 
       setPeople(dataWithParens);
+    } catch {
+      setIsError(true);
     } finally {
       setIsLoading(false);
     }
@@ -35,8 +38,16 @@ const PeoplePage: React.FC = () => {
     return <Loader />;
   }
 
-  if (!peopel) {
-    return null;
+  if (isError) {
+    return (
+      <div className="block">
+        <h1 className="title">People Page</h1>
+
+        <p data-cy="peopleLoadingError" className="has-text-danger">
+          Something went wrong
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -44,7 +55,13 @@ const PeoplePage: React.FC = () => {
       <h1 className="title">People Page</h1>
 
       <div className="box table-container">
-        <PeopleTable peopel={peopel} />
+        {people.length === 0 ? (
+          <p data-cy="noPeopleMessage">
+            There are no people on the server
+          </p>
+        ) : (
+          <PeopleTable peopel={people} />
+        )}
       </div>
     </div>
   );

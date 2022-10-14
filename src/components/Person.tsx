@@ -1,26 +1,26 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { IPerson } from '../types';
-import PersoneLink from './PersoneLink';
+import PersonLink from './PersonLink';
 
 interface Props {
-  persone: IPerson;
+  person: IPerson;
 }
 
-const Persone: React.FC<Props> = ({ persone }) => {
+const Person: React.FC<Props> = ({ person }) => {
   const {
     sex, born, died, motherName, fatherName, mother, father,
-  } = persone;
+  } = person;
 
   const { slug: activeSlug } = useParams();
 
   return (
     <tr
-      className={persone.slug === activeSlug ? 'has-background-warning' : ''}
+      className={person.slug === activeSlug ? 'has-background-warning' : ''}
       data-cy="person"
     >
       <td>
-        <PersoneLink person={persone} />
+        <PersonLink person={person} />
       </td>
 
       <td>{sex}</td>
@@ -28,7 +28,7 @@ const Persone: React.FC<Props> = ({ persone }) => {
       <td>{died}</td>
       <td>
         {mother ? (
-          <PersoneLink person={mother} />
+          <PersonLink person={mother} />
         ) : (
           motherName || '-'
         )}
@@ -36,7 +36,7 @@ const Persone: React.FC<Props> = ({ persone }) => {
 
       <td>
         {father ? (
-          <PersoneLink person={father} />
+          <PersonLink person={father} />
         ) : (
           fatherName || '-'
         )}
@@ -46,4 +46,4 @@ const Persone: React.FC<Props> = ({ persone }) => {
   );
 };
 
-export default Persone;
+export default Person;

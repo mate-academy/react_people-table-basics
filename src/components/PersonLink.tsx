@@ -6,7 +6,7 @@ interface Props {
   person: IPerson;
 }
 
-const PersoneLink: React.FC<Props> = ({ person }) => {
+const PersonLink: React.FC<Props> = ({ person }) => {
   return (
     <Link
       className={person.sex === 'f' ? 'has-text-danger' : ''}
@@ -17,4 +17,4 @@ const PersoneLink: React.FC<Props> = ({ person }) => {
   );
 };
 
-export default PersoneLink;
+export default PersonLink;

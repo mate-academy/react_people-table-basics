@@ -1,5 +1,5 @@
 import React from 'react';
-import Persone from '../../components/Persone';
+import Person from '../../components/Person';
 import { IPerson } from '../../types';
 
 interface Props {
@@ -24,8 +24,8 @@ const PeopleTable: React.FC<Props> = ({ peopel }) => {
       </thead>
 
       <tbody>
-        {peopel.map(persone => (
-          <Persone persone={persone} key={persone.slug} />
+        {peopel.map(person => (
+          <Person person={person} key={person.slug} />
         ))}
       </tbody>
     </table>
