@@ -11,6 +11,16 @@ module.exports = {
         ignoreComments: true,
       },
     ],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
     'jsx-a11y/label-has-associated-control': [
       'error',
       {
