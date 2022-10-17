@@ -1,12 +1,12 @@
 import React from 'react';
-import Person from '../../components/Person';
-import { PersonType } from '../../types';
+import PersonComponent from '../../components/PersonComponent';
+import { Person } from '../../types';
 
 interface Props {
-  peopel: PersonType[];
+  people: Person[];
 }
 
-const PeopleTable: React.FC<Props> = ({ peopel }) => {
+const PeopleTable: React.FC<Props> = ({ people }) => {
   return (
     <table
       data-cy="peopleTable"
@@ -24,8 +24,8 @@ const PeopleTable: React.FC<Props> = ({ peopel }) => {
       </thead>
 
       <tbody>
-        {peopel.map(person => (
-          <Person person={person} key={person.slug} />
+        {people.map(person => (
+          <PersonComponent person={person} key={person.slug} />
         ))}
       </tbody>
     </table>

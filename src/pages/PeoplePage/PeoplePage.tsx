@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { getPeople } from '../../api';
 import { Loader } from '../../components/Loader';
-import { PersonType } from '../../types';
+import { Person } from '../../types';
 import PeopleTable from './PeopleTable';
 
 const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
-  const [people, setPeople] = useState<PersonType[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
 
   const handleGetPeople = async () => {
     try {
       setIsLoading(true);
       const data = await getPeople();
 
-      const dataWithParens = data.map(person => {
+      const dataWithParents = data.map(person => {
         return {
           ...person,
-          mother: data.find(per => per.name === person.motherName),
-          father: data.find(per => per.name === person.fatherName),
+          mother: data.find(anyone => anyone.name === person.motherName),
+          father: data.find(anyone => anyone.name === person.fatherName),
         };
       });
 
-      setPeople(dataWithParens);
+      setPeople(dataWithParents);
     } catch {
       setIsError(true);
     } finally {
@@ -60,7 +60,7 @@ const PeoplePage: React.FC = () => {
             There are no people on the server
           </p>
         ) : (
-          <PeopleTable peopel={people} />
+          <PeopleTable people={people} />
         )}
       </div>
     </div>

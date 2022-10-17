@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 type Props = {
   to: string;
@@ -8,14 +8,13 @@ type Props = {
 };
 
 const PageNavLink: React.FC<Props> = ({ to, text }) => {
-  const { pathname } = useLocation();
-
   return (
     <NavLink
       to={to}
-      className={classNames(
-        'navbar-item', { 'has-background-grey-lighter': pathname === to },
+      className={({ isActive }) => classNames(
+        'navbar-item', { 'has-background-grey-lighter': isActive },
       )}
+      end={to === '/'}
     >
       {text}
     </NavLink>
