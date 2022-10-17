@@ -20,22 +20,25 @@ export const PeoplePage = () => {
   const { slug = '' } = useParams();
 
   const [peopleList, setPeopleList] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [errorType, setErrorType] = useState<ErrorType>(ErrorType.none);
 
   useEffect(() => {
-    setIsLoading(true);
+    (async () => {
+      try {
+        const people = await getPeople();
 
-    getPeople()
-      .then(people => {
         if (!people.length) {
           setErrorType(ErrorType.emptyList);
         }
 
         setPeopleList(complementPeopleList(people));
-      })
-      .catch(() => setErrorType(ErrorType.loading))
-      .finally(() => setIsLoading(false));
+      } catch (err) {
+        setErrorType(ErrorType.loading);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
   }, []);
 
   return (
