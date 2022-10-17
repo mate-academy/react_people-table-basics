@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getPeople } from '../../api';
 import { Loader } from '../../components/Loader';
-import { IPerson } from '../../types';
+import { PersonType } from '../../types';
 import PeopleTable from './PeopleTable';
 
 const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
-  const [people, setPeople] = useState<IPerson[]>([]);
+  const [people, setPeople] = useState<PersonType[]>([]);
 
   const handleGetPeople = async () => {
     try {

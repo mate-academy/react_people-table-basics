@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { IPerson } from '../types';
+import { PersonType } from '../types';
 import PersonLink from './PersonLink';
 
 interface Props {
-  person: IPerson;
+  person: PersonType;
 }
 
 const Person: React.FC<Props> = ({ person }) => {

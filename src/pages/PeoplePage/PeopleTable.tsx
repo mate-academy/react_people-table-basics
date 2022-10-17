@@ -1,9 +1,9 @@
 import React from 'react';
 import Person from '../../components/Person';
-import { IPerson } from '../../types';
+import { PersonType } from '../../types';
 
 interface Props {
-  peopel: IPerson[];
+  peopel: PersonType[];
 }
 
 const PeopleTable: React.FC<Props> = ({ peopel }) => {

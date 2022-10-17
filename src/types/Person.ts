@@ -1,4 +1,4 @@
-export interface IPerson {
+export interface PersonType {
   name: string,
   sex: string,
   born: number,
@@ -6,6 +6,6 @@ export interface IPerson {
   fatherName: string | null,
   motherName: string | null,
   slug: string,
-  mother?: IPerson,
-  father?: IPerson,
+  mother?: PersonType,
+  father?: PersonType,
 }
