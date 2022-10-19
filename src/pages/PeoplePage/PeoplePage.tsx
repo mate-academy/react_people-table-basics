@@ -9,10 +9,10 @@ import { Person } from '../../types/Person';
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isPeopleLoaded, setIsPeopleLoaded] = useState(false);
+  const [isPeopleLoading, setIsPeopleLoading] = useState(false);
 
   useEffect(() => {
-    setIsPeopleLoaded(true);
+    setIsPeopleLoading(true);
 
     const getPeopleAsync = async () => {
       try {
@@ -26,7 +26,7 @@ export const PeoplePage: React.FC = () => {
       } catch {
         setErrorMessage('Something went wrong');
       } finally {
-        setIsPeopleLoaded(false);
+        setIsPeopleLoading(false);
       }
     };
 
@@ -40,7 +40,7 @@ export const PeoplePage: React.FC = () => {
 
         <div className="block">
           <div className="box table-container">
-            {isPeopleLoaded && <Loader />}
+            {isPeopleLoading && <Loader />}
             {errorMessage && <ErrorNotification message={errorMessage} />}
             {!!people.length && <PeopleTable />}
           </div>
