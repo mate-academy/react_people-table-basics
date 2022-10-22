@@ -14,10 +14,8 @@ export const PeoplePage = () => {
 
   useEffect(() => {
     (async () => {
-      setIsLoading(true);
-
       try {
-        setIsLoading(false);
+        setIsLoading(true);
         const data = await getPeople();
 
         setIsPeople(data);

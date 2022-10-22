@@ -9,7 +9,7 @@ export const Navigation = () => (
   >
     <div className="container">
       <div className="navbar-brand">
-        <NavigationPage to="/" text="Home" />
+        <NavigationPage to="/" text="Home" end />
         <NavigationPage to="people" text="People" />
       </div>
     </div>
