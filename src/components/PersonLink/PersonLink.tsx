@@ -8,21 +8,19 @@ type Props = {
   personParent?: string;
 };
 
-export const PersonLink: React.FC<Props> = ({ person, personParent }) => {
-  return (
-    <>
-      {person ? (
-        <Link
-          to={`../${person.slug}`}
-          className={classNames(
-            { 'has-text-danger': person.sex === 'f' },
-          )}
-        >
-          {person.name}
-        </Link>
-      ) : (
-        `${personParent}`
-      )}
-    </>
-  );
-};
+export const PersonLink: React.FC<Props> = ({ person, personParent }) => (
+  <>
+    {person ? (
+      <Link
+        to={`../${person.slug}`}
+        className={classNames(
+          { 'has-text-danger': person.sex === 'f' },
+        )}
+      >
+        {person.name}
+      </Link>
+    ) : (
+      `${personParent}`
+    )}
+  </>
+);
