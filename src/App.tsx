@@ -29,20 +29,14 @@ export const App: React.FC = () => {
             />
             <Route path="/people">
               <Route
-                // ставим индекс и он значит адрес что в обертке то есть /people
                 index
                 element={(
                   <>
-                    {/* <h1 className="title">People Page</h1> */}
                     <PeoplePage />
                   </>
                 )}
               />
               <Route
-                // то что после : оно должно бть в юз парамс хуке
-                // этот адрес нужен чтобы вместе со слагом тоже генреилась таблица но
-                // урл был изменен и в таблице сработает функция сравнения и класс активный поменяется
-                // оставляем просто :selectedPersonSlug так как /people подставится из верхнего роута
                 path=":selectedPersonSlug"
                 element={(
                   <PeoplePage />
