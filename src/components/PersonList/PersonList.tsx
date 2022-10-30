@@ -11,7 +11,18 @@ export const PersonList: React.FC<Props> = ({
   person,
   selectedPerson,
 }) => {
-  const isSelected = selectedPerson === person.slug;
+  const {
+    name,
+    sex,
+    born,
+    died,
+    fatherName,
+    motherName,
+    slug,
+    mother,
+    father,
+  } = person;
+  const isSelected = selectedPerson === slug;
 
   return (
     <tr
@@ -22,38 +33,36 @@ export const PersonList: React.FC<Props> = ({
     >
       <td>
         <PersonLink
-          to={person.slug}
-          name={person.name}
-          sex={person.sex}
+          to={slug}
+          name={name}
+          sex={sex}
         />
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
       <td>
-        {person.mother
-          ? (
-            <PersonLink
-              to={person.mother?.slug}
-              name={person.motherName}
-              sex={person.mother.sex}
-            />
-          ) : (
-            person.motherName || '-'
-          )}
+        {mother ? (
+          <PersonLink
+            to={mother?.slug}
+            name={motherName}
+            sex={mother.sex}
+          />
+        ) : (
+          person.motherName || '-'
+        )}
       </td>
       <td>
-        {person.father
-          ? (
-            <PersonLink
-              to={person.father?.slug}
-              name={person.fatherName}
-              sex={person.father.sex}
-            />
-          ) : (
-            person.fatherName || '-'
-          )}
+        {father ? (
+          <PersonLink
+            to={father?.slug}
+            name={fatherName}
+            sex={father.sex}
+          />
+        ) : (
+          person.fatherName || '-'
+        )}
       </td>
     </tr>
   );

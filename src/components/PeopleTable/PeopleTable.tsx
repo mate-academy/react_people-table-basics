@@ -43,6 +43,7 @@ export const PeopleTable = () => {
       <div className="block">
         <div className="box table-container">
           {isLoading && <Loader />}
+
           {!isLoading && (
             <table
               data-cy="peopleTable"
@@ -70,6 +71,7 @@ export const PeopleTable = () => {
               </tbody>
             </table>
           )}
+
           {errorType === ErrorType.loadingData && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
