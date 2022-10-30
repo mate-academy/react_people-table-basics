@@ -24,6 +24,7 @@ export const PersonList: React.FC<Props> = ({
         <PersonLink
           to={person.slug}
           name={person.name}
+          sex={person.sex}
         />
       </td>
 
