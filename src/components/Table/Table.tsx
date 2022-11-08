@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { Loader } from '../Loader';
 
@@ -13,7 +13,7 @@ export const Table = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
   const [peoplesError, setPeoplesError] = useState(false);
 
-  const [selectedPersone, setSelectedPersone] = useState('');
+  const { selectedPersone } = useParams();
 
   useEffect(() => {
     getPeople()
@@ -86,11 +86,10 @@ export const Table = () => {
                         >
                           <td>
                             <Link
-                              to={`#/people/${getPersoneInfo(persone)}`}
+                              to={`${getPersoneInfo(persone)}`}
                               className={classNames(
                                 { 'has-text-danger': sex === 'f' },
                               )}
-                              onClick={() => setSelectedPersone(`${getPersoneInfo(persone)}`)}
                             >
                               {name}
                             </Link>
@@ -104,9 +103,8 @@ export const Table = () => {
                               ? (
                                 <td>
                                   <Link
-                                    to={`#/people/${getPersoneInfo(mother)}`}
+                                    to={`${getPersoneInfo(mother)}`}
                                     className="has-text-danger"
-                                    onClick={() => setSelectedPersone(`${getPersoneInfo(persone)}`)}
                                   >
                                     {motherName || '-'}
                                   </Link>
@@ -119,8 +117,7 @@ export const Table = () => {
                               ? (
                                 <td>
                                   <Link
-                                    to={`#/people/${getPersoneInfo(father)}`}
-                                    onClick={() => setSelectedPersone(`${getPersoneInfo(persone)}`)}
+                                    to={`${getPersoneInfo(father)}`}
                                   >
                                     {fatherName || '-'}
                                   </Link>
