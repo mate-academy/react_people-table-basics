@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Loader } from '../Loader';
 
@@ -10,18 +10,18 @@ import { getPeople } from '../../api';
 import { Person } from '../../types';
 
 export const Table = () => {
-  const [peoples, setPeoples] = useState<Person[] | undefined>(undefined);
+  const [people, setPeople] = useState<Person[] | null>(null);
   const [peoplesError, setPeoplesError] = useState(false);
 
-  const { selectedPersone = '' } = useParams();
+  const [selectedPersone, setSelectedPersone] = useState('');
 
   useEffect(() => {
     getPeople()
-      .then((people: Person[]) => {
-        setPeoples(people);
+      .then((peopleList: Person[]) => {
+        setPeople(peopleList);
       })
       .catch(() => {
-        setPeoples([]);
+        setPeople([]);
         setPeoplesError(true);
       });
   }, []);
@@ -33,7 +33,7 @@ export const Table = () => {
       <h1 className="title">People Page</h1>
 
       <div className="box table-container">
-        {peoples
+        {people
           ? (peoplesError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
@@ -54,14 +54,14 @@ export const Table = () => {
                 </tr>
               </thead>
 
-              {peoples?.length === 0
+              {people?.length === 0
                 ? (
                   <p data-cy="noPeopleMessage">
                     There are no people on the server
                   </p>
                 ) : (
                   <tbody>
-                    {peoples.map((persone) => {
+                    {people.map((persone) => {
                       const {
                         name,
                         sex,
@@ -71,9 +71,9 @@ export const Table = () => {
                         fatherName,
                       } = persone;
 
-                      const father = peoples
+                      const father = people
                         .find(person => person.name === fatherName);
-                      const mother = peoples
+                      const mother = people
                         .find(person => person.name === motherName);
 
                       return (
@@ -90,6 +90,7 @@ export const Table = () => {
                               className={classNames(
                                 { 'has-text-danger': sex === 'f' },
                               )}
+                              onClick={() => setSelectedPersone(`${getPersoneInfo(persone)}`)}
                             >
                               {name}
                             </Link>
@@ -105,6 +106,7 @@ export const Table = () => {
                                   <Link
                                     to={`#/people/${getPersoneInfo(mother)}`}
                                     className="has-text-danger"
+                                    onClick={() => setSelectedPersone(`${getPersoneInfo(persone)}`)}
                                   >
                                     {motherName || '-'}
                                   </Link>
@@ -116,14 +118,16 @@ export const Table = () => {
                             father
                               ? (
                                 <td>
-                                  <Link to={`#/people/${getPersoneInfo(father)}`}>
+                                  <Link
+                                    to={`#/people/${getPersoneInfo(father)}`}
+                                    onClick={() => setSelectedPersone(`${getPersoneInfo(persone)}`)}
+                                  >
                                     {fatherName || '-'}
                                   </Link>
                                 </td>
                               )
                               : <td>{fatherName || '-'}</td>
                           }
-
                         </tr>
                       );
                     })}
