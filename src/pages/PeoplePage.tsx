@@ -20,7 +20,7 @@ export const PeoplePage = () => {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [people]);
 
   return (
     <>

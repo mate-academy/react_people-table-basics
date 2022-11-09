@@ -13,7 +13,7 @@ export const App = () => (
     <main className="section">
       <div className="container">
         <Routes>
-          <Route path="/people">
+          <Route path="people">
             <Route index element={<PeoplePage />} />
             <Route path=":slug" element={<PeoplePage />} />
           </Route>

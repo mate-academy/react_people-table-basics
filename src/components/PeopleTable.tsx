@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const PeopleTable: FC<Props> = ({ people, isLoading, isError }) => {
-  const { slug } = useParams();
+  const { slug = '' } = useParams();
 
   const findParent = (parentName: string | null) => {
     const parent = people.find(person => person.name === parentName);
@@ -64,7 +64,9 @@ export const PeopleTable: FC<Props> = ({ people, isLoading, isError }) => {
                 data-cy="person"
               >
                 <td>
-                  <PersonLink person={person} />
+                  <PersonLink
+                    person={person}
+                  />
                 </td>
 
                 <td>{person.sex}</td>
