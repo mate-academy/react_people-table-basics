@@ -30,58 +30,54 @@ export const PeopleTable: FC<Props> = ({ people, isLoading, isError }) => {
         {isLoading && <Loader />}
 
         {isError && (
-          <>
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
-
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-          </>
+          <p data-cy="peopleLoadingError" className="has-text-danger">
+            Something went wrong
+          </p>
         )}
 
-        <table
-          data-cy="peopleTable"
-          className="table is-striped is-hoverable is-narrow is-fullwidth"
-        >
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Sex</th>
-              <th>Born</th>
-              <th>Died</th>
-              <th>Mother</th>
-              <th>Father</th>
-            </tr>
-          </thead>
+        {!people.length && !isLoading && (
+          <p data-cy="noPeopleMessage">There are no people on the server</p>
+        )}
 
-          <tbody>
-            {people.map((person) => (
-              <tr
-                key={person.slug}
-                className={classNames(
-                  { 'has-background-warning': slug === person.slug },
-                )}
-                data-cy="person"
-              >
-                <td>
-                  <PersonLink
-                    person={person}
-                  />
-                </td>
-
-                <td>{person.sex}</td>
-                <td>{person.born}</td>
-                <td>{person.died}</td>
-                <td>
-                  {findParent(person.motherName)}
-                </td>
-                <td>
-                  {findParent(person.fatherName)}
-                </td>
+        {people.length > 0 && (
+          <table
+            data-cy="peopleTable"
+            className="table is-striped is-hoverable is-narrow is-fullwidth"
+          >
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Sex</th>
+                <th>Born</th>
+                <th>Died</th>
+                <th>Mother</th>
+                <th>Father</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {people.map((person) => (
+                <tr
+                  key={person.slug}
+                  className={classNames({
+                    'has-background-warning': slug === person.slug,
+                  })}
+                  data-cy="person"
+                >
+                  <td>
+                    <PersonLink person={person} />
+                  </td>
+
+                  <td>{person.sex}</td>
+                  <td>{person.born}</td>
+                  <td>{person.died}</td>
+                  <td>{findParent(person.motherName)}</td>
+                  <td>{findParent(person.fatherName)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );
