@@ -10,12 +10,12 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     <table
       data-cy="peopleTable"
       className="
-    table
-    is-striped
-    is-hoverable
-    is-narrow
-    is-fullwidth
-  "
+        table
+        is-striped
+        is-hoverable
+        is-narrow
+        is-fullwidth
+      "
     >
       <thead>
         <tr>
