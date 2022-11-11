@@ -16,13 +16,14 @@ export const PeopleInfo:React.FC<Props> = ({
     <tr
       data-cy="person"
       className={classNames({
-      'has-background-warning': selectPeople === person.slug
-    })}>
+        'has-background-warning': selectPeople === person.slug,
+      })}
+    >
       <td>
         <Link
           to={`/people/${person.slug}`}
           className={classNames({
-            'has-text-danger': person.sex === 'f'
+            'has-text-danger': person.sex === 'f',
           })}
         >
           {person.name}
