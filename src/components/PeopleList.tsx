@@ -1,5 +1,5 @@
-import React from "react"
-import { Person } from "../types"
+import React from 'react';
+import { Person } from '../types';
 import { PeopleInfo } from './PeopleInfo';
 
 type Props = {
@@ -18,8 +18,7 @@ export const PeopleList:React.FC<Props> = ({
           person={person}
           selectPeople={selectPeople}
         />
-      ))
-      }
+      ))}
     </tbody>
-  )
-}
+  );
+};

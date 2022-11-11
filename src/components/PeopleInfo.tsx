@@ -1,7 +1,7 @@
-import React from "react"
-import { Person } from "../types"
-import classNames from "classnames";
-import { Link } from "react-router-dom";
+import React from 'react';
+import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+import { Person } from '../types';
 
 type Props = {
   person: Person,
@@ -13,7 +13,9 @@ export const PeopleInfo:React.FC<Props> = ({
   selectPeople,
 }) => {
   return (
-    <tr data-cy="person" className={classNames({
+    <tr
+      data-cy="person"
+      className={classNames({
       'has-background-warning': selectPeople === person.slug
     })}>
       <td>
@@ -30,7 +32,7 @@ export const PeopleInfo:React.FC<Props> = ({
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
-      {person.mother ?  (
+      {person.mother ? (
         <td>
           <Link
             to={`/people/${person.mother.slug}`}
@@ -52,8 +54,7 @@ export const PeopleInfo:React.FC<Props> = ({
         </td>
       ) : (
         <td>{person.fatherName ? person.fatherName : '-'}</td>
-      )
-      }
+      )}
     </tr>
-  )
-}
+  );
+};
