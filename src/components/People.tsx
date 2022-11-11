@@ -1,37 +1,41 @@
-import React, { useEffect, useState } from "react"
-import {PeopleList} from './PeopleList'
-import { Person } from "../types";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { PeopleList } from './PeopleList';
+import { Person } from '../types';
 import { getPeople } from '../api';
-import { Loader } from "./Loader";
-import { useParams } from "react-router-dom";
+import { Loader } from './Loader';
 
 export const People:React.FC = () => {
-  const [peopleList, setPeopleList] = useState<Person[]>([])
+  const [peopleList, setPeopleList] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { slug = null } = useParams()
+  const { slug = null } = useParams();
 
   useEffect(() => {
-    const handleLoadingPeople = async() => {
-      try{
+    const handleLoadingPeople = async () => {
+      try {
         setIsLoading(true);
-        const response = await getPeople()
+        const response = await getPeople();
         const List = response.map(person => (
           {
             ...person,
-            father: response.find(per => (per.name === person.fatherName)),
-            mother: response.find(per => (per.name === person.motherName)),
+            father: response.find(per => (
+              per.name === person.fatherName
+            )) || null,
+            mother: response.find(per => (
+              per.name === person.motherName
+            )) || null,
           }
-        ))
+        ));
 
         setPeopleList(List);
         setIsLoading(false);
-      }catch(error) {
+      } catch {
         setError(true);
       }
-    }
+    };
 
-    handleLoadingPeople()
+    handleLoadingPeople();
   }, []);
 
   return (
@@ -51,37 +55,39 @@ export const People:React.FC = () => {
                   </p>
                 )}
 
-              {!peopleList.length && (
-                <p data-cy="noPeopleMessage">
-                  There are no people on the server
-                </p>
-              )}
+                {!peopleList.length && (
+                  <p data-cy="noPeopleMessage">
+                    There are no people on the server
+                  </p>
+                )}
 
-              <table
-                data-cy="peopleTable"
-                className="table is-striped is-hoverable is-narrow is-fullwidth"
-              >
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Born</th>
-                    <th>Died</th>
-                    <th>Mother</th>
-                    <th>Father</th>
-                  </tr>
-                </thead>
+                <table
+                  data-cy="peopleTable"
+                  className="
+                  table is-striped is-hoverable is-narrow is-fullwidth
+                  "
+                >
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Sex</th>
+                      <th>Born</th>
+                      <th>Died</th>
+                      <th>Mother</th>
+                      <th>Father</th>
+                    </tr>
+                  </thead>
 
-                <PeopleList
-                  list={peopleList}
-                  selectPeople={slug}
-                />
-              </table>
+                  <PeopleList
+                    list={peopleList}
+                    selectPeople={slug}
+                  />
+                </table>
               </>
             )}
           </div>
         </div>
-    </div>
-  </main>
-  )
-}
+      </div>
+    </main>
+  );
+};
