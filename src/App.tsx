@@ -20,7 +20,7 @@ export const App = () => (
             </Route>
 
             <Route path="/" element={<HomePage />} />
-            <Route path="//home" element={<Navigate to="/" replace />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
