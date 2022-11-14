@@ -49,7 +49,6 @@ export const PeopleList: FC = () => {
     } catch {
       setHasError(true);
       setIsLoading(false);
-      // throw new Error('Unable to get data from server');
     }
   }, []);
 

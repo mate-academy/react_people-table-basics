@@ -44,9 +44,6 @@ export const PeopleTable: FC<Props> = ({
           const isWomen = sex === 'f';
           const isSelected = personLink === slug;
 
-          // eslint-disable-next-line no-console
-          console.log(personLink, isSelected);
-
           return (
             <tr
               data-cy="person"
