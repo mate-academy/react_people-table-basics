@@ -1,23 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import { getPeople } from '../../api/people';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
 
-interface Error {
-  status: boolean,
-  message: string,
-}
-
-const defaultError = {
-  status: false,
-  message: '',
-};
-
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [error, setError] = useState<Error>(defaultError);
+  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   const getPeopleFromServer = async () => {
@@ -25,12 +14,9 @@ export const PeoplePage: React.FC = () => {
       const peopleFromServer = await getPeople();
 
       setPeople(peopleFromServer);
-      setError(defaultError);
-    } catch (e: any) {
-      setError({
-        status: true,
-        message: e.message,
-      });
+      setError('');
+    } catch {
+      setError('Something went wrong');
     } finally {
       setIsLoading(false);
     }
@@ -40,13 +26,13 @@ export const PeoplePage: React.FC = () => {
     getPeopleFromServer();
   }, []);
 
-  if (error.status) {
+  if (error) {
     return (
       <h1
         data-cy="peopleLoadingError"
         className="title has-text-danger"
       >
-        {`Error: ${error.message}`}
+        {error}
       </h1>
     );
   }
@@ -55,7 +41,7 @@ export const PeoplePage: React.FC = () => {
     <div className="box table-container">
       {isLoading && <Loader />}
 
-      {(!isLoading && !error.status) && (
+      {(!isLoading && (
         <>
           {people.length !== 0
             ? (
@@ -69,11 +55,11 @@ export const PeoplePage: React.FC = () => {
                 data-cy="noPeopleMessage"
                 className="title has-text-danger"
               >
-                {`Error: ${error.message}`}
+                {error}
               </h1>
             )}
         </>
-      )}
+      ))}
     </div>
   );
 };

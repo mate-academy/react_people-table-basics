@@ -7,13 +7,21 @@ interface Props {
   person: Person,
 }
 
-export const PersonLink: React.FC<Props> = ({ person }) => (
-  <NavLink
-    to={`/people/${person.slug}`}
-    className={classNames({
-      'has-text-danger': person.sex === 'f',
-    })}
-  >
-    {person.name}
-  </NavLink>
-);
+export const PersonLink: React.FC<Props> = ({ person }) => {
+  const {
+    slug,
+    sex,
+    name,
+  } = person;
+
+  return (
+    <NavLink
+      to={`/people/${slug}`}
+      className={classNames({
+        'has-text-danger': sex === 'f',
+      })}
+    >
+      {name}
+    </NavLink>
+  );
+};
