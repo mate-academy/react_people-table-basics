@@ -3,6 +3,7 @@ import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Person } from '../types';
 import { Loader } from './Loader/Loader';
+import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[],
@@ -44,6 +45,14 @@ export const PeopleTable: FC<Props> = ({ people, isPeopleLoaded }) => {
                     name, sex, born, died, motherName, fatherName, slug,
                   } = person;
 
+                  const selectedFather: Person | undefined = people.find(el => {
+                    return el.name === fatherName;
+                  });
+
+                  const selectedMother: Person | undefined = people.find(el => {
+                    return el.name === motherName;
+                  });
+
                   return (
                     <tr
                       key={slug}
@@ -62,33 +71,23 @@ export const PeopleTable: FC<Props> = ({ people, isPeopleLoaded }) => {
                         >
                           {name}
                         </Link>
-                        {/* <PersonLink sex={sex} slug={slug} name={name} /> */}
                       </td>
-
                       <td>{sex}</td>
                       <td>{born}</td>
                       <td>{died}</td>
                       <td>
-                        <Link
-                          to={`/people/${slug}`}
-                          className={classNames(
-                            { 'has-text-danger': sex === 'f' },
-                          )}
-                          onClick={() => setSelectedSlug(slug)}
-                        >
-                          {motherName || '-'}
-                        </Link>
+                        <PersonLink
+                          selectedParent={selectedMother}
+                          setSelectedSlug={setSelectedSlug}
+                          parentName={motherName}
+                        />
                       </td>
                       <td>
-                        <Link
-                          to={`/people/${slug}`}
-                          className={classNames(
-                            { 'has-text-danger': sex === 'f' },
-                          )}
-                          onClick={() => setSelectedSlug(slug)}
-                        >
-                          {fatherName || '-'}
-                        </Link>
+                        <PersonLink
+                          selectedParent={selectedFather}
+                          setSelectedSlug={setSelectedSlug}
+                          parentName={fatherName}
+                        />
                       </td>
                     </tr>
                   );
