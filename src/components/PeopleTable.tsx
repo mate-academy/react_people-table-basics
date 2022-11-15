@@ -62,24 +62,33 @@ export const PeopleTable: FC<Props> = ({ people, isPeopleLoaded }) => {
                         >
                           {name}
                         </Link>
+                        {/* <PersonLink sex={sex} slug={slug} name={name} /> */}
                       </td>
 
                       <td>{sex}</td>
                       <td>{born}</td>
                       <td>{died}</td>
-                      <td
-                        className={classNames(
-                          { 'has-text-danger': sex === 'f' },
-                        )}
-                      >
-                        {motherName || '-'}
+                      <td>
+                        <Link
+                          to={`/people/${slug}`}
+                          className={classNames(
+                            { 'has-text-danger': sex === 'f' },
+                          )}
+                          onClick={() => setSelectedSlug(slug)}
+                        >
+                          {motherName || '-'}
+                        </Link>
                       </td>
-                      <td
-                        className={classNames(
-                          { 'has-text-danger': sex === 'f' },
-                        )}
-                      >
-                        {fatherName || '-'}
+                      <td>
+                        <Link
+                          to={`/people/${slug}`}
+                          className={classNames(
+                            { 'has-text-danger': sex === 'f' },
+                          )}
+                          onClick={() => setSelectedSlug(slug)}
+                        >
+                          {fatherName || '-'}
+                        </Link>
                       </td>
                     </tr>
                   );
