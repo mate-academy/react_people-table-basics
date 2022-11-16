@@ -3,14 +3,10 @@ import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 
 export type Props = {
-  person: Person | undefined;
+  person: Person;
 };
 
 export const PersonLink: FC<Props> = ({ person }) => {
-  if (!person) {
-    return <>-</>;
-  }
-
   return (
     <Link
       to={`/people/${person.slug}`}

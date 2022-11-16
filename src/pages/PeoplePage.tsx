@@ -11,15 +11,14 @@ export const PeoplePage = () => {
   const [isLoadingError, setIsLoadingError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    setPeople(null);
+  const getPeopleList = () => {
     getPeople()
       .then((result) => setPeople(result))
       .catch(() => setIsLoadingError(true))
       .finally(() => setIsLoaded(true));
-  }, []);
+  };
 
-  useEffect(() => {
+  const getPeopleWithParents = () => {
     if (people) {
       setPeople(people.map((person) => {
         return {
@@ -29,6 +28,15 @@ export const PeoplePage = () => {
         };
       }));
     }
+  };
+
+  useEffect(() => {
+    setPeople(null);
+    getPeopleList();
+  }, []);
+
+  useEffect(() => {
+    getPeopleWithParents();
   }, [people]);
 
   return (
