@@ -58,7 +58,7 @@ export const People: FC = () => {
             </p>
           )}
 
-          {!isLoading && (
+          {(!isLoading && peopleList.length > 0) && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
