@@ -82,7 +82,17 @@ export const PersonTable: React.FC<Props> = ({ selectedPerson = '' }) => {
               },
             )}
           >
-            <PersonInfo person={person} />
+            <PersonInfo
+              name={person.name}
+              slug={person.slug}
+              died={person.died}
+              born={person.born}
+              mother={person.mother}
+              father={person.father}
+              motherName={person.motherName}
+              fatherName={person.fatherName}
+              sex={person.sex}
+            />
           </tr>
         ))}
       </tbody>

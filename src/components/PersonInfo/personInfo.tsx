@@ -2,48 +2,67 @@ import { Person } from '../../types';
 import { PersonLink } from './PersonLink';
 
 type Props = {
-  person: Person,
+  // person: Person,
+  sex: 'f' | 'm',
+  slug: string,
+  born: number,
+  name: string,
+  died: number,
+  mother?: Person,
+  father?: Person,
+  fatherName: string | null,
+  motherName: string | null,
 };
 
-export const PersonInfo: React.FC<Props> = ({ person }) => (
+export const PersonInfo: React.FC<Props> = ({
+  sex,
+  slug,
+  born,
+  name,
+  died,
+  mother,
+  father,
+  fatherName,
+  motherName,
+}) => (
   <>
     <td>
-      <PersonLink slug={person.slug} text={person.name} sex={person.sex} />
+      <PersonLink slug={slug} text={name} sex={sex} />
     </td>
 
     <td>
-      { person.sex }
+      { sex }
     </td>
 
     <td>
-      { person.born }
+      { born }
     </td>
 
     <td>
-      { person.died }
+      { died }
     </td>
 
     <td>
-      { person.mother ? (
+      { mother ? (
         <PersonLink
-          slug={person.mother.slug}
-          text={person.mother.name}
-          sex={person.mother.sex}
+          slug={mother.slug}
+          text={mother.name}
+          sex={mother.sex}
         />
       ) : (
-        person.motherName
+        motherName
       ) }
     </td>
 
     <td>
-      { person.father ? (
+      { father ? (
         <PersonLink
-          slug={person.father.slug}
-          text={person.father.name}
-          sex={person.father.sex}
+          slug={father.slug}
+          text={father.name}
+          sex={father.sex}
         />
       ) : (
-        person.fatherName
+        fatherName
       ) }
     </td>
   </>
