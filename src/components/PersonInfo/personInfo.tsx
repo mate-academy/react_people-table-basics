@@ -2,7 +2,6 @@ import { Person } from '../../types';
 import { PersonLink } from './PersonLink';
 
 type Props = {
-  // person: Person,
   sex: 'f' | 'm',
   slug: string,
   born: number,

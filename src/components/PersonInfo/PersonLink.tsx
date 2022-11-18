@@ -10,7 +10,7 @@ type Props = {
 
 export const PersonLink: FC<Props> = ({ slug, text, sex }) => (
   <Link
-    to={`../${slug}`}
+    to={`/people/${slug}`}
     className={classNames(
       {
         'has-text-danger': sex === 'f',
