@@ -7,10 +7,10 @@ import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[],
-  isPeopleLoaded: boolean,
+  isPeopleLoading: boolean,
 };
 
-export const PeopleTable: FC<Props> = ({ people, isPeopleLoaded }) => {
+export const PeopleTable: FC<Props> = ({ people, isPeopleLoading }) => {
   const [selectedSlug, setSelectedSlug] = useState('');
 
   return (
@@ -25,7 +25,7 @@ export const PeopleTable: FC<Props> = ({ people, isPeopleLoaded }) => {
           is-fullwidth
         "
       >
-        {!isPeopleLoaded
+        {!isPeopleLoading
           ? <Loader />
           : (
             <>

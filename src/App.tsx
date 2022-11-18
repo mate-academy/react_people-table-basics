@@ -12,18 +12,18 @@ import { getPeople } from './api';
 
 export const App = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isPeopleLoaded, setIsPeopleLoaded] = useState(false);
-  const [isErrorShown, setIsErrorShown] = useState(false);
+  const [isPeopleLoading, setIsPeopleLoading] = useState(false);
+  const [isShownError, setIsShowError] = useState(false);
 
   useEffect(() => {
     getPeople()
       .then((arr: Person[]) => {
         setPeople(arr);
-        setIsPeopleLoaded(true);
+        setIsPeopleLoading(true);
       })
       .catch(() => {
-        setIsErrorShown(true);
-        setIsPeopleLoaded(true);
+        setIsShowError(true);
+        setIsPeopleLoading(true);
       });
   }, []);
 
@@ -60,7 +60,7 @@ export const App = () => {
                   <h1 className="title">People Page</h1>
                   <PeopleTable
                     people={people}
-                    isPeopleLoaded={isPeopleLoaded}
+                    isPeopleLoading={isPeopleLoading}
                   />
                 </>
               )}
@@ -81,7 +81,7 @@ export const App = () => {
             />
           </Routes>
 
-          {isErrorShown && <ErrorNotification />}
+          {isShownError && <ErrorNotification />}
         </div>
       </main>
     </div>
