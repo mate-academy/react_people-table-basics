@@ -32,7 +32,9 @@ export const PersonInfo:React.FC<Props> = ({
   return (
     <tr
       data-cy="person"
-      className={classNames({ 'has-background-warning': isActive === slug })}
+      className={classNames(
+        { 'has-background-warning': isActive === slug },
+      )}
     >
       <td>
         <Link

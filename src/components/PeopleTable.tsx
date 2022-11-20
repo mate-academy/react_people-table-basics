@@ -46,38 +46,43 @@ export const PeopleTable:React.FC = () => {
             </p>
           )}
 
-          <p data-cy="noPeopleMessage">
-            There are no people on the server
-          </p>
+          {(hasError && !people.length && (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
+            </p>
+          ))}
 
-          <table
-            data-cy="peopleTable"
-            className="table is-striped is-hoverable
-            is-narrow is-fullwidth"
-          >
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
-              </tr>
-            </thead>
+          {!isLoading && (
+            <table
+              data-cy="peopleTable"
+              className="table is-striped is-hoverable
+              is-narrow is-fullwidth"
+            >
 
-            <tbody>
-              {people.map((person: Person) => (
-                <PersonInfo
-                  person={person}
-                  key={person.slug}
-                  people={people}
-                  isActive={isActive}
-                  setIsActive={setIsActive}
-                />
-              ))}
-            </tbody>
-          </table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sex</th>
+                  <th>Born</th>
+                  <th>Died</th>
+                  <th>Mother</th>
+                  <th>Father</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {people.map((person: Person) => (
+                  <PersonInfo
+                    person={person}
+                    key={person.slug}
+                    people={people}
+                    isActive={isActive}
+                    setIsActive={setIsActive}
+                  />
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </>
