@@ -8,7 +8,7 @@ export const PeopleTable:React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isActive, setIsActive] = useState('');
+  const [activePerson, setActivePerson] = useState('');
 
   const getPeopleFromsServer = async () => {
     try {
@@ -58,7 +58,6 @@ export const PeopleTable:React.FC = () => {
               className="table is-striped is-hoverable
               is-narrow is-fullwidth"
             >
-
               <thead>
                 <tr>
                   <th>Name</th>
@@ -76,8 +75,8 @@ export const PeopleTable:React.FC = () => {
                     person={person}
                     key={person.slug}
                     people={people}
-                    isActive={isActive}
-                    setIsActive={setIsActive}
+                    activePerson={activePerson}
+                    setActivePerson={setActivePerson}
                   />
                 ))}
               </tbody>

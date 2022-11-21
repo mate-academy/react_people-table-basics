@@ -6,15 +6,15 @@ import { Person } from '../types';
 type Props = {
   person: Person;
   people: Person[];
-  isActive: string;
-  setIsActive: (valuse: string) => void;
+  activePerson: string;
+  setActivePerson: (valuse: string) => void;
 };
 
 export const PersonInfo:React.FC<Props> = ({
   person,
   people,
-  isActive,
-  setIsActive,
+  activePerson,
+  setActivePerson,
 }) => {
   const {
     name,
@@ -33,14 +33,14 @@ export const PersonInfo:React.FC<Props> = ({
     <tr
       data-cy="person"
       className={classNames(
-        { 'has-background-warning': isActive === slug },
+        { 'has-background-warning': activePerson === slug },
       )}
     >
       <td>
         <Link
           to={`#/people/${slug}`}
           className={classNames({ 'has-text-danger': sex === 'f' })}
-          onClick={() => setIsActive(slug)}
+          onClick={() => setActivePerson(slug)}
         >
           {name}
         </Link>
@@ -55,7 +55,7 @@ export const PersonInfo:React.FC<Props> = ({
             <Link
               to={`#/people/${mother.slug}`}
               className="has-text-danger"
-              onClick={() => setIsActive(mother.slug)}
+              onClick={() => setActivePerson(mother.slug)}
             >
               {motherName}
             </Link>
@@ -67,7 +67,7 @@ export const PersonInfo:React.FC<Props> = ({
           ? (
             <Link
               to={`#/people/${father.slug}`}
-              onClick={() => setIsActive(father.slug)}
+              onClick={() => setActivePerson(father.slug)}
             >
               {fatherName}
             </Link>
