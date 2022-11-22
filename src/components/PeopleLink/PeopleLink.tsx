@@ -5,9 +5,11 @@ import { Person } from '../../types';
 
 type Props = {
   person: Person;
+  people: Person[];
 };
 
 export const PeopleLink: FC<Props> = ({
+  people,
   person,
 }) => {
   const location = useLocation().pathname;
@@ -16,14 +18,18 @@ export const PeopleLink: FC<Props> = ({
     sex,
     born,
     died,
+    motherName,
+    fatherName,
     slug,
   } = person;
+  const mother = people.find((p) => p.name === motherName);
+  const father = people.find((p) => p.name === fatherName);
 
   return (
     <tr
       data-cy="person"
       className={classNames(
-        { 'has-background-grey-lighter': `/people/${slug}` === location },
+        { 'has-background-warning': `/people/${slug}` === location },
       )}
     >
       <td>
@@ -39,6 +45,26 @@ export const PeopleLink: FC<Props> = ({
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
+      <td>
+        {mother
+          ? (
+            <NavLink
+              to={`/people/${mother.slug}`}
+              className="has-text-danger"
+            >
+              {motherName}
+            </NavLink>
+          ) : motherName || '-'}
+      </td>
+
+      <td>
+        {father
+          ? (
+            <NavLink to={`/people/${father.slug}`}>
+              {fatherName}
+            </NavLink>
+          ) : fatherName || '-'}
+      </td>
     </tr>
   );
 };

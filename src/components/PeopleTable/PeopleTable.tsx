@@ -24,7 +24,7 @@ export const PeopleTable: FC<Props> = ({ people }) => {
       </thead>
       <tbody>
         {people.map((person) => (
-          <PeopleLink person={person} />
+          <PeopleLink person={person} people={people} />
         ))}
       </tbody>
     </table>

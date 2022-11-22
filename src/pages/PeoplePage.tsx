@@ -28,18 +28,19 @@ export const PeoplePage = () => {
 
   return (
     <div className="block">
-      <h1 className="title">
-        People Page
-      </h1>
+      <h1 className="title">People Page</h1>
       <div className="box table-container">
         {isLoading && <Loader />}
-        {error && <p className="has-text-danger">Something went wrong</p>}
+        {error && (
+          <p data-cy="peopleLoadingError" className="has-text-danger">
+            Something went wrong
+          </p>
+        )}
         {!isLoading && people.length < 1 && !error && (
-          <p>There are no people on the server</p>
+          <p data-cy="noPeopleMessage">There are no people on the server</p>
         )}
 
         {people && people.length > 0 && <PeopleTable people={people} />}
-
       </div>
     </div>
   );
