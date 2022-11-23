@@ -2,29 +2,37 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { getPeople } from '../api';
 import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types';
+import { ErrorMassege } from '../types/ErrorMassege';
+import { Error } from '../types/Error';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isError, setIsError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isError, setIsError] = useState<Error>({
+    status: false,
+    notification: ErrorMassege.None,
+  });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handlePeople = useCallback(async () => {
-    setLoading(true);
+  const handleLoadPeople = useCallback(async () => {
+    setIsLoading(true);
 
     try {
       const peopleFromServer = await getPeople();
 
+      if (peopleFromServer.length === 0) {
+        setIsError({ status: true, notification: ErrorMassege.Empty });
+      }
+
       setPeople([...peopleFromServer]);
-      setLoading(false);
     } catch {
-      setIsError(true);
+      setIsError({ status: true, notification: ErrorMassege.Load });
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    handlePeople();
+    handleLoadPeople();
   }, []);
 
   return (
@@ -32,7 +40,7 @@ export const PeoplePage: React.FC = () => {
       <h1 className="title">People Page</h1>
       <PeopleTable
         people={people}
-        loading={loading}
+        isLoading={isLoading}
         isError={isError}
       />
     </>
