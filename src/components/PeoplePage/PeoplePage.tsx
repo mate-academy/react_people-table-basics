@@ -6,21 +6,21 @@ import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[] | null>([]);
-  const [loader, setLoader] = useState(false);
-  const [error, setError] = useState(false);
+  const [isLoader, setIsLoader] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const loadPeople = async () => {
       try {
-        setLoader(true);
+        setIsLoader(true);
 
         const result = await getPeople();
 
         setPeople(result);
       } catch {
-        setError(true);
+        setIsError(true);
       } finally {
-        setLoader(false);
+        setIsLoader(false);
       }
     };
 
@@ -33,21 +33,21 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loader && <Loader />}
+          {isLoader && <Loader />}
 
-          {error && (
+          {isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {!loader && !people?.length && (
+          {!isLoader && !people?.length && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {people && people.length && (<PeopleTable people={people} />)}
+          {people && !!people.length && (<PeopleTable people={people} />)}
         </div>
       </div>
     </>
