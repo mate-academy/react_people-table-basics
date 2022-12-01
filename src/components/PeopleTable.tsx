@@ -1,4 +1,4 @@
-import { Loader } from "./Loader"
+import { Loader } from './Loader';
 
 export const PeopleTable = () => {
   return (
@@ -136,6 +136,6 @@ export const PeopleTable = () => {
           </tbody>
         </table>
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};

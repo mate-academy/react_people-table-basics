@@ -1,5 +1,12 @@
+import {
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import './App.scss';
-import { NavBar } from './components/NavBar';
+import { PageNavLink } from './components/PageNavLink';
+import { HomePage } from './pages/HomePage';
+import { NotFoundPage } from './pages/NotFoundPage';
 import { PeoplePage } from './pages/PeoplePage';
 
 export const App = () => (
@@ -12,15 +19,21 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavBar />
+          <PageNavLink to="/" text="Home" />
+          <PageNavLink to="/people" text="People" />
         </div>
       </div>
     </nav>
 
     <main className="section">
       <div className="container">
-        <PeoplePage />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<Navigate to="/" replace />} />
+          <Route path="/people" element={<PeoplePage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </div>
-    </main >
-  </div >
+    </main>
+  </div>
 );
