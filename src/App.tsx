@@ -9,14 +9,15 @@ import { getPeople } from './api';
 import { PeoplePage } from './components/PeoplePage';
 
 export const App: React.FC = () => {
-  const [selectedNavLink, setSelectedNavLink] = useState('Home');
+  const [selectedNavLink, setSelectedNavLink] = useState('People');
   const [peopleFromServer, setPeopleFromServer] = useState<Person[]>([]);
 
-  const resetPeopleFromServer = () => {
+  const resetPeopleFromServer = async () => {
     setPeopleFromServer([]);
   };
 
   const fetchPeopleFromServer = async () => {
+    setPeopleFromServer([]);
     const people: Person[] = await getPeople();
 
     setPeopleFromServer(people);
@@ -35,7 +36,6 @@ export const App: React.FC = () => {
   return (
     <div data-cy="app">
       <Navigation
-        selectedLink={selectedNavLink}
         selectedLinkHandler={selectedLinkHandler}
         resetPeopleFromServer={resetPeopleFromServer}
       />

@@ -2,13 +2,11 @@ import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
 
 type Props = {
-  selectedLink: string,
   selectedLinkHandler: (navPage: string) => void
   resetPeopleFromServer: () => void
 };
 
 export const Navigation: React.FC<Props> = ({
-  selectedLink,
   selectedLinkHandler,
   resetPeopleFromServer,
 }) => {
@@ -31,18 +29,17 @@ export const Navigation: React.FC<Props> = ({
       <div className="container">
         <div className="navbar-brand">
           <NavLink
-            className={classnames('navbar-item', {
-              'has-background-grey-lighter': selectedLink === 'Home',
+            className={({ isActive }) => classnames('navbar-item', {
+              'has-background-grey-lighter': isActive,
             })}
             to="/"
             onClick={navigationHome}
           >
             Home
           </NavLink>
-
           <NavLink
-            className={classnames('navbar-item', {
-              'has-background-grey-lighter': selectedLink === 'People',
+            className={({ isActive }) => classnames('navbar-item', {
+              'has-background-grey-lighter': isActive,
             })}
             to="/people"
             onClick={navigationPeople}
