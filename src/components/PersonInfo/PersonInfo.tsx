@@ -16,34 +16,37 @@ export const PersonInfo: React.FC<Props> = ({
   selectedRow,
   selectedPerson,
 }) => {
-  const gg = selectedPerson === person.slug;
+  const selectedHuman = selectedPerson === person.slug;
+  const {
+    sex, born, died, name, slug, motherName, fatherName,
+  } = person;
 
   return (
     <tr
       data-cy="person"
-      key={person.slug}
-      className={classNames({ 'has-background-warning': gg })}
+      key={slug}
+      className={classNames({ 'has-background-warning': selectedHuman })}
     >
       <td>
         <Link
-          to={`/people/${person.slug}`}
+          to={`/people/${slug}`}
           className={classNames(
             { 'has-text-danger': person.sex === 'f' },
           )}
           onClick={() => {
-            selectedRow(person.slug);
+            selectedRow(slug);
           }}
         >
-          {person.name}
+          {name}
         </Link>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
       <td>
         <PersonLink
-          parent={person.motherName}
+          parent={motherName}
           people={people}
           selectedRow={selectedRow}
           person={person}
@@ -51,7 +54,7 @@ export const PersonInfo: React.FC<Props> = ({
       </td>
       <td>
         <PersonLink
-          parent={person.fatherName}
+          parent={fatherName}
           people={people}
           selectedRow={selectedRow}
           person={person}

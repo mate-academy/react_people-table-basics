@@ -16,7 +16,6 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
   return (
     <table
       data-cy="peopleTable"
-      // eslint-disable-next-line max-len
       className="table is-striped is-hoverable is-narrow is-fullwidth"
     >
       {people.length > 0 && (
@@ -35,6 +34,7 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
       <tbody>
         {people.map(person => (
           <PersonInfo
+            key={person.slug}
             person={person}
             people={people}
             selectedPerson={selectedPerson}

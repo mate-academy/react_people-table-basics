@@ -39,7 +39,7 @@ export const PersonLink: React.FC<Props> = ({
   };
 
   const findParentSlug: Person
-  = people.find(human => human.name === parent) || person;
+    = people.find(human => human.name === parent) || person;
 
   useEffect(() => {
     findParent();

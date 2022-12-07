@@ -12,7 +12,7 @@ export const App: React.FC = () => {
   const [selectedNavLink, setSelectedNavLink] = useState('People');
   const [peopleFromServer, setPeopleFromServer] = useState<Person[]>([]);
 
-  const resetPeopleFromServer = async () => {
+  const resetPeopleFromServer = () => {
     setPeopleFromServer([]);
   };
 
