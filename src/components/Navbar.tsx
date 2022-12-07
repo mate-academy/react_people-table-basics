@@ -8,7 +8,6 @@ export const Navbar: React.FC = () => (
     role="navigation"
     aria-label="main navigation"
   >
-
     <div className="container">
       <div className="navbar-brand">
         <NavLink

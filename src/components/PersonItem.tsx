@@ -26,6 +26,15 @@ export const PersonItem: React.FC<Props> = ({ people, person }) => {
     return parentName;
   };
 
+  const {
+    sex,
+    name,
+    born,
+    died,
+    motherName,
+    fatherName,
+  } = person;
+
   return (
     <tr
       data-cy="person"
@@ -36,17 +45,17 @@ export const PersonItem: React.FC<Props> = ({ people, person }) => {
       <td>
         <NavLink
           to={`/people/${person.slug}`}
-          className={classNames({ 'has-text-danger': person.sex === 'f' })}
+          className={classNames({ 'has-text-danger': sex === 'f' })}
         >
-          {person.name}
+          {name}
         </NavLink>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-      <td>{findParent(person.motherName)}</td>
-      <td>{findParent(person.fatherName)}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>{findParent(motherName)}</td>
+      <td>{findParent(fatherName)}</td>
     </tr>
   );
 };

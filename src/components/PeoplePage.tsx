@@ -15,9 +15,9 @@ export const PeoplePage: React.FC = () => {
       const peopleList = await getPeople();
 
       setPeople(peopleList);
-      setIsLoaded(true);
     } catch (error) {
       setIsError(true);
+    } finally {
       setIsLoaded(true);
     }
   };
@@ -51,7 +51,6 @@ export const PeoplePage: React.FC = () => {
           {isLoaded && !isError && (
             <PeopleTable people={people} />
           )}
-
         </div>
       </div>
     </>
