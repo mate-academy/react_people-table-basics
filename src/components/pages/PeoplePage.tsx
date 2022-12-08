@@ -28,7 +28,6 @@ export const PeoplePage = () => {
     }
 
     setIsLoad(false);
-    setIsEmpty(false);
   };
 
   const { getSlug = '' } = useParams();
