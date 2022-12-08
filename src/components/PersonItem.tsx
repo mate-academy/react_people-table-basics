@@ -27,6 +27,7 @@ export const PersonItem: React.FC<Props> = ({ people, person }) => {
   };
 
   const {
+    slug: personSlug,
     sex,
     name,
     born,
@@ -39,12 +40,12 @@ export const PersonItem: React.FC<Props> = ({ people, person }) => {
     <tr
       data-cy="person"
       className={classNames({
-        'has-background-warning': person.slug === slug,
+        'has-background-warning': personSlug === slug,
       })}
     >
       <td>
         <NavLink
-          to={`/people/${person.slug}`}
+          to={`/people/${personSlug}`}
           className={classNames({ 'has-text-danger': sex === 'f' })}
         >
           {name}
