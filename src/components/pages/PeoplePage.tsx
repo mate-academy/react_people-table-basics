@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
-import { PersonNavigate } from '../PersonLink/PersonLink';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -30,7 +30,7 @@ export const PeoplePage = () => {
     setIsLoad(false);
   };
 
-  const { getSlug = '' } = useParams();
+  const { personSlug = '' } = useParams();
 
   const findParent = (parentName: string | null) => {
     if (!parentName) {
@@ -39,7 +39,7 @@ export const PeoplePage = () => {
 
     const getParent = people.find(parent => parent.name === parentName);
 
-    return getParent ? <PersonNavigate person={getParent} /> : parentName;
+    return getParent ? <PersonLink person={getParent} /> : parentName;
   };
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          { people.length > 0 && !isError && (
+          { !isEmpty && !isError && !isLoad && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -100,12 +100,12 @@ export const PeoplePage = () => {
                         data-cy="person"
                         className={
                           classNames({
-                            'has-background-warning': getSlug === slug,
+                            'has-background-warning': personSlug === slug,
                           })
                         }
                       >
                         <td>
-                          <PersonNavigate person={person} />
+                          <PersonLink person={person} />
                         </td>
 
                         <td>{sex}</td>
@@ -120,7 +120,6 @@ export const PeoplePage = () => {
               </tbody>
             </table>
           )}
-
         </div>
       </div>
     </>

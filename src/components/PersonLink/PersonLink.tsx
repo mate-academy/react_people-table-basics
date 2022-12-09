@@ -6,7 +6,7 @@ type Props = {
   person: Person;
 };
 
-export const PersonNavigate: React.FC<Props> = ({ person }) => {
+export const PersonLink: React.FC<Props> = ({ person }) => {
   const { slug, sex, name } = person;
 
   return (
