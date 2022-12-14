@@ -5,18 +5,18 @@ import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
 type Props = {
-  people: Person[] | undefined
+  people: Person[]
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const { slug } = useParams();
+  const { slugParam } = useParams();
 
   const checkPerson = useCallback((parentName: string | null) => {
     if (!parentName) {
       return '-';
     }
 
-    const foundPerson = people?.find(parent => parent.name === parentName);
+    const foundPerson = people.find(parent => parent.name === parentName);
 
     return foundPerson ? <PersonLink person={foundPerson} /> : parentName;
   }, [people]);
@@ -38,25 +38,31 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people?.map(person => (
-          <tr
-            data-cy="person"
-            key={person.slug}
-            className={classNames(
-              { 'has-background-warning': slug === person.slug },
-            )}
-          >
-            <td>
-              <PersonLink person={person} />
-            </td>
+        {people.map(person => {
+          const {
+            slug, sex, born, died, motherName, fatherName,
+          } = person;
 
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
-            <td>{checkPerson(person.motherName)}</td>
-            <td>{checkPerson(person.fatherName)}</td>
-          </tr>
-        ))}
+          return (
+            <tr
+              data-cy="person"
+              key={slug}
+              className={classNames(
+                { 'has-background-warning': slugParam === slug },
+              )}
+            >
+              <td>
+                <PersonLink person={person} />
+              </td>
+
+              <td>{sex}</td>
+              <td>{born}</td>
+              <td>{died}</td>
+              <td>{checkPerson(motherName)}</td>
+              <td>{checkPerson(fatherName)}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

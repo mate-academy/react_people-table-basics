@@ -18,7 +18,7 @@ createRoot(document.getElementById('root') as HTMLDivElement)
         <Route path="/" element={<App />}>
           <Route path="people">
             <Route index element={<PeoplePage />} />
-            <Route path=":slug" element={<PeoplePage />} />
+            <Route path=":slugParam" element={<PeoplePage />} />
           </Route>
 
           <Route index element={<HomePage />} />
