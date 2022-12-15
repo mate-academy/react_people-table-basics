@@ -16,7 +16,7 @@ export const People = () => {
       const fetchedPeople: Person[] = await getPeople();
 
       setPeopleList(fetchedPeople);
-    } catch (error) {
+    } catch (err) {
       setTimeout(() => {
         setIsError(true);
       }, 3000);
