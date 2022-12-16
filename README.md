@@ -7,7 +7,7 @@ Implement the `App` with 2 pages and ability to select a person in the table.
 1. Create the `HomePage` available at `/` with just a title `Home Page`
 1. Create the `PeoplePage` available at `/people` with a title `People Page`
 1. Use [Navigate](https://reactrouter.com/docs/en/v6/components/navigate) component to redirect from `/home` to `/`;
-    - add `replace` attribute not to save `/home` URL in the [browser history](https://reactrouter.com/docs/en/v6/getting-started/concepts#history-and-locations) and avoid navigation loop when you press browser `Go back` button.
+    - add `replace` attribute not to save `/home` URL in the [browser history](https://reactrouter.com/en/main/start/tutorial#managing-the-history-stack) and avoid navigation loop when you press browser `Go back` button.
 1. Implement `NotFoundPage` with a title `Page not found` that is shown for all the other URLs;
 1. Add the `Navbar` with 2 links `Home` and `People`. Active one should have the `has-background-grey-lighter` class;
 1. Use `HashRouter` to be able to share a link to any page on Github pages; 
