@@ -1,3 +1,4 @@
+import React from 'react';
 import classNames from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
