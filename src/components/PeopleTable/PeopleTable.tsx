@@ -13,7 +13,6 @@ export const PeopleTable = () => {
 
   const loadPeople = async () => {
     try {
-      setHasError(false);
       setIsLoading(true);
 
       const loadedPeople = await getPeople();
