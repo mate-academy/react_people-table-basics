@@ -8,9 +8,9 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ peopleList }) => {
-  const { slug = '' } = useParams();
+  const { urlSlug = '' } = useParams();
 
-  const isSelected = (person: Person) => person.slug === slug;
+  const isSelected = (person: Person) => person.slug === urlSlug;
 
   const parentsCheck = (name: string | null) => {
     if (!name) {
@@ -40,9 +40,18 @@ export const PeopleTable: React.FC<Props> = ({ peopleList }) => {
 
       <tbody>
         {peopleList.map((person) => {
+          const {
+            slug,
+            sex,
+            born,
+            died,
+            motherName,
+            fatherName,
+          } = person;
+
           return (
             <tr
-              key={person.slug}
+              key={slug}
               data-cy="person"
               className={classNames(
                 { 'has-background-warning': isSelected(person) },
@@ -52,11 +61,11 @@ export const PeopleTable: React.FC<Props> = ({ peopleList }) => {
                 <PersonLink person={person} />
               </td>
 
-              <td>{person.sex}</td>
-              <td>{person.born}</td>
-              <td>{person.died}</td>
-              <td>{parentsCheck(person.motherName)}</td>
-              <td>{parentsCheck(person.fatherName)}</td>
+              <td>{sex}</td>
+              <td>{born}</td>
+              <td>{died}</td>
+              <td>{parentsCheck(motherName)}</td>
+              <td>{parentsCheck(fatherName)}</td>
             </tr>
           );
         })}
