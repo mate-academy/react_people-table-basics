@@ -4,7 +4,7 @@ import './App.scss';
 import { Navbar } from './components/Navbar';
 import { PeoplePage } from './components/PeoplePage';
 
-export const App = () => (
+export const App: React.FC = () => (
   <div data-cy="app">
     <Navbar />
 
