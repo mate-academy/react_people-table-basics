@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersoneLink/PersonLink';
