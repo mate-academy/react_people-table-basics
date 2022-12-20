@@ -11,14 +11,14 @@ export const App: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [isPeople, setIsPeople] = useState(true);
+  const [arePeoplePresent, setArePeoplePresent] = useState(true);
 
   const fetchData = async () => {
     try {
       const getPeopleFromServer = await getPeople();
 
       if (getPeopleFromServer.length === 0) {
-        setIsPeople(false);
+        setArePeoplePresent(false);
       }
 
       setPeople(getPeopleFromServer);
@@ -49,7 +49,7 @@ export const App: React.FC = () => {
                     people={people}
                     isLoading={isLoading}
                     isError={isError}
-                    isPeople={isPeople}
+                    arePeoplePresent={arePeoplePresent}
                   />
                 )}
               />
@@ -60,7 +60,7 @@ export const App: React.FC = () => {
                     people={people}
                     isLoading={isLoading}
                     isError={isError}
-                    isPeople={isPeople}
+                    arePeoplePresent={arePeoplePresent}
                   />
                 )}
               />

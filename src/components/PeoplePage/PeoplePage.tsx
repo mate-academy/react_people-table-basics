@@ -5,29 +5,35 @@ import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 type Props = {
   isError: boolean,
-  isPeople: boolean,
+  arePeoplePresent: boolean,
   isLoading: boolean,
   people: Person[],
 };
 
 export const PeoplePage: React.FC<Props> = ({
-  isError, isPeople, isLoading, people,
+  isError,
+  arePeoplePresent,
+  isLoading,
+  people,
 }) => {
   const { peopleSlug = null } = useParams();
 
   return (
     <>
       <h1 className="title">People Page</h1>
+
       {isError && (
         <p data-cy="peopleLoadingError" className="has-text-danger">
           Something went wrong
         </p>
       )}
-      {!isPeople && (
+
+      {!arePeoplePresent && (
         <p data-cy="noPeopleMessage">
           There are no people on the server
         </p>
       )}
+
       <PeopleTable
         people={people}
         isLoading={isLoading}
