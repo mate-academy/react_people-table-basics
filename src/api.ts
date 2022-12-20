@@ -1,15 +1,20 @@
 import { Person } from './types/Person';
 
 // eslint-disable-next-line max-len
-const API_URL = 'https://mate-academy.github.io/react_people-table/api/people.json';
+const BASE_URL = 'https://mate-academy.github.io/react_people-table/api/people.json';
 
-function wait(delay: number) {
-  return new Promise(resolve => setTimeout(resolve, delay));
-}
+export const getPeople = async (): Promise<Person[]> => {
+  let response;
 
-export function getPeople(): Promise<Person[]> {
-  // keep this delay for testing purpose
-  return wait(500)
-    .then(() => fetch(API_URL))
-    .then(response => response.json());
-}
+  try {
+    response = await fetch(BASE_URL);
+
+    if (!response.ok) {
+      throw new Error('Error Loading');
+    }
+  } catch (error) {
+    throw new Error('Error Loading');
+  }
+
+  return response.json();
+};
