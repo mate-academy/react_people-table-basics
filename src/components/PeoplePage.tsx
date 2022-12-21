@@ -2,17 +2,16 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { getPeople } from '../api';
 import { Person } from '../types';
 import { Loader } from './Loader';
-import { PersonLink } from './PersonLink';
+import { PersonItem } from './PersonItem';
 
 export const PeoplePage: React.FC = React.memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoadind, setIsLoading] = useState(false);
+  const [isLoadind, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const isSuccessOnLoad = !isLoadind && !isError;
 
   const loadPeople = useCallback(async () => {
     setIsError(false);
-    setIsLoading(true);
 
     try {
       const peopleFromServer = await getPeople();
@@ -54,7 +53,8 @@ export const PeoplePage: React.FC = React.memo(() => {
 
               <tbody>
                 {people.map(person => (
-                  <PersonLink
+                  <PersonItem
+                    key={person.slug}
                     person={person}
                     people={people}
                   />

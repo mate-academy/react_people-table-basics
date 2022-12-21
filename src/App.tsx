@@ -17,13 +17,14 @@ export const App: React.FC = () => (
     <main className="section">
       <div className="container">
         <Routes>
-          <Route path="people">
+          <Route path="/people">
             <Route index element={<PeoplePage />} />
             <Route path=":slug" element={<PeoplePage />} />
           </Route>
+
           <Route path="/" element={<HomePage />} />
           <Route path="*" element={<NotFoundPage />} />
-          <Route path="home" element={<Navigate to="/" replace />} />
+          <Route path="/home" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
     </main>
