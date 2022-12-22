@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 
@@ -15,18 +15,28 @@ export const PersonLink: React.FC<Props> = ({
   mother,
   father,
 }) => {
+  const hasMother = `${person.motherName
+    ? `${person.motherName}`
+    : '-'}`;
+
+  const hasFather = `${person.fatherName
+    ? `${person.fatherName}`
+    : '-'}`;
+
   return (
     <tr
       data-cy="person"
       key={person.slug}
-      className={classNames({
+      className={cn({
         'has-background-warning': slug === person.slug,
       })}
     >
       <td>
         <Link
           to={`/people/${person.slug}`}
-          className={`${person.sex === 'f' && 'has-text-danger'}`}
+          className={cn({
+            'has-text-danger': person.sex === 'f',
+          })}
         >
           {person.name}
         </Link>
@@ -46,9 +56,7 @@ export const PersonLink: React.FC<Props> = ({
               {mother.name}
             </Link>
           )
-          : `${person.motherName
-            ? `${person.motherName}`
-            : '-'}`}
+          : hasMother}
       </td>
 
       <td>
@@ -60,9 +68,7 @@ export const PersonLink: React.FC<Props> = ({
               {father.name}
             </Link>
           )
-          : `${person.fatherName
-            ? `${person.fatherName}`
-            : '-'}`}
+          : hasFather}
       </td>
     </tr>
   );

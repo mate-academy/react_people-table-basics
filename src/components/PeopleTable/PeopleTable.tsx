@@ -12,24 +12,26 @@ export const PeopleTable: React.FC = () => {
   const { slug } = useParams();
 
   const getPeopleFromServer = async () => {
-    setLoader(true);
-    const peopleFromServer = await getPeople();
+    try {
+      setLoader(true);
+      const peopleFromServer = await getPeople();
 
-    setPeople(peopleFromServer);
-    setLoader(false);
+      setPeople(peopleFromServer);
+      setLoader(false);
+    } catch {
+      setError(true);
+    } finally {
+      setLoader(false);
+    }
   };
 
   useEffect(() => {
-    try {
-      getPeopleFromServer();
-    } catch {
-      setError(true);
-    }
+    getPeopleFromServer();
   }, []);
 
   const findParentByName = (parentName: string | null) => {
     return people?.find(
-      person => person.name === parentName || person.name === parentName,
+      person => person.name === parentName,
     );
   };
 
@@ -37,17 +39,17 @@ export const PeopleTable: React.FC = () => {
     <div className="container">
       <h1 className="title">People Page</h1>
 
-      {error && (
-        <p data-cy="peopleLoadingError" className="has-text-danger">
-          Something went wrong
-        </p>
-      )}
-
       <div className="block">
         <div className="box table-container">
-          {loader ? (
-            <Loader />
-          ) : (
+          {error && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )}
+
+          {loader && <Loader />}
+
+          {!loader && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
