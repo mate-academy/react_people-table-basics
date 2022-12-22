@@ -49,6 +49,7 @@ export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
           <tbody>
             {people.map(person => (
               <tr
+                key={person.slug}
                 data-cy="person"
                 className={classNames(
                   { 'has-background-warning': slug === person.slug },
