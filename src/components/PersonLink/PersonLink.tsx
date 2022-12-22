@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
 import { Person } from '../../types';
 
 type Props = {
@@ -12,6 +13,23 @@ export const PersonLink: React.FC<Props> = ({ person, isSelected }) => {
     motherName, mother, fatherName, father,
   } = person;
 
+  const hasParent = (parentName: string | null, parent: Person | undefined) => {
+    if (parent) {
+      return (
+        <NavLink
+          to={`/people/${parent.slug}`}
+          className={classNames({
+            'has-text-danger': parent.sex === 'f',
+          })}
+        >
+          {parent.name}
+        </NavLink>
+      );
+    }
+
+    return parentName || '-';
+  };
+
   return (
     <tr
       data-cy="person"
@@ -20,46 +38,22 @@ export const PersonLink: React.FC<Props> = ({ person, isSelected }) => {
       })}
     >
       <td>
-        <a
-          href={`#/people/${slug}`}
+        <NavLink
+          to={`/people/${slug}`}
           className={classNames({
             'has-text-danger': sex === 'f',
           })}
         >
           {name}
-        </a>
+        </NavLink>
       </td>
 
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
 
-      <td>
-        {mother
-          ? (
-            <a
-              className="has-text-danger"
-              href={`#/people/${mother.slug}`}
-            >
-              {mother.name}
-            </a>
-          ) : (
-            motherName || '-'
-          )}
-      </td>
-
-      <td>
-        {father
-          ? (
-            <a
-              href={`#/people/${father.slug}`}
-            >
-              {father.name}
-            </a>
-          ) : (
-            fatherName || '-'
-          )}
-      </td>
+      <td>{hasParent(motherName, mother)}</td>
+      <td>{hasParent(fatherName, father)}</td>
     </tr>
   );
 };
