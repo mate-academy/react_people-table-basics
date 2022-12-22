@@ -1,12 +1,11 @@
 import './App.scss';
-import classNames from 'classnames';
 import {
   Navigate,
-  NavLink,
   Route,
   Routes,
 } from 'react-router-dom';
 import { PeoplePage } from './components/PeoplePage';
+import { PageNavLink } from './components/PageNavLink';
 
 export const App = () => (
   <div data-cy="app">
@@ -18,29 +17,8 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink
-            to="/"
-            className={({ isActive }) => classNames(
-              'navbar-item',
-              {
-                'has-background-grey-lighter': isActive,
-              },
-            )}
-          >
-            Home
-          </NavLink>
-
-          <NavLink
-            to="/people"
-            className={({ isActive }) => classNames(
-              'navbar-item',
-              {
-                'has-background-grey-lighter': isActive,
-              },
-            )}
-          >
-            People
-          </NavLink>
+          <PageNavLink to="/" text="Home" />
+          <PageNavLink to="/people" text="People" />
         </div>
       </div>
     </nav>
@@ -59,14 +37,21 @@ export const App = () => (
           />
 
           <Route
-            path="people"
-            element={<PeoplePage />}
-          />
-
-          <Route
             path="*"
             element={<h1 className="title">Page not found</h1>}
           />
+
+          <Route path="/people">
+            <Route
+              index
+              element={<PeoplePage />}
+            />
+
+            <Route
+              path=":slug"
+              element={<PeoplePage />}
+            />
+          </Route>
         </Routes>
       </div>
     </main>
