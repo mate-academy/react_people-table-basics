@@ -6,6 +6,8 @@ import {
 } from 'react-router-dom';
 import { PeoplePage } from './components/PeoplePage';
 import { PageNavLink } from './components/PageNavLink';
+import { HomePage } from './components/HomePage';
+import { HotFoundPage } from './components/NotFoundPage';
 
 export const App = () => (
   <div data-cy="app">
@@ -28,7 +30,7 @@ export const App = () => (
         <Routes>
           <Route
             index
-            element={<h1 className="title">Home Page</h1>}
+            element={<HomePage />}
           />
 
           <Route
@@ -38,7 +40,7 @@ export const App = () => (
 
           <Route
             path="*"
-            element={<h1 className="title">Page not found</h1>}
+            element={<HotFoundPage />}
           />
 
           <Route path="/people">
