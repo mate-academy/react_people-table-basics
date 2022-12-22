@@ -1,5 +1,11 @@
 import './App.scss';
-import { Link, Navigate, Route, Routes } from 'react-router-dom';
+import classNames from 'classnames';
+import {
+  Navigate,
+  NavLink,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import { PeoplePage } from './components/PeoplePage';
 
 export const App = () => (
@@ -12,28 +18,35 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <Link
-            className="navbar-item"
+          <NavLink
             to="/"
+            className={({ isActive }) => classNames(
+              'navbar-item',
+              {
+                'has-background-grey-lighter': isActive,
+              },
+            )}
           >
             Home
-          </Link>
+          </NavLink>
 
-          <Link
-            className="navbar-item has-background-grey-lighter"
+          <NavLink
             to="/people"
+            className={({ isActive }) => classNames(
+              'navbar-item',
+              {
+                'has-background-grey-lighter': isActive,
+              },
+            )}
           >
             People
-          </Link>
+          </NavLink>
         </div>
       </div>
     </nav>
 
     <main className="section">
       <div className="container">
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
-
         <Routes>
           <Route
             index
@@ -48,6 +61,11 @@ export const App = () => (
           <Route
             path="people"
             element={<PeoplePage />}
+          />
+
+          <Route
+            path="*"
+            element={<h1 className="title">Page not found</h1>}
           />
         </Routes>
       </div>
