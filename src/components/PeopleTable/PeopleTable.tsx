@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import { Person } from '../../types/Person';
 import { Loader } from '../Loader';
-import { PersonLink } from '../PersonLink/PersonLink';
+import { PersonProperties } from '../PersonProperties/PersonProperties';
 
 type Props = {
   people: Person[],
@@ -11,24 +10,15 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({
-  people, isLoading, selectPeopleSlug,
+  people,
+  isLoading,
+  selectPeopleSlug,
 }) => {
-  const findParrent = (parentName: string | null) => {
-    const parent = people.find(person => person.name === parentName);
-
-    if (parent) {
-      return <PersonLink person={parent} />;
-    }
-
-    return parentName || '-';
-  };
-
-  const isSelected = (person: Person) => person.slug === selectPeopleSlug;
-
   return (
     <div className="block">
       <div className="box table-container">
-        {isLoading ? (<Loader />)
+        {isLoading
+          ? (<Loader />)
           : (
             <table
               data-cy="peopleTable"
@@ -46,23 +36,12 @@ export const PeopleTable: React.FC<Props> = ({
               </thead>
               <tbody>
                 {people.map(person => (
-                  <tr
-                    data-cy="person"
+                  <PersonProperties
+                    person={person}
                     key={person.slug}
-                    className={classNames({
-                      'has-background-warning': isSelected(person),
-                    })}
-                  >
-                    <td>
-                      <PersonLink person={person} />
-                    </td>
-
-                    <td>{person.sex}</td>
-                    <td>{person.born}</td>
-                    <td>{person.died}</td>
-                    <td>{findParrent(person.motherName)}</td>
-                    <td>{findParrent(person.fatherName)}</td>
-                  </tr>
+                    selectPeopleSlug={selectPeopleSlug}
+                    people={people}
+                  />
                 ))}
               </tbody>
             </table>
