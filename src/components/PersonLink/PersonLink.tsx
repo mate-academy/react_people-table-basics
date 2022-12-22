@@ -45,7 +45,10 @@ export const PersonLink: FC<Props> = ({ person, isSelected }) => {
       <td>
         {mother
           ? (
-            <NavLink to={`/people/${mother.slug}`}>
+            <NavLink
+              to={`/people/${mother.slug}`}
+              className="has-text-danger"
+            >
               {motherName}
             </NavLink>
           )

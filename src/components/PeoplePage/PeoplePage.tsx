@@ -34,6 +34,10 @@ export const PeoplePage: FC = () => {
       setErrorType(ErrorType.Another);
     }
 
+    if (!people.length) {
+      setErrorType(ErrorType.NoPeople);
+    }
+
     setIsLoading(false);
   };
 
