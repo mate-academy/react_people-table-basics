@@ -59,7 +59,7 @@ export const App: React.FC = () => {
             />
             <Route
               path="/home"
-              element={<Navigate to="/" />}
+              element={<Navigate replace to="/" />}
             />
             <Route
               path="/*"
