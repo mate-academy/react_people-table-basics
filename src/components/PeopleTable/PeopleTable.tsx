@@ -16,7 +16,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     if (parent) {
       return (
         <Link
-          to={`/people/${slug}`}
+          to={`/people/${parent.slug}`}
           className={classNames(
             {
               'has-text-danger': parent.sex === 'f',
