@@ -72,7 +72,6 @@ export const PeopleTable: FC<Props> = ({
                         {findParent(person.motherName) !== 'not-found'
                           ? (
                             <Link
-                              // to={`/people/elisabeth-haverbeke-1711`}
                               to={`/people/${findParent(person.motherName)}`}
                               className="has-text-danger"
                             >
@@ -91,7 +90,6 @@ export const PeopleTable: FC<Props> = ({
                         {findParent(person.fatherName) !== 'not-found'
                           ? (
                             <Link
-                              // to={`/people/elisabeth-haverbeke-1711`}
                               to={`/people/${findParent(person.fatherName)}`}
                             >
                               {person.fatherName}

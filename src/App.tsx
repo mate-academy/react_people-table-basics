@@ -8,7 +8,6 @@ import { HomePage } from './pages/HomePage';
 import { PeopleTable } from './pages/PeopleTable';
 import { getPeople } from './api';
 import { Person } from './types';
-// import { People } from './pages/People';
 
 type Props = {
   to: string;
