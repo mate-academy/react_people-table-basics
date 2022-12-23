@@ -1,1 +1,1 @@
-export * from './PersonLink';
+export { PersonLink } from './PersonLink';
