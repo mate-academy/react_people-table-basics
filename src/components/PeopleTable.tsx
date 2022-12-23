@@ -4,39 +4,31 @@ import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[],
-  selectedPerson: string,
 };
 
-export const PeopleTable: React.FC<Props> = (
-  { selectedPerson, people },
-) => {
-  const isSelected = (slug: string) => slug === selectedPerson;
+export const PeopleTable: React.FC<Props> = ({ people }) => (
+  <table
+    data-cy="peopleTable"
+    className="table is-striped is-hoverable is-narrow is-fullwidth"
+  >
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Sex</th>
+        <th>Born</th>
+        <th>Died</th>
+        <th>Mother</th>
+        <th>Father</th>
+      </tr>
+    </thead>
 
-  return (
-    <table
-      data-cy="peopleTable"
-      className="table is-striped is-hoverable is-narrow is-fullwidth"
-    >
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {people.map(person => (
-          <PersonLink
-            key={person.slug}
-            person={person}
-            isSelected={isSelected}
-          />
-        ))}
-      </tbody>
-    </table>
-  );
-};
+    <tbody>
+      {people.map(person => (
+        <PersonLink
+          key={person.slug}
+          person={person}
+        />
+      ))}
+    </tbody>
+  </table>
+);

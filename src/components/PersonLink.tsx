@@ -1,15 +1,15 @@
 import classNames from 'classnames';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Person } from '../types/Person';
 
 type Props = {
   person: Person,
-  isSelected: (slug: string) => boolean,
+  // isSelected: (slug: string) => boolean,
 };
 
 export const PersonLink: React.FC<Props> = (
-  { person, isSelected },
+  { person },
 ) => {
   const {
     name,
@@ -23,11 +23,13 @@ export const PersonLink: React.FC<Props> = (
     slug,
   } = person;
 
+  const { slug: selectedSlug } = useParams();
+
   return (
     <tr
       data-cy="person"
       className={classNames({
-        'has-background-warning': isSelected(slug),
+        'has-background-warning': selectedSlug === slug,
       })}
     >
       <td>
