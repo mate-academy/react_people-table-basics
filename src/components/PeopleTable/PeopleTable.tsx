@@ -11,6 +11,18 @@ interface Props {
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { personSlug = '' } = useParams();
 
+  const findParrent = (parrentName: string | null) => {
+    const parrent = people.find(person => person.name === parrentName) || null;
+
+    if (parrent) {
+      return (
+        <PersonLink person={parrent} />
+      );
+    }
+
+    return parrentName || '-';
+  };
+
   return (
     <table
       data-cy="peopleTable"
@@ -36,8 +48,6 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             fatherName,
             motherName,
             slug,
-            mother,
-            father,
           } = person;
 
           return (
@@ -57,23 +67,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>{died}</td>
 
               <td>
-                {mother && (
-                  <PersonLink person={mother} />
-                )}
-
-                {!mother && motherName}
-
-                {!motherName && '-'}
+                {findParrent(motherName)}
               </td>
 
               <td>
-                {father && (
-                  <PersonLink person={father} />
-                )}
-
-                {!father && fatherName}
-
-                {!fatherName && '-'}
+                {findParrent(fatherName)}
               </td>
             </tr>
           );

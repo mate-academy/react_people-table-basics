@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getPeople, getPeopleWithParrents } from '../api';
+import { getPeople } from '../api';
 import { Person } from '../types';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable/PeopleTable';
@@ -22,8 +22,6 @@ export const PeoplePage: React.FC = () => {
   useEffect(() => {
     getPeopleFromServer();
   }, []);
-
-  const peopleWithParrents = getPeopleWithParrents(people);
 
   const isNoPeople = people.length === 0 && !isError && !isLoading;
 
@@ -50,7 +48,7 @@ export const PeoplePage: React.FC = () => {
           )}
 
           {people.length > 0 && (
-            <PeopleTable people={peopleWithParrents} />
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
