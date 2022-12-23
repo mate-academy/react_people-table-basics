@@ -1,40 +1,25 @@
-import classNames from 'classnames';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { PageNavLink } from '../PageNavLink/PageNavLink';
 
-export const Navigation: React.FC = () => {
-  return (
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <NavLink
-            className={({ isActive }) => classNames(
-              'navbar-item', {
-                'has-background-grey-lighter': isActive,
-              },
-            )}
-            to="/"
-          >
-            Home
-          </NavLink>
+export const Navigation: React.FC = () => (
+  <nav
+    data-cy="nav"
+    className="navbar is-fixed-top has-shadow"
+    role="navigation"
+    aria-label="main navigation"
+  >
+    <div className="container">
+      <div className="navbar-brand">
+        <PageNavLink
+          to="/"
+          text="Home"
+        />
 
-          <NavLink
-            className={({ isActive }) => classNames(
-              'navbar-item', {
-                'has-background-grey-lighter': isActive,
-              },
-            )}
-            to="people"
-          >
-            People
-          </NavLink>
-        </div>
+        <PageNavLink
+          to="/people"
+          text="People"
+        />
       </div>
-    </nav>
-  );
-};
+    </div>
+  </nav>
+);
