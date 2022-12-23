@@ -6,11 +6,10 @@ import { Person } from '../types/Person';
 type Props = {
   person: Person,
   isSelected: (slug: string) => boolean,
-  getParent: (parentName: string | null) => Person | undefined,
 };
 
 export const PersonLink: React.FC<Props> = (
-  { person, isSelected, getParent },
+  { person, isSelected },
 ) => {
   const {
     name,
@@ -19,13 +18,10 @@ export const PersonLink: React.FC<Props> = (
     died,
     motherName,
     fatherName,
+    mother,
+    father,
     slug,
   } = person;
-
-  // eslint-disable-next-line no-param-reassign
-  person.mother = getParent(motherName);
-  // eslint-disable-next-line no-param-reassign
-  person.father = getParent(fatherName);
 
   return (
     <tr
@@ -49,11 +45,11 @@ export const PersonLink: React.FC<Props> = (
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {person.mother
+        {mother
           ? (
             <Link
               className="has-text-danger"
-              to={`/people/${person.mother?.slug}`}
+              to={`/people/${mother.slug}`}
             >
               {motherName}
             </Link>
@@ -65,11 +61,11 @@ export const PersonLink: React.FC<Props> = (
           )}
       </td>
       <td>
-        {person.father
+        {father
           ? (
             <Link
               className="has-text-blue"
-              to={`/people/${person.father?.slug}`}
+              to={`/people/${father.slug}`}
             >
               {fatherName}
             </Link>

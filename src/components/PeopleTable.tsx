@@ -11,11 +11,6 @@ export const PeopleTable: React.FC<Props> = (
   { selectedPerson, people },
 ) => {
   const isSelected = (slug: string) => slug === selectedPerson;
-  const getParent = (parentName: string | null) => {
-    const parent = people.find(person => person.name === parentName);
-
-    return parent;
-  };
 
   return (
     <table
@@ -39,7 +34,6 @@ export const PeopleTable: React.FC<Props> = (
             key={person.slug}
             person={person}
             isSelected={isSelected}
-            getParent={getParent}
           />
         ))}
       </tbody>

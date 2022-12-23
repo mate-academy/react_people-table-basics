@@ -15,7 +15,15 @@ export const PeoplePage = () => {
     try {
       const peopleFromServer = await getPeople();
 
-      setPeople(peopleFromServer);
+      const getParent = (parentName: string | null) => peopleFromServer.find(
+        person => person.name === parentName,
+      );
+
+      setPeople(peopleFromServer.map(person => ({
+        ...person,
+        mother: getParent(person.motherName),
+        father: getParent(person.fatherName),
+      })));
       setIsIntialized(true);
     } catch {
       setHasLoadingError(true);
@@ -43,12 +51,12 @@ export const PeoplePage = () => {
               Something went wrong
             </p>
           )}
-          {isIntialized && !hasLoadingError && people.length === 0 && (
+          {isIntialized && !hasLoadingError && !people.length && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
-          {isIntialized && !hasLoadingError && people.length > 0 && (
+          {isIntialized && !hasLoadingError && people.length && (
             <PeopleTable
               people={people}
               selectedPerson={slug || ''}
