@@ -14,8 +14,8 @@ export const PersonLink: React.FC<Props> = ({ person, isSelected }) => {
   } = person;
 
   const hasParent = (parentName: string | null, parent: Person | undefined) => {
-    if (parent) {
-      return (
+    return parent
+      ? (
         <NavLink
           to={`/people/${parent.slug}`}
           className={classNames({
@@ -24,10 +24,8 @@ export const PersonLink: React.FC<Props> = ({ person, isSelected }) => {
         >
           {parent.name}
         </NavLink>
-      );
-    }
-
-    return parentName || '-';
+      )
+      : parentName || '-';
   };
 
   return (
