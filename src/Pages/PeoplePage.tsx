@@ -6,11 +6,10 @@ import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(true);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
   const fetchPeople = useCallback(async () => {
-    setIsLoaded(false);
     try {
       const inData = await getPeople();
 
