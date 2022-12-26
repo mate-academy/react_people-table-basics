@@ -1,5 +1,5 @@
 import { FC } from 'react';
 
-export const HotFoundPage: FC = () => (
+export const NotFoundPage: FC = () => (
   <h1 className="title">Page not found</h1>
 );

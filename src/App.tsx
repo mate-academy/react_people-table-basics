@@ -5,25 +5,13 @@ import {
   Routes,
 } from 'react-router-dom';
 import { PeoplePage } from './components/PeoplePage';
-import { PageNavLink } from './components/PageNavLink';
 import { HomePage } from './components/HomePage';
-import { HotFoundPage } from './components/NotFoundPage';
+import { NotFoundPage } from './components/NotFoundPage';
+import { NavBar } from './components/NavBar';
 
 export const App = () => (
   <div data-cy="app">
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <PageNavLink to="/" text="Home" />
-          <PageNavLink to="/people" text="People" />
-        </div>
-      </div>
-    </nav>
+    <NavBar />
 
     <main className="section">
       <div className="container">
@@ -40,7 +28,7 @@ export const App = () => (
 
           <Route
             path="*"
-            element={<HotFoundPage />}
+            element={<NotFoundPage />}
           />
 
           <Route path="/people">
