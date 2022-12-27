@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useRef } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { PersonLink } from '../PersonLink';
@@ -12,15 +12,6 @@ interface Props {
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
-  const myRef = useRef<HTMLTableRowElement>(null);
-
-  const handleScroll = (ref: HTMLTableRowElement) => {
-    window.scrollTo({
-      top: ref.offsetTop,
-      left: 0,
-      behavior: 'smooth',
-    });
-  };
 
   const findParent = (parentName: string | null) => {
     const parent = people.find(person => person.name === parentName);
@@ -29,8 +20,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       return (
         <PersonLink
           person={parent}
-          handleScroll={handleScroll}
-          myRef={myRef}
+          people={people}
         />
       );
     }
@@ -68,7 +58,6 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <tr
               data-cy="person"
               key={person.slug}
-              ref={myRef}
               className={classNames(
                 {
                   'has-background-warning': slug === person.slug,
@@ -78,8 +67,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>
                 <PersonLink
                   person={person}
-                  handleScroll={handleScroll}
-                  myRef={myRef}
+                  people={people}
                 />
               </td>
 
