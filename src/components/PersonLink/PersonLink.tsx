@@ -34,6 +34,18 @@ export const PersonLink: React.FC<Props> = React.memo((
     return 0;
   };
 
+  React.useEffect(() => {
+    if (person.slug === selectedSlug) {
+      setSelectedPerson(person);
+    }
+
+    window.scrollTo({
+      top: scrollDist(),
+      left: 0,
+      behavior: 'smooth',
+    });
+  });
+
   return (
     <Link
       to={`/people/${slug}`}
@@ -43,17 +55,6 @@ export const PersonLink: React.FC<Props> = React.memo((
           'has-text-danger': sex === 'f',
         },
       )}
-      onClick={() => {
-        if (person.slug === selectedSlug) {
-          setSelectedPerson(person);
-        }
-
-        window.scrollTo({
-          top: scrollDist(),
-          left: 0,
-          behavior: 'smooth',
-        });
-      }}
     >
       {name}
     </Link>
