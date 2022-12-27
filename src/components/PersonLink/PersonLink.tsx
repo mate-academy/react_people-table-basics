@@ -7,11 +7,12 @@ import { Person } from '../../types';
 
 interface Props {
   person: Person;
+  selectedSlug: string | undefined;
   people: Person[];
 }
 
 export const PersonLink: React.FC<Props> = React.memo((
-  { person, people },
+  { person, selectedSlug, people },
 ) => {
   const {
     slug,
@@ -43,7 +44,7 @@ export const PersonLink: React.FC<Props> = React.memo((
         },
       )}
       onClick={() => {
-        if (person) {
+        if (person.slug === selectedSlug) {
           setSelectedPerson(person);
         }
 

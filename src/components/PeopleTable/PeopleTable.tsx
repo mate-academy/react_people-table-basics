@@ -20,6 +20,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       return (
         <PersonLink
           person={parent}
+          selectedSlug={slug}
           people={people}
         />
       );
@@ -67,6 +68,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>
                 <PersonLink
                   person={person}
+                  selectedSlug={slug}
                   people={people}
                 />
               </td>
