@@ -4,17 +4,15 @@ import { Person } from '../../types';
 import { PersonLink } from './PersonLink';
 
 type Props = {
-  mother: Person | string | null,
-  father: Person | string | null,
   person: Person,
   selectedPerson: string
+  findRelative: (name: string | null) => string | JSX.Element
 };
 
 export const PersonItem: React.FC<Props> = ({
-  mother,
-  father,
   person,
   selectedPerson,
+  findRelative,
 }) => {
   const { sex, born, died } = person;
 
@@ -32,22 +30,8 @@ export const PersonItem: React.FC<Props> = ({
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
-      <td>
-        <>
-          {(mother && typeof mother === 'object')
-            && <PersonLink person={mother} />}
-          {(mother && typeof mother === 'string') && `${mother}`}
-          {!mother && '-'}
-        </>
-      </td>
-      <td>
-        <>
-          {(father && typeof father === 'object')
-            && <PersonLink person={father} />}
-          {(father && typeof father === 'string') && `${father}`}
-          {!father && '-'}
-        </>
-      </td>
+      <td>{findRelative(person.motherName)}</td>
+      <td>{findRelative(person.fatherName)}</td>
     </tr>
   );
 };

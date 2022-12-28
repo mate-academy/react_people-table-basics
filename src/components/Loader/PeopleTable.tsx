@@ -1,6 +1,7 @@
 import React from 'react';
 import { Person } from '../../types';
 import { PersonItem } from './PersonItem';
+import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[],
@@ -10,7 +11,7 @@ type Props = {
 export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
   const findRelative = (relativeName: string | null) => {
     if (!relativeName) {
-      return null;
+      return '-';
     }
 
     const relative = people.find(personItem => (
@@ -18,10 +19,10 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
     ));
 
     if (relative) {
-      return relative;
+      return <PersonLink person={relative} />;
     }
 
-    return relativeName;
+    return `${relativeName}`;
   };
 
   return (
@@ -44,10 +45,9 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
         {people.map(person => (
           <PersonItem
             key={person.slug}
-            mother={findRelative(person.motherName)}
-            father={findRelative(person.fatherName)}
             person={person}
             selectedPerson={selectedPerson}
+            findRelative={findRelative}
           />
         ))}
       </tbody>
