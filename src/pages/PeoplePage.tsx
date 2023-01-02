@@ -13,8 +13,18 @@ export const PeoplePage = () => {
   const getPeopleFromServer = useCallback(async () => {
     try {
       const peopleFromServer = await getPeople();
+      const fullPeople = peopleFromServer.map(person => {
+        const mother = peopleFromServer.find(
+          ({ name }) => name === person.motherName,
+        );
+        const father = peopleFromServer.find(
+          ({ name }) => name === person.fatherName,
+        );
 
-      setPeople(peopleFromServer);
+        return { ...person, mother, father };
+      });
+
+      setPeople(fullPeople);
       setIsLoading(false);
     } catch (error) {
       setIsError(true);
