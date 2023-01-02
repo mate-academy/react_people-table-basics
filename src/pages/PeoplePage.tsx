@@ -27,6 +27,7 @@ export const PeoplePage = () => {
 
   const { slug = '' } = useParams();
   const noPeople = !people.length && !isLoading;
+  const shouldRenderTable = !noPeople && !isError && !isLoading;
 
   return (
     <div className="block">
@@ -44,7 +45,8 @@ export const PeoplePage = () => {
           <p data-cy="noPeopleMessage">There are no people on the server</p>
         )}
 
-        <PeopleTable people={people} selectedPerson={slug} />
+        {shouldRenderTable
+          && <PeopleTable people={people} selectedPerson={slug} />}
       </div>
     </div>
   );
