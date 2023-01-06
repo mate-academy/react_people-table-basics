@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { UpdatePerson } from '../../types/UpdatePerson';
+import { ParentLink } from '../ParentLink/ParentLink';
 
 type Props = {
   person: UpdatePerson,
@@ -46,25 +47,10 @@ export const PersonLink: React.FC<Props> = ({
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {mother && (
-          <Link
-            to={`/people/${mother.slug}`}
-            className="has-text-danger"
-          >
-            {mother.name}
-          </Link>
-        )}
-
-        {!mother && motherName}
+        {mother ? <ParentLink parent={mother} /> : motherName}
       </td>
       <td>
-        {father && (
-          <Link to={`/people/${father.slug}`}>
-            {father.name}
-          </Link>
-        )}
-
-        {!father && fatherName}
+        {father ? <ParentLink parent={father} /> : fatherName}
       </td>
     </tr>
   );

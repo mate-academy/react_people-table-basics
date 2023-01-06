@@ -7,7 +7,7 @@ import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [peopleList, setPeopleList] = useState<Person[]>([]);
-  const [showError, setShowError] = useState<boolean>(false);
+  const [isShowError, setIsShowError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { personSlug = '' } = useParams();
@@ -32,9 +32,9 @@ export const PeoplePage: React.FC = () => {
 
     try {
       setPeopleList(peopleFromServer);
-      setShowError(false);
+      setIsShowError(false);
     } catch {
-      setShowError(true);
+      setIsShowError(true);
     } finally {
       setIsLoading(false);
     }
@@ -55,7 +55,7 @@ export const PeoplePage: React.FC = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {showError && (
+          {isShowError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
@@ -67,7 +67,7 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {people.length > 0 && (
+          {Boolean(people.length) && (
             <table
               data-cy="peopleTable"
               className={'table is-striped is-hoverable'

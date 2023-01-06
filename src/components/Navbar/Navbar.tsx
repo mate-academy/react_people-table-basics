@@ -5,19 +5,19 @@ export const Navbar = () => {
   return (
     <div className="navbar-brand">
       <NavLink
+        to="/"
         className={({ isActive }) => classNames('navbar-item', {
           'navbar-item has-background-grey-lighter': isActive,
         })}
-        to="/"
       >
         Home
       </NavLink>
 
       <NavLink
+        to="people"
         className={({ isActive }) => classNames('navbar-item', {
           'navbar-item has-background-grey-lighter': isActive,
         })}
-        to="people"
       >
         People
       </NavLink>
