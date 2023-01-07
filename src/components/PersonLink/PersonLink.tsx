@@ -31,7 +31,9 @@ export const PersonLink: React.FC<Props> = ({
         >
           {parent}
         </Link>
-      ) : parent}
+      ) : (
+        parent
+      )}
     </td>
   );
 };

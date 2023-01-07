@@ -18,6 +18,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
   return (
     <div className="block">
       <div className="box table-container">
+
         <table
           data-cy="peopleTable"
           className="table is-striped is-hoverable is-narrow is-fullwidth"
