@@ -7,19 +7,19 @@ type Props = {
   personSlug: string,
 };
 
-export const PeopleTable: React.FC<Props> = ({
-  people,
-  personSlug,
-}) => {
-  return (
+export const PeopleTable: React.FC<Props> = React.memo(
+  ({
+    people,
+    personSlug,
+  }) => (
     <>
       {people.map(person => (
         <PersonLink
-          key={`${person.slug}`}
+          key={person.slug}
           person={person}
           personSlug={personSlug}
         />
       ))}
     </>
-  );
-};
+  ),
+);

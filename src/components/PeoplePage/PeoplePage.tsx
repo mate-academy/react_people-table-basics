@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
@@ -42,10 +42,11 @@ export const PeoplePage: React.FC = () => {
 
   useEffect(() => {
     loadingPeople();
-    getParent();
   }, []);
 
-  const people = getParent();
+  const people = useMemo(() => {
+    return getParent();
+  }, [peopleList]);
 
   return (
     <>
