@@ -1,9 +1,8 @@
-import { Loader } from '../components/Loader';
 import { useFetchPeople } from '../hooks/useFetchPeople';
 import { PeopleTable } from '../components/PeopleTable';
 
 export const PeoplePage = () => {
-  const { people, isLoading, isError } = useFetchPeople();
+  const { people, isError } = useFetchPeople();
 
   return (
     <div>
@@ -11,8 +10,6 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isLoading && <Loader />}
-
           {isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong

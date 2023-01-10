@@ -2,10 +2,15 @@ import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { useFetchPeople } from '../../hooks/useFetchPeople';
 import { PersonLink } from '../PersonLink';
+import { Loader } from '../Loader';
 
 export const PeopleTable = () => {
-  const { people } = useFetchPeople();
+  const { people, isLoading, isFetching } = useFetchPeople();
   const { slug } = useParams<{ slug: string }>();
+
+  if (isLoading || isFetching) {
+    return <Loader />;
+  }
 
   return (
     <table
