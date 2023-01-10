@@ -5,15 +5,16 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { App } from './App';
 
 const queryClient = new QueryClient();
 
-createRoot(document.getElementById('root') as HTMLDivElement)
-  .render(
-    <Router>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </Router>,
-  );
+createRoot(document.getElementById('root') as HTMLDivElement).render(
+  <Router>
+    <QueryClientProvider client={queryClient}>
+      <App />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  </Router>,
+);

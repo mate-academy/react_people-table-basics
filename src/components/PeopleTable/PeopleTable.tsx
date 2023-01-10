@@ -1,14 +1,22 @@
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
+import { useQueryClient } from '@tanstack/react-query';
 import { useFetchPeople } from '../../hooks/useFetchPeople';
 import { PersonLink } from '../PersonLink';
 import { Loader } from '../Loader';
+import { Person } from '../../types/Person';
 
 export const PeopleTable = () => {
-  const { people, isLoading, isFetching } = useFetchPeople();
+  const { people: peopleFromServer, isLoading, isFetching } = useFetchPeople();
   const { slug } = useParams<{ slug: string }>();
 
-  if (isLoading || isFetching) {
+  const queryClient = useQueryClient();
+
+  const peopleFromCache = queryClient.getQueryData<Person[]>(['people']);
+
+  const people = isFetching ? peopleFromCache : peopleFromServer;
+
+  if (isLoading) {
     return <Loader />;
   }
 

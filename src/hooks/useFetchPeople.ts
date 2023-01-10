@@ -5,7 +5,12 @@ import { Person } from '../types/Person';
 
 export const useFetchPeople = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const { isLoading, isError, isFetching } = useQuery(['people'], getPeople, {
+
+  const {
+    isLoading,
+    isError,
+    isFetching,
+  } = useQuery(['people'], getPeople, {
     onSuccess: (data) => {
       setPeople(
         data.map((person) => ({
