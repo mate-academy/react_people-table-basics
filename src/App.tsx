@@ -1,14 +1,14 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
-import { HomePage } from './Page/HomePage';
-import { PeoplePage } from './Page/PeoplePage';
-import { NotFoundPage } from './Page/NotFoundPage';
-import { BarNavigation } from './components/Navigation/BarNavigation';
+import { HomePage } from './pages/HomePage/HomePage';
+import { PeoplePage } from './pages/PeoplePage/PeoplePage';
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
+import { BarNav } from './components/Navigation/BarNav/BarNav';
 
 export const App = () => {
   return (
     <div data-cy="app">
-      <BarNavigation />
+      <BarNav />
 
       <main className="section">
         <div className="container">

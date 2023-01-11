@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Person } from '../../types';
-import { PersonInfo } from './PersonInfo';
+import { Person } from '../../../types';
+import { PersonInfo } from '../PersonInfo/PersonInfo';
 
 type Props = {
   people: Person[];

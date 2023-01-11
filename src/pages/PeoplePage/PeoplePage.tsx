@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getPeople } from '../api';
-import { Loader } from '../components/Loader';
-import { PeopleTable } from '../components/Table/PeopleTable';
-import { Person } from '../types';
+import { getPeople } from '../../api';
+import { Loader } from '../../components/Loader';
+import { PeopleTable } from '../../components/Table/PeopleTable/PeopleTable';
+import { Person } from '../../types';
 
 export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -20,18 +20,14 @@ export const PeoplePage: FC = () => {
       setPeople(peopleFromServer);
     } catch {
       setHasError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     loadPeople();
   }, []);
-
-  useEffect(() => {
-    if (isLoading) {
-      setIsLoading(false);
-    }
-  }, [people, hasError]);
 
   return (
     <>

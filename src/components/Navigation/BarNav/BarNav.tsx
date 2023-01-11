@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { PageNavigation } from './PageNavigation';
+import { PageNavigation } from '../PageNavigation/PageNavigation';
 
-export const BarNavigation: FC = () => {
+export const BarNav: FC = () => {
   return (
     <nav
       data-cy="nav"
