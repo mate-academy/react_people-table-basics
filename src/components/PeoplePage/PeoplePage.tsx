@@ -4,7 +4,8 @@ import { Person } from '../../types';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<Person[] | null>(null);
+  const [people, setPeople] = useState<Person[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
@@ -13,7 +14,8 @@ export const PeoplePage: React.FC = () => {
       .catch(() => {
         setTimeout(() => setHasError(false), 3000);
         setHasError(true);
-      });
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -23,6 +25,7 @@ export const PeoplePage: React.FC = () => {
         <PeopleTable
           people={people}
           hasError={hasError}
+          isLoading={isLoading}
         />
       </div>
     </>

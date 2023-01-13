@@ -4,24 +4,29 @@ import { Loader } from '../Loader';
 import { PersonalInfo } from './PersonalInfo/PersonalInfo';
 
 type Props = {
-  people: Person[] | null,
+  people: Person[],
   hasError: boolean,
+  isLoading: boolean,
 };
 
-export const PeopleTable: React.FC<Props> = ({ people, hasError }) => {
-  const hasPeople = people ? people.length > 0 : true;
-  const hasTable = hasPeople && people;
+export const PeopleTable: React.FC<Props> = ({
+  people,
+  hasError,
+  isLoading,
+}) => {
+  const hasTable = people.length > 0;
+  const hasPeopleMessage = !hasTable && !isLoading && !hasError;
 
   return (
     <div className="box table-container">
-      {!people && <Loader />}
+      {isLoading && <Loader />}
       {hasError && (
         <p data-cy="peopleLoadingError" className="has-text-danger">
           Something went wrong
         </p>
       )}
 
-      {!hasPeople && (
+      {hasPeopleMessage && (
         <p data-cy="noPeopleMessage">
           There are no people on the server
         </p>
