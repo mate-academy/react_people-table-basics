@@ -9,12 +9,19 @@ type Props = {
 
 export const PersonLink = ({ person, isSelected }: Props) => {
   const {
-    name, sex, born, died,
-    slug, fatherName, motherName, father, mother,
+    name,
+    sex,
+    born,
+    died,
+    slug,
+    fatherName,
+    motherName,
+    father,
+    mother,
   } = person;
 
   const renderParent
-  = (parent: Person | undefined, parentName: string | null) => (
+  = (parent?: Person, parentName?: string | null) => (
     parent
       ? (
         <NavLink
