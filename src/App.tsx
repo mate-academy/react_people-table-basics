@@ -1,12 +1,10 @@
-/* eslint-disable import/order */
-
-import './App.scss';
-import { HomePage } from './components/HomePage';
-import { PeoplePage } from './components/PeoplePage';
+import classNames from 'classnames';
 import {
   Routes, Route, NavLink, Navigate,
 } from 'react-router-dom';
-import classNames from 'classnames';
+import './App.scss';
+import { HomePage } from './components/HomePage';
+import { PeoplePage } from './components/PeoplePage';
 
 export const App = () => {
   return (

@@ -59,7 +59,6 @@ React.FC<{}> = () => {
             {!isListEmpty && !isError && !isLoading && (
               <PeopleTable
                 people={people}
-                // selectedPersonSlug={selectedPersonSlug}
               />
             )}
           </div>
