@@ -21,7 +21,7 @@ export const PersonLink = ({ person, isSelected }: Props) => {
   } = person;
 
   const renderParent
-  = (parent?: Person, parentName?: string | null) => (
+  = (parentName: string | null, parent?: Person) => (
     parent
       ? (
         <NavLink
@@ -57,8 +57,8 @@ export const PersonLink = ({ person, isSelected }: Props) => {
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
-      <td>{renderParent(mother, motherName)}</td>
-      <td>{renderParent(father, fatherName)}</td>
+      <td>{renderParent(motherName, mother)}</td>
+      <td>{renderParent(fatherName, father)}</td>
     </tr>
   );
 };
