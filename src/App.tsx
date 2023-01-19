@@ -46,28 +46,28 @@ export const App = () => {
         </div>
       </nav>
       <main className="section">
-
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<Navigate to="/" replace />} />
-          <Route
-            path="/people"
-            element={(
-              <PeoplePage />
-            )}
-          />
-          <Route
-            path="/people/:slug"
-            element={(
-              <PeoplePage />
-            )}
-          />
-          <Route
-            path="*"
-            element={<h1 className="title">Page not found</h1>}
-          />
-        </Routes>
-
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route
+              path="/people"
+              element={(
+                <PeoplePage />
+              )}
+            />
+            <Route
+              path="/people/:slug"
+              element={(
+                <PeoplePage />
+              )}
+            />
+            <Route
+              path="*"
+              element={<h1 className="title">Page not found</h1>}
+            />
+          </Routes>
+        </div>
       </main>
     </div>
   );

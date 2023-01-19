@@ -13,25 +13,16 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     return personSlug.slug === slug;
   };
 
-  const parents = (parentName: string | null, parentRole: string) => {
+  const parents = (parentName: string | null) => {
     const parent = people.find((person) => person.name === parentName);
-    let className = '';
 
     if (parent) {
-      if (parentRole === 'mother') {
-        className = 'has-text-danger';
-      }
-
       return (
-        <PersonLink person={parent} className={className} />
+        <PersonLink person={parent} />
       );
     }
 
-    if (!parent) {
-      return parentName || '-';
-    }
-
-    return '-';
+    return parentName || '-';
   };
 
   return (
@@ -72,18 +63,20 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
                 })}
               >
                 <td>
-                  <PersonLink person={person} />
+                  <PersonLink
+                    person={person}
+                  />
                 </td>
 
                 <td>{sex}</td>
                 <td>{born}</td>
                 <td>{died}</td>
                 <td>
-                  {parents(motherName, 'mother')}
+                  {parents(motherName)}
 
                 </td>
                 <td>
-                  {parents(fatherName, 'father')}
+                  {parents(fatherName)}
                 </td>
               </tr>
             );

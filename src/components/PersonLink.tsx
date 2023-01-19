@@ -1,12 +1,12 @@
+import classNames from 'classnames';
 import { Link, useParams } from 'react-router-dom';
 import { Person } from '../types';
 
 type Props = {
   person: Person,
-  className?: string,
 };
 
-export const PersonLink:React.FC<Props> = ({ person, className }) => {
+export const PersonLink:React.FC<Props> = ({ person }) => {
   const personSlug = useParams();
   const isSelected = (slug: string) => {
     return personSlug.slug === slug;
@@ -17,7 +17,9 @@ export const PersonLink:React.FC<Props> = ({ person, className }) => {
       to={isSelected(person.slug)
         ? '../people'
         : `../people/${person.slug}`}
-      className={className}
+      className={classNames({
+        'has-text-danger': person.sex === 'f',
+      })}
     >
       {person.name}
     </Link>
