@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { getPeople } from '../../api';
 
 import { Loader } from '../Loader';
-import { PeopleTable } from '../PeopleTable';
+import { PeopleTable } from '../PersonLink';
 
 import { Person } from '../../types';
 
@@ -46,15 +46,15 @@ export const PeoplePage: React.FC = () => {
 
           {people.length === 0 && !isLoading && !hasError && (
             <p data-cy="noPeopleMessage">
-            There are no people on the server
-          </p>
-        )}
+              There are no people on the server
+            </p>
+          )}
 
-        {people.length > 0 && (
-          <PeopleTable people={people} />
-        )}
+          {people.length > 0 && (
+            <PeopleTable people={people} />
+          )}
+        </div>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
 };
