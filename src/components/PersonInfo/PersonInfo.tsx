@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../../types';
@@ -12,8 +12,17 @@ export const PersonInfo: React.FC<Props> = React.memo(
   ({ person }) => {
     const { slug } = useParams();
 
+    const handleClickScroll = useCallback((personSlug: string) => {
+      const selectedPerson = document.getElementById(personSlug);
+
+      if (selectedPerson) {
+        selectedPerson.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, []);
+
     return (
       <tr
+        id={person.slug}
         data-cy="person"
         className={cn(
           { 'has-background-warning': person.slug === slug },
@@ -30,7 +39,12 @@ export const PersonInfo: React.FC<Props> = React.memo(
         <td>
           {
             person.mother
-              ? <PersonLink person={person.mother} />
+              ? (
+                <PersonLink
+                  person={person.mother}
+                  onScroll={handleClickScroll}
+                />
+              )
               : person.motherName || '-'
           }
         </td>
@@ -38,7 +52,12 @@ export const PersonInfo: React.FC<Props> = React.memo(
         <td>
           {
             person.father
-              ? <PersonLink person={person.father} />
+              ? (
+                <PersonLink
+                  person={person.father}
+                  onScroll={handleClickScroll}
+                />
+              )
               : person.fatherName || '-'
           }
         </td>
