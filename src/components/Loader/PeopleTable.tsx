@@ -11,11 +11,13 @@ export const PeopleTable: FC<Props> = ({ people }) => {
   const { slug = '' } = useParams();
 
   const personWithParents = (person: Person) => {
-    const mother
-      = people.find(parent => parent.name === person.motherName);
+    const mother = people.find(
+      parent => parent.name === person.motherName,
+    );
 
-    const father
-      = people.find(parent => parent.name === person.fatherName);
+    const father = people.find(
+      parent => parent.name === person.fatherName,
+    );
 
     return ({ ...person, mother, father });
   };

@@ -9,7 +9,10 @@ type Props = {
 };
 
 export const PersonLink: FC<Props> = ({
-  person: {
+  person,
+  selectedPerson,
+}) => {
+  const {
     name,
     sex,
     born,
@@ -19,14 +22,13 @@ export const PersonLink: FC<Props> = ({
     slug,
     mother,
     father,
-  },
-  selectedPerson,
-}) => {
+  } = person;
+
   const isSelected = (value: string) => value === selectedPerson;
 
   const checkParent = (
-    parent: Person | undefined,
     parentName: string | null,
+    parent?: Person,
   ) => {
     return (
       parent ? (
@@ -58,10 +60,10 @@ export const PersonLink: FC<Props> = ({
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {checkParent(mother, motherName)}
+        {checkParent(motherName, mother)}
       </td>
       <td>
-        {checkParent(father, fatherName)}
+        {checkParent(fatherName, father)}
       </td>
     </tr>
   );

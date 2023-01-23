@@ -10,8 +10,8 @@ export const Navbar: FC = () => (
   >
     <div className="container">
       <div className="navbar-brand">
-        <PageNavLink to="/" text="Home" />
-        <PageNavLink to="/people" text="People" />
+        <PageNavLink url="/" title="Home" />
+        <PageNavLink url="/people" title="People" />
       </div>
     </div>
   </nav>
