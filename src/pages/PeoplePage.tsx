@@ -11,7 +11,6 @@ export const PeoplePage: FC = () => {
 
   const handleLoading = async () => {
     try {
-      setIsError(false);
       setIsLoading(true);
 
       const peopleFromServer = await getPeople();

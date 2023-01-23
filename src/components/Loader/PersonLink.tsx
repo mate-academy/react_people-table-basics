@@ -24,6 +24,23 @@ export const PersonLink: FC<Props> = ({
 }) => {
   const isSelected = (value: string) => value === selectedPerson;
 
+  const checkParent = (
+    parent: Person | undefined,
+    parentName: string | null,
+  ) => {
+    return (
+      parent ? (
+        <Link to={`../${parent.slug}` || ''} className={classNames({ 'has-text-danger': parent.sex === 'f' })}>
+          {parent.name}
+        </Link>
+      ) : (
+        <>
+          {parentName || '-'}
+        </>
+      )
+    );
+  };
+
   return (
     <tr
       data-cy="person"
@@ -41,26 +58,10 @@ export const PersonLink: FC<Props> = ({
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {mother ? (
-          <Link to={`../${mother.slug}` || ''} className="has-text-danger">
-            {motherName}
-          </Link>
-        ) : (
-          <>
-            {motherName || '-'}
-          </>
-        )}
+        {checkParent(mother, motherName)}
       </td>
       <td>
-        {father ? (
-          <Link to={`../${father.slug}`}>
-            {fatherName}
-          </Link>
-        ) : (
-          <>
-            {fatherName || '-'}
-          </>
-        )}
+        {checkParent(father, fatherName)}
       </td>
     </tr>
   );
