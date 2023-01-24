@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { Person } from '../../types/Person';
 import { PersonItem } from '../PersonItem/PersonItem';
@@ -8,7 +8,7 @@ type Props = {
   selectedUser: string;
 };
 
-export const PeopleTable: React.FC<Props> = ({ people, selectedUser }) => (
+export const PeopleTable: React.FC<Props> = memo(({ people, selectedUser }) => (
   <table
     data-cy="peopleTable"
     className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -35,4 +35,4 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedUser }) => (
       ))}
     </tbody>
   </table>
-);
+));

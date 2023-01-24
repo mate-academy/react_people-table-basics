@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 
 import { useParams } from 'react-router-dom';
 import { Loader } from '../Loader/Loader';
@@ -6,7 +6,7 @@ import { PeopleTable } from '../PeopleTable/PeopleTable';
 import { getPeople } from '../../api';
 import { Person } from '../../types/Person';
 
-export const PeoplePage: React.FC = () => {
+export const PeoplePage: React.FC = memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -34,6 +34,9 @@ export const PeoplePage: React.FC = () => {
     loadPeople();
   }, []);
 
+  const isNoPeopleOnServer = isLoadingFinish && !isError && !people.length;
+  const isPeopleOnServer = isLoadingFinish && !isError && people.length;
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -48,13 +51,13 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {isLoadingFinish && !people.length && (
+          {isNoPeopleOnServer && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {isLoadingFinish && people.length && (
+          {isPeopleOnServer && (
             <PeopleTable
               people={people}
               selectedUser={selectedUser}
@@ -64,4 +67,4 @@ export const PeoplePage: React.FC = () => {
       </div>
     </>
   );
-};
+});
