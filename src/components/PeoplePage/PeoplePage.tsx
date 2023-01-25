@@ -16,13 +16,14 @@ const getParents = (
 
 export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   const isMessageVisible = people.length === 0 && !isLoading;
   const isListVisible = people.length > 0 && !isLoading;
 
   const getPeople = async () => {
+    setIsLoading(true);
     try {
       const rawPeople = await fetchPeople();
       const preparedPeople = rawPeople.map(person => ({
@@ -31,18 +32,17 @@ export const PeoplePage: FC = () => {
       }));
 
       setPeople(preparedPeople);
-      setIsLoading(false);
     } catch (error) {
       console.error(error);
 
       setHasError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     getPeople();
-
-    return () => setPeople([]);
   }, []);
 
   return (

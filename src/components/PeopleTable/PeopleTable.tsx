@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useMatch } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const PeopleTable: FC<Props> = ({ people }) => {
-  const currentSlug = useMatch('/people/:slug')?.params.slug;
+  const currentSlug = useParams().slug;
 
   return (
     <table
