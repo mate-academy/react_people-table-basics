@@ -17,28 +17,28 @@ import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 createRoot(document.getElementById('root') as HTMLDivElement)
   .render(
     <HashRouter>
-      <App />
-
       <Routes>
-        <Route
-          path="/"
-          element={<HomePage />}
-        />
+        <Route path="/" element={<App />}>
+          <Route
+            path="*"
+            element={<NotFoundPage />}
+          />
 
-        <Route path="/people">
-          <Route index element={<PeoplePage />} />
-          <Route path=":selectedUser" element={<PeoplePage />} />
+          <Route
+            index
+            element={<HomePage />}
+          />
+
+          <Route path="people">
+            <Route index element={<PeoplePage />} />
+            <Route path=":selectedUser" element={<PeoplePage />} />
+          </Route>
+
+          <Route
+            path="home"
+            element={<Navigate to="/" replace />}
+          />
         </Route>
-
-        <Route
-          path="/home"
-          element={<Navigate to="/" replace />}
-        />
-
-        <Route
-          path="*"
-          element={<NotFoundPage />}
-        />
       </Routes>
     </HashRouter>,
   );
