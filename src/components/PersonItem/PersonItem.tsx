@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../../types/Person';
 import { PersonLink } from '../PersonLink/PersonLink';
@@ -6,17 +7,18 @@ import { PersonLink } from '../PersonLink/PersonLink';
 type Props = {
   people: Person[];
   person: Person;
-  selectedUser: string;
 };
 
 export const PersonItem: React.FC<Props> = memo((props) => {
-  const { person, people, selectedUser } = props;
+  const { person, people } = props;
+
+  const { selectedUser = '' } = useParams();
 
   const findParent = (name: string) => {
-    const findedParent = people.find(human => human.name === name);
+    const parent = people.find(human => human.name === name);
 
-    return findedParent
-      ? <PersonLink person={findedParent} />
+    return parent
+      ? <PersonLink person={parent} />
       : name;
   };
 

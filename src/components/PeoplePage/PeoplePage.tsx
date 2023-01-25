@@ -1,6 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
 
-import { useParams } from 'react-router-dom';
 import { Loader } from '../Loader/Loader';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
 import { getPeople } from '../../api';
@@ -11,7 +10,6 @@ export const PeoplePage: React.FC = memo(() => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isLoadingFinish, setIsLoadingFinish] = useState(false);
-  const { selectedUser = '' } = useParams();
 
   const loadPeople = async () => {
     try {
@@ -60,7 +58,6 @@ export const PeoplePage: React.FC = memo(() => {
           {isPeopleOnServer && (
             <PeopleTable
               people={people}
-              selectedUser={selectedUser}
             />
           )}
         </div>

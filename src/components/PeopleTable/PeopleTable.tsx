@@ -5,10 +5,9 @@ import { PersonItem } from '../PersonItem/PersonItem';
 
 type Props = {
   people: Person[];
-  selectedUser: string;
 };
 
-export const PeopleTable: React.FC<Props> = memo(({ people, selectedUser }) => (
+export const PeopleTable: React.FC<Props> = memo(({ people }) => (
   <table
     data-cy="peopleTable"
     className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -30,7 +29,6 @@ export const PeopleTable: React.FC<Props> = memo(({ people, selectedUser }) => (
           key={person.slug}
           person={person}
           people={people}
-          selectedUser={selectedUser}
         />
       ))}
     </tbody>
