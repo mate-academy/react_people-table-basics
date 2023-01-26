@@ -17,7 +17,7 @@ export const PeoplePage: FC = memo(() => {
     setIsLoading(true);
     try {
       const peopleFromServer = await
-      fetch('https://mate-academy.github.io/react_people-table/api/people.json')
+      fetch('https://mate-academy.github.io/react_people-tale/api/people.json')
         .then(res => res.json());
 
       setPeople(peopleFromServer);
@@ -47,64 +47,66 @@ export const PeoplePage: FC = memo(() => {
   return (
     <div className="block">
       <div className="box table-container">
-        {isLoading && <Loader /> }
+        {isLoading ? <Loader /> : (
+          <>
+            {isError && (
+              <p data-cy="peopleLoadingError" className="has-text-danger">
+                Something went wrong
+              </p>
+            )}
 
-        {isError && (
-          <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
-          </p>
-        )}
+            {people.length === 0 && !isError ? (
+              <p data-cy="noPeopleMessage">
+                There are no people on the server
+              </p>
+            ) : (
+              <table
+                data-cy="peopleTable"
+                className="table is-striped is-hoverable is-narrow is-fullwidth"
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Sex</th>
+                    <th>Born</th>
+                    <th>Died</th>
+                    <th>Mother</th>
+                    <th>Father</th>
+                  </tr>
+                </thead>
 
-        {people.length === 0 ? (
-          <p data-cy="noPeopleMessage">
-            There are no people on the server
-          </p>
-        ) : (
-          <table
-            data-cy="peopleTable"
-            className="table is-striped is-hoverable is-narrow is-fullwidth"
-          >
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
-              </tr>
-            </thead>
+                <tbody>
+                  {peopleWithParents.map(person => (
+                    <tr
+                      key={person.slug}
+                      data-cy="person"
+                      className={cn(
+                        { 'has-background-warning': person.slug === slug },
+                      )}
+                    >
+                      <td>
+                        <PersonLink person={person} />
+                      </td>
 
-            <tbody>
-              {peopleWithParents.map(person => (
-                <tr
-                  key={person.slug}
-                  data-cy="person"
-                  className={cn(
-                    { 'has-background-warning': person.slug === slug },
-                  )}
-                >
-                  <td>
-                    <PersonLink person={person} />
-                  </td>
-
-                  <td>{person.sex}</td>
-                  <td>{person.born}</td>
-                  <td>{person.died}</td>
-                  <td>
-                    {person.mother
-                      ? <PersonLink person={person.mother} />
-                      : person.motherName || '-'}
-                  </td>
-                  <td>
-                    {person.father
-                      ? <PersonLink person={person.father} />
-                      : person.fatherName || '-'}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                      <td>{person.sex}</td>
+                      <td>{person.born}</td>
+                      <td>{person.died}</td>
+                      <td>
+                        {person.mother
+                          ? <PersonLink person={person.mother} />
+                          : person.motherName || '-'}
+                      </td>
+                      <td>
+                        {person.father
+                          ? <PersonLink person={person.father} />
+                          : person.fatherName || '-'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </>
         )}
       </div>
     </div>
