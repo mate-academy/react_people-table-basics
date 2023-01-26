@@ -17,7 +17,7 @@ export const PeoplePage: FC = memo(() => {
     setIsLoading(true);
     try {
       const peopleFromServer = await
-      fetch('https://mate-academy.github.io/react_people-tale/api/people.json')
+      fetch('https://mate-academy.github.io/react_people-table/api/people.json')
         .then(res => res.json());
 
       setPeople(peopleFromServer);
