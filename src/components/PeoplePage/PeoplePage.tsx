@@ -1,4 +1,9 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, {
+  useState,
+  useEffect,
+  memo,
+  useMemo,
+} from 'react';
 
 import { Loader } from '../Loader/Loader';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
@@ -32,8 +37,13 @@ export const PeoplePage: React.FC = memo(() => {
     loadPeople();
   }, []);
 
-  const isNoPeopleOnServer = isLoadingFinish && !isError && !people.length;
-  const isPeopleOnServer = isLoadingFinish && !isError && people.length;
+  const isNoPeopleOnServer = useMemo(() => (
+    isLoadingFinish && !isError && !people.length
+  ), [isLoadingFinish, isError, people]);
+
+  const isPeopleOnServer = useMemo(() => (
+    isLoadingFinish && !isError && people.length
+  ), [isLoadingFinish, isError, people]);
 
   return (
     <>
