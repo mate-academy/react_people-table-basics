@@ -28,14 +28,13 @@ export const NavBar: FC = memo(
             </NavLink>
 
             <NavLink
-              end
               className={({ isActive }) => {
                 return cn(
                   'navbar-item',
                   { 'has-background-grey-lighter': isActive },
                 );
               }}
-              to="people"
+              to="/people"
             >
               People
             </NavLink>
