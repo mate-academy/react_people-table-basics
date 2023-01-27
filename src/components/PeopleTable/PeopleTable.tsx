@@ -1,7 +1,8 @@
 import cn from 'classnames';
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types/Person';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   people: Person[];
@@ -36,14 +37,7 @@ export const PeopleTable: React.FC<Props> = React.memo(({ people }) => {
             key={person.slug}
           >
             <td>
-              <Link
-                to={`../${person.slug}`}
-                className={cn({
-                  'has-text-danger': person.sex === 'f',
-                })}
-              >
-                {person.name}
-              </Link>
+              <PersonLink person={person} />
             </td>
 
             <td>{person.sex}</td>
@@ -51,12 +45,7 @@ export const PeopleTable: React.FC<Props> = React.memo(({ people }) => {
             <td>{person.died}</td>
             <td>
               {person.mother && (
-                <Link
-                  to={`../${person.mother.slug}`}
-                  className="has-text-danger"
-                >
-                  {person.motherName || '-'}
-                </Link>
+                <PersonLink person={person.mother} />
               )}
 
               {!person.mother && person.motherName
@@ -66,9 +55,7 @@ export const PeopleTable: React.FC<Props> = React.memo(({ people }) => {
 
             <td>
               {person.father && (
-                <Link to={`../${person.father.slug}`}>
-                  {person.fatherName || '-'}
-                </Link>
+                <PersonLink person={person.father} />
               )}
 
               {!person.father && person.fatherName
