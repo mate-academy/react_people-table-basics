@@ -1,8 +1,11 @@
 import {
   FC, useEffect, useState,
 } from 'react';
+
+import { useMatch } from 'react-router-dom';
+
 import cn from 'classnames';
-// import { useMatch } from 'react-router-dom';
+
 import { Person } from '../../types';
 
 import { PersonLink } from '../PersonLink';
@@ -11,37 +14,41 @@ import { Loader } from '../Loader';
 
 import { getPeople } from '../../api';
 
-interface Props {
-  handlePersonClick: (person: string) => void;
-  selectedSlug: string;
-}
-
-export const PeopleTable: FC<Props> = ({
-  handlePersonClick,
-  selectedSlug,
-}) => {
+export const PeopleTable: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
 
   const [error, setError] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const match = useMatch('/people/:selectedSlug');
+
+  const [selectedSlug, setSelectedSlug] = useState(match?.params.selectedSlug);
+
+  const handlePersonClick = (slug: string) => {
+    setSelectedSlug(slug);
+  };
+
+  useEffect(() => {
+    setSelectedSlug(match?.params.selectedSlug || '');
+  }, [match]);
+
   async function showPeople() {
     try {
       setIsLoading(true);
       const peopleFromServer = await getPeople();
 
-      const updatedPeople = peopleFromServer.map(child => {
+      const updatedPeople = peopleFromServer.map(person => {
         const mother = peopleFromServer.find((human) => (
-          child.motherName === human.name
+          person.motherName === human.name
         ));
 
         const father = peopleFromServer.find((human) => (
-          child.fatherName === human.name
+          person.fatherName === human.name
         ));
 
         return {
-          ...child,
+          ...person,
           father,
           mother,
         };
