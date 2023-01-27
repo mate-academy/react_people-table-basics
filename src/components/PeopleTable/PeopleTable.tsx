@@ -44,23 +44,15 @@ export const PeopleTable: React.FC<Props> = React.memo(({ people }) => {
             <td>{person.born}</td>
             <td>{person.died}</td>
             <td>
-              {person.mother && (
-                <PersonLink person={person.mother} />
-              )}
-
-              {!person.mother && person.motherName
-                ? person.motherName
-                : '-'}
+              {person.mother
+                ? <PersonLink person={person.mother} />
+                : person.motherName || '-'}
             </td>
 
             <td>
-              {person.father && (
-                <PersonLink person={person.father} />
-              )}
-
-              {!person.father && person.fatherName
-                ? person.fatherName
-                : '-'}
+              {person.father
+                ? <PersonLink person={person.father} />
+                : person.fatherName || '-'}
             </td>
           </tr>
         ))}
