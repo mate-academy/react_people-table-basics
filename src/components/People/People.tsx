@@ -52,6 +52,8 @@ export const People: FC = memo(
       }, [people],
     );
 
+    // this comment for github because in the last commit smt went wrong
+
     const isLoadedPeopleExist = isPeopleLoaded && people.length;
     const isLoadedPeopleNotExist = isPeopleLoaded && !people.length;
 
