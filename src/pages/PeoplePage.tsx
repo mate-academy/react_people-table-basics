@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
-import { PeopleTable } from '../components/PeopleTable/';
+import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types';
 
 export const PeoplePage = () => {

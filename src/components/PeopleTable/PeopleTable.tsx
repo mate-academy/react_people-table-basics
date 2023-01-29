@@ -41,7 +41,7 @@ export const PeopleTable:FC<Props> = ({ people }) => {
               className={cn({ 'has-background-warning': personSlug === slug })}
             >
               <td>
-                <PersonLink person={person}/>
+                <PersonLink person={person} />
               </td>
 
               <td>{sex}</td>
@@ -49,14 +49,14 @@ export const PeopleTable:FC<Props> = ({ people }) => {
               <td>{died}</td>
               <td>
                 {motherName && mother ? (
-                  <PersonLink person = {mother}/>
+                  <PersonLink person={mother} />
                 ) : (
                   motherName || '-'
                 )}
               </td>
               <td>
                 {fatherName && father ? (
-                  <PersonLink person = {father}/>
+                  <PersonLink person={father} />
                 ) : (
                   fatherName || '-'
                 )}

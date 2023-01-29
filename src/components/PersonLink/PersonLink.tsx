@@ -15,5 +15,5 @@ export const PersonLink: FC<Props> = ({ person }) => {
     >
       {person.name}
     </Link>
-  )
+  );
 };
