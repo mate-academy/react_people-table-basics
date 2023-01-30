@@ -1,6 +1,5 @@
 import './App.scss';
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { PeoplePage } from './pages/PeoplePage';
+import { Outlet } from 'react-router-dom';
 import { MainNavLink } from './components/MainNavLink';
 
 export const App = () => (
@@ -21,15 +20,7 @@ export const App = () => (
 
     <main className="section">
       <div className="container">
-        <Routes>
-          <Route path="*" element={<h1 className="title">Page not found</h1>} />
-          <Route path="home" element={<Navigate to="/" replace />} />
-          <Route path="/" element={<h1 className="title">Home Page</h1>} />
-          <Route path="people">
-            <Route index element={<PeoplePage />} />
-            <Route path=":slug" element={<PeoplePage />} />
-          </Route>
-        </Routes>
+        <Outlet />
       </div>
     </main>
   </div>
