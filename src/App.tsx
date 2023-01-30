@@ -1,16 +1,13 @@
 import {
   FC,
 } from 'react';
-
 import {
   NavLink,
   Routes,
   Route,
   Navigate,
 } from 'react-router-dom';
-
 import cn from 'classnames';
-
 import './App.scss';
 
 import { PeopleTable } from './components/PeopleTable';

@@ -1,28 +1,19 @@
 import {
   FC, useEffect, useState,
 } from 'react';
-
 import { useMatch } from 'react-router-dom';
-
 import cn from 'classnames';
 
 import { Person } from '../../types';
-
 import { PersonLink } from '../PersonLink';
-
 import { Loader } from '../Loader';
-
 import { getPeople } from '../../api';
 
 export const PeopleTable: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-
   const [error, setError] = useState('');
-
   const [isLoading, setIsLoading] = useState(false);
-
   const match = useMatch('/people/:selectedSlug');
-
   const [selectedSlug, setSelectedSlug] = useState(match?.params.selectedSlug);
 
   const handlePersonClick = (slug: string) => {
