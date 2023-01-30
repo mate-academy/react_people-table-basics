@@ -13,6 +13,7 @@ export const PeopleTable: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
   const match = useMatch('/people/:selectedSlug');
   const [selectedSlug, setSelectedSlug] = useState(match?.params.selectedSlug);
 
@@ -66,6 +67,7 @@ export const PeopleTable: FC = () => {
       {
         isLoading && <Loader />
       }
+
       {
         error && (
           <p
@@ -146,9 +148,7 @@ export const PeopleTable: FC = () => {
                             : (
                               <PersonLink
                                 person={mother}
-                                handlePersonClick={
-                                  handlePersonClick
-                                }
+                                handlePersonClick={handlePersonClick}
                               />
                             )
                         }
@@ -166,9 +166,7 @@ export const PeopleTable: FC = () => {
                             : (
                               <PersonLink
                                 person={father}
-                                handlePersonClick={
-                                  handlePersonClick
-                                }
+                                handlePersonClick={handlePersonClick}
                               />
                             )
                         }
@@ -176,7 +174,6 @@ export const PeopleTable: FC = () => {
                           !fatherName && (
                             '-'
                           )
-
                         }
                       </td>
                     </tr>
@@ -187,133 +184,6 @@ export const PeopleTable: FC = () => {
           </table>
         )
       }
-      {/* {
-        isLoading
-          ? <Loader />
-          : (
-            <>
-              {
-                error
-                  ? (
-                    <p
-                      data-cy={
-                        error === 'something wrong'
-                          ? 'peopleLoadingError'
-                          : 'noPeopleMessage'
-                      }
-                      className="has-text-danger"
-                    >
-                      {error}
-                    </p>
-                  )
-                  : (
-                    <table
-                      data-cy="peopleTable"
-                      className={cn(
-                        'table',
-                        'is-striped',
-                        'is-hoverable',
-                        'is-fullwidth',
-                        'is-narrow',
-                      )}
-                    >
-                      <thead>
-                        <tr>
-                          <th>Name</th>
-                          <th>Sex</th>
-                          <th>Born</th>
-                          <th>Died</th>
-                          <th>Mother</th>
-                          <th>Father</th>
-                        </tr>
-                      </thead>
-
-                      <tbody>
-                        {
-                          people.map(person => {
-                            const {
-                              name,
-                              sex,
-                              born,
-                              died,
-                              fatherName,
-                              motherName,
-                              mother,
-                              father,
-                              slug,
-                            } = person;
-
-                            return (
-                              <tr
-                                data-cy="person"
-                                key={name}
-                                className={
-                                  cn({
-                                    'has-background-warning':
-                                      slug === selectedSlug,
-                                  })
-                                }
-                              >
-                                <td>
-                                  <PersonLink
-                                    person={person}
-                                    handlePersonClick={handlePersonClick}
-                                  />
-                                </td>
-                                <td>{sex}</td>
-                                <td>{born}</td>
-                                <td>{died}</td>
-                                <td>
-                                  {
-                                    !mother
-                                      ? motherName
-                                      : (
-                                        <PersonLink
-                                          person={mother}
-                                          handlePersonClick={
-                                            handlePersonClick
-                                          }
-                                        />
-                                      )
-                                  }
-                                  {
-                                    !motherName && (
-                                      '-'
-                                    )
-
-                                  }
-                                </td>
-                                <td>
-                                  {
-                                    !father
-                                      ? fatherName
-                                      : (
-                                        <PersonLink
-                                          person={father}
-                                          handlePersonClick={
-                                            handlePersonClick
-                                          }
-                                        />
-                                      )
-                                  }
-                                  {
-                                    !fatherName && (
-                                      '-'
-                                    )
-
-                                  }
-                                </td>
-                              </tr>
-                            );
-                          })
-                        }
-                      </tbody>
-                    </table>
-                  )
-              }
-            </>
-          )
-      } */}
     </div>
   );
 };
