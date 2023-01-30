@@ -79,9 +79,7 @@ export const App: FC = () => (
               <>
                 <h1 className="title">People Page</h1>
                 <div className="block">
-                  <div className="box table-container">
-                    <PeopleTable />
-                  </div>
+                  <PeopleTable />
                 </div>
               </>
             )}
@@ -93,9 +91,7 @@ export const App: FC = () => (
               <>
                 <h1 className="title">People Page</h1>
                 <div className="block">
-                  <div className="box table-container">
-                    <PeopleTable />
-                  </div>
+                  <PeopleTable />
                 </div>
               </>
             )}

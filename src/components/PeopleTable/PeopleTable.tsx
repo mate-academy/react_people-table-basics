@@ -71,8 +71,132 @@ export const PeopleTable: FC = () => {
   }, []);
 
   return (
-    <>
+    <div className="box table-container">
       {
+        isLoading && <Loader />
+      }
+      {
+        error && (
+          <p
+            data-cy={
+              error === 'something wrong'
+                ? 'peopleLoadingError'
+                : 'noPeopleMessage'
+            }
+            className="has-text-danger"
+          >
+            {error}
+          </p>
+        )
+      }
+
+      {
+        !isLoading && people.length > 0 && (
+          <table
+            data-cy="peopleTable"
+            className={cn(
+              'table',
+              'is-striped',
+              'is-hoverable',
+              'is-fullwidth',
+              'is-narrow',
+            )}
+          >
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Sex</th>
+                <th>Born</th>
+                <th>Died</th>
+                <th>Mother</th>
+                <th>Father</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {
+                people.map(person => {
+                  const {
+                    name,
+                    sex,
+                    born,
+                    died,
+                    fatherName,
+                    motherName,
+                    mother,
+                    father,
+                    slug,
+                  } = person;
+
+                  return (
+                    <tr
+                      data-cy="person"
+                      key={name}
+                      className={
+                        cn({
+                          'has-background-warning':
+                            slug === selectedSlug,
+                        })
+                      }
+                    >
+                      <td>
+                        <PersonLink
+                          person={person}
+                          handlePersonClick={handlePersonClick}
+                        />
+                      </td>
+                      <td>{sex}</td>
+                      <td>{born}</td>
+                      <td>{died}</td>
+                      <td>
+                        {
+                          !mother
+                            ? motherName
+                            : (
+                              <PersonLink
+                                person={mother}
+                                handlePersonClick={
+                                  handlePersonClick
+                                }
+                              />
+                            )
+                        }
+                        {
+                          !motherName && (
+                            '-'
+                          )
+
+                        }
+                      </td>
+                      <td>
+                        {
+                          !father
+                            ? fatherName
+                            : (
+                              <PersonLink
+                                person={father}
+                                handlePersonClick={
+                                  handlePersonClick
+                                }
+                              />
+                            )
+                        }
+                        {
+                          !fatherName && (
+                            '-'
+                          )
+
+                        }
+                      </td>
+                    </tr>
+                  );
+                })
+              }
+            </tbody>
+          </table>
+        )
+      }
+      {/* {
         isLoading
           ? <Loader />
           : (
@@ -102,105 +226,103 @@ export const PeopleTable: FC = () => {
                         'is-narrow',
                       )}
                     >
-                      <>
-                        <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>Sex</th>
-                            <th>Born</th>
-                            <th>Died</th>
-                            <th>Mother</th>
-                            <th>Father</th>
-                          </tr>
-                        </thead>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Sex</th>
+                          <th>Born</th>
+                          <th>Died</th>
+                          <th>Mother</th>
+                          <th>Father</th>
+                        </tr>
+                      </thead>
 
-                        <tbody>
-                          {
-                            people.map(person => {
-                              const {
-                                name,
-                                sex,
-                                born,
-                                died,
-                                fatherName,
-                                motherName,
-                                mother,
-                                father,
-                                slug,
-                              } = person;
+                      <tbody>
+                        {
+                          people.map(person => {
+                            const {
+                              name,
+                              sex,
+                              born,
+                              died,
+                              fatherName,
+                              motherName,
+                              mother,
+                              father,
+                              slug,
+                            } = person;
 
-                              return (
-                                <tr
-                                  data-cy="person"
-                                  key={name}
-                                  className={
-                                    cn({
-                                      'has-background-warning':
+                            return (
+                              <tr
+                                data-cy="person"
+                                key={name}
+                                className={
+                                  cn({
+                                    'has-background-warning':
                                       slug === selectedSlug,
-                                    })
+                                  })
+                                }
+                              >
+                                <td>
+                                  <PersonLink
+                                    person={person}
+                                    handlePersonClick={handlePersonClick}
+                                  />
+                                </td>
+                                <td>{sex}</td>
+                                <td>{born}</td>
+                                <td>{died}</td>
+                                <td>
+                                  {
+                                    !mother
+                                      ? motherName
+                                      : (
+                                        <PersonLink
+                                          person={mother}
+                                          handlePersonClick={
+                                            handlePersonClick
+                                          }
+                                        />
+                                      )
                                   }
-                                >
-                                  <td>
-                                    <PersonLink
-                                      person={person}
-                                      handlePersonClick={handlePersonClick}
-                                    />
-                                  </td>
-                                  <td>{sex}</td>
-                                  <td>{born}</td>
-                                  <td>{died}</td>
-                                  <td>
-                                    {
-                                      !mother
-                                        ? motherName
-                                        : (
-                                          <PersonLink
-                                            person={mother}
-                                            handlePersonClick={
-                                              handlePersonClick
-                                            }
-                                          />
-                                        )
-                                    }
-                                    {
-                                      !motherName && (
-                                        '-'
-                                      )
+                                  {
+                                    !motherName && (
+                                      '-'
+                                    )
 
-                                    }
-                                  </td>
-                                  <td>
-                                    {
-                                      !father
-                                        ? fatherName
-                                        : (
-                                          <PersonLink
-                                            person={father}
-                                            handlePersonClick={
-                                              handlePersonClick
-                                            }
-                                          />
-                                        )
-                                    }
-                                    {
-                                      !fatherName && (
-                                        '-'
+                                  }
+                                </td>
+                                <td>
+                                  {
+                                    !father
+                                      ? fatherName
+                                      : (
+                                        <PersonLink
+                                          person={father}
+                                          handlePersonClick={
+                                            handlePersonClick
+                                          }
+                                        />
                                       )
+                                  }
+                                  {
+                                    !fatherName && (
+                                      '-'
+                                    )
 
-                                    }
-                                  </td>
-                                </tr>
-                              );
-                            })
-                          }
-                        </tbody>
-                      </>
+                                  }
+                                </td>
+                              </tr>
+                            );
+                          })
+                        }
+                      </tbody>
                     </table>
                   )
               }
             </>
           )
-      }
-    </>
+      } */}
+    </div>
   );
 };
