@@ -61,8 +61,8 @@ export const PeopleTable: FC = () => {
       setPeople(updatedPeople);
       setIsLoading(false);
     } catch {
-      setError('something wrong');
       setIsLoading(false);
+      setError('something wrong');
     }
   }
 
