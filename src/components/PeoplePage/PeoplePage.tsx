@@ -1,4 +1,6 @@
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, {
+  memo, useEffect, useMemo, useState,
+} from 'react';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
@@ -16,10 +18,8 @@ export const PeoplePage: React.FC = memo(() => {
       const loadedPeople = await getPeople();
 
       setPeople(loadedPeople);
-
     } catch (error) {
       setIsError(true);
-
     } finally {
       setIsLoading(false);
     }

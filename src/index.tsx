@@ -4,7 +4,7 @@ import {
   HashRouter,
   Navigate,
   Route,
-  Routes
+  Routes,
 } from 'react-router-dom';
 
 import 'bulma/css/bulma.css';
