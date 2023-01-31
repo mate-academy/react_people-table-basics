@@ -1,23 +1,22 @@
-import React, { memo } from "react";
-import { FC } from "react";
-import { useParams } from "react-router-dom";
-import { Person } from "../../types";
-import { PersonLink } from "../PersonLink/PersonLink";
+import React, { memo } from 'react';
+import { useParams } from 'react-router-dom';
 import cn from 'classnames';
+import { Person } from '../../types';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   person: Person;
   people: Person[];
-}
+};
 
-export const PersonItem: FC<Props> = memo(({ people, person }) => {
+export const PersonItem: React.FC<Props> = memo(({ people, person }) => {
   const { userSlug = '' } = useParams();
 
   const findParent = (name: string) => {
     const parent = people.find(human => human.name === name);
 
     return parent
-      ? <PersonLink person={parent}/>
+      ? <PersonLink person={parent} />
       : name;
   };
 
@@ -29,7 +28,7 @@ export const PersonItem: FC<Props> = memo(({ people, person }) => {
       )}
     >
       <td>
-        <PersonLink person={person}/>
+        <PersonLink person={person} />
       </td>
 
       <td>{person.sex}</td>
@@ -39,15 +38,13 @@ export const PersonItem: FC<Props> = memo(({ people, person }) => {
       <td>
         {person.motherName
           ? findParent(person.motherName)
-          : '-'
-        }
+          : '-'}
       </td>
 
       <td>
         {person.fatherName
           ? findParent(person.fatherName)
-          : '-'
-        }
+          : '-'}
       </td>
     </tr>
   );
