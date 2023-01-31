@@ -30,7 +30,7 @@ export const PeoplePage: React.FC = memo(() => {
   }, []);
 
   const isDataLoaded = useMemo(() => (
-    !isLoading && !isError && people.length
+    !isLoading && !isError && people.length > 0
   ), [isError, isLoading, people]);
 
   return (
