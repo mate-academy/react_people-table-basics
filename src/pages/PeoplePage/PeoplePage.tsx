@@ -1,32 +1,39 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { getPeople } from '../../api';
 import { Loader } from '../../components/Loader';
 import { PeopleTable } from '../../components/PeopleTable/PeopleTable';
 import { Person } from '../../types';
 
-type Props = {
-  isError: boolean;
-  people: Person[];
-  isLoaded: boolean;
-  loadDate: () => void;
-};
-
-export const PeoplePage: React.FC<Props> = ({
-  isError,
-  people,
-  isLoaded,
-  loadDate,
-}) => {
+export const PeoplePage = () => {
   const { slug = 0 } = useParams();
 
+  const [people, setPeople] = useState<Person[]>([]);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getPeopleFromServer = async () => {
+    setIsLoading(true);
+
+    try {
+      const peopleFromServer = await getPeople();
+
+      setPeople(peopleFromServer);
+    } catch {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    loadDate();
+    getPeopleFromServer();
   }, []);
 
   return (
     <>
       <h1 className="title">People Page</h1>
-      {isLoaded && <Loader /> }
+      {isLoading && <Loader /> }
 
       <div className="block">
         <div className="box table-container">
@@ -36,7 +43,7 @@ export const PeoplePage: React.FC<Props> = ({
             </p>
           )}
 
-          {(!isError && !people.length) && (
+          {(!isLoading && !people.length) && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
