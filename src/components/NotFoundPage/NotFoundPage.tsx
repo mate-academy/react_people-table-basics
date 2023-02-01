@@ -1,7 +1,5 @@
-import React, { memo } from 'react';
+import { FC } from 'react';
 
-export const NotFoundPage: React.FC = memo(() => {
-  return (
-    <h1 className="title">Page not found</h1>
-  );
-});
+export const NotFoundPage: FC = () => (
+  <h1 className="title">Page not found</h1>
+);

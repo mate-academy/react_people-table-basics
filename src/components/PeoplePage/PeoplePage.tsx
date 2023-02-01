@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Loader } from '../Loader';
@@ -7,7 +7,7 @@ import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 import { getPeople } from '../../api';
 
-export const PeoplePage: React.FC = () => {
+export const PeoplePage: React.FC = memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -41,6 +41,15 @@ export const PeoplePage: React.FC = () => {
     }
   };
 
+  const fields = [
+    { id: 1, fieldName: 'Name' },
+    { id: 2, fieldName: 'Sex' },
+    { id: 3, fieldName: 'Born' },
+    { id: 4, fieldName: 'Died' },
+    { id: 5, fieldName: 'Mother' },
+    { id: 6, fieldName: 'Father' },
+  ];
+
   useEffect(() => {
     loadedPeople();
   }, []);
@@ -72,12 +81,9 @@ export const PeoplePage: React.FC = () => {
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
+                  {fields.map(field => (
+                    <th>{field.fieldName}</th>
+                  ))}
                 </tr>
               </thead>
 
@@ -117,4 +123,4 @@ export const PeoplePage: React.FC = () => {
       </div>
     </>
   );
-};
+});
