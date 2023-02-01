@@ -19,7 +19,7 @@ export const App: React.FC = () => {
         <div className="container">
           <div className="navbar-brand">
             <PageNavigation to="/" text="Home" />
-            <PageNavigation to="people" text="People" />
+            <PageNavigation to="/people" text="People" />
           </div>
         </div>
       </nav>

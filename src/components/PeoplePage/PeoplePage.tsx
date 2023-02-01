@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../../types';
 import { Loader } from '../Loader/Loader';
 import { getPeople } from '../../api';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 export const PeoplePage: React.FC = () => {
   const { slug = '' } = useParams();
@@ -20,6 +21,14 @@ export const PeoplePage: React.FC = () => {
       .catch(() => setIsPeopleError(true))
       .finally(() => setIsPeopleLoading(false));
   }, []);
+
+  const findParent = (name: string) => {
+    const parent = people.find(pers => pers.name === name);
+
+    return parent
+      ? <PersonLink person={parent} />
+      : name;
+  };
 
   return (
     <>
@@ -64,21 +73,21 @@ export const PeoplePage: React.FC = () => {
                     key={person.slug}
                   >
                     <td>
-                      <Link
-                        to={`../${person.slug}`}
-                        className={cn(
-                          // eslint-disable-next-line max-len
-                          { 'has-text-danger': person.sex === 'f' },
-                        )}
-                      >
-                        {person.name}
-                      </Link>
+                      <PersonLink person={person} />
                     </td>
                     <td>{person.sex}</td>
                     <td>{person.born}</td>
                     <td>{person.died}</td>
-                    <td>{person.motherName || '-'}</td>
-                    <td>{person.fatherName || '-'}</td>
+                    <td>
+                      {person.motherName
+                        ? findParent(person.motherName)
+                        : (person.motherName || '-')}
+                    </td>
+                    <td>
+                      {person.fatherName
+                        ? findParent(person.fatherName)
+                        : (person.fatherName || '-')}
+                    </td>
                   </tr>
                 ))}
               </tbody>
