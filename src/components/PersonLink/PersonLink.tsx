@@ -9,7 +9,7 @@ type Props = {
 
 export const PersonLink: React.FC<Props> = memo(({ person }) => (
   <Link
-    to={`#/people/${person.slug}`}
+    to={`../${person.slug}`}
     className={className(
       { 'has-text-danger': person.sex === 'f' },
     )}
