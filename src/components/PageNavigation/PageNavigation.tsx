@@ -16,7 +16,6 @@ export const PageNavigation: FC<Props> = memo(({ to, text }) => (
         { 'has-background-grey-lighter': isActive },
       )
     }
-    end
   >
     {text}
   </NavLink>
