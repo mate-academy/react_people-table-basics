@@ -1,5 +1,7 @@
 import { createRoot } from 'react-dom/client';
-import { HashRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import {
+  HashRouter as Router, Navigate, Route, Routes,
+} from 'react-router-dom';
 
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';

@@ -6,7 +6,7 @@ import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   people: Person[];
-}
+};
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
