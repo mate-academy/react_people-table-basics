@@ -12,6 +12,9 @@ export const PeopleTable: React.FC<Props> = memo(({
   people,
 }) => {
   const { selectedSlug = '' } = useParams();
+  const tableHeaders = Object.keys(people[0]);
+
+  tableHeaders.splice(4, 3);
 
   return (
     <table
@@ -20,12 +23,13 @@ export const PeopleTable: React.FC<Props> = memo(({
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {tableHeaders.map(header => (
+            <th key={header}>
+              {
+                header.charAt(0).toUpperCase() + header.slice(1)
+              }
+            </th>
+          ))}
         </tr>
       </thead>
 
