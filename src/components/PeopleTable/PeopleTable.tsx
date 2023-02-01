@@ -1,6 +1,7 @@
 import React from 'react';
 import { Person } from '../../types';
 import { PeopleTableRow } from '../PeopleTableRow';
+import { tableColumns } from './tableColumns';
 
 type Props = {
   people: Person[];
@@ -16,12 +17,9 @@ export const PeopleTable: React.FC<Props> = React.memo(({
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {tableColumns.map(column => (
+            <th key={column.id}>{column.title}</th>
+          ))}
         </tr>
       </thead>
 
