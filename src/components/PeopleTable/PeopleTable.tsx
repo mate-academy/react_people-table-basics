@@ -11,7 +11,7 @@ type Props = {
 export const PeopleTable: React.FC<Props> = memo(({
   people,
 }) => {
-  const { slug = '' } = useParams();
+  const { selectedSlug = '' } = useParams();
 
   return (
     <table
@@ -30,34 +30,47 @@ export const PeopleTable: React.FC<Props> = memo(({
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <tr
-            data-cy="person"
-            className={cn({
-              'has-background-warning': person.slug === slug,
-            })}
-            key={person.slug}
-          >
-            <td>
-              <PersonLink person={person} />
-            </td>
+        {people.map(person => {
+          const {
+            slug,
+            sex,
+            born,
+            died,
+            motherName,
+            fatherName,
+            mother,
+            father,
+          } = person;
 
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
-            <td>
-              {person.mother
-                ? <PersonLink person={person.mother} />
-                : person.motherName || '-'}
-            </td>
+          return (
+            <tr
+              data-cy="person"
+              className={cn({
+                'has-background-warning': slug === selectedSlug,
+              })}
+              key={slug}
+            >
+              <td>
+                <PersonLink person={person} />
+              </td>
 
-            <td>
-              {person.father
-                ? <PersonLink person={person.father} />
-                : person.fatherName || '-'}
-            </td>
-          </tr>
-        ))}
+              <td>{sex}</td>
+              <td>{born}</td>
+              <td>{died}</td>
+              <td>
+                {mother
+                  ? <PersonLink person={mother} />
+                  : motherName || '-'}
+              </td>
+
+              <td>
+                {father
+                  ? <PersonLink person={father} />
+                  : fatherName || '-'}
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
