@@ -11,6 +11,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
 createRoot(document.getElementById('root') as HTMLDivElement)
   .render(
@@ -21,6 +22,8 @@ createRoot(document.getElementById('root') as HTMLDivElement)
         <Route path="/people" element={<PeoplePage />} />
 
         <Route path="/home" element={<Navigate to="/" replace />} />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>,
   );
