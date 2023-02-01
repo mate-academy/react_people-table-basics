@@ -3,6 +3,7 @@ import {
   memo,
   useCallback,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import { useParams } from 'react-router-dom';
@@ -11,6 +12,7 @@ import { Person } from '../../types';
 import { Loader } from '../Loader/Loader';
 import { PersonLink } from '../PersonLink';
 import { getPersonByName } from '../PersonLink/helper';
+import { TableGroups } from '../../TableGroups';
 
 export const People: FC = memo(
   () => {
@@ -42,17 +44,15 @@ export const People: FC = memo(
       loadPeople();
     }, []);
 
-    const peopleWithParents = useCallback(
-      () => {
-        return people.map((person, _, arr) => ({
+    const peopleWithParents = useMemo(() => {
+      return () => (
+        people.map((person, _, arr) => ({
           ...person,
           mother: getPersonByName(arr, person.motherName),
           father: getPersonByName(arr, person.fatherName),
-        }));
-      }, [people],
-    );
-
-    // this comment for github because in the last commit smt went wrong
+        }))
+      );
+    }, [people]);
 
     const isLoadedPeopleExist = isPeopleLoaded && people.length;
     const isLoadedPeopleNotExist = isPeopleLoaded && !people.length;
@@ -84,12 +84,11 @@ export const People: FC = memo(
               >
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Born</th>
-                    <th>Died</th>
-                    <th>Mother</th>
-                    <th>Father</th>
+                    {TableGroups.map(group => (
+                      <th key={group}>
+                        {group}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
 

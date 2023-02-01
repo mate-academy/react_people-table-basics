@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { FC, memo, useMemo } from 'react';
+import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 
@@ -10,12 +10,12 @@ export interface Props {
 
 export const PersonLink: FC<Props> = memo(
   ({ person, slug }) => {
-    const isSelected = useMemo(() => slug === person.slug, [slug, person]);
+    const isSelectedPerson = slug === person.slug;
 
     return (
       <tr
         className={cn(
-          { 'has-background-warning': isSelected },
+          { 'has-background-warning': isSelectedPerson },
         )}
         data-cy="person"
       >
