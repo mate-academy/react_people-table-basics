@@ -49,7 +49,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {people.length && (
+          {people.length !== 0 && (
             <PeopleTable persons={people} selectedPerson={slug} />
           )}
         </div>
