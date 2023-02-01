@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import './App.scss';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
-import { PageNavLink } from './components/PageNavLink/PageNavLink';
+import { Navbar } from './components/Navbar/Navbar';
 
 export const App = () => {
   return (
@@ -19,10 +19,7 @@ export const App = () => {
           aria-label="main navigation"
         >
           <div className="container">
-            <div className="navbar-brand">
-              <PageNavLink to="/" text="Home" />
-              <PageNavLink to="people" text="People" />
-            </div>
+            <Navbar />
           </div>
         </nav>
 
