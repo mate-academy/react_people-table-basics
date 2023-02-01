@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, {
   memo, useCallback, useEffect, useState,
 } from 'react';
@@ -8,6 +9,7 @@ import { Person } from '../types';
 
 export const PeoplePage: React.FC = memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
+  const [header, setHeader] = useState<string[]>([]);
   const { slug } = useParams();
   const [errorText, setErrorText] = useState('');
 
@@ -15,7 +17,7 @@ export const PeoplePage: React.FC = memo(() => {
     setErrorText(error);
   };
 
-  const peopleFromServer = useCallback(async () => {
+  const getPeopleFromServer = useCallback(async () => {
     try {
       const response = await fetch(
         'https://mate-academy.github.io/react_people-table/api/people.json',
@@ -35,6 +37,22 @@ export const PeoplePage: React.FC = memo(() => {
         };
       });
 
+      const rawTableHeader = Object.keys(personsFromServer[0]);
+
+      const changingNamesHeader = rawTableHeader.map(el => {
+        if (el === 'fatherName') {
+          el = 'father';
+        }
+
+        if (el === 'motherName') {
+          el = 'mother';
+        }
+
+        return el[0].toUpperCase() + el.slice(1);
+      });
+
+      setHeader(changingNamesHeader);
+
       setPeople(peopleWithParents);
     } catch {
       errorMessage('Something went wrong');
@@ -42,10 +60,8 @@ export const PeoplePage: React.FC = memo(() => {
   }, []);
 
   useEffect(() => {
-    peopleFromServer();
+    getPeopleFromServer();
   }, []);
-  const tabbleHeaderColumns
-    = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
   return (
     <>
@@ -66,7 +82,7 @@ export const PeoplePage: React.FC = memo(() => {
           >
             <thead>
               <tr>
-                {tabbleHeaderColumns.map(column => (<th>{column}</th>))}
+                {header.map(column => (<th key={column}>{column}</th>))}
               </tr>
             </thead>
 
