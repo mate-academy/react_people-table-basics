@@ -2,12 +2,11 @@ import './App.scss';
 import {
   Navigate, Route, Routes,
 } from 'react-router-dom';
-import React, { memo } from 'react';
 import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
 import { PageNavLinks } from './pages/PageNavLinks';
 
-export const App: React.FC = memo(() => {
+export const App: React.FC = () => {
   return (
     <div data-cy="app">
       <nav
@@ -42,4 +41,4 @@ export const App: React.FC = memo(() => {
       </main>
     </div>
   );
-});
+};

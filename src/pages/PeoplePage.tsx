@@ -1,5 +1,5 @@
 import React, {
-  memo, useEffect, useMemo, useState,
+  memo, useCallback, useEffect, useState,
 } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader } from '../components/Loader';
@@ -15,7 +15,7 @@ export const PeoplePage: React.FC = memo(() => {
     setErrorText(error);
   };
 
-  const peopleFromServer = useMemo(() => async () => {
+  const peopleFromServer = useCallback(async () => {
     try {
       const response = await fetch(
         'https://mate-academy.github.io/react_people-table/api/people.json',
@@ -44,6 +44,8 @@ export const PeoplePage: React.FC = memo(() => {
   useEffect(() => {
     peopleFromServer();
   }, []);
+  const tabbleHeaderColumns
+    = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
   return (
     <>
@@ -64,12 +66,7 @@ export const PeoplePage: React.FC = memo(() => {
           >
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
+                {tabbleHeaderColumns.map(column => (<th>{column}</th>))}
               </tr>
             </thead>
 

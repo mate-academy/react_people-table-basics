@@ -12,7 +12,7 @@ export const PersonTable: React.FC<Props> = memo(({
   people,
   slug = '',
 }) => {
-  const selectedName = (person: Person) => person.slug === slug;
+  const isSelectedName = (person: Person) => person.slug === slug;
 
   return (
     <tbody>
@@ -20,7 +20,7 @@ export const PersonTable: React.FC<Props> = memo(({
         <tr
           data-cy="person"
           className={classNames(
-            { 'has-background-warning': selectedName(person) },
+            { 'has-background-warning': isSelectedName(person) },
           )}
           key={person.slug}
         >
