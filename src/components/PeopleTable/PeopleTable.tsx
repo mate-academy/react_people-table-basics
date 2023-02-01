@@ -41,11 +41,13 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
+
             <td>
               {person.mother
                 ? <PersonLink person={person.mother} />
                 : person.motherName || '-'}
             </td>
+
             <td>
               {person.father
                 ? <PersonLink person={person.father} />

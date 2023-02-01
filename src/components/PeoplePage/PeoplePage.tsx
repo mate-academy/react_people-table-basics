@@ -4,6 +4,8 @@ import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
 
+import './PeoplePage.scss';
+
 export const PeoplePage: React.FC = memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -42,7 +44,7 @@ export const PeoplePage: React.FC = memo(() => {
 
   return (
     <>
-      <h1 className="title">People Page</h1>
+      <h1 className="title people-title">People Page</h1>
       <div className="block">
         <div className="box table-container">
           {isLoading && <Loader />}
@@ -62,7 +64,6 @@ export const PeoplePage: React.FC = memo(() => {
           {!isLoading && (
             <PeopleTable people={people} />
           )}
-
         </div>
       </div>
     </>
