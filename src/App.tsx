@@ -20,7 +20,6 @@ export const App: React.FC = () => {
           <div className="navbar-brand">
             <NavLink
               to="/"
-              end
               className={({ isActive }) => cn('navbar-item',
                 { 'has-background-grey-lighter': isActive })}
             >
@@ -29,7 +28,6 @@ export const App: React.FC = () => {
 
             <NavLink
               to="/people"
-              end
               className={({ isActive }) => cn('navbar-item',
                 { 'has-background-grey-lighter': isActive })}
             >
@@ -55,12 +53,11 @@ export const App: React.FC = () => {
             element={<Navigate to="/" replace />}
           />
 
-          <Route
-            path="people"
-            element={(
-              <PeoplePage />
-            )}
-          />
+          <Route path="people">
+            <Route index element={<PeoplePage />} />
+            <Route path=":slug" element={<PeoplePage />} />
+          </Route>
+
           <Route
             path="*"
             element={<h1 className="title">Page not found</h1>}

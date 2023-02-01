@@ -1,4 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
+import cn from 'classnames';
+import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
@@ -9,6 +11,7 @@ export const PeoplePage: React.FC = memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingFinish, setIsLoadingFinish] = useState(false);
+  const { slug } = useParams();
 
   const loadPeople = async () => {
     try {
@@ -16,7 +19,20 @@ export const PeoplePage: React.FC = memo(() => {
 
       const loadedPeople = await getPeople();
 
-      setPeople(loadedPeople);
+      const preparedPeople = loadedPeople.map(person => {
+        const mother = loadedPeople.find(mom => (
+          mom.name === person.motherName));
+        const father = loadedPeople.find(dad => (
+          dad.name === person.fatherName));
+
+        return {
+          ...person,
+          mother,
+          father,
+        };
+      });
+
+      setPeople(preparedPeople);
     } catch (error) {
       setIsError(true);
     } finally {
@@ -51,49 +67,55 @@ export const PeoplePage: React.FC = memo(() => {
             </p>
           )}
 
-          <table
-            data-cy="peopleTable"
-            className="table is-striped
+          {people.length > 0 && (
+            <table
+              data-cy="peopleTable"
+              className="table is-striped
                   is-hoverable is-narrow is-fullwidth"
-          >
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {people.map((person) => (
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/jan-van-brussel-1714">
-                      {person.name}
-                    </a>
-                  </td>
-
-                  <td>{person.sex}</td>
-                  <td>{person.born}</td>
-                  <td>{person.died}</td>
-                  <td>
-                    {person.mother
-                      ? <PersonLink person={person.mother} />
-                      : person.motherName || '-'}
-                  </td>
-                  <td>
-                    {person.father
-                      ? <PersonLink person={person.father} />
-                      : person.fatherName || '-'}
-                  </td>
+            >
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sex</th>
+                  <th>Born</th>
+                  <th>Died</th>
+                  <th>Mother</th>
+                  <th>Father</th>
                 </tr>
-              ))}
+              </thead>
 
-            </tbody>
-          </table>
+              <tbody>
+                {people.map((person) => (
+                  <tr
+                    data-cy="person"
+                    key={person.slug}
+                    className={cn({
+                      'has-background-warning': person.slug === slug,
+                    })}
+                  >
+                    <td>
+                      <PersonLink person={person} />
+                    </td>
+
+                    <td>{person.sex}</td>
+                    <td>{person.born}</td>
+                    <td>{person.died}</td>
+                    <td>
+                      {person.mother
+                        ? <PersonLink person={person.mother} />
+                        : person.motherName || '-'}
+                    </td>
+                    <td>
+                      {person.father
+                        ? <PersonLink person={person.father} />
+                        : person.fatherName || '-'}
+                    </td>
+                  </tr>
+                ))}
+
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </div>
