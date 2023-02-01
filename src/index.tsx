@@ -12,18 +12,21 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
+import { App } from './App';
 
 createRoot(document.getElementById('root') as HTMLDivElement)
   .render(
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<App />}>
+          <Route index element={<HomePage />} />
 
-        <Route path="/people" element={<PeoplePage />} />
+          <Route path="/people" element={<PeoplePage />} />
 
-        <Route path="/home" element={<Navigate to="/" replace />} />
+          <Route path="/home" element={<Navigate to="/" replace />} />
 
-        <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
       </Routes>
     </Router>,
   );
