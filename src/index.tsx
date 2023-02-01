@@ -10,7 +10,7 @@ import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 import { App } from './App';
-import { PeoplePage } from './components/PeoplePage';
+import { PeoplePage } from './pages/PeoplePage';
 
 createRoot(document.getElementById('root') as HTMLDivElement)
   .render(
