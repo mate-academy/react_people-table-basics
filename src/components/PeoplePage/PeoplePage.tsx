@@ -16,8 +16,8 @@ export const PeoplePage: React.FC = memo(() => {
   const { slug = null } = useParams();
 
   const loadPeople = async () => {
-    setIsLoading(true);
     setErrorMessage('');
+    setIsLoading(true);
     try {
       const getPeopleFromServer = await getPeople();
       const preparedPeople = getPreparedPeople(getPeopleFromServer);
