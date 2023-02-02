@@ -9,20 +9,41 @@ export const PeoplePage = () => {
   const [isPeopleLoading, setIsPeopleLoading] = useState(false);
   const [isPeopleLoadingError, setIsPeopleLoadingError] = useState(false);
 
-  const getPeopleFromServer = () => {
-    setIsPeopleLoading(true);
+  const getFullPeopleFromServer = async () => {
+    try {
+      setIsPeopleLoading(true);
 
-    getPeople()
-      .then(setPeople)
-      .catch(() => setIsPeopleLoadingError(true))
-      .finally(() => setIsPeopleLoading(false));
+      const peopleFromServer = await getPeople();
+
+      const fullPeople = peopleFromServer.map(person => {
+        const mother = peopleFromServer.find(
+          personMother => personMother.name === person.motherName,
+        );
+
+        const father = peopleFromServer.find(
+          personFather => personFather.name === person.fatherName,
+        );
+
+        return {
+          ...person,
+          mother,
+          father,
+        };
+      });
+
+      setPeople(fullPeople);
+    } catch {
+      setIsPeopleLoadingError(true);
+    } finally {
+      setIsPeopleLoading(false);
+    }
   };
 
   useEffect(() => {
-    getPeopleFromServer();
+    getFullPeopleFromServer();
   }, []);
 
-  const isNoPeople = !isPeopleLoading && people.length === 0;
+  const isNoPeople = people.length === 0;
 
   return (
     <>
@@ -38,15 +59,17 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {isNoPeople && (
+          {(isNoPeople && !isPeopleLoading) && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          <PeopleTable
-            people={people}
-          />
+          {!isNoPeople && (
+            <PeopleTable
+              people={people}
+            />
+          )}
         </div>
       </div>
     </>
