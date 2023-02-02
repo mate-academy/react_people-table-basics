@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { NavLink } from "react-router-dom";
 
-export const NavBar = () => {
+export const NavBar: React.FC = () => {
   return (
     <nav
       data-cy="nav"
@@ -15,18 +15,18 @@ export const NavBar = () => {
           const { isActive } = props;
 
           return cn('navbar-item', {
-            'has-background-grey-lightner': isActive,
+            'has-background-grey-lighter': isActive,
           })
         }}
         >
           Home
         </NavLink>
 
-        <NavLink to="#/people" className={(props: any) => {
+        <NavLink to="/people" className={(props: any) => {
           const { isActive } = props;
 
           return cn('navbar-item', {
-            'has-background-grey-lightner': isActive,
+            'has-background-grey-lighter': isActive,
           })
         }}
         >
