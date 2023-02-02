@@ -1,14 +1,16 @@
 import { FC } from 'react';
 import cn from 'classnames';
-import { Person } from '../../types';
-import { PersonLink } from '../PersonLink/PersonLink';
+import { useParams } from 'react-router-dom';
+import { Person } from '../types';
+import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[];
-  selectedPersonSlug?: string;
 };
 
-export const PeopleTable: FC<Props> = ({ people, selectedPersonSlug }) => {
+export const PeopleTable: FC<Props> = ({ people }) => {
+  const { personSlug } = useParams();
+
   return (
     <table
       data-cy="peopleTable"
@@ -31,7 +33,7 @@ export const PeopleTable: FC<Props> = ({ people, selectedPersonSlug }) => {
             data-cy="person"
             key={person.slug}
             className={cn(
-              { 'has-background-warning': person.slug === selectedPersonSlug },
+              { 'has-background-warning': person.slug === personSlug },
             )}
           >
             <td>
@@ -42,17 +44,9 @@ export const PeopleTable: FC<Props> = ({ people, selectedPersonSlug }) => {
             <td>{person.born}</td>
             <td>{person.died}</td>
 
-            <td>
-              {person.motherName
-                ? <PersonLink person={person.mother} />
-                : '-'}
-            </td>
+            <td>{person.motherName ?? '-'}</td>
 
-            <td>
-              {person.fatherName
-                ? <PersonLink person={person.father} />
-                : '-'}
-            </td>
+            <td>{person.fatherName ?? '-'}</td>
           </tr>
         ))}
       </tbody>

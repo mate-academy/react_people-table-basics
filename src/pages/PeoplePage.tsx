@@ -1,41 +1,28 @@
-import { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
-import { PeopleTable } from '../components/PeopleTable/PeopleTable';
-import { Person } from '../types/Person';
+import { PeopleTable } from '../components/PeopleTable';
+import { Person } from '../types';
 
-export const PeoplePage: FC = () => {
-  const { personSlug = '' } = useParams();
-
+export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isPeopleLoading, setIsPeopleLoading] = useState(false);
-  const [noPeopleError, setNoPeopleError] = useState(false);
-  const [peopleLoadingError, setPeopleLoadingError] = useState(false);
+  const [isPeopleLoadingError, setIsPeopleLoadingError] = useState(false);
 
-  // eslint-disable-next-line max-len
-  const BASE_URL = 'https://mate-academy.github.io/react_people-table/api/people.json';
-
-  const getPeople = () => {
-    const requestUrl = `${BASE_URL}/people`;
-
-    return fetch(requestUrl)
-      .then(response => {
-        if (!response.ok) {
-          setPeopleLoadingError(true);
-        }
-
-        return response.json();
-      });
-  };
-
-  useEffect(() => {
+  const getPeopleFromServer = () => {
     setIsPeopleLoading(true);
 
     getPeople()
       .then(setPeople)
-      .catch(() => setNoPeopleError(true))
+      .catch(() => setIsPeopleLoadingError(true))
       .finally(() => setIsPeopleLoading(false));
+  };
+
+  useEffect(() => {
+    getPeopleFromServer();
   }, []);
+
+  const isNoPeople = !isPeopleLoading && people.length === 0;
 
   return (
     <>
@@ -43,26 +30,23 @@ export const PeoplePage: FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isPeopleLoading
-            ? <Loader />
-            : (
-              <PeopleTable
-                people={people}
-                selectedPersonSlug={personSlug}
-              />
-            )}
+          {isPeopleLoading && <Loader />}
 
-          {peopleLoadingError && (
+          {isPeopleLoadingError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {noPeopleError && (
+          {isNoPeople && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
+
+          <PeopleTable
+            people={people}
+          />
         </div>
       </div>
     </>
