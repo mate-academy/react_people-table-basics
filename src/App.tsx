@@ -37,11 +37,11 @@ export const App = () => {
                 element={(
                   <>
                     <h1 className="title">People Page</h1>
+                    <PeoplePage />
                     <Outlet />
                   </>
                 )}
               >
-                <Route index element={<PeoplePage />} />
                 <Route
                   path=":slug"
                   element={<PeoplePage />}
