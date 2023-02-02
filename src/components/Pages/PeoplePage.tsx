@@ -1,9 +1,9 @@
-import React, { memo, useEffect, useState } from "react";
-import { getPeople } from "../../api";
+import React, { memo, useEffect, useState } from 'react';
+import { getPeople } from '../../api';
 
-import { Person } from "../../types";
-import { Loader } from "../Loader";
-import { PeopleTable } from "../PeopleTable";
+import { Person } from '../../types';
+import { Loader } from '../Loader';
+import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage: React.FC = memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -17,8 +17,10 @@ export const PeoplePage: React.FC = memo(() => {
       const loadPeople = await getPeople();
 
       const preparedPeople = loadPeople.map((person) => {
-        const father = loadPeople.find((father) => person.fatherName === father.name);
-        const mother = loadPeople.find((mother) => person.motherName === mother.name);
+        const father = loadPeople
+          .find((dad) => person.fatherName === dad.name);
+        const mother = loadPeople
+          .find((mom) => person.motherName === mom.name);
 
         return {
           ...person,
