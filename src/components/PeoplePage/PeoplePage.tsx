@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import cn from 'classnames';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader/Loader';
 import { getPeople } from '../../api';
-import { PersonLink } from '../PersonLink/PersonLink';
+import { PersonPage } from '../PersonPage/PersonPage';
 
 export const PeoplePage: React.FC = () => {
-  const { slug = '' } = useParams();
   const [people, setPeople] = useState<Person[]>([]);
   const [isPeopleLoading, setIsPeopleLoading] = useState(false);
   const [isPeopleError, setIsPeopleError] = useState(false);
-
-  const isSelected = (person: Person) => person.slug === slug;
 
   useEffect(() => {
     setIsPeopleLoading(true);
@@ -22,22 +17,17 @@ export const PeoplePage: React.FC = () => {
       .finally(() => setIsPeopleLoading(false));
   }, []);
 
-  const findParent = (name: string) => {
-    const parent = people.find(pers => pers.name === name);
-
-    return parent
-      ? <PersonLink person={parent} />
-      : name;
-  };
-
-  const tableHeaders = [
+  const tableHeaders = useMemo(() => [
     { id: 1, title: 'Name' },
     { id: 2, title: 'Sex' },
     { id: 3, title: 'Born' },
     { id: 4, title: 'Died' },
     { id: 5, title: 'Mother' },
     { id: 6, title: 'Father' },
-  ];
+  ], []);
+
+  const isNoPeople = useMemo(() => (!isPeopleLoading && !people.length),
+    [isPeopleLoading, people]);
 
   return (
     <>
@@ -48,13 +38,20 @@ export const PeoplePage: React.FC = () => {
           {isPeopleLoading && (
             <Loader />
           )}
-          {!people.length && !isPeopleLoading && (
+
+          {isPeopleError && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )}
+
+          {isNoPeople && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {people.length > 0 && (
+          {!isPeopleLoading && (
             <table
               data-cy="peopleTable"
               // eslint-disable-next-line max-len
@@ -72,39 +69,14 @@ export const PeoplePage: React.FC = () => {
 
               <tbody>
                 {people.map(person => (
-                  <tr
-                    data-cy="person"
-                    className={cn({
-                      // eslint-disable-next-line max-len
-                      'has-background-warning': isSelected(person),
-                    })}
+                  <PersonPage
                     key={person.slug}
-                  >
-                    <td>
-                      <PersonLink person={person} />
-                    </td>
-                    <td>{person.sex}</td>
-                    <td>{person.born}</td>
-                    <td>{person.died}</td>
-                    <td>
-                      {person.motherName
-                        ? findParent(person.motherName)
-                        : (person.motherName || '-')}
-                    </td>
-                    <td>
-                      {person.fatherName
-                        ? findParent(person.fatherName)
-                        : (person.fatherName || '-')}
-                    </td>
-                  </tr>
+                    person={person}
+                    people={people}
+                  />
                 ))}
               </tbody>
             </table>
-          )}
-          {isPeopleError && (
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
           )}
         </div>
       </div>
