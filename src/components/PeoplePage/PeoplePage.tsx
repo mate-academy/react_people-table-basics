@@ -1,4 +1,9 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, {
+  memo,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Loader } from '../Loader';
@@ -41,14 +46,14 @@ export const PeoplePage: React.FC = memo(() => {
     }
   };
 
-  const fields = [
+  const fields = useMemo(() => [
     { id: 1, fieldName: 'Name' },
     { id: 2, fieldName: 'Sex' },
     { id: 3, fieldName: 'Born' },
     { id: 4, fieldName: 'Died' },
     { id: 5, fieldName: 'Mother' },
     { id: 6, fieldName: 'Father' },
-  ];
+  ], []);
 
   useEffect(() => {
     loadedPeople();

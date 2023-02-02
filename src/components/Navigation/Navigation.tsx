@@ -1,25 +1,18 @@
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
-import cn from 'classnames';
+import { CustomNavLink } from '../CustomNavLink';
 
 export const Navigation: FC = () => {
   return (
     <div className="navbar-brand">
-      <NavLink
-        className={({ isActive }) => cn('navbar-item',
-          { 'has-background-grey-lighter': isActive })}
+      <CustomNavLink
         to="/"
-      >
-        Home
-      </NavLink>
+        title="Home"
+      />
 
-      <NavLink
-        className={({ isActive }) => cn('navbar-item',
-          { 'has-background-grey-lighter': isActive })}
+      <CustomNavLink
         to="/people"
-      >
-        People
-      </NavLink>
+        title="People"
+      />
     </div>
   );
 };
