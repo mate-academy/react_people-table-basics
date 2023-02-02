@@ -5,7 +5,7 @@ import './App.scss';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
-import { NavBar } from './components/Loader/NavBar';
+import { NavBar } from './components/NavBar/NavBar';
 
 export const App = () => (
   <div data-cy="app">
@@ -19,7 +19,6 @@ export const App = () => (
           <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="*" element={<NotFoundPage />} />
 
-          {/*
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -142,7 +141,7 @@ export const App = () => (
               </tbody>
             </table>
           </div>
-        </div> */}
+        </div>
         </Routes>
       </div>
     </main>
