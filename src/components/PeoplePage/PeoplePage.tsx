@@ -1,28 +1,24 @@
 import React, {
   memo,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
-import { useParams } from 'react-router-dom';
-import cn from 'classnames';
+
 import { Loader } from '../Loader';
 
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink/PersonLink';
 import { getPeople } from '../../api';
+import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 export const PeoplePage: React.FC = memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const { slug } = useParams();
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const loadedPeople = async () => {
-    setIsLoading(true);
-
     try {
+      setIsLoading(true);
+
       const loadPeople = await getPeople();
 
       const peopleWithParents = loadPeople.map(person => {
@@ -39,21 +35,14 @@ export const PeoplePage: React.FC = memo(() => {
       });
 
       setPeople(peopleWithParents);
-    } catch (error) {
-      setErrorMessage('Something went wrong');
+    } catch {
+      setErrorMessage(true);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const fields = useMemo(() => [
-    { id: 1, fieldName: 'Name' },
-    { id: 2, fieldName: 'Sex' },
-    { id: 3, fieldName: 'Born' },
-    { id: 4, fieldName: 'Died' },
-    { id: 5, fieldName: 'Mother' },
-    { id: 6, fieldName: 'Father' },
-  ], []);
+  const hasNoPeople = !isLoading && !people.length;
 
   useEffect(() => {
     loadedPeople();
@@ -73,56 +62,14 @@ export const PeoplePage: React.FC = memo(() => {
             </p>
           )}
 
-          {!people.length && !isLoading && (
+          {hasNoPeople && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
           {!isLoading && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  {fields.map(field => (
-                    <th>{field.fieldName}</th>
-                  ))}
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map(person => (
-                  <tr
-                    data-cy="person"
-                    key={person.slug}
-                    className={cn({
-                      'has-background-warning': person.slug === slug,
-                    })}
-                  >
-                    <td>
-                      <PersonLink person={person} />
-                    </td>
-
-                    <td>{person.sex}</td>
-                    <td>{person.born}</td>
-                    <td>{person.died}</td>
-
-                    <td>
-                      {person.mother
-                        ? <PersonLink person={person.mother} />
-                        : person.motherName || '-'}
-                    </td>
-                    <td>
-                      {person.father
-                        ? <PersonLink person={person.father} />
-                        : person.fatherName || '-'}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <PeopleTable people={people} />
           )}
         </div>
       </div>

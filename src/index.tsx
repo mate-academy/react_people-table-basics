@@ -22,7 +22,6 @@ createRoot(document.getElementById('root') as HTMLDivElement)
           <Route index element={<HomePage />} />
 
           <Route path="/people">
-            <Route index element={<PeoplePage />} />
             <Route path=":slug" element={<PeoplePage />} />
           </Route>
 
