@@ -1,34 +1,15 @@
-import { Loader } from './components/Loader';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { Loader } from './components/Loader';
 
 import './App.scss';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
+import { NavBar } from './components/Loader/NavBar';
 
 export const App = () => (
   <div data-cy="app">
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
-            Home
-          </a>
-
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
-          >
-            People
-          </a>
-        </div>
-      </div>
-    </nav>
+    <NavBar />
 
     <main className="section">
       <div className="container">
@@ -38,7 +19,7 @@ export const App = () => (
           <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="*" element={<NotFoundPage />} />
 
-        {/* <div className="block">
+          {/* <div className="block">
           <div className="box table-container">
             <Loader />
 
