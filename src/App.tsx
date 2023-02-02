@@ -1,6 +1,10 @@
 import { Loader } from './components/Loader';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import './App.scss';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { HomePage } from './pages/HomePage';
+import { PeoplePage } from './pages/PeoplePage';
 
 export const App = () => (
   <div data-cy="app">
@@ -28,11 +32,13 @@ export const App = () => (
 
     <main className="section">
       <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/people" element={<PeoplePage />} />
+          <Route path="/home" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFoundPage />} />
 
-        <div className="block">
+        {/* <div className="block">
           <div className="box table-container">
             <Loader />
 
@@ -166,7 +172,8 @@ export const App = () => (
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
+        </Routes>
       </div>
     </main>
   </div>
