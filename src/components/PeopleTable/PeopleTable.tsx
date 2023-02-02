@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../../types';
@@ -7,17 +7,17 @@ import { PersonLink } from '../PersonLink/PersonLink';
 type Props = {
   people: Person[]
 };
+const fields = [
+  { id: 1, fieldName: 'Name' },
+  { id: 2, fieldName: 'Sex' },
+  { id: 3, fieldName: 'Born' },
+  { id: 4, fieldName: 'Died' },
+  { id: 5, fieldName: 'Mother' },
+  { id: 6, fieldName: 'Father' },
+];
+
 export const PeopleTable: FC<Props> = ({ people }) => {
   const { slug } = useParams();
-
-  const fields = useMemo(() => [
-    { id: 1, fieldName: 'Name' },
-    { id: 2, fieldName: 'Sex' },
-    { id: 3, fieldName: 'Born' },
-    { id: 4, fieldName: 'Died' },
-    { id: 5, fieldName: 'Mother' },
-    { id: 6, fieldName: 'Father' },
-  ], []);
 
   return (
     <table
@@ -27,7 +27,7 @@ export const PeopleTable: FC<Props> = ({ people }) => {
       <thead>
         <tr>
           {fields.map(field => (
-            <th>{field.fieldName}</th>
+            <th key={field.id}>{field.fieldName}</th>
           ))}
         </tr>
       </thead>
