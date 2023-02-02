@@ -1,5 +1,4 @@
-import { NavLink } from 'react-router-dom';
-import cn from 'classnames';
+import { TemplateNavLink } from './TemplateNavLink';
 
 export const Navbar = () => {
   return (
@@ -11,23 +10,8 @@ export const Navbar = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink
-            to="/"
-            className={({ isActive }) => cn(
-              'navbar-item', { 'has-background-grey-lighter': isActive },
-            )}
-          >
-            Home
-          </NavLink>
-
-          <NavLink
-            to="/people"
-            className={({ isActive }) => cn(
-              'navbar-item', { 'has-background-grey-lighter': isActive },
-            )}
-          >
-            People
-          </NavLink>
+          <TemplateNavLink to="/" textToDisplay="Home" />
+          <TemplateNavLink to="/people" textToDisplay="People" />
         </div>
       </div>
     </nav>

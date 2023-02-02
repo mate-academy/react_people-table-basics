@@ -8,6 +8,15 @@ type Props = {
   people: Person[];
 };
 
+const tableHeaders = [
+  { id: 1, title: 'Name' },
+  { id: 2, title: 'Sex' },
+  { id: 3, title: 'Born' },
+  { id: 4, title: 'Died' },
+  { id: 5, title: 'Mother' },
+  { id: 6, title: 'Father' },
+];
+
 export const PeopleTable: FC<Props> = ({ people }) => {
   const { personSlug } = useParams();
 
@@ -18,12 +27,11 @@ export const PeopleTable: FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {tableHeaders.map(header => (
+            <th key={header.id}>
+              {header.title}
+            </th>
+          ))}
         </tr>
       </thead>
 
