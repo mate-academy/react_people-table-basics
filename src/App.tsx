@@ -1,6 +1,5 @@
 import {
   Navigate,
-  Outlet,
   Route,
   Routes,
 } from 'react-router-dom';
@@ -32,20 +31,8 @@ export const App = () => {
               />
               <Route path="home" element={<Navigate to="/" replace />} />
 
-              <Route
-                path="people"
-                element={(
-                  <>
-                    <h1 className="title">People Page</h1>
-                    <PeoplePage />
-                    <Outlet />
-                  </>
-                )}
-              >
-                <Route
-                  path=":slug"
-                  element={<PeoplePage />}
-                />
+              <Route path="people" element={<PeoplePage />}>
+                <Route path=":slug" element={<PeoplePage />} />
               </Route>
 
               <Route
