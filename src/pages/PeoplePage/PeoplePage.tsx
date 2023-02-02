@@ -1,8 +1,8 @@
 import React, { memo, useEffect, useState } from 'react';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
-import { Loader } from '../Loader';
-import { PeopleTable } from '../PeopleTable/PeopleTable';
+import { Loader } from '../../components/Loader';
+import { PeopleTable } from '../../components/PeopleTable/PeopleTable';
 
 export const PeoplePage: React.FC = memo(() => {
   const [isError, setIsError] = useState(false);
