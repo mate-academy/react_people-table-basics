@@ -30,6 +30,15 @@ export const PeoplePage: React.FC = () => {
       : name;
   };
 
+  const tableHeaders = [
+    { id: 1, title: 'Name' },
+    { id: 2, title: 'Sex' },
+    { id: 3, title: 'Born' },
+    { id: 4, title: 'Died' },
+    { id: 5, title: 'Mother' },
+    { id: 6, title: 'Father' },
+  ];
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -53,12 +62,11 @@ export const PeoplePage: React.FC = () => {
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
+                  {tableHeaders.map(header => (
+                    <th key={header.id}>
+                      {header.title}
+                    </th>
+                  ))}
                 </tr>
               </thead>
 

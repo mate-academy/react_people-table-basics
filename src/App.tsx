@@ -6,6 +6,8 @@ import {
 import './App.scss';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { PageNavigation } from './components/PageNavigation/PageNavigation';
+import { HomePage } from './components/HomePage/HomePage';
+import { ErrorPage } from './components/ErrorPage/ErrorPage';
 
 export const App: React.FC = () => {
   return (
@@ -27,16 +29,13 @@ export const App: React.FC = () => {
       <main className="section">
         <div className="container">
           <Routes>
-            <Route path="/" element={<h1 className="title">Home Page</h1>} />
+            <Route path="/" element={<HomePage />} />
             <Route path="home" element={<Navigate to="/" replace />} />
             <Route path="people">
               <Route index element={<PeoplePage />} />
               <Route path=":slug" element={<PeoplePage />} />
             </Route>
-            <Route
-              path="*"
-              element={<h1 className="title">Page not found</h1>}
-            />
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </div>
       </main>
