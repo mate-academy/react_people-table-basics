@@ -20,7 +20,7 @@ export const PeoplePage:React.FC = () => {
 
         setPeople(peopleFromServer);
         setLoaded(true);
-      } catch {
+      } catch (err) {
         setError(true);
       } finally {
         setLoading(false);
