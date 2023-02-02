@@ -38,8 +38,8 @@ export const PeoplePage: React.FC = memo(() => {
     loadPeople();
   }, []);
 
-  const isLoadedPeopleExist = useMemo(() => (
-    isDataLoaded && people.length
+  const isNoLoadedPeople = useMemo(() => (
+    isDataLoaded && !people.length
   ), [isDataLoaded, people]);
 
   return (
@@ -48,25 +48,20 @@ export const PeoplePage: React.FC = memo(() => {
 
       <div className="block">
         <div className="box table-container">
-          {isLoading
-            ? <Loader />
-            : (
-              <>
-                {errorMessage && (
-                  <p data-cy="peopleLoadingError" className="has-text-danger">
-                    {errorMessage}
-                  </p>
-                )}
+          {isLoading && <Loader />}
 
-                {isLoadedPeopleExist
-                  ? <PeopleTable people={people} />
-                  : (
-                    <p data-cy="noPeopleMessage">
-                      There are no people on the server
-                    </p>
-                  )}
-              </>
-            )}
+          {errorMessage && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              {errorMessage}
+            </p>
+          )}
+
+          {people.length !== 0 && (<PeopleTable people={people} />)}
+          {isNoLoadedPeople && (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
+            </p>
+          )}
         </div>
       </div>
     </>
