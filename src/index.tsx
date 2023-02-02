@@ -16,8 +16,7 @@ createRoot(document.getElementById('root') as HTMLDivElement)
     <HashRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="people">
-            <Route index element={<PeoplePage />} />
+          <Route path="people" element={<PeoplePage />}>
             <Route path=":personSlug" element={<PeoplePage />} />
           </Route>
 
