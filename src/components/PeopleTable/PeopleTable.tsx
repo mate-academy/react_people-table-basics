@@ -17,10 +17,8 @@ export const PeopleTable: React.FC = () => {
     getPeople()
       .then(peopleFromServer => {
         const preparedPeople = peopleFromServer.map(person => {
-          const mother = people.find(mother =>
-            mother.name === person.motherName);
-          const father = people.find(father =>
-            father.name === person.fatherName);
+          const mother = people.find(mom => mom.name === person.motherName);
+          const father = people.find(dad => dad.name === person.fatherName);
 
           return {
             ...person,
