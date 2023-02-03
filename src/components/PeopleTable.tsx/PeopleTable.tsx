@@ -1,6 +1,6 @@
 import React from 'react';
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink/PersonLink';
+import { TableRow } from '../TableRow/TableRow';
 
 type Props = {
   people: Person[];
@@ -26,7 +26,7 @@ export const PeopleTable: React.FC<Props> = React.memo(
 
         <tbody>
           {people.map(person => (
-            <PersonLink
+            <TableRow
               key={person.slug}
               person={person}
             />

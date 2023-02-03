@@ -6,17 +6,16 @@ type Props = {
   person: Person;
 };
 
-export const PersonLink: React.FC<Props> = React.memo(
+export const TableRow: React.FC<Props> = React.memo(
   ({ person }) => {
     return (
       <tr data-cy="person">
         <td>
           <a
             href={`#/people/${person.slug}`}
-            className={cn(
-              'todo',
-              { 'has-text-danger': person.sex === 'f' },
-            )}
+            className={cn('todo', {
+              'has-text-danger': person.sex === 'f',
+            })}
           >
             {person.name}
           </a>
