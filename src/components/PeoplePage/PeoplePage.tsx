@@ -26,8 +26,9 @@ export const PeoplePage: React.FC = () => {
     { id: 6, title: 'Father' },
   ], []);
 
-  const isNoPeople = useMemo(() => (!isPeopleLoading && !people.length),
-    [isPeopleLoading, people]);
+  const isNoPeople = useMemo(() => (
+    !isPeopleLoading && !people.length && isPeopleError),
+  [isPeopleLoading, people]);
 
   return (
     <>
@@ -46,7 +47,7 @@ export const PeoplePage: React.FC = () => {
           )}
 
           {isNoPeople && (
-            <p data-cy="noPeopleMessage">
+            <p data-cy="noPeopleMessage" className="box-error">
               There are no people on the server
             </p>
           )}
