@@ -28,7 +28,7 @@ export const PeoplePage: React.FC = () => {
 
   const isNoPeople = useMemo(() => (
     !isPeopleLoading && !people.length && isPeopleError),
-  [isPeopleLoading, people]);
+  []);
 
   return (
     <>
