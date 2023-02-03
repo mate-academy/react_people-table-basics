@@ -1,17 +1,19 @@
 /* eslint-disable no-prototype-builtins */
 import React from 'react';
 import cn from 'classnames';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from './PersonLink';
 
+const headTitles = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 type Props = {
   people: Person[];
-  personSlug: string;
 };
 
-export const PeopleTable: React.FC<Props> = ({ people, personSlug }) => {
-  const isSelected = (person: Person) => person.slug === personSlug;
-  const headTitles = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+export const PeopleTable: React.FC<Props> = ({ people }) => {
+  const { personSlug = '' } = useParams();
+  const isSelectedPerson = (person: Person) => person.slug === personSlug;
 
   return (
     <table
@@ -32,7 +34,7 @@ export const PeopleTable: React.FC<Props> = ({ people, personSlug }) => {
             data-cy="person"
             key={person.slug}
             className={cn(
-              { 'has-background-warning': isSelected(person) },
+              { 'has-background-warning': isSelectedPerson(person) },
             )}
           >
             <td>
