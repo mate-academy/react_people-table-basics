@@ -51,7 +51,7 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {!isPeopleLoading && (
+          {people.length > 0 && (
             <table
               data-cy="peopleTable"
               // eslint-disable-next-line max-len
