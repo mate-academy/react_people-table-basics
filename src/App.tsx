@@ -16,7 +16,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 export const App = () => {
   const [people, setPeople] = useState<Person[]>([]);
 
-  const peopleFromServer = async () => {
+  const getPeopleFromServer = async () => {
     try {
       const dataFromServer = await getPeople();
 
@@ -43,7 +43,7 @@ export const App = () => {
   };
 
   useEffect(() => {
-    peopleFromServer();
+    getPeopleFromServer();
   }, []);
 
   return (

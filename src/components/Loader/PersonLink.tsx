@@ -11,7 +11,7 @@ type Props = {
 export const PersonLink: React.FC<Props> = ({ person }) => {
   return (
     <Link
-      to={`#/people/${person.slug}`}
+      to={`/people/${person.slug}`}
       className={cn({ 'has-text-danger': person.sex === 'f' })}
     >
       {person.name}

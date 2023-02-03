@@ -1,5 +1,6 @@
 /* eslint-disable no-prototype-builtins */
 import React from 'react';
+import cn from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from './PersonLink';
 
@@ -10,6 +11,7 @@ type Props = {
 
 export const PeopleTable: React.FC<Props> = ({ people, personSlug }) => {
   const isSelected = (person: Person) => person.slug === personSlug;
+  const headTitles = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
   return (
     <table
@@ -18,12 +20,9 @@ export const PeopleTable: React.FC<Props> = ({ people, personSlug }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {headTitles.map(title => (
+            <th>{ title }</th>
+          ))}
         </tr>
       </thead>
 
@@ -32,7 +31,9 @@ export const PeopleTable: React.FC<Props> = ({ people, personSlug }) => {
           <tr
             data-cy="person"
             key={person.slug}
-            className={isSelected(person) ? 'has-background-warning' : ''}
+            className={cn(
+              { 'has-background-warning': isSelected(person) },
+            )}
           >
             <td>
               <PersonLink person={person} />
