@@ -64,7 +64,7 @@ export const PeoplePage = memo(() => {
             </p>
           )}
 
-          {people.length
+          {people.length > 0
          && <PeopleTable people={people} />}
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.scss';
 import { Navbar } from './components/Navbar';
-import { ErrorNotification } from './Pages/ErrorNotification';
+import { PageNotFound } from './Pages/PageNotFound';
 import { HomePage } from './Pages/HomePage';
 import { PeoplePage } from './Pages/PeoplePage';
 
@@ -15,7 +15,7 @@ export const App = () => (
         <Route path="/people" element={<PeoplePage />}>
           <Route path=":slug" element={<PeoplePage />} />
         </Route>
-        <Route path="*" element={<ErrorNotification />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </main>
   </div>
