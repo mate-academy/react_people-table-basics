@@ -8,13 +8,13 @@ import { PersonLink } from '../PersonLink/PersonLink';
 
 export const PeopleTable: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [users, setUsers] = useState<Person[] | null>(null);
+  const [people, setPeople] = useState<Person[] | null>(null);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     getPeople()
       .then(result => {
-        setUsers(result.map(person => {
+        setPeople(result.map(person => {
           return {
             ...person,
             mother: result.find(mother => mother.name === person.motherName),
@@ -30,7 +30,7 @@ export const PeopleTable: React.FC = () => {
       });
   }, []);
 
-  const isUsersEmpty = !isLoading && !isError && !users?.length === null;
+  const isPeopleEmpty = !isLoading && !isError && people?.length === 0;
 
   const { personSlug } = useParams();
 
@@ -47,13 +47,13 @@ export const PeopleTable: React.FC = () => {
           </p>
         )}
 
-        {isUsersEmpty && (
+        {isPeopleEmpty && (
           <p data-cy="noPeopleMessage">
             There are no people on the server
           </p>
         )}
 
-        {!isLoading && users?.length && (
+        {!isLoading && people?.length && (
           <table
             data-cy="peopleTable"
             className="
@@ -75,7 +75,7 @@ export const PeopleTable: React.FC = () => {
               </tr>
             </thead>
 
-            {users?.map(person => (
+            {people?.map(person => (
               <tbody>
                 <tr
                   data-cy="person"
