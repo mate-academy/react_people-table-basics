@@ -8,6 +8,7 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isPeopleLoading, setIsPeopleLoading] = useState(false);
   const [isPeopleLoadingError, setIsPeopleLoadingError] = useState(false);
+  const [isPeopleLoaded, setIsPeopleLoaded] = useState(false);
 
   const getFullPeopleFromServer = async () => {
     try {
@@ -32,6 +33,7 @@ export const PeoplePage = () => {
       });
 
       setPeople(fullPeople);
+      setIsPeopleLoaded(true);
     } catch {
       setIsPeopleLoadingError(true);
     } finally {
@@ -59,7 +61,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {(isNoPeople && !isPeopleLoading) && (
+          {(isNoPeople && isPeopleLoaded) && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>

@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, To } from 'react-router-dom';
 import cn from 'classnames';
 
 type Props = {
-  to: string;
+  to: To;
   textToDisplay: string;
 };
 
