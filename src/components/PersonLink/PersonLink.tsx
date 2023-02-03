@@ -10,7 +10,7 @@ interface Props {
 export const PersonLink:FC<Props> = memo(({ person }) => {
   return (
     <Link
-      to={`/people/${person.slug}`}
+      to={`../${person.slug}`}
       className={cn({
         'has-text-danger': person.sex === 'f',
       })}

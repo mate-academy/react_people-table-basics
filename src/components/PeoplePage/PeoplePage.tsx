@@ -21,8 +21,12 @@ export const PeoplePage:FC = memo(() => {
 
       const peopleFromServer = await getPeople();
       const preparedPeople = peopleFromServer.map(person => {
-        const mother = peopleFromServer.find(p => person.motherName === p.name);
-        const father = peopleFromServer.find(p => person.fatherName === p.name);
+        const mother = peopleFromServer.find(mom => (
+          person.motherName === mom.name
+        ));
+
+        const father = peopleFromServer.find(dad => (
+          person.fatherName === dad.name));
 
         return {
           ...person,
@@ -56,9 +60,6 @@ export const PeoplePage:FC = memo(() => {
         <div className="box table-container">
           {isTableLoading && <Loader />}
 
-          {/* <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
-          </p> */}
           {errorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
