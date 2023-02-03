@@ -8,7 +8,6 @@ import '@fortawesome/fontawesome-free/css/all.css';
 
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
-import { PeopleTable } from './components/PepopleTable/PeopleTable';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { App } from './App';
 
@@ -23,22 +22,11 @@ createRoot(document.getElementById('root') as HTMLDivElement)
           <Route path="people">
             <Route
               index
-              element={(
-                <>
-                  <PeoplePage />
-                  <PeopleTable />
-                </>
-              )}
+              element={(<PeoplePage />)}
             />
             <Route
               path=":slug"
-              element={(
-                <>
-                  <PeoplePage />
-                  <PeopleTable />
-                </>
-              )}
-            />
+              element={(<PeoplePage />)}/>
           </Route>
 
           <Route
