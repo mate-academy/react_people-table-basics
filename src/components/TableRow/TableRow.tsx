@@ -1,6 +1,6 @@
 import cn from 'classnames';
-import { Link } from 'react-router-dom';
 import { Person } from '../../types/Person';
+import { PersonLink } from '../PersonLink';
 
 interface Props {
   person: Person
@@ -11,7 +11,6 @@ export const TableRow: React.FC<Props> = ({ person, selectedPersonId }) => {
   const {
     slug,
     sex,
-    name,
     born,
     died,
     mother,
@@ -29,15 +28,7 @@ export const TableRow: React.FC<Props> = ({ person, selectedPersonId }) => {
       )}
     >
       <td>
-        <Link
-          to={`/people/${slug}`}
-          className={cn(
-            { 'has-text-danger': sex === 'f' },
-            { 'has-text-info': sex === 'm' },
-          )}
-        >
-          {name}
-        </Link>
+        <PersonLink person={person} />
       </td>
 
       <td>{sex}</td>
@@ -45,30 +36,16 @@ export const TableRow: React.FC<Props> = ({ person, selectedPersonId }) => {
       <td>{died}</td>
       <td>
         {
-          mother ? (
-            <Link
-              to={`/people/${mother.slug}`}
-              className="has-text-danger"
-            >
-              {motherName}
-            </Link>
-          ) : (
-            motherName || '-'
-          )
+          mother
+            ? <PersonLink person={mother} />
+            : motherName || '-'
         }
       </td>
       <td>
         {
-          father ? (
-            <Link
-              to={`/people/${father.slug}`}
-              className="has-text-info"
-            >
-              {fatherName}
-            </Link>
-          ) : (
-            fatherName || '-'
-          )
+          father
+            ? <PersonLink person={father} />
+            : fatherName || '-'
         }
       </td>
     </tr>
