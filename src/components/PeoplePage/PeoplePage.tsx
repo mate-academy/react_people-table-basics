@@ -37,6 +37,7 @@ export const PeoplePage: React.FC = () => {
       <h1 className="title">People Page</h1>
       <div className="box table-container">
         {isLoading && <Loader />}
+
         <p data-cy="peopleLoadingError" className="has-text-danger">
           {!apiError && people.length === 0
             ? error
@@ -46,7 +47,7 @@ export const PeoplePage: React.FC = () => {
         <p data-cy="noPeopleMessage">
           {apiError && error}
         </p>
-        <PeopleTable people={people} />
+        {people.length > 0 && <PeopleTable people={people} />}
       </div>
     </div>
   );
