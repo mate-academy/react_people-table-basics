@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Loader } from '../components/Loader';
 import { getPeople } from '../api';
 import { Person } from '../types';
+import { PeopleTable } from '../components/PeopleTable/PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -49,6 +50,7 @@ export const PeoplePage = () => {
               There are no people on the server
             </p>
           )}
+          <PeopleTable people={people} />
         </div>
       </div>
     </>
