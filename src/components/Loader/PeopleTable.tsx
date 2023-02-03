@@ -11,7 +11,7 @@ type Props = {
   people: Person[];
 };
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
+export const PeopleTable: React.FC<Props> = React.memo(({ people }) => {
   const { personSlug = '' } = useParams();
   const isSelectedPerson = (person: Person) => person.slug === personSlug;
 
@@ -23,7 +23,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       <thead>
         <tr>
           {headTitles.map(title => (
-            <th>{ title }</th>
+            <th>{title}</th>
           ))}
         </tr>
       </thead>
@@ -42,7 +42,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             </td>
 
             <td>{person.sex}</td>
-            <td>{person.born }</td>
+            <td>{person.born}</td>
             <td>{person.died}</td>
             <td>
               {person.mother
@@ -59,4 +59,4 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </tbody>
     </table>
   );
-};
+});
