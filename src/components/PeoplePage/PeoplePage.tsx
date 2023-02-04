@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { getPeople } from '../../api';
+import { useEffect, useState } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
@@ -56,7 +56,11 @@ export const PeoplePage = () => {
               There are no people on the server
             </p>
           )}
-          <PeopleTable people={people} />
+          {!isLoading && !hasError && people.length && (
+            <PeopleTable
+              people={people}
+            />
+      )}
         </div>
       </div>
     </>
