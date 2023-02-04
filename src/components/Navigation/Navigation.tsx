@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
-import cn from 'classnames';
-import { NavLink } from 'react-router-dom';
+// import { NavLink as CustomLink } from 'react-router-dom';
+import { CustomLink } from '../../Helpers/CustomLink';
 
 export const Navigation:FC = memo(() => {
   return (
@@ -12,25 +12,8 @@ export const Navigation:FC = memo(() => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink
-            className={({ isActive }) => (
-              cn('navbar-item', {
-                'has-background-grey-lighter is-active': isActive,
-              })
-            )}
-            to="/"
-          >
-            Home
-          </NavLink>
-
-          <NavLink
-            className={({ isActive }) => (
-              cn('navbar-item', { 'has-background-grey-lighter': isActive })
-            )}
-            to="people"
-          >
-            People
-          </NavLink>
+          <CustomLink title="Home" to="/" />
+          <CustomLink title="People" to="people" />
         </div>
       </div>
     </nav>
