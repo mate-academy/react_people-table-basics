@@ -1,13 +1,15 @@
 import React from 'react';
 import { Person } from '../../types';
-import { TableRow } from '../TableRow/TableRow';
+import { PersonItem } from '../PersonItem/PersonItem';
+import { getParent } from '../../helpers/helpers';
 
 type Props = {
   people: Person[];
+  selectedPersonSlug: string
 };
 
 export const PeopleTable: React.FC<Props> = React.memo(
-  ({ people }) => {
+  ({ people, selectedPersonSlug }) => {
     return (
       <table
         data-cy="peopleTable"
@@ -26,9 +28,12 @@ export const PeopleTable: React.FC<Props> = React.memo(
 
         <tbody>
           {people.map(person => (
-            <TableRow
+            <PersonItem
               key={person.slug}
               person={person}
+              selectedPersonSlug={selectedPersonSlug}
+              personMother={getParent(people, person.motherName)}
+              personFather={getParent(people, person.fatherName)}
             />
           ))}
         </tbody>
