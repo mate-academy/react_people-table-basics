@@ -4,9 +4,5 @@ export const getParent = (
   people: Person[],
   parentName: string | null,
 ) => {
-  if (parentName === null) {
-    return '';
-  }
-
-  return people.find(person => person.name === parentName) || parentName;
+  return people.find(person => person.name === parentName) || null;
 };

@@ -1,23 +1,17 @@
-import cn from 'classnames';
 import React from 'react';
+import cn from 'classnames';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   person: Person;
-  selectedPersonSlug: string;
-  personMother: Person | string;
-  personFather: Person | string;
 };
 
 export const PersonItem: React.FC<Props> = React.memo(
-  ({
-    person,
-    selectedPersonSlug,
-    personMother,
-    personFather,
-  }) => {
-    const isSelected = (person.slug === selectedPersonSlug);
+  ({ person }) => {
+    const { slug = '' } = useParams();
+    const isSelected = (person.slug === slug);
 
     return (
       <tr
@@ -35,16 +29,14 @@ export const PersonItem: React.FC<Props> = React.memo(
         <td>{person.died}</td>
 
         <td>
-          {person.motherName
-            // ? `${person.motherName}`
-            ? <PersonLink person={personMother} />
-            : '-'}
+          {person.mother
+            ? <PersonLink person={person.mother} />
+            : person.motherName || '-'}
         </td>
         <td>
-          {person.fatherName
-            // ? `${person.fatherName}`
-            ? <PersonLink person={personFather} />
-            : '-'}
+          {person.father
+            ? <PersonLink person={person.father} />
+            : person.fatherName || '-'}
         </td>
       </tr>
     );

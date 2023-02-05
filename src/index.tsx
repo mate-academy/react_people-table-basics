@@ -26,7 +26,6 @@ createRoot(document.getElementById('root') as HTMLDivElement)
 
           <Route path="*" element={<NotFoundPage />} />
         </Route>
-
       </Routes>
     </HashRouter>,
   );

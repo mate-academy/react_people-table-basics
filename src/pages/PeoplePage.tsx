@@ -1,20 +1,26 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { getPeople } from '../api';
 import { Person } from '../types';
 import { PeopleTable } from '../components/PeopleTable.tsx/PeopleTable';
 import { Loader } from '../components/Loader';
+import { getParent } from '../helpers/helpers';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadError, setIsLoadError] = useState(false);
 
-  const { slug = '' } = useParams();
-
   useEffect(() => {
     getPeople()
-      .then(setPeople)
+      .then(loadedPeople => {
+        const preparedPeople = loadedPeople.map(person => ({
+          ...person,
+          mother: getParent(loadedPeople, person.motherName),
+          father: getParent(loadedPeople, person.fatherName),
+        }));
+
+        setPeople(preparedPeople);
+      })
       .catch(() => setIsLoadError(true))
       .finally(() => setIsLoading(false));
   }, []);
@@ -30,10 +36,7 @@ export const PeoplePage = () => {
               <Loader />
             )
             : (
-              <PeopleTable
-                people={people}
-                selectedPersonSlug={slug}
-              />
+              <PeopleTable people={people} />
             )}
 
           {isLoadError && (
