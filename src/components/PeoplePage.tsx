@@ -6,11 +6,7 @@ import { Loader } from './Loader';
 import { Person } from '../types/Person';
 import { getPeople } from '../api';
 
-type Props = {
-
-};
-
-export const PeoplePage: React.FC<Props> = () => {
+export const PeoplePage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [peopleList, setPeopleList] = useState<Person[]>([]);
   const [isErrorOnServer, setIsErrorOnServer] = useState(false);
