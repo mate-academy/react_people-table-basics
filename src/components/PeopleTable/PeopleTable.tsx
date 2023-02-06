@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { Person } from '../../types';
+import { Person } from '../../types/Person';
 import { PersonLink } from '../PersonLink/PersonLink';
 
 interface Props {

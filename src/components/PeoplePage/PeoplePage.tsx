@@ -1,7 +1,7 @@
-import { getPeople } from '../../api';
 import { useEffect, useState } from 'react';
-import { Person } from '../../types';
-import { Loader } from '../Loader';
+import { getPeople } from '../../api';
+import { Person } from '../../types/Person';
+import { Loader } from '../Loader/Loader';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 export const PeoplePage = () => {
@@ -21,7 +21,10 @@ export const PeoplePage = () => {
         const foundMother = loadedPeople
           .find(mother => mother.name === person.motherName);
 
-        return Object.assign(person, { foundFather, foundMother });
+        return Object.assign(
+          person,
+          { father: foundFather, mother: foundMother },
+        );
       });
 
       setPeople(peopleWithParents);
@@ -56,11 +59,12 @@ export const PeoplePage = () => {
               There are no people on the server
             </p>
           )}
-          {!isLoading && !hasError && people.length && (
+
+          {!isLoading && !hasError && (
             <PeopleTable
               people={people}
             />
-      )}
+          )}
         </div>
       </div>
     </>

@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { Person } from '../../types';
+import { Person } from '../../types/Person';
 
 interface Props {
-  person: Person
+  person: Person;
 }
 
 export const PersonLink: FC<Props> = (props) => {
@@ -13,7 +13,7 @@ export const PersonLink: FC<Props> = (props) => {
 
   return (
     <Link
-      to={person.slug}
+      to={`../${person.slug}`}
       className={classNames({
         'has-text-danger': isWoman,
       })}
