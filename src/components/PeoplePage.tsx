@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 
-import { getPeople } from '../api';
+import { Link, useParams } from 'react-router-dom';
 import { Loader } from './Loader';
 import { Person } from '../types/Person';
+import { getPeople } from '../api';
 
 type Props = {
 
@@ -12,26 +13,25 @@ type Props = {
 export const PeoplePage: React.FC<Props> = () => {
   const [loading, setLoading] = useState(true);
   const [peopleList, setPeopleList] = useState<Person[]>([]);
-  const [isError, setIsError] = useState(false);
-  const [errorText, setErrorText] = useState('');
+  const [isErrorOnServer, setIsErrorOnServer] = useState(false);
+  const { slug } = useParams();
+
+  const getPeopleList = async () => {
+    try {
+      const loadedPeople = await getPeople();
+
+      setPeopleList(() => loadedPeople);
+    } catch {
+      setIsErrorOnServer(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const isNoDataOnServer = !loading && !peopleList.length;
 
   useEffect(() => {
-    getPeople()
-      .then(data => {
-        setPeopleList(() => data);
-        if (peopleList.length === 0) {
-          setIsError(true);
-          setErrorText('There are no people on the server');
-        }
-      })
-      .catch(() => {
-        setPeopleList([]);
-        setIsError(true);
-        setErrorText('Something went wrong');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    getPeopleList();
   }, []);
 
   const getParent = (parentName: string | null) => {
@@ -43,14 +43,14 @@ export const PeoplePage: React.FC<Props> = () => {
 
     return parent
       ? (
-        <a
+        <Link
           className={cn(
             { 'has-text-danger': parent.sex === 'f' },
           )}
-          href="#/people/emma-de-milliano-1876"
+          to={parent.slug}
         >
           {parentName}
-        </a>
+        </Link>
       ) : `${parentName}`;
   };
 
@@ -81,16 +81,22 @@ export const PeoplePage: React.FC<Props> = () => {
 
                   <tbody>
                     {peopleList.map(person => (
-                      <tr data-cy="person">
+                      <tr
+                        key={person.slug}
+                        className={cn(
+                          { 'has-background-warning': person.slug === slug },
+                        )}
+                        data-cy="person"
+                      >
                         <td>
-                          <a
-                            href="#/people/philibert-haverbeke-1907"
+                          <Link
+                            to={person.slug}
                             className={cn(
                               { 'has-text-danger': person.sex === 'f' },
                             )}
                           >
                             {person.name}
-                          </a>
+                          </Link>
                         </td>
 
                         <td>{person.sex}</td>
@@ -110,24 +116,18 @@ export const PeoplePage: React.FC<Props> = () => {
                     ))}
                   </tbody>
                 </table>
-                <div
-                  data-cy="ErrorNotification"
-                  className={cn(
-                    'notification', 'is-danger',
-                    'is-light', 'has-text-weight-normal',
-                    { hidden: !isError },
-                  )}
-                >
-                  <p
-                    data-cy="peopleLoadingError"
-                    className={cn(
-                      'has-text-danger',
-                      { hidden: !isError },
-                    )}
-                  >
-                    {errorText}
+
+                {isErrorOnServer && (
+                  <p data-cy="peopleLoadingError" className="has-text-danger">
+                    Something went wrong
                   </p>
-                </div>
+                )}
+
+                {isNoDataOnServer && (
+                  <p data-cy="noPeopleMessage">
+                    There are no people on the server
+                  </p>
+                )}
               </>
             )}
         </div>
