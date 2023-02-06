@@ -26,7 +26,6 @@ export const PersonPage: React.FC<Props> = memo(({ person, people }) => {
     <tr
       data-cy="person"
       className={cn({
-        // eslint-disable-next-line max-len
         'has-background-warning': isSelected(person),
       })}
       key={person.slug}
