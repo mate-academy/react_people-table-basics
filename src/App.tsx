@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 import './App.scss';
 import { PeoplePage } from './components/PeoplePage';
-import { Navbar } from './components/Navbar';
+import { NavigationLink } from './components/NavigationLink';
 
 export const App = () => (
   <div data-cy="app">
@@ -17,8 +17,8 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <Navbar to="/" text="Home" />
-          <Navbar to="/people" text="People" />
+          <NavigationLink to="/" text="Home" />
+          <NavigationLink to="/people" text="People" />
         </div>
       </div>
     </nav>

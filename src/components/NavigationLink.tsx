@@ -7,7 +7,7 @@ type Props = {
   text: string,
 };
 
-export const Navbar: FC<Props> = ({ to, text }) => {
+export const NavigationLink: FC<Props> = ({ to, text }) => {
   return (
     <NavLink
       to={to}

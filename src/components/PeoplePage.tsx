@@ -8,30 +8,30 @@ import { getPeople } from '../api';
 
 export const PeoplePage: React.FC = () => {
   const [loading, setLoading] = useState(true);
-  const [peopleList, setPeopleList] = useState<Person[]>([]);
-  const [isErrorOnServer, setIsErrorOnServer] = useState(false);
+  const [people, setPeople] = useState<Person[]>([]);
+  const [isError, setIsError] = useState(false);
   const { slug } = useParams();
 
   const getPeopleList = async () => {
     try {
       const loadedPeople = await getPeople();
 
-      setPeopleList(() => loadedPeople);
+      setPeople(() => loadedPeople);
     } catch {
-      setIsErrorOnServer(true);
+      setIsError(true);
     } finally {
       setLoading(false);
     }
   };
 
-  const isNoDataOnServer = !loading && !peopleList.length;
+  const isPeopleLoaded = !loading && people.length;
 
   useEffect(() => {
     getPeopleList();
   }, []);
 
   const getParent = (parentName: string | null) => {
-    const parent = peopleList.find(person => person.name === parentName);
+    const parent = people.find(person => person.name === parentName);
 
     if (!parentName) {
       return '-';
@@ -76,7 +76,7 @@ export const PeoplePage: React.FC = () => {
                   </thead>
 
                   <tbody>
-                    {peopleList.map(person => (
+                    {people.map(person => (
                       <tr
                         key={person.slug}
                         className={cn(
@@ -113,13 +113,13 @@ export const PeoplePage: React.FC = () => {
                   </tbody>
                 </table>
 
-                {isErrorOnServer && (
+                {isError && (
                   <p data-cy="peopleLoadingError" className="has-text-danger">
                     Something went wrong
                   </p>
                 )}
 
-                {isNoDataOnServer && (
+                {!isPeopleLoaded && (
                   <p data-cy="noPeopleMessage">
                     There are no people on the server
                   </p>
