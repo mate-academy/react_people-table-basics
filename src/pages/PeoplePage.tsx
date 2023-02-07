@@ -7,7 +7,7 @@ import { PeopleTable } from '../components/PeopleTable/PeopleTable';
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isErrorNotif, setIsErrorNotif] = useState(false);
+  const [isErrorNotification, setIsErrorNotification] = useState(false);
 
   const loadingPeople = async () => {
     try {
@@ -17,7 +17,7 @@ export const PeoplePage = () => {
 
       setPeople(loadedPeople);
     } catch {
-      setIsErrorNotif(true);
+      setIsErrorNotification(true);
     } finally {
       setIsLoading(false);
     }
@@ -36,7 +36,7 @@ export const PeoplePage = () => {
 
         <div className="box table-container">
           {isLoading && <Loader />}
-          {isErrorNotif && (
+          {isErrorNotification && (
             <p
               data-cy="peopleLoadingError"
               className="has-text-danger"
