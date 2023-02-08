@@ -8,7 +8,7 @@ export const PeoplePage: React.FC = React.memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [arePeopleLoaded, setArePeopleLoaded] = useState(false);
+  const [isPeopleLoaded, setIsPeopleLoaded] = useState(false);
 
   const loadPeople = async () => {
     setIsLoading(true);
@@ -17,7 +17,7 @@ export const PeoplePage: React.FC = React.memo(() => {
       const peopleFromServer = await getPeople();
 
       setPeople(peopleFromServer);
-      setArePeopleLoaded(true);
+      setIsPeopleLoaded(true);
     } catch (error) {
       setErrorMessage('Unable to load people');
     } finally {
@@ -40,8 +40,8 @@ export const PeoplePage: React.FC = React.memo(() => {
     };
   });
 
-  const isNoPeopleError = !preparedPeople.length && arePeopleLoaded;
-  const isLoadedDataExist = preparedPeople && arePeopleLoaded;
+  const isNoPeopleError = !preparedPeople.length && isPeopleLoaded;
+  const isLoadedDataExist = preparedPeople && isPeopleLoaded;
 
   return (
     <>

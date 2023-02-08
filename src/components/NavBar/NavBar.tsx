@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageNavLink } from '../PageNavLink/PageNavLInk';
+import { PageNavLink } from '../PageNavLink/PageNavLink';
 
 export const NavBar: React.FC = React.memo(() => {
   return (

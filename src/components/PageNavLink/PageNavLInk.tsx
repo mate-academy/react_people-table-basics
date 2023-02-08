@@ -7,17 +7,17 @@ type Props = {
   linkTitle: string;
 };
 
-export const PageNavLink: React.FC<Props> = React.memo(
-  ({ to, linkTitle }) => {
-    return (
-      <NavLink
-        to={to}
-        className={({ isActive }) => classNames(
-          'navbar-item', { 'has-background-grey-lighter': isActive },
-        )}
-      >
-        {linkTitle}
-      </NavLink>
-    );
-  },
-);
+export const PageNavLink: React.FC<Props> = React.memo(({
+  to, linkTitle,
+}) => {
+  return (
+    <NavLink
+      to={to}
+      className={({ isActive }) => classNames(
+        'navbar-item', { 'has-background-grey-lighter': isActive },
+      )}
+    >
+      {linkTitle}
+    </NavLink>
+  );
+});

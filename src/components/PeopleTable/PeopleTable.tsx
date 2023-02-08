@@ -34,6 +34,7 @@ export const PeopleTable: React.FC<Props> = React.memo(({ people }) => {
             className={classNames(
               { 'has-background-warning': person.slug === slug },
             )}
+            key={person.slug}
           >
             <td>
               <PersonLink person={person} />
