@@ -8,6 +8,7 @@ export const PeoplePage: React.FC = memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [arePeopleLoaded, setArePeopleLoaded] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,10 +26,14 @@ export const PeoplePage: React.FC = memo(() => {
         });
 
         setPeople(peopleWithParents);
+        setArePeopleLoaded(true);
       })
       .catch(() => setShowError(true))
       .finally(() => setIsLoading(false));
   }, []);
+
+  const arePeopleOnServer = arePeopleLoaded && people.length > 0;
+  const noPeopleOnServer = arePeopleLoaded && people.length === 0;
 
   return (
     <>
@@ -46,13 +51,13 @@ export const PeoplePage: React.FC = memo(() => {
             </p>
           )}
 
-          {people.length === 0 && !isLoading && (
+          {noPeopleOnServer && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {people.length > 0 && (
+          {arePeopleOnServer && (
             <PeopleTable people={people} />
           )}
         </div>
