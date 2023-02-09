@@ -8,7 +8,6 @@ import {
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
-import React from 'react';
 import { App } from './App';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
@@ -21,9 +20,8 @@ createRoot(document.getElementById('root') as HTMLDivElement)
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
 
-          <Route path="/people">
-            <Route index element={<PeoplePage />} />
-            <Route path="slug" element={<PeoplePage />} />
+          <Route path="/people" element={<PeoplePage />}>
+            <Route path=":slug" element={<PeoplePage />} />
           </Route>
 
           <Route
