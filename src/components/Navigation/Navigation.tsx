@@ -1,5 +1,4 @@
 import { FC, memo } from 'react';
-// import { NavLink as CustomLink } from 'react-router-dom';
 import { CustomLink } from '../../Helpers/CustomLink';
 
 export const Navigation:FC = memo(() => {

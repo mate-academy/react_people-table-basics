@@ -12,7 +12,6 @@ export const PeopleTable:FC<Props> = memo(({ people, selectedPersonSlug }) => {
   return (
     <table
       data-cy="peopleTable"
-      // eslint-disable-next-line max-len
       className="table is-striped is-hoverable is-narrow is-fullwidth"
     >
       <thead>

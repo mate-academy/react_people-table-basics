@@ -5,7 +5,6 @@ import {
   useState,
 } from 'react';
 import { useParams } from 'react-router-dom';
-
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
@@ -36,12 +35,8 @@ export const PeoplePage:FC = memo(() => {
       });
 
       setPeople(preparedPeople);
-
-      return preparedPeople;
     } catch (loadingError) {
       setErrorMessage('Something went wrong');
-
-      return loadingError;
     } finally {
       setIsTableLoading(false);
     }
