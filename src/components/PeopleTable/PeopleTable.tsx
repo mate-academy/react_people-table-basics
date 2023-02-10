@@ -39,6 +39,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               mother,
               father,
             } = person;
+            const ifNoMotherLink = motherName || '-';
+            const ifNoFaherLink = fatherName || '-';
 
             return (
               <tr
@@ -58,12 +60,12 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
                 <td>
                   {mother
                     ? <PersonLink person={mother} />
-                    : motherName || '-'}
+                    : ifNoMotherLink}
                 </td>
                 <td>
                   {father
                     ? <PersonLink person={father} />
-                    : fatherName || '-'}
+                    : ifNoFaherLink}
                 </td>
               </tr>
             );
