@@ -32,7 +32,7 @@ export const PerosnLink: React.FC<Props> = ({
     >
       <td>
         <NavLink
-          to={`#/${slug}`}
+          to={`/people/${slug}`}
           className={(sex === 'f' ? 'has-text-danger' : '')}
           onClick={() => setIsActiveRow(slug)}
         >
@@ -47,7 +47,7 @@ export const PerosnLink: React.FC<Props> = ({
         <td>
           <Link
             className="has-text-danger"
-            to={`#/${mother.slug}`}
+            to={`/people/${mother.slug}`}
             onClick={() => setIsActiveRow(mother.slug)}
           >
             {mother.name}
@@ -60,7 +60,7 @@ export const PerosnLink: React.FC<Props> = ({
       {father ? (
         <td>
           <Link
-            to={`#/${father.slug}`}
+            to={`/people/${father.slug}`}
             onClick={() => setIsActiveRow(father.slug)}
           >
             {father.name}
