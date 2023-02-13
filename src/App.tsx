@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
-import { MainNav } from './components/MainNavigation/MainNavigation';
+import { MainNav } from './components/MainNavigation';
 import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
 
