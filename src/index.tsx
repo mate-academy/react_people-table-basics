@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import {
-  BrowserRouter, Navigate, Route, Routes,
+  HashRouter, Navigate, Route, Routes,
 } from 'react-router-dom';
 
 import 'bulma/css/bulma.css';
@@ -11,7 +11,7 @@ import { PeoplePage } from './components/PeoplePage';
 
 createRoot(document.getElementById('root') as HTMLDivElement)
   .render(
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<h1 className="title">Home Page</h1>} />
@@ -25,5 +25,5 @@ createRoot(document.getElementById('root') as HTMLDivElement)
 
         </Route>
       </Routes>
-    </BrowserRouter>,
+    </HashRouter>,
   );

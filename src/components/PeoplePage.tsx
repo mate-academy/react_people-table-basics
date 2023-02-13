@@ -10,20 +10,21 @@ export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const peopleSetter = async () => {
-    setHasError(false);
-    setIsLoading(true);
-    const pep = await getPeople();
+    try {
+      setHasError(false);
+      setIsLoading(true);
+      const pep = await getPeople();
 
-    setPeople(pep);
-    setIsLoading(false);
+      setPeople(pep);
+      setIsLoading(false);
+    } catch (_) {
+      setHasError(true);
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
-    try {
-      peopleSetter();
-    } catch (_) {
-      setHasError(true);
-    }
+    peopleSetter();
   }, []);
 
   return (
