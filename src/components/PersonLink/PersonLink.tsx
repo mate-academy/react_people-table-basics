@@ -78,7 +78,6 @@ export const PersonLink: React.FC<Props> = ({
                 ? (
                   <Link
                     to={`./${father?.slug}`}
-                    className="has-text-danger"
                   >
                     {fatherName}
                   </Link>
