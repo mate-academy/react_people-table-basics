@@ -1,5 +1,7 @@
-import React from 'react';
+import classNames from 'classnames';
+import React, { useState } from 'react';
 import { Person } from '../types';
+import { PersonLink } from './PersonLink';
 // import classNames from 'classnames';
 
 type Props = {
@@ -7,6 +9,8 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
+  const [personSelected, setPersonSelected] = useState('');
+
   return (
     <table
       data-cy="peopleTable"
@@ -28,20 +32,36 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           <tr
             data-cy="person"
             key={person.slug}
+            className={classNames({
+              'has-background-warning': person.slug === personSelected,
+            })}
           >
-            <td>
-              <a
-                href={`#/people/${person.slug}`}
-              >
-                {person.name}
-              </a>
-            </td>
+            <PersonLink
+              person={person}
+              setPersonSelected={setPersonSelected}
+            />
 
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
-            <td>{person.motherName}</td>
-            <td>{person.fatherName}</td>
+            <td>
+              <a
+                href={`#/people/${person.slug}`}
+              >
+                {person.motherName
+                  ? (person.motherName)
+                  : ('-')}
+              </a>
+            </td>
+            <td>
+              <a
+                href={`#/people/${person.slug}`}
+              >
+                {person.fatherName
+                  ? (person.fatherName)
+                  : ('-')}
+              </a>
+            </td>
           </tr>
         ))}
         <tr data-cy="person">
