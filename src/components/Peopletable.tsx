@@ -24,7 +24,10 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
 
       <tbody>
         {people.map((person) => (
-          <tr data-cy="person">
+          <tr
+            data-cy="person"
+            key={person.slug}
+          >
             <td>
               <a href={`#/people/${person.slug}`}>
                 {person.name}
