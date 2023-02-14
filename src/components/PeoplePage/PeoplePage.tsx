@@ -6,7 +6,7 @@ import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage = () => {
   const [peopleList, setPeopleList] = useState<Person[] | null>(null);
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState();
   const [isLoad, setIsLoad] = useState(false);
 
   const getPeopleList = () => {
@@ -14,7 +14,7 @@ export const PeoplePage = () => {
 
     getPeople()
       .then((data) => setPeopleList(data))
-      .catch(() => setIsError(true))
+      .catch((error) => setIsError(error.message))
       .finally(() => setIsLoad(false));
   };
 
@@ -33,7 +33,7 @@ export const PeoplePage = () => {
 
           {isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
+              {isError}
             </p>
           )}
 

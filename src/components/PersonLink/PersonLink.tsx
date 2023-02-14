@@ -8,7 +8,7 @@ type Props = {
   isActiveRow: string,
 };
 
-export const PerosnLink: React.FC<Props> = ({
+export const PersonLink: React.FC<Props> = ({
   person,
   setIsActiveRow,
   isActiveRow,

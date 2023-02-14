@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Person } from '../../types';
-import { PerosnLink } from '../PersonLink';
+import { PersonLink } from '../PersonLink';
 
 type Props = {
   peopleList: Person[],
@@ -30,7 +30,8 @@ export const PeopleTable: React.FC<Props> = ({ peopleList }) => {
           const person = { ...item };
 
           if (item.fatherName || item.motherName) {
-            for (let i = 0; i < peopleList.length; i += 1) {
+            // eslint-disable-next-line no-plusplus
+            for (let i = 0; i < peopleList.length; i++) {
               if (peopleList[i].name === item.fatherName) {
                 person.father = peopleList[i];
               }
@@ -42,7 +43,7 @@ export const PeopleTable: React.FC<Props> = ({ peopleList }) => {
           }
 
           return (
-            <PerosnLink
+            <PersonLink
               person={person}
               key={person.slug}
               setIsActiveRow={setIsActiveRow}
