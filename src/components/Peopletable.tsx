@@ -1,5 +1,6 @@
 import React from 'react';
 import { Person } from '../types';
+// import classNames from 'classnames';
 
 type Props = {
   people: Person[]
@@ -29,7 +30,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             key={person.slug}
           >
             <td>
-              <a href={`#/people/${person.slug}`}>
+              <a
+                href={`#/people/${person.slug}`}
+              >
                 {person.name}
               </a>
             </td>
