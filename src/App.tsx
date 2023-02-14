@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Loader } from './components/Loader';
 
 import './App.scss';
@@ -60,6 +60,15 @@ export const App: React.FC = () => {
                     </div>
                   </div>
                 </>
+              )}
+            />
+            <Route
+              path="/home"
+              element={(
+                <Navigate
+                  to="/"
+                  replace
+                />
               )}
             />
             <Route
