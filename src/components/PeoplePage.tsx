@@ -22,11 +22,17 @@ export const PeoplePage: React.FC = () => {
       })
       .catch(() => {
         setErrorLoading(Errors.LOADING);
+        setIsLoaded(false);
       })
       .finally(() => (
         setIsLoading(false)
       ));
   }, []);
+
+  const showTable = !isLoading
+    && isLoaded
+    && !errorLoading
+    && people.length > 0;
 
   return (
     <>
@@ -43,19 +49,19 @@ export const PeoplePage: React.FC = () => {
           )}
           {isLoading && (<Loader />)}
           {isLoaded && people.length === 0
-            ? (
+            && (
               <p
                 data-cy="noPeopleMessage"
               >
                 {Errors.EMPTY}
               </p>
-            )
-            : (
-              <PeopleTable
-                people={people}
-                personSlugSelected={personSlugSelected}
-              />
             )}
+          {showTable && (
+            <PeopleTable
+              people={people}
+              personSlugSelected={personSlugSelected}
+            />
+          )}
         </div>
       </div>
     </>
