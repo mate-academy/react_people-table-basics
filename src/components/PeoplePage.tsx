@@ -7,18 +7,25 @@ import { PeopleTable } from './Peopletable';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [errorLoading, setErrorLoading] = useState('');
   const match = useMatch('/people/:personSlug');
   const personSlugSelected = match?.params.personSlug;
 
   useEffect(() => {
+    setIsLoading(true);
     getPeople()
-      .then((peopleData) => (
-        setPeople(peopleData)
-      ))
+      .then((peopleData) => {
+        setPeople(peopleData);
+        setIsLoaded(true);
+      })
       .catch(() => {
         setErrorLoading(Errors.LOADING);
-      });
+      })
+      .finally(() => (
+        setIsLoading(false)
+      ));
   }, []);
 
   return (
@@ -34,16 +41,14 @@ export const PeoplePage: React.FC = () => {
               {errorLoading}
             </p>
           )}
-          {people.length === 0
+          {isLoading && (<Loader />)}
+          {isLoaded && people.length === 0
             ? (
-              <>
-                <Loader />
-                <p
-                  data-cy="noPeopleMessage"
-                >
-                  {Errors.EMPTY}
-                </p>
-              </>
+              <p
+                data-cy="noPeopleMessage"
+              >
+                {Errors.EMPTY}
+              </p>
             )
             : (
               <PeopleTable
