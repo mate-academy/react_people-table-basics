@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { useEffect, useState } from 'react';
 import { Person } from '../types';
 import { getPeople } from '../api';
@@ -13,9 +14,29 @@ export const PeoplePage = () => {
     try {
       setHasError(false);
       setIsLoading(true);
-      const pep = await getPeople();
+      const peopleRes = await getPeople();
 
-      setPeople(pep);
+      peopleRes.forEach(person => {
+        if (person.motherName) {
+          const mother = peopleRes.find(
+            woman => woman.name === person.motherName,
+          );
+
+          if (mother) {
+            person.mother = mother;
+          }
+        }
+
+        if (person.fatherName) {
+          const father = peopleRes.find(man => man.name === person.fatherName);
+
+          if (father) {
+            person.father = father;
+          }
+        }
+      });
+
+      setPeople(peopleRes);
       setIsLoading(false);
     } catch (_) {
       setHasError(true);

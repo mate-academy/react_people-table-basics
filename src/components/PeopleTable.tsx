@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
@@ -9,24 +8,6 @@ type Props = {
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { personId } = useParams();
-
-  people.forEach(person => {
-    if (person.motherName) {
-      const mother = people.find(woman => woman.name === person.motherName);
-
-      if (mother) {
-        person.mother = mother;
-      }
-    }
-
-    if (person.fatherName) {
-      const father = people.find(man => man.name === person.fatherName);
-
-      if (father) {
-        person.father = father;
-      }
-    }
-  });
 
   return (
     <table
