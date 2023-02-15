@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useMatch } from 'react-router-dom';
 import { Errors, getPeople } from '../api';
 import { Person } from '../types';
 import { Loader } from './Loader/Loader';
@@ -7,6 +8,8 @@ import { PeopleTable } from './Peopletable';
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [errorLoading, setErrorLoading] = useState('');
+  const match = useMatch('/people/:personSlug');
+  const personSlugSelected = match?.params.personSlug;
 
   useEffect(() => {
     getPeople()
@@ -45,6 +48,7 @@ export const PeoplePage: React.FC = () => {
             : (
               <PeopleTable
                 people={people}
+                personSlugSelected={personSlugSelected}
               />
             )}
         </div>

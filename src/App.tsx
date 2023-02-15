@@ -27,6 +27,12 @@ export const App: React.FC = () => {
               }
             />
             <Route
+              path="/people/:personSlug"
+              element={
+                <PeoplePage />
+              }
+            />
+            <Route
               path="/home"
               element={(
                 <Navigate
