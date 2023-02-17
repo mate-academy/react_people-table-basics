@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { getPeople } from "../api";
-import { Person } from "../types";
-import { Loader } from "./Loader";
-import { PeopleTable } from "./PeopleTable";
+import { useEffect, useState } from 'react';
+import { getPeople } from '../api';
+import { Person } from '../types';
+import { Loader } from './Loader';
+import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(true);

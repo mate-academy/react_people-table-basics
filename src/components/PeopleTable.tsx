@@ -1,7 +1,7 @@
-import cn from "classnames";
-import { useParams } from "react-router-dom";
-import { Person } from "../types";
-import { PersonLink } from "./PersonLink";
+import cn from 'classnames';
+import { useParams } from 'react-router-dom';
+import { Person } from '../types';
+import { PersonLink } from './PersonLink';
 
 export const PeopleTable: React.FC<{ people: Person[] }> = ({ people }) => {
   const personSlug = useParams();
@@ -12,7 +12,7 @@ export const PeopleTable: React.FC<{ people: Person[] }> = ({ people }) => {
   const findParent = (name: string | null) => {
     const parent = people.find((person) => person.name === name);
 
-    return parent ? <PersonLink person={parent} /> : name || "-";
+    return parent ? <PersonLink person={parent} /> : name || '-';
   };
 
   return (
@@ -41,7 +41,7 @@ export const PeopleTable: React.FC<{ people: Person[] }> = ({ people }) => {
               data-cy="person"
               key={name}
               className={cn({
-                "has-background-warning": isSelected(slug),
+                'has-background-warning': isSelected(slug),
               })}
             >
               <td>
