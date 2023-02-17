@@ -33,7 +33,16 @@ export const PeopleTable: React.FC<{ people: Person[] }> = ({ people }) => {
 
       <tbody>
         {people.map((person: Person) => {
-          const { name, sex, born, died, fatherName, motherName, slug } =
+          const {
+            name,
+            sex,
+            born,
+            died,
+            fatherName,
+            motherName,
+            slug
+          }
+          =
             person;
 
           return (

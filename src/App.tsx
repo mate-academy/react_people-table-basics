@@ -6,7 +6,6 @@ import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
 
 export const App = () => {
-
   return (
     <div data-cy="app">
       <nav
@@ -18,22 +17,20 @@ export const App = () => {
         <div className="container">
           <div className="navbar-brand">
             <NavLink
-              className={({ isActive }) => (
-                  cn('navbar-item', {
-                    'has-background-grey-lighter': isActive,
-                  })
-                )
+              className={({ isActive }) =>
+                cn('navbar-item', {
+                  'has-background-grey-lighter': isActive,
+                })
               }
               to="/"
             >
               Home
             </NavLink>
             <NavLink
-              className={({ isActive }) => (
-                  cn('navbar-item', {
-                    'has-background-grey-lighter': isActive,
-                  })
-                )
+              className={({ isActive }) =>
+                cn('navbar-item', {
+                  'has-background-grey-lighter': isActive,
+                })
               }
               to="/people"
             >
@@ -63,5 +60,4 @@ export const App = () => {
       </main>
     </div>
   );
-
 };
