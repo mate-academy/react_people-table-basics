@@ -1,4 +1,9 @@
-import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  NavLink,
+  Navigate,
+} from 'react-router-dom';
 
 import './App.scss';
 import cn from 'classnames';
@@ -17,21 +22,17 @@ export const App = () => {
         <div className="container">
           <div className="navbar-brand">
             <NavLink
-              className={({ isActive }) =>
-                cn('navbar-item', {
-                  'has-background-grey-lighter': isActive,
-                })
-              }
+              className={({ isActive }) => cn('navbar-item', {
+                'has-background-grey-lighter': isActive,
+              })}
               to="/"
             >
               Home
             </NavLink>
             <NavLink
-              className={({ isActive }) =>
-                cn('navbar-item', {
-                  'has-background-grey-lighter': isActive,
-                })
-              }
+              className={({ isActive }) => cn('navbar-item', {
+                'has-background-grey-lighter': isActive,
+              })}
               to="/people"
             >
               People

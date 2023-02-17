@@ -40,10 +40,8 @@ export const PeopleTable: React.FC<{ people: Person[] }> = ({ people }) => {
             died,
             fatherName,
             motherName,
-            slug
-          }
-          =
-            person;
+            slug,
+          } = person;
 
           return (
             <tr
