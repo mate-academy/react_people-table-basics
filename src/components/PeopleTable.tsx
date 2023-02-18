@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { useState } from 'react';
 import { Person } from '../types';
 import { Loader } from './Loader';
 import { PersonLink } from './PersonLink';
@@ -8,19 +7,16 @@ type Props = {
   people: Person[],
   errorMessage: string,
   loading: boolean,
+  selectedPersonSlug: string | undefined,
 };
 
 export const PeopleTable: React.FC<Props> = (
-  { people, errorMessage, loading },
+  {
+    people, errorMessage, loading, selectedPersonSlug,
+  },
 ) => {
-  const [selected, setSelected] = useState<Person | null>();
-
   function parentName(name: string | null) {
     return people.find(p => p.name === name) || null;
-  }
-
-  function selectedPerson(person: Person) {
-    setSelected(people.find(p => p.name === person.name));
   }
 
   return (
@@ -66,12 +62,14 @@ export const PeopleTable: React.FC<Props> = (
                   return (
                     <tr
                       data-cy="person"
-                      onClick={() => {
-                        selectedPerson(person);
-                      }}
+                      key={person.slug}
+                      // onClick={() => {
+                      //   selectedPerson(person);
+                      // }}
                       className={classNames({
                         'has-background-warning':
-                        person.name === selected?.name,
+                        person.slug === selectedPersonSlug,
+                        // person.name === selected?.name,
                       })}
                     >
                       <PersonLink person={person} />
