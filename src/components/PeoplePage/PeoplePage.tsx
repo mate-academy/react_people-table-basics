@@ -13,6 +13,9 @@ export const PeoplePage = () => {
   const match = useMatch('/people/:personSlug');
   const selectedPersonSlug = match?.params.personSlug;
 
+  const getParent = (name: string | null, peopleData: Person[]) => (
+    peopleData.find(parent => parent.name === name));
+
   useEffect(() => {
     setIsLoading(true);
     getPeople()
@@ -20,10 +23,8 @@ export const PeoplePage = () => {
         setIsLoading(false);
         setPeople(result.map(person => ({
           ...person,
-          mother: result
-            .find(mother => mother.name === person.motherName),
-          father: result
-            .find(father => father.name === person.fatherName),
+          mother: getParent(person.motherName, result),
+          father: getParent(person.fatherName, result),
         })));
       })
       .catch(() => {

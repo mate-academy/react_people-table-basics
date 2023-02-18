@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import './App.scss';
 import { Navigation } from './components/Navigation';
@@ -31,6 +31,7 @@ export const App = () => (
             path="*"
             element={<h1 className="title">Page not found</h1>}
           />
+          <Route path="/home" element={<Navigate to="/" />} />
         </Routes>
       </div>
     </main>
