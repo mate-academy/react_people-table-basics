@@ -7,30 +7,29 @@ import { Person } from '../../types';
 import { ErrorTypes } from '../../types/ErrorTypes';
 
 export const PeoplePage = () => {
-  const [persons, setPersons] = useState<Person[]>([]);
-  const [isPersonsLoaded, setIsPersonsLoaded] = useState(false);
+  const [people, setPeople] = useState<Person[]>([]);
+  const [isPeopleLoaded, setIsPeopleLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorNoteShown, setErrorNoteShown] = useState(false);
   const match = useMatch('/people/:slug');
   const selectedPerson = match?.params.slug;
-  const isCountPersonsLoaded = persons.length === 0;
+  const isPeopleListEmpty = people.length === 0;
 
   useEffect(() => {
     const fetchPerson = async () => {
       setIsLoading(true);
-      setIsPersonsLoaded(false);
+      setIsPeopleLoaded(false);
       setErrorNoteShown(false);
 
       try {
         const person = await getPeople();
 
-        setPersons(person);
+        setPeople(person);
       } catch {
-        setIsLoading(false);
         setErrorNoteShown(true);
       } finally {
         setIsLoading(false);
-        setIsPersonsLoaded(true);
+        setIsPeopleLoaded(true);
       }
     };
 
@@ -48,12 +47,12 @@ export const PeoplePage = () => {
               {ErrorTypes.Loading}
             </p>
           )}
-          {isPersonsLoaded && isCountPersonsLoaded && (
+          {isPeopleLoaded && isPeopleListEmpty && (
             <p data-cy="noPeopleMessage">{ErrorTypes.Empty}</p>
           )}
 
-          {isPersonsLoaded && !isCountPersonsLoaded && !isErrorNoteShown && (
-            <PeopleTable persons={persons} selectedPerson={selectedPerson} />
+          {isPeopleLoaded && !isPeopleListEmpty && !isErrorNoteShown && (
+            <PeopleTable people={people} selectedPerson={selectedPerson} />
           )}
         </div>
       </div>

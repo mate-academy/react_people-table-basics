@@ -4,13 +4,13 @@ import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
 type Props = {
-  persons: Person[];
+  people: Person[];
   selectedPerson: string | undefined;
 };
 
-export const PeopleTable: FC<Props> = ({ persons, selectedPerson }) => {
+export const PeopleTable: FC<Props> = ({ people, selectedPerson }) => {
   const getParents = (name: string | null) => {
-    return persons.find((person) => person.name === name) || null;
+    return people.find((person) => person.name === name) || null;
   };
 
   return (
@@ -31,10 +31,8 @@ export const PeopleTable: FC<Props> = ({ persons, selectedPerson }) => {
 
       <tbody>
         <>
-          {persons.map((person) => {
-            const {
-              sex, born, died, motherName, fatherName, slug,
-            } = person;
+          {people.map((person) => {
+            const { sex, born, died, motherName, fatherName, slug } = person;
             const mom = getParents(motherName);
             const dad = getParents(fatherName);
 
