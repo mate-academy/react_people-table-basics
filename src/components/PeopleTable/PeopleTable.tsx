@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api/api';
 import { Person } from '../../types';
+import { getVisiblePeople } from '../../utils/visiblePeople';
 import { Loader } from '../Loader';
 import { PeopleInfo } from '../PeopleInfo/PeopleInfo';
 
@@ -33,6 +34,8 @@ export const PeopleTable = () => {
     loadPeople();
   }, []);
 
+  const visiblePeople = getVisiblePeople(people);
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -46,13 +49,13 @@ export const PeopleTable = () => {
               Something went wrong
             </p>
           )}
-          {people.length === 0 && !isLoading && (
+          {visiblePeople.length === 0 && !isLoading && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {isLoaded && people.length > 0 && (
+          {isLoaded && visiblePeople.length > 0 && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -69,7 +72,7 @@ export const PeopleTable = () => {
               </thead>
 
               <tbody>
-                {people?.map(person => (
+                {visiblePeople?.map(person => (
                   <tr
                     key={person.slug}
                     data-cy="person"
@@ -80,7 +83,6 @@ export const PeopleTable = () => {
                   >
                     <PeopleInfo
                       person={person}
-                      people={people}
                     />
                   </tr>
                 ))}
