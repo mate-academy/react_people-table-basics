@@ -4,8 +4,8 @@ import { Person } from '../types';
 import { PersonLink } from './PersonLink';
 
 type Props = {
-  people: Person[]
-  personSlugSelected: string | undefined
+  people: Person[],
+  personSlugSelected: string | undefined,
 };
 
 export const PeopleTable: React.FC<Props> = ({

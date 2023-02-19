@@ -29,7 +29,7 @@ export const PeoplePage: React.FC = () => {
       ));
   }, []);
 
-  const showTable = !isLoading
+  const shouldShowTable = !isLoading
     && isLoaded
     && !errorLoading
     && people.length > 0;
@@ -56,7 +56,7 @@ export const PeoplePage: React.FC = () => {
                 {Errors.EMPTY}
               </p>
             )}
-          {showTable && (
+          {shouldShowTable && (
             <PeopleTable
               people={people}
               personSlugSelected={personSlugSelected}

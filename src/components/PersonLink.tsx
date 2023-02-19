@@ -7,9 +7,7 @@ type Props = {
   person: Person,
 };
 
-export const PersonLink: React.FC<Props> = ({
-  person,
-}) => (
+export const PersonLink: React.FC<Props> = ({ person }) => (
   <td>
     <Link
       className={classNames({
