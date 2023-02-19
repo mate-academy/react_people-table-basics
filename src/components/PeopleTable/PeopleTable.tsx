@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { useMatch } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api/api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
@@ -12,9 +12,7 @@ export const PeopleTable = () => {
   const [hasError, setHasError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const match = useMatch('/people/:slug');
-
-  const selectedPersonSlug = match?.params.slug;
+  const { slug } = useParams<{ slug: string }>();
 
   const loadPeople = async () => {
     setIsLoading(true);
@@ -77,7 +75,7 @@ export const PeopleTable = () => {
                     data-cy="person"
                     className={classNames({
                       'has-background-warning':
-                        person.slug === selectedPersonSlug,
+                        person.slug === slug,
                     })}
                   >
                     <PeopleInfo
