@@ -63,13 +63,9 @@ export const PeopleTable: React.FC<Props> = (
                     <tr
                       data-cy="person"
                       key={person.slug}
-                      // onClick={() => {
-                      //   selectedPerson(person);
-                      // }}
                       className={classNames({
                         'has-background-warning':
                         person.slug === selectedPersonSlug,
-                        // person.name === selected?.name,
                       })}
                     >
                       <PersonLink person={person} />

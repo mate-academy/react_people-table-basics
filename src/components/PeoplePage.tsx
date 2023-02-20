@@ -13,16 +13,11 @@ export const PeoplePage: React.FC = () => {
   const selectedPersonSlug = match?.params.slug;
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
-
-  useEffect(() => {
     if (loading) {
       getPeople()
         .then(setPeople)
-        .catch(() => setErrorMessage('Something went wrong'));
+        .catch(() => setErrorMessage('Something went wrong'))
+        .finally(() => setLoading(false));
     }
   }, [people]);
 
