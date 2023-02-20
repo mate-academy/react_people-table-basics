@@ -5,25 +5,14 @@ import { getPeople } from '../../api';
 import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
+import { findMother, findFather } from '../../Utils';
 
 export const PeopleTable = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
   const [isTableLoading, setIsTableLoading] = useState(false);
-  const [apiError, setApiError] = useState('');
+  const [hasError, setHasError] = useState(false);
 
   const { personSlug } = useParams();
-
-  const findMother = (motherName: string | null) => {
-    const mother = people?.find(person => person.name === motherName);
-
-    return mother || null;
-  };
-
-  const findFather = (fatherName: string | null) => {
-    const father = people?.find(person => person.name === fatherName);
-
-    return father || null;
-  };
 
   useEffect(() => {
     setIsTableLoading(true);
@@ -32,7 +21,7 @@ export const PeopleTable = () => {
         setPeople(peopleFromServer);
       })
       .catch(() => {
-        setApiError('unable to load data');
+        setHasError(true);
       })
       .finally(() => {
         setIsTableLoading(false);
@@ -46,7 +35,7 @@ export const PeopleTable = () => {
         <div className="box table-container">
           {isTableLoading && <Loader />}
 
-          {apiError && (
+          {hasError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
@@ -89,9 +78,12 @@ export const PeopleTable = () => {
                     <td>{person.born}</td>
                     <td>{person.died}</td>
                     <td>
-                      {findMother(person.motherName)
+                      {findMother(people, person.motherName)
                         ? (
-                          <PersonLink person={findMother(person.motherName)} />
+                          <PersonLink person={findMother(
+                            people, person.motherName,
+                          )}
+                          />
                         )
                         : (
                           person.motherName
@@ -99,9 +91,13 @@ export const PeopleTable = () => {
                         || '-'}
                     </td>
                     <td>
-                      {findFather(person.fatherName)
+                      {findFather(people, person.fatherName)
                         ? (
-                          <PersonLink person={findFather(person.fatherName)} />
+                          <PersonLink person={findFather(
+                            people,
+                            person.fatherName,
+                          )}
+                          />
                         )
                         : (
                           person.fatherName
