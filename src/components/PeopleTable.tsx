@@ -27,9 +27,11 @@ export const PeopleTable: React.FC<Props> = (
         )
         : (
           <div className="box table-container">
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              {errorMessage}
-            </p>
+            {errorMessage && (
+              <p data-cy="peopleLoadingError" className="has-text-danger">
+                {errorMessage}
+              </p>
+            )}
 
             {people.length === 0 && (
               <p data-cy="noPeopleMessage">
