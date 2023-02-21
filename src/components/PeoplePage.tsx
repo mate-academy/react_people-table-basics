@@ -48,6 +48,7 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
           {isLoading && (<Loader />)}
+
           {isLoaded && people.length === 0
             && (
               <p
