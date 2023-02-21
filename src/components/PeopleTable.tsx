@@ -12,7 +12,10 @@ type Props = {
 
 export const PeopleTable: React.FC<Props> = (
   {
-    people, errorMessage, loading, selectedPersonSlug,
+    people,
+    errorMessage,
+    loading,
+    selectedPersonSlug,
   },
 ) => {
   function parentName(name: string | null) {
@@ -21,79 +24,82 @@ export const PeopleTable: React.FC<Props> = (
 
   return (
     <div className="block">
-      {loading
-        ? (
-          <div className="box table-container"><Loader /></div>
-        )
-        : (
-          <div className="box table-container">
-            {errorMessage && (
-              <p data-cy="peopleLoadingError" className="has-text-danger">
-                {errorMessage}
-              </p>
-            )}
+      {loading && (
+        <div className="box table-container">
+          <Loader />
+        </div>
+      )}
 
-            {people.length === 0 && (
-              <p data-cy="noPeopleMessage">
-                There are no people on the server
-              </p>
-            )}
+      {!loading && (
+        <div className="box table-container">
+          {errorMessage && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              {errorMessage}
+            </p>
+          )}
 
-            <table
-              data-cy="peopleTable"
-              // eslint-disable-next-line max-len
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
+          {people.length === 0 && (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
+            </p>
+          )}
 
-              <tbody>
+          <table
+            data-cy="peopleTable"
+            // eslint-disable-next-line max-len
+            className="table is-striped is-hoverable is-narrow is-fullwidth"
+          >
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Sex</th>
+                <th>Born</th>
+                <th>Died</th>
+                <th>Mother</th>
+                <th>Father</th>
+              </tr>
+            </thead>
 
-                {people.map(person => {
-                  const mother = parentName(person.motherName);
-                  const father = parentName(person.fatherName);
+            <tbody>
 
-                  return (
-                    <tr
-                      data-cy="person"
-                      key={person.slug}
-                      className={classNames({
-                        'has-background-warning':
-                        person.slug === selectedPersonSlug,
-                      })}
-                    >
-                      <PersonLink person={person} />
+              {people.map(person => {
+                const mother = parentName(person.motherName);
+                const father = parentName(person.fatherName);
 
-                      <td>{person.sex}</td>
-                      <td>{person.born}</td>
-                      <td>{person.died}</td>
+                return (
+                  <tr
+                    data-cy="person"
+                    key={person.slug}
+                    className={classNames({
+                      'has-background-warning':
+                      person.slug === selectedPersonSlug,
+                    })}
+                  >
+                    <PersonLink person={person} />
 
-                      {mother
-                        ? (
-                          <PersonLink person={mother} />
-                        )
-                        : (<td>{person.motherName || '-'}</td>)}
+                    <td>{person.sex}</td>
+                    <td>{person.born}</td>
+                    <td>{person.died}</td>
 
-                      {father
-                        ? (
-                          <PersonLink person={father} />
-                        )
-                        : (<td>{person.fatherName || '-'}</td>)}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
+                    {mother
+                      ? (
+                        <PersonLink person={mother} />
+                      )
+                      : (<td>{person.motherName || '-'}</td>)}
+
+                    {father
+                      ? (
+                        <PersonLink person={father} />
+                      )
+                      : (<td>{person.fatherName || '-'}</td>)}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
     </div>
   );
 };

@@ -11,7 +11,6 @@ export const Navigation: React.FC = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-
           <NavLink
             to="/"
             className={({ isActive }) => (
