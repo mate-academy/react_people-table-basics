@@ -2,7 +2,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.scss';
 import { Navigation } from './components/Navigation';
-import { PeopleBlock } from './components/People/PeopleBlock';
+import { NotFoundPage } from './components/NotFoundPage';
+import { PeoplePage } from './components/PeoplePage/PeoplePage';
 
 export const App = () => (
   <div data-cy="app">
@@ -20,9 +21,9 @@ export const App = () => (
           <Route path="/home" element={<Navigate to="/" />} />
           <Route
             path="/people"
-            element={<PeopleBlock />}
+            element={<PeoplePage />}
           />
-          <Route path="*" element={<h1 className="title">Page not found</h1>} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </main>

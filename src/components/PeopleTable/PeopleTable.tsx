@@ -1,12 +1,24 @@
+import { Person } from '../../types';
 import { Loader } from '../Loader';
 
-export const PeopleBlock = () => (
-  <div className="block">
-    <h1 className="title">People Page</h1>
+type Props = {
+  isLoading: boolean,
+  displayedPeople: Person[],
+};
 
+export const PeopleTable: React.FC<Props> = ({
+  isLoading,
+  displayedPeople,
+}) => {
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  // eslint-disable-next-line no-console
+  console.log(isLoading, displayedPeople);
+
+  return (
     <div className="box table-container">
-      <Loader />
-
       <p data-cy="peopleLoadingError" className="has-text-danger">
         Something went wrong
       </p>
@@ -137,5 +149,5 @@ export const PeopleBlock = () => (
         </tbody>
       </table>
     </div>
-  </div>
-);
+  );
+};

@@ -6,7 +6,7 @@ type Props = {
 };
 
 export const NavElement: React.FC<Props> = ({ children }) => {
-  const slug = children
+  const slug = (children)
     .split(' ')
     .filter(word => word)
     .map(word => word.toLowerCase())
@@ -18,7 +18,9 @@ export const NavElement: React.FC<Props> = ({ children }) => {
         'navbar-item is-capitalized',
         { 'has-background-grey-lighter': isActive },
       )}
-      to={`/${slug}`}
+      to={`/${slug === 'home'
+        ? ''
+        : slug}`}
     >
       {children}
     </NavLink>
