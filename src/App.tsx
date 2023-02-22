@@ -7,16 +7,23 @@ import { Navigation } from './components/Navigation';
 export const App = () => (
   <div data-cy="app">
     <Navigation />
+
     <main className="section">
       <div className="container">
         <Routes>
-          <Route path="/" />
+          <Route
+            path="/"
+            element={
+              <h1 className="title">Home Page</h1>
+            }
+          />
           <Route path="/home" element={<Navigate to="/" />} />
+          <Route
+            path="/people"
+            element={<h1 className="title">People Page</h1>}
+          />
           <Route path="*" element={<h1 className="title">Page not found</h1>} />
         </Routes>
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
 
         <div className="block">
           <div className="box table-container">

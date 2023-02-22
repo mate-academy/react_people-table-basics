@@ -1,0 +1,26 @@
+import cn from 'classnames';
+import { NavLink } from 'react-router-dom';
+
+type Props = {
+  children: string,
+};
+
+export const NavElement: React.FC<Props> = ({ children }) => {
+  const slug = children
+    .split(' ')
+    .filter(word => word)
+    .map(word => word.toLowerCase())
+    .join('-');
+
+  return (
+    <NavLink
+      className={({ isActive }) => cn(
+        'navbar-item is-capitalized',
+        { 'has-background-grey-lighter': isActive },
+      )}
+      to={`/${slug}`}
+    >
+      {children}
+    </NavLink>
+  );
+};

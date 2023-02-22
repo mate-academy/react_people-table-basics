@@ -1,3 +1,5 @@
+import { NavElement } from '../NavButton';
+
 export const Navigation = () => (
   <nav
     data-cy="nav"
@@ -7,16 +9,9 @@ export const Navigation = () => (
   >
     <div className="container">
       <div className="navbar-brand">
-        <a className="navbar-item" href="#/">
-          Home
-        </a>
-
-        <a
-          className="navbar-item has-background-grey-lighter"
-          href="#/people"
-        >
-          People
-        </a>
+        <NavElement>Home</NavElement>
+        <NavElement>People</NavElement>
+        <NavElement>No page</NavElement>
       </div>
     </div>
   </nav>
