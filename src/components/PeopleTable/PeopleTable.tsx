@@ -30,6 +30,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       <tbody>
         {people.map((person) => (
           <PersonRow
+            key={person.slug}
             person={person}
             selectedSlug={selectedSlug}
           />
