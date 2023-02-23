@@ -3,7 +3,7 @@ import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable/PeopleTable';
 import { Person } from '../types';
-import { getParent } from './GetParent';
+import { getParent } from '../components/utils/GetParent';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
