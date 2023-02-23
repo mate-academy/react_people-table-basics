@@ -3,14 +3,14 @@ import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
 interface Props {
-  people: Person[],
+  people: Person[];
   selectedPerson: string;
 }
 
 export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
   const findParent = (name: string | null) => {
-    return people.find(person => person.name === name) || null;
-  };
+    return people.find((person) => person.name === name) || null;
+  }
 
   return (
     <table
@@ -29,7 +29,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
       </thead>
 
       <tbody>
-        {people.map(person => {
+        {people.map((person) => {
           const mother = findParent(person.motherName);
           const father = findParent(person.fatherName);
 
