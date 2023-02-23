@@ -58,6 +58,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
 
           return (
             <tr
+              key={name}
               data-cy="person"
               className={cn({ 'has-background-warning': isSelected })}
             >

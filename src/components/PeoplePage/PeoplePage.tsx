@@ -13,12 +13,12 @@ export const PeoplePage: React.FC = () => {
   const { slug = '' } = useParams();
 
   const fetchPeople = async () => {
-    setIsLoading(true);
-
     try {
+      setIsLoading(true);
       const allPeople = await getPeople();
 
-      await setPeople(allPeople);
+      setPeople(allPeople);
+      setHasError(false);
     } catch {
       console.warn('An occur error while loading people');
       setHasError(true);
