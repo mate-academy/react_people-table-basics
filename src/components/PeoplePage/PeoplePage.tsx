@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { preparePeopleArray } from '../../utils/preparePeopleArray';
@@ -23,6 +23,10 @@ export const PeoplePage: React.FC = () => {
       setIsLoaderActive(false);
     }
   };
+
+  const peopleArrayIsAmpty = useMemo(() => {
+    return people.length === 0 && !isLoaderActive;
+  }, [people]);
 
   useEffect(() => {
     fetchPeople();
@@ -49,7 +53,7 @@ export const PeoplePage: React.FC = () => {
         />
       )}
 
-      {(people.length === 0 && !isLoaderActive) && (
+      {peopleArrayIsAmpty && (
         <p data-cy="noPeopleMessage">
           There are no people on the server
         </p>
