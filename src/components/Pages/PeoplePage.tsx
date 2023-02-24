@@ -46,7 +46,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!people && (
+          {!people.length && !loadingHasError && !isLoading && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
@@ -55,6 +55,7 @@ export const PeoplePage = () => {
           {isTableVisible && (
             <PeopleTable selectedPersonSlug={personSlug} people={people} />
           )}
+
         </div>
       </div>
     </div>
