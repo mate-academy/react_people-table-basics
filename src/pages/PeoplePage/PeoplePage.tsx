@@ -11,7 +11,7 @@ export const PeoplePage: FC = () => {
   const [isPeopleLoading, setIsPeopleLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const { currentPerson = 0 } = useParams();
+  const { selectedPerson = 0 } = useParams();
 
   const loadPeople = async () => {
     try {
@@ -78,7 +78,8 @@ export const PeoplePage: FC = () => {
                       data-cy="person"
                       key={person.slug}
                       className={cn({
-                        'has-background-warning': person.slug === currentPerson,
+                        // eslint-disable-next-line
+                        'has-background-warning': person.slug === selectedPerson,
                       })}
                     >
                       <td>
@@ -100,7 +101,7 @@ export const PeoplePage: FC = () => {
                           </td>
                         )
                         : (
-                          <td>{person.motherName ? person.motherName : '-'}</td>
+                          <td>{person.motherName || ('-')}</td>
                         )}
 
                       {father
@@ -112,7 +113,7 @@ export const PeoplePage: FC = () => {
                           </td>
                         )
                         : (
-                          <td>{person.fatherName ? person.fatherName : '-'}</td>
+                          <td>{person.fatherName || ('-')}</td>
                         )}
                     </tr>
                   );

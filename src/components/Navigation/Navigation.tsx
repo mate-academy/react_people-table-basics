@@ -1,37 +1,17 @@
-import { NavLink } from 'react-router-dom';
-import cn from 'classnames';
+import { PageNavLink } from '../PageNavLink';
 
-export const Navigation = () => {
-  const handlerActiveLink = (isActive: boolean) => {
-    return cn('navbar-item', {
-      'has-background-grey-lighter': isActive,
-    });
-  };
-
-  return (
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <NavLink
-            to="/"
-            className={({ isActive }) => handlerActiveLink(isActive)}
-          >
-            Home
-          </NavLink>
-
-          <NavLink
-            to="/people"
-            className={({ isActive }) => handlerActiveLink(isActive)}
-          >
-            People
-          </NavLink>
-        </div>
+export const Navigation = () => (
+  <nav
+    data-cy="nav"
+    className="navbar is-fixed-top has-shadow"
+    role="navigation"
+    aria-label="main navigation"
+  >
+    <div className="container">
+      <div className="navbar-brand">
+        <PageNavLink to="/" name="Home" />
+        <PageNavLink to="/people" name="People" />
       </div>
-    </nav>
-  );
-};
+    </div>
+  </nav>
+);
