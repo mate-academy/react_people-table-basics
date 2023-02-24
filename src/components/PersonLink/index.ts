@@ -1,1 +1,1 @@
-export * from './PeopleLink';
+export * from './PersonLink';
