@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
 import { Person } from '../../types';
@@ -9,7 +9,7 @@ export const PeoplePage: React.FC = () => {
   const [hasLoadingError, setHasLoadingError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const loadPeople = async () => {
+  const loadPeople = useCallback(async () => {
     try {
       setIsLoading(true);
       const peopleFromServer = await getPeople();
@@ -20,7 +20,7 @@ export const PeoplePage: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     setHasLoadingError(false);
