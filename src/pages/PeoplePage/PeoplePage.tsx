@@ -12,8 +12,9 @@ export const PeoplePage: React.FC = () => {
   const { slug = '' } = useParams();
 
   const handleGettingPeople = async () => {
+    setIsLoading(true);
+
     try {
-      setIsLoading(true);
       const peopleFromServer = await getPeople();
 
       setIsError(false);
