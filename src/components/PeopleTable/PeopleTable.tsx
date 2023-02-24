@@ -1,7 +1,7 @@
-import classNames from "classnames";
-import React from "react";
-import { Person } from "../../types";
-import { PersonLink } from "../PersonLink";
+import classNames from 'classnames';
+import React from 'react';
+import { Person } from '../../types';
+import { PersonLink } from '../PersonLink';
 
 type Props = {
   people: Person[],
@@ -14,7 +14,7 @@ export const PeopleTable: React.FC<Props> = ({ people, personSlug }) => {
       <p data-cy="noPeopleMessage">
         There are no people on the server
       </p>
-    )
+    );
   }
 
   const peopleWithParents = people.map(human => ({
@@ -40,7 +40,7 @@ export const PeopleTable: React.FC<Props> = ({ people, personSlug }) => {
       </thead>
 
       <tbody>
-      {peopleWithParents.map(person => {
+        {peopleWithParents.map(person => {
           const {
             name,
             sex,
@@ -95,5 +95,5 @@ export const PeopleTable: React.FC<Props> = ({ people, personSlug }) => {
         })}
       </tbody>
     </table>
-  )
-}
+  );
+};

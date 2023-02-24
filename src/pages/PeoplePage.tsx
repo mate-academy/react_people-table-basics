@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getPeople } from "../../api";
-import { Person } from "../../types";
-import { Loader } from "../Loader";
-import { PeopleTable } from "../PeopleTable";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getPeople } from '../api';
+import { Person } from '../types';
+import { Loader } from '../components/Loader';
+import { PeopleTable } from '../components/PeopleTable';
 
 export const PersonPage: React.FC = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
@@ -16,6 +16,7 @@ export const PersonPage: React.FC = () => {
       setLoading(true);
 
       const person = await getPeople();
+
       setPeople(person);
     } catch {
       setIsError(true);
@@ -45,8 +46,9 @@ export const PersonPage: React.FC = () => {
           <PeopleTable
             people={people}
             personSlug={personSlug}
-          />)}
+          />
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
