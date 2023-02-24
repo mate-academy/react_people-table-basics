@@ -63,31 +63,17 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
               className={cn({ 'has-background-warning': isSelected })}
             >
               <td>
-                <PersonLink
-                  slug={slug}
-                  name={name}
-                  sex={sex}
-                />
+                <PersonLink person={person} />
               </td>
 
               <td>{sex}</td>
               <td>{born}</td>
               <td>{died}</td>
               <td>
-                {mother
-                  ? (
-                    <PersonLink
-                      slug={mother.slug}
-                      name={editedMotherName}
-                      sex={mother.sex}
-                    />
-                  )
-                  : editedMotherName}
+                {mother ? <PersonLink person={mother} /> : editedMotherName}
               </td>
               <td>
-                {father
-                  ? <PersonLink slug={father.slug} name={editedFatherName} />
-                  : editedFatherName}
+                {father ? <PersonLink person={father} /> : editedFatherName}
               </td>
             </tr>
           );

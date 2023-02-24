@@ -1,17 +1,17 @@
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
+import { Person } from '../../types';
 
 type Props = {
-  slug: string;
-  name: string;
-  sex?: string;
+  person: Person;
 };
 
-export const PersonLink: React.FC<Props> = ({ slug, name, sex = 'm' }) => {
-  const isWomen = sex === 'f';
+export const PersonLink: React.FC<Props> = ({ person }) => {
+  const { name, sex, slug } = person;
+  const isWoman = sex === 'f';
 
   return (
-    <Link to={`../${slug}`} className={cn({ 'has-text-danger': isWomen })}>
+    <Link to={`../${slug}`} className={cn({ 'has-text-danger': isWoman })}>
       {name}
     </Link>
   );
