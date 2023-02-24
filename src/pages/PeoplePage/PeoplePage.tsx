@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
-import { PeopleTable } from '../PeopleTable';
-import { Loader } from '../Loader';
+import { PeopleTable } from '../../components/PeopleTable';
+import { Loader } from '../../components/Loader';
 import { getPeople } from '../../utils/fetchPeople';
 
 export const PeoplePage: React.FC = () => {
@@ -64,7 +64,6 @@ export const PeoplePage: React.FC = () => {
 
           {people.length > 0
           && (<PeopleTable people={people} selectedSlug={slug} />)}
-
         </div>
       </div>
     </>

@@ -5,9 +5,9 @@ import {
 } from 'react-router-dom';
 import React from 'react';
 import './App.scss';
-import { HomePage } from './components/HomePage';
-import { PeoplePage } from './components/PeoplePage';
-import { NotFoundPage } from './components/NotFoundPage';
+import { HomePage } from './pages/HomePage';
+import { PeoplePage } from './pages/PeoplePage';
+import { NotFoundPage } from './pages/NotFoundPage';
 import { Navbar } from './components/Navbar';
 
 export const App: React.FC = () => {
