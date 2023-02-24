@@ -22,7 +22,7 @@ export const PeoplePage = () => {
       const peopleFromServer = await getPeople();
 
       setPeople(peopleFromServer);
-    } catch (error) {
+    } catch {
       setLoadingHasError(true);
     } finally {
       setIsLoading(false);
