@@ -33,20 +33,24 @@ export const PeoplePage: React.FC = () => {
     fetchPeople();
   }, []);
 
+  const isLoading = loadingStatus === LoadingStatus.ISLOADING;
+  const hasError = loadingStatus === LoadingStatus.ERROR;
+  const loadingSuccess = loadingStatus === LoadingStatus.SUCCESS;
+
   return (
     <>
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {(loadingStatus === LoadingStatus.ISLOADING) && <Loader />}
+          {(isLoading) && <Loader />}
 
-          {(loadingStatus === LoadingStatus.ERROR) && (
+          {(hasError) && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {(loadingStatus === LoadingStatus.SUCCESS) && (
+          {(loadingSuccess) && (
             <PeopleTable
               people={people}
               personSlug={slug}

@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { HomePage } from './components/HomePage';
 import { NavBar } from './components/NavBar';
+import { NotFoundPage } from './components/NotFoundPage';
 import { PeoplePage } from './components/PeoplePage';
 
 export const App = () => (
@@ -21,7 +22,7 @@ export const App = () => (
             <Route path=":slug" element={<PeoplePage />} />
           </Route>
 
-          <Route path="*" element={<h1 className="title">Page not found</h1>} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </main>
