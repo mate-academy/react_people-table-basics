@@ -2,30 +2,27 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
-import { LoadingStatus } from '../../types/LoadingStatus';
+import { preparedPeople } from '../../utils/helpers';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const { slug = '' } = useParams();
   const [people, setPeople] = useState<Person[]>([]);
-  const [loadingStatus, setLoadingStatus] = useState<LoadingStatus>(
-    LoadingStatus.NONE,
-  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const fetchPeople = useCallback(async () => {
-    setLoadingStatus(LoadingStatus.ISLOADING);
+    setIsLoading(true);
 
     try {
       const peopleFromServer = await getPeople();
 
       setPeople(peopleFromServer);
-
-      if (peopleFromServer) {
-        setLoadingStatus(LoadingStatus.SUCCESS);
-      }
     } catch {
-      setLoadingStatus(LoadingStatus.ERROR);
+      setHasError(true);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -33,9 +30,9 @@ export const PeoplePage: React.FC = () => {
     fetchPeople();
   }, []);
 
-  const isLoading = loadingStatus === LoadingStatus.ISLOADING;
-  const hasError = loadingStatus === LoadingStatus.ERROR;
-  const loadingSuccess = loadingStatus === LoadingStatus.SUCCESS;
+  const peopleWithParents = preparedPeople(people);
+  const hasData = people.length > 0 && !isLoading;
+  const hasEmpty = (people.length === 0) && (!hasError) && (!isLoading);
 
   return (
     <>
@@ -50,11 +47,17 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {loadingSuccess && (
+          {hasData && (
             <PeopleTable
-              people={people}
+              people={peopleWithParents}
               personSlug={slug}
             />
+          )}
+
+          {hasEmpty && (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
+            </p>
           )}
         </div>
       </div>

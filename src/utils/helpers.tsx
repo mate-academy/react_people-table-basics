@@ -1,5 +1,11 @@
 import { Person } from '../types';
 
-export const findParent = (parentName: string, people: Person []) => {
-  return people.find(person => person.name === parentName) || null;
+export const preparedPeople = (people: Person []) => {
+  return people.map(person => {
+    return {
+      ...person,
+      mother: people.find(parent => parent.name === person.motherName) || null,
+      father: people.find(parent => parent.name === person.fatherName) || null,
+    };
+  });
 };
