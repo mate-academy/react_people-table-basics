@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
@@ -21,6 +22,7 @@ export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[] | []>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const { slug = '' } = useParams();
 
   const fetchPeople = async () => {
     try {
@@ -62,6 +64,7 @@ export const PeoplePage: React.FC = () => {
       {people.length > 0 && (
         <PeopleTable
           people={people}
+          selectedSlug={slug}
         />
       )}
 

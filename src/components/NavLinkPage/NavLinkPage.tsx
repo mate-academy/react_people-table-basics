@@ -5,7 +5,7 @@ import classNames from 'classnames';
 type Props = {
   to: To,
   text: string,
-}
+};
 
 export const NavLinkPage: React.FC<Props> = React.memo(({ to, text }) => (
   <NavLink
