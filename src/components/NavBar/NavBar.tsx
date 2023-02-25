@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLinkPage } from '../NavLinkPage';
+import { NavLinkPage } from '../../pages/NavLinkPage';
 
 export const NavBar: React.FC = () => (
   <nav
