@@ -1,22 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
+import { preparePeople } from '../../helpers';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
-
-export const preparePeople = (people: Person[]) => {
-  return people.map(person => {
-    const mother = people.find(mom => mom.name === person.motherName);
-    const father = people.find(dad => dad.name === person.fatherName);
-
-    return {
-      ...person,
-      mother,
-      father,
-    };
-  });
-};
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[] | []>([]);
