@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { preparePeopleArray } from '../../utils/preparePeopleArray';
@@ -6,11 +6,11 @@ import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<Person[] | []>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoaderActive, setIsLoaderActive] = useState(true);
   const [isLoadingError, setIisLoadingError] = useState(false);
 
-  const fetchPeople = async () => {
+  const fetchPeople = useCallback(async () => {
     try {
       let data = await getPeople();
 
@@ -22,11 +22,9 @@ export const PeoplePage: React.FC = () => {
     } finally {
       setIsLoaderActive(false);
     }
-  };
+  }, []);
 
-  const peopleArrayIsAmpty = useMemo(() => {
-    return people.length === 0 && !isLoaderActive;
-  }, [people]);
+  const peopleArrayIsAmpty = people.length === 0 && !isLoaderActive;
 
   useEffect(() => {
     fetchPeople();
