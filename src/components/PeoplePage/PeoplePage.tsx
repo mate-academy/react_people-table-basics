@@ -7,7 +7,7 @@ import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const {slug = ''} = useParams();
+  const { slug = '' } = useParams();
   const [errorText, setErrorText] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
