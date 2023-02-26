@@ -26,7 +26,6 @@ export const PeoplePage = () => {
           displayedPeople={displayedPeople}
         />
       </div>
-
     </div>
   );
 };
