@@ -8,17 +8,18 @@ import { PeopleTable } from '../components/PeopleTable/PeopleTable';
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [hasError, setHasError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { slug = '' } = useParams();
 
   const peopleFromServer = async () => {
+    setLoading(true);
     try {
       const peoples = await getPeople();
 
       setPeople(peoples);
+      setLoading(false);
     } catch {
       setHasError(true);
-    } finally {
-      setHasError(false);
     }
   };
 
@@ -35,15 +36,18 @@ export const PeoplePage = () => {
   }
 
   return (
-    <div className="block">
-      <div className="box table-container">
+    <>
+      <div className="block">
+        <h1 className="title">People Page</h1>
+        <div className="box table-container">
 
-        {people.length <= 0 ? (
-          <Loader />
-        ) : (
-          <PeopleTable people={people} selectedSlug={slug} />
-        )}
+          {loading ? (
+            <Loader />
+          ) : (
+            <PeopleTable people={people} selectedSlug={slug} />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
