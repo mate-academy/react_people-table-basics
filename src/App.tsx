@@ -23,6 +23,10 @@ export const App = () => (
             path="/people"
             element={<PeoplePage />}
           />
+          <Route
+            path="/people/:slug"
+            element={<PeoplePage />}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

@@ -1,153 +1,126 @@
+import classNames from 'classnames';
+import { Link, useMatch } from 'react-router-dom';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 
 type Props = {
   isLoading: boolean,
+  hasLoadingError: boolean,
   displayedPeople: Person[],
 };
 
 export const PeopleTable: React.FC<Props> = ({
   isLoading,
+  hasLoadingError,
   displayedPeople,
 }) => {
+  const match = useMatch('/people/:slug');
+  const activeSlug = match?.params.slug;
+
+  const getPersonByName = (name: string | null) => {
+    return displayedPeople
+      .find(person => person.name === name);
+  };
+
   if (isLoading) {
     return <Loader />;
   }
 
-  // eslint-disable-next-line no-console
-  console.log(isLoading, displayedPeople);
-
-  return (
-    <div className="box table-container">
+  if (hasLoadingError) {
+    return (
       <p data-cy="peopleLoadingError" className="has-text-danger">
         Something went wrong
       </p>
+    );
+  }
 
+  if (!displayedPeople.length) {
+    return (
       <p data-cy="noPeopleMessage">
         There are no people on the server
       </p>
+    );
+  }
 
-      <table
-        data-cy="peopleTable"
-        className="table is-striped is-hoverable is-narrow is-fullwidth"
-      >
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Sex</th>
-            <th>Born</th>
-            <th>Died</th>
-            <th>Mother</th>
-            <th>Father</th>
-          </tr>
-        </thead>
+  return (
+    <table
+      data-cy="peopleTable"
+      className="table is-striped is-hoverable is-narrow is-fullwidth"
+    >
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Sex</th>
+          <th>Born</th>
+          <th>Died</th>
+          <th>Mother</th>
+          <th>Father</th>
+        </tr>
+      </thead>
 
-        <tbody>
-          <tr data-cy="person">
-            <td>
-              <a href="#/people/jan-van-brussel-1714">
-                Jan van Brussel
-              </a>
-            </td>
+      <tbody>
+        {displayedPeople.map(({
+          name,
+          fatherName,
+          motherName,
+          slug,
+          sex,
+          born,
+          died,
+        }) => {
+          const mother = getPersonByName(motherName);
+          const father = getPersonByName(fatherName);
 
-            <td>m</td>
-            <td>1714</td>
-            <td>1748</td>
-            <td>Joanna van Rooten</td>
-            <td>Jacobus van Brussel</td>
-          </tr>
+          return (
+            <tr
+              data-cy="person"
+              key={slug}
+              className={
+                classNames({ 'has-background-warning': slug === activeSlug })
+              }
+            >
+              <td>
+                <Link to={`/people/${slug}`}>
+                  {name}
+                </Link>
 
-          <tr data-cy="person">
-            <td>
-              <a href="#/people/philibert-haverbeke-1907">
-                Philibert Haverbeke
-              </a>
-            </td>
+              </td>
+              <td>{sex}</td>
+              <td>{born}</td>
+              <td>{died}</td>
 
-            <td>m</td>
-            <td>1907</td>
-            <td>1997</td>
+              <td>
+                {mother?.slug
+                  ? (
+                    <Link
+                      className="has-text-danger"
+                      to={`/people/${mother.slug}`}
+                    >
+                      {motherName}
+                    </Link>
+                  )
+                  : (
+                    <p>{motherName || '-'}</p>
+                  )}
+              </td>
 
-            <td>
-              <a
-                className="has-text-danger"
-                href="#/people/emma-de-milliano-1876"
-              >
-                Emma de Milliano
-              </a>
-            </td>
-
-            <td>
-              <a href="#/people/emile-haverbeke-1877">
-                Emile Haverbeke
-              </a>
-            </td>
-          </tr>
-
-          <tr data-cy="person" className="has-background-warning">
-            <td>
-              <a href="#/people/jan-frans-van-brussel-1761">
-                Jan Frans van Brussel
-              </a>
-            </td>
-
-            <td>m</td>
-            <td>1761</td>
-            <td>1833</td>
-            <td>-</td>
-
-            <td>
-              <a href="#/people/jacobus-bernardus-van-brussel-1736">
-                Jacobus Bernardus van Brussel
-              </a>
-            </td>
-          </tr>
-
-          <tr data-cy="person">
-            <td>
-              <a
-                className="has-text-danger"
-                href="#/people/lievijne-jans-1542"
-              >
-                Lievijne Jans
-              </a>
-            </td>
-
-            <td>f</td>
-            <td>1542</td>
-            <td>1582</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
-
-          <tr data-cy="person">
-            <td>
-              <a href="#/people/bernardus-de-causmaecker-1721">
-                Bernardus de Causmaecker
-              </a>
-            </td>
-
-            <td>m</td>
-            <td>1721</td>
-            <td>1789</td>
-
-            <td>
-              <a
-                className="has-text-danger"
-                href="#/people/livina-haverbeke-1692"
-              >
-                Livina Haverbeke
-              </a>
-            </td>
-
-            <td>
-              <a href="#/people/lieven-de-causmaecker-1696">
-                Lieven de Causmaecker
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+              <td>
+                {father?.slug
+                  ? (
+                    <Link
+                      to={`/people/${father.slug}`}
+                    >
+                      {fatherName}
+                    </Link>
+                  )
+                  : (
+                    <p>{fatherName || '-'}</p>
+                  )}
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
