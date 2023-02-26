@@ -1,7 +1,8 @@
-import classNames from 'classnames';
-import { Link, useMatch } from 'react-router-dom';
+import cn from 'classnames';
+import { useMatch } from 'react-router-dom';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
+import { PersonLink } from '../PersonLink';
 
 type Props = {
   isLoading: boolean,
@@ -59,15 +60,15 @@ export const PeopleTable: React.FC<Props> = ({
       </thead>
 
       <tbody>
-        {displayedPeople.map(({
-          name,
-          fatherName,
-          motherName,
-          slug,
-          sex,
-          born,
-          died,
-        }) => {
+        {displayedPeople.map((person) => {
+          const {
+            fatherName,
+            motherName,
+            slug,
+            sex,
+            born,
+            died,
+          } = person;
           const mother = getPersonByName(motherName);
           const father = getPersonByName(fatherName);
 
@@ -76,46 +77,27 @@ export const PeopleTable: React.FC<Props> = ({
               data-cy="person"
               key={slug}
               className={
-                classNames({ 'has-background-warning': slug === activeSlug })
+                cn({ 'has-background-warning': slug === activeSlug })
               }
             >
               <td>
-                <Link to={`/people/${slug}`}>
-                  {name}
-                </Link>
-
+                <PersonLink person={person} />
               </td>
+
               <td>{sex}</td>
               <td>{born}</td>
               <td>{died}</td>
 
               <td>
                 {mother?.slug
-                  ? (
-                    <Link
-                      className="has-text-danger"
-                      to={`/people/${mother.slug}`}
-                    >
-                      {motherName}
-                    </Link>
-                  )
-                  : (
-                    <p>{motherName || '-'}</p>
-                  )}
+                  ? <PersonLink person={mother} />
+                  : <p>{motherName || '-'}</p>}
               </td>
 
               <td>
                 {father?.slug
-                  ? (
-                    <Link
-                      to={`/people/${father.slug}`}
-                    >
-                      {fatherName}
-                    </Link>
-                  )
-                  : (
-                    <p>{fatherName || '-'}</p>
-                  )}
+                  ? <PersonLink person={father} />
+                  : <p>{fatherName || '-'}</p>}
               </td>
             </tr>
           );
