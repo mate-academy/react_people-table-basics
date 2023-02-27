@@ -15,10 +15,14 @@ export const PeoplePage: React.FC = () => {
     try {
       const data = await getPeople();
 
+      const getParent = (parent: string | null) => {
+        return data.find(pers => pers.name === parent);
+      };
+
       const peopleWithParents = data.map(person => ({
         ...person,
-        mother: data.find(pers => pers.name === person.motherName),
-        father: data.find(pers => pers.name === person.fatherName),
+        mother: getParent(person.motherName),
+        father: getParent(person.fatherName),
       }));
 
       setPeople(peopleWithParents);
