@@ -1,3 +1,4 @@
+import React from 'react';
 import { Person } from '../../types';
 import { PersonString } from '../PersonString';
 
@@ -7,7 +8,7 @@ interface Props {
   hasError: boolean,
 }
 
-export const PeopleTable: React.FC<Props> = ({
+export const PeopleTable: React.FC<Props> = React.memo(({
   people,
   personSlug,
   hasError,
@@ -55,4 +56,4 @@ export const PeopleTable: React.FC<Props> = ({
       </tbody>
     </table>
   );
-};
+});

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
@@ -6,7 +6,7 @@ import { preparedPeople } from '../../utils/helpers';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
 
-export const PeoplePage: React.FC = () => {
+export const PeoplePage: React.FC = React.memo(() => {
   const { slug = '' } = useParams();
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -49,4 +49,4 @@ export const PeoplePage: React.FC = () => {
       </div>
     </>
   );
-};
+});
