@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
 import { getPeople } from '../api';
 import { Person } from '../types';
 
-export const PeoplePage: React.FC = () => {
+export const PeoplePage: React.FC = React.memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -31,8 +31,7 @@ export const PeoplePage: React.FC = () => {
     fetchPeople();
   }, []);
 
-  const noPeople = isLoaded && !people.length;
-  const showPeople = isLoaded && people.length;
+  const hasPeople = isLoaded && people.length;
 
   return (
     <div className="block">
@@ -45,14 +44,16 @@ export const PeoplePage: React.FC = () => {
           </p>
         )}
 
-        {noPeople && (
+        {!hasPeople && (
           <p data-cy="noPeopleMessage">
             There are no people on the server
           </p>
         )}
 
-        {showPeople && (<PeopleTable people={people} selectedSlug={slug} />)}
+        {hasPeople && (
+          <PeopleTable people={people} selectedSlug={slug} />
+        )}
       </div>
     </div>
   );
-};
+});
