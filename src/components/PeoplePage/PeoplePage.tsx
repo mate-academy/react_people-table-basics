@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
@@ -13,7 +13,7 @@ export const PeoplePage: React.FC = () => {
   const [hasError, setHasError] = useState(false);
   const { slug = '' } = useParams();
 
-  const fetchPeople = async () => {
+  const fetchPeople = useCallback(async () => {
     try {
       const peopleFromServer = await getPeople();
 
@@ -30,7 +30,7 @@ export const PeoplePage: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchPeople();

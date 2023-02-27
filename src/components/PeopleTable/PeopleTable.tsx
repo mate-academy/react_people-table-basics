@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import React from 'react';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
@@ -7,7 +8,10 @@ type Props = {
   selectedSlug: string;
 };
 
-export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
+export const PeopleTable: React.FC<Props> = React.memo(({
+  people,
+  selectedSlug,
+}) => {
   return (
     <table
       data-cy="peopleTable"
@@ -70,4 +74,4 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
       </tbody>
     </table>
   );
-};
+});
