@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { PeopleTable } from '../components/PeopleTable';
@@ -6,9 +7,9 @@ import { Loader } from '../components/Loader';
 
 export const PeopleTablePage: React.FC = memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [isPeopleLoaded, setIsPeopleLoaded] = useState(false);
+  const { slug = '' } = useParams();
 
   const loadPeople = async () => {
     setIsLoading(true);
@@ -17,7 +18,6 @@ export const PeopleTablePage: React.FC = memo(() => {
       const peopleFromServer = await getPeople();
 
       setPeople(peopleFromServer);
-      setIsPeopleLoaded(true);
     } catch {
       setErrorMessage(true);
     } finally {
@@ -29,29 +29,21 @@ export const PeopleTablePage: React.FC = memo(() => {
     loadPeople();
   }, []);
 
-  const hasNoPeople = !people.length && isPeopleLoaded;
-
   return (
     <>
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {isLoading && <Loader />}
-
-          {errorMessage
-            && (
-              <p data-cy="peopleLoadingError" className="has-text-danger">
-                Something went wrong
-              </p>
+          {isLoading ? (
+            <Loader />
+          )
+            : (
+              <PeopleTable
+                people={people}
+                selectedSlug={slug}
+                errorMessage={errorMessage}
+              />
             )}
-
-          {hasNoPeople && (
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
-          )}
-
-          {people.length !== 0 && <PeopleTable people={people} />}
         </div>
       </div>
     </>

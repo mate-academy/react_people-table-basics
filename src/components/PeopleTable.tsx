@@ -1,11 +1,12 @@
 import { memo } from 'react';
 import classNames from 'classnames';
-import { useParams } from 'react-router-dom';
 import { Person } from '../types/Person';
 import { PersonLink } from './PersonLink';
 
 interface Props {
   people: Person[],
+  selectedSlug: string,
+  errorMessage: boolean,
 }
 
 const headers = [
@@ -17,8 +18,26 @@ const headers = [
   { id: 6, title: 'Father' },
 ];
 
-export const PeopleTable: React.FC<Props> = memo(({ people }) => {
-  const { slug } = useParams();
+export const PeopleTable: React.FC<Props> = memo(({
+  people,
+  selectedSlug,
+  errorMessage,
+}) => {
+  if (errorMessage) {
+    return (
+      <p data-cy="peopleLoadingError" className="has-text-danger">
+        Something went wrong
+      </p>
+    );
+  }
+
+  if (!people.length) {
+    return (
+      <p data-cy="noPeopleMessage">
+        There are no people on the server
+      </p>
+    );
+  }
 
   return (
     <table
@@ -32,33 +51,52 @@ export const PeopleTable: React.FC<Props> = memo(({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <tr
-            data-cy="person"
-            key={person.slug}
-            className={(classNames({
-              'has-background-warning': person.slug === slug,
-            }))}
-          >
-            <td>
-              <PersonLink person={person} />
-            </td>
+        {people.map(person => {
+          const {
+            sex,
+            born,
+            died,
+            motherName,
+            fatherName,
+            slug,
+          } = person;
 
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
-            <td>
-              {person.father
-                ? <PersonLink person={person.father} />
-                : person.fatherName || '-'}
-            </td>
-            <td>
-              {person.mother
-                ? <PersonLink person={person.mother} />
-                : person.motherName || '-'}
-            </td>
-          </tr>
-        ))}
+          const hasSelected = slug === selectedSlug;
+          const selectedMother = people.find(p => p.name === motherName);
+          const selectedFather = people.find(p => p.name === fatherName);
+          const motherNameCell = motherName || '-';
+          const fatherNameCell = fatherName || '-';
+
+          return (
+            <tr
+              key={slug}
+              data-cy="person"
+              className={classNames({
+                'has-background-warning': hasSelected,
+              })}
+            >
+              <td>
+                <PersonLink person={person} />
+              </td>
+
+              <td>{sex}</td>
+              <td>{born}</td>
+              <td>{died}</td>
+
+              <td>
+                {selectedMother
+                  ? <PersonLink person={selectedMother} />
+                  : motherNameCell}
+              </td>
+
+              <td>
+                {selectedFather
+                  ? <PersonLink person={selectedFather} />
+                  : fatherNameCell}
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
