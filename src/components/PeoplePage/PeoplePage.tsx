@@ -6,9 +6,9 @@ import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<Person[] | []>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoaderActive, setIsLoaderActive] = useState(true);
-  const [isLoadingError, setIisLoadingError] = useState(false);
+  const [isLoadingError, setIsLoadingError] = useState(false);
 
   const fetchPeople = async () => {
     try {
@@ -18,13 +18,13 @@ export const PeoplePage: React.FC = () => {
       setPeople(data);
       setIsLoaderActive(false);
     } catch {
-      setIisLoadingError(true);
+      setIsLoadingError(true);
     } finally {
       setIsLoaderActive(false);
     }
   };
 
-  const peopleArrayIsAmpty = useMemo(() => {
+  const peopleArrayIsEmpty = useMemo(() => {
     return people.length === 0 && !isLoaderActive;
   }, [people]);
 
@@ -53,7 +53,7 @@ export const PeoplePage: React.FC = () => {
         />
       )}
 
-      {peopleArrayIsAmpty && (
+      {peopleArrayIsEmpty && (
         <p data-cy="noPeopleMessage">
           There are no people on the server
         </p>
