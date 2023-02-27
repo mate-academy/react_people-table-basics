@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { preparePeople } from '../../helpers';
@@ -12,7 +12,7 @@ export const PeoplePage: React.FC = () => {
   const [hasError, setHasError] = useState(false);
   const { slug = '' } = useParams();
 
-  const fetchPeople = async () => {
+  const fetchPeople = useCallback(async () => {
     try {
       let data = await getPeople();
 
@@ -24,11 +24,11 @@ export const PeoplePage: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const isPeopleExist = useMemo(() => {
+  const isPeopleExist = () => {
     return people.length === 0 && !isLoading;
-  }, [people]);
+  };
 
   useEffect(() => {
     fetchPeople();
@@ -49,14 +49,14 @@ export const PeoplePage: React.FC = () => {
         </p>
       )}
 
-      {people.length > 0 && (
+      {!!people.length && (
         <PeopleTable
           people={people}
           selectedSlug={slug}
         />
       )}
 
-      {isPeopleExist && (
+      {isPeopleExist() && (
         <p data-cy="noPeopleMessage">
           There are no people on the server
         </p>

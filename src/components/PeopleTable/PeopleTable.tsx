@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import React from 'react';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
@@ -7,7 +8,9 @@ type Props = {
   selectedSlug: string
 };
 
-export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => (
+export const PeopleTable: React.FC<Props> = React.memo(({
+  people, selectedSlug,
+}) => (
   <table
     data-cy="peopleTable"
     className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -35,6 +38,8 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => (
         } = person;
 
         const isSlugSelected = slug === selectedSlug;
+        const hasMother = motherName || '-';
+        const hasFather = fatherName || '-';
 
         return (
           <tr
@@ -54,16 +59,16 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => (
             <td>
               {person.mother
                 ? <PersonLink person={person.mother} />
-                : (motherName || '-')}
+                : hasMother }
             </td>
             <td>
               {person.father
                 ? <PersonLink person={person.father} />
-                : (fatherName || '-')}
+                : hasFather }
             </td>
           </tr>
         );
       })}
     </tbody>
   </table>
-);
+));
