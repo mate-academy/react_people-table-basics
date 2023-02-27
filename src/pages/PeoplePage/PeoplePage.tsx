@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PeopleTable } from '../../components/PeopleTable';
 import { Loader } from '../../components/Loader';
-import { getPeople } from '../../utils/fetchPeople';
+import { getPeople } from '../../api';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
