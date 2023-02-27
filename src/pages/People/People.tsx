@@ -1,9 +1,15 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, {
+  useCallback,
+  useState,
+  useEffect,
+  useMemo,
+} from 'react';
 
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../../components/Loader';
 import { PeopleTable } from '../../components/PeopleTable';
+import { getPeopleWithParents } from '../../utils/getPeopleWithParents';
 
 export const People: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -31,22 +37,9 @@ export const People: React.FC = () => {
     getPeopleFromServer();
   }, []);
 
-  const getPeopleWithParents = useCallback(
-    (arrayOfPeople: Person[]) => {
-      return arrayOfPeople.map(person => {
-        const mother = people.find(mom => mom.name === person.motherName);
-        const father = people.find(dad => dad.name === person.fatherName);
-
-        return {
-          ...person,
-          mother,
-          father,
-        };
-      });
-    }, [people],
+  const peopleWithParents = useMemo(
+    () => getPeopleWithParents(people), [people],
   );
-
-  const peopleWithParents = getPeopleWithParents(people);
 
   const isWrong = !isLoading && people.length === 0;
 
