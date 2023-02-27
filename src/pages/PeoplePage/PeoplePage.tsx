@@ -16,9 +16,6 @@ export const PeoplePage: React.FC = () => {
 
     try {
       const peopleFromServer = await getPeople();
-
-      setIsError(false);
-
       const updatedPeople = peopleFromServer.map(person => (
         {
           ...person,
@@ -48,7 +45,7 @@ export const PeoplePage: React.FC = () => {
       <div className="block">
         <div className="box table-container">
 
-          {(isLoading && (<Loader />))}
+          {isLoading && <Loader />}
 
           {people.length === 0 && isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
