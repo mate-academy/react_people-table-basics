@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Person } from '../../types/Person';
 
 type Props = {
@@ -8,20 +8,14 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
-  const {
-    name,
-    sex,
-    slug,
-  } = person;
-
   return (
-    <Link
-      to={`../${slug}`}
+    <NavLink
+      to={`../${person.slug}`}
       className={classNames({
-        'has-text-danger': sex === 'f',
+        'has-text-danger': person.sex === 'f',
       })}
     >
-      {name}
-    </Link>
+      {person.name}
+    </NavLink>
   );
 };
