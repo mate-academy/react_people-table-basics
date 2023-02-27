@@ -8,20 +8,6 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
-  if (people.length === 0) {
-    return (
-      <p data-cy="noPeopleMessage">
-        There are no people on the server
-      </p>
-    );
-  }
-
-  const peopleWithParents = people.map(human => ({
-    ...human,
-    mother: people.find(person => person.name === human.motherName) || null,
-    father: people.find(person => person.name === human.fatherName) || null,
-  }));
-
   return (
     <table
       data-cy="peopleTable"
@@ -39,9 +25,8 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
       </thead>
 
       <tbody>
-        {peopleWithParents.map(person => {
+        {people.map(person => {
           const {
-            name,
             sex,
             born,
             died,
@@ -52,15 +37,15 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
             father,
           } = person;
 
-          const isSelected = selectedSlug === slug;
+          const isSelectedPerson = selectedSlug === slug;
           const editedMotherName = motherName || '-';
           const editedFatherName = fatherName || '-';
 
           return (
             <tr
-              key={name}
+              key={slug}
               data-cy="person"
-              className={cn({ 'has-background-warning': isSelected })}
+              className={cn({ 'has-background-warning': isSelectedPerson })}
             >
               <td>
                 <PersonLink person={person} />
@@ -70,10 +55,14 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
               <td>{born}</td>
               <td>{died}</td>
               <td>
-                {mother ? <PersonLink person={mother} /> : editedMotherName}
+                {mother
+                  ? <PersonLink person={mother} />
+                  : editedMotherName}
               </td>
               <td>
-                {father ? <PersonLink person={father} /> : editedFatherName}
+                {father
+                  ? <PersonLink person={father} />
+                  : editedFatherName}
               </td>
             </tr>
           );
