@@ -4,8 +4,9 @@ import { Loader } from '../../components/Loader';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { PeopleTable } from '../../components/PeopleTable';
+import { extendPeople } from '../../utils/extendPeople';
 
-export const PeoplePage: React.FC = () => {
+export const PeoplePage: React.FC = React.memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -18,7 +19,9 @@ export const PeoplePage: React.FC = () => {
     try {
       const loadedPeople = await getPeople();
 
-      setPeople(loadedPeople);
+      const peopleExtended = extendPeople(loadedPeople);
+
+      setPeople(peopleExtended);
       setIsLoading(false);
     } catch {
       setIsError(true);
@@ -56,4 +59,4 @@ export const PeoplePage: React.FC = () => {
       </div>
     </>
   );
-};
+});

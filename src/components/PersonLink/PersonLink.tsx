@@ -6,15 +6,11 @@ import { Person } from '../../types';
 type Props = {
   person: Person;
   selectedPerson: string;
-  mother: Person | null;
-  father: Person | null;
 };
 
-export const PersonLink: React.FC<Props> = ({
+export const PersonLink: React.FC<Props> = React.memo(({
   person,
   selectedPerson,
-  mother,
-  father,
 }) => {
   const {
     name,
@@ -24,7 +20,12 @@ export const PersonLink: React.FC<Props> = ({
     motherName,
     fatherName,
     slug,
+    mother,
+    father,
   } = person;
+
+  const motherInfo = motherName || '-';
+  const fatherInfo = fatherName || '-';
 
   return (
     <tr
@@ -59,14 +60,14 @@ export const PersonLink: React.FC<Props> = ({
               {mother.name}
             </Link>
           )
-          : (motherName || '-')}
+          : motherInfo}
       </td>
 
       <td>
         {father
           ? <Link to={`/people/${father.slug}`}>{father.name}</Link>
-          : (fatherName || '-')}
+          : fatherInfo}
       </td>
     </tr>
   );
-};
+});
