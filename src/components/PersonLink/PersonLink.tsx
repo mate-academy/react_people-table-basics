@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import classNames from 'classnames';
@@ -9,8 +9,12 @@ type Props = {
   person: Person,
 };
 
-export const PersonLink: React.FC<Props> = ({ person }) => {
-  const { slug, name, sex } = person;
+export const PersonLink: React.FC<Props> = memo(({ person }) => {
+  const {
+    slug,
+    name,
+    sex,
+  } = person;
 
   return (
     <NavLink
@@ -22,4 +26,4 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       {name}
     </NavLink>
   );
-};
+});

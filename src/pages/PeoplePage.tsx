@@ -1,11 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types';
 
-export const PeoplePage: React.FC = () => {
+export const PeoplePage: React.FC = memo(() => {
   const { personSlug = '' } = useParams();
   const [people, setPeople] = useState<Person[]>([]);
   const [hasError, setHasError] = useState(false);
@@ -64,4 +69,4 @@ export const PeoplePage: React.FC = () => {
       </div>
     </div>
   );
-};
+});
