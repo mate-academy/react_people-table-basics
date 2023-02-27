@@ -8,7 +8,8 @@ type Props = {
 };
 
 export const PageNavLink: FC<Props> = ({
-  to, text,
+  to,
+  text,
 }) => (
   <NavLink
     className={({ isActive }) => classNames('navbar-item',

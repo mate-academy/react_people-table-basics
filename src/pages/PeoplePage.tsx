@@ -1,33 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
 import { getPeople } from '../api';
 import { Person } from '../types';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
+import { preparePeople } from '../utils/preparePeople';
 
 export const PersonPage: React.FC = () => {
-  const [people, setPeople] = useState<Person[] | null>(null);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const { personSlug = '' } = useParams();
 
-  const fetchPeople = async () => {
+  const fetchPeople = useCallback(async () => {
     try {
       setLoading(true);
 
-      const person = await getPeople();
+      const people = await getPeople();
 
-      setPeople(person);
+      const preparedPeople = preparePeople(people);
+
+      setPeople(preparedPeople);
     } catch {
       setIsError(true);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchPeople();
   }, []);
+
+  const isEmplyPeople = !Boolean(people.length) && !isLoading && !isError;
+  const isVisiblePeople = Boolean(people.length) && !isLoading;
 
   return (
     <div className="block">
@@ -42,11 +46,14 @@ export const PersonPage: React.FC = () => {
           </p>
         )}
 
-        {people && (
-          <PeopleTable
-            people={people}
-            personSlug={personSlug}
-          />
+        {isEmplyPeople && (
+          <p data-cy="noPeopleMessage">
+            There are no people on the server
+          </p>
+        )}
+
+        {isVisiblePeople && (
+          <PeopleTable people={people} />
         )}
       </div>
     </div>
