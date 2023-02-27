@@ -1,5 +1,4 @@
-import { NavLink } from 'react-router-dom';
-import classNames from 'classnames';
+import { Navlink } from '../Navlink';
 
 export const Navbar = () => (
   <nav
@@ -10,29 +9,8 @@ export const Navbar = () => (
   >
     <div className="container">
       <div className="navbar-brand">
-        <NavLink
-          to="/"
-          className={({ isActive }) => (
-            classNames(
-              'navbar-item',
-              { 'has-background-grey-lighter': isActive },
-            )
-          )}
-        >
-          Home
-        </NavLink>
-
-        <NavLink
-          to="/people"
-          className={({ isActive }) => (
-            classNames(
-              'navbar-item',
-              { 'has-background-grey-lighter': isActive },
-            )
-          )}
-        >
-          People
-        </NavLink>
+        <Navlink to="/" text="Home" />
+        <Navlink to="people" text="People" />
       </div>
     </div>
   </nav>

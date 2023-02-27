@@ -25,12 +25,24 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => (
 
     <tbody>
       {people.map(person => {
-        const isSlugSelected = person.slug === selectedSlug;
+        const {
+          sex,
+          born,
+          died,
+          father,
+          fatherName,
+          mother,
+          motherName,
+          slug,
+        } = person;
+        const isSlugSelected = slug === selectedSlug;
+        const preparedMotherName = motherName || '-';
+        const preparedFatherName = fatherName || '-';
 
         return (
           <tr
             data-cy="person"
-            key={person.slug}
+            key={slug}
             className={classNames(
               { 'has-background-warning': isSlugSelected },
             )}
@@ -39,18 +51,18 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => (
               <PersonLink person={person} />
             </td>
 
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
+            <td>{sex}</td>
+            <td>{born}</td>
+            <td>{died}</td>
             <td>
-              {person.mother
-                ? <PersonLink person={person.mother} />
-                : (person.motherName || '-')}
+              {mother
+                ? <PersonLink person={mother} />
+                : preparedMotherName}
             </td>
             <td>
-              {person.father
-                ? <PersonLink person={person.father} />
-                : (person.fatherName || '-')}
+              {father
+                ? <PersonLink person={father} />
+                : preparedFatherName}
             </td>
           </tr>
         );
