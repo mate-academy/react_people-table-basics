@@ -1,7 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import './App.scss';
+import { HomePage } from './components/HomePage/HomePage';
 import { NavBar } from './components/NavBar';
+import { NotFoundPage } from './components/NotFoundPage';
 import { PeoplesPage } from './components/PeoplesPage';
 
 export const App = () => (
@@ -10,8 +12,8 @@ export const App = () => (
 
     <main className="section">
       <Routes>
-        <Route path="*" element={<p>Page not found</p>} />
-        <Route path="/" element={<h1 className="title">Home Page</h1>} />
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="home" element={<Navigate to="/" replace />} />
         <Route path="/people" element={<PeoplesPage />}>
           <Route path=":slug" element={<PeoplesPage />} />

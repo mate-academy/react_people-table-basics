@@ -31,15 +31,17 @@ export const PeoplesPage = () => {
 
   return (
     <div className="block">
-      {isLoaded && <Loader /> }
+      <h1 className="title">People Page</h1>
+      <div className="box table-container">
+        {isLoaded && <Loader /> }
 
-      {isError && (
-        <p data-cy="peopleLoadingError" className="has-text-danger">
-          Something went wrong
-        </p>
-      )}
+        {isError && (
+          <p data-cy="peopleLoadingError" className="has-text-danger">
+            Something went wrong
+          </p>
+        )}
 
-      {people.length > 0
+        {people.length > 0
       && (
         <PeopleTable
           people={people}
@@ -47,13 +49,14 @@ export const PeoplesPage = () => {
         />
       )}
 
-      {IsPeopleFromServer
+        {IsPeopleFromServer
       && (
         <p data-cy="noPeopleMessage">
           There are no people on the server
         </p>
       )}
 
+      </div>
     </div>
   );
 };
