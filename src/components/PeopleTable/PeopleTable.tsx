@@ -9,7 +9,7 @@ type Props = {
   isError: boolean,
 };
 
-export const PeopleTable: React.FC<Props> = ({
+export const PeopleTable: React.FC<Props> = React.memo(({
   people,
   selectedSlug,
   isError,
@@ -96,4 +96,4 @@ export const PeopleTable: React.FC<Props> = ({
       </tbody>
     </table>
   );
-};
+});

@@ -5,7 +5,7 @@ import { Person } from '../../types/Person';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
 
-export const PeoplePage: React.FC = () => {
+export const PeoplePage: React.FC = React.memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -29,22 +29,20 @@ export const PeoplePage: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <h1 className="title">People page</h1>
-      <div className="block">
-        <div className="box table-container">
-          {isLoading
-            ? (
-              <Loader />
-            ) : (
-              <PeopleTable
-                people={people}
-                selectedSlug={slug}
-                isError={isError}
-              />
-            )}
-        </div>
+    <div className="block">
+      <h1 className="title">People Page</h1>
+      <div className="box table-container">
+        {isLoading
+          ? (
+            <Loader />
+          ) : (
+            <PeopleTable
+              people={people}
+              selectedSlug={slug}
+              isError={isError}
+            />
+          )}
       </div>
-    </>
+    </div>
   );
-};
+});
