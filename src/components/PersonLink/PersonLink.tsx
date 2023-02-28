@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { LinkProps } from './Link';
+import { LinkProps } from './LinkProps';
 
 export const PersonLink: React.FC<LinkProps> = ({ person }) => (
   <Link

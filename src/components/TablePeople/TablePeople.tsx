@@ -1,12 +1,8 @@
 import { useParams } from 'react-router-dom';
-import { Person } from '../../types';
 import { PersonInfo } from '../PersonInfo/PersonInfo';
+import { PropsTablePage } from './PropsTablePage';
 
-export type Props = {
-  peopleList: Person[];
-};
-
-export const TablePeople: React.FC<Props> = ({ peopleList }) => {
+export const TablePeople: React.FC<PropsTablePage> = ({ list }) => {
   const { personSlug = '' } = useParams();
 
   return (
@@ -25,21 +21,17 @@ export const TablePeople: React.FC<Props> = ({ peopleList }) => {
         </tr>
       </thead>
       <tbody>
-        {peopleList.length
-          ? peopleList.map(person => {
-            return (
-              <PersonInfo
-                person={person}
-                selectedSlug={personSlug}
-                key={person.slug}
-              />
-            );
-          })
-          : (
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
-          )}
+        {list.length ? list.map(person => (
+          <PersonInfo
+            person={person}
+            selectedSlug={personSlug}
+            key={person.slug}
+          />
+        )) : (
+          <p data-cy="noPeopleMessage">
+            There are no people on the server
+          </p>
+        )}
       </tbody>
     </table>
   );

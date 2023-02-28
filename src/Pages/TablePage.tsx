@@ -5,12 +5,10 @@ import { Person } from '../types';
 type Props = {
   isLoading: boolean;
   isError: boolean;
-  filteredPeopleList: Person[];
+  list: Person[];
 };
 
-export const TablePage: React.FC<Props> = ({
-  isLoading, filteredPeopleList, isError,
-}) => (
+export const TablePage: React.FC<Props> = ({ isLoading, list, isError }) => (
   <>
     <div className="container">
       <h1 className="title">People Page</h1>
@@ -27,7 +25,7 @@ export const TablePage: React.FC<Props> = ({
           )}
           {isLoading
             ? <Loader />
-            : <TablePeople peopleList={filteredPeopleList} />}
+            : <TablePeople list={list} />}
         </div>
       </div>
     </div>
