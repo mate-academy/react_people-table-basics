@@ -1,7 +1,5 @@
 import React from 'react';
 
 export const HomePage: React.FC = () => (
-  <a className="navbar-item" href="#/">
-    Home
-  </a>
+  <h1 className="title">Home Page</h1>
 );

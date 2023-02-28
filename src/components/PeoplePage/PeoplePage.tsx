@@ -8,7 +8,7 @@ import { PeopleTable } from '../PeopleTable';
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const { slug = '' } = useParams();
-  const [errorText, setErrorText] = useState('');
+  const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchPeople = async () => {
@@ -26,8 +26,8 @@ export const PeoplePage: React.FC = () => {
       }));
 
       setPeople(peopleWithParents);
-    } catch (error) {
-      setErrorText('Something went wrong');
+    } catch {
+      setIsError(true);
     }
 
     setIsLoading(false);
@@ -46,13 +46,13 @@ export const PeoplePage: React.FC = () => {
 
           {(isLoading && (<Loader />))}
 
-          {!people.length && errorText && (
+          {!people.length && isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {!people.length && !errorText && !isLoading
+          {!people.length && !isError && !isLoading
           && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
