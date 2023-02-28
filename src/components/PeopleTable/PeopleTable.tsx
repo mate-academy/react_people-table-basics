@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
@@ -10,6 +10,12 @@ type Props = {
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug: paramsSlug = '' } = useParams();
+  const [searchParams] = useSearchParams();
+  const currentQuery = searchParams.get('query') || '';
+
+  const visiblePeople = people.filter(person => (
+    person.name.includes(currentQuery)
+  ));
 
   return (
     <table
@@ -68,7 +74,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => {
+        {visiblePeople.map(person => {
           const {
             sex,
             born,

@@ -1,14 +1,64 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import classNames from 'classnames';
+import { getSearchWith } from '../../utils/searchHelper';
+import { SearchLink } from '../SearchLink';
 
 export const PeopleFilters: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentQuery = searchParams.get('query') || '';
+  const currentSex = searchParams.get('sex');
+
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const currentValue = event.target.value.trimStart() || null;
+
+    const preparedSearchWith = getSearchWith(
+      searchParams,
+      {
+        query: currentValue,
+      },
+    );
+
+    setSearchParams(preparedSearchWith);
+  };
+
   return (
     <nav className="panel">
       <p className="panel-heading">Filters</p>
 
       <p className="panel-tabs" data-cy="SexFilter">
-        <a className="is-active" href="#/people">All</a>
-        <a className="" href="#/people?sex=m">Male</a>
-        <a className="" href="#/people?sex=f">Female</a>
+        <SearchLink
+          className={classNames({
+            'is-active': currentSex === null,
+          })}
+          params={{
+            sex: null,
+          }}
+        >
+          All
+        </SearchLink>
+
+        <SearchLink
+          className={classNames({
+            'is-active': currentSex === 'm',
+          })}
+          params={{
+            sex: 'm',
+          }}
+        >
+          Male
+        </SearchLink>
+
+        <SearchLink
+          className={classNames({
+            'is-active': currentSex === 'f',
+          })}
+          params={{
+            sex: 'f',
+          }}
+        >
+          Female
+        </SearchLink>
       </p>
 
       <div className="panel-block">
@@ -18,6 +68,8 @@ export const PeopleFilters: React.FC = () => {
             type="search"
             className="input"
             placeholder="Search"
+            value={currentQuery}
+            onChange={handleNameChange}
           />
 
           <span className="icon is-left">
