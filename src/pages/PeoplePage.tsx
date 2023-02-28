@@ -8,7 +8,7 @@ import { Person } from '../types';
 import { Loader } from '../components/Loader/Loader';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<Person[] | null>(null);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isErrorResponse, setIsErrorResponse] = useState(false);
   const { slug = '' } = useParams();
@@ -72,9 +72,7 @@ export const PeoplePage: React.FC = () => {
                     )}
                     key={person.name}
                   >
-                    <td>
-                      <PersonLink hasParent={person} />
-                    </td>
+                    <PersonLink hasParent={person} />
                     <td>{person.sex}</td>
                     <td>{person.born}</td>
                     <td>{person.died}</td>
