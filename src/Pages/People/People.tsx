@@ -14,11 +14,10 @@ export const People = () => {
       const newPeople = await getPeople();
 
       setPeople(newPeople);
-      setIsSuccess(true);
-      setIsLoading(false);
     } catch {
-      setIsLoading(false);
       setIsSuccess(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 
