@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import cn from 'classnames';
 import { Person } from '../types';
 import { getPeople } from '../api';
@@ -11,7 +11,7 @@ export const PeoplePage = () => {
   const [isError, setIsError] = useState(false);
   const [isPeopleLoading, setIsPeopleLoading] = useState(false);
 
-  const getPeopleFromServer = async () => {
+  const getPeopleFromServer = useCallback(async () => {
     try {
       setIsPeopleLoading(true);
 
@@ -23,7 +23,7 @@ export const PeoplePage = () => {
       setIsError(true);
       setIsPeopleLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getPeopleFromServer();
