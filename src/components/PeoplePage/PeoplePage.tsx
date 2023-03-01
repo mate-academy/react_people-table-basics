@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PeopleTable } from '../PeopleTable';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 
-export const PeoplePage: React.FC = () => {
+export const PeoplePage = React.memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -47,13 +47,13 @@ export const PeoplePage: React.FC = () => {
 
           {(isLoading && (<Loader />))}
 
-          {!!people.length && isError && (
+          {!people.length && isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {!!people.length && !isError && !isLoading
+          {!people.length && !isError && !isLoading
           && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
@@ -66,4 +66,4 @@ export const PeoplePage: React.FC = () => {
       </div>
     </>
   );
-};
+});
