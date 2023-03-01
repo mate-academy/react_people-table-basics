@@ -1,12 +1,12 @@
+import React from 'react';
 import { Person } from '../../types';
 import { PersonItem } from '../PersonItem/PersonItem';
 
 type Props = {
   people: Person[],
-
 };
 
-export const PeopleTable: React.FC<Props> = ({
+export const PeopleTable: React.FC<Props> = React.memo(({
   people,
 }) => (
   <table
@@ -16,6 +16,7 @@ export const PeopleTable: React.FC<Props> = ({
     <thead>
       <tr>
         <th>Name</th>
+
         <th>Sex</th>
         <th>Born</th>
         <th>Died</th>
@@ -33,4 +34,4 @@ export const PeopleTable: React.FC<Props> = ({
       ))}
     </tbody>
   </table>
-);
+));

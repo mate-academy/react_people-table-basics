@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
-import { preparePeopleArray } from '../../preperedPeople';
+import { preparePeople } from '../../preperedPeople';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
 
-export const PeoplePage: React.FC = () => {
+export const PeoplePage: React.FC = React.memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoaderActive, setIsLoaderActive] = useState(true);
   const [isLoadingError, setIsLoadingError] = useState(false);
@@ -14,7 +14,7 @@ export const PeoplePage: React.FC = () => {
     try {
       let data = await getPeople();
 
-      data = preparePeopleArray(data);
+      data = preparePeople(data);
       setPeople(data);
       setIsLoaderActive(false);
     } catch {
@@ -24,9 +24,7 @@ export const PeoplePage: React.FC = () => {
     }
   };
 
-  const peopleArrayIsEmpty = useMemo(() => {
-    return people.length === 0 && !isLoaderActive;
-  }, [people]);
+  const peopleArrayIsEmpty = people.length === 0 && !isLoaderActive;
 
   useEffect(() => {
     fetchPeople();
@@ -47,7 +45,7 @@ export const PeoplePage: React.FC = () => {
         </p>
       )}
 
-      {people.length > 0 && (
+      {!!people.length && (
         <PeopleTable
           people={people}
         />
@@ -60,4 +58,4 @@ export const PeoplePage: React.FC = () => {
       )}
     </>
   );
-};
+});

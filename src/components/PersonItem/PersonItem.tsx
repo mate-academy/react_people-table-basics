@@ -8,7 +8,7 @@ type Props = {
   person: Person;
 };
 
-export const PersonItem: React.FC<Props> = ({ person }) => {
+export const PersonItem: React.FC<Props> = React.memo(({ person }) => {
   const {
     slug,
     sex,
@@ -20,6 +20,9 @@ export const PersonItem: React.FC<Props> = ({ person }) => {
     father,
   } = person;
   const { personSlug = '' } = useParams();
+
+  const motherNameCell = motherName || '-';
+  const fatherNameCell = fatherName || '-';
 
   return (
     <tr
@@ -39,16 +42,17 @@ export const PersonItem: React.FC<Props> = ({ person }) => {
         {(
           mother
             ? <PersonLink person={mother} />
-            : motherName || '-'
+            : motherNameCell
         )}
       </td>
       <td>
         {(
           father
             ? <PersonLink person={father} />
-            : fatherName || '-'
+            : fatherNameCell
+
         )}
       </td>
     </tr>
   );
-};
+});

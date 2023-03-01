@@ -7,7 +7,7 @@ type Props = {
   person: Person,
 };
 
-export const PersonLink: React.FC<Props> = ({ person }) => {
+export const PersonLink: React.FC<Props> = React.memo(({ person }) => {
   const {
     slug,
     sex,
@@ -22,4 +22,4 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       {name}
     </Link>
   );
-};
+});
