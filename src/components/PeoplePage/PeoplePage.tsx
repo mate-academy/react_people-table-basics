@@ -16,9 +16,6 @@ export const PeoplePage: React.FC = () => {
 
     try {
       const peopleFromServer = await getPeople();
-
-      setIsError(false);
-
       const updatedPeople = peopleFromServer.map(person => (
         {
           ...person,
@@ -32,9 +29,9 @@ export const PeoplePage: React.FC = () => {
       setPeople(updatedPeople);
     } catch (error) {
       setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -50,13 +47,13 @@ export const PeoplePage: React.FC = () => {
 
           {(isLoading && (<Loader />))}
 
-          {people.length === 0 && isError && (
+          {!!people.length && isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {people.length === 0 && !isError && !isLoading
+          {!!people.length && !isError && !isLoading
           && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
