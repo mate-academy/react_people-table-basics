@@ -1,12 +1,12 @@
 import {
-  Routes, Route, NavLink, Navigate,
+  Routes, Route, Navigate,
 } from 'react-router-dom';
-import cn from 'classnames';
 
 import './App.scss';
 import { PeoplePage } from './components/PeoplePage';
 import { HomePage } from './components/HomePage';
 import { NotFoundPage } from './components/NotFouundPage';
+import { NavBar } from './components/NavBar';
 
 export const App = () => (
   <div data-cy="app">
@@ -17,25 +17,9 @@ export const App = () => (
       aria-label="main navigation"
     >
       <div className="container">
-        <div className="navbar-brand">
-          <NavLink
-            className={({ isActive }) => cn('navbar-item', {
-              'has-background-grey-lighter': isActive,
-            })}
-            to="/"
-          >
-            Home
-          </NavLink>
 
-          <NavLink
-            className={({ isActive }) => cn('navbar-item', {
-              'has-background-grey-lighter': isActive,
-            })}
-            to="/people"
-          >
-            People
-          </NavLink>
-        </div>
+        <NavBar />
+
       </div>
     </nav>
 

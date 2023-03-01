@@ -9,9 +9,10 @@ export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const { slug = '' } = useParams();
   const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchPeople = async () => {
+    setIsLoading(true);
     try {
       const data = await getPeople();
 
@@ -37,6 +38,9 @@ export const PeoplePage: React.FC = () => {
     fetchPeople();
   }, []);
 
+  const isSomethingWrong = !people.length && isError;
+  const areNoPeopleOnServer = !people.length && !isError && !isLoading;
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -44,22 +48,25 @@ export const PeoplePage: React.FC = () => {
       <div className="block">
         <div className="box table-container">
 
-          {(isLoading && (<Loader />))}
+          {(isLoading
+            && (<Loader />))}
 
-          {!people.length && isError && (
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
-          )}
+          {isSomethingWrong
+            && (
+              <p data-cy="peopleLoadingError" className="has-text-danger">
+                Something went wrong
+              </p>
+            )}
 
-          {!people.length && !isError && !isLoading
-          && (
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
-          )}
+          {areNoPeopleOnServer
+            && (
+              <p data-cy="noPeopleMessage">
+                There are no people on the server
+              </p>
+            )}
 
-          {people.length !== 0 && <PeopleTable people={people} slug={slug} />}
+          {people.length !== 0
+            && <PeopleTable people={people} slug={slug} />}
 
         </div>
       </div>
