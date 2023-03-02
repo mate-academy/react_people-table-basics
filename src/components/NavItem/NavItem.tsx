@@ -8,7 +8,7 @@ interface Props {
 
 export const NavItem: React.FC<Props> = ({ to, title }) => (
   <NavLink
-    to={`${to}`}
+    to={to}
     className={({ isActive }) => classNames('navbar-item', {
       'has-background-grey-lighter': isActive,
     })}

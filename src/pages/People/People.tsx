@@ -5,6 +5,7 @@ import React, {
   useMemo,
 } from 'react';
 
+import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../../components/Loader';
@@ -15,6 +16,7 @@ export const People: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const { personSlug = '' } = useParams();
 
   const getPeopleFromServer = useCallback(
     async () => {
@@ -61,7 +63,7 @@ export const People: React.FC = () => {
             </p>
           )}
           {people.length > 0 && (
-            <PeopleTable people={peopleWithParents} />
+            <PeopleTable people={peopleWithParents} personSlug={personSlug} />
           )}
         </div>
       </div>

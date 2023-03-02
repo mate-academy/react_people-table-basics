@@ -22,7 +22,7 @@ createRoot(document.getElementById('root') as HTMLDivElement)
             path="/home"
             element={<Navigate to="/" replace />}
           />
-          <Route path="/people">
+          <Route path="people">
             <Route index element={<People />} />
             <Route
               path=":personSlug"

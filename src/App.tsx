@@ -19,7 +19,7 @@ export const App = () => (
           />
 
           <NavItem
-            to="/people"
+            to="people"
             title="People"
           />
         </div>

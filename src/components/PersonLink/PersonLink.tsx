@@ -7,17 +7,19 @@ interface Props {
   person: Person
 }
 
-export const PersonLink: React.FC<Props> = ({ person }) => {
-  const { name, sex, slug } = person;
+export const PersonLink: React.FC<Props> = React.memo(
+  ({ person }) => {
+    const { name, sex, slug } = person;
 
-  return (
-    <Link
-      to={`/people/${slug}`}
-      className={classNames({
-        'has-text-danger': sex === 'f',
-      })}
-    >
-      {name}
-    </Link>
-  );
-};
+    return (
+      <Link
+        to={`../${slug}`}
+        className={classNames({
+          'has-text-danger': sex === 'f',
+        })}
+      >
+        {name}
+      </Link>
+    );
+  },
+);
