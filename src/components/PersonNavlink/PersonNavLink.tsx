@@ -12,7 +12,7 @@ export const PersonNavLink: FC<Props> = ({ person }) => {
 
   return (
     <NavLink
-      to={`../${person.slug}`}
+      to={`/people/${person.slug}`}
       className={() => (
         classNames({ 'has-text-danger': isWomen })
       )}

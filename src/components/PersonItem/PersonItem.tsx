@@ -4,21 +4,24 @@ import { Person } from '../../types';
 import { PersonNavLink } from '../PersonNavlink';
 
 type Props = {
+  people: Person[],
   person: Person,
   selectedSlug: string,
-  mother: Person | undefined,
-  father: Person | undefined,
 };
 
 export const PersonItem: FC<Props> = ({
+  people,
   person,
   selectedSlug,
-  mother,
-  father,
 }) => {
   const isSelectedPerson = person.slug === selectedSlug;
   const personMotherName = person.motherName || '-';
   const personFatherName = person.fatherName || '-';
+
+  const personMother = people
+    .find((personItem: Person) => personItem.name === person.motherName);
+  const personFather = people
+    .find((personItem: Person) => personItem.name === person.fatherName);
 
   return (
     <tr
@@ -33,17 +36,17 @@ export const PersonItem: FC<Props> = ({
       <td>{person.born}</td>
       <td>{person.died}</td>
       <td>
-        {mother
+        {personMother
           ? (
-            <PersonNavLink person={mother} />
+            <PersonNavLink person={personMother} />
           ) : (
             personMotherName
           )}
       </td>
       <td>
-        {father
+        {personFather
           ? (
-            <PersonNavLink person={father} />
+            <PersonNavLink person={personFather} />
           ) : (
             personFatherName
           )}

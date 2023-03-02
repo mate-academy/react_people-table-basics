@@ -35,22 +35,14 @@ export const PeopleTable: FC<Props> = ({ people, selectedSlug }) => {
       </thead>
 
       <tbody>
-        {people.map(person => {
-          const mother = people
-            .find(personItem => personItem.name === person.motherName);
-          const father = people
-            .find(personItem => personItem.name === person.fatherName);
-
-          return (
-            <PersonItem
-              person={person}
-              key={person.slug}
-              selectedSlug={selectedSlug}
-              mother={mother}
-              father={father}
-            />
-          );
-        })}
+        {people.map(person => (
+          <PersonItem
+            people={people}
+            person={person}
+            key={person.slug}
+            selectedSlug={selectedSlug}
+          />
+        ))}
       </tbody>
     </table>
   );
