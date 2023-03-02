@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { Loader } from '../components/Loader';
@@ -11,7 +11,7 @@ export const PeoplePage = () => {
   const [loading, setLoading] = useState(false);
   const { slug = '' } = useParams();
 
-  const peopleFromServer = async () => {
+  const peopleFromServer = useCallback(async () => {
     setLoading(true);
     try {
       const peoples = await getPeople();
@@ -21,7 +21,7 @@ export const PeoplePage = () => {
     } catch {
       setHasError(true);
     }
-  };
+  }, []);
 
   useEffect(() => {
     peopleFromServer();
@@ -39,13 +39,17 @@ export const PeoplePage = () => {
     <>
       <div className="block">
         <h1 className="title">People Page</h1>
-        <div className="box table-container">
+        <div className="columns is-desktop is-flex-direction-row-reverse">
+          <div className="column is-7-tablet is-narrow-desktop" />
 
-          {loading ? (
-            <Loader />
-          ) : (
-            <PeopleTable people={people} selectedSlug={slug} />
-          )}
+          <div className="box table-container">
+
+            {loading ? (
+              <Loader />
+            ) : (
+              <PeopleTable people={people} selectedSlug={slug} />
+            )}
+          </div>
         </div>
       </div>
     </>
