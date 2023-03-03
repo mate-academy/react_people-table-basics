@@ -1,27 +1,28 @@
 import classNames from 'classnames';
 import { FC } from 'react';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonNavLink } from '../PersonNavlink';
 
 type Props = {
-  people: Person[],
   person: Person,
-  selectedSlug: string,
+  motherName: string | null,
+  fatherName: string | null,
+  mother: Person | undefined,
+  father: Person | undefined,
 };
 
 export const PersonItem: FC<Props> = ({
-  people,
   person,
-  selectedSlug,
+  motherName,
+  fatherName,
+  mother,
+  father,
 }) => {
-  const isSelectedPerson = person.slug === selectedSlug;
-  const personMotherName = person.motherName || '-';
-  const personFatherName = person.fatherName || '-';
-
-  const personMother = people
-    .find((personItem: Person) => personItem.name === person.motherName);
-  const personFather = people
-    .find((personItem: Person) => personItem.name === person.fatherName);
+  const { slug = '' } = useParams();
+  const isSelectedPerson = person.slug === slug;
+  const personMotherName = motherName || '-';
+  const personFatherName = fatherName || '-';
 
   return (
     <tr
@@ -36,17 +37,17 @@ export const PersonItem: FC<Props> = ({
       <td>{person.born}</td>
       <td>{person.died}</td>
       <td>
-        {personMother
+        {mother
           ? (
-            <PersonNavLink person={personMother} />
+            <PersonNavLink person={mother} />
           ) : (
             personMotherName
           )}
       </td>
       <td>
-        {personFather
+        {father
           ? (
-            <PersonNavLink person={personFather} />
+            <PersonNavLink person={father} />
           ) : (
             personFatherName
           )}
