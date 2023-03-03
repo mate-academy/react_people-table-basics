@@ -5,7 +5,9 @@ import {
 } from 'react-router-dom';
 // import { Loader } from './components/Loader';
 import './App.scss';
+import { HomePage } from './components/HomePage';
 import { Navbar } from './components/Navbar';
+import { PageNotFound } from './components/PageNotFound';
 import { PersonPage } from './components/PersonPage';
 
 export const App = () => {
@@ -28,11 +30,11 @@ export const App = () => {
           <Routes>
             <Route
               path="*"
-              element={<h1 className="title">Page not found</h1>}
+              element={<PageNotFound />}
             />
             <Route
               path="/"
-              element={<h1 className="title">Home Page</h1>}
+              element={<HomePage />}
             />
             <Route
               path="home"

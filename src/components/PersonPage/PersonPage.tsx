@@ -6,19 +6,26 @@ import { Loader } from '../Loader';
 import { PersonList } from '../PersonList';
 
 export const PersonPage = () => {
-  const [personas, setPersonas] = useState<Person[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const { slug = '' } = useParams();
-
-  const getPersonasFromServer = async () => {
+  const getPeopleFromServer = async () => {
     setIsLoading(true);
 
     try {
       const serverData = await getPeople();
+      const addParents = serverData.map(person => {
+        const mother: Person | null
+          = serverData.find(mom => mom.name === person.motherName) || null;
+        const father: Person | null
+          = serverData.find(dad => dad.name === person.fatherName) || null;
 
-      setPersonas(serverData);
+        return { ...person, mother, father };
+      });
+
+      setPeople(addParents);
     } catch {
       // console.log('data didnt download from server');
       setIsError(true);
@@ -28,7 +35,7 @@ export const PersonPage = () => {
   };
 
   useEffect(() => {
-    getPersonasFromServer();
+    getPeopleFromServer();
   }, []);
 
   return (
@@ -47,10 +54,10 @@ export const PersonPage = () => {
                       Something went wrong
                     </p>
                   ) : (
-                    <PersonList personas={personas} selectedPersonId={slug} />
+                    <PersonList people={people} selectedPersonId={slug} />
                   ) }
 
-                {!personas.length && (
+                {!people.length && (
                   <p data-cy="noPeopleMessage">
                     There are no people on the server
                   </p>

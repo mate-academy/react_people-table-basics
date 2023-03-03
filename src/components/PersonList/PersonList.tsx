@@ -4,12 +4,12 @@ import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
 type Props = {
-  personas: Person[],
+  people: Person[],
   selectedPersonId: string,
 };
 
 export const PersonList: React.FC<Props> = ({
-  personas,
+  people,
   selectedPersonId,
 }) => {
   const isSelected = (person: Person) => person.slug === selectedPersonId;
@@ -31,12 +31,10 @@ export const PersonList: React.FC<Props> = ({
       </thead>
 
       <tbody>
-        {personas.map(person => {
-          const mother = personas.find(mom => mom.name === person.motherName);
-          const father = personas.find(dad => dad.name === person.fatherName);
-
+        {people.map(person => {
           return (
             <tr
+              key={person.slug}
               data-cy="person"
               className={classNames(
                 { 'has-background-warning': isSelected(person) },
@@ -55,13 +53,13 @@ export const PersonList: React.FC<Props> = ({
               <td>{person.born}</td>
               <td>{person.died}</td>
               <td>
-                {mother
-                  ? <PersonLink person={mother} />
+                {person.mother
+                  ? <PersonLink person={person.mother} />
                   : `${person.motherName || '-'}`}
               </td>
               <td>
-                {father
-                  ? <PersonLink person={father} />
+                {person.father
+                  ? <PersonLink person={person.father} />
                   : `${person.fatherName || '-'}`}
               </td>
             </tr>
