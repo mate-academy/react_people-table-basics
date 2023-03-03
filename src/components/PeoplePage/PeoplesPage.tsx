@@ -6,7 +6,7 @@ import { findParentByName } from '../../utiles/findParentByName';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeoplesTable';
 
-export const PeoplesPage = () => {
+export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -16,8 +16,14 @@ export const PeoplesPage = () => {
     setIsLoaded(true);
     try {
       const peopleFromServer = await getPeople();
+      const prepearedPeople = peopleFromServer.map(person => {
+        const mother = findParentByName(peopleFromServer, person.motherName);
+        const father = findParentByName(peopleFromServer, person.fatherName);
 
-      setPeople(peopleFromServer);
+        return { ...person, mother, father };
+      });
+
+      setPeople(prepearedPeople);
     } catch {
       setIsError(true);
     } finally {
@@ -28,14 +34,8 @@ export const PeoplesPage = () => {
   useEffect(() => {
     fetchPeople();
   }, []);
+
   const isPeopleFromServer = !isLoaded && people.length === 0;
-
-  const prepearedPeople = people.map(person => {
-    const mother = findParentByName(people, person.motherName);
-    const father = findParentByName(people, person.fatherName);
-
-    return { ...person, mother, father };
-  });
 
   return (
     <div className="block">
@@ -51,7 +51,7 @@ export const PeoplesPage = () => {
 
         {people.length > 0 && (
           <PeopleTable
-            people={prepearedPeople}
+            people={people}
             selectedSlug={slug}
           />
         )}

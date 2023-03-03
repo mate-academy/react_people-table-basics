@@ -4,7 +4,7 @@ import './App.scss';
 import { HomePage } from './components/HomePage/HomePage';
 import { NavBar } from './components/NavBar';
 import { NotFoundPage } from './components/NotFoundPage';
-import { PeoplesPage } from './components/PeoplesPage';
+import { PeoplePage } from './components/PeoplePage';
 
 export const App = () => (
   <div data-cy="app">
@@ -15,8 +15,9 @@ export const App = () => (
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="home" element={<Navigate to="/" replace />} />
-        <Route path="/people" element={<PeoplesPage />}>
-          <Route path=":slug" element={<PeoplesPage />} />
+        <Route path="/people">
+          <Route index element={<PeoplePage />} />
+          <Route path=":slug" element={<PeoplePage />} />
         </Route>
       </Routes>
     </main>
