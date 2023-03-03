@@ -4,6 +4,7 @@ import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
+import { getPeopleWithParents } from '../utils';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -16,17 +17,7 @@ export const PeoplePage: React.FC = () => {
     try {
       const data = await getPeople();
 
-      const getParent = (parent: string | null) => {
-        return data.find(pers => pers.name === parent);
-      };
-
-      const peopleWithParents = data.map(person => ({
-        ...person,
-        mother: getParent(person.motherName),
-        father: getParent(person.fatherName),
-      }));
-
-      setPeople(peopleWithParents);
+      setPeople(getPeopleWithParents(data));
     } catch {
       setIsError(true);
     }
@@ -51,22 +42,21 @@ export const PeoplePage: React.FC = () => {
           {(isLoading
             && (<Loader />))}
 
-          {isSomethingWrong
-            && (
-              <p data-cy="peopleLoadingError" className="has-text-danger">
-                Something went wrong
-              </p>
-            )}
+          {isSomethingWrong && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )}
 
-          {areNoPeopleOnServer
-            && (
-              <p data-cy="noPeopleMessage">
-                There are no people on the server
-              </p>
-            )}
+          {areNoPeopleOnServer && (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
+            </p>
+          )}
 
-          {people.length !== 0
-            && <PeopleTable people={people} slug={slug} />}
+          {people.length !== 0 && (
+            <PeopleTable people={people} slug={slug} />
+          )}
 
         </div>
       </div>
