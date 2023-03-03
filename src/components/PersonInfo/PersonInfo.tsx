@@ -5,13 +5,11 @@ import { PersonLink } from '../PersonLink';
 
 type Props = {
   person: Person,
-  findPersonByName: (name:string | null) => Person | undefined,
   selectedSlug:string
 };
 
 export const PersonInfo: React.FC<Props> = ({
   person,
-  findPersonByName,
   selectedSlug,
 }) => {
   const {
@@ -22,10 +20,9 @@ export const PersonInfo: React.FC<Props> = ({
     motherName,
     fatherName,
     slug,
+    mother,
+    father,
   } = person;
-
-  const mother = findPersonByName(motherName);
-  const father = findPersonByName(fatherName);
 
   const isSelectedPerson = person.slug === selectedSlug;
 

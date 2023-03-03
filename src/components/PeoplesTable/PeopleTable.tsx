@@ -7,38 +7,31 @@ type Props = {
   selectedSlug:string,
 };
 
-export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
-  const findPersonByName = (name:string | null) => {
-    return people.find(parent => parent.name === name);
-  };
+export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => (
+  <table
+    data-cy="peopleTable"
+    className="table is-striped is-hoverable is-narrow is-fullwidth"
+  >
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Sex</th>
+        <th>Born</th>
+        <th>Died</th>
+        <th>Mother</th>
+        <th>Father</th>
+      </tr>
+    </thead>
 
-  return (
-    <table
-      data-cy="peopleTable"
-      className="table is-striped is-hoverable is-narrow is-fullwidth"
-    >
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
-        </tr>
-      </thead>
+    <tbody>
 
-      <tbody>
-
-        {people.map(person => (
-          <PersonInfo
-            key={person.slug}
-            person={person}
-            findPersonByName={findPersonByName}
-            selectedSlug={selectedSlug}
-          />
-        ))}
-      </tbody>
-    </table>
-  );
-};
+      {people.map(person => (
+        <PersonInfo
+          key={person.slug}
+          person={person}
+          selectedSlug={selectedSlug}
+        />
+      ))}
+    </tbody>
+  </table>
+);

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
+import { findParentByName } from '../../utiles/findParentByName';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeoplesTable';
 
@@ -16,18 +17,25 @@ export const PeoplesPage = () => {
     try {
       const peopleFromServer = await getPeople();
 
-      setIsLoaded(false);
-
       setPeople(peopleFromServer);
     } catch {
       setIsError(true);
+    } finally {
+      setIsLoaded(false);
     }
   };
 
   useEffect(() => {
     fetchPeople();
   }, []);
-  const IsPeopleFromServer = !isLoaded && people.length === 0;
+  const isPeopleFromServer = !isLoaded && people.length === 0;
+
+  const prepearedPeople = people.map(person => {
+    const mother = findParentByName(people, person.motherName);
+    const father = findParentByName(people, person.fatherName);
+
+    return { ...person, mother, father };
+  });
 
   return (
     <div className="block">
@@ -41,20 +49,18 @@ export const PeoplesPage = () => {
           </p>
         )}
 
-        {people.length > 0
-      && (
-        <PeopleTable
-          people={people}
-          selectedSlug={slug}
-        />
-      )}
+        {people.length > 0 && (
+          <PeopleTable
+            people={prepearedPeople}
+            selectedSlug={slug}
+          />
+        )}
 
-        {IsPeopleFromServer
-      && (
-        <p data-cy="noPeopleMessage">
-          There are no people on the server
-        </p>
-      )}
+        {isPeopleFromServer && (
+          <p data-cy="noPeopleMessage">
+            There are no people on the server
+          </p>
+        )}
 
       </div>
     </div>

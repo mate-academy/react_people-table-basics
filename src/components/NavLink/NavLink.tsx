@@ -12,11 +12,9 @@ export const NavLinkPage:React.FC<Props> = ({ to, text }) => {
 
     <NavLink
       to={to}
-      className={({ isActive }) => {
-        return classNames('navbar-item', {
-          'has-background-grey-lighter': isActive,
-        });
-      }}
+      className={({ isActive }) => (
+        classNames('navbar-item', { 'has-background-grey-lighter': isActive })
+      )}
     >
       {text}
     </NavLink>
