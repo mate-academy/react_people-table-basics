@@ -13,6 +13,9 @@ export const PeoplePage = () => {
   const { personSlug = '' } = useParams();
 
   const isTableVisible = Boolean(people.length && !loadingHasError);
+  const isTableEmpty = Boolean(
+    !people.length && !loadingHasError && !isLoading,
+  );
 
   const getPeopleFromServer = useCallback(async () => {
     setLoadingHasError(false);
@@ -46,7 +49,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!people.length && !loadingHasError && !isLoading && (
+          {isTableEmpty && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
