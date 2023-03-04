@@ -8,7 +8,7 @@ type Props = {
   selectedPersonSlug: string,
 };
 
-export const PeopleTable: React.FC<Props> = ({
+export const PeopleTable: React.FC<Props> = React.memo(({
   people,
   selectedPersonSlug,
 }) => {
@@ -66,4 +66,4 @@ export const PeopleTable: React.FC<Props> = ({
       </tbody>
     </table>
   );
-};
+});

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
@@ -16,7 +16,7 @@ export const PeoplePage: React.FC = () => {
     !people.length && !hasErrorMessage && !isLoading,
   );
 
-  const getPeopleFromServer = async () => {
+  const getPeopleFromServer = useCallback(async () => {
     setIsLoading(true);
     setHasErrorMessage(false);
 
@@ -29,7 +29,7 @@ export const PeoplePage: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getPeopleFromServer();
