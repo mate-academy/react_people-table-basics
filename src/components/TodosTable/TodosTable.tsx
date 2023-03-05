@@ -70,60 +70,55 @@ export const TodosTable: FC<Props> = ({ selectedPersonSlug }) => {
             </thead>
 
             <tbody>
-              {people.map(person => (
-                <tr
-                  data-cy="person"
-                  key={`${person.name}`}
-                  className={classNames(
-                    { 'has-background-warning': isSelected(person) },
-                  )}
-                >
-                  <td>
-                    <Link
-                      to={`../${person.slug}`}
-                      className={classNames(
-                        { 'has-text-danger': person.sex === 'f' },
-                      )}
-                    >
-                      {person.name}
-                    </Link>
-                  </td>
+              {people.map(person => {
+                const isMotherName = person.motherName || '-';
+                const isFatherName = person.fatherName || '-';
 
-                  <td>{person.sex}</td>
-                  <td>{person.born}</td>
-                  <td>{person.died}</td>
-                  <td>
-                    {/* eslint-disable-next-line no-nested-ternary */}
-                    {!person.motherName
-                      ? '-'
-                      : (!personParents(person.motherName)
-                        ? person.motherName
-                        : (
+                return (
+                  <tr
+                    data-cy="person"
+                    key={`${person.name}`}
+                    className={classNames(
+                      { 'has-background-warning': isSelected(person) },
+                    )}
+                  >
+                    <td>
+                      <Link
+                        to={`../${person.slug}`}
+                        className={classNames(
+                          { 'has-text-danger': person.sex === 'f' },
+                        )}
+                      >
+                        {person.name}
+                      </Link>
+                    </td>
+
+                    <td>{person.sex}</td>
+                    <td>{person.born}</td>
+                    <td>{person.died}</td>
+                    <td>
+                      {person.motherName && personParents(person.motherName)
+                        ? (
                           <Link
                             to={`../${personParents(person.motherName)?.slug}`}
                             className="has-text-danger"
                           >
                             {person.motherName}
                           </Link>
-                        )
-                      )}
-                  </td>
+                        ) : isMotherName}
+                    </td>
 
-                  <td>
-                    {/* eslint-disable-next-line no-nested-ternary */}
-                    {!person.fatherName
-                      ? '-'
-                      : (!personParents(person.fatherName)
-                        ? person.fatherName
-                        : (
+                    <td>
+                      {person.fatherName && personParents(person.fatherName)
+                        ? (
                           <Link to={`../${personParents(person.fatherName)?.slug}`}>
                             {person.fatherName}
                           </Link>
-                        )
-                      )}
-                  </td>
-                </tr>
-              ))}
+                        ) : isFatherName}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         )}
