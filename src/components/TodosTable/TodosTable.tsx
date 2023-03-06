@@ -17,7 +17,7 @@ export const TodosTable: FC<Props> = ({ selectedPersonSlug }) => {
 
   const isSelected = (person: Person) => person.slug === selectedPersonSlug;
 
-  const findPersonParents = (personParent: string) => {
+  const findPersonParents = (personParent: string | null) => {
     return people.find(person => personParent === person.name);
   };
 
@@ -73,6 +73,8 @@ export const TodosTable: FC<Props> = ({ selectedPersonSlug }) => {
               {people.map(person => {
                 const preparedMotherName = person.motherName || '-';
                 const preparedFatherName = person.fatherName || '-';
+                const mother = findPersonParents(person.motherName);
+                const father = findPersonParents(person.fatherName);
 
                 return (
                   <tr
@@ -97,10 +99,10 @@ export const TodosTable: FC<Props> = ({ selectedPersonSlug }) => {
                     <td>{person.born}</td>
                     <td>{person.died}</td>
                     <td>
-                      {person.motherName
+                      {mother
                         ? (
                           <Link
-                            to={`../${findPersonParents(person.motherName)?.slug}`}
+                            to={`../${mother?.slug}`}
                             className="has-text-danger"
                           >
                             {person.motherName}
@@ -109,9 +111,9 @@ export const TodosTable: FC<Props> = ({ selectedPersonSlug }) => {
                     </td>
 
                     <td>
-                      {person.fatherName
+                      {father
                         ? (
-                          <Link to={`../${findPersonParents(person.fatherName)?.slug}`}>
+                          <Link to={`../${father?.slug}`}>
                             {person.fatherName}
                           </Link>
                         ) : preparedFatherName}
