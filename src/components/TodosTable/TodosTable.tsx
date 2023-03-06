@@ -17,8 +17,8 @@ export const TodosTable: FC<Props> = ({ selectedPersonSlug }) => {
 
   const isSelected = (person: Person) => person.slug === selectedPersonSlug;
 
-  const personParents = (personParent: string) => {
-    return people.find(v => personParent === v.name);
+  const findPersonParents = (personParent: string) => {
+    return people.find(person => personParent === person.name);
   };
 
   useEffect(() => {
@@ -71,8 +71,8 @@ export const TodosTable: FC<Props> = ({ selectedPersonSlug }) => {
 
             <tbody>
               {people.map(person => {
-                const isMotherName = person.motherName || '-';
-                const isFatherName = person.fatherName || '-';
+                const preparedMotherName = person.motherName || '-';
+                const preparedFatherName = person.fatherName || '-';
 
                 return (
                   <tr
@@ -97,24 +97,24 @@ export const TodosTable: FC<Props> = ({ selectedPersonSlug }) => {
                     <td>{person.born}</td>
                     <td>{person.died}</td>
                     <td>
-                      {person.motherName && personParents(person.motherName)
+                      {person.motherName
                         ? (
                           <Link
-                            to={`../${personParents(person.motherName)?.slug}`}
+                            to={`../${findPersonParents(person.motherName)?.slug}`}
                             className="has-text-danger"
                           >
                             {person.motherName}
                           </Link>
-                        ) : isMotherName}
+                        ) : preparedMotherName}
                     </td>
 
                     <td>
-                      {person.fatherName && personParents(person.fatherName)
+                      {person.fatherName
                         ? (
-                          <Link to={`../${personParents(person.fatherName)?.slug}`}>
+                          <Link to={`../${findPersonParents(person.fatherName)?.slug}`}>
                             {person.fatherName}
                           </Link>
-                        ) : isFatherName}
+                        ) : preparedFatherName}
                     </td>
                   </tr>
                 );
