@@ -7,13 +7,13 @@ import { PersonLink } from '../PersonLink';
 
 type Props = {
   people: Person[],
-  isSuccess: boolean,
+  isError: boolean,
   isLoading: boolean,
 };
 
 export const PeopleTable: React.FC<Props> = ({
   people,
-  isSuccess,
+  isError,
   isLoading,
 }) => {
   const { userSlug } = useParams();
@@ -22,7 +22,7 @@ export const PeopleTable: React.FC<Props> = ({
     return <Loader />;
   }
 
-  if (!isSuccess) {
+  if (isError) {
     return (
       <p data-cy="peopleLoadingError" className="has-text-danger">
         Something went wrong
@@ -66,15 +66,9 @@ export const PeopleTable: React.FC<Props> = ({
                   died,
                   motherName,
                   fatherName,
+                  father,
+                  mother,
                 } = person;
-
-                const mother = people.find((human) => (
-                  human.name === motherName
-                ));
-
-                const father = people.find((human) => (
-                  human.name === fatherName
-                ));
 
                 const isSelected = userSlug === slug;
 

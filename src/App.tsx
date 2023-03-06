@@ -19,7 +19,7 @@ export const App = () => (
             <Route path=":userSlug" element={<People />} />
           </Route>
           <Route
-            path="/*"
+            path="*"
             element={<NotFound />}
           />
         </Routes>

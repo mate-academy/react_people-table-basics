@@ -1,21 +1,39 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getPeople } from '../../api';
 import { PeopleTable } from '../../components/PeopleTable';
 import { Person } from '../../types';
 
 export const People = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isSuccess, setIsSuccess] = useState<boolean>(true);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const peopleWithParents = useCallback((
+    peopleToUpdate: Person[],
+  ): Person[] => {
+    return peopleToUpdate.map(person => {
+      const { motherName, fatherName } = person;
+
+      return {
+        ...person,
+        mother: peopleToUpdate.find((human) => (
+          human.name === motherName
+        )),
+        father: peopleToUpdate.find((human) => (
+          human.name === fatherName
+        )),
+      };
+    });
+  }, []);
 
   const fetchPeople = async () => {
     try {
       setIsLoading(true);
       const newPeople = await getPeople();
 
-      setPeople(newPeople);
+      setPeople(peopleWithParents(newPeople));
     } catch {
-      setIsSuccess(false);
+      setIsError(true);
     } finally {
       setIsLoading(false);
     }
@@ -30,7 +48,7 @@ export const People = () => {
       <h1 className="title">People Page</h1>
       <PeopleTable
         people={people}
-        isSuccess={isSuccess}
+        isError={isError}
         isLoading={isLoading}
       />
     </>
