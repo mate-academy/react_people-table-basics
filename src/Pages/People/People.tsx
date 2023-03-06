@@ -8,7 +8,7 @@ export const People = () => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const peopleWithParents = useCallback((
+  const addPeopleParents = useCallback((
     peopleToUpdate: Person[],
   ): Person[] => {
     return peopleToUpdate.map(person => {
@@ -31,7 +31,7 @@ export const People = () => {
       setIsLoading(true);
       const newPeople = await getPeople();
 
-      setPeople(peopleWithParents(newPeople));
+      setPeople(addPeopleParents(newPeople));
     } catch {
       setIsError(true);
     } finally {
