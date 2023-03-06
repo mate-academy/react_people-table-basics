@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
+import { warningTimer } from '../../utils/warningTimer';
 
 type Props = {
   selectedPersonSlug: string;
@@ -30,30 +31,31 @@ export const TodosTable: FC<Props> = ({ selectedPersonSlug }) => {
         setPeople(todosData);
       } catch (error) {
         setIsHasError(true);
+        warningTimer(setIsHasError, false, 3000);
       } finally {
         setIsLoadingPerson(false);
       }
     })();
-  }, []);
+  }, [isHasError]);
 
   return (
     <div className="block">
       <div className="box table-container">
         {isLoadingPerson && <Loader />}
 
-        {isHasError && (
+        {isHasError && !isLoadingPerson && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             Something went wrong
           </p>
         )}
 
-        {!isLoadingPerson && !people.length && (
+        {!isLoadingPerson && !people.length && !isHasError && (
           <p data-cy="noPeopleMessage">
             There are no people on the server
           </p>
         )}
 
-        {!isLoadingPerson && people.length && (
+        {!isLoadingPerson && people.length ? (
           <table
             data-cy="peopleTable"
             className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -123,7 +125,7 @@ export const TodosTable: FC<Props> = ({ selectedPersonSlug }) => {
               })}
             </tbody>
           </table>
-        )}
+        ) : null}
       </div>
     </div>
   );

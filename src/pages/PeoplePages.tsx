@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { TodosTable } from '../components/TodosTable/TodosTable';
+import { TodosTable } from '../components/PeopleTable/PeopleTable';
 
 export const TodosPage = () => {
   const { slug = '' } = useParams();

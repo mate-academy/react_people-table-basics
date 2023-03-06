@@ -1,3 +1,3 @@
 export * from './HomePage';
-export * from './TodosPages';
+export * from './PeoplePages';
 export * from './NotFoundPage';
