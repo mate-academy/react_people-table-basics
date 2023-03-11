@@ -46,7 +46,7 @@ export const People: React.FC = () => {
                 </p>
               )}
 
-              {!error && listPeople.length < 1
+              {!error && !listPeople.length
                     && (
                       <p data-cy="noPeopleMessage">
                         There are no people on the server
@@ -73,43 +73,41 @@ export const People: React.FC = () => {
                                 </thead>
 
                                 <tbody>
-                                  {listPeople.map((person: Person) => {
-                                    return (
-                                      <tr
-                                        data-cy="person"
-                                        className={classNames('', {
-                                          'has-background-warning':
+                                  {listPeople.map((person: Person) => (
+                                    <tr
+                                      data-cy="person"
+                                      className={classNames('', {
+                                        'has-background-warning':
                                             isActive(person.name),
-                                        })}
-                                        key={person.slug}
-                                      >
-                                        <PersonLink person={person} />
+                                      })}
+                                      key={person.slug}
+                                    >
+                                      <PersonLink person={person} />
 
-                                        <td>{person.sex}</td>
-                                        <td>{person.born}</td>
-                                        <td>{person.died}</td>
-                                        <td>
-                                          {sheMother(person) ? (
-                                            <Link
-                                              className="has-text-danger"
-                                              to={{
-                                                pathname: `#/people/${person.name.replaceAll(' ', '-')}-${person.born}`,
-                                              }}
-                                            >
-                                              {person.motherName}
-                                            </Link>
-                                          ) : emptyName(person)}
+                                      <td>{person.sex}</td>
+                                      <td>{person.born}</td>
+                                      <td>{person.died}</td>
+                                      <td>
+                                        {sheMother(person) ? (
+                                          <Link
+                                            className="has-text-danger"
+                                            to={{
+                                              pathname: `#/people/${person.name.replaceAll(' ', '-')}-${person.born}`,
+                                            }}
+                                          >
+                                            {person.motherName}
+                                          </Link>
+                                        ) : emptyName(person)}
 
-                                        </td>
-                                        <td>
-                                          {!person.fatherName
-                                            ? '-'
-                                            : person.fatherName}
+                                      </td>
+                                      <td>
+                                        {!person.fatherName
+                                          ? '-'
+                                          : person.fatherName}
 
-                                        </td>
-                                      </tr>
-                                    );
-                                  })}
+                                      </td>
+                                    </tr>
+                                  ))}
                                 </tbody>
                               </table>
                             )}
