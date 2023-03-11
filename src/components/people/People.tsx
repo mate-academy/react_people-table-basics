@@ -17,17 +17,11 @@ export const People: React.FC = () => {
       .catch(() => setError(true));
   }, []);
 
-  const sheMother = (person:Person) => {
+  const parent = (person:Person) => {
     return listPeople
       .filter(
-        (el: Person) => el.name === person.motherName,
-      ).length;
-  };
-
-  const heFather = (person:Person) => {
-    return listPeople
-      .filter(
-        (el: Person) => el.name === person.fatherName,
+        (el: Person) => el.name === person.fatherName
+          || el.name === person.fatherName,
       ).length;
   };
 
@@ -95,12 +89,10 @@ export const People: React.FC = () => {
                                       <td>{person.born}</td>
                                       <td>{person.died}</td>
                                       <td>
-                                        {sheMother(person) ? (
+                                        {parent(person) ? (
                                           <Link
                                             className="has-text-danger"
-                                            to={{
-                                              pathname: `/people/${person.slug}`,
-                                            }}
+                                            to={`/people/${person.slug}`}
                                           >
                                             {person.motherName}
                                           </Link>
@@ -108,12 +100,8 @@ export const People: React.FC = () => {
 
                                       </td>
                                       <td>
-                                        {heFather(person) ? (
-                                          <Link
-                                            to={{
-                                              pathname: `/people/${person.slug}`,
-                                            }}
-                                          >
+                                        {parent(person) ? (
+                                          <Link to={`/people/${person.slug}`}>
                                             {person.fatherName}
                                           </Link>
                                         ) : emptyName(person)}

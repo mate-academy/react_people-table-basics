@@ -11,12 +11,10 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
   return (
     <td>
       <Link
+        to={`/people/${person.slug}`}
         className={classNames('', {
           'has-text-danger': person.sex === 'f',
         })}
-        to={{
-          pathname: `/people/${person.slug}`,
-        }}
       >
         {person.name}
       </Link>
