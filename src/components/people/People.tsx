@@ -1,11 +1,15 @@
+import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
+import { PersonLink } from '../person/Person';
 
 export const People: React.FC = () => {
   const [listPeople, setListPeople] = useState<Person[]>([]);
   const [error, setError] = useState(false);
+  const { hash } = useLocation();
 
   useEffect(() => {
     getPeople()
@@ -13,10 +17,25 @@ export const People: React.FC = () => {
       .catch(() => setError(true));
   }, []);
 
+  const sheMother = (person:Person) => {
+    return listPeople
+      .filter(
+        (el: Person) => el.name === person.motherName,
+      ).length;
+  };
+
+  const isActive = (name: string) => {
+    return hash.replaceAll('-', ' ').includes(name);
+  };
+
+  const emptyName = (person:Person) => {
+    return person.motherName ? person.motherName : '-';
+  };
+
   return (
-      <div className="block">
-        <h2 className="title">People Page</h2>
-        <div className="box table-container">
+    <div className="block">
+      <h2 className="title">People Page</h2>
+      <div className="box table-container">
         {listPeople.length < 1 && !error
           ? <Loader />
           : (
@@ -56,20 +75,38 @@ export const People: React.FC = () => {
                                 <tbody>
                                   {listPeople.map((person: Person) => {
                                     return (
-                                      <tr data-cy="person" key={person.slug}>
-                                        <td>
-                                          <a
-                                            href="#/people/jan-van-brussel-1714"
-                                          >
-                                            {person.name}
-                                          </a>
-                                        </td>
+                                      <tr
+                                        data-cy="person"
+                                        className={classNames('', {
+                                          'has-background-warning':
+                                            isActive(person.name),
+                                        })}
+                                        key={person.slug}
+                                      >
+                                        <PersonLink person={person} />
 
                                         <td>{person.sex}</td>
                                         <td>{person.born}</td>
                                         <td>{person.died}</td>
-                                        <td>{person.motherName}</td>
-                                        <td>{person.fatherName}</td>
+                                        <td>
+                                          {sheMother(person) ? (
+                                            <Link
+                                              className="has-text-danger"
+                                              to={{
+                                                pathname: `#/people/${person.name.replaceAll(' ', '-')}-${person.born}`,
+                                              }}
+                                            >
+                                              {person.motherName}
+                                            </Link>
+                                          ) : emptyName(person)}
+
+                                        </td>
+                                        <td>
+                                          {!person.fatherName
+                                            ? '-'
+                                            : person.fatherName}
+
+                                        </td>
                                       </tr>
                                     );
                                   })}
