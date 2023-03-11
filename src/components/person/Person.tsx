@@ -15,7 +15,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
           'has-text-danger': person.sex === 'f',
         })}
         to={{
-          pathname: `#/people/${person.name.replaceAll(' ', '-')}-${person.born}`,
+          pathname: `/people/${person.slug}`,
         }}
       >
         {person.name}

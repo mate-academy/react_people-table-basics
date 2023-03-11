@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
@@ -9,7 +9,7 @@ import { PersonLink } from '../person/Person';
 export const People: React.FC = () => {
   const [listPeople, setListPeople] = useState<Person[]>([]);
   const [error, setError] = useState(false);
-  const { hash } = useLocation();
+  const { slug = '' } = useParams();
 
   useEffect(() => {
     getPeople()
@@ -25,7 +25,7 @@ export const People: React.FC = () => {
   };
 
   const isActive = (name: string) => {
-    return hash.replaceAll('-', ' ').includes(name);
+    return slug.replaceAll('-', ' ').includes(name.toLowerCase());
   };
 
   const emptyName = (person:Person) => {
@@ -92,7 +92,7 @@ export const People: React.FC = () => {
                                           <Link
                                             className="has-text-danger"
                                             to={{
-                                              pathname: `#/people/${person.name.replaceAll(' ', '-')}-${person.born}`,
+                                              pathname: `/people/${person.slug}`,
                                             }}
                                           >
                                             {person.motherName}
