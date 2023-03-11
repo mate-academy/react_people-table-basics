@@ -24,6 +24,13 @@ export const People: React.FC = () => {
       ).length;
   };
 
+  const heFather = (person:Person) => {
+    return listPeople
+      .filter(
+        (el: Person) => el.name === person.fatherName,
+      ).length;
+  };
+
   const isActive = (name: string) => {
     return slug.replaceAll('-', ' ').includes(name.toLowerCase());
   };
@@ -101,9 +108,15 @@ export const People: React.FC = () => {
 
                                       </td>
                                       <td>
-                                        {!person.fatherName
-                                          ? '-'
-                                          : person.fatherName}
+                                        {heFather(person) ? (
+                                          <Link
+                                            to={{
+                                              pathname: `/people/${person.slug}`,
+                                            }}
+                                          >
+                                            {person.fatherName}
+                                          </Link>
+                                        ) : emptyName(person)}
 
                                       </td>
                                     </tr>
