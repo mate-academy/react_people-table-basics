@@ -29,10 +29,10 @@ export const App = () => (
           </NavLink>
 
           <NavLink
-            className={({ isActive }) => {
-              return classNames('navbar-item',
-                { 'has-background-grey-lighter': isActive });
-            }}
+            className={({ isActive }) => (classNames(
+              'navbar-item',
+              { 'has-background-grey-lighter': isActive }
+            ))}
             to="/people"
           >
             People
