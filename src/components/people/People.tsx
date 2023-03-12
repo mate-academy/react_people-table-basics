@@ -17,7 +17,7 @@ export const People: React.FC = () => {
       .catch(() => setError(true));
   }, []);
 
-  const getParent = (person:Person) => {
+  const getParent = (person: Person) => {
     return listPeople
       .find(
         (el: Person) => el.name === person.fatherName,
@@ -25,11 +25,19 @@ export const People: React.FC = () => {
   };
 
   const isActive = (name: string) => {
-    return slug.replaceAll('-', ' ').includes(name.toLowerCase());
+    return slug.replaceAll('-', ' ').toLowerCase().includes(name.toLowerCase());
   };
 
   const emptyName = (person:Person) => {
     return person.motherName || '-';
+  };
+
+  const createSlug = (name:string) => {
+    const parent = listPeople.filter((el: Person) => el.name === name)[0];
+
+    return parent
+      ? `/people/${parent.name.replaceAll(' ', '-')}-${parent.born}`
+      : '';
   };
 
   return (
@@ -91,7 +99,11 @@ export const People: React.FC = () => {
                                         {getParent(person) ? (
                                           <Link
                                             className="has-text-danger"
-                                            to={`/people/${person.slug}`}
+                                            to={
+                                              createSlug(
+                                                person.motherName as string,
+                                              )
+                                            }
                                           >
                                             {person.motherName}
                                           </Link>
@@ -100,7 +112,12 @@ export const People: React.FC = () => {
                                       </td>
                                       <td>
                                         {getParent(person) ? (
-                                          <Link to={`/people/${person.slug}`}>
+                                          <Link to={
+                                            createSlug(
+                                              person.fatherName as string,
+                                            )
+                                          }
+                                          >
                                             {person.fatherName}
                                           </Link>
                                         ) : emptyName(person)}
