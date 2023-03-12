@@ -20,8 +20,7 @@ export const People: React.FC = () => {
   const getParent = (person:Person) => {
     return listPeople
       .find(
-        (el: Person) => el.name === person.fatherName
-          || el.name === person.fatherName,
+        (el: Person) => el.name === person.fatherName,
       );
   };
 
