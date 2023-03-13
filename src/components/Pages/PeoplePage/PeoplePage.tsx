@@ -13,21 +13,21 @@ export const PeoplePage = () => {
   const [isLoader, setIsLoader] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const LoadPeoplesData = async () => {
+  const loadPeoplesData = async () => {
     try {
       setIsLoader(true);
       const peoplesData = await getPeople();
 
       setPeoples(peoplesData);
-      setIsLoader(false);
     } catch {
-      setIsLoader(false);
       setIsError(true);
+    } finally {
+      setIsLoader(false);
     }
   };
 
   useEffect(() => {
-    LoadPeoplesData();
+    loadPeoplesData();
   }, []);
 
   return (
