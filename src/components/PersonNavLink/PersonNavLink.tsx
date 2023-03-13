@@ -9,10 +9,12 @@ type Props = {
 };
 
 export const PersonNavLink: FC<Props> = ({ to, text, sex }) => (
-  <NavLink
-    className={classNames({ 'has-text-danger': sex === 'f' })}
-    to={`../${to}`}
-  >
-    {text}
-  </NavLink>
+  <>
+    <NavLink
+      className={classNames({ 'has-text-danger': sex === 'f' })}
+      to={`${to}`}
+    >
+      {text}
+    </NavLink>
+  </>
 );

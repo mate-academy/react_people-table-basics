@@ -31,7 +31,7 @@ export const App = () => (
           <NavLink
             className={({ isActive }) => (classNames(
               'navbar-item',
-              { 'has-background-grey-lighter': isActive }
+              { 'has-background-grey-lighter': isActive },
             ))}
             to="/people"
           >
