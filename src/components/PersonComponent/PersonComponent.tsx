@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import classNames from 'classnames';
 import { Person } from '../../types';
-import { PersonNavigation } from '../PersonNavigation/PersonNavigation';
+import { PersonNavigation } from '../PersonNavigation';
 
 type Props = {
   person: Person;
