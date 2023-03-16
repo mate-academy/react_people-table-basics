@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Person } from '../../types';
-import { PersonComponent } from '../PersonComponent';
+import { PersonComponent } from '../PersonComponent/PersonComponent';
 
 type Props = {
   peopleData: Person[];
