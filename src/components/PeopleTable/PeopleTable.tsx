@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Person } from '../../types';
+import { findParent } from '../../utils/findParent';
 import { PersonComponent } from '../PersonComponent/PersonComponent';
 
 type Props = {
@@ -29,10 +30,8 @@ export const PeopleTable: FC<Props> = ({
 
       <tbody>
         {peopleData.map((person) => {
-          const mother = peopleData
-            .find(pers => pers.name === person.motherName);
-          const father = peopleData
-            .find(pers => pers.name === person.fatherName);
+          const mother = findParent(peopleData, person.motherName);
+          const father = findParent(peopleData, person.fatherName);
 
           return (
             <PersonComponent
