@@ -35,7 +35,7 @@ export const App = () => (
           />
 
           <Route
-            path="home"
+            path="/home"
             element={<Navigate to="/" replace />}
           />
 
@@ -52,7 +52,7 @@ export const App = () => (
           </Route>
 
           <Route
-            path="*"
+            path="/*"
             element={<h1 className="title">Page not found</h1>}
           />
         </Routes>
