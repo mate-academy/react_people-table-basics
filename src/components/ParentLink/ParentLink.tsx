@@ -5,7 +5,7 @@ import { Person } from '../../types';
 
 type Props = {
   parent: Person | undefined,
-  parentName: string | null,
+  parentName?: string,
 };
 
 export const ParentLink: React.FC<Props> = ({ parent, parentName }) => (
