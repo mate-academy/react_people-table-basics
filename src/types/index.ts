@@ -1,2 +1,2 @@
-export * from './PersonWithParents';
+export * from './ExtendedPerson';
 export * from './Person';

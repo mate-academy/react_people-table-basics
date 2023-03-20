@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getPeople, makePeopleWithParents } from '../../api';
+import { getPeople, extendPerson } from '../../api';
 import { PersonWithParents } from '../../types';
 import { PersonCell } from '../PersonCell/PersonCell';
 import { Loader } from '../Loader';
@@ -10,7 +10,7 @@ export const PeopleTable = () => {
 
   useEffect(() => {
     getPeople()
-      .then(r => setPeople(makePeopleWithParents(r)))
+      .then(r => setPeople(extendPerson(r)))
       .catch(() => setError(true));
   }, []);
 

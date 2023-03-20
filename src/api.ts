@@ -14,13 +14,17 @@ export function getPeople(): Promise<Person[]> {
     .then(response => response.json());
 }
 
-export const makePeopleWithParents = (people: Person[]) => {
-  return people.map(p => {
-    const mother = people.find(m => m.name === p.motherName);
-    const father = people.find(f => f.name === p.fatherName);
+export const findPerson = (people: Person[], name?: string) => {
+  return people.find(person => person.name === name);
+};
+
+export const extendPerson = (people: Person[]) => {
+  return people.map(person => {
+    const mother = findPerson(people, person.motherName);
+    const father = findPerson(people, person.fatherName);
 
     return {
-      ...p,
+      ...person,
       mother,
       father,
     };
