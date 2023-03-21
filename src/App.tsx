@@ -12,32 +12,40 @@ export const App = () => {
       <main className="section">
         <div className="container">
           <Routes>
-            <Route 
-              path="/" 
-              element={<PageTitle title='Home Page' />} />
-            <Route path='people'>
-              <Route index element={(
-                <>
-                  <PageTitle title='People Page' />
-                  <PeopleData />
-                </>
-              )} />
-              <Route path=':personId' element={(
-                <>
-                  <PageTitle title='People Page' />
-                  <PeopleData />
-                </>
-              )} />
+            <Route
+              path="/"
+              element={<PageTitle title="Home Page" />}
+            />
+            <Route path="people">
+              <Route
+                index
+                element={(
+                  <>
+                    <PageTitle title="People Page" />
+                    <PeopleData />
+                  </>
+                )}
+              />
+              <Route
+                path=":personId"
+                element={(
+                  <>
+                    <PageTitle title="People Page" />
+                    <PeopleData />
+                  </>
+                )}
+              />
             </Route>
             <Route
               path="*"
               element={
-                <PageTitle title='Page not found' />
+                <PageTitle title="Page not found" />
               }
             />
-            <Route 
-              path="home" 
-              element={<Navigate to="/" replace />} />
+            <Route
+              path="home"
+              element={<Navigate to="/" replace />}
+            />
           </Routes>
         </div>
       </main>

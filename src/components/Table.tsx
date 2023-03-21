@@ -11,13 +11,15 @@ export const Table: React.FC<Props> = ({ people }) => {
   const { personId } = useParams();
 
   const femaleNames = useMemo(
-    () => new Set(people.filter((item) => item.sex === 'f').map((item) => item.name)),
-    [people]
+    () => new Set(people
+      .filter((item) => item.sex === 'f')
+      .map((item) => item.name)),
+    [people],
   );
 
   const peopleMap = useMemo(
     () => new Map(people.map((person) => [person.name, person])),
-    [people]
+    [people],
   );
 
   return (
