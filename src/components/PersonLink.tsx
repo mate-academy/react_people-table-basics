@@ -1,5 +1,5 @@
-import classNames from "classnames";
-import { Link } from "react-router-dom";
+import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 type Props = {
   name: string;
@@ -8,10 +8,12 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ name, slug, sex }) => {
-  return <Link
-    to={`../${slug}`}
-    className={classNames({'has-text-danger' : sex === 'f'})}
-  >
-    {name}
-  </Link>;
+  return (
+    <Link
+      to={`../${slug}`}
+      className={classNames({ 'has-text-danger': sex === 'f' })}
+    >
+      {name}
+    </Link>
+  );
 };
