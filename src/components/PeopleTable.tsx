@@ -11,32 +11,16 @@ type Props = {
 export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
   const isSelected = (person: Person) => person.slug === slug;
 
-  const personsMotherLink = (person: Person) => {
-    const mother = people.find(p => p.name === person.motherName);
+  const getPersonLinkByName = (parentName: string | null) => {
+    const parent = people.find(person => person.name === parentName);
 
-    if (mother) {
+    if (parent) {
       return (
-        <PersonLink person={mother} />
+        <PersonLink person={parent} />
       );
     }
 
-    return person.motherName
-      ? person.motherName
-      : '-';
-  };
-
-  const personsFatherLink = (person: Person) => {
-    const father = people.find(p => p.name === person.fatherName);
-
-    if (father) {
-      return (
-        <PersonLink person={father} />
-      );
-    }
-
-    return person.fatherName
-      ? person.fatherName
-      : '-';
+    return parentName || '-';
   };
 
   return (
@@ -71,8 +55,8 @@ export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
-            <td>{personsMotherLink(person)}</td>
-            <td>{personsFatherLink(person)}</td>
+            <td>{getPersonLinkByName(person.motherName)}</td>
+            <td>{getPersonLinkByName(person.fatherName)}</td>
           </tr>
         ))}
       </tbody>
