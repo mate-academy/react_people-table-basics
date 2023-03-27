@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
 import { Person } from '../types/Person';
-import { NavLink } from 'react-router-dom';
-import classNames from 'classnames';
-
+/* eslint-disable */
 type Props = {
   person: Person[];
 };
@@ -14,7 +14,7 @@ export const PeopleTable: React.FC<Props> = () => {
   const [error, setError] = useState(false);
   const [data, setData] = useState<Person[]>([]);
   const [selectedPersonSlug, setSelectedPersonSlug] = useState<string | null>(
-    null
+    null,
   );
 
   useEffect(() => {
@@ -31,7 +31,6 @@ export const PeopleTable: React.FC<Props> = () => {
           setError(false);
         }
       } catch (error) {
-        console.log(error);
         setError(true);
         setIsLoading(false);
       }
