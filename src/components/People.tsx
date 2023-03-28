@@ -39,7 +39,7 @@ export const People = () => {
             </p>
           )}
 
-          {people.length === 0 && !error && !isLoading && (
+          {!people.length && !error && !isLoading && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
