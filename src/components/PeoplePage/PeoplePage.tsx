@@ -11,7 +11,6 @@ export const PeoplePage = () => {
 
   useEffect(() => {
     setLoaded(false);
-    setError(false);
 
     const getPeopleFromSever = async () => {
       try {
