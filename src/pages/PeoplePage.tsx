@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
@@ -15,12 +14,12 @@ export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasLoadingError, setHasLoadingError] = useState(false);
   const [hasNoDataError, setHasNoDataError] = useState(false);
-  const { slug: selectedPersonSlug = '' } = useParams();
 
   useEffect(() => {
-    setIsLoading(true);
-    getPeople()
-      .then((fetchedPeople) => {
+    (async () => {
+      try {
+        setIsLoading(true);
+        const fetchedPeople = await getPeople();
         const isEmptyResponse = !fetchedPeople.length;
 
         if (isEmptyResponse !== hasNoDataError) {
@@ -41,9 +40,12 @@ export const PeoplePage = () => {
 
           return currentPerson;
         }));
-      })
-      .catch(() => setHasLoadingError(true))
-      .finally(() => setIsLoading(false));
+      } catch (err) {
+        setHasLoadingError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
   }, []);
 
   return (
@@ -65,10 +67,7 @@ export const PeoplePage = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            <PeopleTable
-              people={people}
-              selectedPersonSlug={selectedPersonSlug}
-            />
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
