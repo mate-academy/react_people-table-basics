@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useMatch } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
@@ -10,15 +10,24 @@ export const PeoplePage: React.FC = () => {
   const [isError, setIsError] = useState(false);
   const [people, setPeople] = useState<Person[]>([]);
 
-  const match = useMatch('/people/:personId');
-  const selectedId = match?.params.personId || '';
+  const { slug = '' } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
-    getPeople()
-      .then(setPeople)
-      .catch(() => setIsError(true))
-      .finally(() => setIsLoading(false));
+
+    const getPeopleFromServer = async () => {
+      try {
+        const peopleFromServer = await getPeople();
+
+        setPeople(peopleFromServer);
+      } catch {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getPeopleFromServer();
   }, []);
 
   return (
@@ -43,7 +52,7 @@ export const PeoplePage: React.FC = () => {
                   </p>
                 )}
 
-                <PeopleTable people={people} personId={selectedId} />
+                <PeopleTable people={people} personId={slug} />
               </>
             )}
         </div>

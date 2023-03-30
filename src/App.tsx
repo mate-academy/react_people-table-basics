@@ -8,6 +8,8 @@ import {
 
 import { PeoplePage } from './components/PeoplePage';
 import { NavigationBar } from './components/NavigationBar';
+import { Homepage } from './components/HomePage';
+import { NotFoundPage } from './components/NotFoundPage';
 
 export const App: React.FC = () => {
   return (
@@ -19,7 +21,7 @@ export const App: React.FC = () => {
           <Routes>
             <Route
               path="/"
-              element={<h1 className="title">Home Page</h1>}
+              element={<Homepage />}
             />
             <Route
               path="/home"
@@ -28,12 +30,12 @@ export const App: React.FC = () => {
 
             <Route path="people">
               <Route index element={<PeoplePage />} />
-              <Route path=":personId" element={<PeoplePage />} />
+              <Route path=":slug" element={<PeoplePage />} />
             </Route>
 
             <Route
               path="*"
-              element={<h1 className="title">Page not found</h1>}
+              element={<NotFoundPage />}
             />
           </Routes>
         </div>
