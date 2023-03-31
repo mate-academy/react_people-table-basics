@@ -1,11 +1,10 @@
-import classNames from 'classnames';
 import {
   Routes,
   Route,
   Navigate,
-  NavLink,
 } from 'react-router-dom';
 import './App.scss';
+import { CustomNavLink } from './components/NavLink/CustomNavLink';
 import { PeoplePage } from './components/PeoplePage/Index';
 
 export const App = () => {
@@ -19,25 +18,9 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <NavLink
-              className={({ isActive }) => (
-                classNames('navbar-item', {
-                  'has-background-grey-lighter': isActive,
-                }))}
-              to="/"
-            >
-              Home
-            </NavLink>
+            <CustomNavLink to="/" label="Home" />
 
-            <NavLink
-              className={({ isActive }) => (
-                classNames('navbar-item', {
-                  'has-background-grey-lighter': isActive,
-                }))}
-              to="/people"
-            >
-              People
-            </NavLink>
+            <CustomNavLink to="/people" label="People" />
           </div>
         </div>
       </nav>
@@ -59,27 +42,25 @@ export const App = () => {
               }
             />
 
-            <Route path="/people">
-              <Route
-                index
-                element={(
-                  <>
-                    <h1 className="title">People Page</h1>
-                    <PeoplePage />
-                  </>
-                )}
-              />
+            <Route
+              path="/people"
+              element={(
+                <>
+                  <h1 className="title">People Page</h1>
+                  <PeoplePage />
+                </>
+              )}
+            />
 
-              <Route
-                path=":personId"
-                element={(
-                  <>
-                    <h1 className="title">People Page</h1>
-                    <PeoplePage />
-                  </>
-                )}
-              />
-            </Route>
+            <Route
+              path="/people/:personId"
+              element={(
+                <>
+                  <h1 className="title">People Page</h1>
+                  <PeoplePage />
+                </>
+              )}
+            />
 
             <Route
               path="*"
