@@ -67,12 +67,14 @@ export const PeopleTable = () => {
               </tr>
             </thead>
 
-            {people.map(person => (
-              <PersonInfo
-                key={person.slug}
-                person={person}
-              />
-            ))}
+            <tbody>
+              {people.map(person => (
+                <PersonInfo
+                  key={person.slug}
+                  person={person}
+                />
+              ))}
+            </tbody>
           </table>
         )}
       </div>

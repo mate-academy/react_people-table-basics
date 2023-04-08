@@ -20,41 +20,39 @@ export const PersonInfo: FC<Props> = ({ person }) => {
     motherName,
   } = person;
 
-  const { userSlug = '' } = useParams();
+  const { userSlug } = useParams();
   const isSelected = slug === userSlug;
 
   return (
-    <tbody>
-      <tr
-        data-cy="person"
-        className={cn({
-          'has-background-warning': isSelected,
-        })}
-      >
-        <td>
-          <PersonLink person={person} />
-        </td>
+    <tr
+      data-cy="person"
+      className={cn({
+        'has-background-warning': isSelected,
+      })}
+    >
+      <td>
+        <PersonLink person={person} />
+      </td>
 
-        <td>{sex}</td>
-        <td>{born}</td>
-        <td>{died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
 
-        <td>
-          {mother ? (
-            <PersonLink person={mother} />
-          ) : (
-            motherName || '-'
-          )}
-        </td>
+      <td>
+        {mother ? (
+          <PersonLink person={mother} />
+        ) : (
+          motherName || '-'
+        )}
+      </td>
 
-        <td>
-          {father ? (
-            <PersonLink person={father} />
-          ) : (
-            fatherName || '-'
-          )}
-        </td>
-      </tr>
-    </tbody>
+      <td>
+        {father ? (
+          <PersonLink person={father} />
+        ) : (
+          fatherName || '-'
+        )}
+      </td>
+    </tr>
   );
 };
