@@ -18,10 +18,10 @@ export const People: React.FC = () => {
     try {
       const loadedPeople = await getPeople();
 
-      if (loadedPeople) {
-        setPeople(loadedPeople);
-      } else {
+      if (loadedPeople.length === 0) {
         setIsNoPeople(true);
+      } else {
+        setPeople(loadedPeople);
       }
     } catch {
       setIsError(true);
