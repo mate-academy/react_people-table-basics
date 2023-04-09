@@ -9,9 +9,11 @@ type Props = {
   isNoPeople: boolean,
 };
 
-export const PeopleTable: React.FC<Props> = (
-  { peopleList, selectedPerson, isNoPeople },
-) => {
+export const PeopleTable: React.FC<Props> = ({
+  peopleList,
+  selectedPerson,
+  isNoPeople,
+}) => {
   const isSelected = (person: Person) => person.slug === selectedPerson;
 
   const getSlug = (name: string | null) => {
@@ -47,7 +49,7 @@ export const PeopleTable: React.FC<Props> = (
             {peopleList.map(person => (
               <tr
                 data-cy="person"
-                key={person.born}
+                key={person.slug}
                 className={classNames({
                   'has-background-warning': isSelected(person),
                 })}
