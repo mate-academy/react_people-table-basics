@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMatch } from 'react-router-dom';
 import { Loader } from '../Loader';
-import { Person } from '../../types';
+import { PersonType } from '../../types';
 import { getPeople } from '../../api';
 import { PeopleTable } from '../PeopleTable';
 
@@ -9,12 +9,13 @@ export const People: React.FC = () => {
   const match = useMatch('people/:slug');
   const selectedPersonSlug = match?.params.slug;
 
-  const [people, setPeople] = useState<Person[]>([]);
+  const [people, setPeople] = useState<PersonType[]>([]);
   const [isPeopleLoading, setIsPeopleLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isNoPeople, setIsNoPeople] = useState(false);
 
   const loadPeople = async () => {
+    setIsPeopleLoading(true);
     try {
       const loadedPeople = await getPeople();
 
@@ -31,7 +32,6 @@ export const People: React.FC = () => {
   };
 
   useEffect(() => {
-    setIsPeopleLoading(true);
     loadPeople();
   }, []);
 

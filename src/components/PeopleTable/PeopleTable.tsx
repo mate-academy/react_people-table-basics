@@ -1,9 +1,9 @@
 import React from 'react';
-import classNames from 'classnames';
-import { Person } from '../../types';
+import { PersonType } from '../../types';
+import { Person } from '../Person';
 
 type Props = {
-  people: Person[];
+  people: PersonType[];
   selectedPersonSlug: string;
 };
 
@@ -29,73 +29,21 @@ export const PeopleTable: React.FC<Props> = ({
 
       <tbody>
         {people.map(person => {
-          const {
-            name,
-            sex,
-            born,
-            died,
-            fatherName,
-            motherName,
-            slug,
-          } = person;
+          const isMother = people.find(personSearch => {
+            return personSearch.name === person.motherName;
+          }) || null;
 
-          const isMother = people.filter(personSearch => {
-            return personSearch.name === motherName;
-          })[0];
-
-          const isFather = people.filter(personSearch => {
-            return personSearch.name === fatherName;
-          })[0];
+          const isFather = people.find(personSearch => {
+            return personSearch.name === person.fatherName;
+          }) || null;
 
           return (
-            <tr
-              key={slug}
-              data-cy="person"
-              className={classNames(
-                {
-                  'has-background-warning': selectedPersonSlug === slug,
-                },
-              )}
-            >
-              <td>
-                <a
-                  href={`#/people/${slug}`}
-                  className={classNames(
-                    { 'has-text-danger': sex === 'f' },
-                  )}
-                >
-                  {name}
-                </a>
-              </td>
-
-              <td>{sex}</td>
-              <td>{born}</td>
-              <td>{died}</td>
-              <td>
-                {isMother
-                  ? (
-                    <a
-                      href={`#/people/${isMother.slug}`}
-                      className="has-text-danger"
-                    >
-                      {isMother.name}
-                    </a>
-                  )
-                  : motherName || '-'}
-              </td>
-
-              <td>
-                {isFather
-                  ? (
-                    <a
-                      href={`#/people/${isFather.slug}`}
-                    >
-                      {isFather.name}
-                    </a>
-                  )
-                  : fatherName || '-'}
-              </td>
-            </tr>
+            <Person
+              person={person}
+              selectedPersonSlug={selectedPersonSlug}
+              isMother={isMother}
+              isFather={isFather}
+            />
           );
         })}
       </tbody>

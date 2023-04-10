@@ -3,6 +3,8 @@ import { Navigation } from './components/Navigation';
 import { People } from './components/People';
 
 import './App.scss';
+import { HomePage } from './components/HomePage/HomePage';
+import { PageNotFound } from './components/PageNotFound';
 
 export const App = () => (
   <div data-cy="app">
@@ -14,7 +16,7 @@ export const App = () => (
         <Routes>
           <Route
             path="/"
-            element={(<h1 className="title">Home Page</h1>)}
+            element={(<HomePage />)}
           />
 
           <Route
@@ -36,7 +38,7 @@ export const App = () => (
 
           <Route
             path="*"
-            element={(<h1 className="title">Page not found</h1>)}
+            element={(<PageNotFound />)}
           />
         </Routes>
       </div>
