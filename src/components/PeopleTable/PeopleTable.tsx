@@ -1,9 +1,9 @@
 import React from 'react';
-import { PersonType } from '../../types';
-import { Person } from '../Person';
+import { Person } from '../../types';
+import { PersonData } from '../PersonData';
 
 type Props = {
-  people: PersonType[];
+  people: Person[];
   selectedPersonSlug: string;
 };
 
@@ -38,7 +38,7 @@ export const PeopleTable: React.FC<Props> = ({
           }) || null;
 
           return (
-            <Person
+            <PersonData
               person={person}
               selectedPersonSlug={selectedPersonSlug}
               isMother={isMother}

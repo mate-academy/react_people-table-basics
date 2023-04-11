@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMatch } from 'react-router-dom';
 import { Loader } from '../Loader';
-import { PersonType } from '../../types';
+import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { PeopleTable } from '../PeopleTable';
 
@@ -9,19 +9,16 @@ export const People: React.FC = () => {
   const match = useMatch('people/:slug');
   const selectedPersonSlug = match?.params.slug;
 
-  const [people, setPeople] = useState<PersonType[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isPeopleLoading, setIsPeopleLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [isNoPeople, setIsNoPeople] = useState(false);
 
   const loadPeople = async () => {
     setIsPeopleLoading(true);
     try {
       const loadedPeople = await getPeople();
 
-      if (loadedPeople.length === 0) {
-        setIsNoPeople(true);
-      } else {
+      if (loadedPeople) {
         setPeople(loadedPeople);
       }
     } catch {
@@ -49,7 +46,7 @@ export const People: React.FC = () => {
             </p>
           )}
 
-          {!isError && isNoPeople && (
+          {!isError && !isPeopleLoading && people.length === 0 && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>

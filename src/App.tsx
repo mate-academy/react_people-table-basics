@@ -16,7 +16,7 @@ export const App = () => (
         <Routes>
           <Route
             path="/"
-            element={(<HomePage />)}
+            element={<HomePage />}
           />
 
           <Route
@@ -26,19 +26,14 @@ export const App = () => (
             }
           />
 
-          <Route
-            path="/people"
-            element={(<People />)}
-          />
-
-          <Route
-            path="/people/:slug"
-            element={(<People />)}
-          />
+          <Route path="/people">
+            <Route index element={<People />} />
+            <Route path=":slug" element={<People />} />
+          </Route>
 
           <Route
             path="*"
-            element={(<PageNotFound />)}
+            element={<PageNotFound />}
           />
         </Routes>
       </div>

@@ -1,15 +1,15 @@
 import React from 'react';
 import classNames from 'classnames';
-import { PersonType } from '../../types';
+import { Person } from '../../types';
 
 type Props = {
-  person: PersonType;
+  person: Person;
   selectedPersonSlug: string;
-  isMother: PersonType | null;
-  isFather: PersonType | null;
+  isMother: Person | null;
+  isFather: Person | null;
 };
 
-export const Person: React.FC<Props> = ({
+export const PersonData: React.FC<Props> = ({
   person,
   selectedPersonSlug,
   isMother,
