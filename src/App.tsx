@@ -3,7 +3,7 @@ import {
   NavLink, Navigate, Route, Routes,
 } from 'react-router-dom';
 import classNames from 'classnames';
-import { PeoplePage } from './components/PeoplePage/PeoplePage';
+import { PeoplePageWrapper } from './components/PeoplePage/PeoplePageWrapper';
 
 export const App = () => {
   return (
@@ -44,9 +44,9 @@ export const App = () => {
 
             <Route path="/" element={<h1 className="title">Home Page</h1>} />
 
-            <Route path="people" element={<PeoplePage />}>
-              <Route index element={<PeoplePage />} />
-              <Route path=":slug" element={<PeoplePage />} />
+            <Route path="people" element={<PeoplePageWrapper />}>
+              <Route index element={<PeoplePageWrapper />} />
+              <Route path=":slug" element={<PeoplePageWrapper />} />
             </Route>
 
             <Route

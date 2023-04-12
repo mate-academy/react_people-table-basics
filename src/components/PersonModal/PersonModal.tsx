@@ -8,6 +8,57 @@ interface Props {
   people: Person[];
 }
 
+interface MotherLinkProps {
+  motherName: string | null;
+  people: Person[];
+}
+
+const MotherLink: React.FC<MotherLinkProps> = ({ motherName, people }) => {
+  if (!motherName) {
+    return <>-</>;
+  }
+
+  const motherPerson = people.find((p) => p.name === motherName);
+
+  if (motherPerson) {
+    return (
+      <Link
+        to={`/people/${motherPerson.slug}`}
+        className="has-text-danger"
+      >
+        {motherName}
+      </Link>
+    );
+  }
+
+  return <>{motherName}</>;
+};
+
+interface FatherLinkProps {
+  fatherName: string | null;
+  people: Person[];
+}
+
+const FatherLink: React.FC<FatherLinkProps> = ({ fatherName, people }) => {
+  if (!fatherName) {
+    return <>-</>;
+  }
+
+  const fatherPerson = people.find((p) => p.name === fatherName);
+
+  if (fatherPerson) {
+    return (
+      <Link
+        to={`/people/${fatherPerson.slug}`}
+      >
+        {fatherName}
+      </Link>
+    );
+  }
+
+  return <>{fatherName}</>;
+};
+
 export const PersonModal: React.FC<Props> = ({
   person,
   selectedPersonSlug,
@@ -16,43 +67,6 @@ export const PersonModal: React.FC<Props> = ({
   const {
     slug, sex, name, died, born, motherName, fatherName,
   } = person;
-
-  let motherLink = null;
-
-  if (motherName) {
-    const motherPerson = people.find((p) => p.name === motherName);
-
-    if (motherPerson) {
-      motherLink = (
-        <Link
-          to={`/people/${motherPerson.slug}`}
-          className="has-text-danger"
-        >
-          {motherName}
-        </Link>
-      );
-    } else {
-      motherLink = motherName;
-    }
-  } else {
-    motherLink = '-';
-  }
-
-  let fatherLink = null;
-
-  if (fatherName) {
-    const fatherPerson = people.find((p) => p.name === fatherName);
-
-    if (fatherPerson) {
-      fatherLink = (
-        <Link to={`/people/${fatherPerson.slug}`}>{fatherName}</Link>
-      );
-    } else {
-      fatherLink = fatherName;
-    }
-  } else {
-    fatherLink = '-';
-  }
 
   const tableRowClasses = classNames({
     'has-background-warning': selectedPersonSlug === slug,
@@ -73,8 +87,8 @@ export const PersonModal: React.FC<Props> = ({
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
-      <td>{motherLink}</td>
-      <td>{fatherLink}</td>
+      <td><MotherLink people={people} motherName={motherName} /></td>
+      <td><FatherLink people={people} fatherName={fatherName} /></td>
     </tr>
   );
 };
