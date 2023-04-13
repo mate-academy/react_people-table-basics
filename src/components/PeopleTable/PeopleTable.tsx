@@ -1,18 +1,17 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink';
 
 type Props = {
   people: Person[],
-  selectedPersonSlug: string | undefined,
 };
 
-export const PeopleTable: React.FC<Props> = ({
-  people,
-  selectedPersonSlug,
-}) => {
+export const PeopleTable: React.FC<Props> = ({ people }) => {
+  const { slug: selectedPersonSlug } = useParams();
+
   return (
     <table
       data-cy="peopleTable"
@@ -34,7 +33,6 @@ export const PeopleTable: React.FC<Props> = ({
           ? (
             people.map(person => {
               const {
-                name,
                 sex,
                 born,
                 died,
@@ -69,14 +67,7 @@ export const PeopleTable: React.FC<Props> = ({
                   )}
                 >
                   <td>
-                    <Link
-                      to={`../${slug}`}
-                      className={classNames(
-                        { 'has-text-danger': sex === 'f' },
-                      )}
-                    >
-                      {name}
-                    </Link>
+                    <PersonLink person={person} />
                   </td>
 
                   <td>
@@ -94,12 +85,7 @@ export const PeopleTable: React.FC<Props> = ({
                   <td>
                     {mother
                       ? (
-                        <Link
-                          to={`../${mother.slug}`}
-                          className="has-text-danger"
-                        >
-                          {motherName}
-                        </Link>
+                        <PersonLink person={mother} />
                       )
                       : (
                         motherName || '-'
@@ -109,9 +95,7 @@ export const PeopleTable: React.FC<Props> = ({
                   <td>
                     {father
                       ? (
-                        <Link to={`../${father.slug}`}>
-                          {fatherName}
-                        </Link>
+                        <PersonLink person={father} />
                       )
                       : (
                         fatherName || '-'

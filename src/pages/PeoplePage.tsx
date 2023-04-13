@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Person } from '../types';
 import { getPeople } from '../api';
@@ -11,9 +10,7 @@ export const PeoplePage: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const { slug } = useParams();
-
-  const loadPeopleFromServer = async () => {
+  const loadPeopleFromServer = useCallback(async () => {
     try {
       const peopleFromServer = await getPeople();
 
@@ -23,7 +20,7 @@ export const PeoplePage: React.FC = () => {
     } finally {
       setIsLoaded(true);
     }
-  };
+  }, []);
 
   useEffect(() => {
     loadPeopleFromServer();
@@ -48,10 +45,7 @@ export const PeoplePage: React.FC = () => {
           )}
 
           {isLoaded && !errorMessage && (
-            <PeopleTable
-              people={people}
-              selectedPersonSlug={slug}
-            />
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
