@@ -1,63 +1,13 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Person } from '../../types/Person';
+import { ParentLink } from './ParentLink';
 
 interface Props {
   person: Person;
   selectedPersonSlug: string;
   people: Person[];
 }
-
-interface MotherLinkProps {
-  motherName: string | null;
-  people: Person[];
-}
-
-const MotherLink: React.FC<MotherLinkProps> = ({ motherName, people }) => {
-  if (!motherName) {
-    return <>-</>;
-  }
-
-  const motherPerson = people.find((p) => p.name === motherName);
-
-  if (motherPerson) {
-    return (
-      <Link
-        to={`/people/${motherPerson.slug}`}
-        className="has-text-danger"
-      >
-        {motherName}
-      </Link>
-    );
-  }
-
-  return <>{motherName}</>;
-};
-
-interface FatherLinkProps {
-  fatherName: string | null;
-  people: Person[];
-}
-
-const FatherLink: React.FC<FatherLinkProps> = ({ fatherName, people }) => {
-  if (!fatherName) {
-    return <>-</>;
-  }
-
-  const fatherPerson = people.find((p) => p.name === fatherName);
-
-  if (fatherPerson) {
-    return (
-      <Link
-        to={`/people/${fatherPerson.slug}`}
-      >
-        {fatherName}
-      </Link>
-    );
-  }
-
-  return <>{fatherName}</>;
-};
 
 export const PersonModal: React.FC<Props> = ({
   person,
@@ -87,8 +37,8 @@ export const PersonModal: React.FC<Props> = ({
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
-      <td><MotherLink people={people} motherName={motherName} /></td>
-      <td><FatherLink people={people} fatherName={fatherName} /></td>
+      <td><ParentLink people={people} parentName={motherName} /></td>
+      <td><ParentLink people={people} parentName={fatherName} /></td>
     </tr>
   );
 };
