@@ -40,22 +40,21 @@ export const PeoplePage: FC = () => {
             && <Loader />}
 
           {error && (
-            <>
-              <ErrorNotification
-                onError={error}
-                onChangeError={setError}
-              />
-
-              {isEmptyPeopleList && (
-                <p data-cy="noPeopleMessage">
-                  There are no people on the server
-                </p>
-              )}
-            </>
+            <ErrorNotification
+              onError={error}
+              onChangeError={setError}
+            />
           )}
 
           {!isLoading
-            && !error
+            && isEmptyPeopleList
+            && (
+              <p data-cy="noPeopleMessage">
+                There are no people on the server
+              </p>
+            )}
+
+          {!isEmptyPeopleList
             && <PeopleTable people={people} />}
         </div>
       </div>
