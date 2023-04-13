@@ -65,21 +65,28 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
                 <TableCell>
                   <PersonLink person={person} />
                 </TableCell>
+
                 <TableCell>{sex}</TableCell>
                 <TableCell>{born}</TableCell>
                 <TableCell>{died}</TableCell>
+
                 <TableCell>
                   {mother && (
                     <PersonLink person={mother} />
                   )}
+
                   {(!mother && motherName) && motherName}
+
                   {(!mother && !motherName) && '-'}
                 </TableCell>
+
                 <TableCell>
                   {father && (
                     <PersonLink person={father} />
                   )}
+
                   {(!father && fatherName) && fatherName}
+
                   {(!father && !fatherName) && '-'}
                 </TableCell>
               </TableRow>
