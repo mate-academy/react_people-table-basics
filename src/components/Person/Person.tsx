@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
+import cn from 'classnames';
 import { PersonType } from '../../types';
 import { UserLink } from '../UserLink';
 
@@ -24,14 +24,13 @@ export const Person: FC<PersonProps> = ({
     motherName,
     fatherName,
   } = person;
-
   const { slug: userId = '' } = useParams();
   const isSelected = slug === userId;
 
   return (
     <tr
       data-cy="person"
-      className={classNames({
+      className={cn({
         'has-background-warning': isSelected,
       })}
     >

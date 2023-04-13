@@ -19,7 +19,11 @@ export const PeopleTable: FC<PeopleTableProps> = ({
   return (
     <table
       data-cy="peopleTable"
-      className="table is-striped is-hoverable is-narrow is-fullwidth"
+      className="table
+      is-striped
+      is-hoverable
+      is-narrow
+      is-fullwidth"
     >
       <thead>
         <tr>

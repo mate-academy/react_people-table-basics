@@ -1,12 +1,12 @@
 import { FC, useEffect } from 'react';
 import { ErrorType } from '../../types';
 
-interface ErrorProps {
+interface ErrorNotificationProps {
   onError: ErrorType;
   onChangeError: (onError: ErrorType) => void;
 }
 
-export const ErrorNotification: FC<ErrorProps> = ({
+export const ErrorNotification: FC<ErrorNotificationProps> = ({
   onError,
   onChangeError,
 }) => {
@@ -15,7 +15,6 @@ export const ErrorNotification: FC<ErrorProps> = ({
   }, [onError]);
 
   return (
-
     <p data-cy="peopleLoadingError" className="has-text-danger">
       {onError}
     </p>

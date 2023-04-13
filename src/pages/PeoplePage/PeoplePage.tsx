@@ -10,7 +10,7 @@ export const PeoplePage: FC = () => {
   const [error, setError] = useState(ErrorType.None);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchPeoples = async () => {
+  const fetchPeople = async () => {
     setIsLoading(true);
 
     try {
@@ -25,8 +25,10 @@ export const PeoplePage: FC = () => {
   };
 
   useEffect(() => {
-    fetchPeoples();
+    fetchPeople();
   }, []);
+
+  const isEmptyPeopleList = people.length === 0;
 
   return (
     <>
@@ -35,25 +37,26 @@ export const PeoplePage: FC = () => {
       <div className="block">
         <div className="box table-container">
           {isLoading
-            ? <Loader />
-            : (
-              <>
-                {error && (
-                  <ErrorNotification
-                    onError={error}
-                    onChangeError={setError}
-                  />
-                )}
+            && <Loader />}
 
-                {people.length === 0 && (
-                  <p data-cy="noPeopleMessage">
-                    There are no people on the server
-                  </p>
-                )}
+          {error && (
+            <>
+              <ErrorNotification
+                onError={error}
+                onChangeError={setError}
+              />
 
-                <PeopleTable people={people} />
-              </>
-            )}
+              {isEmptyPeopleList && (
+                <p data-cy="noPeopleMessage">
+                  There are no people on the server
+                </p>
+              )}
+            </>
+          )}
+
+          {!isLoading
+            && !error
+            && <PeopleTable people={people} />}
         </div>
       </div>
     </>
