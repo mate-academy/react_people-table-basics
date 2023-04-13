@@ -1,6 +1,6 @@
-import classNames from "classnames";
-import { useParams } from "react-router-dom";
-import { Person } from "../../types";
+import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
+import { Person } from '../../types';
 
 interface Props {
   person: Person;
@@ -42,7 +42,6 @@ export const PersonInfo: React.FC<Props> = ({ person }) => {
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
-
 
       {mother
         ? (

@@ -6,12 +6,12 @@ interface Props {
   text: string;
 }
 
-export const AppNavLink: React.FC<Props> = ({to, text}) => (
+export const AppNavLink: React.FC<Props> = ({ to, text }) => (
   <NavLink
     to={to}
     className={({ isActive }) => classNames(
       'navbar-item',
-      { 'has-background-grey-lighter': isActive }
+      { 'has-background-grey-lighter': isActive },
     )}
   >
     {text}

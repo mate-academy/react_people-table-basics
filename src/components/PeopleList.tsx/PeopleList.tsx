@@ -1,5 +1,5 @@
-import { Person } from "../../types";
-import { PersonInfo } from "../PersonInfo";
+import { Person } from '../../types';
+import { PersonInfo } from '../PersonInfo';
 
 interface Props {
   people: Person[];

@@ -1,4 +1,4 @@
-import { Person } from "../types";
+import { Person } from '../types';
 
 export function fillPersonParentsFields(people: Person[]): Person[] {
   return people.map(person => {
@@ -9,6 +9,6 @@ export function fillPersonParentsFields(people: Person[]): Person[] {
       ...person,
       mother,
       father,
-    }
+    };
   });
-};
+}

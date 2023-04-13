@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
-import { getPeople } from "../../api";
-import { Loader } from "../../components/Loader";
-import { PeopleList } from "../../components/PeopleList.tsx";
-import { fillPersonParentsFields } from "../../helpers/fillPersonParentsFields";
-import { Person } from "../../types";
+import { useEffect, useMemo, useState } from 'react';
+import { getPeople } from '../../api';
+import { Loader } from '../../components/Loader';
+import { PeopleList } from '../../components/PeopleList.tsx';
+import { fillPersonParentsFields } from '../../helpers/fillPersonParentsFields';
+import { Person } from '../../types';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -14,6 +14,7 @@ export const PeoplePage: React.FC = () => {
     try {
       const response = await getPeople();
       const filledPeople = fillPersonParentsFields(response);
+
       setPeople(filledPeople);
     } catch {
       setHasError(true);
