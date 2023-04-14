@@ -48,6 +48,7 @@ export const PeopleTable: FC<Props> = (props) => {
 
           return (
             <tr
+              data-cy="person"
               key={slug}
               className={classNames({
                 'has-background-warning': slug === personId,
