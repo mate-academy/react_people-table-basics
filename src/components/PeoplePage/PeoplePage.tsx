@@ -31,6 +31,8 @@ export const PeoplePage: FC = () => {
     getPeopleFromServer();
   }, []);
 
+  const hasPeople = people.length <= 0;
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -47,7 +49,7 @@ export const PeoplePage: FC = () => {
                 </p>
               )}
 
-              {people.length <= 0 && (
+              {hasPeople && !isLoading && (
                 <p data-cy="noPeopleMessage">
                   There are no people on the server
                 </p>
