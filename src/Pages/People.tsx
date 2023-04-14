@@ -1,13 +1,8 @@
 import { useState, useEffect } from 'react';
-import { getPeople } from '../../api';
-import { Person } from '../../types';
-import { PeopleList } from '../PeopleList/PeopleList';
-import { Loader } from '../Loader';
-
-// type Props = {
-//   people: Person[];
-//   personSlug?: string;
-// };
+import { getPeople } from '../api';
+import { Person } from '../types';
+import { PeopleList } from '../components/PeopleList/PeopleList';
+import { Loader } from '../components/Loader';
 
 export const PeopleTable: React.FC = () => {
   const [peopleList, setPeopleList] = useState<Person[]>([]);
@@ -16,8 +11,6 @@ export const PeopleTable: React.FC = () => {
 
   const fetchPeople = async () => {
     try {
-      // setIsLoading(true);
-
       const people = await getPeople();
 
       setPeopleList(people);
@@ -74,29 +67,35 @@ export const PeopleTable: React.FC = () => {
           <h1 className="title">People Page</h1>
           <div className="block">
             <div className="box table-container">
-              {/* <Loader />
-
-          <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
-          </p> */}
-
               <table
                 data-cy="peopleTable"
                 className="table is-striped is-hoverable is-narrow is-fullwidth"
               >
                 <thead>
                   <tr>
-                    <th>Name</th>
+                    <th>
+                      Name
+                    </th>
 
-                    <th>Sex</th>
+                    <th>
+                      Sex
+                    </th>
 
-                    <th>Born</th>
+                    <th>
+                      Born
+                    </th>
 
-                    <th>Died</th>
+                    <th>
+                      Died
+                    </th>
 
-                    <th>Mother</th>
+                    <th>
+                      Mother
+                    </th>
 
-                    <th>Father</th>
+                    <th>
+                      Father
+                    </th>
                   </tr>
                 </thead>
 
