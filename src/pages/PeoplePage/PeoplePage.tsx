@@ -5,8 +5,6 @@ import { Loader } from '../../components/Loader';
 import { Person } from '../../types';
 import { PeopleTable } from '../../components/PeopleTable';
 
-
-
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
