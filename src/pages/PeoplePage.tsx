@@ -6,12 +6,11 @@ import { Person } from '../types';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [hasLoadingError, setHasError] = useState(false);
   const [hasDataError, setHasDataError] = useState(false);
 
   const loadPeople = useCallback(async () => {
-    setIsLoading(true);
     try {
       const loadedPeople = await getPeople();
 
