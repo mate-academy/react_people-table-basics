@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../../types';
-import { LinkType } from '../../types/Links';
+import { PageRoutes } from '../../types/PageRoutes';
 import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
@@ -37,9 +37,9 @@ export const PeopleList: React.FC<Props> = ({ people, selectedSlug }) => {
           motherName,
           slug,
         }: Person) => {
-          const hasFindMother = people
+          const mother = people
             .find(person => person.name === motherName);
-          const hasFindFather = people
+          const father = people
             .find(person => person.name === fatherName);
 
           return (
@@ -52,7 +52,7 @@ export const PeopleList: React.FC<Props> = ({ people, selectedSlug }) => {
             >
               <td>
                 <Link
-                  to={`${LinkType.PeoplePage}/${slug}`}
+                  to={`${PageRoutes.PeoplePage}/${slug}`}
                   className={classNames(
                     { 'has-text-danger': sex === 'f' },
                   )}
@@ -66,16 +66,16 @@ export const PeopleList: React.FC<Props> = ({ people, selectedSlug }) => {
               <td>{died}</td>
 
               <td>
-                { hasFindMother ? (
-                  <PersonLink person={hasFindFather!} />
+                { mother ? (
+                  <PersonLink person={father!} />
                 ) : (
                   motherName || '-'
                 )}
               </td>
 
               <td>
-                { hasFindFather ? (
-                  <PersonLink person={hasFindFather} />
+                { father ? (
+                  <PersonLink person={father} />
                 ) : (
                   fatherName || '-'
                 )}

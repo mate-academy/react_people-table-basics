@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
-import { LinkType } from '../../types/Links';
+import { PageRoutes } from '../../types/PageRoutes';
 
 export const Navigation = () => {
   return (
@@ -19,7 +19,7 @@ export const Navigation = () => {
                 'has-background-grey-lighter': isActive,
               },
             )}
-            to={LinkType.HomePage}
+            to={PageRoutes.HomePage}
           >
             Home
           </NavLink>
@@ -31,7 +31,7 @@ export const Navigation = () => {
                 'has-background-grey-lighter': isActive,
               },
             )}
-            to={LinkType.PeoplePage}
+            to={PageRoutes.PeoplePage}
           >
             People
           </NavLink>

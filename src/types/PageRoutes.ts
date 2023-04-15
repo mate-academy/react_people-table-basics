@@ -1,4 +1,4 @@
-export enum LinkType {
+export enum PageRoutes {
   HomePage = '/',
   PeoplePage = '/people',
   ErrorPage = '*',

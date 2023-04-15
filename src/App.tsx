@@ -6,7 +6,7 @@ import { Navigation } from './components/Navigation/Navigation';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { HomePage } from './components/HomePage/HomePage';
 import { NotFoundPage } from './components/Errors/NotFoundPage';
-import { LinkType } from './types/Links';
+import { PageRoutes } from './types/PageRoutes';
 
 export const App = () => {
   return (
@@ -16,22 +16,22 @@ export const App = () => {
       <main className="section">
         <div className="container">
           <Routes>
-            <Route path={LinkType.HomePage} element={<HomePage />} />
+            <Route path={PageRoutes.HomePage} element={<HomePage />} />
 
             <Route
               path="home"
               element={
-                <Navigate to={LinkType.HomePage} replace />
+                <Navigate to={PageRoutes.HomePage} replace />
               }
             />
 
-            <Route path={LinkType.PeoplePage}>
+            <Route path={PageRoutes.PeoplePage}>
               <Route index element={<PeoplePage />} />
 
               <Route path=":slug" element={<PeoplePage />} />
             </Route>
 
-            <Route path={LinkType.ErrorPage} element={<NotFoundPage />} />
+            <Route path={PageRoutes.ErrorPage} element={<NotFoundPage />} />
           </Routes>
         </div>
       </main>

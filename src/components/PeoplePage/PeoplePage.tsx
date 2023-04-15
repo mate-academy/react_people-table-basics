@@ -10,6 +10,8 @@ export const PeoplePage = () => {
   const [isLoader, setIsLoader] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  const { slug = '' } = useParams();
+
   const fetchPeople = useCallback(async () => {
     try {
       setIsLoader(true);
@@ -27,8 +29,6 @@ export const PeoplePage = () => {
     fetchPeople();
   }, []);
 
-  const { slug = '' } = useParams();
-
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -44,7 +44,7 @@ export const PeoplePage = () => {
                   </p>
                 )}
 
-                {people.length === 0 && (
+                {!people.length && (
                   <p data-cy="noPeopleMessage">
                     There are no people on the server
                   </p>
@@ -52,12 +52,11 @@ export const PeoplePage = () => {
               </>
             )}
 
-          {(!isError && people.length !== 0) && (
+          {(!isError && !!people.length) && (
             <PeopleList people={people} selectedSlug={slug} />
           )}
         </div>
       </div>
     </>
-
   );
 };
