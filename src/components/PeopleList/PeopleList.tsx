@@ -67,7 +67,7 @@ export const PeopleList: React.FC<Props> = ({ people, selectedSlug }) => {
 
               <td>
                 { mother ? (
-                  <PersonLink person={father!} />
+                  <PersonLink person={mother} />
                 ) : (
                   motherName || '-'
                 )}

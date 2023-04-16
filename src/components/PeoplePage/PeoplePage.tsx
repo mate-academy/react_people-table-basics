@@ -7,7 +7,7 @@ import { PeopleList } from '../PeopleList/PeopleList';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoader, setIsLoader] = useState(false);
+  const [isLoading, setIsLoader] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const { slug = '' } = useParams();
@@ -34,7 +34,7 @@ export const PeoplePage = () => {
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {isLoader
+          {isLoading
             ? <Loader />
             : (
               <>
