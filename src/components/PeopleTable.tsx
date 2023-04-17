@@ -18,12 +18,24 @@ export const PeopleTable: FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          <th>
+            Name
+          </th>
+          <th>
+            Sex
+          </th>
+          <th>
+            Born
+          </th>
+          <th>
+            Died
+          </th>
+          <th>
+            Mother
+          </th>
+          <th>
+            Father
+          </th>
         </tr>
       </thead>
 
@@ -51,9 +63,15 @@ export const PeopleTable: FC<Props> = ({ people }) => {
               <td>
                 <PeopleLink person={person} />
               </td>
-              <td>{sex}</td>
-              <td>{born}</td>
-              <td>{died}</td>
+              <td>
+                {sex}
+              </td>
+              <td>
+                {born}
+              </td>
+              <td>
+                {died}
+              </td>
               <td>
                 {mother ? (
                   <PeopleLink person={mother} />

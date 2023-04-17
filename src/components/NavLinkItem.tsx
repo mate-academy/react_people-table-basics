@@ -2,12 +2,15 @@ import { NavLink } from 'react-router-dom';
 import { FC } from 'react';
 import classNames from 'classnames';
 
-type Props = {
+interface Props {
   to: string;
   title: string;
-};
+}
 
-export const NavLinkItem: FC<Props> = ({ to, title }) => (
+export const NavLinkItem: FC<Props> = ({
+  to,
+  title,
+}) => (
   <NavLink
     to={to}
     className={({ isActive }) => classNames(
