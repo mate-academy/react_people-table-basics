@@ -64,8 +64,7 @@ export const PeoplePage: React.FC = () => {
 
           {isLoading
             ? <Loader />
-            : <PeopleTable people={peopleTable} />
-          }
+            : <PeopleTable people={peopleTable} />}
 
         </div>
       </div>
