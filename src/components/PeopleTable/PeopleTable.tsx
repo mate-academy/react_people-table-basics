@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const { slug: selectedSlug = '' } = useParams();
+  const { slug: selectedSlug } = useParams();
 
   return (
     <table
