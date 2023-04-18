@@ -14,6 +14,7 @@ import { getPeople } from '../api';
 export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const { personSlug = '' } = useParams();
   const havePeople = people.length > 0;
@@ -26,9 +27,7 @@ export const PeoplePage: FC = () => {
 
         setPeople(loadedPeople);
       } catch {
-        <p data-cy="peopleLoadingError" className="has-text-danger">
-          Something went wrong
-        </p>;
+        setHasError(true);
       } finally {
         setIsLoading(false);
       }
@@ -46,7 +45,13 @@ export const PeoplePage: FC = () => {
       <div className="block">
         <div className="box table-container">
 
-          {!havePeople && (
+          {hasError && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )}
+
+          {!havePeople && !isLoading && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>

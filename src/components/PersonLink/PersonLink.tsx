@@ -5,20 +5,18 @@ import { Person } from '../../types';
 
 export type Props = {
   person: Person;
-  selectedPerson: string;
 };
 
-export const PersonLink: FC<Props> = ({ person, selectedPerson }) => {
+export const PersonLink: FC<Props> = ({ person }) => {
   const { name, sex, slug } = person;
   const isFemale = sex === 'f';
-  const isSelected = (human: Person) => human.slug === selectedPerson;
 
   return (
     <Link
       className={classNames(
         { 'has-text-danger': isFemale },
       )}
-      to={isSelected(person) ? '../' : `../${slug}`}
+      to={`../${slug}`}
     >
       {name}
     </Link>

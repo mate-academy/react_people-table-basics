@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import classNames from 'classnames';
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   people: Person[];
@@ -47,7 +47,7 @@ export const PeopleTable: FC<Props> = ({ people, selectedPerson }) => {
               )}
             >
               <td>
-                <PersonLink person={person} selectedPerson={selectedPerson} />
+                <PersonLink person={person} />
               </td>
 
               <td>{sex}</td>
@@ -63,7 +63,6 @@ export const PeopleTable: FC<Props> = ({ people, selectedPerson }) => {
                           woman => woman.name === motherName,
                         ) || person
                       }
-                      selectedPerson={selectedPerson}
                     />
                   )
                   : motherName || '-'}
@@ -75,7 +74,6 @@ export const PeopleTable: FC<Props> = ({ people, selectedPerson }) => {
                       person={
                         people.find(man => man.name === fatherName) || person
                       }
-                      selectedPerson={selectedPerson}
                     />
                   )
                   : fatherName || '-'}
