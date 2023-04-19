@@ -5,7 +5,7 @@ import { PeopleList } from '../../components/PeopleList';
 import { Person } from '../../types/Person';
 
 const getPerson = (people: Person[], name: string) => (
-  people.find((person) => person.name === name)
+  people.find((person) => person.name === name) || null
 );
 
 export const PeoplePage: React.FC = () => {
@@ -21,6 +21,8 @@ export const PeoplePage: React.FC = () => {
       .then((peoplesFromApi) => {
         if (peoplesFromApi.length === 0) {
           setIsEmptyDataError(true);
+
+          return;
         }
 
         const peoplesWithParents = peoplesFromApi.map((person) => {
@@ -56,7 +58,7 @@ export const PeoplePage: React.FC = () => {
 
           {isLoadingError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
+              Something went wrong while list of people loading!!
             </p>
           )}
 
@@ -64,23 +66,7 @@ export const PeoplePage: React.FC = () => {
             ? (
               <Loader />
             ) : (
-              <table
-                data-cy="peopleTable"
-                className="table is-striped is-hoverable is-narrow is-fullwidth"
-              >
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Born</th>
-                    <th>Died</th>
-                    <th>Mother</th>
-                    <th>Father</th>
-                  </tr>
-                </thead>
-
-                <PeopleList people={people} />
-              </table>
+              <PeopleList people={people} />
             )}
         </div>
       </div>
