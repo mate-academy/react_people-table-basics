@@ -9,7 +9,7 @@ type Props = {
 };
 
 type Params = {
-  personSlug: string,
+  personSlug?: string,
 };
 
 export const PersonInfo: FC<Props> = ({
