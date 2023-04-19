@@ -1,4 +1,3 @@
-import React from 'react';
 import { PageNavLink } from '../PageNavLink/PageNavLink';
 
 export const Navigation = () => {
