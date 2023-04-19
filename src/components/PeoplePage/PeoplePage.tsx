@@ -6,6 +6,13 @@ import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { PersonLink } from '../PersonLink';
 
+function getPersonByName(
+  people: Person[],
+  personName: string,
+): Person | undefined {
+  return people.find(({ name }) => name === personName);
+}
+
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,20 +31,21 @@ export const PeoplePage: React.FC = () => {
           motherName,
           fatherName,
         } = person;
-        const modifieedPerson = { ...person };
+        const modifiedPerson = { ...person };
 
         if (!motherName) {
-          modifieedPerson.motherName = '-';
+          modifiedPerson.motherName = '-';
+        } else {
+          modifiedPerson.mother = getPersonByName(result, motherName);
         }
 
         if (!fatherName) {
-          modifieedPerson.fatherName = '-';
+          modifiedPerson.fatherName = '-';
+        } else {
+          modifiedPerson.father = getPersonByName(result, fatherName);
         }
 
-        modifieedPerson.mother = result.find(({ name }) => name === motherName);
-        modifieedPerson.father = result.find(({ name }) => name === fatherName);
-
-        return modifieedPerson;
+        return modifiedPerson;
       });
 
       setPeople(modifiedPeople);
@@ -72,7 +80,7 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {!isLoading && people.length && (
+          {!isLoading && people.length > 0 && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
