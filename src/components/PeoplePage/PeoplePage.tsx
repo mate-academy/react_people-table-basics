@@ -5,6 +5,12 @@ import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
 
+const findParent = (
+  array: Person[], parentName: string | null,
+): Person | undefined => {
+  return array.find(parent => parent.name === parentName);
+};
+
 export const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -18,8 +24,13 @@ export const PeoplePage: React.FC = () => {
     const getPeopleFromServer = async () => {
       try {
         const peopleFromServer = await getPeople();
+        const peopleWithParents = peopleFromServer.map(person => ({
+          ...person,
+          mother: findParent(peopleFromServer, person.motherName),
+          father: findParent(peopleFromServer, person.fatherName),
+        }));
 
-        setPeople(peopleFromServer);
+        setPeople(peopleWithParents);
       } catch {
         setIsError(true);
       } finally {
@@ -46,13 +57,15 @@ export const PeoplePage: React.FC = () => {
                   </p>
                 )}
 
-                {people.length <= 0 && (
+                {people.length <= 0 && !isError && (
                   <p data-cy="noPeopleMessage">
                     There are no people on the server
                   </p>
                 )}
 
-                <PeopleTable people={people} personId={slug} />
+                {!isError && people.length > 0 && (
+                  <PeopleTable people={people} personId={slug} />
+                )}
               </>
             )}
         </div>

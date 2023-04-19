@@ -8,7 +8,7 @@ import {
 
 import { PeoplePage } from './components/PeoplePage';
 import { NavigationBar } from './components/NavigationBar';
-import { Homepage } from './components/HomePage';
+import { HomePage } from './components/HomePage';
 import { NotFoundPage } from './components/NotFoundPage';
 
 export const App: React.FC = () => {
@@ -21,7 +21,7 @@ export const App: React.FC = () => {
           <Routes>
             <Route
               path="/"
-              element={<Homepage />}
+              element={<HomePage />}
             />
             <Route
               path="/home"
