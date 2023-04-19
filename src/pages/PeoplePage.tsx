@@ -54,7 +54,7 @@ export const PeoplePage = () => {
                 </p>
               )}
 
-              {!hasLoadingError && (
+              {!hasLoadingError && people.length > 0 && (
                 <PeopleTable people={people} />
               )}
             </>
