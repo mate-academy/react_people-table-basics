@@ -30,7 +30,7 @@ export const PeopleTable = () => {
     loadPeople();
   }, []);
 
-  const noPeopleOnServer = !people.length && !isLoading;
+  const noPeopleOnServer = !people.length && !isLoading && !isError;
 
   return (
     <div className="block">
