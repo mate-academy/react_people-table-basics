@@ -25,7 +25,6 @@ export const PersonInfo: React.FC<Props> = ({ person }) => {
 
   return (
     <tr
-      key={slug}
       data-cy="person"
       className={classNames(
         { 'has-background-warning': isSelected },

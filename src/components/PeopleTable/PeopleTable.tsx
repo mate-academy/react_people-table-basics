@@ -27,7 +27,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => (
       {people.length
         ? (
           people.map(person => (
-            <PersonInfo person={person} />
+            <PersonInfo key={person.slug} person={person} />
           ))
         )
         : (
