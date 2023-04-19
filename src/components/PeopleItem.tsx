@@ -12,17 +12,17 @@ export const PeopleItem: React.FC<{
   }
     = person;
 
-  const LinkParrents = (selectedParrents: string | null) => {
-    const findedParrents = selectedParrents && peopleFromServer.find(
+  const linkParents = (selectedParrents: string | null) => {
+    const findedParents = selectedParrents && peopleFromServer.find(
       (people) => people.name === selectedParrents,
     );
 
-    if (findedParrents) {
+    if (findedParents) {
       return (
         <Link
-          to={`/people/${findedParrents.slug}`}
+          to={`/people/${findedParents.slug}`}
           className={classNames({
-            'has-text-danger': findedParrents.sex === 'f',
+            'has-text-danger': findedParents.sex === 'f',
           })}
         >
           {selectedParrents}
@@ -54,8 +54,8 @@ export const PeopleItem: React.FC<{
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
-      <td>{motherName === null ? ' - ' : LinkParrents(motherName)}</td>
-      <td>{fatherName === null ? ' - ' : LinkParrents(fatherName)}</td>
+      <td>{linkParents(motherName)}</td>
+      <td>{linkParents(fatherName)}</td>
     </tr>
   );
 };

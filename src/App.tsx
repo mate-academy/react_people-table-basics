@@ -4,14 +4,13 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { People } from './pages/People';
 import { Person } from './types';
 import { getPeople } from './api';
-import { Loader } from './components/Loader';
 import { PageNavLink } from './components/PageNavLink';
 import { NotFound } from './pages/NotFound';
 import { Home } from './pages/Home';
 
 export const App = () => {
   const [peopleFromServer, setPeopleFromServer] = useState<Person[]>();
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   useEffect(() => {
     getPeople()
@@ -49,16 +48,12 @@ export const App = () => {
           <Route path="/people">
             <Route
               index
-              element={
-                peopleFromServer ? (
-                  <People
-                    peopleFromServer={peopleFromServer}
-                    errorMessage={errorMessage}
-                  />
-                ) : (
-                  <Loader />
-                )
-              }
+              element={(
+                <People
+                  peopleFromServer={peopleFromServer}
+                  errorMessage={errorMessage}
+                />
+              )}
             />
             <Route
               path=":slug"
