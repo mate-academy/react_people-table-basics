@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { Person } from '../../types';
 
 type Props = {
-  person : Person,
+  person: Person,
 };
 
 export const PersonLink: FC<Props> = ({ person }) => {

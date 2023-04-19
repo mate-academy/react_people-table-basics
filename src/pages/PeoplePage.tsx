@@ -3,22 +3,24 @@ import { Loader } from '../components/Loader';
 import { getPeople } from '../api';
 import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types';
+import { getParent } from '../helpers';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasLoadingError, setHasError] = useState(false);
-  const [hasDataError, setHasDataError] = useState(false);
 
   const loadPeople = useCallback(async () => {
     try {
       const loadedPeople = await getPeople();
 
-      if (!loadedPeople.length) {
-        setHasDataError(true);
-      }
+      const peopleWithParents = loadedPeople.map(person => ({
+        ...person,
+        mother: getParent(loadedPeople, person.motherName),
+        father: getParent(loadedPeople, person.fatherName),
+      }));
 
-      setPeople(loadedPeople);
+      setPeople(peopleWithParents);
     } catch (error) {
       setHasError(true);
     } finally {
@@ -42,7 +44,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {hasDataError && (
+          {!isLoading && people.length === 0 && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
@@ -51,7 +53,6 @@ export const PeoplePage = () => {
           )}
 
           {!hasLoadingError
-          && !hasDataError
           && !isLoading && (
             <PeopleTable people={people} />
           )}
