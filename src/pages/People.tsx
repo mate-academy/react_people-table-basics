@@ -18,7 +18,7 @@ export const People: React.FC<{
             {errorMessage && (
               <p
                 data-cy={
-                  errorMessage.length === 33
+                  errorMessage === 'There are no people on the server'
                     ? 'noPeopleMessage'
                     : 'peopleLoadingError'
                 }

@@ -8,7 +8,13 @@ export const PeopleItem: React.FC<{
   peopleFromServer: Person[] | undefined;
 }> = ({ person, selectedTodoId, peopleFromServer = [] }) => {
   const {
-    name, sex, born, died, fatherName, motherName, slug,
+    name,
+    sex,
+    born,
+    died,
+    fatherName,
+    motherName,
+    slug,
   }
     = person;
 
