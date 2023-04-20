@@ -9,18 +9,21 @@ import { NotFound } from './pages/NotFound';
 import { Home } from './pages/Home';
 
 export const App = () => {
-  const [peopleFromServer, setPeopleFromServer] = useState<Person[]>();
+  const [peopleFromServer, setPeopleFromServer] = useState<Person[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getPeople()
       .then((persons) => {
+        setIsLoading(true);
         setPeopleFromServer(persons);
-        if (peopleFromServer?.length === 0) {
+        if (!peopleFromServer.length) {
           setErrorMessage('There are no people on the server');
         }
       })
-      .catch(() => setErrorMessage('Something went wrong'));
+      .catch(() => setErrorMessage('Something went wrong'))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -50,6 +53,7 @@ export const App = () => {
               index
               element={(
                 <People
+                  isLoading={isLoading}
                   peopleFromServer={peopleFromServer}
                   errorMessage={errorMessage}
                 />
@@ -59,6 +63,7 @@ export const App = () => {
               path=":slug"
               element={(
                 <People
+                  isLoading={isLoading}
                   peopleFromServer={peopleFromServer}
                   errorMessage={errorMessage}
                 />

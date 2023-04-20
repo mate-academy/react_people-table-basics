@@ -4,64 +4,63 @@ import { Person } from '../types';
 import { Loader } from '../components/Loader';
 
 export const People: React.FC<{
+  isLoading: boolean;
   peopleFromServer: Person[] | undefined;
   errorMessage: string | undefined;
-}> = ({ peopleFromServer, errorMessage }) => {
+}> = ({ isLoading, peopleFromServer, errorMessage }) => {
   const { slug = '' } = useParams();
 
-  if (peopleFromServer) {
-    return (
-      <div className="container">
-        <h1 className="title">People Page</h1>
-        <div className="block">
-          <div className="box table-container">
-            {errorMessage && (
-              <p
-                data-cy={
-                  peopleFromServer.length === 0
-                    ? 'noPeopleMessage'
-                    : 'peopleLoadingError'
-                }
-                className="has-text-danger"
-              >
-                {errorMessage}
-              </p>
-            )}
-
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <div className="container">
+      <h1 className="title">People Page</h1>
+      <div className="block">
+        <div className="box table-container">
+          {errorMessage && (
+            <p
+              data-cy={
+                peopleFromServer?.length === 0
+                  ? 'noPeopleMessage'
+                  : 'peopleLoadingError'
+              }
+              className="has-text-danger"
             >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
+              {errorMessage}
+            </p>
+          )}
 
-              <tbody>
-                {peopleFromServer
-                  && peopleFromServer.map((person) => {
-                    return (
-                      <PeopleItem
-                        person={person}
-                        key={person.name}
-                        selectedTodoId={slug}
-                        peopleFromServer={peopleFromServer}
-                      />
-                    );
-                  })}
-              </tbody>
-            </table>
-          </div>
+          <table
+            data-cy="peopleTable"
+            className="table is-striped is-hoverable is-narrow is-fullwidth"
+          >
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Sex</th>
+                <th>Born</th>
+                <th>Died</th>
+                <th>Mother</th>
+                <th>Father</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {peopleFromServer
+                && peopleFromServer.map((person) => {
+                  return (
+                    <PeopleItem
+                      person={person}
+                      key={person.name}
+                      selectedTodoId={slug}
+                      peopleFromServer={peopleFromServer}
+                    />
+                  );
+                })}
+            </tbody>
+          </table>
         </div>
       </div>
-    );
-  }
-
-  return <Loader />;
+    </div>
+  );
 };
