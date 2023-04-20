@@ -39,15 +39,13 @@ export const PeopleTable: FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map((person) => {
-          return (
-            <PeopleInfo
-              key={person.slug}
-              person={person}
-              selectedPersonSlug={selectedPersonSlug}
-            />
-          );
-        })}
+        {people.map((person) => (
+          <PeopleInfo
+            key={person.slug}
+            person={person}
+            selectedPersonSlug={selectedPersonSlug}
+          />
+        ))}
       </tbody>
     </table>
   );

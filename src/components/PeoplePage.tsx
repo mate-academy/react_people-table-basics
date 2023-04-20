@@ -5,7 +5,7 @@ import { Loader } from './Loader';
 import { PeopleTable } from './PeopleTable';
 
 const findPerson = (people: Person[], name: string) => {
-  return people.find((person) => person.name === name);
+  return people.find((person) => person.name === name) || undefined;
 };
 
 export const PeoplePage = () => {
@@ -72,9 +72,11 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {isLoading ? (
+          {isLoading && (
             <Loader />
-          ) : (
+          )}
+
+          {!hasLoadingError && !hasNoDataError && !isLoading && (
             <PeopleTable people={people} />
           )}
         </div>
