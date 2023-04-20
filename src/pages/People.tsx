@@ -8,6 +8,7 @@ export const People: React.FC<{
   errorMessage: string | undefined;
 }> = ({ peopleFromServer, errorMessage }) => {
   const { slug = '' } = useParams();
+  const errorLength = 33;
 
   if (peopleFromServer) {
     return (
@@ -18,7 +19,7 @@ export const People: React.FC<{
             {errorMessage && (
               <p
                 data-cy={
-                  errorMessage === 'There are no people on the server'
+                  errorMessage.length === errorLength
                     ? 'noPeopleMessage'
                     : 'peopleLoadingError'
                 }
