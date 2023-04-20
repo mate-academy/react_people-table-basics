@@ -12,6 +12,7 @@ export const App = () => {
   const [peopleFromServer, setPeopleFromServer] = useState<Person[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>();
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     getPeople()
@@ -22,7 +23,10 @@ export const App = () => {
           setErrorMessage('There are no people on the server');
         }
       })
-      .catch(() => setErrorMessage('Something went wrong'))
+      .catch(() => {
+        setIsError(true);
+        setErrorMessage('Something went wrong');
+      })
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -53,6 +57,8 @@ export const App = () => {
               index
               element={(
                 <People
+                  isError={isError}
+                  setIsError={setIsError}
                   isLoading={isLoading}
                   peopleFromServer={peopleFromServer}
                   errorMessage={errorMessage}
@@ -63,6 +69,8 @@ export const App = () => {
               path=":slug"
               element={(
                 <People
+                  isError={isError}
+                  setIsError={setIsError}
                   isLoading={isLoading}
                   peopleFromServer={peopleFromServer}
                   errorMessage={errorMessage}

@@ -4,20 +4,28 @@ import { Person } from '../types';
 import { Loader } from '../components/Loader';
 
 export const People: React.FC<{
+  isError: boolean;
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
   peopleFromServer: Person[] | undefined;
   errorMessage: string | undefined;
-}> = ({ isLoading, peopleFromServer, errorMessage }) => {
+}> = ({
+  isError,
+  setIsError,
+  isLoading,
+  peopleFromServer,
+  errorMessage,
+}) => {
   const { slug = '' } = useParams();
 
   return isLoading ? (
-    <Loader />
+    <Loader setIsError={setIsError} isError={isError} />
   ) : (
     <div className="container">
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {errorMessage && (
+          {isError && (
             <p
               data-cy={
                 peopleFromServer?.length === 0
@@ -30,23 +38,24 @@ export const People: React.FC<{
             </p>
           )}
 
-          <table
-            data-cy="peopleTable"
-            className="table is-striped is-hoverable is-narrow is-fullwidth"
-          >
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
-              </tr>
-            </thead>
+          {!isError && (
+            <table
+              data-cy="peopleTable"
+              className="table is-striped is-hoverable is-narrow is-fullwidth"
+            >
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sex</th>
+                  <th>Born</th>
+                  <th>Died</th>
+                  <th>Mother</th>
+                  <th>Father</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              {peopleFromServer
+              <tbody>
+                {peopleFromServer
                 && peopleFromServer.map((person) => {
                   return (
                     <PeopleItem
@@ -57,8 +66,9 @@ export const People: React.FC<{
                     />
                   );
                 })}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </div>
