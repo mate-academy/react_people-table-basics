@@ -16,6 +16,7 @@ export const PeoplePage: React.FC= () => {
   useEffect(() => {
     const getPeopleTableFromServer = async () => {
       try {
+        setIsLoading(true)
         const peopleFromServer = await getPeople();
 
         const visiblePeople = peopleFromServer.map(person => {
@@ -55,11 +56,6 @@ export const PeoplePage: React.FC= () => {
             </p>
           )}
 
-          {!people.length  && (
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
-          )}
     {isLoading ? (
       <Loader />
     ) : (

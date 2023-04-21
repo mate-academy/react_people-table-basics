@@ -1,10 +1,9 @@
-import { Loader } from './components/Loader/Loader/Loader';
 import { HomePage} from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import classNames from 'classnames';
 import './App.scss';
-import { NavLink,Route,Routes,Navigate} from 'react-router-dom';
+import { NavLink,Route,Routes} from 'react-router-dom';
  'react-router-dom';
 
  import React from 'react';
@@ -46,17 +45,12 @@ return (
       <div className="container">
         <Routes>
       <Route path="/" element={<HomePage/>}/>
-      <Route path="people" element={<PeoplePage/>}/>
+      <Route path="people" element={<PeoplePage/>}> 
+            <Route index element={<PeoplePage/>}/>
+          <Route path=':slug' element={<PeoplePage/>}/>
+      </Route>
       <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
-
-            {/* <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
-           
-           <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p> */}
             </div>
             </main>
             </div>
