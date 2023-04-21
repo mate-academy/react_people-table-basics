@@ -5,7 +5,7 @@ import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
 import { PageNotFound } from './pages/PageNotFound';
 
-// import './App.scss';
+import './App.scss';
 
 export const App = () => {
   return (

@@ -19,8 +19,12 @@ type Props = {
   people: Person[];
 };
 
+type Params = {
+  slug?: string;
+};
+
 export const PeopleList: React.FC<Props> = ({ people }) => {
-  const { slug: selectedPersonSlug = '' } = useParams();
+  const { slug: selectedPersonSlug = '' } = useParams<Params>();
 
   return (
     <TableContainer
@@ -75,9 +79,9 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
                     <PersonLink person={mother} />
                   )}
 
-                  {(!mother && motherName) && motherName}
-
-                  {(!mother && !motherName) && '-'}
+                  {(!mother && motherName)
+                    ? motherName
+                    : '-'}
                 </TableCell>
 
                 <TableCell>
@@ -85,9 +89,9 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
                     <PersonLink person={father} />
                   )}
 
-                  {(!father && fatherName) && fatherName}
-
-                  {(!father && !fatherName) && '-'}
+                  {(!father && fatherName)
+                    ? fatherName
+                    : '-'}
                 </TableCell>
               </TableRow>
             );
