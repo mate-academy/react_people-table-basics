@@ -1,3 +1,10 @@
+import {
+  NavLink,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
+import cn from 'classnames';
 import { Loader } from './components/Loader';
 
 import './App.scss';
@@ -12,25 +19,58 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
+          <NavLink
+            className={({ isActive }) => cn(
+              'navbar-item',
+              { 'has-background-grey-lighter': isActive },
+            )}
+            to="/"
+          >
             Home
-          </a>
+          </NavLink>
 
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
+          <NavLink
+            className={({ isActive }) => cn(
+              'navbar-item',
+              { 'has-background-grey-lighter': isActive },
+            )}
+            to="/people"
           >
             People
-          </a>
+          </NavLink>
         </div>
       </div>
     </nav>
 
     <main className="section">
       <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <h1 className="title">Home Page</h1>
+            }
+          />
+
+          <Route
+            path="/people"
+            element={
+              <h1 className="title">People Page</h1>
+            }
+          />
+
+          <Route
+            path="/home"
+            element={<Navigate to="/" replace />}
+          />
+
+          <Route
+            path="*"
+            element={
+              <h1 className="title">Page not found</h1>
+            }
+          />
+        </Routes>
 
         <div className="block">
           <div className="box table-container">
