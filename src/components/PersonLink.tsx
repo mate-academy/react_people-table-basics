@@ -1,4 +1,4 @@
-import { FC, Dispatch, SetStateAction } from 'react';
+import { FC } from 'react';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { Person } from '../types';
@@ -6,13 +6,11 @@ import { Person } from '../types';
 type Props = {
   person: Person,
   isSelected: boolean,
-  setSelectedSlug: Dispatch<SetStateAction<string>>,
 };
 
-export const PersonItem: FC<Props> = ({
+export const PersonLink: FC<Props> = ({
   person,
   isSelected,
-  setSelectedSlug,
 }) => {
   const {
     name,
@@ -34,9 +32,8 @@ export const PersonItem: FC<Props> = ({
       case !!parentLink:
         return (
           <Link
-            to={`#/people/${parentLink?.slug}`}
+            to={`../${parentLink?.slug}`}
             className={cn({ 'has-text-danger': parentLink?.sex === 'f' })}
-            onClick={() => setSelectedSlug(`${parentLink?.slug}`)}
           >
             {parentLink?.name}
           </Link>
@@ -57,9 +54,8 @@ export const PersonItem: FC<Props> = ({
     >
       <td>
         <Link
-          to={`#/people/${slug}`}
+          to={`../${slug}`}
           className={cn({ 'has-text-danger': sex === 'f' })}
-          onClick={() => setSelectedSlug(slug)}
         >
           {name}
         </Link>

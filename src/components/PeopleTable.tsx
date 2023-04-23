@@ -1,13 +1,14 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import { useParams } from 'react-router-dom';
 import { Person } from '../types';
-import { PersonItem } from './PersonLink';
+import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[],
 };
 
 export const PeopleTable: FC<Props> = ({ people }) => {
-  const [selectedSlug, setSelectedSlug] = useState('');
+  const { slug } = useParams();
 
   return (
     <table
@@ -27,11 +28,10 @@ export const PeopleTable: FC<Props> = ({ people }) => {
 
       <tbody>
         {people.map(person => (
-          <PersonItem
+          <PersonLink
             key={person.slug}
             person={person}
-            isSelected={selectedSlug === person.slug}
-            setSelectedSlug={setSelectedSlug}
+            isSelected={slug === person.slug}
           />
         ))}
       </tbody>
