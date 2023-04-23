@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import classNames from 'classnames';
 import { PersonLink } from '../PersonLink/PersonLink';
-import { Parent } from '../Parent/Parent';
+import { ParentLink } from '../ParentLink/ParentLink';
 import { PersonInfoProps } from '../PeoplePage.types';
 
 export const PersonInfo: FC<PersonInfoProps> = ({
-  person, selectedPersonSlug, people,
+  person, selectedPersonSlug,
 }) => {
   const {
     sex,
@@ -14,6 +14,8 @@ export const PersonInfo: FC<PersonInfoProps> = ({
     slug,
     fatherName,
     motherName,
+    mother,
+    father,
   } = person;
 
   return (
@@ -33,15 +35,15 @@ export const PersonInfo: FC<PersonInfoProps> = ({
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        <Parent
+        <ParentLink
           parentName={motherName}
-          people={people}
+          parent={mother}
         />
       </td>
       <td>
-        <Parent
+        <ParentLink
           parentName={fatherName}
-          people={people}
+          parent={father}
         />
       </td>
     </tr>

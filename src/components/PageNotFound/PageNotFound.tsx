@@ -1,7 +1,5 @@
 import { FC } from 'react';
 
-export const PageNotFound: FC = () => {
-  return (
-    <h1 className="title">Page not found</h1>
-  );
-};
+export const PageNotFound: FC = () => (
+  <h1 className="title">PageNotFound</h1>
+);

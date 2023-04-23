@@ -15,6 +15,5 @@ export interface PersonLinkProps {
 
 export interface PersonInfoProps {
   person: Person,
-  people: Person[],
   selectedPersonSlug: string,
 }

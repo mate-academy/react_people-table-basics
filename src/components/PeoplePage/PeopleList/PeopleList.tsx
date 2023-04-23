@@ -28,7 +28,6 @@ export const PeopleList: FC<PeopleListProps> = ({
             <PersonInfo
               key={person.slug}
               person={person}
-              people={people}
               selectedPersonSlug={selectedPersonSlug}
             />
           );
