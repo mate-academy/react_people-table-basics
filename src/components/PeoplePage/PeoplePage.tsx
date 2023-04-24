@@ -12,8 +12,8 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isDataLoading, setIsDataLoading] = useState(false);
 
-  const findPerson = (personName: string | null) => {
-    return people.find(person => person.name === personName);
+  const findPerson = (personName: string | null, peopleData: Person[]) => {
+    return peopleData.find(person => person.name === personName);
   };
 
   const match = useMatch('/people/:slug');
@@ -26,8 +26,8 @@ export const PeoplePage = () => {
           ...pers,
           motherName: pers.motherName || '-',
           fatherName: pers.fatherName || '-',
-          mother: findPerson(pers.motherName),
-          father: findPerson(pers.fatherName),
+          mother: findPerson(pers.motherName, res),
+          father: findPerson(pers.fatherName, res),
         })));
 
         if (!res) {
