@@ -1,1 +1,3 @@
-export * from './Person';
+export * from './PersonType';
+export * from './ErrorType';
+export * from './Path';
