@@ -14,6 +14,7 @@ export const PeoplePage: FC = () => {
     setIsLoading(true);
 
     try {
+      setError(ErrorType.None);
       const getPeopleList = await getPeople();
 
       setPeople(getPeopleList);
@@ -41,7 +42,7 @@ export const PeoplePage: FC = () => {
 
           {error && (
             <ErrorNotification
-              onError={error}
+              errorMessage={error}
               onChangeError={setError}
             />
           )}
