@@ -6,11 +6,14 @@ type Props = {
   person: Person,
   motherLink: Person | null,
   fatherLink: Person | null,
-  selectedSlug: string,
+  personSlug: string,
 };
 
 export const PersonLink: React.FC<Props> = ({
-  person, motherLink, fatherLink, selectedSlug,
+  person,
+  motherLink,
+  fatherLink,
+  personSlug,
 }) => {
   const {
     name,
@@ -22,11 +25,14 @@ export const PersonLink: React.FC<Props> = ({
     slug,
   } = person;
 
+  // console.log(slug);
+
   return (
     <tr
+      key={slug}
       data-cy="person"
       className={classNames({
-        'has-background-warning': person.slug === selectedSlug,
+        'has-background-warning': personSlug === slug,
       })}
     >
       <td>
@@ -45,6 +51,7 @@ export const PersonLink: React.FC<Props> = ({
         {motherLink ? (
           <NavLink
             to={`/people/${motherLink.slug}`}
+            className="has-text-danger"
           >
             {motherLink.name}
           </NavLink>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable/PeopleTable';
@@ -9,16 +9,14 @@ export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const { slug = '' } = useParams();
+  const { personSlug = '' } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
     getPeople()
       .then(result => setPeople(result))
       .catch(() => setIsError(true))
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -29,7 +27,7 @@ export const PeoplePage: React.FC = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {isError && !isLoading
+          {isError && !isLoading && !people.length
             && (
               <p data-cy="peopleLoadingError" className="has-text-danger">
                 Something went wrong
@@ -42,10 +40,13 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          <PeopleTable
-            people={people}
-            slug={slug}
-          />
+          {people.length > 0 && !isLoading && !isError
+            && (
+              <PeopleTable
+                people={people}
+                personSlug={personSlug}
+              />
+            )}
         </div>
       </div>
     </>

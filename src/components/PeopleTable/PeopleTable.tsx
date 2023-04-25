@@ -3,10 +3,12 @@ import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   people: Person[],
-  slug: string,
+  personSlug: string,
 };
 
-export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
+export const PeopleTable: React.FC<Props> = ({ people, personSlug }) => {
+  // console.log(slug);
+
   return (
     <>
       <table
@@ -39,7 +41,7 @@ export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
                 person={person}
                 motherLink={motherLink}
                 fatherLink={fatherLink}
-                selectedSlug={slug}
+                personSlug={personSlug}
               />
             );
           })}
