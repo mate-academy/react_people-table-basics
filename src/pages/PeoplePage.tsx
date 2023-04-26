@@ -1,22 +1,22 @@
-import { PeopleTable } from "../components/PeopleTable";
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types/Person';
 import { getPeople } from '../api';
-import { Loader } from "../components/Loader/Loader/Loader";
+import { Loader } from '../components/Loader/Loader/Loader';
 
-export const PeoplePage: React.FC= () => {
+export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setError] = useState(false);
 
-  const findParent = (people: Person[], name: string) => {
-    return people.find(person => person.name === name);
+  const findParent = (allPeople: Person[], name: string) => {
+    return allPeople.find(person => person.name === name);
   };
-  
+
   useEffect(() => {
     const getPeopleTableFromServer = async () => {
       try {
-        setIsLoading(true)
+        setIsLoading(true);
         const peopleFromServer = await getPeople();
 
         const visiblePeople = peopleFromServer.map(person => {
@@ -47,23 +47,23 @@ export const PeoplePage: React.FC= () => {
 
   return (
     <div>
-    <div className="block">
-    <div className="box table-container">
-      
-    {isError && (
+      <div className="block">
+        <div className="box table-container">
+
+          {isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-    {isLoading ? (
-      <Loader />
-    ) : (
-        <PeopleTable people={people}/>
-    )}
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <PeopleTable people={people} />
+          )}
+        </div>
+      </div>
     </div>
-    </div>
-    </div>
-  
-);
-}
+
+  );
+};
