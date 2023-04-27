@@ -21,8 +21,12 @@ export const PeoplePage: React.FC = () => {
     getPeople()
       .then(data => {
         const personWithParents = data.map(person => {
-          const mother = data.find(mom => mom.name === person.motherName);
-          const father = data.find(dad => dad.name === person.fatherName);
+          const mother = data.find((motherFound) => {
+            return motherFound.name === person.motherName;
+          });
+          const father = data.find((fatherFound) => {
+            return fatherFound.name === person.fatherName;
+          });
 
           return {
             ...person,

@@ -7,7 +7,7 @@ type Props = {
   text: string,
 };
 
-export const PageNavLink: React.FC<Props> = ({ to, text }) => (
+const PageNavLink: React.FC<Props> = ({ to, text }) => (
   <NavLink
     to={to}
     className={({ isActive }) => classNames(
@@ -18,3 +18,5 @@ export const PageNavLink: React.FC<Props> = ({ to, text }) => (
     {text}
   </NavLink>
 );
+
+export default PageNavLink;
