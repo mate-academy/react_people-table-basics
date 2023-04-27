@@ -7,12 +7,12 @@ import { PeopleTable } from '../components/PeopleTable';
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isInizialized, setIsInizialized] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const loadPeople = async () => {
     setIsLoading(true);
-    setIsInizialized(false);
+    setIsInitialized(false);
     setIsError(false);
 
     try {
@@ -35,7 +35,7 @@ export const PeoplePage: React.FC = () => {
       });
 
       setPeople(peopleWithParent);
-      setIsInizialized(true);
+      setIsInitialized(true);
     } catch {
       setIsError(true);
     } finally {
@@ -47,7 +47,7 @@ export const PeoplePage: React.FC = () => {
     loadPeople();
   }, []);
 
-  const isNoPeopleOnServer = !people.length && isInizialized;
+  const isNoPeopleOnServer = !people.length && isInitialized;
 
   return (
     <>

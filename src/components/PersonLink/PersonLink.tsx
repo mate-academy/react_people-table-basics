@@ -8,18 +8,14 @@ type Props = {
 };
 
 export const PersonLink: FC<Props> = ({
-  person,
-}) => {
-  const { slug, sex, name } = person;
-
-  return (
-    <Link
-      to={slug}
-      className={classNames(
-        { 'has-text-danger': sex === 'f' },
-      )}
-    >
-      {name}
-    </Link>
-  );
-};
+  person: { slug, sex, name },
+}) => (
+  <Link
+    to={slug}
+    className={classNames(
+      { 'has-text-danger': sex === 'f' },
+    )}
+  >
+    {name}
+  </Link>
+);
