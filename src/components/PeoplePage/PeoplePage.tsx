@@ -1,32 +1,55 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader } from '../Loader';
-import { PersonList } from '../PersonList/PersonList';
+import { PersonList } from '../PersonList';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 
-export const Block: React.FC = () => {
+export const PeoplePage: React.FC = () => {
   const [allPeople, setPeople] = useState<Person[]>([]);
   const [errorMessage, setErrorMessage] = useState('');
-  const [wasRequest, setWasRequest] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
   const { personSlug } = useParams();
 
   const loadPeople = async () => {
     try {
       const people = await getPeople();
 
-      setPeople(people);
-      setWasRequest(true);
+      const addedLinkToPeople = people.map(person => {
+        const copiedPerson = { ...person };
+        const foundFather = people.find(human => (
+          human.name === person.fatherName
+        ));
+        const foundMother = people.find(human => (
+          human.name === person.motherName
+        ));
+
+        if (foundFather) {
+          copiedPerson.father = foundFather;
+        }
+
+        if (foundMother) {
+          copiedPerson.mother = foundMother;
+        }
+
+        return copiedPerson;
+      });
+
+      setPeople(addedLinkToPeople);
     } catch {
       setErrorMessage('Unable to download people from server');
+    } finally {
+      setIsLoaded(false);
     }
   };
+
+  const noPeopleOnServer = !allPeople.length && !isLoaded && !errorMessage;
 
   useEffect(() => {
     loadPeople();
   }, []);
 
-  if (!allPeople.length && wasRequest && !errorMessage) {
+  if (noPeopleOnServer) {
     return (
       <p
         data-cy="noPeopleMessage"
@@ -57,7 +80,7 @@ export const Block: React.FC = () => {
 
   return (
     <div className="block">
-      {!allPeople.length && !errorMessage && !wasRequest ? (
+      {isLoaded ? (
         <Loader />
       ) : (
         <div className="box table-container">

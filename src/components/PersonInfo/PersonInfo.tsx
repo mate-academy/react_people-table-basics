@@ -6,15 +6,11 @@ import { Person } from '../../types';
 type Props = {
   person: Person;
   isSelected: boolean;
-  father: Person | undefined;
-  mother: Person | undefined;
 };
 
 export const PersonInfo: React.FC<Props> = ({
   person,
   isSelected,
-  mother,
-  father,
 }) => {
   const {
     slug,
@@ -24,6 +20,8 @@ export const PersonInfo: React.FC<Props> = ({
     motherName,
     born,
     died,
+    mother,
+    father,
   } = person;
 
   return (
