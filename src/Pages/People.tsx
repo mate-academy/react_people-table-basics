@@ -4,6 +4,7 @@ import { Person } from '../types';
 import { PeopleList } from '../components/PeopleList/PeopleList';
 import { Loader } from '../components/Loader';
 import { TableHeaders } from '../utils/TableHeaders';
+import { renderMessage } from '../utils/RenderMessage';
 
 export const PeopleTable: React.FC = () => {
   const [peopleList, setPeopleList] = useState<Person[]>([]);
@@ -14,7 +15,28 @@ export const PeopleTable: React.FC = () => {
     try {
       const people = await getPeople();
 
-      setPeopleList(people);
+      const linkedPeople = people.map(person => {
+        const copyPerson = { ...person };
+
+        const mother = people.find(
+          (human) => human.name === person.motherName,
+        );
+        const father = people.find(
+          (human) => human.name === person.fatherName,
+        );
+
+        if (mother) {
+          copyPerson.mother = mother;
+        }
+
+        if (father) {
+          copyPerson.father = father;
+        }
+
+        return copyPerson;
+      });
+
+      setPeopleList(linkedPeople);
     } catch {
       setErrorMessage('No internet connection');
     } finally {
@@ -27,29 +49,11 @@ export const PeopleTable: React.FC = () => {
   }, []);
 
   if (errorMessage) {
-    return (
-      <>
-        <h1 className="title">People Page</h1>
-        <div className="block">
-          <div className="box table-container">
-            <p data-cy="peopleLoadingError">{errorMessage}</p>
-          </div>
-        </div>
-      </>
-    );
+    return renderMessage(errorMessage);
   }
 
   if (peopleList.length === 0 && !isLoading) {
-    return (
-      <>
-        <h1 className="title">People Page</h1>
-        <div className="block">
-          <div className="box table-container">
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-          </div>
-        </div>
-      </>
-    );
+    return renderMessage('There are no people on the server');
   }
 
   return (

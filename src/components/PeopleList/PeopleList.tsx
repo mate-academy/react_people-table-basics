@@ -12,7 +12,6 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
         return (
           <PersonInfo
             person={person}
-            people={people}
             key={person.slug}
           />
         );
