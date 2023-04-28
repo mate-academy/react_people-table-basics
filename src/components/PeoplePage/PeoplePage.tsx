@@ -9,7 +9,7 @@ export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const { slug = '' } = useParams();
+  const { slug = '' } = useParams<string>();
 
   useEffect(() => {
     setIsLoading(true);
@@ -29,6 +29,21 @@ export const PeoplePage: React.FC = () => {
     getPeopleFromServer();
   }, []);
 
+  const findParrent = (parrentName: string | null) => {
+    return people.find(person => person.name === parrentName) || null;
+  };
+
+  const peopleWithParrents = people.map(person => {
+    const personCopy = {
+      ...person,
+    };
+
+    personCopy.father = findParrent(person.fatherName);
+    personCopy.mother = findParrent(person.motherName);
+
+    return personCopy;
+  });
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -40,7 +55,7 @@ export const PeoplePage: React.FC = () => {
               <Loader />
             ) : (
               <PeopleTable
-                people={people}
+                people={peopleWithParrents}
                 personId={slug}
               />
             )}

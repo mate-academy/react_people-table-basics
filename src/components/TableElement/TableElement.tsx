@@ -4,16 +4,16 @@ import { PersonLink } from '../PersonLink';
 import { Person } from '../../types';
 
 type Props = {
-  name: string
-  sex: string
-  born: number
-  died: number
-  mother: Person | null
-  motherName: string | null
-  father: Person | null
-  fatherName: string | null
-  slug: string
-  personId: string | number
+  name: string,
+  sex: string,
+  born: number,
+  died: number,
+  mother: Person | null,
+  motherName: string | null,
+  father: Person | null,
+  fatherName: string | null,
+  slug: string,
+  personId: string | number,
 };
 
 export const TableElement: React.FC<Props> = (

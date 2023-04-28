@@ -7,16 +7,14 @@ type Props = {
   title: string
 };
 
-export const NavigationLink: React.FC<Props> = ({ link, title }) => {
-  return (
-    <NavLink
-      to={link}
-      className={({ isActive }) => classNames(
-        'navbar-item',
-        { 'has-background-grey-lighter': isActive },
-      )}
-    >
-      {title}
-    </NavLink>
-  );
-};
+export const NavigationLink: React.FC<Props> = ({ link, title }) => (
+  <NavLink
+    to={link}
+    className={({ isActive }) => classNames(
+      'navbar-item',
+      { 'has-background-grey-lighter': isActive },
+    )}
+  >
+    {title}
+  </NavLink>
+);
