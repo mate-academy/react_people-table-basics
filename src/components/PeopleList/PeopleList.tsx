@@ -9,14 +9,10 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
   return (
     <>
       {people.map((person) => {
-        const mother = people.find(human => human.name === person.motherName);
-        const father = people.find(human => human.name === person.fatherName);
-
         return (
           <PersonInfo
             person={person}
-            mother={mother}
-            father={father}
+            people={people}
             key={person.slug}
           />
         );

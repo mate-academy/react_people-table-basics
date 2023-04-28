@@ -4,11 +4,10 @@ import { Person } from '../../types';
 
 type Props = {
   person: Person;
-  mother?: Person;
-  father?: Person;
+  people: Person[],
 };
 
-export const PersonInfo: React.FC<Props> = ({ person, mother, father }) => {
+export const PersonInfo: React.FC<Props> = ({ person, people }) => {
   const {
     name,
     sex,
@@ -20,6 +19,13 @@ export const PersonInfo: React.FC<Props> = ({ person, mother, father }) => {
   } = person;
 
   const { personSlug } = useParams();
+
+  const mother = people.find(
+    (human) => human.name === person.motherName,
+  );
+  const father = people.find(
+    (human) => human.name === person.fatherName,
+  );
 
   const isSelected = slug === personSlug;
 
@@ -54,20 +60,15 @@ export const PersonInfo: React.FC<Props> = ({ person, mother, father }) => {
         {died}
       </td>
 
-      {mother
-        ? (
-          <td>
-            <Link
-              to={`../${mother.slug}`}
-              className="has-text-danger"
-            >
-              {mother.name}
-            </Link>
-          </td>
-        )
-        : (
-          <td>{motherName || '-'}</td>
+      <td>
+        {mother ? (
+          <Link to={`../${mother.slug}`} className="has-text-danger">
+            {mother.name}
+          </Link>
+        ) : (
+          motherName || '-'
         )}
+      </td>
 
       {father ? (
         <td>

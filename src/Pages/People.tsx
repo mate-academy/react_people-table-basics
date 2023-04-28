@@ -3,6 +3,7 @@ import { getPeople } from '../api';
 import { Person } from '../types';
 import { PeopleList } from '../components/PeopleList/PeopleList';
 import { Loader } from '../components/Loader';
+import { TableHeaders } from '../utils/TableHeaders';
 
 export const PeopleTable: React.FC = () => {
   const [peopleList, setPeopleList] = useState<Person[]>([]);
@@ -15,7 +16,7 @@ export const PeopleTable: React.FC = () => {
 
       setPeopleList(people);
     } catch {
-      setErrorMessage('No ethernet connection');
+      setErrorMessage('No internet connection');
     } finally {
       setIsLoading(false);
     }
@@ -73,29 +74,9 @@ export const PeopleTable: React.FC = () => {
               >
                 <thead>
                   <tr>
-                    <th>
-                      Name
-                    </th>
-
-                    <th>
-                      Sex
-                    </th>
-
-                    <th>
-                      Born
-                    </th>
-
-                    <th>
-                      Died
-                    </th>
-
-                    <th>
-                      Mother
-                    </th>
-
-                    <th>
-                      Father
-                    </th>
+                    {TableHeaders.map(header => (
+                      <th key={header}>{header}</th>
+                    ))}
                   </tr>
                 </thead>
 

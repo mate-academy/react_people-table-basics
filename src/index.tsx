@@ -1,20 +1,20 @@
-import { createRoot } from "react-dom/client";
+import { createRoot } from 'react-dom/client';
 import {
   Navigate,
   Route,
   HashRouter as Router,
   Routes,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import "bulma/css/bulma.css";
-import "@fortawesome/fontawesome-free/css/all.css";
+import 'bulma/css/bulma.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 
-import { App } from "./App";
-import { HomePage } from "./Pages/HomePage";
-import { PageNotFound } from "./Pages/Page404";
-import { PeopleTable } from "./Pages/People";
+import { App } from './App';
+import { HomePage } from './Pages/HomePage';
+import { PageNotFound } from './Pages/Page404';
+import { PeopleTable } from './Pages/People';
 
-createRoot(document.getElementById("root") as HTMLDivElement).render(
+createRoot(document.getElementById('root') as HTMLDivElement).render(
   <Router>
     <Routes>
       <Route path="/" element={<App />}>
@@ -28,5 +28,5 @@ createRoot(document.getElementById("root") as HTMLDivElement).render(
         </Route>
       </Route>
     </Routes>
-  </Router>
+  </Router>,
 );
