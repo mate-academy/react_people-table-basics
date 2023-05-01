@@ -5,6 +5,7 @@ import { Loader } from '../Loader/Loader';
 import { PeopleTable } from '../PeopleTable';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
+import { findParent } from '../../helpers/helpers';
 
 export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -19,8 +20,9 @@ export const PeoplePage: FC = () => {
 
       try {
         const peopleFromServer = await getPeople();
+        const peopleWithParents = findParent(peopleFromServer);
 
-        setPeople(peopleFromServer);
+        setPeople(peopleWithParents);
       } catch {
         setHasError(true);
       }
@@ -49,13 +51,15 @@ export const PeoplePage: FC = () => {
                 </p>
               )}
 
-              {hasNoPeople && (
+              {hasNoPeople && !hasError && (
                 <p data-cy="noPeopleMessage">
                   There are no people on the server
                 </p>
               )}
 
-              <PeopleTable people={people} personId={slug} />
+              {!hasNoPeople && !hasError && (
+                <PeopleTable people={people} personId={slug} />
+              )}
             </>
           )}
         </div>

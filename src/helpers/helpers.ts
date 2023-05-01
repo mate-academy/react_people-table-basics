@@ -2,7 +2,10 @@ import { Person } from '../types';
 
 export const findParent = (
   people: Person[],
-  parentName: string | null,
-): Person | null => {
-  return people.find(({ name }) => name === parentName) || null;
-};
+) => (
+  people.map(person => ({
+    ...person,
+    mother: people.find((mother) => mother.name === person.motherName) || null,
+    father: people.find((father) => father.name === person.fatherName) || null,
+  }))
+);

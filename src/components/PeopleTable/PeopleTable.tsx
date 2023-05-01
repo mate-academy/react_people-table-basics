@@ -3,7 +3,6 @@ import classNames from 'classnames';
 
 import { Person } from '../../types';
 import { PeopleLink } from '../PeopleLink';
-import { findParent } from '../../helpers/helpers';
 
 export type Props = {
   people: Person[],
@@ -41,10 +40,9 @@ export const PeopleTable: FC<Props> = (props) => {
             motherName,
             fatherName,
             slug,
+            mother,
+            father,
           } = person;
-
-          const motherOfPerson = findParent(people, motherName);
-          const fatherOfPerson = findParent(people, fatherName);
 
           return (
             <tr
@@ -63,16 +61,16 @@ export const PeopleTable: FC<Props> = (props) => {
               <td>{died}</td>
 
               <td>
-                {motherOfPerson ? (
-                  <PeopleLink person={motherOfPerson} />
+                {mother ? (
+                  <PeopleLink person={mother} />
                 ) : (
                   motherName || '-'
                 )}
               </td>
 
               <td>
-                {fatherOfPerson ? (
-                  <PeopleLink person={fatherOfPerson} />
+                {father ? (
+                  <PeopleLink person={father} />
                 ) : (
                   fatherName || '-'
                 )}
