@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Person } from '../types';
@@ -27,15 +28,13 @@ export const CurrentPerson: React.FC<Props> = ({
   const mothers = getParents(people, 'mother');
   const fathers = getParents(people, 'father');
 
-  const backgroundColor = selectedSlug === slug ? 'yellow' : 'white';
+  const backgroundColor = selectedSlug === slug;
 
   return (
     <tr
       key={slug}
       data-cy="person"
-      style={{
-        backgroundColor,
-      }}
+      className={classNames({ 'has-background-warning': backgroundColor })}
     >
       <td>
         <Link
