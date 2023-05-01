@@ -46,7 +46,7 @@ export const PeoplePage: React.FC = () => {
                     </p>
                   )}
 
-                  <PeopleTable people={people} />
+                  {!hasError && <PeopleTable people={people} />}
                 </>
               )}
           </div>

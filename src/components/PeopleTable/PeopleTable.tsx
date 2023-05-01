@@ -8,6 +8,10 @@ type Props = {
   people: Person[];
 };
 
+type RouteParams = {
+  personId: string;
+};
+
 const getParent = (
   array: Person[], parentName: string | null,
 ): Person | null => {
@@ -15,7 +19,7 @@ const getParent = (
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const { personId } = useParams();
+  const { personId } = useParams<RouteParams>();
 
   return (
     <table
