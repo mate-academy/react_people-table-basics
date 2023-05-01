@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { MainNav } from './MainNav';
 import { PeopleTable } from './PeopleTable';
 
-export const App = () => (
+export const App: React.FC = () => (
   <div data-cy="app">
     <MainNav />
 
@@ -18,16 +18,28 @@ export const App = () => (
             }
           />
 
-          <Route
-            path="/people"
-            element={(
-              <>
-                <h1 className="title">People Page</h1>
+          <Route path="people">
+            <Route
+              index
+              element={(
+                <>
+                  <h1 className="title">People Page</h1>
 
-                <PeopleTable />
-              </>
-            )}
-          />
+                  <PeopleTable />
+                </>
+              )}
+            />
+            <Route
+              path=":personSlug"
+              element={(
+                <>
+                  <h1 className="title">People Page</h1>
+
+                  <PeopleTable />
+                </>
+              )}
+            />
+          </Route>
 
           <Route
             path="*"

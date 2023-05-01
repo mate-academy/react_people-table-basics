@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getPeople } from './api';
 import { Person } from './types/Person';
 import { Loader } from './components/Loader';
+import { CurrentPerson } from './CurrentPerson';
 
-export const PeopleTable = () => {
+export const PeopleTable: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [hasError, setHasError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { personSlug = '' } = useParams();
 
   useEffect(() => {
     getPeople()
@@ -36,18 +39,11 @@ export const PeopleTable = () => {
 
         <tbody>
           {people.map((person) => (
-            <tr key={person.slug} data-cy="person">
-              <td>
-                <a href={`#/people/${person.slug}`}>
-                  {person.name}
-                </a>
-              </td>
-              <td>{person.sex}</td>
-              <td>{person.born}</td>
-              <td>{person.died}</td>
-              <td>{person.motherName}</td>
-              <td>{person.fatherName}</td>
-            </tr>
+            <CurrentPerson
+              people={people}
+              currentPerson={person}
+              selectedSlug={personSlug}
+            />
           ))}
         </tbody>
       </table>
