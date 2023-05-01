@@ -11,8 +11,10 @@ export const PeoplePage = () => {
   const [isLoadError, setIsLoadError] = useState(false);
 
   useEffect(() => {
-    getPeople()
-      .then(loadedPeople => {
+    const loadPeople = async () => {
+      try {
+        setIsLoading(true);
+        const loadedPeople = await getPeople();
         const preparedPeople = loadedPeople.map(person => ({
           ...person,
           mother: findParent(loadedPeople, person.motherName),
@@ -20,9 +22,14 @@ export const PeoplePage = () => {
         }));
 
         setPeople(preparedPeople);
-      })
-      .catch(() => setIsLoadError(true))
-      .finally(() => setIsLoading(false));
+      } catch (error) {
+        setIsLoadError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadPeople();
   }, []);
 
   return (
@@ -31,26 +38,24 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isLoading
-            ? (
-              <Loader />
-            )
-            : (
-              <PeopleTable people={people} />
-            )}
 
+          {isLoading && <Loader />}
           {isLoadError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {!isLoading && !people.length && (
+          {(!isLoading && !isLoadError && !people.length) && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               <p data-cy="noPeopleMessage">
                 There are no people on the server
               </p>
             </p>
+          )}
+
+          {!isLoading && !isLoadError && !!people.length && (
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
