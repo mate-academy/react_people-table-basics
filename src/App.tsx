@@ -1,8 +1,10 @@
 import './App.scss';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { MainNav } from './MainNav';
-import { PeopleTable } from './PeopleTable';
+import { MainNav } from './components/MainNav';
+import { PeoplePage } from './pages/PeoplePage';
+import { HomePage } from './pages/HomePage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export const App: React.FC = () => (
   <div data-cy="app">
@@ -14,7 +16,7 @@ export const App: React.FC = () => (
           <Route
             path="/"
             element={
-              <h1 className="title">Home Page</h1>
+              <HomePage />
             }
           />
 
@@ -22,21 +24,13 @@ export const App: React.FC = () => (
             <Route
               index
               element={(
-                <>
-                  <h1 className="title">People Page</h1>
-
-                  <PeopleTable />
-                </>
+                <PeoplePage />
               )}
             />
             <Route
               path=":personSlug"
               element={(
-                <>
-                  <h1 className="title">People Page</h1>
-
-                  <PeopleTable />
-                </>
+                <PeoplePage />
               )}
             />
           </Route>
@@ -44,7 +38,7 @@ export const App: React.FC = () => (
           <Route
             path="*"
             element={
-              <h1 className="title">Page not found</h1>
+              <NotFoundPage />
             }
           />
         </Routes>

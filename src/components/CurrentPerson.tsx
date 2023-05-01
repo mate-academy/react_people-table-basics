@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Person } from './types';
-import { getParents } from './helpers';
+import { Person } from '../types';
+import { getParents } from '../helpers';
 
 type Props = {
   people: Person[];

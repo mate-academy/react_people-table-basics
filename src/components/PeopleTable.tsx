@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getPeople } from './api';
-import { Person } from './types/Person';
-import { Loader } from './components/Loader';
+import { getPeople } from '../api';
+import { Person } from '../types/Person';
+import { Loader } from './Loader';
 import { CurrentPerson } from './CurrentPerson';
 
 export const PeopleTable: React.FC = () => {
