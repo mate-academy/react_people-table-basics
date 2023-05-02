@@ -16,6 +16,7 @@ export const People = () => {
         const loadedPeople = await getPeople();
 
         setPeople(loadedPeople);
+        setError(false);
       } catch {
         setError(true);
       } finally {
@@ -38,11 +39,14 @@ export const People = () => {
               Something went wrong
             </p>
           )}
+
           {!people.length
             ? (
-              <p data-cy="noPeopleMessage">
-                There are no people on the server
-              </p>
+              !error && (
+                <p data-cy="noPeopleMessage">
+                  There are no people on the server
+                </p>
+              )
             )
             : (
               <table

@@ -1,32 +1,11 @@
 import './App.scss';
 import {
-  Navigate, NavLink, Route, Routes,
+  Navigate, Route, Routes,
 } from 'react-router-dom';
-import { FC } from 'react';
-import classNames from 'classnames';
 import { People } from './pages/People';
 import { Home } from './pages/Home';
-
-type Props = {
-  path: string;
-  text: string;
-  className: string;
-};
-
-const PageNavLink: FC<Props> = ({
-  path,
-  text,
-  className,
-}) => (
-  <NavLink
-    to={path}
-    className={({ isActive }) => classNames(className, {
-      'has-background-grey-lighter': isActive,
-    })}
-  >
-    {text}
-  </NavLink>
-);
+import { NotFound } from './pages/NotFound';
+import { PageNavLink } from './components/PageNavLink';
 
 export const App = () => {
   return (
@@ -56,7 +35,7 @@ export const App = () => {
             </Route>
             <Route
               path="*"
-              element={<h1 className="title">Page not found</h1>}
+              element={<NotFound />}
             />
           </Routes>
 
