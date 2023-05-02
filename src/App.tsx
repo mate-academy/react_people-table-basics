@@ -5,24 +5,12 @@ import {
 import { People } from './pages/People';
 import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
-import { PageNavLink } from './components/PageNavLink';
+import { NavBar } from './components/NavBar';
 
 export const App = () => {
   return (
     <div data-cy="app">
-      <nav
-        data-cy="nav"
-        className="navbar is-fixed-top has-shadow"
-        role="navigation"
-        aria-label="main navigation"
-      >
-        <div className="container">
-          <div className="navbar-brand">
-            <PageNavLink path="/" text="Home" className="navbar-item" />
-            <PageNavLink path="/people" text="People" className="navbar-item" />
-          </div>
-        </div>
-      </nav>
+      <NavBar />
 
       <main className="section">
         <div className="container">
