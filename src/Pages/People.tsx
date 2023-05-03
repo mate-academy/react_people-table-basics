@@ -58,27 +58,25 @@ export const PeopleTable: React.FC = () => {
 
   return (
     <>
-      {isLoading ? (
-        <>
-          <h1 className="title">People Page</h1>
-          <div className="block">
-            <div className="box table-container">
-              <Loader />
-            </div>
-          </div>
-        </>
-      ) : (
-        <>
-          <h1 className="title">People Page</h1>
-          <div className="block">
-            <div className="box table-container">
+      <h1 className="title">People Page</h1>
+      <div className="block">
+        <div className="box table-container">
+          {isLoading && <Loader />}
+          {errorMessage && <p>{errorMessage}</p>}
+          {peopleList.length > 0 && !errorMessage && !isLoading && (
+            <>
               <table
                 data-cy="peopleTable"
-                className="table is-striped is-hoverable is-narrow is-fullwidth"
+                className="
+                  table
+                  is-striped
+                  is-hoverable
+                  is-narrow
+                  is-fullwidth"
               >
                 <thead>
                   <tr>
-                    {TableHeaders.map(header => (
+                    {TableHeaders.map((header) => (
                       <th key={header}>{header}</th>
                     ))}
                   </tr>
@@ -88,10 +86,10 @@ export const PeopleTable: React.FC = () => {
                   <PeopleList people={peopleList} />
                 </tbody>
               </table>
-            </div>
-          </div>
-        </>
-      )}
+            </>
+          )}
+        </div>
+      </div>
     </>
   );
 };

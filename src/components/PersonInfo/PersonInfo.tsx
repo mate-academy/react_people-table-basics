@@ -21,13 +21,6 @@ export const PersonInfo: React.FC<Props> = ({ person }) => {
 
   const { personSlug } = useParams();
 
-  // const mother = people.find(
-  //   (human) => human.name === person.motherName,
-  // );
-  // const father = people.find(
-  //   (human) => human.name === person.fatherName,
-  // );
-
   const isSelected = slug === personSlug;
 
   return (
