@@ -11,7 +11,7 @@ type Props = {
 export const PersonList: React.FC<Props> = ({
   persons,
 }) => {
-  const { slug: selectedPerson = '' } = useParams();
+  const { slug: selectedPersonSlug = '' } = useParams();
 
   return (
     <table
@@ -46,7 +46,7 @@ export const PersonList: React.FC<Props> = ({
             <tr
               data-cy="person"
               className={classNames({
-                'has-background-warning': selectedPerson === slug,
+                'has-background-warning': selectedPersonSlug === slug,
               })}
               key={slug}
             >
