@@ -4,7 +4,6 @@ import { Person } from '../types';
 import { PeopleList } from '../components/PeopleList/PeopleList';
 import { Loader } from '../components/Loader';
 import { TableHeaders } from '../utils/TableHeaders';
-import { renderMessage } from '../utils/RenderMessage';
 
 export const PeopleTable: React.FC = () => {
   const [peopleList, setPeopleList] = useState<Person[]>([]);
@@ -47,14 +46,6 @@ export const PeopleTable: React.FC = () => {
   useEffect(() => {
     fetchPeople();
   }, []);
-
-  if (errorMessage) {
-    return renderMessage(errorMessage);
-  }
-
-  if (peopleList.length === 0 && !isLoading) {
-    return renderMessage('There are no people on the server');
-  }
 
   return (
     <>
