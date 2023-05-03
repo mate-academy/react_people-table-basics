@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames';
-import { Loader } from '../Loader';
-import { Person } from '../../../types';
-import { getPeople } from '../../../api';
+import { Loader } from '../Loader/Loader';
+import { Person } from '../../types';
+import { getPeople } from '../../api';
 import { PersonLink } from '../Person/Person';
 
 export const People: React.FC = () => {
@@ -84,7 +84,7 @@ export const People: React.FC = () => {
                       {listPeople.map((person: Person) => (
                         <tr
                           data-cy="person"
-                          className={classNames('', {
+                          className={classNames({
                             'has-background-warning':
                               isActive(person.name),
                           })}
