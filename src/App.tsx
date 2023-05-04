@@ -1,9 +1,11 @@
 import './App.scss';
-import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
+import {
+  Navigate, NavLink, Route, Routes,
+} from 'react-router-dom';
+import classNames from 'classnames';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
-import classNames from 'classnames';
 
 export const App = () => {
   return (
@@ -18,21 +20,17 @@ export const App = () => {
           <div className="navbar-brand">
             <NavLink
               to="/"
-              className={({ isActive }) =>
-                classNames('navbar-item', {
-                  'has-background-grey-lighter': isActive,
-                })
-              }
+              className={({ isActive }) => classNames('navbar-item', {
+                'has-background-grey-lighter': isActive,
+              })}
             >
               Home
             </NavLink>
 
             <NavLink
-              className={({ isActive }) =>
-                classNames('navbar-item', {
-                  'has-background-grey-lighter': isActive,
-                })
-              }
+              className={({ isActive }) => classNames('navbar-item', {
+                'has-background-grey-lighter': isActive,
+              })}
               to="/people"
             >
               People
@@ -48,7 +46,7 @@ export const App = () => {
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="/people">
               <Route index element={<PeoplePage />} />
-              <Route path=':personSlug' element={<PeoplePage />} />
+              <Route path=":personSlug" element={<PeoplePage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

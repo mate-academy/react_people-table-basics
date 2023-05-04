@@ -11,13 +11,12 @@ export const PeoplePage = () => {
   useEffect(() => {
     getPeople()
       .then((fetchedPeople) => {
-
         const populatedPeopleWithParents = fetchedPeople.map((person) => {
           const mother = fetchedPeople.find(
-            (motherPerson) => motherPerson.name === person.motherName
+            (motherPerson) => motherPerson.name === person.motherName,
           );
           const father = fetchedPeople.find(
-            (fatherPerson) => fatherPerson.name === person.fatherName
+            (fatherPerson) => fatherPerson.name === person.fatherName,
           );
 
           return { ...person, mother, father };
