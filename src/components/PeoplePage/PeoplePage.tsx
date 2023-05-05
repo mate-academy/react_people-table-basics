@@ -19,10 +19,15 @@ export const PeoplePage = () => {
         const linkedPeople = peopleFromServer.map(person => {
           const newPerson = { ...person };
 
-          const mother = peopleFromServer
-            .find(human => human.name === person.motherName);
-          const father = peopleFromServer
-            .find(human => human.name === person.fatherName);
+          function findParentByName(
+            parent: Person[],
+            parentName: string | null,
+          ): Person | undefined {
+            return parent.find(human => human.name === parentName);
+          }
+
+          const mother = findParentByName(peopleFromServer, person.motherName);
+          const father = findParentByName(peopleFromServer, person.fatherName);
 
           if (mother) {
             newPerson.mother = mother;
