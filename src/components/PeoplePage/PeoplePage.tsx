@@ -10,8 +10,6 @@ export const PeoplePage = () => {
   const [isLoaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    setLoaded(false);
-
     const getPeopleFromSever = async () => {
       try {
         const peopleFromServer = await getPeople();
@@ -19,12 +17,10 @@ export const PeoplePage = () => {
         const linkedPeople = peopleFromServer.map(person => {
           const newPerson = { ...person };
 
-          function findParentByName(
+          const findParentByName = (
             parent: Person[],
             parentName: string | null,
-          ): Person | undefined {
-            return parent.find(human => human.name === parentName);
-          }
+          ) => parent.find(human => human.name === parentName);
 
           const mother = findParentByName(peopleFromServer, person.motherName);
           const father = findParentByName(peopleFromServer, person.fatherName);

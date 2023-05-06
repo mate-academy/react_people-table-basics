@@ -7,6 +7,7 @@ type Props = {
 };
 
 export const PeopleTable: FC<Props> = ({ people }) => (
+
   <table
     data-cy="peopleTable"
     className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -24,7 +25,7 @@ export const PeopleTable: FC<Props> = ({ people }) => (
 
     <tbody>
       {people.map(person => (
-        <PersonInTable person={person} />
+        <PersonInTable key={person.slug} person={person} />
       ))}
     </tbody>
   </table>
