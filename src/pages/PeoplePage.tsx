@@ -16,7 +16,7 @@ export const PeoplePage: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  const { personSlug = '' } = useParams();
+  const { personSlug = '' } = useParams<{ personSlug?: string }>();
   const havePeople = people.length > 0;
 
   const loadPeople = useCallback(
@@ -57,7 +57,7 @@ export const PeoplePage: FC = () => {
             </p>
           )}
 
-          {isLoading ? (
+          {isLoading && people.length > 0 ? (
             <Loader />
           ) : (
             <PeopleTable

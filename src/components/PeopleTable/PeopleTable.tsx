@@ -9,8 +9,6 @@ type Props = {
 };
 
 export const PeopleTable: FC<Props> = ({ people, selectedPerson }) => {
-  const isSelected = (person: Person) => person.slug === selectedPerson;
-
   return (
     <table
       data-cy="peopleTable"
@@ -36,7 +34,10 @@ export const PeopleTable: FC<Props> = ({ people, selectedPerson }) => {
             slug,
             fatherName,
             motherName,
+            mother,
+            father,
           } = person;
+          const isSelected = (human: Person) => human.slug === selectedPerson;
 
           return (
             <tr
@@ -55,28 +56,18 @@ export const PeopleTable: FC<Props> = ({ people, selectedPerson }) => {
               <td>{died}</td>
 
               <td>
-                {people.some(woman => woman.name === motherName)
-                  ? (
-                    <PersonLink
-                      person={
-                        people.find(
-                          woman => woman.name === motherName,
-                        ) || person
-                      }
-                    />
-                  )
-                  : motherName || '-'}
+                {mother ? (
+                  <PersonLink person={mother} />
+                ) : (
+                  motherName || '-'
+                )}
               </td>
               <td>
-                {people.some(man => man.name === fatherName)
-                  ? (
-                    <PersonLink
-                      person={
-                        people.find(man => man.name === fatherName) || person
-                      }
-                    />
-                  )
-                  : fatherName || '-'}
+                {father ? (
+                  <PersonLink person={father} />
+                ) : (
+                  fatherName || '-'
+                )}
               </td>
             </tr>
           );
