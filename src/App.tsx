@@ -43,7 +43,7 @@ export const App = () => {
             />
 
             <Route
-              path="people"
+              path="/people"
               element={<PeoplePage />}
             >
               <Route
@@ -58,7 +58,7 @@ export const App = () => {
             </Route>
 
             <Route
-              path="home"
+              path="/home"
               element={<Navigate to="/" replace />}
             />
           </Routes>

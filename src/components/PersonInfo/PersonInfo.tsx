@@ -23,7 +23,8 @@ export const PersonInfo: FC<Props> = memo(({ person, selectedPerson }) => {
   return (
     <tr
       data-cy="person"
-      className={cn({ 'has-background-warning': slug === selectedPerson })}>
+      className={cn({ 'has-background-warning': slug === selectedPerson })}
+    >
       <td>
         <Link
           to={slug}
