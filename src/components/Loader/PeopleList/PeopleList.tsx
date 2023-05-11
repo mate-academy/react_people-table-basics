@@ -7,18 +7,15 @@ interface Props {
   currentElement: string,
 }
 
+const findParent = (
+  parent: 'mother' | 'father', person: Person, people: Person[],
+) => {
+  return parent === 'mother'
+    ? people.find(somePerson => somePerson.name === person.motherName)
+    : people.find(somePerson => somePerson.name === person.fatherName);
+};
+
 export const PeopleList: React.FC<Props> = ({ people, currentElement }) => {
-  const findParent = (parent: 'mother' | 'father', person: Person) => {
-    const motherName = person.motherName ? person.motherName : '';
-    const fatherName = person.fatherName ? person.fatherName : '';
-
-    return parent === 'mother'
-      ? people.map(somePerson => somePerson.name)
-        .indexOf(motherName)
-      : people.map(somePerson => somePerson.name)
-        .indexOf(fatherName);
-  };
-
   return (
     <>
       {!people.length ? (
@@ -60,7 +57,7 @@ export const PeopleList: React.FC<Props> = ({ people, currentElement }) => {
                 {person.motherName ? (
                   <PersonLink
                     person={
-                      people[findParent('mother', person)]
+                      findParent('mother', person, people)
                     }
                     personName={person.motherName}
                   />
@@ -70,7 +67,7 @@ export const PeopleList: React.FC<Props> = ({ people, currentElement }) => {
                 {person.fatherName ? (
                   <PersonLink
                     person={
-                      people[findParent('father', person)]
+                      findParent('father', person, people)
                     }
                     personName={person.fatherName}
                   />
