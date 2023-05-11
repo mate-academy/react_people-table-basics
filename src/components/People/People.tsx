@@ -6,6 +6,7 @@ import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
 import { getPeople } from '../../api';
+import { Parent } from '../Parent';
 
 export const People = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -70,10 +71,10 @@ export const People = () => {
               {people?.map(person => {
                 const mother = people.find(
                   currPerson => currPerson.name === person.motherName,
-                );
+                ) || null;
                 const father = people.find(
                   currPerson => currPerson.name === person.fatherName,
-                );
+                ) || null;
 
                 return (
                   <tr
@@ -89,15 +90,12 @@ export const People = () => {
                     <td>{person.sex}</td>
                     <td>{person.born}</td>
                     <td>{person.died}</td>
-                    {!!mother && <td><PersonLink person={mother} /></td>}
-                    {!!person.motherName && !mother
-                      && <td>{person.motherName}</td>}
-                    {!person.motherName && <td>-</td>}
-
-                    {!!father && <td><PersonLink person={father} /></td>}
-                    {!!person.fatherName && !father
-                      && <td>{person.fatherName}</td>}
-                    {!person.fatherName && <td>-</td>}
+                    <td>
+                      <Parent parent={mother} parentName={person.motherName} />
+                    </td>
+                    <td>
+                      <Parent parent={father} parentName={person.fatherName} />
+                    </td>
                   </tr>
                 );
               })}
