@@ -8,12 +8,12 @@ import { PersonLink } from '../PersonLink';
 import { getPeople } from '../../api';
 
 export const People = () => {
-  const [people, setPeople] = useState<Person[] | null>(null);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
   const { personData = '' } = useParams();
 
-  async function getPepleList() {
+  async function getPeopleList() {
     try {
       setLoading(true);
 
@@ -28,7 +28,7 @@ export const People = () => {
   }
 
   useEffect(() => {
-    getPepleList();
+    getPeopleList();
   }, []);
 
   return (
@@ -44,13 +44,13 @@ export const People = () => {
           </p>
         )}
 
-        {!!people && people.length === 0 && (
+        {!isError && !isLoading && people.length === 0 && (
           <p data-cy="noPeopleMessage">
             There are no people on the server
           </p>
         )}
 
-        {!isError && !!people && people.length > 0 && (
+        {!isError && people.length > 0 && (
           <table
             data-cy="peopleTable"
             className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -91,11 +91,13 @@ export const People = () => {
                     <td>{person.died}</td>
                     {!!mother && <td><PersonLink person={mother} /></td>}
                     {!!person.motherName && !mother
-                      ? <td>{person.motherName}</td> : null}
+                      && <td>{person.motherName}</td>}
+                    {!person.motherName && <td>-</td>}
 
                     {!!father && <td><PersonLink person={father} /></td>}
                     {!!person.fatherName && !father
-                      ? <td>{person.fatherName}</td> : null}
+                      && <td>{person.fatherName}</td>}
+                    {!person.fatherName && <td>-</td>}
                   </tr>
                 );
               })}
