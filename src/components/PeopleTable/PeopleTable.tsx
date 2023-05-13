@@ -45,10 +45,11 @@ export const PeopleTable: React.FC<Props> = ({ people, error }) => {
               died,
               motherName,
               fatherName,
-              mother,
-              father,
               slug,
             } = person;
+
+            const mother = people.find(pepl => pepl.name === motherName);
+            const father = people.find(pepl => pepl.name === fatherName);
 
             return (
               <tbody key={slug}>
