@@ -38,14 +38,13 @@ export const App: React.FC = () => {
   const [error, setError] = useState<boolean>(false);
 
   const getpeople = async () => {
-    const fetchPeople = await getPeople();
-
     setIsLoading(true);
+
+    const fetchPeople = await getPeople();
 
     try {
       setPeople(fetchPeople);
     } catch {
-      setIsLoading(false);
       setError(true);
     } finally {
       setIsLoading(false);
