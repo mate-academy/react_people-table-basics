@@ -4,7 +4,7 @@ import { Person } from '../../types/Person';
 
 type Props = {
   people: Person[];
-  error: boolean,
+  error: boolean;
 };
 
 export const PeoplePage: React.FC<Props> = ({ people, error }) => {

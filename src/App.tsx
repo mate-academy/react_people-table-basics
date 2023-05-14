@@ -18,17 +18,15 @@ type Props = {
 
 export const PageNavLink: React.FC<Props> = ({ to, text }) => {
   return (
-    <>
-      <NavLink
-        className={({ isActive }) => classNames(
-          'navbar-item',
-          { 'has-background-grey-lighter': isActive },
-        )}
-        to={to}
-      >
-        {text}
-      </NavLink>
-    </>
+    <NavLink
+      className={({ isActive }) => classNames(
+        'navbar-item',
+        { 'has-background-grey-lighter': isActive },
+      )}
+      to={to}
+    >
+      {text}
+    </NavLink>
   );
 };
 
@@ -37,12 +35,12 @@ export const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
-  const getpeople = async () => {
-    setIsLoading(true);
-
-    const fetchPeople = await getPeople();
-
+  const getPerson = async () => {
     try {
+      setIsLoading(true);
+
+      const fetchPeople = await getPeople();
+
       setPeople(fetchPeople);
     } catch {
       setError(true);
@@ -52,7 +50,7 @@ export const App: React.FC = () => {
   };
 
   useEffect(() => {
-    getpeople();
+    getPerson();
   }, []);
 
   return (
