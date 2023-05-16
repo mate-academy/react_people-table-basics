@@ -1,32 +1,11 @@
-// eslint-disable-next-line object-curly-newline
-import { FC, useCallback, useEffect, useState } from 'react';
-import { Person } from '../../types';
-import { fetchPeople } from '../../api';
+import { FC } from 'react';
+import { useFetch } from '../../custom-hooks/useFetch';
 import { Loader } from '../../components/Loader';
 import { PeopleTable } from '../../components/PeopleTable';
+import { API_URL } from '../../constants/apiUrl';
 
 export const PeoplePage: FC = () => {
-  const [people, setPeople] = useState<Person[] | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>('');
-
-  const getPeople = useCallback(async (): Promise<void> => {
-    setIsLoading(true);
-
-    try {
-      const peopleFromServer = await fetchPeople();
-
-      setPeople(peopleFromServer);
-    } catch (error) {
-      setErrorMessage('Something went wrong');
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    getPeople();
-  }, []);
+  const { people, isLoading, errorMessage } = useFetch(API_URL);
 
   const getPerent = (parentName: string | null) => {
     if (parentName) {
