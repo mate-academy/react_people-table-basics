@@ -19,7 +19,7 @@ const NavigationLink: React.FC<Props> = ({ to, text }) => {
   );
 };
 
-export const Navigation: React.FC<Props> = () => {
+export const Navigation: React.FC = () => {
   return (
     <nav
       data-cy="nav"
