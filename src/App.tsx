@@ -22,7 +22,7 @@ export const App = () => {
         <div className="container">
           <div className="navbar-brand">
             <PageNavLink to="/" text="Home" />
-            <PageNavLink to="people" text="People" />
+            <PageNavLink to="/people" text="People" />
           </div>
         </div>
       </nav>
@@ -30,7 +30,7 @@ export const App = () => {
       <main className="section">
         <div className="container">
           <Routes>
-            <Route path="people">
+            <Route path="/people">
               <Route
                 index
                 element={<PeoplePage />}
@@ -46,7 +46,7 @@ export const App = () => {
               element={<HomePage />}
             />
 
-            <Route path="home" element={<Navigate to="/" replace />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
 
             <Route
               path="*"
