@@ -11,43 +11,39 @@ interface Props {
 export const PeopleTable: FC<Props> = ({
   people,
   isLoading,
-}) => {
+}) => (
+  <div className="container">
+    <div className="block">
+      <div className="box table-container">
 
-  return (
-    <div className="container">
-      <div className="block">
-        <div className="box table-container">
+        {
+          isLoading
+            ? <Loader />
+            : (
+              <table
+                data-cy="peopleTable"
+                className="table is-striped is-hoverable is-narrow is-fullwidth"
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Sex</th>
+                    <th>Born</th>
+                    <th>Died</th>
+                    <th>Mother</th>
+                    <th>Father</th>
+                  </tr>
+                </thead>
 
-          {
-            isLoading
-              ? <Loader />
-              : (
-                <table
-                  data-cy="peopleTable"
-                  // eslint-disable-next-line
-                  className="table is-striped is-hoverable is-narrow is-fullwidth"
-                >
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Sex</th>
-                      <th>Born</th>
-                      <th>Died</th>
-                      <th>Mother</th>
-                      <th>Father</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {people.map(person => (
-                      <PersonLink person={person} />
-                    ))}
-                  </tbody>
-                </table>
-              )
-          }
-        </div>
+                <tbody>
+                  {people.map(person => (
+                    <PersonLink person={person} />
+                  ))}
+                </tbody>
+              </table>
+            )
+        }
       </div>
     </div>
-  );
-};
+  </div>
+);
