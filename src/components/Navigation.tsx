@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
-
 export const Navigation = () => (
   <nav
     data-cy="nav"

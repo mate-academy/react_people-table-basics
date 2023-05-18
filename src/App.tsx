@@ -2,32 +2,14 @@ import { useEffect, useState } from 'react';
 
 import './App.scss';
 import {
-  Navigate, Route, Routes, useParams,
+  Navigate, Route, Routes,
 } from 'react-router-dom';
 import { Person } from './types';
-import { Loader } from './components/Loader';
 import { getPeople } from './api';
-import { PeopleList } from './components/PeopleList';
 import { Navigation } from './components/Navigation';
-
-type Props = {
-  people: Person[]
-};
-
-export const PeoplePage: React.FC<Props> = ({ people }) => {
-  const { personSlug = '' } = useParams();
-
-  return (
-    <>
-      <h1 className="title">People Page</h1>
-
-      <PeopleList
-        people={people}
-        selectedPerson={personSlug}
-      />
-    </>
-  );
-};
+import { PeoplePage } from './pages/PeoplePage';
+import { HomePage } from './pages/HomePage';
+import { PageNotFound } from './pages/PageNotFound';
 
 export const App: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -56,54 +38,43 @@ export const App: React.FC = () => {
     <div data-cy="app">
 
       <Navigation />
-      <main className="section">
-        <div className="container">
 
-          <div className="block">
-            <div className="box table-container">
-              {isLoading && <Loader />}
-              {!isLoading && isError && (
-                <p data-cy="peopleLoadingError" className="has-text-danger">
-                  Something went wrong
-                </p>
-              )}
+      <Routes>
+        <Route
+          path="/"
+          element={<HomePage />}
+        />
+        <Route path="home" element={<Navigate to="/" replace />} />
 
-              {(!people.length && !isLoading) && (
-                <p data-cy="noPeopleMessage">
-                  There are no people on the server
-                </p>
-              )}
+        <Route path="people">
+          <Route
+            index
+            element={(
+              <PeoplePage
+                people={people}
+                isLoading={isLoading}
+                isError={isError}
+              />
+            )}
+          />
 
-              {!isLoading && !isError && (
-                <Routes>
-                  <Route
-                    path="/"
-                    element={<h1 className="title">Home Page</h1>}
-                  />
-                  <Route path="home" element={<Navigate to="/" replace />} />
+          <Route
+            path=":personSlug"
+            element={(
+              <PeoplePage
+                people={people}
+                isLoading={isLoading}
+                isError={isError}
+              />
+            )}
+          />
+        </Route>
 
-                  <Route path="people">
-                    <Route
-                      index
-                      element={<PeoplePage people={people} />}
-                    />
-
-                    <Route
-                      path=":personSlug"
-                      element={<PeoplePage people={people} />}
-                    />
-                  </Route>
-
-                  <Route
-                    path="*"
-                    element={<h1 className="title">Page not found</h1>}
-                  />
-                </Routes>
-              )}
-            </div>
-          </div>
-        </div>
-      </main>
+        <Route
+          path="*"
+          element={<PageNotFound />}
+        />
+      </Routes>
     </div>
   );
 };
