@@ -9,21 +9,21 @@ export const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const getPeopleFromServer = async () => {
-    try {
-      setIsLoading(true);
-      setIsError(false);
-      const peopleFromServer = await getPeople();
-
-      setPeople(peopleFromServer);
-    } catch {
-      setIsError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    async function getPeopleFromServer() {
+      try {
+        setIsLoading(true);
+        setIsError(false);
+        const peopleFromServer = await getPeople();
+
+        setPeople(peopleFromServer);
+      } catch {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
     getPeopleFromServer();
   }, []);
 

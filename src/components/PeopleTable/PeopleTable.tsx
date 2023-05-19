@@ -12,13 +12,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug: activeSlug } = useParams();
 
   const findParent = (parentName: string | null) => {
-    const parent = people.find(human => human.name === parentName);
+    const parent = people.find(person => person.name === parentName);
 
-    if (parent) {
-      return <PersonLink person={parent} />;
-    }
-
-    return parentName || '-';
+    return parent
+      ? <PersonLink person={parent} />
+      : parentName || '-';
   };
 
   return (
