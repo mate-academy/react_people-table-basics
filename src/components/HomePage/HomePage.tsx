@@ -1,5 +1,5 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
-export const HomePage: FC = () => (
+export const HomePage: FC = memo(() => (
   <h1 className="title">Home Page</h1>
-);
+));

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PersonLink } from '../PersonLink';
@@ -8,7 +8,7 @@ interface Props {
   isLoading: boolean;
 }
 
-export const PeopleTable: FC<Props> = ({
+export const PeopleTable: FC<Props> = memo(({
   people,
   isLoading,
 }) => (
@@ -46,4 +46,4 @@ export const PeopleTable: FC<Props> = ({
       </div>
     </div>
   </div>
-);
+));

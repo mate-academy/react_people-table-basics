@@ -1,15 +1,21 @@
 import {
   FC,
+  memo,
   useCallback,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 import { PeopleTable } from '../PeopleTable';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 
-export const PeoplePage: FC = () => {
+const toFindParents = (people: Person[], personName: string | null) => {
+  const personParent = people.find(({ name }) => name === personName);
+
+  return personParent;
+};
+
+export const PeoplePage: FC = memo(() => {
   const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,10 +27,19 @@ export const PeoplePage: FC = () => {
     try {
       setIsLoading(true);
       const allPeople = await getPeople();
+      const peopleWithParents = allPeople.map((person) => {
+        return (
+          {
+            ...person,
+            mother: toFindParents(allPeople, person.motherName),
+            father: toFindParents(allPeople, person.fatherName),
+          }
+        );
+      });
 
       if (allPeople.length) {
         setIsLoading(false);
-        setPeople(allPeople);
+        setPeople(peopleWithParents);
       } else {
         setHasNoPeople(true);
       }
@@ -36,19 +51,6 @@ export const PeoplePage: FC = () => {
   useEffect(() => {
     getPeopleFromServer();
   }, []);
-
-  const peopleWithParents = useMemo(() => {
-    return people.map(person => {
-      const isMother = people.find(({ name }) => name === person.motherName);
-      const isFather = people.find(({ name }) => name === person.fatherName);
-
-      return ({
-        ...person,
-        mother: isMother,
-        father: isFather,
-      });
-    });
-  }, [people]);
 
   return (
     <>
@@ -67,10 +69,10 @@ export const PeoplePage: FC = () => {
 
       {showPeople && (
         <PeopleTable
-          people={peopleWithParents}
+          people={people}
           isLoading={isLoading}
         />
       )}
     </>
   );
-};
+});

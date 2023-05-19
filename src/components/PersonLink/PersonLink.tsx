@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import classNames from 'classnames';
 import { NavLink, useParams } from 'react-router-dom';
 import { Person } from '../../types';
@@ -7,7 +7,7 @@ interface Props {
   person: Person;
 }
 
-export const PersonLink: FC<Props> = ({ person }) => {
+export const PersonLink: FC<Props> = memo(({ person }) => {
   const { slug: currentUser } = useParams();
 
   const {
@@ -75,4 +75,4 @@ export const PersonLink: FC<Props> = ({ person }) => {
       }
     </tr>
   );
-};
+});
