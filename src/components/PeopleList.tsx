@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Person } from '../types';
-import { findParent } from '../utils/findParents';
+import { findParent } from '../utils/ParentLink';
 
 export type Props = {
   people: Person[],
