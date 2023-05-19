@@ -34,7 +34,8 @@ export const PersonInfo: React.FC<Props> = ({
         <Link
           to={slug}
           className={cn({ 'has-text-danger': sex === 'f' })}
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault();
             setSelectedPerson(slug);
           }}
         >
@@ -48,12 +49,12 @@ export const PersonInfo: React.FC<Props> = ({
       {
         mother
           ? (
-            <td
-              className={cn({ 'has-text-danger': mother.sex === 'f' })}
-            >
+            <td>
               <Link
-                to={slug}
-                onClick={() => {
+                to={`/people/${slug}`}
+                className={cn({ 'has-text-danger': mother.sex === 'f' })}
+                onClick={(event) => {
+                  event.preventDefault();
                   setSelectedPerson(mother.slug);
                 }}
               >
@@ -72,7 +73,8 @@ export const PersonInfo: React.FC<Props> = ({
             <td>
               <Link
                 to={slug}
-                onClick={() => {
+                onClick={(event) => {
+                  event.preventDefault();
                   setSelectedPerson(father.slug);
                 }}
               >

@@ -63,6 +63,30 @@ export const App = () => {
                 />
               )}
             />
+            <Route path="/people">
+              <Route
+                index
+                element={(
+                  <PeopleTable
+                    people={people}
+                    error={error}
+                    isLoading={isLoading}
+                    fetchPeople={fetchPeople}
+                  />
+                )}
+              />
+              <Route
+                path=":personSlug"
+                element={(
+                  <PeopleTable
+                    people={people}
+                    error={error}
+                    isLoading={isLoading}
+                    fetchPeople={fetchPeople}
+                  />
+                )}
+              />
+            </Route>
 
             <Route
               path="*"
