@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-import React, { useState } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 // import { useParams } from 'react-router-dom';
 import { Person } from '../types';
@@ -7,17 +7,17 @@ import { PersonLink } from './PersonLink';
 
 interface Props {
   person: Person;
+  parent: (person: string) => Person | undefined;
+  selectedPerson: string;
 }
 
-export const PersonItem: React.FC<Props> = ({ person }) => {
-  const [selectedPerson, setSelectedPerson] = useState('');
-  // const { PersonSlug = '' } = useParams();
-
-  const handleClick = (slug: string) => {
-    setSelectedPerson((prevSelectedPerson) => {
-      return prevSelectedPerson !== slug ? slug : '';
-    });
-  };
+export const PersonItem: React.FC<Props> = ({
+  person,
+  parent,
+  selectedPerson,
+}) => {
+  const father = person.fatherName ? parent(person.fatherName) : null;
+  const mother = person.motherName ? parent(person.motherName) : null;
 
   return (
     <tr
@@ -27,14 +27,27 @@ export const PersonItem: React.FC<Props> = ({ person }) => {
       })}
     >
       <td>
-        <PersonLink person={person} handleClick={handleClick} />
+        <PersonLink person={person} />
       </td>
 
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
-      <td>-</td>
-      <td>-</td>
+      <td>
+        {mother ? (
+          <PersonLink person={mother} />
+        ) : (
+          person.motherName || '-'
+        )}
+      </td>
+      <td>
+
+        {father ? (
+          <PersonLink person={father} />
+        ) : (
+          person.fatherName || '-'
+        )}
+      </td>
     </tr>
   );
 };

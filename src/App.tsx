@@ -2,14 +2,9 @@ import './App.scss';
 import {
   NavLink, Navigate, Route, Routes,
 } from 'react-router-dom';
-import {
-  FC, useCallback, useEffect, useState,
-} from 'react';
+import { FC, useState } from 'react';
 import classNames from 'classnames';
-import { getPeople } from './api';
-import { Person } from './types';
 import { PeopleTable } from './components/PeopleTable';
-import { Loader } from './components/Loader';
 
 interface Props {
   to: string;
@@ -28,17 +23,7 @@ export const PageNavLink: FC<Props> = ({ to, text }) => (
 );
 
 export const App = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-
-  const getPeopleFromServer = useCallback(async () => {
-    const peopleFromServer = await getPeople();
-
-    setPeople(peopleFromServer);
-  }, []);
-
-  useEffect(() => {
-    getPeopleFromServer();
-  }, [getPeopleFromServer]);
+  const [isLoadingError, setIsLoadingError] = useState(false);
 
   return (
     <div data-cy="app">
@@ -64,7 +49,7 @@ export const App = () => {
             <Route path="home" element={<Navigate to="/" replace />} />
             <Route
               path="people/:slug"
-              element={<PeopleTable people={people} />}
+              element={<PeopleTable setIsLoadingError={setIsLoadingError} />}
             />
 
             <Route
@@ -80,15 +65,11 @@ export const App = () => {
           <div className="block">
             <div className="box table-container">
 
-              <p data-cy="peopleLoadingError" className="has-text-danger">
-                Something went wrong
-              </p>
-
-              <p data-cy="noPeopleMessage">
-                There are no people on the server
-              </p>
-
-              {people.length < 1 ? <Loader /> : <PeopleTable people={people} />}
+              {isLoadingError ? (
+                <p data-cy="peopleLoadingError" className="has-text-danger">
+                  Something went wrong
+                </p>
+              ) : <PeopleTable setIsLoadingError={setIsLoadingError} />}
             </div>
           </div>
         </div>

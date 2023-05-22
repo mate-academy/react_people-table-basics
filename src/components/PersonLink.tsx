@@ -6,18 +6,16 @@ import { Person } from '../types';
 
 interface Props {
   person: Person;
-  handleClick: (arg:string) => void;
 }
 
-export const PersonLink: React.FC<Props> = ({ person, handleClick }) => {
+export const PersonLink: React.FC<Props> = ({ person }) => {
   return (
     <td>
       <Link
         to={`/people/${person.slug}`}
         className={classNames({
-          'has-text-danger': person.sex === 'm',
+          'has-text-danger': person.sex === 'f',
         })}
-        onClick={() => handleClick(person.slug)}
       >
         {person.name}
       </Link>
