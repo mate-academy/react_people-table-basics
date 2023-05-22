@@ -33,7 +33,7 @@ export const App = () => (
                 'has-background-grey-lighter': isActive,
               })
             )}
-            to="people/"
+            to="people"
           >
             People
           </NavLink>
@@ -50,7 +50,7 @@ export const App = () => (
             element={<HomePage />}
           />
           <Route
-            path="people/*"
+            path="people"
             element={<PeoplePage />}
           />
           <Route

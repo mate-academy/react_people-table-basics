@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink';
 
 type Props = {
   people: Person[];
@@ -60,8 +61,18 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>{sex}</td>
               <td>{born}</td>
               <td>{died}</td>
-              <td>{mother ? motherName : '-'}</td>
-              <td>{father ? fatherName : '-'}</td>
+              <td>
+                {!motherName && ('-')}
+                {motherName && mother
+                  ? (<PersonLink person={mother} />)
+                  : (motherName)}
+              </td>
+              <td>
+                {!fatherName && ('-')}
+                {fatherName && father
+                  ? (<PersonLink person={father} />)
+                  : (fatherName)}
+              </td>
             </tr>
           );
         })}
