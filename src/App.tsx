@@ -11,6 +11,35 @@ interface Props {
   text: string;
 }
 
+export const PeoplePage: React.FC = () => {
+  const [isLoadingError, setIsLoadingError] = useState(false);
+
+  return (
+    <>
+      <h1 className="title">People Page</h1>
+
+      <div className="block">
+        <div className="box table-container">
+
+          {isLoadingError ? (
+            <p
+              data-cy="peopleLoadingError"
+              className="has-text-danger"
+            >
+              Something went wrong
+            </p>
+          ) : (
+            <PeopleTable
+              setIsLoadingError={setIsLoadingError}
+              isLoadingError={isLoadingError}
+            />
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
+
 export const PageNavLink: FC<Props> = ({ to, text }) => (
   <NavLink
     to={to}
@@ -23,8 +52,6 @@ export const PageNavLink: FC<Props> = ({ to, text }) => (
 );
 
 export const App = () => {
-  const [isLoadingError, setIsLoadingError] = useState(false);
-
   return (
     <div data-cy="app">
       <nav
@@ -49,29 +76,18 @@ export const App = () => {
             <Route path="home" element={<Navigate to="/" replace />} />
             <Route
               path="people/:slug"
-              element={<PeopleTable setIsLoadingError={setIsLoadingError} />}
+              element={<PeoplePage />}
             />
 
-            <Route
-              path="/people"
-              element={<h1 className="title">People Page</h1>}
-            />
             <Route
               path="*"
               element={<h1 className="title">Page not found</h1>}
             />
+            <Route
+              path="/people"
+              element={<PeoplePage />}
+            />
           </Routes>
-
-          <div className="block">
-            <div className="box table-container">
-
-              {isLoadingError ? (
-                <p data-cy="peopleLoadingError" className="has-text-danger">
-                  Something went wrong
-                </p>
-              ) : <PeopleTable setIsLoadingError={setIsLoadingError} />}
-            </div>
-          </div>
         </div>
       </main>
     </div>
