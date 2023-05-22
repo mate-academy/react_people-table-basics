@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import classnames from 'classnames';
+import { useEffect } from 'react';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
@@ -11,6 +12,19 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
   const getParent = (parentName: string | null) => {
     return people.find(({ name }) => name === parentName);
   };
+
+  const selectedSlug = useParams().slug ?? '';
+
+  useEffect(() => {
+    const selectedPerson = document.getElementById(selectedSlug);
+
+    if (selectedPerson) {
+      selectedPerson.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
+  }, [selectedSlug]);
 
   return (
     <table
@@ -46,13 +60,17 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <tr
               data-cy="person"
               key={slug}
+              id={slug}
+              className={classnames({
+                'has-background-warning': slug === selectedSlug,
+              })}
             >
               <td>
                 <Link
                   className={classnames({
                     'has-text-danger': sex === 'f',
                   })}
-                  to={`#/people/${slug}`}
+                  to={`/people/${slug}`}
                 >
                   {name}
                 </Link>

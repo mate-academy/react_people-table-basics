@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { useState, useEffect } from 'react';
 import { getPeople } from '../api';
 import { Person } from '../types';
@@ -15,8 +14,6 @@ export const PeoplePage: React.FC = () => {
       setIsLoading(true);
       try {
         const peopleFromServer = await getPeople();
-
-        console.log(peopleFromServer);
 
         setPeople(peopleFromServer);
         setIsLoading(true);
@@ -44,13 +41,20 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {!people.length && (
+          {(!isLoading && !people.length) && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {!hasError && <PeopleTable people={people} />}
+          {
+            (!hasError && people.length > 0)
+            && (
+              <PeopleTable
+                people={people}
+              />
+            )
+          }
         </div>
       </div>
     </>

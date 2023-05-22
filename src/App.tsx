@@ -1,45 +1,14 @@
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.scss';
-import cn from 'classnames';
 import { PeoplePage } from './Pages/PeoplePage';
 import { HomePage } from './Pages/HomePage';
 import { NotFoundPage } from './Pages/NotFoundPage';
+import { NavigationBar } from './components/NavigationBar/NavigationBar';
 
 export const App = () => (
   <div data-cy="app">
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <NavLink
-            className={({ isActive }) => (
-              cn('navbar-item', {
-                'has-background-grey-lighter': isActive,
-              })
-            )}
-            to="/"
-          >
-            Home
-          </NavLink>
-
-          <NavLink
-            className={({ isActive }) => (
-              cn('navbar-item', {
-                'has-background-grey-lighter': isActive,
-              })
-            )}
-            to="people"
-          >
-            People
-          </NavLink>
-        </div>
-      </div>
-    </nav>
+    <NavigationBar />
 
     <main className="section">
       <div className="container">
@@ -51,7 +20,19 @@ export const App = () => (
           />
           <Route
             path="people"
-            element={<PeoplePage />}
+          >
+            <Route
+              index
+              element={<PeoplePage />}
+            />
+            <Route
+              path="/people/:slug"
+              element={<PeoplePage />}
+            />
+          </Route>
+          <Route
+            path="/home"
+            element={<Navigate to="/" replace />}
           />
           <Route
             path="*"
