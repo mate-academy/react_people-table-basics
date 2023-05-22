@@ -3,6 +3,7 @@ import './App.scss';
 import { HomePage } from './components/HomePage';
 import { Navbar } from './components/Navbar';
 import { PeoplePage } from './components/PeoplePage';
+import { PageNotFound } from './components/PageNotFound/PageNotFound';
 
 export const App = () => (
   <div data-cy="app">
@@ -13,9 +14,10 @@ export const App = () => (
         <Route path="/" element={<HomePage />} />
         <Route path="/people">
           <Route index element={<PeoplePage />} />
+          <Route path=":slug" element={<PeoplePage />} />
         </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
-
     </main>
   </div>
 );
