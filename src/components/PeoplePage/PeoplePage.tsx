@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
@@ -13,25 +13,25 @@ export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [newError, setNewError] = useState(false);
 
-  const noPeople = people.length === 0;
+  const loadPeople = useCallback(
+    async () => {
+      try {
+        const response = await getPeople();
 
-  const loadPeople = async () => {
-    try {
-      const response = await getPeople();
+        const peopleWithParents = response.map((person) => ({
+          ...person,
+          mother: findParent(response, person.motherName),
+          father: findParent(response, person.fatherName),
+        }));
 
-      const peopleWithParents = response.map((person) => ({
-        ...person,
-        mother: findParent(response, person.motherName),
-        father: findParent(response, person.fatherName),
-      }));
-
-      setPeople(peopleWithParents);
-    } catch (error) {
-      setNewError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+        setPeople(peopleWithParents);
+      } catch (error) {
+        setNewError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    }, [],
+  );
 
   useEffect(() => {
     setIsLoading(true);
@@ -56,8 +56,7 @@ export const PeoplePage = () => {
                     </p>
                   )}
 
-                {noPeople
-                  && !newError
+                {!people.length && !newError
                   ? (
                     <p data-cy="noPeopleMessage">
                       There are no people on the server

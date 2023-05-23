@@ -1,13 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
-import { NewPerson } from '../NewPerson';
+import { PersonItem } from '../PersonItem';
 
 type Props = {
   people: Person[];
 };
 
 export const PeopleList: React.FC<Props> = ({ people }) => {
-  const { selectedPerson } = useParams();
+  const { personId } = useParams();
 
   return (
     <table
@@ -27,10 +27,10 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
 
       <tbody>
         {people.map((person) => (
-          <NewPerson
+          <PersonItem
             key={person.slug}
             person={person}
-            selectedPerson={selectedPerson}
+            selectedPerson={personId}
           />
         ))}
       </tbody>
