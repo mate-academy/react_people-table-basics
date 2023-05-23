@@ -1,18 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../../types';
 
 interface Props {
   person: Person;
-  selectedPerson: string;
-  setSelectedPerson: (slug: string) => void;
 }
 
-export const PersonInfo: React.FC<Props> = ({
-  person,
-  selectedPerson,
-  setSelectedPerson,
-}) => {
+export const PersonInfo: React.FC<Props> = ({ person }) => {
+  const { personSlug } = useParams();
+
   const {
     name,
     born,
@@ -28,16 +24,12 @@ export const PersonInfo: React.FC<Props> = ({
   return (
     <tr
       data-cy="person"
-      className={cn({ 'has-background-warning': slug === selectedPerson })}
+      className={cn({ 'has-background-warning': slug === personSlug })}
     >
       <td>
         <Link
-          to={slug}
+          to={`/people/${slug}`}
           className={cn({ 'has-text-danger': sex === 'f' })}
-          onClick={(event) => {
-            event.preventDefault();
-            setSelectedPerson(slug);
-          }}
         >
           {name}
         </Link>
@@ -51,12 +43,8 @@ export const PersonInfo: React.FC<Props> = ({
           ? (
             <td>
               <Link
-                to={`/people/${slug}`}
+                to={`/people/${mother.slug}`}
                 className={cn({ 'has-text-danger': mother.sex === 'f' })}
-                onClick={(event) => {
-                  event.preventDefault();
-                  setSelectedPerson(mother.slug);
-                }}
               >
                 {motherName}
               </Link>
@@ -71,13 +59,7 @@ export const PersonInfo: React.FC<Props> = ({
         father
           ? (
             <td>
-              <Link
-                to={slug}
-                onClick={(event) => {
-                  event.preventDefault();
-                  setSelectedPerson(father.slug);
-                }}
-              >
+              <Link to={`/people/${father.slug}`}>
                 {fatherName}
               </Link>
             </td>

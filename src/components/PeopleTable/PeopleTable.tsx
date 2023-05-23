@@ -1,26 +1,42 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PersonInfo } from '../PersonInfo';
+import { getPeople } from '../../api';
 
-interface Props {
-  people: Person[];
-  error: string | null;
-  isLoading: boolean;
-  fetchPeople: () => void;
-}
+export const PeopleTable = () => {
+  const [people, setPeople] = useState<Person[] | null>(null);
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-export const PeopleTable: React.FC<Props> = ({
-  fetchPeople,
-  people,
-  isLoading,
-  error,
-}) => {
-  const [selectedPerson, setSelectedPerson] = useState('');
+  const findPeopleWithParents = (peopleFromServer: Person[]) => {
+    const peopleWithParents = peopleFromServer.map(child => {
+      const mother = peopleFromServer.find(
+        parent => parent.name === child.motherName,
+      );
+      const father = peopleFromServer.find(
+        parent => parent.name === child.fatherName,
+      );
 
-  const handleSetSelectedPerson = (slug: string) => {
-    setSelectedPerson(slug);
+      return {
+        ...child,
+        mother,
+        father,
+      };
+    });
+
+    setPeople(peopleWithParents);
   };
+
+  const fetchPeople = useCallback(async () => {
+    try {
+      await getPeople().then(data => findPeopleWithParents(data));
+    } catch {
+      setError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchPeople();
@@ -29,13 +45,13 @@ export const PeopleTable: React.FC<Props> = ({
   return (
     <div className="block">
       <div className="box table-container">
-        {error === 'load' && (
+        {error && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             Something went wrong
           </p>
         )}
 
-        {people.length === 0 && (
+        {(people !== null && people.length === 0) && (
           <p data-cy="noPeopleMessage">
             There are no people on the server
           </p>
@@ -60,11 +76,9 @@ export const PeopleTable: React.FC<Props> = ({
               </thead>
 
               <tbody>
-                {people.map(person => (
+                {people?.map(person => (
                   <PersonInfo
                     person={person}
-                    selectedPerson={selectedPerson}
-                    setSelectedPerson={handleSetSelectedPerson}
                     key={person.slug}
                   />
                 ))}
