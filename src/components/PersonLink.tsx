@@ -8,7 +8,7 @@ interface Props {
   selectedPerson: string;
 }
 
-export const PersonCard: React.FC<Props> = memo((
+export const PersonLink: React.FC<Props> = memo((
   { person, selectedPerson },
 ) => {
   const {

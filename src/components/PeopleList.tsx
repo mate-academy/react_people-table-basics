@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { memo } from 'react';
 import { Person } from '../types';
-import { PersonCard } from './PersonCard';
+import { PersonLink } from './PersonLink';
 
 interface Props {
   people: Person[];
@@ -28,7 +28,7 @@ export const PeopleList: React.FC<Props> = memo(({ people }) => {
 
       <tbody>
         {people.map((person) => (
-          <PersonCard
+          <PersonLink
             person={person}
             key={person.slug}
             selectedPerson={selectedPerson}

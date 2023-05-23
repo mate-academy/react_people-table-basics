@@ -1,7 +1,6 @@
-import { memo } from 'react';
 import { PageNavLink } from './PageNavLink';
 
-export const NavBar = memo(() => (
+export const NavBar = () => (
   <nav
     data-cy="nav"
     className="navbar is-fixed-top has-shadow"
@@ -15,4 +14,4 @@ export const NavBar = memo(() => (
       </div>
     </div>
   </nav>
-));
+);

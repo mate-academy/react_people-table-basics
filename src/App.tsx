@@ -14,15 +14,8 @@ export const App = () => (
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/people" element={<PeoplePage />}>
-            <Route
-              path=":selectedPerson"
-              element={<PeoplePage />}
-            />
-
-            <Route
-              index
-              element={<PeoplePage />}
-            />
+            <Route path=":selectedPerson" element={<PeoplePage />} />
+            <Route index element={<PeoplePage />} />
           </Route>
           <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="*" element={<NotFoundPage />} />

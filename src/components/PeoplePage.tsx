@@ -15,7 +15,7 @@ export const PeoplePage = memo(() => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const LoadPeople = useCallback(async () => {
+  const loadPeople = useCallback(async () => {
     setIsLoading(true);
 
     try {
@@ -28,15 +28,15 @@ export const PeoplePage = memo(() => {
       }));
 
       setPeople(peopleWithParents);
-      setIsLoading(false);
     } catch {
       setErrorMessage('Failed to load people');
+    } finally {
       setIsLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    LoadPeople();
+    loadPeople();
   }, []);
 
   return (
