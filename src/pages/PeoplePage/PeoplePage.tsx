@@ -6,7 +6,7 @@ import { PeopleTable } from '../../components/PeopleTable';
 export const PeoplePage: FC = () => {
   const { people, isLoading, errorMessage } = useFetchPeople();
 
-  const getParent = (parentName: string | null) => {
+  const findParent = (parentName: string | null) => {
     if (parentName) {
       return people?.find(person => person.name === parentName);
     }
@@ -17,8 +17,8 @@ export const PeoplePage: FC = () => {
   const peopleWithParents = people.map((person) => {
     return {
       ...person,
-      mother: getParent(person.motherName),
-      father: getParent(person.fatherName),
+      mother: findParent(person.motherName),
+      father: findParent(person.fatherName),
     };
   });
 
