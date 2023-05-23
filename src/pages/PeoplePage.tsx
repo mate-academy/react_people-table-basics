@@ -33,7 +33,9 @@ export const PeoplePage = () => {
         });
 
         setPeople(peopleWithParents);
-      } else {
+      }
+
+      if (!avaliablePeople.length) {
         setAreNoPeople(true);
       }
     } catch {
