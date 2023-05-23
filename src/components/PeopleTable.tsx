@@ -1,37 +1,20 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { PersonItem } from './PersonItem';
-import { getPeople } from '../api';
 import { Loader } from './Loader';
 
 interface Props {
-  setIsLoadingError: (arg: boolean) => void;
+  people: Person[];
   isLoadingError: boolean
 }
 
 export const PeopleTable: React.FC<Props> = ({
-  setIsLoadingError,
+  people,
   isLoadingError,
 }) => {
   const { slug = '' } = useParams();
-  const [people, setPeople] = useState<Person[]>([]);
-
-  const getPeopleFromServer = useCallback(async () => {
-    try {
-      const peopleFromServer = await getPeople();
-
-      setPeople(peopleFromServer);
-    } catch (error) {
-      setIsLoadingError(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    getPeopleFromServer();
-  }, [getPeopleFromServer]);
-
-  const parent = (parentName: string) => {
+  const findParent = (parentName: string) => {
     return people.find(person => person.name === parentName);
   };
 
@@ -59,7 +42,7 @@ export const PeopleTable: React.FC<Props> = ({
                 <PersonItem
                   person={person}
                   key={person.slug}
-                  parent={parent}
+                  findParent={findParent}
                   selectedPerson={slug}
                 />
               ))}

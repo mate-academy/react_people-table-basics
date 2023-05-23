@@ -7,17 +7,17 @@ import { PersonLink } from './PersonLink';
 
 interface Props {
   person: Person;
-  parent: (person: string) => Person | undefined;
+  findParent: (person: string) => Person | undefined;
   selectedPerson: string;
 }
 
 export const PersonItem: React.FC<Props> = ({
   person,
-  parent,
+  findParent,
   selectedPerson,
 }) => {
-  const father = person.fatherName ? parent(person.fatherName) : null;
-  const mother = person.motherName ? parent(person.motherName) : null;
+  const father = person.fatherName ? findParent(person.fatherName) : null;
+  const mother = person.motherName ? findParent(person.motherName) : null;
 
   return (
     <tr
