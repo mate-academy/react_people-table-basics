@@ -6,10 +6,11 @@ import { PeopleTable } from '../PeopleTable';
 import { Person } from '../../types';
 
 export const PeoplePage: React.FC = () => {
+  const { slug = '' } = useParams();
+
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const { slug = '' } = useParams();
 
   useEffect(() => {
     const getPeopleOnLoad = async () => {
