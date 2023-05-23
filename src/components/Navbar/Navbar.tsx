@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { PageNavLink } from '../PageNavLink';
 
-export const Navbar:FC = () => (
+export const Navbar: FC = () => (
   <nav
     data-cy="nav"
     className="navbar is-fixed-top has-shadow"
@@ -13,7 +13,6 @@ export const Navbar:FC = () => (
         <PageNavLink to="/" text="Home" />
 
         <PageNavLink to="/people" text="People" />
-
       </div>
     </div>
   </nav>

@@ -6,22 +6,12 @@ import { PersonLink } from '../PersonLink';
 interface Props {
   people: Person[];
   personSlug?: string;
-  isError?: boolean;
 }
 
 export const PeopleList:FC<Props> = ({
   people,
   personSlug,
-  isError,
 }) => {
-  if (isError) {
-    return (
-      <p data-cy="peopleLoadingError" className="has-text-danger">
-        Something went wrong
-      </p>
-    );
-  }
-
   if (!people.length) {
     return (
       <p data-cy="noPeopleMessage">

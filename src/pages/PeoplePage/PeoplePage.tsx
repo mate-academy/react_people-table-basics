@@ -15,9 +15,9 @@ export const PeoplePage: FC = () => {
     const fetchPeople = async () => {
       setIsLoading(true);
       try {
-        const loadPeople = await getPeople();
+        const loadedPeople = await getPeople();
 
-        setPeople(loadPeople);
+        setPeople(loadedPeople);
       } catch (err) {
         setIsError(true);
       } finally {
@@ -34,18 +34,21 @@ export const PeoplePage: FC = () => {
 
       <div className="block">
         <div className="box table-container">
+          {(isError && !isLoading) && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )}
           {isLoading
             ? <Loader />
             : (
               <PeopleList
                 people={people}
                 personSlug={slug}
-                isError={isError}
               />
             )}
         </div>
       </div>
     </>
-
   );
 };

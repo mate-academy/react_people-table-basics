@@ -7,7 +7,7 @@ interface Props {
   text: string;
 }
 
-export const PageNavLink:FC<Props> = ({ to, text }) => (
+export const PageNavLink: FC<Props> = ({ to, text }) => (
   <NavLink
     className={
       ({ isActive }) => classNames('navbar-item', {
