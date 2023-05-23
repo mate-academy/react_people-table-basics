@@ -1,11 +1,12 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.scss';
+import { FC } from 'react';
 import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { NavLinkItem } from './components/NavLinkItem/NavLinkItem';
 
-export const App: React.FC = () => (
+export const App: FC = () => (
   <div data-cy="app">
     <nav
       data-cy="nav"
@@ -32,7 +33,7 @@ export const App: React.FC = () => (
           <Route path="/people">
             <Route index element={<PeoplePage />} />
 
-            <Route path=":personSlug" element={<PeoplePage />} />
+            <Route path=":slug" element={<PeoplePage />} />
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />
