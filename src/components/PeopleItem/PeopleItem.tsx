@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const PeopleItem: React.FC<Props> = ({ person }) => {
-  const { selectedPersonSlug = '' } = useParams();
+  const { slug = '' } = useParams();
   const {
     sex,
     born,
@@ -18,7 +18,7 @@ export const PeopleItem: React.FC<Props> = ({ person }) => {
     mother,
     father,
   } = person;
-  const isActive = selectedPersonSlug === person.slug;
+  const isActive = slug === person.slug;
 
   return (
     <tr
