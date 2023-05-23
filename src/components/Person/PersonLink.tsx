@@ -23,8 +23,8 @@ export const PersonLink: FC<Props> = ({ person, people }) => {
     slug,
   } = person;
 
-  const motherOfPerson = findPerson(motherName, people);
-  const fatherOfPerson = findPerson(fatherName, people);
+  const personMother = findPerson(motherName, people);
+  const personFather = findPerson(fatherName, people);
 
   return (
     <>
@@ -44,12 +44,12 @@ export const PersonLink: FC<Props> = ({ person, people }) => {
       <td>{died}</td>
 
       <td>
-        {motherOfPerson
+        {personMother
           ? (
             <Link
-              to={`/people/${motherOfPerson.slug}`}
+              to={`/people/${personMother.slug}`}
               className={cn({
-                'has-text-danger': motherOfPerson?.sex === 'f',
+                'has-text-danger': personMother?.sex === 'f',
               })}
             >
               {motherName}
@@ -59,10 +59,10 @@ export const PersonLink: FC<Props> = ({ person, people }) => {
       </td>
 
       <td>
-        {fatherOfPerson
+        {personFather
           ? (
             <Link
-              to={`/people/${fatherOfPerson.slug}`}
+              to={`/people/${personFather.slug}`}
             >
               {fatherName}
             </Link>
