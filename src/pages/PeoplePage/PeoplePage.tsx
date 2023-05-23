@@ -1,13 +1,12 @@
 import { FC } from 'react';
-import { useFetch } from '../../custom-hooks/useFetch';
+import { useFetchPeople } from '../../custom-hooks/useFetch';
 import { Loader } from '../../components/Loader';
 import { PeopleTable } from '../../components/PeopleTable';
-import { API_URL } from '../../constants/apiUrl';
 
 export const PeoplePage: FC = () => {
-  const { people, isLoading, errorMessage } = useFetch(API_URL);
+  const { people, isLoading, errorMessage } = useFetchPeople();
 
-  const getPerent = (parentName: string | null) => {
+  const getParent = (parentName: string | null) => {
     if (parentName) {
       return people?.find(person => person.name === parentName);
     }
@@ -15,13 +14,13 @@ export const PeoplePage: FC = () => {
     return null;
   };
 
-  const peopleWithPerents = people ? people.map((person) => {
+  const peopleWithParents = people.map((person) => {
     return {
       ...person,
-      mother: getPerent(person.motherName),
-      father: getPerent(person.fatherName),
+      mother: getParent(person.motherName),
+      father: getParent(person.fatherName),
     };
-  }) : [];
+  });
 
   return (
     <>
@@ -37,13 +36,15 @@ export const PeoplePage: FC = () => {
             </p>
           )}
 
-          {people?.length === 0 && (
+          {!isLoading && people.length === 0 && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {people && (<PeopleTable people={peopleWithPerents} />)}
+          {peopleWithParents.length !== 0 && (
+            <PeopleTable people={peopleWithParents} />
+          )}
         </div>
       </div>
     </>
