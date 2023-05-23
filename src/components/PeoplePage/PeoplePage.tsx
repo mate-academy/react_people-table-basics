@@ -19,7 +19,7 @@ export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const isListEmpty = !people.length;
+  const isListEmpty = !people.length && !isLoading && !isError;
 
   const loadPeople = useCallback(async () => {
     setIsLoading(true);
