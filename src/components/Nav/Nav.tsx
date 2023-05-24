@@ -1,7 +1,8 @@
 import cn from 'classnames';
+import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export const Nav = () => (
+export const Nav = memo(() => (
   <nav
     data-cy="nav"
     className="navbar is-fixed-top has-shadow"
@@ -34,4 +35,4 @@ export const Nav = () => (
       </div>
     </div>
   </nav>
-);
+));

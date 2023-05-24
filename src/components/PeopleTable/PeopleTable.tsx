@@ -1,10 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useState,
+  memo,
+} from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PersonInfo } from '../PersonInfo';
 import { getPeople } from '../../api';
 
-export const PeopleTable = () => {
+export const PeopleTable = memo(() => {
   const [people, setPeople] = useState<Person[] | null>(null);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -88,4 +93,4 @@ export const PeopleTable = () => {
       </div>
     </div>
   );
-};
+});

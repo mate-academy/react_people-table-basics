@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../../types';
@@ -6,7 +7,7 @@ interface Props {
   person: Person;
 }
 
-export const PersonInfo: React.FC<Props> = ({ person }) => {
+export const PersonInfo: React.FC<Props> = memo(({ person }) => {
   const { personSlug } = useParams();
 
   const {
@@ -71,4 +72,4 @@ export const PersonInfo: React.FC<Props> = ({ person }) => {
       }
     </tr>
   );
-};
+});

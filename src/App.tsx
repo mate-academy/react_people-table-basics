@@ -16,6 +16,11 @@ export const App = () => (
             element={(<Home />)}
           />
 
+          <Route
+            path="/home"
+            element={(<Home />)}
+          />
+
           <Route path="/people">
             <Route
               index
