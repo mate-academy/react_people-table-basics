@@ -1,4 +1,6 @@
-import { FC, useEffect, useState } from 'react';
+import {
+  FC, useCallback, useEffect, useState,
+} from 'react';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { PeopleTable } from '../../components/PeopleTable';
@@ -8,11 +10,11 @@ export const PeoplePage: FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchPeople = async () => {
+  const fetchPeople = useCallback(async () => {
     setIsLoading(true);
 
     try {
-      const peopleResponse: Person[] = await getPeople();
+      const peopleResponse = await getPeople();
 
       const peopleWithParents = peopleResponse.map(person => {
         const mother = peopleResponse
@@ -33,7 +35,7 @@ export const PeoplePage: FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchPeople();
