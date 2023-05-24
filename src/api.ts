@@ -13,3 +13,8 @@ export function getPeople(): Promise<Person[]> {
     .then(() => fetch(API_URL))
     .then(response => response.json());
 }
+
+export function getPerson(people: Person[], name: string | null) {
+  return (
+    people.find((person) => person.name === name));
+}
