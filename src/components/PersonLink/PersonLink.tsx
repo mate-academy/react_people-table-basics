@@ -31,7 +31,7 @@ export const PersonLink: FC<Props> = memo(({ person }) => {
     >
       <td>
         <NavLink
-          to={`./${slug}`}
+          to={`/people/${slug}`}
           className={classNames({
             'has-text-danger': sex === 'f',
           })}
@@ -47,7 +47,7 @@ export const PersonLink: FC<Props> = memo(({ person }) => {
         mother ? (
           <td>
             <NavLink
-              to={`./${mother.slug}`}
+              to={`/people/${mother.slug}`}
               className="has-text-danger"
             >
               {motherName}
@@ -63,7 +63,7 @@ export const PersonLink: FC<Props> = memo(({ person }) => {
         father ? (
           <td>
             <NavLink
-              to={`./${father.slug}`}
+              to={`/people/${father.slug}`}
             >
               {fatherName}
             </NavLink>

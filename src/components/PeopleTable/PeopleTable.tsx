@@ -37,7 +37,7 @@ export const PeopleTable: FC<Props> = memo(({
 
                 <tbody>
                   {people.map(person => (
-                    <PersonLink person={person} key={person.slug}/>
+                    <PersonLink person={person} key={person.slug} />
                   ))}
                 </tbody>
               </table>
