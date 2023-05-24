@@ -1,19 +1,18 @@
-import classNames from 'classnames';
 import React, { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { PageNavLink } from '../PageNavLink';
 
-interface Props {
-  to: string;
-  text: string;
-}
-
-export const Navbar: FC<Props> = React.memo(({ to, text }) => (
-  <NavLink
-    className={({ isActive }) => classNames('navbar-item', {
-      'has-background-grey-lighter': isActive,
-    })}
-    to={to}
+export const Navbar: FC = React.memo(() => (
+  <nav
+    data-cy="nav"
+    className="navbar is-fixed-top has-shadow"
+    role="navigation"
+    aria-label="main navigation"
   >
-    {text}
-  </NavLink>
+    <div className="container">
+      <div className="navbar-brand">
+        <PageNavLink to="/" text="Home" />
+        <PageNavLink to="/people" text="People" />
+      </div>
+    </div>
+  </nav>
 ));

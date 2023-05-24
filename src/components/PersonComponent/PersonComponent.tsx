@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import classNames from 'classnames';
-import { useMatch } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
@@ -8,8 +8,9 @@ interface Props {
   person: Person;
 }
 
-export const Human: FC<Props> = React.memo(({ person }) => {
-  const match = useMatch('/people/:slug');
+export const PersonComponent: FC<Props> = React.memo(({ person }) => {
+  const params = useParams();
+
   const {
     sex,
     born,
@@ -25,7 +26,7 @@ export const Human: FC<Props> = React.memo(({ person }) => {
     <tr
       data-cy="person"
       className={classNames({
-        'has-background-warning': match?.params.slug === `:${slug}`,
+        'has-background-warning': params.slug === `:${slug}`,
       })}
     >
       <td>

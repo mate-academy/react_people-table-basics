@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Person } from '../../types';
-import { Human } from '../Human';
+import { PersonComponent } from '../PersonComponent';
 
 interface Props {
   people: Person[];
@@ -35,7 +35,7 @@ export const PeopleTable: FC<Props> = React.memo(({ people }) => (
         };
 
         return (
-          <Human key={person.name} person={human} />
+          <PersonComponent key={person.name} person={human} />
         );
       })}
     </tbody>
