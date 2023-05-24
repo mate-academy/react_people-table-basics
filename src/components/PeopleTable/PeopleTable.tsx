@@ -5,9 +5,22 @@ import { Person } from '../../types';
 type Props = {
   peoples: Person[];
   selectedSlug: string;
+  isError: boolean;
 };
 
-export const PeopleTable: React.FC<Props> = ({ peoples, selectedSlug }) => {
+export const PeopleTable: React.FC<Props> = ({
+  peoples,
+  selectedSlug,
+  isError,
+}) => {
+  if (!isError) {
+    return (
+      <p data-cy="peopleLoadingError" className="has-text-danger">
+        Something went wrong
+      </p>
+    );
+  }
+
   return (
     <table
       data-cy="peopleTable"

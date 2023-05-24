@@ -35,20 +35,11 @@ export const PeoplePage = () => {
           {isLoad
             ? <Loader />
             : (
-              (
-                isError
-                  ? (
-                    <PeopleTable
-                      peoples={people}
-                      selectedSlug={slug}
-                    />
-                  )
-                  : (
-                    <p data-cy="peopleLoadingError" className="has-text-danger">
-                      Something went wrong
-                    </p>
-                  )
-              )
+              <PeopleTable
+                peoples={people}
+                selectedSlug={slug}
+                isError={isError}
+              />
             )}
         </div>
       </div>
