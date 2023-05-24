@@ -10,7 +10,6 @@ export const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState<ErrorType | null>(null);
 
-
   useEffect(() => {
     setIsLoading(true);
 
@@ -18,19 +17,20 @@ export const PeoplePage: React.FC = () => {
       .then((peopleFromServer) => {
         if (peopleFromServer.length === 0) {
           setHasError(ErrorType.EmptyData);
+
           return;
         }
 
-      const peopleWithParents = peopleFromServer.map((person) => ({
-        ...person,
-        mother: getPerson(peopleFromServer, person.motherName),
-        father: getPerson(peopleFromServer, person.fatherName),
-      }));
+        const peopleWithParents = peopleFromServer.map((person) => ({
+          ...person,
+          mother: getPerson(peopleFromServer, person.motherName),
+          father: getPerson(peopleFromServer, person.fatherName),
+        }));
 
-      setPeople(peopleWithParents);
-    })
-    .catch(() => setHasError(ErrorType.LoadingError))
-    .finally(() => setIsLoading(false));
+        setPeople(peopleWithParents);
+      })
+      .catch(() => setHasError(ErrorType.LoadingError))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (

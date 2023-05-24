@@ -19,4 +19,5 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
     >
       {name}
     </Link>
-)};
+  );
+};
