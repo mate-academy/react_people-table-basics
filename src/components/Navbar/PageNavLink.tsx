@@ -9,7 +9,7 @@ type Props = {
   end?: boolean;
 };
 
-export const PageNavLink: React.FC<Props> = ({ to, text, end }) => {
+export const PageNavLink: React.FC<Props> = React.memo(({ to, text, end }) => {
   return (
     <NavLink
       to={to}
@@ -21,4 +21,4 @@ export const PageNavLink: React.FC<Props> = ({ to, text, end }) => {
       {text}
     </NavLink>
   );
-};
+});
