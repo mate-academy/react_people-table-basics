@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from './types';
 import { PersonLink } from './PersonLink';
-import { PersonParants } from './components/PersonParants';
+import { PersonParants } from './types/PersonParants';
 
 export interface Props {
   person: Person;
@@ -10,12 +10,11 @@ export interface Props {
 }
 
 export const PersonInfo: React.FC<Props> = ({ person, personParants }) => {
-  const { personSlug } = useParams();
+  const { slug } = useParams();
   const {
     sex,
     born,
     died,
-    slug,
     motherName,
     fatherName,
   } = person;
@@ -24,7 +23,7 @@ export const PersonInfo: React.FC<Props> = ({ person, personParants }) => {
     <tr
       data-cy="person"
       className={classNames({
-        'has-background-warning': personSlug === slug,
+        'has-background-warning': person.slug === slug,
       })}
     >
       <td>

@@ -25,7 +25,7 @@ createRoot(document.getElementById('root') as HTMLDivElement)
           <Route path="home" element={<Navigate to="/" replace />} />
           <Route path="/people">
             <Route index element={<PeoplePage />} />
-            <Route path=":personSlug" element={<PeoplePage />} />
+            <Route path=":slug" element={<PeoplePage />} />
           </Route>
         </Route>
       </Routes>

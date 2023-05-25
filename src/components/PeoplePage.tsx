@@ -2,22 +2,7 @@ import { useEffect, useState } from 'react';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
-import { PersonInfo } from '../PersonInfo';
-import { PersonParants } from './PersonParants';
-
-const findParants = (people: Person[], person: Person) => {
-  const personParants: PersonParants = {
-    father: null,
-    mother: null,
-  };
-
-  personParants.father = people
-    .find(findPerson => person.fatherName === findPerson.name) || null;
-  personParants.mother = people
-    .find(findPerson => person.motherName === findPerson.name) || null;
-
-  return personParants;
-};
+import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [isLoadedError, setIsLoadedError] = useState(false);
@@ -39,8 +24,6 @@ export const PeoplePage: React.FC = () => {
     loadPeople();
   }, []);
 
-  // console.log(people)
-  // console.log(people[0], 'peoplePage');
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -60,38 +43,9 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {(!isPeopleLoading && people.length) && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map((person: Person) => {
-                  return (
-                    <PersonInfo
-                      person={person}
-                      personParants={findParants(people, person)}
-                      key={person.slug}
-                    />
-                  );
-                })}
-              </tbody>
-            </table>
-          )}
+          <PeopleTable isPeopleLoading={isPeopleLoading} people={people} />
         </div>
       </div>
     </>
-
   );
 };
