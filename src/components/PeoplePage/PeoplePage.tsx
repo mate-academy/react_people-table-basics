@@ -1,39 +1,45 @@
-import { FC, useEffect, useState } from "react";
-import { Loader } from "../Loader";
-import { Person } from "../../types/Person";
-import { getPeople } from "../../api"
-import { PeopleTable } from "../PeopleTable/PeopleTable";
+import { FC, useEffect, useState } from 'react';
+import { Loader } from '../Loader';
+import { Person } from '../../types/Person';
+import { getPeople } from '../../api';
+import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    getPeople()
-      .then((peopleFromServer) => {
-        const fullPeopleinfo = peopleFromServer.map((person) => {
-          const personMother = peopleFromServer.find(
-            (motherPerson) => motherPerson.name === person.motherName,
-          );
-          const personFather = peopleFromServer.find(
-            (fatherPerson) => fatherPerson.name === person.fatherName,
-          );
+  const fetchData = async () => {
+    try {
+      const peopleFromServer = await getPeople();
 
-          return { ...person, mother:personMother, father: personFather };
-        });
+      const peopleWithParents = peopleFromServer.map((person) => {
+        const mother = peopleFromServer.find(
+          (personMother) => personMother.name === person.motherName,
+        );
 
-        setPeople(fullPeopleinfo);
-      })
-      .catch(() => {
-        setError('Unable to load people');
-      })
-      .finally(() => {
-        setIsLoading(false);
+        const father = peopleFromServer.find(
+          (personFather) => personFather.name === person.fatherName,
+        );
+
+        return {
+          ...person,
+          mother,
+          father,
+        };
       });
-  }, []);
 
-  console.log(people);
+      setPeople(peopleWithParents);
+    } catch (errorMessage) {
+      setError('Something went wrong');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="block">
@@ -54,7 +60,7 @@ export const PeoplePage: FC = () => {
                 There are no people on the server
               </p>
             )}
-            <PeopleTable people = {people}/>
+            <PeopleTable people={people} />
           </>
         )}
       </div>
