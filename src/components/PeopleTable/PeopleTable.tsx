@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import { FC } from 'react';
-import { v4 } from 'uuid';
 
 import { PersonItem } from '../PersonItem/PersonItem';
 import { Person } from '../../types';
@@ -31,7 +30,7 @@ export const PeopleTable: FC<Props> = ({ people }) => {
           {people.map(person => (
             <PersonItem
               person={person}
-              key={v4()}
+              key={person.slug}
             />
           ))}
         </tbody>

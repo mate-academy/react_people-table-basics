@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
@@ -9,28 +9,29 @@ export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingError, setIsLoadingError] = useState(false);
 
-  const fetchPeople = () => {
-    getPeople()
-      .then((fetchedPeople) => {
-        const peopleWithParents = fetchedPeople.map(person => {
-          const father = fetchedPeople.find(personFather => (
-            personFather.name === person.fatherName
-          ));
+  const fetchPeople = useCallback(async () => {
+    try {
+      const fetchedPeople = await getPeople();
 
-          const mother = fetchedPeople.find(personMother => (
-            personMother.name === person.motherName
-          ));
+      const peopleWithParents = fetchedPeople.map(person => {
+        const father = fetchedPeople.find(personFather => (
+          personFather.name === person.fatherName
+        ));
 
-          return { ...person, father, mother };
-        });
+        const mother = fetchedPeople.find(personMother => (
+          personMother.name === person.motherName
+        ));
 
-        setPeople(peopleWithParents);
-      })
-      .catch(() => {
-        setIsLoadingError(true);
-      })
-      .finally(() => setIsLoading(false));
-  };
+        return { ...person, father, mother };
+      });
+
+      setPeople(peopleWithParents);
+    } catch (error) {
+      setIsLoadingError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchPeople();
@@ -56,7 +57,6 @@ export const PeoplePage = () => {
           )}
 
           {people.length > 0 && (<PeopleTable people={people} />)}
-
         </div>
       </div>
     </>

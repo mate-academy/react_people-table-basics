@@ -26,46 +26,43 @@ export const PersonItem: FC<Props> = ({ person }) => {
   const selectedTodo = userSlug === slug;
 
   return (
-    <>
-      <tr
-        data-cy="person"
-        className={classnames({ 'has-background-warning': selectedTodo })}
-      >
-        <td>
-          <PersonLink
-            sex={sex}
-            slug={slug}
-            name={name}
-          />
-        </td>
+    <tr
+      data-cy="person"
+      className={classnames({ 'has-background-warning': selectedTodo })}
+    >
+      <td>
+        <PersonLink
+          sex={sex}
+          slug={slug}
+          name={name}
+        />
+      </td>
 
-        <td>{sex}</td>
-        <td>{born}</td>
-        <td>{died}</td>
-        <td>
-          {mother
-            ? (
-              <PersonLink
-                sex={mother.sex}
-                slug={mother.slug}
-                name={mother.name}
-              />
-            )
-            : motherName || '-'}
-        </td>
-        <td>
-          {father
-            ? (
-              <PersonLink
-                sex={father.sex}
-                slug={father.slug}
-                name={father.name}
-              />
-            )
-            : fatherName || '-'}
-        </td>
-      </tr>
-
-    </>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>
+        {mother
+          ? (
+            <PersonLink
+              sex={mother.sex}
+              slug={mother.slug}
+              name={mother.name}
+            />
+          )
+          : motherName || '-'}
+      </td>
+      <td>
+        {father
+          ? (
+            <PersonLink
+              sex={father.sex}
+              slug={father.slug}
+              name={father.name}
+            />
+          )
+          : fatherName || '-'}
+      </td>
+    </tr>
   );
 };
