@@ -1,7 +1,7 @@
-import { NavLinkItem } from "../NavLinkItem/NavLinkItem"
+import { NavLinkItem } from '../NavLinkItem/NavLinkItem';
 
 export const Navigation = () => {
-  return(
+  return (
     <nav
       data-cy="nav"
       className="navbar is-fixed-top has-shadow"
@@ -15,5 +15,5 @@ export const Navigation = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};

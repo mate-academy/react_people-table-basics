@@ -5,40 +5,50 @@ import { PersonLink } from "../PersonLink/PersonLink";
 
 interface Props {
   person: Person;
-  slug: string | undefined;
+  personSlug: string | undefined;
 }
 
-export const PersonItem: FC<Props> = ({ person, slug }) => {
+export const PersonItem: FC<Props> = ({ person, personSlug }) => {
+  const {
+    slug,
+    sex,
+    born,
+    died,
+    mother,
+    motherName,
+    father,
+    fatherName
+  } = person
   return (
     <tr
-      key={person.slug}
+      key={slug}
       data-cy="person"
       className={cn({
-        'has-background-warning': slug === person.slug,
+        'has-background-warning': personSlug === slug,
       })}
     >
       <td>
         <PersonLink person={person} />
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
 
       <td>
-        {person.mother && (<PersonLink person={person.mother} />)}
-        {person.motherName && !person.mother && (
-          <p>{person.motherName}</p>
+        {mother && (<PersonLink person={mother} />)}
+        {motherName && !mother && (
+          <p>{motherName}</p>
         )}
-        {!person.motherName && !person.mother && ('-')}
+        {!motherName && !mother && ('-')}
       </td>
 
       <td>
-        {person.father && (<PersonLink person={person.father} />)}
-        {person.fatherName && !person.father && (
-          <p>{person.fatherName}</p>
+        {father && (<PersonLink person={father} />)}
+        {fatherName && !father && (
+          <p>{fatherName}</p>
         )}
-        {!person.fatherName && !person.father && ('-')}
+        {!fatherName && !father && ('-')}
       </td>
     </tr>
   )
