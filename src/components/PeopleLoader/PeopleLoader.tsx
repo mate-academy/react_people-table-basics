@@ -58,15 +58,17 @@ export const PeopleLoader = () => {
     );
   }
 
-  if (people.length === 0) {
-    return (
-      <p data-cy="noPeopleMessage">
-        There are no people on the server
-      </p>
-    );
-  }
-
   return (
-    <PeopleTable people={people} />
+    <>
+      {people && (
+        <PeopleTable people={people} />
+      )}
+
+      {!!people.length && (
+        <p data-cy="noPeopleMessage">
+          There are no people on the server
+        </p>
+      )}
+    </>
   );
 };

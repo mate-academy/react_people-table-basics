@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const PeopleTable: FC<Props> = ({ people }) => {
-  const { personSlug } = useParams();
+  const { slug } = useParams();
 
   return (
     <table
@@ -33,7 +33,7 @@ export const PeopleTable: FC<Props> = ({ people }) => {
             data-cy="person"
             key={person.slug}
             className={classNames({
-              'has-background-warning': personSlug === person.slug,
+              'has-background-warning': slug === person.slug,
             })}
           >
             <PeopleTableRowData person={person} />
