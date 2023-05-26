@@ -42,7 +42,7 @@ export const PeopleLoader = () => {
 
   useEffect(() => {
     loadPeople();
-  }, [loadPeople]);
+  }, []);
 
   if (isError) {
     return (
