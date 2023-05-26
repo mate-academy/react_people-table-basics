@@ -1,44 +1,32 @@
-import classNames from 'classnames';
+import cn from 'classnames';
 import { FC } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { PeopleType } from '../../Type/People';
+import { PersonLink } from '../PersonLink';
 
 type Props = {
   person: PeopleType;
 };
 
-type LinkProps = {
-  person: PeopleType;
-};
-
-export const PersonLink: FC<LinkProps> = ({ person }) => {
-  const { name, slug, sex } = person;
-
-  return (
-    <Link
-      to={`/people/${slug}`}
-      className={classNames({ 'has-text-danger': sex === 'f' })}
-    >
-      {name}
-    </Link>
-  );
-};
-
 export const Person: FC<Props> = ({ person }) => {
-  // TODO change const display
   const {
-    slug, sex, born, died, mother, father, motherName, fatherName,
-  }
-    = person;
+    slug,
+    sex,
+    born,
+    died,
+    mother,
+    father,
+    motherName,
+    fatherName,
+  } = person;
   const selectedTodo = useParams();
 
   return (
     <tr
       data-cy="person"
-      className={classNames({
+      className={cn({
         'has-background-warning': slug === selectedTodo.personId,
       })}
-      key={slug}
     >
       <td>
         <PersonLink person={person} />

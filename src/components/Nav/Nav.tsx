@@ -1,24 +1,4 @@
-import classNames from 'classnames';
-import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
-
-export type LinkProps = {
-  path: string;
-  title: string;
-};
-
-export const NavItem: FC<LinkProps> = ({ path, title }) => {
-  return (
-    <NavLink
-      className={({ isActive }) => (
-        classNames({ 'has-background-grey-lighter': isActive }, 'navbar-item')
-      )}
-      to={path}
-    >
-      {title}
-    </NavLink>
-  );
-};
+import { NavItem } from '../NavItem';
 
 export const Nav = () => {
   return (

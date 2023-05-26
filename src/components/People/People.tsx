@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { PeopleType } from '../../Type/People';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
+import { fetchPeople } from '../../Api/getPeople';
 
 const peopleList = (peoples: PeopleType[]) => {
   const newPeople = peoples.map((person) => {
@@ -21,16 +22,13 @@ const peopleList = (peoples: PeopleType[]) => {
 };
 
 export const People = () => {
-  const [people, setPeople] = React.useState<PeopleType[]>([]);
-  const [isError, setIsError] = React.useState<boolean>(false);
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [people, setPeople] = useState<PeopleType[]>([]);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchPeople = async () => {
+  const getPeople = async () => {
     try {
-      const response = await fetch(
-        'https://mate-academy.github.io/react_people-table/api/people.json',
-      );
-      const data = await response.json();
+      const data = await fetchPeople();
 
       setPeople(peopleList(data));
     } catch (error) {
@@ -41,7 +39,7 @@ export const People = () => {
   };
 
   useEffect(() => {
-    fetchPeople();
+    getPeople();
   }, []);
 
   return (
