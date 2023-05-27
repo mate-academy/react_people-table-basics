@@ -1,28 +1,33 @@
-import { useEffect, useMemo, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { PeopleTable } from '../PeopleTable';
 import { Loader } from '../Loader';
 
-export const PeopleBlock = () => {
+export const PeopleList = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isWait, setIsWait] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const { personSlug = '0' } = useParams();
 
-  const fetchPeople = async () => {
+  const fetchPeople = useCallback(async () => {
     try {
       setPeople(await getPeople());
     } catch (error) {
       setIsError(true);
     }
 
-    setIsWait(false);
-  };
+    setIsLoading(false);
+  }, []);
 
   useEffect(() => {
-    setIsWait(true);
+    setIsLoading(true);
     fetchPeople();
   }, []);
 
@@ -39,7 +44,7 @@ export const PeopleBlock = () => {
     };
   }), [people]);
 
-  if (isWait) {
+  if (isLoading) {
     return (<Loader />);
   }
 

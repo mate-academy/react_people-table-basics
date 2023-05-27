@@ -1,4 +1,4 @@
-import { PeopleBlock } from '../PeopleBlock';
+import { PeopleList } from '../PeopleList';
 
 export const PeoplePage = () => (
   <>
@@ -6,7 +6,7 @@ export const PeoplePage = () => (
 
     <div className="box table-container">
       <div className="block">
-        <PeopleBlock />
+        <PeopleList />
       </div>
     </div>
   </>
