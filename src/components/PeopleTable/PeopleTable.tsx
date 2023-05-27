@@ -4,13 +4,13 @@ import { PersonItem } from '../PersonItem/PersonItem';
 import { Loader } from '../Loader';
 
 type Props = {
-  peopleList: Person[] | null;
+  people: Person[] | null;
 };
 
-export const PeopleTable: FC<Props> = ({ peopleList }) => {
+export const PeopleTable: FC<Props> = ({ people }) => {
   return (
     <>
-      {peopleList ? (
+      {people ? (
         <table
           data-cy="peopleTable"
           className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -27,8 +27,8 @@ export const PeopleTable: FC<Props> = ({ peopleList }) => {
           </thead>
 
           <tbody>
-            {peopleList.length > 0
-              ? peopleList.map(person => (
+            {people.length > 0
+              ? people.map(person => (
                 <PersonItem person={person} key={person.slug} />
               )) : (
                 <p data-cy="noPeopleMessage">

@@ -1,4 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import {
+  FC,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
@@ -7,7 +12,7 @@ export const PeoplePage: FC = () => {
   const [peopleList, getPeopleList] = useState<Person[] | null>(null);
   const [isError, setIsError] = useState(false);
 
-  const fetchPeopleList = async () => {
+  const fetchPeopleList = useCallback(async () => {
     setIsError(false);
 
     try {
@@ -25,7 +30,7 @@ export const PeoplePage: FC = () => {
     } catch {
       setIsError(true);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchPeopleList();
@@ -41,9 +46,8 @@ export const PeoplePage: FC = () => {
             Something went wrong
           </p>
         ) : (
-          <PeopleTable peopleList={peopleList} />
+          <PeopleTable people={peopleList} />
         )}
-
       </div>
     </div>
   );

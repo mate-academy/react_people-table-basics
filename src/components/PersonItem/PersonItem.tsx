@@ -13,14 +13,14 @@ export const PersonItem: FC<Props> = ({ person }) => {
     sex,
     born,
     died,
+    slug: personSlug,
     fatherName,
     motherName,
-    slug,
     mother,
     father,
   } = person;
 
-  const { personSlug } = useParams();
+  const { slug } = useParams();
 
   return (
     <tr
@@ -31,7 +31,7 @@ export const PersonItem: FC<Props> = ({ person }) => {
     >
       <td>
         <Link
-          to={`../${slug}`}
+          to={`../${personSlug}`}
           className={cn({ 'has-text-danger': sex === 'f' })}
         >
           {name}
