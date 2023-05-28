@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
-  useNavigate, Route, Routes, Link,
+  useNavigate, Route, Routes, NavLink,
 } from 'react-router-dom';
+import cn from 'classnames';
 import { HomePage } from './components/homePage';
 import { People } from './components/peoplePage';
 import { getPeople } from './api';
@@ -53,19 +54,33 @@ export const App: React.FC = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <Link
-              className="navbar-item"
+            <NavLink
+              className={({ isActive }) => (
+                cn(
+                  'navbar-item',
+                  {
+                    'has-background-grey-lighter': isActive,
+                  },
+                )
+              )}
               replace
               to="/"
             >
               Home
-            </Link>
-            <Link
-              className="navbar-item"
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => (
+                cn(
+                  'navbar-item',
+                  {
+                    'has-background-grey-lighter': isActive,
+                  },
+                )
+              )}
               to="/people"
             >
               People
-            </Link>
+            </NavLink>
           </div>
         </div>
       </nav>

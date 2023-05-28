@@ -59,10 +59,8 @@ export const People: React.FC<Props> = ({
     <main className="section">
       <div className="container">
         <h1 className="title">People Page</h1>
-
         <div className="block">
           <div className="box table-container">
-
             {loadingError ? (
               <p data-cy="peopleLoadingError" className="has-text-danger">
                 Something went wrong
