@@ -6,8 +6,6 @@ import { PersonLink } from '../PersonLink/PersonLink';
 
 interface Props {
   person: Person;
-  mother?: Person;
-  father?: Person;
 }
 
 export const PersonInfo: React.FC<Props> = ({ person }) => {
@@ -28,7 +26,6 @@ export const PersonInfo: React.FC<Props> = ({ person }) => {
   return (
     <tr
       data-cy="person"
-      key={slug}
       className={classNames(
         {
           'has-background-warning': isPersonSelected,

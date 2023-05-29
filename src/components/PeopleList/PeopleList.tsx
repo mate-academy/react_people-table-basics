@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const PeopleList: React.FC<Props> = ({ people }) => {
-  const findParent = (persons: Person[], name: string | null) => (
+  const findPersonByName = (persons: Person[], name: string | null) => (
     persons.find(person => person.name === name)
   );
 
@@ -19,8 +19,8 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
           motherName,
           fatherName,
         } = person;
-        const mother = findParent(people, motherName);
-        const father = findParent(people, fatherName);
+        const mother = findPersonByName(people, motherName);
+        const father = findPersonByName(people, fatherName);
 
         const personsParents = {
           ...person,

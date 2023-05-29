@@ -9,7 +9,7 @@ export const People = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const isEmpty = people.length === 0;
+  const isPeopleListEmpty = people.length === 0;
 
   useEffect(() => {
     setIsLoading(true);
@@ -35,15 +35,13 @@ export const People = () => {
               </p>
             )}
 
-            {!isLoading
-            && isEmpty
-                && (
-                  <p data-cy="noPeopleMessage">
-                    No data
-                  </p>
-                )}
+            {!isLoading && isPeopleListEmpty && (
+              <p data-cy="noPeopleMessage">
+                No data
+              </p>
+            )}
 
-            {!isEmpty && (
+            {!isPeopleListEmpty && (
               <table
                 data-cy="peopleTable"
                 className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -60,7 +58,6 @@ export const People = () => {
                 </thead>
 
                 <PeopleList people={people} />
-
               </table>
             )}
           </div>
