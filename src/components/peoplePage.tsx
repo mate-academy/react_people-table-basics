@@ -155,7 +155,6 @@ export const People: React.FC<Props> = ({
                   <Loader />
                 )}
               </>
-
             )}
           </div>
         </div>
