@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.scss';
 import { HomePage } from './Pages/HomePage/HomePage';
 import { PeoplePage } from './Pages/PeoplePage/PeoplePage';
@@ -13,7 +13,10 @@ export const App = () => (
       <div className="container">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/people" element={<PeoplePage />} />
+          <Route path="home" element={<Navigate to="/" replace />} />
+          <Route path="people" element={<PeoplePage />}>
+            <Route path=":selectedSlug" element={<PeoplePage />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

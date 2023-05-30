@@ -1,17 +1,36 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState } from 'react';
+import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
 import { Loader } from '../../components/Loader/Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
+import { PersonLink } from '../../components/PersonLink/PersonLink';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[] | null>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const { selectedSlug } = useParams<{ selectedSlug: string }>();
 
   useEffect(() => {
     getPeople().then((res) => {
-      setPeople(res);
+      const personAndParents = res.map(person => {
+        const mother = res.find((motherPerson) => {
+          return motherPerson.name === person.motherName;
+        });
+        const father = res.find((fatherPerson) => {
+          return fatherPerson.name === person.fatherName;
+        });
+
+        return {
+          ...person,
+          mother,
+          father,
+        };
+      });
+
+      setPeople(personAndParents);
       setIsLoading(false);
     }).catch(() => {
       setHasError(true);
@@ -20,28 +39,39 @@ export const PeoplePage = () => {
 
   const peopleElements = people?.map(person => {
     const {
-      name,
       sex,
       born,
       died,
-      motherName,
-      fatherName,
+      mother,
+      father,
       slug,
     } = person;
 
     return (
-      <tr data-cy="person" key={slug}>
+      <tr
+        data-cy="person"
+        key={slug}
+        className={classNames({
+          'has-background-warning': slug === selectedSlug,
+        })}
+      >
         <td>
-          <a href="#/people/jan-van-brussel-1714">
-            {name}
-          </a>
+          <PersonLink person={person} />
         </td>
 
         <td>{sex}</td>
         <td>{born}</td>
         <td>{died}</td>
-        <td>{motherName || '-'}</td>
-        <td>{fatherName || '-'}</td>
+        <td>
+          {mother
+            ? <PersonLink person={mother} />
+            : (person.motherName || '-')}
+        </td>
+        <td>
+          {father
+            ? <PersonLink person={father} />
+            : (person.fatherName || '-')}
+        </td>
       </tr>
     );
   });
