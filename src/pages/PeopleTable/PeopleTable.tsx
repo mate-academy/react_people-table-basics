@@ -44,8 +44,7 @@ export const PeopleTable: React.FC = () => {
 
           {!people.length ? (
             !error
-            && !isLoading
-            && (
+            && !isLoading && (
               <p data-cy="noPeopleMessage">There are no people on the server</p>
             )
           ) : (
@@ -65,22 +64,25 @@ export const PeopleTable: React.FC = () => {
               </thead>
 
               <tbody>
-                {people.map((person) => (
-                  <PersonRow
-                    key={person.slug}
-                    motherInList={
-                      people.find(
-                        (human) => human.name === person.motherName,
-                      ) || null
-                    }
-                    fatherInList={
-                      people.find(
-                        (human) => human.name === person.fatherName,
-                      ) || null
-                    }
-                    person={person}
-                  />
-                ))}
+                {people.map((person) => {
+                  const isMother
+                    = people.find(
+                      (human) => human.name === person.motherName,
+                    ) || null;
+                  const isFather
+                    = people.find(
+                      (human) => human.name === person.fatherName,
+                    ) || null;
+
+                  return (
+                    <PersonRow
+                      key={person.slug}
+                      motherInList={isMother}
+                      fatherInList={isFather}
+                      person={person}
+                    />
+                  );
+                })}
               </tbody>
             </table>
           )}
