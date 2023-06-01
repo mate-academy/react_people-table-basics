@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Loader } from './Loader';
-import { getPeople } from '../api';
 import { Person } from '../types';
 import { PersonLink } from './Person';
+import { getPeople } from '../api';
 
 export const PeopleTable: React.FC = () => {
-  const [people, setIsPeoples] = useState<Person[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const getIsPeople = async () => {
+  const getPeoples = async () => {
     try {
       const loadePeople = await getPeople();
 
-      setIsPeoples(() => loadePeople);
+      setPeople(() => loadePeople);
     } catch {
       setError(true);
     } finally {
@@ -24,7 +24,7 @@ export const PeopleTable: React.FC = () => {
   const isLoaded = !isLoading && people.length;
 
   useEffect(() => {
-    getIsPeople();
+    getPeoples();
   }, []);
 
   return (
@@ -67,7 +67,7 @@ export const PeopleTable: React.FC = () => {
             </p>
           )}
 
-          {(!isLoaded && people.length) 
+          {(!isLoaded && people.length)
             ? (
               <p data-cy="noPeopleMessage">
                 There are no people on the server
