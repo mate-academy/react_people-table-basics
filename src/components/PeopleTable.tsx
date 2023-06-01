@@ -23,7 +23,6 @@ export const PeopleTable: React.FC = () => {
 
   const isLoaded = !isLoading && people.length;
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     getIsPeople();
   }, []);
@@ -68,11 +67,13 @@ export const PeopleTable: React.FC = () => {
             </p>
           )}
 
-          {(!isLoading) && (
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
-          )}
+          {(!isLoaded && people.length) 
+            ? (
+              <p data-cy="noPeopleMessage">
+                There are no people on the server
+              </p>
+            )
+            : ''}
         </div>
       </div>
     </>
