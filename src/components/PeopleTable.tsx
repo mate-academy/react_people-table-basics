@@ -53,6 +53,7 @@ export const PeopleTable: React.FC = () => {
               <tbody>
                 {people?.map(element => (
                   <PersonLink
+                    key={element.slug}
                     person={element}
                     people={people}
                   />
