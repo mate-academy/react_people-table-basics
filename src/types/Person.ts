@@ -4,7 +4,7 @@ export interface Person {
   born: number,
   died: number,
   fatherName: string | null,
-  motherName: string | null,
+  motherName: string,
   slug: string,
   mother?: Person,
   father?: Person,
