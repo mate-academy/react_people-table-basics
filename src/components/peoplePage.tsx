@@ -1,25 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Person } from '../types';
 import { Loader } from './Loader';
+import { PersonElement } from './PersonElement';
 
 interface Props {
   people: Person[],
   isLoading: boolean,
   loadingError: boolean,
+  setSelectedPerson: (value: string) => void,
+  selectedName: string | undefined,
+  setSelectedName: (value: string | undefined) => void,
 }
 
 export const People: React.FC<Props> = ({
   people,
   isLoading,
   loadingError,
+  setSelectedPerson,
+  setSelectedName,
+  selectedName,
 }) => {
-  const [selectedName, setSelectedName] = useState('');
-
-  const handleSelection
-  = (event: React.MouseEvent<HTMLAnchorElement>, name: string) => {
-    event.preventDefault();
-
+  const handleSelection = (
+    name: string | undefined,
+    slug: string,
+  ) => {
+    localStorage.setItem('selectedPersonSlug', slug);
     setSelectedName(name);
+    setSelectedPerson(slug);
   };
 
   const updatedPeople = people.map((child) => {
@@ -54,6 +61,14 @@ export const People: React.FC<Props> = ({
       mother,
     };
   });
+
+  useEffect(() => {
+    const selectedPersonSlug = localStorage.getItem('selectedPersonSlug');
+    const selectedNewPerson
+     = people.find((person) => person.slug === selectedPersonSlug);
+
+    setSelectedName(selectedNewPerson ? selectedNewPerson?.name : '');
+  }, [people]);
 
   return (
     <main className="section">
@@ -91,61 +106,11 @@ export const People: React.FC<Props> = ({
                       <tbody>
                         {updatedPeople.map((person) => {
                           return (
-
-                            <tr
-                              key={person.name}
-                              className={selectedName === person.name
-                                ? 'has-background-warning'
-                                : ''}
-                            >
-                              <td>
-                                <a
-                                  href={person.slug}
-                                  className={person.sex === 'f'
-                                    ? ('has-text-danger')
-                                    : ''}
-                                  role="button"
-                                  onClick={(event) => {
-                                    handleSelection(event, person.name);
-                                  }}
-                                >
-                                  {person.name}
-                                </a>
-                              </td>
-                              <td>{person.sex}</td>
-                              <td>{person.born}</td>
-                              <td>{person.died}</td>
-                              <td>
-                                {person.mother
-                                  ? (
-                                    <a
-                                      href={person.mother?.slug}
-                                      className="has-text-danger"
-                                    >
-                                      {person.mother.name}
-                                    </a>
-                                  ) : (
-                                    <p>
-                                      {person.motherName}
-                                    </p>
-                                  )}
-                              </td>
-                              <td>
-                                {person.father
-                                  ? (
-                                    <a
-                                      href={person.father?.slug}
-                                    >
-                                      {person.father.name}
-                                    </a>
-                                  ) : (
-                                    <p>
-                                      {person.fatherName}
-                                    </p>
-                                  )}
-                              </td>
-                            </tr>
-
+                            <PersonElement
+                              person={person}
+                              handleSelection={handleSelection}
+                              selectedName={selectedName}
+                            />
                           );
                         })}
                       </tbody>

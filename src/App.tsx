@@ -1,48 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import {
-  useNavigate, Route, Routes, NavLink,
+  Route, Routes, NavLink, Navigate, useLocation,
 } from 'react-router-dom';
 import cn from 'classnames';
-import { HomePage } from './components/homePage';
-import { People } from './components/peoplePage';
+import { HomePage } from './components/HomePage';
+import { People } from './components/PeoplePage';
 import { getPeople } from './api';
 import { Person } from './types';
-import { NotFoundPage } from './components/notFoundPage';
+import { NotFoundPage } from './components/NotFoundPage';
 
 export const App: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const navigate = useNavigate();
   const [isLoading, setLoading] = useState(true);
   const [loadingError, setLoadingError] = useState(false);
+  const [selectedName, setSelectedName] = useState<string | undefined>('');
+  const [selectedPerson, setSelectedPerson] = useState<string>(
+    localStorage.getItem('selectedPersonSlug') || '',
+  );
 
-  async function peopleArr() {
+  const location = useLocation();
+
+  const isHomePage = location.pathname.endsWith('/home');
+
+  const fetchPeopleAsync = async () => {
     try {
       const fetchedData = await getPeople();
 
       setLoading(false);
       setPeople(fetchedData);
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error occurred:', error);
       setLoadingError(true);
+      throw new Error('There is an error');
     }
-  }
+  };
 
   useEffect(() => {
-    peopleArr();
-  });
-
-  useEffect(() => {
-    const handleGoBack = () => {
-      navigate('/another-page', { replace: true });
-    };
-
-    window.addEventListener('popstate', handleGoBack);
-
-    return () => {
-      window.removeEventListener('popstate', handleGoBack);
-    };
-  }, [navigate]);
+    fetchPeopleAsync();
+  }, []);
 
   return (
     <div data-cy="app">
@@ -55,14 +49,9 @@ export const App: React.FC = () => {
         <div className="container">
           <div className="navbar-brand">
             <NavLink
-              className={({ isActive }) => (
-                cn(
-                  'navbar-item',
-                  {
-                    'has-background-grey-lighter': isActive,
-                  },
-                )
-              )}
+              className={({ isActive }) => cn('navbar-item', {
+                'has-background-grey-lighter': isActive,
+              })}
               replace
               to="/"
             >
@@ -84,6 +73,8 @@ export const App: React.FC = () => {
           </div>
         </div>
       </nav>
+
+      {isHomePage && <Navigate to="/" replace />}
       <Routes>
         <Route
           path="/"
@@ -91,14 +82,34 @@ export const App: React.FC = () => {
         />
         <Route
           path="/people"
-          element={(
-            <People
-              people={people}
-              isLoading={isLoading}
-              loadingError={loadingError}
-            />
-          )}
-        />
+        >
+          <Route
+            index
+            element={(
+              <People
+                people={people}
+                isLoading={isLoading}
+                loadingError={loadingError}
+                setSelectedPerson={setSelectedPerson}
+                selectedName={selectedName}
+                setSelectedName={setSelectedName}
+              />
+            )}
+          />
+          <Route
+            path={`/people/:${selectedPerson}`}
+            element={(
+              <People
+                people={people}
+                isLoading={isLoading}
+                loadingError={loadingError}
+                setSelectedPerson={setSelectedPerson}
+                selectedName={selectedName}
+                setSelectedName={setSelectedName}
+              />
+            )}
+          />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
