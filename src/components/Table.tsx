@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
-import { PersonLink } from './PersonLink';
+import { PersonRow } from './PersonRow';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
 
@@ -52,7 +52,7 @@ export const Table: FC = () => {
 
                   <tbody>
                     {persons.map(person => (
-                      <PersonLink
+                      <PersonRow
                         person={person}
                         persons={persons}
                         key={person.slug}
