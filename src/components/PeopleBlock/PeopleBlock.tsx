@@ -1,37 +1,37 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
-enum Erorr {
-  NO,
-  SERVER,
-  NOPEOPLE,
+enum Error {
+  NO = 'no error',
+  SERVER = 'server error',
+  NOPEOPLE = 'no people in server',
 }
 
 export const PeopleTable = () => {
   const [visiblePeople, setVisiblePeople] = useState<Person[]>([]);
-  const [load, setLoad] = useState(false);
-  const [erorr, setErorr] = useState<Erorr>(Erorr.NO);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error>(Error.NO);
   const { slug = '' } = useParams();
 
   const loadPeople = async () => {
-    setLoad(true);
+    setIsLoading(true);
 
-    const people = await getPeople().catch(() => setErorr(Erorr.SERVER));
+    const people = await getPeople().catch(() => setError(Error.SERVER));
 
     if (people) {
       if (people.length === 0) {
-        setErorr(Erorr.NOPEOPLE);
+        setError(Error.NOPEOPLE);
       }
 
       setVisiblePeople(people);
     }
 
-    setLoad(false);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -44,15 +44,15 @@ export const PeopleTable = () => {
 
       <div className="block">
         <div className="box table-container">
-          {load && <Loader />}
+          {isLoading && <Loader />}
 
-          {erorr === Erorr.SERVER && (
+          {error === Error.SERVER && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {erorr === Erorr.NOPEOPLE && (
+          {error === Error.NOPEOPLE && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
@@ -84,27 +84,31 @@ export const PeopleTable = () => {
                       )}
                     >
                       <td>
-                        <Link
-                          to={`../${people.slug}`}
-                          className={classNames(
-                            { 'has-text-danger': people.sex === 'f' },
-                          )}
-                        >
-                          {people.name}
-                        </Link>
+                        <PersonLink
+                          people={visiblePeople}
+                          personName={people.name}
+                        />
                       </td>
 
                       <td>{people.sex}</td>
                       <td>{people.born}</td>
                       <td>{people.died}</td>
-                      <PersonLink
-                        people={visiblePeople}
-                        personName={people.motherName}
-                      />
-                      <PersonLink
-                        people={visiblePeople}
-                        personName={people.fatherName}
-                      />
+                      <td>
+                        {people.motherName ? (
+                          <PersonLink
+                            people={visiblePeople}
+                            personName={people.motherName}
+                          />
+                        ) : ('-')}
+                      </td>
+                      <td>
+                        {people.fatherName ? (
+                          <PersonLink
+                            people={visiblePeople}
+                            personName={people.fatherName}
+                          />
+                        ) : ('-')}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

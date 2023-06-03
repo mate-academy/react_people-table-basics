@@ -11,22 +11,16 @@ type PersonLinkProps = {
 export const PersonLink: FC<PersonLinkProps> = ({ people, personName }) => {
   const person = people.find(human => human.name === personName);
 
-  if (!personName) {
-    return (<td>-</td>);
-  }
-
   if (person) {
     return (
-      <td>
-        <NavLink
-          to={`../${person.slug}`}
-          className={classNames({ 'has-text-danger': person.sex === 'f' })}
-        >
-          {person.name}
-        </NavLink>
-      </td>
+      <NavLink
+        to={`../${person.slug}`}
+        className={classNames({ 'has-text-danger': person.sex === 'f' })}
+      >
+        {person.name}
+      </NavLink>
     );
   }
 
-  return (<td>{personName}</td>);
+  return <>{personName}</>;
 };
