@@ -35,14 +35,6 @@ export const PersonRow:FC<Props> = ({ person, persons, personSlug }) => {
       )}
     >
       <td>
-        {/* <Link
-          to={`/people/${person.slug}`}
-          className={classNames({
-            'has-text-danger': person.sex === 'f',
-          })}
-        >
-          {person.name}
-        </Link> */}
         <PersonLink
           link={`/people/${person.slug}`}
           text={person.name}
