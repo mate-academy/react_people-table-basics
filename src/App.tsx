@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Route, Routes, NavLink, Navigate, useLocation,
+  Route, Routes, NavLink, Navigate, useLocation, useParams,
 } from 'react-router-dom';
 import cn from 'classnames';
 import { HomePage } from './components/HomePage';
@@ -13,14 +13,21 @@ export const App: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [loadingError, setLoadingError] = useState(false);
-  const [selectedName, setSelectedName] = useState<string | undefined>('');
-  const [selectedPerson, setSelectedPerson] = useState<string>(
+  const [selectedSlug, setSelectedSlug] = useState<string>(
     localStorage.getItem('selectedPersonSlug') || '',
   );
 
   const location = useLocation();
 
+  const { personSlug } = useParams();
+
   const isHomePage = location.pathname.endsWith('/home');
+
+  const handleSelection = (slug: string) => {
+    if (personSlug !== slug) {
+      setSelectedSlug(slug);
+    }
+  };
 
   const fetchPeopleAsync = async () => {
     try {
@@ -28,9 +35,10 @@ export const App: React.FC = () => {
 
       setLoading(false);
       setPeople(fetchedData);
+      setSelectedSlug(window.location.pathname);
     } catch (error) {
       setLoadingError(true);
-      throw new Error('There is an error');
+      throw new Error('Failed to fetch people');
     }
   };
 
@@ -80,9 +88,8 @@ export const App: React.FC = () => {
           path="/"
           element={<HomePage />}
         />
-        <Route
-          path="/people"
-        >
+        {selectedSlug}
+        <Route path="/people">
           <Route
             index
             element={(
@@ -90,22 +97,20 @@ export const App: React.FC = () => {
                 people={people}
                 isLoading={isLoading}
                 loadingError={loadingError}
-                setSelectedPerson={setSelectedPerson}
-                selectedName={selectedName}
-                setSelectedName={setSelectedName}
+                personSlug={selectedSlug}
+                handleSelection={handleSelection}
               />
             )}
           />
           <Route
-            path={`/people/:${selectedPerson}`}
+            path={`/people/:${personSlug}`}
             element={(
               <People
                 people={people}
                 isLoading={isLoading}
                 loadingError={loadingError}
-                setSelectedPerson={setSelectedPerson}
-                selectedName={selectedName}
-                setSelectedName={setSelectedName}
+                personSlug={selectedSlug}
+                handleSelection={handleSelection}
               />
             )}
           />

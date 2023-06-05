@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Person } from '../types';
 import { Loader } from './Loader';
 import { PersonElement } from './PersonElement';
@@ -7,30 +7,19 @@ interface Props {
   people: Person[],
   isLoading: boolean,
   loadingError: boolean,
-  setSelectedPerson: (value: string) => void,
-  selectedName: string | undefined,
-  setSelectedName: (value: string | undefined) => void,
+  personSlug: string | undefined,
+  handleSelection: (slug: string,) => void,
 }
 
 export const People: React.FC<Props> = ({
   people,
   isLoading,
   loadingError,
-  setSelectedPerson,
-  setSelectedName,
-  selectedName,
+  handleSelection,
+  personSlug,
 }) => {
-  const handleSelection = (
-    name: string | undefined,
-    slug: string,
-  ) => {
-    localStorage.setItem('selectedPersonSlug', slug);
-    setSelectedName(name);
-    setSelectedPerson(slug);
-  };
-
   const updatedPeople = people.map((child) => {
-    if (child.motherName === null && child.fatherName === null) {
+    if (!child.motherName && !child.fatherName) {
       return {
         ...child,
         motherName: '-',
@@ -38,14 +27,14 @@ export const People: React.FC<Props> = ({
       };
     }
 
-    if (child.fatherName === null) {
+    if (!child.fatherName) {
       return {
         ...child,
         fatherName: '-',
       };
     }
 
-    if (child.motherName === null) {
+    if (!child.motherName) {
       return {
         ...child,
         motherName: '-',
@@ -61,14 +50,6 @@ export const People: React.FC<Props> = ({
       mother,
     };
   });
-
-  useEffect(() => {
-    const selectedPersonSlug = localStorage.getItem('selectedPersonSlug');
-    const selectedNewPerson
-     = people.find((person) => person.slug === selectedPersonSlug);
-
-    setSelectedName(selectedNewPerson ? selectedNewPerson?.name : '');
-  }, [people]);
 
   return (
     <main className="section">
@@ -107,9 +88,10 @@ export const People: React.FC<Props> = ({
                         {updatedPeople.map((person) => {
                           return (
                             <PersonElement
+                              key={person.slug}
                               person={person}
                               handleSelection={handleSelection}
-                              selectedName={selectedName}
+                              personSlug={personSlug}
                             />
                           );
                         })}

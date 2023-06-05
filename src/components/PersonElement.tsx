@@ -4,78 +4,86 @@ import { Person } from '../types/Person';
 
 interface Props {
   person: Person,
-  handleSelection: (name: string | undefined, slug: string,) => void,
-  selectedName: string | undefined,
+  handleSelection: (slug: string,) => void,
+  personSlug: string | undefined,
 }
 
 export const PersonElement: React.FC<Props> = ({
   person,
   handleSelection,
-  selectedName,
+  personSlug,
 }) => {
+  const {
+    name,
+    sex,
+    born,
+    died,
+    fatherName,
+    motherName,
+    slug,
+    mother,
+    father,
+  } = person;
+
   return (
     <tr
-      key={person.name}
-      className={selectedName === person.name
+      className={personSlug === slug
         ? 'has-background-warning'
         : ''}
     >
       <td>
         <NavLink
-          to={`/people/${person.slug}`}
-          className={person.sex === 'f'
+          to={`/people/${slug}`}
+          className={sex === 'f'
             ? ('has-text-danger')
             : ''}
           onClick={() => {
             handleSelection(
-              person.name,
-              person.slug,
+              slug,
             );
           }}
         >
-          {person.name}
+          {name}
         </NavLink>
       </td>
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
       <td>
-        {person.mother ? (
+        {mother ? (
           <NavLink
-            to={`/people/${person.mother.slug}`}
+            to={`/people/${mother.slug}`}
             className="has-text-danger"
             onClick={() => {
               handleSelection(
-                person.mother?.name,
-                person.mother?.slug || '',
+                mother?.slug || '',
               );
             }}
           >
-            {person.mother.name}
+            {mother.name}
           </NavLink>
         ) : (
           <p>
-            {person.motherName}
+            {motherName}
           </p>
         )}
       </td>
       <td>
-        {person.father
+        {father
           ? (
             <NavLink
-              to={`/people/${person.father.slug}`}
+              to={`/people/${father.slug}`}
               onClick={() => {
                 handleSelection(
-                  person.father?.name,
-                  person.father?.slug || '',
+                  father?.slug || '',
                 );
               }}
             >
-              {person.father.name}
+              {father.name}
             </NavLink>
           ) : (
             <p>
-              {person.fatherName}
+              {fatherName}
             </p>
           )}
       </td>
