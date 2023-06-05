@@ -6,18 +6,18 @@ import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [arePeopleLoaded, setArePeopleLoaded] = useState(false);
-  const [wasLoadingSuccessful, setWasLoadingSuccessful] = useState(false);
+  const [isLoadingFinished, setIsLoadingFinished] = useState(false);
+  const [werePeopleLoaded, setWerePeopleLoaded] = useState(false);
 
   useEffect(() => {
-    setArePeopleLoaded(false);
+    setIsLoadingFinished(false);
     getPeople()
       .then((loadedPeople) => {
         setPeople(loadedPeople);
-        setWasLoadingSuccessful(true);
+        setWerePeopleLoaded(true);
       })
-      .catch(() => setWasLoadingSuccessful(false))
-      .finally(() => setArePeopleLoaded(true));
+      .catch(() => setWerePeopleLoaded(false))
+      .finally(() => setIsLoadingFinished(true));
   }, []);
 
   return (
@@ -25,10 +25,10 @@ export const PeoplePage = () => {
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {!arePeopleLoaded && <Loader />}
+          {!isLoadingFinished && <Loader />}
 
-          {!wasLoadingSuccessful
-            && arePeopleLoaded
+          {!werePeopleLoaded
+            && isLoadingFinished
             && (
               <p
                 data-cy="peopleLoadingError"
@@ -38,7 +38,7 @@ export const PeoplePage = () => {
               </p>
             )}
 
-          {wasLoadingSuccessful
+          {werePeopleLoaded
             && Boolean(!people.length)
             && (
               <p
