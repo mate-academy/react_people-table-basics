@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Person } from '../types/Person';
 
 interface Props {
@@ -25,9 +25,11 @@ export const PersonElement: React.FC<Props> = ({
     father,
   } = person;
 
+  const location = useLocation().pathname.toString().slice(8);
+
   return (
     <tr
-      className={personSlug === slug
+      className={personSlug === slug && location === slug
         ? 'has-background-warning'
         : ''}
     >
@@ -35,13 +37,9 @@ export const PersonElement: React.FC<Props> = ({
         <NavLink
           to={`/people/${slug}`}
           className={sex === 'f'
-            ? ('has-text-danger')
+            ? 'has-text-danger'
             : ''}
-          onClick={() => {
-            handleSelection(
-              slug,
-            );
-          }}
+          onClick={() => handleSelection(slug)}
         >
           {name}
         </NavLink>

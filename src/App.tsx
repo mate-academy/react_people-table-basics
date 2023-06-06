@@ -1,50 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
-  Route, Routes, NavLink, Navigate, useLocation, useParams,
+  Route, Routes, NavLink, Navigate, useLocation,
 } from 'react-router-dom';
 import cn from 'classnames';
 import { HomePage } from './components/HomePage';
 import { People } from './components/PeoplePage';
-import { getPeople } from './api';
-import { Person } from './types';
 import { NotFoundPage } from './components/NotFoundPage';
 
 export const App: React.FC = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setLoading] = useState(true);
-  const [loadingError, setLoadingError] = useState(false);
-  const [selectedSlug, setSelectedSlug] = useState<string>(
-    localStorage.getItem('selectedPersonSlug') || '',
-  );
-
   const location = useLocation();
 
-  const { personSlug } = useParams();
-
   const isHomePage = location.pathname.endsWith('/home');
-
-  const handleSelection = (slug: string) => {
-    if (personSlug !== slug) {
-      setSelectedSlug(slug);
-    }
-  };
-
-  const fetchPeopleAsync = async () => {
-    try {
-      const fetchedData = await getPeople();
-
-      setLoading(false);
-      setPeople(fetchedData);
-      setSelectedSlug(window.location.pathname);
-    } catch (error) {
-      setLoadingError(true);
-      throw new Error('Failed to fetch people');
-    }
-  };
-
-  useEffect(() => {
-    fetchPeopleAsync();
-  }, []);
 
   return (
     <div data-cy="app">
@@ -88,32 +54,9 @@ export const App: React.FC = () => {
           path="/"
           element={<HomePage />}
         />
-        {selectedSlug}
         <Route path="/people">
-          <Route
-            index
-            element={(
-              <People
-                people={people}
-                isLoading={isLoading}
-                loadingError={loadingError}
-                personSlug={selectedSlug}
-                handleSelection={handleSelection}
-              />
-            )}
-          />
-          <Route
-            path={`/people/:${personSlug}`}
-            element={(
-              <People
-                people={people}
-                isLoading={isLoading}
-                loadingError={loadingError}
-                personSlug={selectedSlug}
-                handleSelection={handleSelection}
-              />
-            )}
-          />
+          <Route index element={<People />} />
+          <Route path=":slug" element={<People />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

@@ -1,23 +1,20 @@
-import React from 'react';
-import { Person } from '../types';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Loader } from './Loader';
 import { PersonElement } from './PersonElement';
+import { getPeople } from '../api';
+import { Person } from '../types';
 
-interface Props {
-  people: Person[],
-  isLoading: boolean,
-  loadingError: boolean,
-  personSlug: string | undefined,
-  handleSelection: (slug: string,) => void,
-}
+export const People: React.FC = () => {
+  const [people, setPeople] = useState<Person[]>([]);
+  const [isLoading, setLoading] = useState(true);
+  const [loadingError, setLoadingError] = useState(false);
+  const [selectedSlug, setSelectedSlug] = useState<string>(
+    localStorage.getItem('selectedPersonSlug') || '',
+  );
 
-export const People: React.FC<Props> = ({
-  people,
-  isLoading,
-  loadingError,
-  handleSelection,
-  personSlug,
-}) => {
+  const { personSlug } = useParams<{ personSlug: string }>();
+
   const updatedPeople = people.map((child) => {
     if (!child.motherName && !child.fatherName) {
       return {
@@ -50,6 +47,37 @@ export const People: React.FC<Props> = ({
       mother,
     };
   });
+
+  const handleSelection = (slug: string) => {
+    if (personSlug !== slug) {
+      setSelectedSlug(slug);
+    }
+
+    localStorage.setItem('selectedPersonSlug', slug);
+  };
+
+  const fetchPeopleAsync = async () => {
+    try {
+      const fetchedData = await getPeople();
+
+      setLoading(false);
+      setPeople(fetchedData);
+    } catch (error) {
+      setLoadingError(true);
+      throw new Error('Failed to fetch people');
+    }
+  };
+
+  useEffect(() => {
+    fetchPeopleAsync();
+  }, []);
+
+  useEffect(() => {
+    if (personSlug && !people.some(person => person.slug === personSlug)) {
+      setSelectedSlug('');
+      localStorage.setItem('selectedPersonSlug', '');
+    }
+  }, [personSlug, people, window.location.href]);
 
   return (
     <main className="section">
@@ -91,7 +119,7 @@ export const People: React.FC<Props> = ({
                               key={person.slug}
                               person={person}
                               handleSelection={handleSelection}
-                              personSlug={personSlug}
+                              personSlug={selectedSlug}
                             />
                           );
                         })}
