@@ -10,7 +10,7 @@ import { NotFoundPage } from './components/NotFoundPage';
 export const App: React.FC = () => {
   const location = useLocation();
 
-  const isHomePageOn = location.pathname.endsWith('/home');
+  const isHomePage = location.pathname.endsWith('/home');
 
   return (
     <div data-cy="app">
@@ -48,7 +48,7 @@ export const App: React.FC = () => {
         </div>
       </nav>
 
-      {isHomePageOn && <Navigate to="/" replace />}
+      {isHomePage && <Navigate to="/" replace />}
       <Routes>
         <Route
           path="/"
