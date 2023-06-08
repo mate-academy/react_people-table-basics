@@ -13,8 +13,8 @@ export const PeoplePage = () => {
   const [isErrorLoading, setErrorLoading] = useState<boolean>(false);
   const [IsNoPeopleMessage, setNoPeopleMessage] = useState<boolean>(false);
   const { slug: selectedSlug } = useParams();
-  const findPerson = (personName: string | null) => {
-    return people.find(person => person.name === personName);
+  const findPerson = (personName: string | null, peopleData: Person[]) => {
+    return peopleData.find(person => person.name === personName);
   };
 
   const loadPeople = async () => {
@@ -26,8 +26,8 @@ export const PeoplePage = () => {
         ...prev,
         motherName: prev.motherName || '-',
         fatherName: prev.fatherName || '-',
-        mother: findPerson(prev.motherName),
-        father: findPerson(prev.fatherName),
+        mother: findPerson(prev.motherName, peopleFromServer),
+        father: findPerson(prev.fatherName, peopleFromServer),
       })));
 
       if (!peopleFromServer) {
