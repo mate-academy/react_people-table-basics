@@ -12,9 +12,9 @@ export const PeoplePage = () => {
   const getAllPeople = async () => {
     setLoading(true);
     try {
-      const todosFromServer = await getPeople();
+      const peopleFromServer = await getPeople();
 
-      setPeople(todosFromServer);
+      setPeople(peopleFromServer);
     } catch (error) {
       setIsError(true);
     } finally {

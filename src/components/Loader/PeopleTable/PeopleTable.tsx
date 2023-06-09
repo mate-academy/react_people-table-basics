@@ -31,10 +31,13 @@ export const PeopleTable: React.FC<PeopleTableProps> = ({ people }) => {
         <tbody>
           {people.map((person) => {
             const isSelected = slug === person.slug;
-            // eslint-disable-next-line
-            const findMother = people.find((mother) => mother.name === person.motherName);
-            // eslint-disable-next-line
-            const findFather = people.find((father) => father.name === person.fatherName);
+            const findMother = (): Person | undefined => {
+              return people.find((mother) => mother.name === person.motherName);
+            };
+
+            const findFather = (): Person | undefined => {
+              return people.find((father) => father.name === person.fatherName);
+            };
 
             return (
               <tr
@@ -54,8 +57,8 @@ export const PeopleTable: React.FC<PeopleTableProps> = ({ people }) => {
                 <td>{person.sex}</td>
                 <td>{person.born}</td>
                 <td>{person.died}</td>
-                <td>{findMother ? person.motherName : '-'}</td>
-                <td>{findFather ? person.fatherName : '-'}</td>
+                <td>{findMother() ? person.motherName : '-'}</td>
+                <td>{findFather() ? person.fatherName : '-'}</td>
               </tr>
             );
           })}

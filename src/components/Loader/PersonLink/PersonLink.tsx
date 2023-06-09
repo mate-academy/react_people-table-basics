@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { Person } from '../../../types';
 
 type PersonLinkProps = {
-  people: Person,
+  person: Person,
 };
 
-export const PersonLink:React.FC<PersonLinkProps> = ({ people }) => {
-  const { name, sex, slug } = people;
+export const PersonLink:React.FC<PersonLinkProps> = ({ person }) => {
+  const { name, sex, slug } = person;
 
   return (
     <Link
