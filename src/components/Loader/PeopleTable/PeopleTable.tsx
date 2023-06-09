@@ -48,8 +48,9 @@ export const PeopleTable: React.FC<PeopleTableProps> = ({ people }) => {
                 <td>
                   <Link
                     to={`/people/${person.slug}`}
-                    // eslint-disable-next-line
-                    className={classNames({ 'has-text-danger': person.sex === 'f' })}
+                    className={classNames({
+                      'has-text-danger': person.sex === 'f',
+                    })}
                   >
                     {person.name}
                   </Link>
