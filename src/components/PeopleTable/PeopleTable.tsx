@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Person } from '../../types/Person';
 import { Loader } from '../Loader';
+import { PersonItem } from '../PersonItem/PersonItem';
 
 import { getPeople } from '../../api';
 
@@ -74,17 +75,7 @@ export const PeopleTable = () => {
           <tbody>
             {peopleList.map(person => (
               <tr data-cy="person" key={person.slug}>
-                <td>
-                  <a href={`#/people/${person.slug}`}>
-                    {person.name}
-                  </a>
-                </td>
-
-                <td>{person.sex}</td>
-                <td>{person.born}</td>
-                <td>{person.died}</td>
-                {person.motherName ? <td>{person.motherName}</td> : <td>-</td>}
-                {person.fatherName ? <td>{person.fatherName}</td> : <td>-</td>}
+                <PersonItem person={person} />
               </tr>
             ))}
           </tbody>
