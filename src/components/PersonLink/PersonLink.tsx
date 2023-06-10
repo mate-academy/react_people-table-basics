@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-
 import { Person } from '../../types';
 import { PageRoutes } from '../../types/PageRoutes';
 

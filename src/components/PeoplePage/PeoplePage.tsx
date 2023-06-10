@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import { Person } from '../../types';
 import { Loader } from '../Loader/Loader';
 import { getPeople } from '../../api';
