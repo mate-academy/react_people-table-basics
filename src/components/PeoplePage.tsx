@@ -43,8 +43,7 @@ export const PeoplePage = () => {
                     Something went wrong
                   </p>
                 )}
-
-                {!isLoading && !hasError && people.length === 0
+                {!isLoading && !hasError && !people.length
             && (
               <p data-cy="noPeopleMessage">
                 There are no people on the server
@@ -65,7 +64,6 @@ export const PeoplePage = () => {
                       <th>Father</th>
                     </tr>
                   </thead>
-
                   <tbody>
                     {!isLoading && people.map(person => {
                       const {
@@ -95,26 +93,18 @@ export const PeoplePage = () => {
                           <td>
                             <PersonalLink person={person} />
                           </td>
-
                           <td>{sex}</td>
                           <td>{born}</td>
                           <td>{died}</td>
                           <td>
                             { foundMother
-                              ? (
-                                <PersonalLink person={foundMother} />
-                              )
+                              ? <PersonalLink person={foundMother} />
                               : <p>{motherName || '-'}</p>}
-
                           </td>
-
                           <td>
                             { foundFather
-                              ? (
-                                <PersonalLink person={foundFather} />
-                              )
+                              ? <PersonalLink person={foundFather} />
                               : <p>{fatherName || '-'}</p>}
-
                           </td>
                         </tr>
                       );
@@ -123,7 +113,6 @@ export const PeoplePage = () => {
                 </table>
               </>
             )}
-
         </div>
       </div>
     </>
