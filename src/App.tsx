@@ -1,5 +1,6 @@
 import {
-  Route, Redirect, Switch,
+  Navigate,
+  Route, Routes,
 } from 'react-router-dom';
 import './App.scss';
 import { HomePage } from './components/Home';
@@ -13,15 +14,13 @@ export const App = () => {
       <Navbar />
       <main className="section">
         <div className="container">
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/home">
-              <Redirect to="/" />
-            </Route>
-            <Route exact path="/people" component={PeoplePage} />
-            <Route exact path="/people/:slug" component={PeoplePage} />
-            <Route path="*" component={PageNotFound} />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<Navigate to="/" />} />
+            <Route path="/people" element={<PeoplePage />} />
+            <Route path="/people/:slug" element={<PeoplePage />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
         </div>
       </main>
     </div>

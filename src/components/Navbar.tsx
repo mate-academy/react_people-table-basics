@@ -10,17 +10,18 @@ export const Navbar = () => (
     <div className="container">
       <div className="navbar-brand">
         <NavLink
-          exact
           to="/"
-          className="navbar-item"
-          activeClassName="navbar-item has-background-grey-lighter"
+          className={({ isActive }) => (isActive
+            ? 'navbar-item has-background-grey-lighter'
+            : 'navbar-item')}
         >
           Home
         </NavLink>
         <NavLink
           to="/people"
-          className="navbar-item"
-          activeClassName="navbar-item has-background-grey-lighter"
+          className={({ isActive }) => (isActive
+            ? 'navbar-item has-background-grey-lighter'
+            : 'navbar-item')}
         >
           People
         </NavLink>
