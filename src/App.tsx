@@ -1,173 +1,92 @@
+import { useEffect, useState } from 'react';
+import {
+  Route,
+  HashRouter,
+  Switch,
+  useLocation,
+} from 'react-router-dom';
+
 import { Loader } from './components/Loader';
+import { TableList } from './components/Tabledata.tsx/TableList';
+import { Error } from './components/Error/Error';
+import { Navbar } from './components/Navbar/Navbar';
+import { Person } from './types/Person';
+
+import { getPeople } from './api';
 
 import './App.scss';
 
-export const App = () => (
-  <div data-cy="app">
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
-            Home
-          </a>
+export const App = () => {
+  const [personData, setApiData] = useState<Person[]>([]);
+  const [error, setError] = useState('');
+  const [clickedNav, setClickedNav] = useState(
+    window.location.hash.substr(1) || '/',
+  );
 
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
-          >
-            People
-          </a>
-        </div>
-      </div>
-    </nav>
+  const location = useLocation();
 
-    <main className="section">
-      <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
+  const fetchData = () => {
+    getPeople()
+      .then((res) => {
+        setApiData(res);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  };
 
-        <div className="block">
-          <div className="box table-container">
-            <Loader />
+  useEffect(() => {
+    if (clickedNav === '/') {
+      setApiData([]);
+    }
 
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
+    fetchData();
+    setClickedNav(window.location.hash.substr(1) || '/');
+  }, [location]);
 
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
+  useEffect(() => {
+    const handlePopstate = () => {
+      setClickedNav(window.location.hash.substr(1));
+    };
 
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
+    window.addEventListener('popstate', handlePopstate);
 
-              <tbody>
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/jan-van-brussel-1714">
-                      Jan van Brussel
-                    </a>
-                  </td>
+    return () => {
+      window.removeEventListener('popstate', handlePopstate);
+    };
+  }, []);
 
-                  <td>m</td>
-                  <td>1714</td>
-                  <td>1748</td>
-                  <td>Joanna van Rooten</td>
-                  <td>Jacobus van Brussel</td>
-                </tr>
+  const handleNavClick = (route: string) => {
+    window.location.hash = route;
+  };
 
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/philibert-haverbeke-1907">
-                      Philibert Haverbeke
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1907</td>
-                  <td>1997</td>
-
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/emma-de-milliano-1876"
-                    >
-                      Emma de Milliano
-                    </a>
-                  </td>
-
-                  <td>
-                    <a href="#/people/emile-haverbeke-1877">
-                      Emile Haverbeke
-                    </a>
-                  </td>
-                </tr>
-
-                <tr data-cy="person" className="has-background-warning">
-                  <td>
-                    <a href="#/people/jan-frans-van-brussel-1761">
-                      Jan Frans van Brussel
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1761</td>
-                  <td>1833</td>
-                  <td>-</td>
-
-                  <td>
-                    <a href="#/people/jacobus-bernardus-van-brussel-1736">
-                      Jacobus Bernardus van Brussel
-                    </a>
-                  </td>
-                </tr>
-
-                <tr data-cy="person">
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/lievijne-jans-1542"
-                    >
-                      Lievijne Jans
-                    </a>
-                  </td>
-
-                  <td>f</td>
-                  <td>1542</td>
-                  <td>1582</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/bernardus-de-causmaecker-1721">
-                      Bernardus de Causmaecker
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1721</td>
-                  <td>1789</td>
-
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/livina-haverbeke-1692"
-                    >
-                      Livina Haverbeke
-                    </a>
-                  </td>
-
-                  <td>
-                    <a href="#/people/lieven-de-causmaecker-1696">
-                      Lieven de Causmaecker
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  return (
+    <HashRouter>
+      <div data-cy="app">
+        <Navbar
+          clickedNavs={clickedNav}
+          handleNavClick={handleNavClick}
+        />
+        <main className="section">
+          <div className="container">
+            <Switch>
+              <Route exact path="/">
+                <h1 className="title">Home Page</h1>
+              </Route>
+              <Route path="/people">
+                {error && <Error error={error} />}
+                {!error && personData.length > 0 && (
+                  <TableList personData={personData} />
+                )}
+                {!error && personData.length === 0 && <Loader />}
+              </Route>
+              <Route>
+                <h1 className="title">Page not found</h1>
+              </Route>
+            </Switch>
           </div>
-        </div>
+        </main>
       </div>
-    </main>
-  </div>
-);
+    </HashRouter>
+  );
+};
