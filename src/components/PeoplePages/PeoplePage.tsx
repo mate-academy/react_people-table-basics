@@ -19,13 +19,6 @@ export const PeoplePage = () => {
       }
 
       const peopleWithParents = dataPeople.map(person => {
-        // const mother = dataPeople.find((motherPerson) => {
-        //   return motherPerson.name === person.motherName;
-        // });
-        // const father = dataPeople.find((fatherPerson) => {
-        //   return fatherPerson.name === person.fatherName;
-        // });
-
         const findParentByName = (parentName: string) => {
           return dataPeople
             .find(parentPerson => parentPerson.name === parentName);
