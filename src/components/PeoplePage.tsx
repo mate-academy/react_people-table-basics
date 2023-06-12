@@ -7,16 +7,16 @@ import { PeopleTable } from './PeopleTable';
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoadingFinished, setIsLoadingFinished] = useState(false);
-  const [werePeopleLoaded, setWerePeopleLoaded] = useState(false);
+  const [peopleLoaded, setPeopleLoaded] = useState(false);
 
   useEffect(() => {
     setIsLoadingFinished(false);
     getPeople()
       .then((loadedPeople) => {
         setPeople(loadedPeople);
-        setWerePeopleLoaded(true);
+        setPeopleLoaded(true);
       })
-      .catch(() => setWerePeopleLoaded(false))
+      .catch(() => setPeopleLoaded(false))
       .finally(() => setIsLoadingFinished(true));
   }, []);
 
@@ -27,7 +27,7 @@ export const PeoplePage = () => {
         <div className="box table-container">
           {!isLoadingFinished && <Loader />}
 
-          {!werePeopleLoaded
+          {!peopleLoaded
             && isLoadingFinished
             && (
               <p
@@ -38,7 +38,7 @@ export const PeoplePage = () => {
               </p>
             )}
 
-          {werePeopleLoaded
+          {peopleLoaded
             && Boolean(!people.length)
             && (
               <p
