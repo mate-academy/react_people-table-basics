@@ -6,12 +6,17 @@ interface Props {
   handleNavClick: (value: string) => void;
 }
 
-export const Navbar: React.FC<Props> = ({ clickedNavs }) => {
-  const [clickedNav, setClickedNav] = useState(clickedNavs);
+export const Navbar: React.FC<Props> = ({ clickedNavs, handleNavClick }) => {
+  const [isNavigationClicked, setIsNavigationClicked] = useState(false);
 
   useEffect(() => {
-    setClickedNav(clickedNavs);
+    setIsNavigationClicked(clickedNavs.includes('/people'));
   }, [clickedNavs]);
+
+  const handleNavLinkClick = () => {
+    setIsNavigationClicked(true);
+    handleNavClick('/people');
+  };
 
   return (
     <nav
@@ -23,15 +28,16 @@ export const Navbar: React.FC<Props> = ({ clickedNavs }) => {
       <div className="container">
         <div className="navbar-brand">
           <NavLink
-            className={`navbar-item ${clickedNav === '/' && 'has-background-grey-lighter'}`}
+            className={`navbar-item ${!isNavigationClicked && 'has-background-grey-lighter'}`}
             exact
             to="/"
           >
             Home
           </NavLink>
           <NavLink
-            className={`navbar-item ${clickedNav === '/people' && 'has-background-grey-lighter'}`}
+            className={`navbar-item ${isNavigationClicked && 'has-background-grey-lighter'}`}
             to="/people"
+            onClick={handleNavLinkClick}
           >
             People
           </NavLink>

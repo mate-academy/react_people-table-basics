@@ -6,10 +6,11 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import { Loader } from './components/Loader';
+/* import { Loader } from './components/Loader'; */
 import { TableList } from './components/Tabledata.tsx/TableList';
-import { Error } from './components/Error/Error';
+/* import { Error } from './components/Error/Error'; */
 import { Navbar } from './components/Navbar/Navbar';
+import { Homepage } from './components/Homepage/Homepage';
 import { Person } from './types/Person';
 
 import { getPeople } from './api';
@@ -19,7 +20,7 @@ import './App.scss';
 export const App = () => {
   const [personData, setApiData] = useState<Person[]>([]);
   const [error, setError] = useState('');
-  const [clickedNav, setClickedNav] = useState(
+  const [isNavigationClicked, setIsNavigationClicked] = useState(
     window.location.hash.substr(1) || '/',
   );
 
@@ -36,17 +37,17 @@ export const App = () => {
   };
 
   useEffect(() => {
-    if (clickedNav === '/') {
+    if (isNavigationClicked === '/') {
       setApiData([]);
     }
 
     fetchData();
-    setClickedNav(window.location.hash.substr(1) || '/');
+    setIsNavigationClicked(window.location.hash.substr(1) || '/');
   }, [location]);
 
   useEffect(() => {
     const handlePopstate = () => {
-      setClickedNav(window.location.hash.substr(1));
+      setIsNavigationClicked(window.location.hash.substr(1));
     };
 
     window.addEventListener('popstate', handlePopstate);
@@ -64,22 +65,24 @@ export const App = () => {
     <HashRouter>
       <div data-cy="app">
         <Navbar
-          clickedNavs={clickedNav}
+          clickedNavs={isNavigationClicked}
           handleNavClick={handleNavClick}
         />
         <main className="section">
           <div className="container">
             <Switch>
               <Route exact path="/">
-                <h1 className="title">Home Page</h1>
+                <Homepage />
               </Route>
+
               <Route path="/people">
-                {error && <Error error={error} />}
-                {!error && personData.length > 0 && (
-                  <TableList personData={personData} />
-                )}
-                {!error && personData.length === 0 && <Loader />}
+                <h1 className="title">People Page</h1>
+                <TableList
+                  personData={personData}
+                  error={error}
+                />
               </Route>
+
               <Route>
                 <h1 className="title">Page not found</h1>
               </Route>
