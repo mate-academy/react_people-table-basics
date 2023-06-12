@@ -37,40 +37,42 @@ export const TableList: React.FC<Props> = ({ personData, error }) => {
     <>
       {error && <Error error={error} />}
       {!error && personData.length > 0 && (
+        <div>
+          <h1 className="title">People Page</h1>
 
-        <div className="box table-container">
-          {personData.length > 0 && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
+          <div className="box table-container">
+            {personData.length > 0 && (
+              <table
+                data-cy="peopleTable"
+                className="table is-striped is-hoverable is-narrow is-fullwidth"
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Sex</th>
+                    <th>Born</th>
+                    <th>Died</th>
+                    <th>Mother</th>
+                    <th>Father</th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                {combineData.map((person) => (
-                  <TableDetails
-                    person={person}
-                    key={person.slug}
-                    addClassToRow={addClassToRow}
-                    clickedSlug={clickedSlug}
-                  />
-                ))}
-              </tbody>
-            </table>
-          )}
+                <tbody>
+                  {combineData.map((person) => (
+                    <TableDetails
+                      person={person}
+                      key={person.slug}
+                      addClassToRow={addClassToRow}
+                      clickedSlug={clickedSlug}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
         </div>
-
       )}
-      {!error && personData.length === 0 && <Loader />}
+      {!error && personData.length && <Loader />}
 
     </>
   );

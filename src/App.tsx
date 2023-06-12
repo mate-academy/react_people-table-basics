@@ -6,11 +6,11 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-/* import { Loader } from './components/Loader'; */
 import { TableList } from './components/Tabledata.tsx/TableList';
-/* import { Error } from './components/Error/Error'; */
 import { Navbar } from './components/Navbar/Navbar';
-import { Homepage } from './components/Homepage/Homepage';
+import { HomePage } from './components/HomePage/HomePage';
+import { InfoPage } from './components/InfoPage/InfoPage';
+
 import { Person } from './types/Person';
 
 import { getPeople } from './api';
@@ -72,11 +72,10 @@ export const App = () => {
           <div className="container">
             <Switch>
               <Route exact path="/">
-                <Homepage />
+                <HomePage />
               </Route>
 
               <Route path="/people">
-                <h1 className="title">People Page</h1>
                 <TableList
                   personData={personData}
                   error={error}
@@ -84,7 +83,7 @@ export const App = () => {
               </Route>
 
               <Route>
-                <h1 className="title">Page not found</h1>
+                <InfoPage />
               </Route>
             </Switch>
           </div>
