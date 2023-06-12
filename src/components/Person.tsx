@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
-import PersonLink from '../PersonLink/PersonLink';
-import { PersonProps } from '../../types';
+import PersonLink from './PersonLink';
+import { PersonProps } from '../types';
 
 interface Props {
   person: PersonProps
@@ -32,13 +32,13 @@ export default function Person({ person }: Props) {
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {mother && person.mother
-          ? <PersonLink person={person.mother} />
+        {mother
+          ? <PersonLink person={mother} />
           : (motherName || '-')}
       </td>
       <td>
-        {father && person.father
-          ? <PersonLink person={person.father} />
+        {father
+          ? <PersonLink person={father} />
           : (fatherName || '-')}
       </td>
     </tr>

@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { getPeople } from '../../api';
-import { Loader } from '../Loader';
-import Person from '../Person/Person';
-import combinePeople from '../../utils/combinePeople';
-import { PersonProps } from '../../types';
+import { getPeople } from '../api';
+import { Loader } from './Loader';
+import Person from './Person';
+import combinePeople from '../utils/combinePeople';
+import { PersonProps } from '../types';
 
 export default function PeopleList() {
   const [peopleList, setPeopleList] = useState<PersonProps[] | []>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  const isPeopleListEmpty = !peopleList.length;
 
   useEffect(() => {
     setIsLoading(true);
@@ -40,7 +42,7 @@ export default function PeopleList() {
               </p>
             )}
 
-          {(!isError && !isLoading && !peopleList.length)
+          {(!isError && !isLoading && isPeopleListEmpty)
             && (
               <p data-cy="noPeopleMessage">
                 There are no people on the server

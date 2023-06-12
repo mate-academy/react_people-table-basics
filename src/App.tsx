@@ -1,7 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
-import PeopleList from './components/PeopleList/PeopleList';
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/Navbar';
+import { HomePage } from './pages/HomePage';
+import { PeoplePage } from './pages/PeoplePage';
 
 export const App = () => (
   <div data-cy="app">
@@ -9,10 +10,10 @@ export const App = () => (
     <main className="section">
       <div className="container">
         <Routes>
-          <Route path="/" element={<h1 className="title">Home Page</h1>} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
-          <Route path="/people" element={<PeopleList />}>
-            <Route path=":selectedPerson" element={<PeopleList />} />
+          <Route path="/people" element={<PeoplePage />}>
+            <Route path=":selectedPerson" element={<PeoplePage />} />
           </Route>
           <Route path="*" element={<h1 className="title">Page not found</h1>} />
         </Routes>
