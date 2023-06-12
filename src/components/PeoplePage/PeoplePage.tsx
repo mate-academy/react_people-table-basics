@@ -9,9 +9,9 @@ type Props = {
 };
 
 export const PeoplePage: React.FC<Props> = ({ slugPerson }) => {
-  const [people, setPeople] = useState<Person[]>();
-  const [error, setError] = useState<boolean>();
-  const [isLoading, setIsLoading] = useState<boolean>();
+  const [people, setPeople] = useState<Person[]>([]);
+  const [error, setError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const loadPeople = async () => {
     setIsLoading(true);
@@ -37,15 +37,15 @@ export const PeoplePage: React.FC<Props> = ({ slugPerson }) => {
       <div className="block">
         <div className="box table-container">
           {isLoading && (<Loader />)}
-          {error && isLoading && (
-            <>
-              <p data-cy="peopleLoadingError" className="has-text-danger">
-                Something went wrong
-              </p>
-              <p data-cy="noPeopleMessage">
-                There are no people on the server
-              </p>
-            </>
+          {error && !isLoading && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )}
+          {!isLoading && !error && people.length === 0 && (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
+            </p>
           )}
 
           <PeopleTable people={people} slugPerson={slugPerson} />

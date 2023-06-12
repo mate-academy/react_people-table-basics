@@ -1,10 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 
 type Props = {
-  people: Person[] | undefined,
+  people: Person[],
   slugPerson: string | undefined,
 };
 
@@ -39,10 +38,10 @@ export const PeopleTable: React.FC<Props> = ({ people, slugPerson }) => {
               } = person;
               const mother = people.find(
                 (child) => (child.motherName === person.name),
-              ) || { slug: '' };
+              );
               const father = people.find(
                 (child) => (child.fatherName === person.name),
-              ) || { slug: '' };
+              );
 
               return (
                 <tr
@@ -54,40 +53,38 @@ export const PeopleTable: React.FC<Props> = ({ people, slugPerson }) => {
                   }
                 >
                   <td>
-                    <Link
-                      to={`/people/${slug}`}
+                    <a
+                      href={`/people/${slug}`}
                       className={classNames(
                         { 'has-text-danger': sex === 'f' },
                       )}
                     >
                       {name}
-                    </Link>
+                    </a>
                   </td>
                   <td>{sex}</td>
                   <td>{born}</td>
                   <td>{died}</td>
                   <td>
-                    {mother.slug !== '' && (
-                      <Link
-                        to={`/people/${mother?.slug}`}
+                    {mother ? (
+                      <a
+                        href={`/people/${mother?.slug}`}
                         className="has-text-danger"
                       >
                         {motherName}
-                      </Link>
-                    )}
-                    {mother.slug === '' && (
+                      </a>
+                    ) : (
                       <p>{motherName || '-'}</p>
                     )}
                   </td>
                   <td>
-                    {father.slug !== '' && (
-                      <Link
-                        to={`/people/${father?.slug}`}
+                    {father ? (
+                      <a
+                        href={`/people/${father?.slug}`}
                       >
                         {fatherName}
-                      </Link>
-                    )}
-                    {father.slug === '' && (
+                      </a>
+                    ) : (
                       <p>{fatherName || '-'}</p>
                     )}
                   </td>
