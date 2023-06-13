@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 
 import { Person } from '../../types/Person';
@@ -10,6 +11,10 @@ export const PeopleTable = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isEmptyPeopleList, setIsEmptyList] = useState(false);
   const [peopleList, setPeopleList] = useState<Person[]>([]);
+  const [
+    selectedPerson,
+    setSelectedPerson,
+  ] = useState<Person | undefined>(undefined);
   const [isLoadingError, setIsLoadingError] = useState(false);
 
   useEffect(() => {
@@ -34,6 +39,10 @@ export const PeopleTable = () => {
 
     getPeopleList();
   }, []);
+
+  const handleSelectedPerson = (person: Person | undefined) => {
+    setSelectedPerson(person);
+  };
 
   return (
     <div className="block">
@@ -74,8 +83,19 @@ export const PeopleTable = () => {
 
           <tbody>
             {peopleList.map(person => (
-              <tr data-cy="person" key={person.slug}>
-                <PersonItem person={person} />
+              <tr
+                data-cy="person"
+                key={person.slug}
+                className={classNames({
+                  'has-background-warning':
+                     selectedPerson?.name === person.name,
+                })}
+              >
+                <PersonItem
+                  person={person}
+                  peopleList={peopleList}
+                  handleSelectedPerson={handleSelectedPerson}
+                />
               </tr>
             ))}
           </tbody>
