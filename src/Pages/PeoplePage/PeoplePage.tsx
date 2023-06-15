@@ -7,6 +7,17 @@ import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { PersonLink } from '../../components/PersonLink/PersonLink';
 
+const findParent = (
+  people: Person[],
+  parentName: string | null,
+): Person | null => {
+  if (parentName) {
+    return people.find(person => person.name === parentName) || null;
+  }
+
+  return null;
+};
+
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[] | null>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,20 +26,11 @@ export const PeoplePage = () => {
 
   useEffect(() => {
     getPeople().then((res) => {
-      const personAndParents = res.map(person => {
-        const mother = res.find((motherPerson) => {
-          return motherPerson.name === person.motherName;
-        });
-        const father = res.find((fatherPerson) => {
-          return fatherPerson.name === person.fatherName;
-        });
-
-        return {
-          ...person,
-          mother,
-          father,
-        };
-      });
+      const personAndParents: Person[] = res.map(person => ({
+        ...person,
+        mother: findParent(res, person.motherName),
+        father: findParent(res, person.fatherName),
+      }));
 
       setPeople(personAndParents);
       setIsLoading(false);
@@ -91,7 +93,7 @@ export const PeoplePage = () => {
 
           {isLoading ? (
             <Loader />
-          ) : people?.length === 0 ? (
+          ) : !people?.length ? (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           ) : (
             <table
