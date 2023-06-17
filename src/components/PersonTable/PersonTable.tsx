@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { Person } from '../../types';
-// import { PersonRow } from '../PersonRow/PersonRow';
 import { PersonLink } from '../PersonLink';
 
 type Props = {
