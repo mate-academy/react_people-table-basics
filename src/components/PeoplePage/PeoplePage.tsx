@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { Loader } from '../Loader';
-import { PeopleTable } from '../PeopleTable/PeopleTabel';
+import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 type Props = {
   slugPerson: string | undefined,

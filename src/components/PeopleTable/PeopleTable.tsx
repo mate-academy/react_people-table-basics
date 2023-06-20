@@ -54,7 +54,7 @@ export const PeopleTable: React.FC<Props> = ({ people, slugPerson }) => {
                 >
                   <td>
                     <a
-                      href={`/people/${slug}`}
+                      href={`#/people/${slug}`}
                       className={classNames(
                         { 'has-text-danger': sex === 'f' },
                       )}
@@ -68,7 +68,7 @@ export const PeopleTable: React.FC<Props> = ({ people, slugPerson }) => {
                   <td>
                     {mother ? (
                       <a
-                        href={`/people/${mother?.slug}`}
+                        href={`#/people/${mother?.slug}`}
                         className="has-text-danger"
                       >
                         {motherName}
@@ -80,7 +80,7 @@ export const PeopleTable: React.FC<Props> = ({ people, slugPerson }) => {
                   <td>
                     {father ? (
                       <a
-                        href={`/people/${father?.slug}`}
+                        href={`#/people/${father?.slug}`}
                       >
                         {fatherName}
                       </a>
