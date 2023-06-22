@@ -1,8 +1,11 @@
-import { Routes, Route, NavLink } from 'react-router-dom';
-import { Loader } from './components/Loader';
-import { PeoplePage } from './PeoplePage';
-import { Navigate } from 'react-router-dom';
 import classNames from 'classnames';
+import {
+  Routes,
+  Route,
+  NavLink,
+  Navigate,
+} from 'react-router-dom';
+import { PeoplePage } from './PeoplePage';
 
 import './App.scss';
 
@@ -18,7 +21,10 @@ export const App = () => (
         <div className="navbar-brand">
           <NavLink
             className={
-              ({ isActive }) => classNames('navbar-item', { 'has-background-grey-lighter': isActive })
+              ({ isActive }) => classNames('navbar-item',
+                {
+                  'has-background-grey-lighter': isActive,
+                })
             }
             to="/"
           >
@@ -27,33 +33,40 @@ export const App = () => (
 
           <NavLink
             className={
-              ({ isActive }) => classNames('navbar-item', { 'has-background-grey-lighter': isActive })
-            } to="/people"
+              ({ isActive }) => classNames('navbar-item',
+                {
+                  'has-background-grey-lighter': isActive,
+                })
+            }
+            to="/people"
           >
             People
           </NavLink>
         </div>
       </div>
-    </nav >
+    </nav>
 
     <main className="section">
       <div className="container">
 
         <Routes>
-          <Route path="/" element={<h1 className='title'>Home page</h1>} />
+          <Route path="/" element={<h1 className="title">Home page</h1>} />
           <Route path="/home" element={<Navigate to="/" replace />} />
-          <Route path="/people" element={
-            <PeoplePage />
-          } />
-          <Route path="/people/:slug" element={
-            <PeoplePage />
-          } />
+          <Route
+            path="/people"
+            element={<PeoplePage />}
+          />
+          <Route
+            path="/people/:slug"
+            element={<PeoplePage />}
+          />
 
-          <Route path="*" element={
-            <h1 className="title">Page not found</h1>
-          } />
+          <Route
+            path="*"
+            element={<h1 className="title">Page not found</h1>}
+          />
         </Routes>
       </div>
     </main>
-  </div >
+  </div>
 );
