@@ -1,8 +1,8 @@
-import React from 'react';
+import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Navigation } from '../../components/Navigation';
+import { Navigation } from '../Navigation';
 
-export const AppPage: React.FC = () => {
+export const Layout: FC = () => {
   return (
     <div data-cy="app">
       <Navigation />

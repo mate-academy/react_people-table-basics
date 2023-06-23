@@ -1,7 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 import { NavigationLink } from '../NavigationLink';
 
-export const Navigation: React.FC = () => (
+export const Navigation: FC = () => (
   <nav
     data-cy="nav"
     className="navbar is-fixed-top has-shadow"
@@ -10,8 +10,8 @@ export const Navigation: React.FC = () => (
   >
     <div className="container">
       <div className="navbar-brand">
-        <NavigationLink to="/" title="Home" />
-        <NavigationLink to="people" title="People" />
+        <NavigationLink to="/">Home</NavigationLink>
+        <NavigationLink to="people">People</NavigationLink>
       </div>
     </div>
   </nav>

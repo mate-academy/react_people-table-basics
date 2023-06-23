@@ -1,6 +1,6 @@
 import React from 'react';
-import cn from 'classnames';
 import { useParams } from 'react-router-dom';
+import cn from 'classnames';
 import { PersonLink } from '../PersonLink';
 import { Person } from '../../types';
 
