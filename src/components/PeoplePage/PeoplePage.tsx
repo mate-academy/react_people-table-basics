@@ -10,7 +10,7 @@ export const PeoplePage: FC = () => {
   const [peoples, setPeoples] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { slug = 'carolus-haverbeke-1832' } = useParams();
+  const { slug = '' } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
