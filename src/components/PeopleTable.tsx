@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../types';
@@ -9,7 +9,7 @@ type Props = {
   isLoading: boolean;
 };
 
-export const PeopleTable: React.FC<Props> = ({
+export const PeopleTable: FC<Props> = ({
   people,
   isLoading,
 }) => {
@@ -37,37 +37,21 @@ export const PeopleTable: React.FC<Props> = ({
 
       <tbody>
         {people.map(person => {
-          const getMotherCellData = () => {
-            const mother = people.find(personsMother => (
-              personsMother.name === person.motherName
-            ));
+          const mother = people.find(personsMother => (
+            personsMother.name === person.motherName
+          ));
 
-            if (mother) {
-              return <PersonLink person={mother} />;
-            }
-
-            return person.motherName || '-';
-          };
-
-          const getFatherCellData = () => {
-            const father = people.find(personsFather => (
-              personsFather.name === person.fatherName
-            ));
-
-            if (father) {
-              return <PersonLink person={father} />;
-            }
-
-            return person.fatherName || '-';
-          };
+          const father = people.find(personsFather => (
+            personsFather.name === person.fatherName
+          ));
 
           return (
             <tr
               data-cy="person"
               key={person.slug}
-              className={classNames(
-                { 'has-background-warning': person.slug === personSlug },
-              )}
+              className={classNames({
+                'has-background-warning': person.slug === personSlug,
+              })}
             >
               <td>
                 <PersonLink person={person} />
@@ -77,10 +61,14 @@ export const PeopleTable: React.FC<Props> = ({
               <td>{person.born}</td>
               <td>{person.died}</td>
               <td>
-                { getMotherCellData() }
+                {mother
+                  ? <PersonLink person={mother} />
+                  : person.motherName || '-'}
               </td>
               <td>
-                { getFatherCellData() }
+                {father
+                  ? <PersonLink person={father} />
+                  : person.fatherName || '-'}
               </td>
             </tr>
           );

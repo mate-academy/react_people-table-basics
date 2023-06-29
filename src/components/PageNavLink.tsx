@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   text: string;
 };
 
-export const PageNavLink: React.FC<Props> = ({ to, text }) => {
+export const PageNavLink: FC<Props> = ({ to, text }) => {
   return (
     <NavLink
       to={to}

@@ -1,6 +1,6 @@
-import React from 'react';
+import { FC } from 'react';
 
-export const NotFoundPage: React.FC = () => {
+export const NotFoundPage: FC = () => {
   return (
     <h1 className="title">Page not found</h1>
   );

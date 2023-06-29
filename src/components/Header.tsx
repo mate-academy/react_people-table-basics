@@ -1,7 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 import { PageNavLink } from './PageNavLink';
 
-export const Header: React.FC = () => {
+export const Header: FC = () => {
   return (
     <nav
       data-cy="nav"

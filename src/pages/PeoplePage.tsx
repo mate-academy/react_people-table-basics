@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import {
+  FC,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { ErrorTypes } from '../constants';
 import { Loader } from '../components/Loader';
 
-export const PeoplePage: React.FC = () => {
+export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [errorType, setErrorType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const errorNotification = errorType === ErrorTypes.UPLOAD
-    ? (
-      <p data-cy="peopleLoadingError" className="has-text-danger">
-        Something went wrong
-      </p>
-    ) : (
-      <p data-cy="noPeopleMessage">
-        There are no people on the server
-      </p>
-    );
-
-  const getPeopleFromServer = async () => {
+  const getPeopleFromServer = useCallback(async () => {
     setIsLoading(true);
     try {
       const response = await getPeople();
@@ -36,7 +30,7 @@ export const PeoplePage: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [people]);
 
   useEffect(() => {
     getPeopleFromServer();
@@ -58,7 +52,16 @@ export const PeoplePage: React.FC = () => {
       ) : (
         <div className="block">
           <div className="box table-container">
-            {errorNotification}
+            { errorType === ErrorTypes.UPLOAD
+              ? (
+                <p data-cy="peopleLoadingError" className="has-text-danger">
+                  Something went wrong
+                </p>
+              ) : (
+                <p data-cy="noPeopleMessage">
+                  There are no people on the server
+                </p>
+              )}
           </div>
         </div>
       )}

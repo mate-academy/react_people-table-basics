@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../types';
@@ -7,7 +7,7 @@ type Props = {
   person: Person;
 };
 
-export const PersonLink: React.FC<Props> = ({ person }) => {
+export const PersonLink: FC<Props> = ({ person }) => {
   return (
     <Link
       to={`/people/${person.slug}`}
