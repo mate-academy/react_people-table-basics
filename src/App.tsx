@@ -5,7 +5,7 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import cn from 'classnames';
+import classNames from 'classnames';
 
 import './App.scss';
 import { HomePage } from './components/HomePage/HomePage';
@@ -13,6 +13,12 @@ import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { PageNotFound } from './components/PageNotFound/PageNotFound';
 
 export const App: FC = () => {
+  const navLinkClasses = (
+    { isActive }: { isActive: boolean },
+  ) => classNames('navbar-item', {
+    'has-background-grey-lighter': isActive,
+  });
+
   return (
     <div data-cy="app">
       <nav
@@ -24,18 +30,14 @@ export const App: FC = () => {
         <div className="container">
           <div className="navbar-brand">
             <NavLink
-              className={({ isActive }) => cn('navbar-item', {
-                'has-background-grey-lighter': isActive,
-              })}
+              className={navLinkClasses}
               to="/"
             >
               Home
             </NavLink>
 
             <NavLink
-              className={({ isActive }) => cn('navbar-item', {
-                'has-background-grey-lighter': isActive,
-              })}
+              className={navLinkClasses}
               to="/people"
             >
               People

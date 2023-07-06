@@ -7,7 +7,7 @@ import { PeopleTable } from '../PeopleTable/PeopleTable';
 import { getDetailsOfParents } from '../../helpers';
 
 export const PeoplePage: FC = () => {
-  const [peoples, setPeoples] = useState<Person[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const { slug = '' } = useParams();
@@ -17,7 +17,7 @@ export const PeoplePage: FC = () => {
 
     getPeople()
       .then(person => {
-        setPeoples(person);
+        setPeople(person);
         setIsLoading(false);
       })
       .catch(() => {
@@ -26,30 +26,26 @@ export const PeoplePage: FC = () => {
       });
   }, []);
 
-  const visiblePeoples = getDetailsOfParents(peoples);
+  const visiblePeoples = getDetailsOfParents(people);
 
   return (
     <>
       <h1 className="title">People Page</h1>
 
-      {isLoading
-        ? (
-          <Loader />
-        ) : (
-          <>
-            {error
-              ? (
-                <p data-cy="peopleLoadingError" className="has-text-danger">
-                  {error}
-                </p>
-              ) : (
-                <PeopleTable
-                  peoples={visiblePeoples}
-                  selectedPersonSlug={slug}
-                />
-              )}
-          </>
-        )}
+      {isLoading && <Loader />}
+
+      {!isLoading && !error && (
+        <PeopleTable
+          people={visiblePeoples}
+          selectedPersonSlug={slug}
+        />
+      )}
+
+      {!isLoading && error && (
+        <p data-cy="peopleLoadingError" className="has-text-danger">
+          {error}
+        </p>
+      )}
     </>
   );
 };

@@ -1,14 +1,24 @@
 import { Person } from './types';
 
-export const getDetailsOfParents = (peoples: Person[]): Person[] => {
-  return peoples.map(person => {
-    const mother = peoples.find(p => p.name === person.motherName);
-    const father = peoples.find(p => p.name === person.fatherName);
+export const getDetailsOfParents = (people: Person[]): Person[] => {
+  const peopleMap = new Map<string, Person>();
 
-    return {
-      ...person,
-      mother,
-      father,
-    };
+  people.forEach(person => {
+    peopleMap.set(person.name, person);
+  });
+
+  return people.map(person => {
+    if (person.motherName && person.fatherName) {
+      const mother = peopleMap.get(person.motherName);
+      const father = peopleMap.get(person.fatherName);
+
+      return {
+        ...person,
+        mother,
+        father,
+      };
+    }
+
+    return person;
   });
 };

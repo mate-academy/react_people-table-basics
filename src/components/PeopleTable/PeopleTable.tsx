@@ -1,21 +1,23 @@
 import { FC } from 'react';
-import cn from 'classnames';
+import classNames from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
-interface Props {
-  peoples: Person[];
+const tableColumns = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
+interface PeopleTableInterface {
+  people: Person[];
   selectedPersonSlug: string;
 }
 
-export const PeopleTable: FC<Props> = ({
-  peoples,
+export const PeopleTable: FC<PeopleTableInterface> = ({
+  people,
   selectedPersonSlug,
 }) => {
   return (
     <div className="block">
       <div className="box table-container">
-        {peoples.length === 0 ? (
+        {people.length === 0 ? (
           <p data-cy="noPeopleMessage">
             There are no people on the server
           </p>
@@ -26,17 +28,16 @@ export const PeopleTable: FC<Props> = ({
           >
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
+                {tableColumns.map(column => (
+                  <th key={column}>
+                    {column}
+                  </th>
+                ))}
               </tr>
             </thead>
 
             <tbody>
-              {peoples.map(person => {
+              {people.map(person => {
                 const {
                   sex,
                   born,
@@ -48,12 +49,14 @@ export const PeopleTable: FC<Props> = ({
                   father,
                 } = person;
 
+                const personRowClasses = classNames({
+                  'has-background-warning': selectedPersonSlug === slug,
+                });
+
                 return (
                   <tr
                     data-cy="person"
-                    className={cn({
-                      'has-background-warning': selectedPersonSlug === slug,
-                    })}
+                    className={personRowClasses}
                     key={slug}
                   >
                     <td>
@@ -66,24 +69,12 @@ export const PeopleTable: FC<Props> = ({
                     <td>
                       {mother
                         ? <PersonLink person={mother} />
-                        : (
-                          <>
-                            {motherName
-                              ? `${motherName}`
-                              : '-'}
-                          </>
-                        )}
+                        : motherName || '-'}
                     </td>
                     <td>
                       {father
                         ? <PersonLink person={father} />
-                        : (
-                          <>
-                            {fatherName
-                              ? `${fatherName}`
-                              : '-'}
-                          </>
-                        )}
+                        : fatherName || '-'}
                     </td>
                   </tr>
                 );
