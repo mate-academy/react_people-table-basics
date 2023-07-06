@@ -7,7 +7,7 @@ interface Props {
   title: string;
 }
 
-export const PageNavLink: React.FC<Props> = ({ to, title }) => {
+export const NavigationLink: React.FC<Props> = ({ to, title }) => {
   return (
     <NavLink
       to={to}

@@ -1,4 +1,4 @@
-import { PageNavLink } from '../PageNavLink/PageNavLink';
+import { NavigationLink } from '../NavigationLink/NavigationLink';
 
 export const Navigation: React.FC = () => {
   return (
@@ -10,8 +10,8 @@ export const Navigation: React.FC = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <PageNavLink to="/" title="Home" />
-          <PageNavLink to="people" title="People" />
+          <NavigationLink to="/" title="Home" />
+          <NavigationLink to="people" title="People" />
         </div>
       </div>
     </nav>
