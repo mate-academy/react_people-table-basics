@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import {
+  Navigate,
   Route, RouterProvider, createHashRouter, createRoutesFromElements,
 } from 'react-router-dom';
 
@@ -14,9 +15,13 @@ const router = createHashRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/" element={<HomePage />} />
+      <Route path="/people">
+        <Route index element={<PeoplePage />} />
+        <Route path=":userSlug/" element={<PeoplePage />} />
+      </Route>
       <Route
-        path="/people"
-        element={<PeoplePage />}
+        path="/home"
+        element={<Navigate to="/" replace />}
       />
 
       <Route path="*" element={<NotFound />} />

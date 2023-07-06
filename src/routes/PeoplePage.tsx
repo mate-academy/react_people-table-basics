@@ -7,12 +7,13 @@ import { PeopleTable } from '../components/PeopleTable';
 
 export const PeoplePage = () => {
   const [peoples, setPeoples] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
+
+  const isAviablePeople = peoples.length > 0;
 
   const fetchData = async () => {
     try {
-      setIsLoading(true);
       const data = await getPeople();
       const preparedData = getPeoplesWithParents(data);
 
@@ -41,13 +42,13 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!isLoading && peoples.length === 0 && (
+          {!isAviablePeople && !isLoading && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {peoples.length > 0 && <PeopleTable people={peoples} />}
+          {isAviablePeople && !isLoading && <PeopleTable people={peoples} />}
         </div>
       </div>
     </>
