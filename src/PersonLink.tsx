@@ -3,12 +3,29 @@ import classNames from 'classnames';
 import { useParams, Link } from 'react-router-dom';
 import { Person } from './types';
 
-const findParent = (
+const FATHER = 'father';
+const MOTHER = 'mother';
+const FEMALE = 'f';
+const NOT_SET_VALUE = '-';
+
+interface ParentLink {
   person: Person,
   parentType: string,
   name: string,
   peopleList: Person[],
+}
+
+const getParentLink = (
+  args: ParentLink,
 ) => {
+  const {
+    person,
+    parentType,
+    name,
+    peopleList,
+  } = args;
+  const isMother = parentType === MOTHER;
+
   const parent = peopleList
     .find(personToFind => personToFind.name === name);
 
@@ -16,11 +33,11 @@ const findParent = (
     return (
       <Link
         className={classNames(
-          { 'has-text-danger': parentType === 'mother' },
+          { 'has-text-danger': isMother },
         )}
         to={`/people/${parent.slug}`}
       >
-        {parentType === 'mother'
+        {isMother
           ? person.motherName
           : person.fatherName}
       </Link>
@@ -37,6 +54,9 @@ interface Props {
 
 export const PersonLink: React.FC<Props> = ({ person, people }) => {
   const { slug } = useParams();
+  const isFemale = person.sex === FEMALE;
+
+  const { sex, born, died } = person;
 
   return (
     <tr
@@ -49,7 +69,7 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
       <td>
         <Link
           className={classNames(
-            { 'has-text-danger': person.sex === 'f' },
+            { 'has-text-danger': isFemale },
           )}
           to={`/people/${person.slug}`}
         >
@@ -57,22 +77,32 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
         </Link>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
       <td>
         {person.motherName
           ? (
-            findParent(person, 'mother', person.motherName, people)
+            getParentLink({
+              person,
+              parentType: MOTHER,
+              name: person.motherName,
+              peopleList: people,
+            })
           )
-          : ('-')}
+          : (NOT_SET_VALUE)}
       </td>
       <td>
         {person.fatherName
           ? (
-            findParent(person, 'father', person.fatherName, people)
+            getParentLink({
+              person,
+              parentType: FATHER,
+              name: person.fatherName,
+              peopleList: people,
+            })
           )
-          : ('-')}
+          : (NOT_SET_VALUE)}
       </td>
     </tr>
   );

@@ -4,6 +4,8 @@ import { Person } from './types';
 import { Loader } from './components/Loader';
 import { PersonLink } from './PersonLink';
 
+const tableHeads = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 export const PeoplePage: React.FC<{}> = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,19 +25,22 @@ export const PeoplePage: React.FC<{}> = () => {
     loadPeople();
   }, []);
 
+  const isErrorMessageVisible = !isLoading && error;
+  const isPeopleTableVisible = !isLoading && !error && people.length > 0;
+
   return (
     <>
       <h1 className="title">People Page</h1>
       {isLoading && <Loader />}
 
-      {error
+      {isErrorMessageVisible
         && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             Something went wrong
           </p>
         )}
 
-      {(!error && !isLoading)
+      {isPeopleTableVisible
         && (
           <table
             data-cy="peopleTable"
@@ -43,18 +48,19 @@ export const PeoplePage: React.FC<{}> = () => {
           >
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
+                {tableHeads.map(head => (
+                  <th key={head}>{head}</th>
+                ))}
               </tr>
             </thead>
 
             <tbody>
               {people.map(person => (
-                <PersonLink person={person} people={people} />
+                <PersonLink
+                  person={person}
+                  people={people}
+                  key={person.slug}
+                />
               ))}
             </tbody>
           </table>
