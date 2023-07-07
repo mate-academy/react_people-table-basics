@@ -1,28 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { TableList } from '../../components/TableList';
 import { Loader } from '../../components/Loader';
 
 interface UsePeopleDataResult {
-  content: JSX.Element | null;
+  content: JSX.Element;
 }
 
 function sortPersons(persons: Person[]) {
-  const valuePersons = [...persons];
-
-  return valuePersons
-    .map(person => {
-      return {
-        ...person,
-        mother: valuePersons.find(mom => mom.name === person.motherName),
-        father: valuePersons.find(dad => dad.name === person.fatherName),
-      };
-    });
+  return persons.map(person => ({
+    ...person,
+    mother: persons.find(mom => mom.name === person.motherName),
+    father: persons.find(dad => dad.name === person.fatherName),
+  }));
 }
 
 export const usePeopleData = (): UsePeopleDataResult => {
-  const [dataPerosn, setDataPerson] = useState<Person[]>([]);
+  const [dataPersons, setDataPersons] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
 
@@ -31,7 +26,7 @@ export const usePeopleData = (): UsePeopleDataResult => {
       try {
         const loadedPeople = await getPeople();
 
-        setDataPerson(sortPersons(loadedPeople));
+        setDataPersons(sortPersons(loadedPeople));
       } catch {
         setLoadError(true);
       } finally {
@@ -42,25 +37,29 @@ export const usePeopleData = (): UsePeopleDataResult => {
     fetchData();
   }, []);
 
-  let content: JSX.Element | null = null;
+  const content: JSX.Element = useMemo(() => {
+    if (isLoading) {
+      return <Loader />;
+    }
 
-  if (isLoading) {
-    content = <Loader />;
-  } else if (loadError) {
-    content = (
-      <p data-cy="peopleLoadingError" className="has-text-danger">
-        Something went wrong
-      </p>
-    );
-  } else if (dataPerosn.length) {
-    content = <TableList persons={dataPerosn} />;
-  } else {
-    content = (
+    if (loadError) {
+      return (
+        <p data-cy="peopleLoadingError" className="has-text-danger">
+          Something went wrong
+        </p>
+      );
+    }
+
+    if (dataPersons.length) {
+      return <TableList persons={dataPersons} />;
+    }
+
+    return (
       <p data-cy="noPeopleMessage">
         There are no people on the server
       </p>
     );
-  }
+  }, [isLoading, loadError, dataPersons.length]);
 
   return { content };
 };
