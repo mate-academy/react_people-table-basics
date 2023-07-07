@@ -20,7 +20,7 @@ export const PeopleTable:FC<Props> = ({ people }) => {
       <thead>
         <tr>
           {Object.entries(TableHeadNames).map(([key, value]) => (
-            <td key={key}>{value}</td>
+            <th key={key}>{value}</th>
           ))}
         </tr>
       </thead>

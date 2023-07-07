@@ -9,7 +9,7 @@ interface Props {
 
 export const PersonLink:FC<Props> = ({ person }) => (
   <Link
-    to={`../${person.slug}`}
+    to={`/people/${person.slug}`}
     className={cn({ 'has-text-danger': person.sex === 'f' })}
   >
     {person.name}
