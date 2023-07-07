@@ -6,18 +6,20 @@ import { getPeoplesWithParents } from '../helpers/getPeoplesWithParents';
 import { PeopleTable } from '../components/PeopleTable';
 
 export const PeoplePage = () => {
-  const [peoples, setPeoples] = useState<Person[]>([]);
+  const [peopleData, setPeopleData] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
 
-  const isAviablePeople = peoples.length > 0;
+  const hasPeople = peopleData.length > 0;
+  const isNoPeopleAfterFetch = !hasPeople && !isLoading;
+  const hasPeopleAfterFetch = hasPeople && !isLoading;
 
   const fetchData = async () => {
     try {
       const data = await getPeople();
       const preparedData = getPeoplesWithParents(data);
 
-      setPeoples(preparedData);
+      setPeopleData(preparedData);
     } catch (error) {
       setLoadError('Something went wrong');
     } finally {
@@ -42,13 +44,13 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!isAviablePeople && !isLoading && (
+          {isNoPeopleAfterFetch && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {isAviablePeople && !isLoading && <PeopleTable people={peoples} />}
+          {hasPeopleAfterFetch && <PeopleTable people={peopleData} />}
         </div>
       </div>
     </>

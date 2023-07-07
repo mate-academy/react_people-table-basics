@@ -1,10 +1,10 @@
 import cn from 'classnames';
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, To } from 'react-router-dom';
 
 interface Props {
-  title: string,
-  directTo: string,
+  title: string;
+  directTo: To;
 }
 
 export const NavHeaderLink:FC<Props> = ({ title, directTo }) => (

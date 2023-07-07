@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom';
 import { FC } from 'react';
 import { PersonLink } from './PersonLink';
 import { Person } from '../types';
+import { TableHeadNames } from '../enums/TableHeadNames';
 
 interface Props {
-  people: Person[]
+  people: Person[];
 }
 
 export const PeopleTable:FC<Props> = ({ people }) => {
@@ -18,12 +19,9 @@ export const PeopleTable:FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {Object.entries(TableHeadNames).map(([key, value]) => (
+            <td key={key}>{value}</td>
+          ))}
         </tr>
       </thead>
 
@@ -46,13 +44,13 @@ export const PeopleTable:FC<Props> = ({ people }) => {
               <td>{person.died}</td>
               <td>
                 {person.mother
-                  ? (<PersonLink person={person.mother} />)
-                  : (person.motherName || '-')}
+                  ? <PersonLink person={person.mother} />
+                  : person.motherName || '-'}
               </td>
               <td>
                 {person.father
-                  ? (<PersonLink person={person.father} />)
-                  : (person.fatherName || '-')}
+                  ? <PersonLink person={person.father} />
+                  : person.fatherName || '-'}
               </td>
             </tr>
           );
