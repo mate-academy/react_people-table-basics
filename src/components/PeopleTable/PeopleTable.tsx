@@ -10,8 +10,8 @@ export type PropsPeopleTable = {
 export const PeopleTable: React.FC<PropsPeopleTable> = ({ people }) => {
   const { slug } = useParams();
 
-  const FindParentOfPerson = (parentName: string | null) => {
-    return people.find((human: Person) => human.name === parentName);
+  const findParentOfPerson = (parentName: string | null) => {
+    return people.find((person: Person) => person.name === parentName);
   };
 
   return people.length > 0
@@ -51,10 +51,10 @@ export const PeopleTable: React.FC<PropsPeopleTable> = ({ people }) => {
                 {person.motherName
                   ? (
                     <td>
-                      {FindParentOfPerson(person.motherName)
+                      {findParentOfPerson(person.motherName)
                         ? (
                           <PersonLink
-                            person={FindParentOfPerson(person.motherName)}
+                            person={findParentOfPerson(person.motherName)}
                           />
                         )
                         : person.motherName}
@@ -65,10 +65,10 @@ export const PeopleTable: React.FC<PropsPeopleTable> = ({ people }) => {
                 {person.fatherName
                   ? (
                     <td>
-                      {FindParentOfPerson(person.fatherName)
+                      {findParentOfPerson(person.fatherName)
                         ? (
                           <PersonLink
-                            person={FindParentOfPerson(person.fatherName)}
+                            person={findParentOfPerson(person.fatherName)}
                           />
                         )
                         : person.fatherName}

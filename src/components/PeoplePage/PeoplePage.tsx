@@ -7,11 +7,13 @@ import { PeopleTable } from '../PeopleTable/PeopleTable';
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>();
   const [isError, setIsError] = useState(false);
+  const [isLoader, setIsLoader] = useState(true);
 
   useEffect(() => {
     getPeople()
       .then(setPeople)
-      .catch(() => setIsError(true));
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoader(false));
   }, []);
 
   return (
@@ -20,9 +22,9 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {!people
-            ? <Loader />
-            : <PeopleTable people={people} />}
+          {isLoader && <Loader />}
+
+          {people && <PeopleTable people={people} />}
 
           {isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
