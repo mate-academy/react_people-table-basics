@@ -15,8 +15,9 @@ export const PeoplePage: React.FC = () => {
 
       try {
         const response = await getPeople();
+
         setPeople(response);
-      } catch (error) {
+      } catch {
         setError('Something went wrong');
       }
 
@@ -33,7 +34,7 @@ export const PeoplePage: React.FC = () => {
     return {
       ...person,
       mother,
-      father
+      father,
     };
   });
 
@@ -44,7 +45,7 @@ export const PeoplePage: React.FC = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {(isLoading && error) && (
+          {error && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               {error}
             </p>
@@ -62,4 +63,3 @@ export const PeoplePage: React.FC = () => {
     </>
   );
 };
-

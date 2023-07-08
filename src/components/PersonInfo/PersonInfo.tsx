@@ -8,7 +8,7 @@ interface Props {
   selectedPersonSlug: string;
 }
 
-export  const PersonInfo: React.FC<Props> = ({ person, selectedPersonSlug}) => {
+export const PersonInfo: React.FC<Props> = ({ person, selectedPersonSlug }) => {
   const {
     sex,
     born,
@@ -22,30 +22,32 @@ export  const PersonInfo: React.FC<Props> = ({ person, selectedPersonSlug}) => {
 
   return (
     <tr
-    data-cy="person"
-    className={classNames({'has-background-warning': selectedPersonSlug === slug})}
+      data-cy="person"
+      className={classNames(
+        { 'has-background-warning': selectedPersonSlug === slug },
+      )}
     >
-    <td>
-      <PersonLink person={person}/>
-    </td>
+      <td>
+        <PersonLink person={person} />
+      </td>
 
-    <td>{sex}</td>
-    <td>{born}</td>
-    <td>{died}</td>
-    <td>
-      {mother ? (
-        <PersonLink person={mother} />
-      ) : (
-        motherName || '-'
-      )}
-    </td>
-    <td>
-      {father ? (
-        <PersonLink person={father} />
-      ) : (
-       fatherName || '-'
-      )}
-    </td>
-  </tr>
-  )
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>
+        {mother ? (
+          <PersonLink person={mother} />
+        ) : (
+          motherName || '-'
+        )}
+      </td>
+      <td>
+        {father ? (
+          <PersonLink person={father} />
+        ) : (
+          fatherName || '-'
+        )}
+      </td>
+    </tr>
+  );
 };
