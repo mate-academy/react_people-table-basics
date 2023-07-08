@@ -1,31 +1,33 @@
 import { FC } from 'react';
 import { Person } from '../../types';
 import { TableRow } from '../TableRow';
+import { TableColumn } from '../../enums';
 
 interface Props {
   people: Person[]
 }
 
-export const PeopleTable: FC<Props> = ({ people }) => (
-  <table
-    data-cy="peopleTable"
-    className="table is-striped is-hoverable is-narrow is-fullwidth"
-  >
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Sex</th>
-        <th>Born</th>
-        <th>Died</th>
-        <th>Mother</th>
-        <th>Father</th>
-      </tr>
-    </thead>
+export const PeopleTable: FC<Props> = ({ people }) => {
+  const tableColumns = Object.keys(TableColumn);
 
-    <tbody>
-      {people.map(person => (
-        <TableRow key={person.slug} person={person} />
-      ))}
-    </tbody>
-  </table>
-);
+  return (
+    <table
+      data-cy="peopleTable"
+      className="table is-striped is-hoverable is-narrow is-fullwidth"
+    >
+      <thead>
+        <tr>
+          {tableColumns.map(column => (
+            <th key={column}>{column}</th>
+          ))}
+        </tr>
+      </thead>
+
+      <tbody>
+        {people.map(person => (
+          <TableRow key={person.slug} person={person} />
+        ))}
+      </tbody>
+    </table>
+  );
+};
