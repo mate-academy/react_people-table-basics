@@ -1,6 +1,6 @@
 import './App.scss';
 import { NavigationLink } from './components/NavigationLink/NavigationLink';
-import { Pages } from './components/Pages/Pages';
+import { Pages } from './pages/Pages';
 
 export const App = () => {
   return (
