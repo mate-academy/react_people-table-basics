@@ -7,7 +7,9 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ visiblePeople }) => {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug } = useParams();
+
+  const tableHeads = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
   return (
     <table
@@ -16,12 +18,9 @@ export const PeopleTable: React.FC<Props> = ({ visiblePeople }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {tableHeads.map(th => (
+            <th key={th}>{th}</th>
+          ))}
         </tr>
       </thead>
 
