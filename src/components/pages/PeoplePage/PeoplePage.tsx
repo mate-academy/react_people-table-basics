@@ -3,6 +3,7 @@ import { PeopleTable } from '../../PeopleTable/PeopleTable';
 import { getPeople } from '../../../api';
 import { Person } from '../../../types';
 import { Loader } from '../../Loader';
+import { findParent } from '../../../helpers/findParents';
 
 export const PeoplePage: React.FC = () => {
   const [visiblePeople, setVisiblePeople] = useState<Person[]>();
@@ -22,18 +23,14 @@ export const PeoplePage: React.FC = () => {
           _,
           people,
         ) => {
-          const mother = people.find(m => (
-            m.name === person.motherName));
-          const father = people.find(f => (
-            f.name === person.fatherName));
+          const mother = findParent(people, person, 'mother');
+          const father = findParent(people, person, 'father');
 
-          return (
-            {
-              ...person,
-              mother,
-              father,
-            }
-          );
+          return {
+            ...person,
+            mother,
+            father,
+          };
         });
 
         setVisiblePeople(peopleWithParents);
@@ -46,6 +43,8 @@ export const PeoplePage: React.FC = () => {
         setIsLoading(false);
       });
   }, []);
+
+  const areTherePeopleOnSever = isRequestSent && !visiblePeople?.length;
 
   return (
     <>
@@ -61,7 +60,7 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {isRequestSent && !visiblePeople?.length && (
+          {areTherePeopleOnSever && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>

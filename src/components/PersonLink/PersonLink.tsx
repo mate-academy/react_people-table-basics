@@ -1,8 +1,9 @@
+import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 
 type Props = {
-  person: Person,
+  person: Person;
 };
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
@@ -11,11 +12,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
   return (
     <Link
       to={slug}
-      className={
-        sex === 'f'
-          ? 'has-text-danger'
-          : ''
-      }
+      className={cn({ 'has-text-danger': sex === 'f' })}
     >
       {name}
     </Link>

@@ -3,7 +3,7 @@ import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
-  visiblePeople: Person[],
+  visiblePeople: Person[];
 };
 
 export const PeopleTable: React.FC<Props> = ({ visiblePeople }) => {
@@ -44,20 +44,12 @@ export const PeopleTable: React.FC<Props> = ({ visiblePeople }) => {
             <td>{person.died}</td>
             <td>
               {person.mother
-                ? (
-                  <PersonLink
-                    person={person.mother}
-                  />
-                )
+                ? <PersonLink person={person.mother} />
                 : person.motherName || '-'}
             </td>
             <td>
               {person.father
-                ? (
-                  <PersonLink
-                    person={person.father}
-                  />
-                )
+                ? <PersonLink person={person.father} />
                 : person.fatherName || '-'}
             </td>
           </tr>
