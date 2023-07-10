@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
-// import { PersonLink } from '../Person/Person';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 interface Props {
+  isError: boolean;
   people: Person[];
   isDataUploaded: boolean;
   findMotherSlug: (child: Person) => string | null;
@@ -12,14 +12,13 @@ interface Props {
 }
 
 export const PeoplePage: React.FC<Props> = ({
+  isError,
   people,
   isDataUploaded,
   findMotherSlug,
   findFatherSlug,
 }) => {
   const { personSlug } = useParams();
-
-  // console.log(routeParams)
 
   return (
     <>
@@ -28,7 +27,13 @@ export const PeoplePage: React.FC<Props> = ({
         <div className="box table-container">
           {!isDataUploaded && <Loader />}
 
-          {isDataUploaded && people.length === 0 && (
+          {isError && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )}
+
+          {!isError && isDataUploaded && people.length === 0 && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>

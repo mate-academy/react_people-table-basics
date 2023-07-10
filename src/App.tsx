@@ -3,10 +3,9 @@ import {
   Route,
   Navigate,
   NavLink,
-  // useParams,
 } from 'react-router-dom';
 import './App.scss';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
@@ -15,21 +14,23 @@ import { Person } from './types';
 
 export const App = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  // const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [isDataUploaded, setIsDataUploaded] = useState(false);
 
   useEffect(() => {
     getPeople()
       .then(uploadedPeople => {
         setPeople(uploadedPeople);
-        setIsDataUploaded(true);
       })
       .catch(() => {
-        // setIsError(true);
+        setIsError(true);
+      })
+      .finally(() => {
+        setIsDataUploaded(true);
       });
   }, []);
 
-  const findMotherSlug = (child: Person): string | null => {
+  const findMotherSlug = useCallback((child: Person): string | null => {
     const mother = people.find(person => person.name === child.motherName);
 
     if (mother) {
@@ -37,9 +38,9 @@ export const App = () => {
     }
 
     return null;
-  };
+  }, [people]);
 
-  const findFatherSlug = (child: Person): string | null => {
+  const findFatherSlug = useCallback((child: Person): string | null => {
     const father = people.find(person => person.name === child.fatherName);
 
     if (father) {
@@ -47,10 +48,7 @@ export const App = () => {
     }
 
     return null;
-  };
-
-  // const persss = useParams();
-  // console.log(persss)
+  }, [people]);
 
   return (
     <div data-cy="app">
@@ -99,6 +97,7 @@ export const App = () => {
                 index
                 element={(
                   <PeoplePage
+                    isError={isError}
                     people={people}
                     isDataUploaded={isDataUploaded}
                     findMotherSlug={findMotherSlug}
@@ -111,6 +110,7 @@ export const App = () => {
                 path=":personSlug"
                 element={(
                   <PeoplePage
+                    isError={isError}
                     people={people}
                     isDataUploaded={isDataUploaded}
                     findMotherSlug={findMotherSlug}

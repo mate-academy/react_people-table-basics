@@ -3,16 +3,13 @@ import classNames from 'classnames';
 import { Person } from '../../types';
 
 interface Props {
-  // people: Person[];
   person: Person;
   findMotherSlug: (person: Person) => string | null;
   findFatherSlug: (person: Person) => string | null;
   selectedPerson: string | undefined;
-  // isDataUploaded: boolean;
 }
 
 export const PersonLink: React.FC<Props> = ({
-  // people,
   person,
   findMotherSlug,
   findFatherSlug,

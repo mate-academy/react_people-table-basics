@@ -1,19 +1,14 @@
-// import { Link } from 'react-router-dom';
-// import classNames from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
 interface Props {
-  // people: Person[];
   people: Person[];
   findMotherSlug: (person: Person) => string | null;
   findFatherSlug: (person: Person) => string | null;
   selectedPerson: string | undefined;
-  // isDataUploaded: boolean;
 }
 
 export const PeopleTable: React.FC<Props> = ({
-  // people,
   people,
   findMotherSlug,
   findFatherSlug,
@@ -38,7 +33,6 @@ export const PeopleTable: React.FC<Props> = ({
       <tbody>
         {people.map(person => (
           <PersonLink
-            // people={people}
             person={person}
             findMotherSlug={findMotherSlug}
             findFatherSlug={findFatherSlug}
