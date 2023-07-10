@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import React from 'react';
 import './App.scss';
 import { HomePage } from './components/Pages/HomePage';
 import { PeoplePage } from './components/Pages/PeoplePage';
