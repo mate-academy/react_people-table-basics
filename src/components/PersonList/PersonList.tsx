@@ -2,6 +2,7 @@ import { FC } from 'react';
 import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   persons: null | Person[],
@@ -50,14 +51,11 @@ export const PersonList: FC<Props> = ({ persons }) => {
 
             if (foundPerson) {
               return (
-                <a
-                  className={classNames({
-                    'has-text-danger': foundPerson.sex === 'f',
-                  })}
-                  href={`#/people/${foundPerson.slug}`}
-                >
-                  {foundPerson.name}
-                </a>
+                <PersonLink
+                  slug={foundPerson.slug}
+                  sex={foundPerson.sex}
+                  title={foundPerson.name}
+                />
               );
             }
 
@@ -73,14 +71,11 @@ export const PersonList: FC<Props> = ({ persons }) => {
               })}
             >
               <td>
-                <a
-                  className={classNames({
-                    'has-text-danger': sex === 'f',
-                  })}
-                  href={`#/people/${person.slug}`}
-                >
-                  {name}
-                </a>
+                <PersonLink
+                  slug={person.slug}
+                  sex={sex}
+                  title={name}
+                />
               </td>
 
               <td>{sex}</td>
