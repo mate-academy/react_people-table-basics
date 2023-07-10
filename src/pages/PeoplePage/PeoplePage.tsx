@@ -4,6 +4,7 @@ import { Loader } from '../../components/Loader';
 import { PeopleTable } from '../../components/PeopleTable';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
+import { preparePeople } from '../../helpers';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -17,20 +18,7 @@ export const PeoplePage = () => {
       .finally(() => setIsLoaded(true));
   }, []);
 
-  const preparedPeople: Person[] = people.map(person => {
-    const mother = people.find(
-      possibleMother => possibleMother.name === person.motherName,
-    );
-    const father = people.find(
-      possibleFather => possibleFather.name === person.fatherName,
-    );
-
-    return {
-      ...person,
-      mother,
-      father,
-    };
-  });
+  const preparedPeople = preparePeople(people);
 
   const isErrorVisible = isLoaded && isError;
   const isNoPeopleVisible = isLoaded && !isError && people.length === 0;

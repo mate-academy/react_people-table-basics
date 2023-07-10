@@ -8,11 +8,13 @@ type Props = {
   person: Person;
 };
 
+const FEMALE = 'f';
+
 export const PersonLink: React.FC<Props> = ({ person }) => {
   const { slug, name, sex } = person;
 
   return (
-    <NavLink to={`/people/${slug}`} className={cn({ 'has-text-danger': sex === 'f' })}>
+    <NavLink to={`/people/${slug}`} className={cn({ 'has-text-danger': sex === FEMALE })}>
       {name}
     </NavLink>
   );
