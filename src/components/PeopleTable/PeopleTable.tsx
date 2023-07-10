@@ -10,20 +10,15 @@ export const PeopleTable: FC<Props> = ({ people }) => {
   const newPeople = people.map((person: Person) => {
     const newPerson: Person = { ...person };
 
-    const mother = people.find((el) => el.name === person.motherName);
-
-    if (mother) {
-      newPerson.mother = mother;
-    }
-
-    const father = people.find((el) => el.name === person.fatherName);
-
-    if (father) {
-      newPerson.father = father;
-    }
+    newPerson.mother = people.find((el) => el.name === person.motherName);
+    newPerson.father = people.find((el) => el.name === person.fatherName);
 
     return newPerson;
   });
+
+  if (!people.length) {
+    return null;
+  }
 
   return (
     <table

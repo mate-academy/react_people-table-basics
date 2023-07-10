@@ -5,20 +5,21 @@ import { getPeople } from '../../api';
 import { Person } from '../../types';
 
 export const PeoplePage: FC = () => {
-  const [isLoader, setIsLoader] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState(false);
-  const [people, setPeople] = useState<Person[] | null>(null);
+  const [people, setPeople] = useState<Person[]>([]);
 
   useEffect(() => {
     setIsError(false);
-    setIsLoader(true);
+    setIsLoading(true);
     getPeople()
+      // .then(() => setPeople([]))
       .then(setPeople)
       .catch(() => {
         setIsError(true);
       })
       .finally(() => {
-        setIsLoader(false);
+        setIsLoading(false);
       });
   }, []);
 
@@ -28,29 +29,23 @@ export const PeoplePage: FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isLoader ? (
-            <Loader />
+          {isLoading && <Loader />}
+
+          {isError && (
+            <p
+              data-cy="peopleLoadingError"
+              className="has-text-danger"
+            >
+              Something went wrong
+            </p>
+          )}
+
+          {!people.length && !isLoading ? (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
+            </p>
           ) : (
-            <>
-              {isError ? (
-                <p
-                  data-cy="peopleLoadingError"
-                  className="has-text-danger"
-                >
-                  Something went wrong
-                </p>
-              ) : (
-                <>
-                  {people ? (
-                    <PeopleTable people={people} />
-                  ) : (
-                    <p data-cy="noPeopleMessage">
-                      There are no people on the server
-                    </p>
-                  )}
-                </>
-              )}
-            </>
+            <PeopleTable people={people} />
           )}
         </div>
       </div>

@@ -21,17 +21,7 @@ export const PersonLink: FC<Props> = ({ person }) => {
   } = person;
 
   const currentRow = slug === peopleSlug;
-  // const parentsName = (
-  //   (fatherName || motherName) ? peopleSlug?.split('-')
-  //     .slice(0, 2)
-  //     .join(' ') === person.name.toLowerCase() : false
-  // );
-
-  // const handleClickParents = () => {
-  //   setParentsName()
-  // }
-
-  const woman = person.sex === 'f';
+  const isWoman = person.sex === 'f';
   const isMother = motherName || '-';
   const isFather = fatherName || '-';
 
@@ -47,7 +37,7 @@ export const PersonLink: FC<Props> = ({ person }) => {
         <Link
           to={`/people/${person.slug}`}
           className={classNames({
-            'has-text-danger': woman,
+            'has-text-danger': isWoman,
           })}
         >
           {name}

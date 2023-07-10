@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 
 export const App = () => {
-
   return (
     <div data-cy="app">
       <nav
