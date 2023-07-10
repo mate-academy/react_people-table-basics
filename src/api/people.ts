@@ -1,28 +1,15 @@
-import axios from 'axios';
-import { API_URL } from '../consts/consts';
 import { Person } from '../types/Person';
 
-type GetPeopleResponse = {
-  data: Person[];
-};
+// eslint-disable-next-line max-len
+const API_URL = 'https://mate-academy.github.io/react_people-table/api/people.json';
 
-export const getPeople = async () => {
-  try {
-    const { data } = await axios.get<GetPeopleResponse>(
-      API_URL,
-      {
-        headers: {
-          Accept: 'application/json',
-        },
-      },
-    );
+function wait(delay: number) {
+  return new Promise(resolve => setTimeout(resolve, delay));
+}
 
-    return data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      return `${error.status}: ${error.message}`;
-    }
-
-    return 'An unexpected error occurred';
-  }
-};
+export function getPeople(): Promise<Person[]> {
+  // keep this delay for testing purpose
+  return wait(500)
+    .then(() => fetch(API_URL))
+    .then(response => response.json());
+}
