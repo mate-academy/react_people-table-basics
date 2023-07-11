@@ -9,6 +9,8 @@ interface Props {
   people: Person[];
 }
 
+const EMPTY_TABLE_CELL = '-';
+
 export const PeopleTable:FC<Props> = ({ people }) => {
   const { userSlug } = useParams();
 
@@ -27,11 +29,21 @@ export const PeopleTable:FC<Props> = ({ people }) => {
 
       <tbody>
         {people.map(person => {
-          const isSelected = userSlug === person.slug;
+          const {
+            slug,
+            sex,
+            born,
+            died,
+            mother,
+            motherName,
+            father,
+            fatherName,
+          } = person;
+          const isSelected = userSlug === slug;
 
           return (
             <tr
-              key={person.slug}
+              key={slug}
               data-cy="person"
               className={cn({ 'has-background-warning': isSelected })}
             >
@@ -39,18 +51,18 @@ export const PeopleTable:FC<Props> = ({ people }) => {
                 <PersonLink person={person} />
               </td>
 
-              <td>{person.sex}</td>
-              <td>{person.born}</td>
-              <td>{person.died}</td>
+              <td>{sex}</td>
+              <td>{born}</td>
+              <td>{died}</td>
               <td>
-                {person.mother
-                  ? <PersonLink person={person.mother} />
-                  : person.motherName || '-'}
+                {mother
+                  ? <PersonLink person={mother} />
+                  : motherName || EMPTY_TABLE_CELL}
               </td>
               <td>
-                {person.father
-                  ? <PersonLink person={person.father} />
-                  : person.fatherName || '-'}
+                {father
+                  ? <PersonLink person={father} />
+                  : fatherName || EMPTY_TABLE_CELL}
               </td>
             </tr>
           );

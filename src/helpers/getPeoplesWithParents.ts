@@ -1,15 +1,17 @@
 import { Person } from '../types';
-import { getPersonParent } from './getPersonParent';
+import { getPeopleMap } from './getPeopleMap';
 
-export const getPeoplesWithParents = (peopleData: Person[]) => (
-  peopleData.map(person => {
-    const father = getPersonParent(person.fatherName, peopleData);
-    const mother = getPersonParent(person.motherName, peopleData);
+export const getPeoplesWithParents = (peopleData: Person[]) => {
+  const peopleMap = getPeopleMap(peopleData);
+
+  return peopleData.map(person => {
+    const father = peopleMap.get(person.fatherName);
+    const mother = peopleMap.get(person.motherName);
 
     return {
       ...person,
-      father: father || undefined,
-      mother: mother || undefined,
+      father,
+      mother,
     };
-  })
-);
+  });
+};
