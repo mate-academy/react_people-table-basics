@@ -1,5 +1,5 @@
-/* eslint-disable max-len */
 import classNames from 'classnames';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import PersonLink from './PersonLink';

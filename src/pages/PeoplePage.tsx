@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
-// import PeopleTable from '../components/PeopleTable';
-import { Person } from '../types';
+import React, { useEffect, useState } from 'react';
 import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
 import PeopleTable from '../components/PeopleTable';
+import { Person } from '../types';
 
 type Parent = 'father' | 'mother';
 

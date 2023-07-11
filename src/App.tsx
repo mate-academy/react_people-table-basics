@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Navigate,
   Outlet,
@@ -5,12 +6,12 @@ import {
   Routes,
 } from 'react-router-dom';
 import './App.scss';
-import HomePage from './pages/HomePage';
 import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import PeoplePage from './pages/PeoplePage';
 
-export const App = () => (
+export const App: React.FC = () => (
   <div data-cy="app">
     <Routes>
       <Route
