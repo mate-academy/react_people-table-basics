@@ -10,10 +10,12 @@ interface Props {
 export const PersonLink: React.FC<Props> = ({ person }) => {
   const { slug, name, sex } = person;
 
+  const FEMALE = 'f';
+
   return (
     <NavLink
-      to={`/people/${slug}`}
-      className={classNames({ 'has-text-danger': sex === 'f' })}
+      to={`../${slug}`}
+      className={classNames({ 'has-text-danger': sex === FEMALE })}
     >
       {name}
     </NavLink>

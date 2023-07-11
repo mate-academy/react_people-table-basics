@@ -3,11 +3,12 @@ import { Loader } from '../components/Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { PeopleTable } from '../components/PeopleTable/PeopleTable';
+import { getVisiblePeople } from '../helpers';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<null | string>(null);
+  const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -17,8 +18,10 @@ export const PeoplePage: React.FC = () => {
         const response = await getPeople();
 
         setPeople(response);
-      } catch {
-        setError('Something went wrong');
+      } catch (error) {
+        if (error instanceof Error) {
+          setErrorMessage(`Something went wrong: ${error.message}`);
+        }
       }
 
       setIsLoading(false);
@@ -27,16 +30,7 @@ export const PeoplePage: React.FC = () => {
     fetchPeople();
   }, []);
 
-  const visiblePeople = people.map(person => {
-    const mother = people.find(m => person.motherName === m.name);
-    const father = people.find(f => person.fatherName === f.name);
-
-    return {
-      ...person,
-      mother,
-      father,
-    };
-  });
+  const visiblePeople = getVisiblePeople(people);
 
   return (
     <>
@@ -45,13 +39,13 @@ export const PeoplePage: React.FC = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {error && (
+          {errorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
-              {error}
+              {errorMessage}
             </p>
           )}
 
-          {!isLoading && !error && people.length === 0 && (
+          {!isLoading && !errorMessage && people.length === 0 && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>

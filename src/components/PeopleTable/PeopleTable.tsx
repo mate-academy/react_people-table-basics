@@ -17,12 +17,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'].map(column => (
+            <th key={column}>{column}</th>
+          ))}
         </tr>
       </thead>
 
