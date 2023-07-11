@@ -5,34 +5,49 @@ import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
 interface Props {
-  person: Person
+  person: Person;
 }
+
+const NOT_SET_VALUE = '-';
+
 export const PersonInfo: FC<Props> = ({ person }) => {
-  const { slug } = useParams<{ slug: string }>();
+  const { personSlug } = useParams();
+  const {
+    slug,
+    sex,
+    born,
+    died,
+    mother,
+    father,
+    motherName,
+    fatherName,
+  } = person;
+  const isSelected = slug === personSlug;
 
   return (
     <tbody>
       <tr
         data-cy="person"
-        className={cn({ 'has-background-warning': person.slug === slug })}
+        key={person.slug}
+        className={cn({ 'has-background-warning': isSelected })}
       >
         <td>
           <PersonLink person={person} />
         </td>
 
-        <td>{person.sex}</td>
-        <td>{person.born}</td>
-        <td>{person.died}</td>
+        <td>{sex}</td>
+        <td>{born}</td>
+        <td>{died}</td>
         <td>
-          {person.mother
-            ? (<PersonLink person={person.mother} />)
-            : (person.motherName || '-')}
+          {mother
+            ? (<PersonLink person={mother} />)
+            : (motherName || NOT_SET_VALUE)}
         </td>
 
         <td>
-          {person.father
-            ? (<PersonLink person={person.father} />)
-            : (person.fatherName || '-')}
+          {father
+            ? (<PersonLink person={father} />)
+            : (fatherName || NOT_SET_VALUE)}
         </td>
       </tr>
     </tbody>

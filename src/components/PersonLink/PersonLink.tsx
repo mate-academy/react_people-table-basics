@@ -4,16 +4,23 @@ import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 
 interface Props {
-  person: Person
+  person: Person;
 }
 
-export const PersonLink: FC<Props> = ({ person }) => (
-  <Link
-    className={cn({
-      'has-text-danger': person.sex === 'f',
-    })}
-    to={person.slug}
-  >
-    {person.name || '-'}
-  </Link>
-);
+const FEMALE = 'f';
+
+export const PersonLink: FC<Props> = ({ person }) => {
+  const { name, slug } = person;
+  const isFemale = person.sex === FEMALE;
+
+  return (
+    <Link
+      className={cn({
+        'has-text-danger': isFemale,
+      })}
+      to={slug}
+    >
+      {name}
+    </Link>
+  );
+};

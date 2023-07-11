@@ -3,20 +3,22 @@ import { Loader } from '../../components/Loader';
 import { PeopleTable } from '../../components/PeopleTable';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
+import { getPeoplesAndParents } from '../../helpers';
 
 export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const peopleFromServer = await getPeople();
+        const visiblePeople = getPeoplesAndParents(peopleFromServer);
 
-        setPeople(peopleFromServer);
-      } catch {
-        setIsError(true);
+        setPeople(visiblePeople);
+      } catch (error) {
+        setErrorMessage(`Something went wrong: ${(error as Error).message}`);
       } finally {
         setIsLoading(false);
       }
@@ -25,22 +27,10 @@ export const PeoplePage: FC = () => {
     fetchData();
   }, []);
 
-  const visiblePeople: Person[] = people.map(person => {
-    const mother = people.find(m => m.name === person.motherName);
-    const father = people.find(f => f.name === person.fatherName);
+  const isNotVisiblePeopleFromServer
+  = !people.length && !errorMessage && !isLoading;
 
-    return {
-      ...person,
-      mother,
-      father,
-    };
-  });
-
-  const isVisibleError = isError && !isLoading;
-  const isNotVisiblePeopleFromServer = !visiblePeople.length
-    && !isError && !isLoading;
-  const isVisiblePeopleTable = visiblePeople.length > 0
-    && !isError && !isLoading;
+  const isVisiblePeopleTable = people.length > 0 && !errorMessage && !isLoading;
 
   return (
     <>
@@ -48,23 +38,18 @@ export const PeoplePage: FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isLoading && (
-            <Loader />
-          )}
+          {isLoading && <Loader />}
 
-          {isVisiblePeopleTable && (
-            <PeopleTable people={visiblePeople} />)}
+          {isVisiblePeopleTable && <PeopleTable people={people} />}
 
-          {isVisibleError && (
+          {errorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
+              {errorMessage}
             </p>
           )}
 
           {isNotVisiblePeopleFromServer && (
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
+            <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
         </div>
       </div>

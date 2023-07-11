@@ -3,8 +3,11 @@ import { Person } from '../../types';
 import { PersonInfo } from '../PersonInfo';
 
 interface Props {
-  people: Person[]
+  people: Person[];
 }
+
+const tableRowNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 export const PeopleTable: FC<Props> = ({ people }) => {
   return (
     <table
@@ -13,12 +16,9 @@ export const PeopleTable: FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {tableRowNames.map(rowName => (
+            <th>{rowName}</th>
+          ))}
         </tr>
       </thead>
 
