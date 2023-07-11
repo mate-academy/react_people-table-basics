@@ -18,7 +18,7 @@ const getParent = (
   return people.find(({ name }) => name === person.motherName);
 };
 
-const PeoplePage = () => {
+const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isError, setIsError] = useState(false);
   const [isPending, setIsPending] = useState(true);
