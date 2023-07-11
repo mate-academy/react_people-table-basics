@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.scss';
 import { HomePage } from './pages/HomePage';
-import { PeoplePage } from './pages/PeoplePage';
+import { PeopleTabPage } from './pages/PeopleTabPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { Navbar } from './components/Navbar';
 
@@ -19,8 +19,8 @@ export const App: React.FC = () => {
               element={<Navigate to="/" replace />}
             />
             <Route path="/people">
-              <Route index element={<PeoplePage />} />
-              <Route path=":slectedPersonSlug" element={<PeoplePage />} />
+              <Route index element={<PeopleTabPage />} />
+              <Route path=":slectedPersonSlug" element={<PeopleTabPage />} />
             </Route>
 
             <Route path="*" element={<NotFoundPage />} />

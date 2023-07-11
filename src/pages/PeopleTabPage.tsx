@@ -4,12 +4,12 @@ import { PeopleTable } from '../components/PeopleTable';
 import { getPeople } from '../api';
 import { Person } from '../types';
 
-export const PeoplePage: React.FC = () => {
+export const PeopleTabPage: React.FC = () => {
   const [peopleFromServer, setPeopleFromServer] = useState<Person[]>([]);
   const [isLoadin, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
-  const isEmptyPeople = peopleFromServer.length === 0 && !isLoadin;
+  const isEmpty = peopleFromServer.length === 0 && !errorMessage;
 
   useEffect(() => {
     setIsLoading(true);
@@ -20,14 +20,6 @@ export const PeoplePage: React.FC = () => {
       })
       .finally(() => setIsLoading(false));
   }, []);
-
-  useEffect(() => {
-    if (errorMessage) {
-      setTimeout(() => {
-        setErrorMessage(false);
-      }, 3000);
-    }
-  }, [errorMessage]);
 
   return (
     <>
@@ -44,13 +36,15 @@ export const PeoplePage: React.FC = () => {
                 </p>
               )}
 
-              {isEmptyPeople && (
+              {isEmpty && (
                 <p data-cy="noPeopleMessage">
                   There are no people on the server
                 </p>
               )}
 
-              <PeopleTable people={peopleFromServer} />
+              {!isEmpty && (
+                <PeopleTable people={peopleFromServer} />
+              )}
             </>
           )}
         </div>
