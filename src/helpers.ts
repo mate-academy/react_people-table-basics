@@ -1,23 +1,16 @@
 import { Person } from './types';
 
-const getFather = (
-  fatherName: string | null,
+const getParent = (
+  parentName: string | null,
   array: Person[],
 ): Person | undefined => {
-  return array.find(father => father.name === fatherName);
-};
-
-const getMother = (
-  motherName: string | null,
-  array: Person[],
-): Person | undefined => {
-  return array.find(mother => mother.name === motherName);
+  return array.find(person => person.name === parentName);
 };
 
 export const getProcessPeople = (people: Person[]): Person[] => {
   return people.map(person => {
-    const father = getFather(person.fatherName, people);
-    const mother = getMother(person.motherName, people);
+    const father = getParent(person.fatherName, people);
+    const mother = getParent(person.motherName, people);
 
     return {
       ...person,
