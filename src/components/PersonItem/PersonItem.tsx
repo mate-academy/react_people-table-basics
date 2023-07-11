@@ -10,6 +10,15 @@ interface Props {
 export const PersonItem: FC<Props> = ({ person }) => {
   const { slug } = useParams();
   const isSelectedPerson = person.slug === slug;
+  const {
+    sex,
+    born,
+    died,
+    motherName,
+    fatherName,
+    mother,
+    father,
+  } = person;
 
   return (
     <>
@@ -30,32 +39,32 @@ export const PersonItem: FC<Props> = ({ person }) => {
           </Link>
         </td>
 
-        <td>{person.sex}</td>
-        <td>{person.born}</td>
-        <td>{person.died}</td>
+        <td>{sex}</td>
+        <td>{born}</td>
+        <td>{died}</td>
         <td>
-          {person.mother && (
+          {mother && (
             <Link
-              to={`/people/${person.mother.slug}`}
+              to={`/people/${mother.slug}`}
               className="has-text-danger"
             >
-              {person.motherName}
+              {motherName}
             </Link>
           )}
 
-          {!person.mother && (person.motherName || '-')}
+          {!mother && (motherName || '-')}
         </td>
 
         <td>
-          {person.father && (
+          {father && (
             <Link
-              to={`/people/${person.father.slug}`}
+              to={`/people/${father.slug}`}
             >
-              {person.fatherName}
+              {fatherName}
             </Link>
           )}
 
-          {!person.father && (person.fatherName || '-')}
+          {!father && (fatherName || '-')}
         </td>
       </tr>
     </>
