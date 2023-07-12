@@ -7,10 +7,10 @@ export type Props = {
   people: Person[],
 };
 
+const tableHeads = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 export const PeopleTable: FC<Props> = ({ people }) => {
   const { slug } = useParams();
-
-  const tableHeads = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
   return (
     <table

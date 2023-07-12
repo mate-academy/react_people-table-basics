@@ -3,26 +3,19 @@ import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
+import { findPersons } from '../Function/Function';
 
 export const PeoplePages = () => {
   const [dataPersons, setDataPersons] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
 
-  const sortPersons = (persons: Person[]) => {
-    return persons.map(person => ({
-      ...person,
-      mother: persons.find(mom => mom.name === person.motherName),
-      father: persons.find(dad => dad.name === person.fatherName),
-    }));
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const loadedPeople = await getPeople();
 
-        setDataPersons(sortPersons(loadedPeople));
+        setDataPersons(findPersons(loadedPeople));
       } catch {
         setLoadError(true);
       } finally {
@@ -47,7 +40,7 @@ export const PeoplePages = () => {
             </p>
           )}
 
-          {dataPersons.length && <PeopleTable people={dataPersons} />}
+          {dataPersons.length > 0 && <PeopleTable people={dataPersons} />}
 
           {!loadError && !isLoading && !dataPersons.length && (
             <p data-cy="noPeopleMessage">
