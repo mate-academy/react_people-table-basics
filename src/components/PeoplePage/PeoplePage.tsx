@@ -9,6 +9,9 @@ export const PeoplePage: React.FC = () => {
   const [isTableLoading, setIsTableLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const isTableVisible = !isTableLoading && !error;
+  const isErrorVisible = !isTableLoading && error;
+
   useEffect(() => {
     setIsTableLoading(true);
 
@@ -43,13 +46,13 @@ export const PeoplePage: React.FC = () => {
 
       {isTableLoading && <Loader />}
 
-      {!isTableLoading && !error && (
+      {isTableVisible && (
         <PeopleTable
           people={people}
         />
       )}
 
-      {!isTableLoading && error && (
+      {isErrorVisible && (
         <p data-cy="peopleLoadingError" className="has-text-danger">
           {error}
         </p>
