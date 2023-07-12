@@ -1,41 +1,13 @@
 import React from 'react';
-import classNames from 'classnames';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import './App.scss';
+import { MainNav } from './components/MainNav';
 
 export const App: React.FC = () => {
   return (
     <div data-cy="app">
-      <nav
-        data-cy="nav"
-        className="navbar is-fixed-top has-shadow"
-        role="navigation"
-        aria-label="main navigation"
-      >
-        <div className="container">
-          <div className="navbar-brand">
-            <NavLink
-              to="/"
-              className={({ isActive }) => classNames(
-                'navbar-item',
-                { 'has-background-grey-lighter': isActive },
-              )}
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/people"
-              className={({ isActive }) => classNames(
-                'navbar-item',
-                { 'has-background-grey-lighter': isActive },
-              )}
-            >
-              People
-            </NavLink>
-          </div>
-        </div>
-      </nav>
+      <MainNav />
       <main className="section">
         <div className="container">
           <Outlet />

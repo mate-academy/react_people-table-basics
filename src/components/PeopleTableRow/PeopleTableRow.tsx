@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../../types';
+import { TableRowLink } from '../TableRowLink';
 
 interface Props {
   person: Person
@@ -33,12 +34,7 @@ export const PeopleTableRow: React.FC<Props> = ({ person }) => {
       <td>
         {person.mother
           ? (
-            <Link
-              className="has-text-danger"
-              to={person.mother.slug}
-            >
-              {person.motherName || '-'}
-            </Link>
+            <TableRowLink parent={person.mother} />
           ) : (
             person.motherName || '-'
           )}
@@ -46,11 +42,7 @@ export const PeopleTableRow: React.FC<Props> = ({ person }) => {
       <td>
         {person.father
           ? (
-            <Link
-              to={person.father.slug}
-            >
-              {person.fatherName || '-'}
-            </Link>
+            <TableRowLink parent={person.father} />
           ) : (
             person.fatherName || '-'
           )}

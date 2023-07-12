@@ -5,11 +5,11 @@ import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 import { App } from './App';
-import { HomePage } from './components/HomePage';
-import { NotFoundRedirect } from './components/NotFoundRedirect';
-import { NotFound } from './components/NotFound';
-import { Navigate } from './components/Navigate';
-import { PeoplePage } from './components/PeoplePage';
+import { HomePage } from './pages/HomePage';
+import { NotFoundRedirect } from './pages/NotFoundRedirect';
+import { NotFound } from './pages/NotFound';
+import { Navigate } from './pages/Navigate';
+import { PeoplePage } from './pages/PeoplePage';
 
 const router = createHashRouter([
   {
