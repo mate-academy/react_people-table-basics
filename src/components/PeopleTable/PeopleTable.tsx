@@ -7,6 +7,8 @@ interface Props {
   people: Person[];
 }
 
+const tableColumns = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug = '' } = useParams();
 
@@ -17,7 +19,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          {['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'].map(column => (
+          {tableColumns.map(column => (
             <th key={column}>{column}</th>
           ))}
         </tr>

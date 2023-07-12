@@ -20,11 +20,13 @@ export const PersonInfo: React.FC<Props> = ({ person, selectedPersonSlug }) => {
     father,
   } = person;
 
+  const isPersonSelected = selectedPersonSlug === slug;
+
   return (
     <tr
       data-cy="person"
       className={classNames(
-        { 'has-background-warning': selectedPersonSlug === slug },
+        { 'has-background-warning': isPersonSelected },
       )}
     >
       <td>

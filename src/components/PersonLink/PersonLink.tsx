@@ -7,10 +7,10 @@ interface Props {
   person: Person;
 }
 
+const FEMALE = 'f';
+
 export const PersonLink: React.FC<Props> = ({ person }) => {
   const { slug, name, sex } = person;
-
-  const FEMALE = 'f';
 
   return (
     <NavLink
