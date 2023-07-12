@@ -4,6 +4,8 @@ import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { PersonItem } from '../PersonItem/PersonItem';
 
+const tableHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 export const PeopleTable: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,10 +25,10 @@ export const PeopleTable: React.FC = () => {
     return { ...person, mother, father };
   });
 
-  const isVisibleErrorNoPeople = (preparedPeople.length === 0
-    && !isError
-    && !isLoading);
-  const isVisiblePeopleTable = (preparedPeople.length > 0);
+  const isVisibleErrorNoPeople = (
+    preparedPeople.length === 0 && !isError && !isLoading);
+
+  const isVisiblePeopleTable = preparedPeople.length > 0;
 
   return (
     <div className="block">
@@ -55,12 +57,9 @@ export const PeopleTable: React.FC = () => {
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
+                  {tableHeaders.map(header => (
+                    <th key={header}>{header}</th>
+                  ))}
                 </tr>
               </thead>
 

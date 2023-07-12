@@ -10,12 +10,13 @@ type Props = {
 
 export const PersonItem: React.FC<Props> = ({ person }) => {
   const { slug } = useParams();
+  const isSelectedPerson = person.slug === slug;
 
   return (
     <tr
       data-cy="person"
       className={cn({
-        'has-background-warning': person.slug === slug,
+        'has-background-warning': isSelectedPerson,
       })}
     >
       <td>
