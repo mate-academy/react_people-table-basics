@@ -6,14 +6,13 @@ import { Person } from '../../types';
 
 export const PeoplePage: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const [people, setPeople] = useState<Person[]>([]);
 
   useEffect(() => {
     setIsError(false);
     setIsLoading(true);
     getPeople()
-      // .then(() => setPeople([]))
       .then(setPeople)
       .catch(() => {
         setIsError(true);
@@ -40,7 +39,7 @@ export const PeoplePage: FC = () => {
             </p>
           )}
 
-          {!people.length && !isLoading ? (
+          {!people.length && !isLoading && !isError ? (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>

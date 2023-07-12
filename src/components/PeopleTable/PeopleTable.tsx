@@ -7,6 +7,10 @@ type Props = {
 };
 
 export const PeopleTable: FC<Props> = ({ people }) => {
+  if (!people.length) {
+    return null;
+  }
+
   const newPeople = people.map((person: Person) => {
     const newPerson: Person = { ...person };
 
@@ -15,10 +19,6 @@ export const PeopleTable: FC<Props> = ({ people }) => {
 
     return newPerson;
   });
-
-  if (!people.length) {
-    return null;
-  }
 
   return (
     <table

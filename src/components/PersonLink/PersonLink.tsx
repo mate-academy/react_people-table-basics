@@ -22,8 +22,8 @@ export const PersonLink: FC<Props> = ({ person }) => {
 
   const currentRow = slug === peopleSlug;
   const isWoman = person.sex === 'f';
-  const isMother = motherName || '-';
-  const isFather = fatherName || '-';
+  const motherLabel = motherName || '-';
+  const fatherLabel = fatherName || '-';
 
   return (
     <tr
@@ -52,13 +52,13 @@ export const PersonLink: FC<Props> = ({ person }) => {
           <Link
             to={`/people/${person.mother?.slug}`}
             className={classNames({
-              'has-text-danger': isMother,
+              'has-text-danger': motherLabel,
             })}
           >
-            {isMother}
+            {motherLabel}
           </Link>
         ) : (
-          `${isMother}`
+          `${motherLabel}`
         )}
       </td>
       <td>
@@ -66,10 +66,10 @@ export const PersonLink: FC<Props> = ({ person }) => {
           <Link
             to={`/people/${person.father.slug}`}
           >
-            {isFather}
+            {fatherLabel}
           </Link>
         ) : (
-          `${isFather}`
+          `${fatherLabel}`
         )}
       </td>
     </tr>
