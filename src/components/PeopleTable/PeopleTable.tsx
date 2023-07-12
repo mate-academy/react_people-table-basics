@@ -2,6 +2,15 @@ import { FC } from 'react';
 import { Person } from '../../types';
 import { PersonInfo } from '../PersonInfo';
 
+const tableHeaders = [
+  'Name',
+  'Sex',
+  'Born',
+  'Died',
+  'Mother',
+  'Father',
+];
+
 interface Props {
   people: Person[]
 }
@@ -13,12 +22,9 @@ export const PeopleTable: FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {tableHeaders.map((header) => (
+            <th key={header}>{header}</th>
+          ))}
         </tr>
       </thead>
 

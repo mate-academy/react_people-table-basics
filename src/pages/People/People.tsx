@@ -26,8 +26,12 @@ export const People: FC = () => {
   }, []);
 
   const visiblePeople: Person[] = people.map(person => {
-    const mother = people.find(mother => mother.name === person.motherName);
-    const father = people.find(father => father.name === person.fatherName);
+    const mother = people.find(
+      someMother => someMother.name === person.motherName,
+    );
+    const father = people.find(
+      someFather => someFather.name === person.fatherName,
+    );
 
     return {
       ...person,
