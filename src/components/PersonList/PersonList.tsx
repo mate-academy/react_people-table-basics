@@ -11,10 +11,12 @@ type Props = {
 export const PersonList: FC<Props> = ({ persons }) => {
   const { slug } = useParams();
 
-  if (!persons || !persons.length) {
+  if (!persons) {
     return (
       <p data-cy="noPeopleMessage">
-        There are no people on the server
+        {persons === null
+          ? ''
+          : 'There are no people on the server'}
       </p>
     );
   }
