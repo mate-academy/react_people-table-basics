@@ -14,7 +14,11 @@ export const PeoplePage = () => {
 
     getPeople()
       .then(setPersons)
-      .catch(() => setHasError(true))
+      .catch(error => {
+        // eslint-disable-next-line no-console
+        console.error(error.message);
+        setHasError(true);
+      })
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -32,9 +36,7 @@ export const PeoplePage = () => {
                 Something went wrong
               </p>
             )
-            : (
-              <PersonList persons={persons} />
-            )}
+            : (persons && <PersonList persons={persons} />)}
         </div>
       </div>
     </>

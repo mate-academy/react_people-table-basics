@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
+import { NO_VALUE } from '../../helpers/constants';
+import { findPerson } from '../../helpers/helperFunctions';
 
 type Props = {
   persons: null | Person[],
@@ -11,12 +13,12 @@ type Props = {
 export const PersonList: FC<Props> = ({ persons }) => {
   const { slug } = useParams();
 
-  if (!persons) {
+  const tableHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
+  if (persons?.length === 0) {
     return (
       <p data-cy="noPeopleMessage">
-        {persons === null
-          ? ''
-          : 'There are no people on the server'}
+        There are no people on the server
       </p>
     );
   }
@@ -28,17 +30,14 @@ export const PersonList: FC<Props> = ({ persons }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {tableHeaders.map(header => (
+            <th>{header}</th>
+          ))}
         </tr>
       </thead>
 
       <tbody>
-        {persons.map(person => {
+        {persons?.map(person => {
           const {
             name,
             sex,
@@ -47,22 +46,6 @@ export const PersonList: FC<Props> = ({ persons }) => {
             motherName,
             fatherName,
           } = person;
-
-          const findPerson = (personName: string) => {
-            const foundPerson = persons.find(pers => pers.name === personName);
-
-            if (foundPerson) {
-              return (
-                <PersonLink
-                  slug={foundPerson.slug}
-                  sex={foundPerson.sex}
-                  title={foundPerson.name}
-                />
-              );
-            }
-
-            return personName;
-          };
 
           return (
             <tr
@@ -83,8 +66,8 @@ export const PersonList: FC<Props> = ({ persons }) => {
               <td>{sex}</td>
               <td>{born}</td>
               <td>{died}</td>
-              <td>{findPerson(motherName || '-')}</td>
-              <td>{findPerson(fatherName || '-')}</td>
+              <td>{findPerson(motherName || NO_VALUE, persons)}</td>
+              <td>{findPerson(fatherName || NO_VALUE, persons)}</td>
             </tr>
           );
         })}
