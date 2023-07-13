@@ -5,14 +5,15 @@ import { Person } from '../types';
 
 interface Props {
   person: Person;
-  selectedSlug: string;
 }
 
-export const PersonLink: FC<Props> = ({ person, selectedSlug }) => {
+export const PersonLink: FC<Props> = ({ person }) => {
+  const isPersonFemale = person.sex === 'f';
+
   return (
     <Link
-      to={`/people/${selectedSlug}`}
-      className={classNames({ 'has-text-danger': person.sex === 'f' })}
+      to={`/people/${person.slug}`}
+      className={classNames({ 'has-text-danger': isPersonFemale })}
     >
       {person.name}
     </Link>

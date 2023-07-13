@@ -1,14 +1,17 @@
 import { FC } from 'react';
 import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
 
 interface Props {
   people: Person[];
-  selectedSlug: string;
 }
 
-export const PeopleTable: FC<Props> = ({ people, selectedSlug }) => {
+export const PeopleTable: FC<Props> = ({ people }) => {
+  const { selectedSlug = '' } = useParams();
+  const tableHeader = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
   return (
     <table
       data-cy="peopleTable"
@@ -16,12 +19,7 @@ export const PeopleTable: FC<Props> = ({ people, selectedSlug }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {tableHeader.map(name => <th>{name}</th>)}
         </tr>
       </thead>
 
@@ -41,7 +39,7 @@ export const PeopleTable: FC<Props> = ({ people, selectedSlug }) => {
               )}
             >
               <td>
-                <PersonLink person={person} selectedSlug={person.slug} />
+                <PersonLink person={person} />
               </td>
               <td>{person.sex}</td>
               <td>{person.born}</td>
@@ -50,7 +48,6 @@ export const PeopleTable: FC<Props> = ({ people, selectedSlug }) => {
                 {personMother ? (
                   <PersonLink
                     person={personMother}
-                    selectedSlug={personMother.slug}
                   />
                 ) : (
                   person.motherName || '-'
@@ -60,7 +57,6 @@ export const PeopleTable: FC<Props> = ({ people, selectedSlug }) => {
                 {personFather ? (
                   <PersonLink
                     person={personFather}
-                    selectedSlug={personFather.slug}
                   />
                 ) : (
                   person.fatherName || '-'
