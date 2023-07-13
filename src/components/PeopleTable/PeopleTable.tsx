@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
-import { PersonItem } from '../PersonItem/PersonItem';
-
-const tableHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+import {
+  PeopleTableHeaders,
+} from '../../PeopleTableHeaders/PeopleTableHeaders';
+import { PeopleTableBody } from '../PeopleTableBody/PeopleTableBody';
 
 export const PeopleTable: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -55,19 +56,9 @@ export const PeopleTable: React.FC = () => {
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
             >
-              <thead>
-                <tr>
-                  {tableHeaders.map(header => (
-                    <th key={header}>{header}</th>
-                  ))}
-                </tr>
-              </thead>
+              <PeopleTableHeaders />
 
-              <tbody>
-                {preparedPeople.map(person => (
-                  <PersonItem key={person.slug} person={person} />
-                ))}
-              </tbody>
+              <PeopleTableBody people={preparedPeople} />
             </table>
           )}
       </div>

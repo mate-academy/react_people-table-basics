@@ -3,39 +3,38 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage/HomePage';
 import { PeopleTablePage } from './pages/PeopleTablePage/PeopleTablePage';
 import { PageNotFound } from './pages/PageNotFound/PageNotFound';
-import { NavBar } from './components/NavBar/NavBar';
+import { Layout } from './components/Layout/Layout';
 
 export const App = () => (
-  <div data-cy="app">
-    <NavBar />
+  <Routes>
 
-    <main className="section">
-      <div className="container">
-        <Routes>
+    <Route
+      path="/"
+      element={
+        <Layout />
+      }
+    >
+      <Route
+        index
+        element={
+          <HomePage />
+        }
+      />
 
-          <Route
-            path="/"
-            element={
-              <HomePage />
-            }
-          />
+      <Route
+        path="/home"
+        element={
+          <Navigate to="/" replace />
+        }
+      />
 
-          <Route
-            path="/home"
-            element={
-              <Navigate to="/" replace />
-            }
-          />
+      <Route path="people">
+        <Route index element={<PeopleTablePage />} />
 
-          <Route path="people">
-            <Route index element={<PeopleTablePage />} />
+        <Route path=":slug" element={<PeopleTablePage />} />
+      </Route>
 
-            <Route path=":slug" element={<PeopleTablePage />} />
-          </Route>
-
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </div>
-    </main>
-  </div>
+      <Route path="*" element={<PageNotFound />} />
+    </Route>
+  </Routes>
 );
