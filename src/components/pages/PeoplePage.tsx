@@ -43,6 +43,12 @@ export const PeoplePage: FC = () => {
           Something went wrong
         </p>
       )}
+
+      {isThereNoPeople && (
+        <p data-cy="noPeopleMessage">
+          There are no people on the server
+        </p>
+      )}
     </div>
   );
 };
