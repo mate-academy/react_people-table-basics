@@ -5,6 +5,7 @@ import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { PersonItem } from '../PersonItem/PersonItem';
 import { getPeople } from '../../api';
+import { TableRows } from '../../types/TableRows';
 
 export const PeopleTable: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -19,6 +20,8 @@ export const PeopleTable: FC = () => {
   }, []);
 
   const isPeoplePresent = people.length > 0;
+  const isLoadingError = isLoaded && isError;
+  const isTodosEmpty = isLoaded && !isPeoplePresent;
 
   const mappedPeople = useMemo(() => people.map(person => {
     const father = people.find(
@@ -37,13 +40,13 @@ export const PeopleTable: FC = () => {
       <div className="box table-container">
         {!isLoaded && <Loader />}
 
-        {(isLoaded && isError) && (
+        {(isLoadingError) && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             Something went wrong
           </p>
         )}
 
-        {(isLoaded && !isPeoplePresent) && (
+        {(isTodosEmpty) && (
           <p data-cy="noPeopleMessage">
             There are no people on the server
           </p>
@@ -56,12 +59,11 @@ export const PeopleTable: FC = () => {
           >
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
+                {(Object.values(TableRows)).map(value => (
+                  <th key={value}>
+                    {value}
+                  </th>
+                ))}
               </tr>
             </thead>
 

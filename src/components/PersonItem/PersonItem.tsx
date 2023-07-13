@@ -18,7 +18,10 @@ export const PersonItem: FC<Props> = ({ person }) => {
     fatherName,
     mother,
     father,
+    name,
   } = person;
+
+  const isPersonFemale = sex === 'f';
 
   return (
     <>
@@ -32,10 +35,10 @@ export const PersonItem: FC<Props> = ({ person }) => {
           <Link
             to={person.slug}
             className={cn(
-              { 'has-text-danger': person.sex === 'f' },
+              { 'has-text-danger': isPersonFemale },
             )}
           >
-            {person.name}
+            {name}
           </Link>
         </td>
 
