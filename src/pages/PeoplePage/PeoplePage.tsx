@@ -6,24 +6,14 @@ import { PeopleTable } from '../../components/PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isTableLoading, setIsTableLoading] = useState(false);
-  const [noPeople, setNoPeople] = useState(false);
-  const [error, setError] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    setIsTableLoading(true);
-
     getPeople()
-      .then(peopleFromServer => {
-        if (peopleFromServer.length === 0) {
-          setIsTableLoading(true);
-          setNoPeople(true);
-        }
-
-        setIsTableLoading(false);
-        setPeople(peopleFromServer);
-      })
-      .catch(() => setError('Something went wrong'));
+      .then(response => setPeople(response))
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoaded(true));
   }, []);
 
   const visiblePeople = people.map(person => {
@@ -39,30 +29,33 @@ export const PeoplePage: React.FC = () => {
     };
   });
 
+  const isErrorVisible = isLoaded && isError;
+  const isNoPeopleVisible = isLoaded && !isError && people.length === 0;
+  const isPeopleTabVisible = isLoaded && !isError && people.length > 0;
+
   return (
     <>
       <h1 className="title">People Page</h1>
 
       <div className="block">
         <div className="box table-container">
-          {(isTableLoading) && <Loader />}
+          {!isLoaded && <Loader />}
 
-          {error && (
-            <p
-              data-cy="peopleLoadingError"
-              className="has-text-danger"
-            >
-              {error}
+          {isErrorVisible && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
             </p>
           )}
 
-          {noPeople && people.length === 0 ? (
+          {isNoPeopleVisible && (
             <p
               data-cy="noPeopleMessage"
             >
               There are no people on the server
             </p>
-          ) : (people.length !== 0 && (<PeopleTable people={visiblePeople} />))}
+          )}
+
+          {isPeopleTabVisible && (<PeopleTable people={visiblePeople} />)}
 
         </div>
       </div>

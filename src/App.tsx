@@ -1,7 +1,7 @@
 import './App.scss';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { PeoplePage } from './pages/PeoplePage/PeoplePage';
-import { NotFound } from './pages/NotFoundPage/NotFoundPage';
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import { HomePage } from './pages/HomePage/HomePage';
 import { NavBar } from './components/NavBar';
 
@@ -19,7 +19,7 @@ export const App = () => {
                 <Route index element={<PeoplePage />} />
                 <Route path=":slug" element={<PeoplePage />} />
               </Route>
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<NotFoundPage />} />
               <Route path="home" element={<Navigate to="/" replace />} />
             </Routes>
           </div>
