@@ -4,11 +4,22 @@ import cn from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
+const MISSING_VALUE_SIGN = '-';
+
 interface Props {
-  person: Person
+  person: Person;
 }
 export const PersonInfo: FC<Props> = ({ person }) => {
   const { slug } = useParams<{ slug: string }>();
+  const {
+    sex,
+    born,
+    died,
+    mother,
+    motherName,
+    father,
+    fatherName,
+  } = person;
 
   return (
     <tbody>
@@ -20,19 +31,23 @@ export const PersonInfo: FC<Props> = ({ person }) => {
           <PersonLink person={person} />
         </td>
 
-        <td>{person.sex}</td>
-        <td>{person.born}</td>
-        <td>{person.died}</td>
+        <td>{sex}</td>
+        <td>{born}</td>
+        <td>{died}</td>
         <td>
-          {person.mother
-            ? (<PersonLink person={person.mother} />)
-            : (person.motherName || '-')}
+          {mother ? (
+            <PersonLink person={mother} />
+          ) : (
+            motherName || MISSING_VALUE_SIGN
+          )}
         </td>
 
         <td>
-          {person.father
-            ? (<PersonLink person={person.father} />)
-            : (person.fatherName || '-')}
+          {father ? (
+            <PersonLink person={father} />
+          ) : (
+            fatherName || MISSING_VALUE_SIGN
+          )}
         </td>
       </tr>
     </tbody>

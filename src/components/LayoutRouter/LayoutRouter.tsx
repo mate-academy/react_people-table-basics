@@ -7,6 +7,10 @@ export const LayoutRouter: FC = () => (
     <div data-cy="app">
       <MainNav />
     </div>
-    <Outlet />
+    <main className="section">
+      <div className="container">
+        <Outlet />
+      </div>
+    </main>
   </>
 );

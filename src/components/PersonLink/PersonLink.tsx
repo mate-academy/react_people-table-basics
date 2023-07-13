@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 
-const femaleSex = 'f';
+const FEMALE_SIGN = 'f';
 
 interface Props {
   person: Person
@@ -12,7 +12,7 @@ interface Props {
 export const PersonLink: FC<Props> = ({ person }) => (
   <Link
     className={cn({
-      'has-text-danger': person.sex === femaleSex,
+      'has-text-danger': person.sex === FEMALE_SIGN,
     })}
     to={person.slug}
   >
