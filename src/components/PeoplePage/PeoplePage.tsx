@@ -17,23 +17,27 @@ export const PeoplePage: React.FC = () => {
 
     getPeople()
       .then(visiblePeople => {
-        const peopleWithParents = visiblePeople.map(
-          (person, _, serverPeople) => {
-            const mother = serverPeople.find(m => m.name === person.motherName);
-            const father = serverPeople.find(f => f.name === person.fatherName);
+        const peopleMap = new Map<string, Person>();
 
-            return {
-              ...person,
-              mother,
-              father,
-            };
-          },
-        );
+        visiblePeople.forEach(person => {
+          peopleMap.set(person.name, person);
+        });
+
+        const peopleWithParents = visiblePeople.map(person => {
+          const mother = peopleMap.get(person.motherName);
+          const father = peopleMap.get(person.fatherName);
+
+          return {
+            ...person,
+            mother,
+            father,
+          };
+        });
 
         setPeople(peopleWithParents);
       })
-      .catch(() => {
-        setError('Something went wrong');
+      .catch(errorName => {
+        setError(`Something went wrong: ${errorName}`);
       })
       .finally(() => {
         setIsTableLoading(false);

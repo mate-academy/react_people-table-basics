@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
+import { columnNames } from '../../helpers/helpers';
 
 type Props = {
   people : Person[];
@@ -10,8 +11,6 @@ type Props = {
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
-
-  const columnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
   return (
     <div className="block">
