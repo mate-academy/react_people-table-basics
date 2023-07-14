@@ -1,8 +1,28 @@
+import { FC } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Loader } from './components/Loader';
-
 import './App.scss';
+import { Layout } from './pages/Layout';
+import { Home } from './pages/Home';
+import { PeoplePage } from './pages/PeoplePage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
-export const App = () => (
+export const App: FC = () => (
+  <div data-cy="app">
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/home" element={<Navigate to="/" />} />
+        <Route path="/people" element={<PeoplePage />}>
+          <Route path="/people/:personSlug" element={<PeoplePage />} />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
+  </div>
+);
+
+export const App1 = () => (
   <div data-cy="app">
     <nav
       data-cy="nav"
