@@ -8,8 +8,9 @@ interface Props {
 }
 
 export const PersonItem: FC<Props> = ({ person }) => {
-  const { slug } = useParams();
-  const isSelectedPerson = person.slug === slug;
+  const { slug: currentSlug } = useParams();
+  const femaleSex = 'f';
+  const emptyCell = '-';
   const {
     sex,
     born,
@@ -19,9 +20,11 @@ export const PersonItem: FC<Props> = ({ person }) => {
     mother,
     father,
     name,
+    slug,
   } = person;
 
-  const isPersonFemale = sex === 'f';
+  const isSelectedPerson = slug === currentSlug;
+  const isPersonFemale = sex === femaleSex;
 
   return (
     <>
@@ -33,7 +36,7 @@ export const PersonItem: FC<Props> = ({ person }) => {
       >
         <td>
           <Link
-            to={person.slug}
+            to={slug}
             className={cn(
               { 'has-text-danger': isPersonFemale },
             )}
@@ -55,7 +58,7 @@ export const PersonItem: FC<Props> = ({ person }) => {
             </Link>
           )}
 
-          {!mother && (motherName || '-')}
+          {!mother && (motherName || emptyCell)}
         </td>
 
         <td>
@@ -67,7 +70,7 @@ export const PersonItem: FC<Props> = ({ person }) => {
             </Link>
           )}
 
-          {!father && (fatherName || '-')}
+          {!father && (fatherName || emptyCell)}
         </td>
       </tr>
     </>
