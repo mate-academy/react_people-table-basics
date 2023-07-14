@@ -5,51 +5,11 @@ import {
   NavLink,
 } from 'react-router-dom';
 import './App.scss';
-import { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
-import { getPeople } from './api';
-import { Person } from './types';
 
 export const App = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [isError, setIsError] = useState(false);
-  const [isDataUploaded, setIsDataUploaded] = useState(false);
-
-  useEffect(() => {
-    getPeople()
-      .then(uploadedPeople => {
-        setPeople(uploadedPeople);
-      })
-      .catch(() => {
-        setIsError(true);
-      })
-      .finally(() => {
-        setIsDataUploaded(true);
-      });
-  }, []);
-
-  const findMotherSlug = useCallback((child: Person): string | null => {
-    const mother = people.find(person => person.name === child.motherName);
-
-    if (mother) {
-      return mother.slug;
-    }
-
-    return null;
-  }, [people]);
-
-  const findFatherSlug = useCallback((child: Person): string | null => {
-    const father = people.find(person => person.name === child.fatherName);
-
-    if (father) {
-      return father.slug;
-    }
-
-    return null;
-  }, [people]);
-
   return (
     <div data-cy="app">
       <nav
@@ -96,26 +56,14 @@ export const App = () => {
               <Route
                 index
                 element={(
-                  <PeoplePage
-                    isError={isError}
-                    people={people}
-                    isDataUploaded={isDataUploaded}
-                    findMotherSlug={findMotherSlug}
-                    findFatherSlug={findFatherSlug}
-                  />
+                  <PeoplePage />
                 )}
               />
 
               <Route
                 path=":personSlug"
                 element={(
-                  <PeoplePage
-                    isError={isError}
-                    people={people}
-                    isDataUploaded={isDataUploaded}
-                    findMotherSlug={findMotherSlug}
-                    findFatherSlug={findFatherSlug}
-                  />
+                  <PeoplePage />
                 )}
               />
             </Route>

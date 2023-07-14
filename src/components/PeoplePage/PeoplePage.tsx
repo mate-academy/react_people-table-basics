@@ -1,23 +1,47 @@
 import { useParams } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
+import { getPeople } from '../../api';
 
-interface Props {
-  isError: boolean;
-  people: Person[];
-  isDataUploaded: boolean;
-  findMotherSlug: (child: Person) => string | null;
-  findFatherSlug: (child: Person) => string | null;
-}
+export const PeoplePage: React.FC = () => {
+  const [people, setPeople] = useState<Person[]>([]);
+  const [isError, setIsError] = useState(false);
+  const [isDataUploaded, setIsDataUploaded] = useState(false);
 
-export const PeoplePage: React.FC<Props> = ({
-  isError,
-  people,
-  isDataUploaded,
-  findMotherSlug,
-  findFatherSlug,
-}) => {
+  useEffect(() => {
+    getPeople()
+      .then(uploadedPeople => {
+        setPeople(uploadedPeople);
+      })
+      .catch(() => {
+        setIsError(true);
+      })
+      .finally(() => {
+        setIsDataUploaded(true);
+      });
+  }, []);
+
+  const findMotherSlug = useCallback((child: Person): string | null => {
+    const mother = people.find(person => person.name === child.motherName);
+
+    if (mother) {
+      return mother.slug;
+    }
+
+    return null;
+  }, [people]);
+
+  const findFatherSlug = useCallback((child: Person): string | null => {
+    const father = people.find(person => person.name === child.fatherName);
+
+    if (father) {
+      return father.slug;
+    }
+
+    return null;
+  }, [people]);
   const { personSlug } = useParams();
 
   return (
