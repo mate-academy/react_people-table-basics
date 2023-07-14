@@ -16,14 +16,14 @@ interface ParentLink {
 }
 
 const getParentLink = (
-  args: ParentLink,
+  props: ParentLink,
 ) => {
   const {
     person,
     parentType,
     name,
     peopleList,
-  } = args;
+  } = props;
   const isMother = parentType === MOTHER;
 
   const parent = peopleList
