@@ -7,9 +7,10 @@ type Props = {
   person: Person;
 };
 
+const FEMALE = 'f';
+
 export const PersonLink: React.FC<Props> = ({ person }) => {
   const { name, sex, slug } = person;
-  const FEMALE = 'f';
 
   return (
     <Link

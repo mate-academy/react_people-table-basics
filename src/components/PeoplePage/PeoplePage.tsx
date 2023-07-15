@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
+import { createPeopleWithParents } from '../../helpers/helpers';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 export const PeoplePage: React.FC = () => {
@@ -23,16 +24,8 @@ export const PeoplePage: React.FC = () => {
           peopleMap.set(person.name, person);
         });
 
-        const peopleWithParents = visiblePeople.map(person => {
-          const mother = peopleMap.get(person.motherName);
-          const father = peopleMap.get(person.fatherName);
-
-          return {
-            ...person,
-            mother,
-            father,
-          };
-        });
+        // eslint-disable-next-line max-len
+        const peopleWithParents = createPeopleWithParents(visiblePeople, peopleMap);
 
         setPeople(peopleWithParents);
       })
