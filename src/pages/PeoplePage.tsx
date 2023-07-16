@@ -2,23 +2,22 @@ import { useEffect, useState } from 'react';
 import { Loader } from '../components/Loader';
 import { getPeople } from '../api';
 import { Person } from '../types';
-import { PeopleTableHeader } from '../components/PeopleTableHeader';
-import { PeopleTableBody } from '../components/PeopleTableBody';
+import { PeopleTable } from '../components/PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person []>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isHasError, setIsHasError] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     getPeople()
       .then(setPeople)
-      .catch(() => setIsHasError(true))
+      .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
   }, []);
 
-  const isNotPeople = !isLoading && !isHasError && people.length === 0;
+  const isNotPeople = !isLoading && !isError && people.length === 0;
 
   return (
     <>
@@ -28,7 +27,7 @@ export const PeoplePage = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {isHasError && (
+          {isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
@@ -41,14 +40,7 @@ export const PeoplePage = () => {
           )}
 
           {people.length > 0 && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <PeopleTableHeader />
-
-              <PeopleTableBody people={people} />
-            </table>
+            <PeopleTable people={people} />
           )}
         </div>
       </div>

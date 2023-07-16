@@ -1,6 +1,6 @@
 import { PageNavLink } from './PageNavLink';
 
-export const NavBar = () => {
+export const Navigation = () => {
   return (
     <nav
       data-cy="nav"

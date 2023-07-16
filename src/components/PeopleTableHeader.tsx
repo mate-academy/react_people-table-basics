@@ -1,12 +1,15 @@
-export const PeopleTableHeader = () => (
+import { FC } from 'react';
+
+interface PeopleTableHeaderProps {
+  titles: string[]
+}
+
+export const PeopleTableHeader: FC<PeopleTableHeaderProps> = ({ titles }) => (
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Sex</th>
-      <th>Born</th>
-      <th>Died</th>
-      <th>Mother</th>
-      <th>Father</th>
+      {titles.map(title => (
+        <th key={title}>{title}</th>
+      ))}
     </tr>
   </thead>
 );
