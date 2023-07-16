@@ -1,58 +1,44 @@
+import { useMemo } from 'react';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
 
 type Props = {
   person: Person;
-  personNames: string[];
-  findParent: (parentName: string) => Person;
+  findParent: (parentName: string) => Person | null;
 };
 
 export const TablePersonParents: React.FC<Props> = ({
   person,
-  personNames,
   findParent,
 }) => {
+  const personMother: Person | string | null = useMemo(() => (
+    person.motherName
+      ? findParent(person.motherName) || person.motherName
+      : null
+  ), [person]);
+  const personFather: Person | string | null = useMemo(() => (
+    person.fatherName
+      ? findParent(person.fatherName) || person.fatherName
+      : null
+  ), [person]);
+
   return (
     <>
-      {person.motherName
+      {personMother
         ? (
-          <>
-            {personNames?.includes(person.motherName)
-              ? (
-                <td>
-                  <PersonLink
-                    person={
-                      findParent(person.motherName)
-                    }
-                  />
-                </td>
-              )
-              : <td>{person.motherName}</td>}
-          </>
+          <td>
+            <PersonLink person={personMother} />
+          </td>
         )
-        : (
-          <td>-</td>
-        )}
+        : <td>-</td>}
 
-      {person.fatherName
+      {personFather
         ? (
-          <>
-            {personNames?.includes(person.fatherName)
-              ? (
-                <td>
-                  <PersonLink
-                    person={
-                      findParent(person.fatherName)
-                    }
-                  />
-                </td>
-              )
-              : <td>{person.fatherName}</td>}
-          </>
+          <td>
+            <PersonLink person={personFather} />
+          </td>
         )
-        : (
-          <td>-</td>
-        )}
+        : <td>-</td> }
     </>
   );
 };

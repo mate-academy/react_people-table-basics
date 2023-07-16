@@ -3,13 +3,15 @@ import { Loader } from '../components/Loader';
 import { getPeople } from '../api';
 import { Person } from '../types';
 
-import { PeopleTable } from '../components/PepopleTable';
+import { PeopleTable } from '../components/PeopleTable';
 
-export const PepoplePage: React.FC = () => {
-  const [isNoPeopleOnServer, setIsNoPeopleOnServer] = useState(false);
+export const PeoplePage: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isDownloading, setIsDownloading] = useState(false);
-  const [peopleFromServer, setPeopleFromServer] = useState<Person[]>([]);
+  const [
+    peopleFromServer,
+    setPeopleFromServer,
+  ] = useState<Person[] | null>(null);
 
   useEffect(() => {
     setIsDownloading(true);
@@ -17,8 +19,7 @@ export const PepoplePage: React.FC = () => {
     getPeople()
       .then(result => {
         if (result.length === 0) {
-          setIsNoPeopleOnServer(true);
-          setIsDownloading(false);
+          setPeopleFromServer([]);
 
           return;
         }
@@ -37,7 +38,7 @@ export const PepoplePage: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isDownloading && <Loader />}
+          {(isDownloading && !peopleFromServer) && <Loader />}
 
           {errorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
@@ -45,15 +46,15 @@ export const PepoplePage: React.FC = () => {
             </p>
           )}
 
-          {isNoPeopleOnServer
-            ? (
-              <p data-cy="noPeopleMessage">
-                There are no people on the server
-              </p>
-            )
-            : (peopleFromServer?.length !== 0 && (
-              <PeopleTable peopleFromServer={peopleFromServer} />
-            ))}
+          {peopleFromServer && (
+            !peopleFromServer?.length
+              ? (
+                <p data-cy="noPeopleMessage">
+                  There are no people on the server
+                </p>
+              )
+              : <PeopleTable peopleFromServer={peopleFromServer} />
+          )}
         </div>
       </div>
     </div>

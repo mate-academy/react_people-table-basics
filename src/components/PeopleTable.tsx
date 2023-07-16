@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
@@ -9,22 +9,27 @@ type Props = {
   peopleFromServer: Person[];
 };
 
+const tableHeads: string[] = [
+  'Name',
+  'Sex',
+  'Born',
+  'Died',
+  'Mother',
+  'Father',
+];
+
 export const PeopleTable: React.FC<Props> = ({ peopleFromServer }) => {
   const { personSlug = '' } = useParams();
 
-  const findParent = useCallback((parentName: string) => {
-    const parent = peopleFromServer?.find(person => person.name === parentName);
+  const findParent = useCallback((motherName: string) => {
+    const parent = peopleFromServer?.find(person => person.name === motherName);
 
     if (!parent) {
-      throw new Error('Cant find parent');
+      return null;
     }
 
     return parent;
   }, [peopleFromServer]);
-
-  const personNames = useMemo(() => (
-    peopleFromServer?.map(person => person.name)
-  ), [peopleFromServer]);
 
   return (
     <table
@@ -33,12 +38,7 @@ export const PeopleTable: React.FC<Props> = ({ peopleFromServer }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {tableHeads.map(head => <th key={head}>{head}</th>)}
         </tr>
       </thead>
 
@@ -61,7 +61,6 @@ export const PeopleTable: React.FC<Props> = ({ peopleFromServer }) => {
 
             <TablePersonParents
               person={person}
-              personNames={personNames}
               findParent={findParent}
             />
           </tr>

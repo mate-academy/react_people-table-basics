@@ -1,5 +1,4 @@
-import { NavLink } from 'react-router-dom';
-import cn from 'classnames';
+import { NavBarLink } from './NavBarLink';
 
 export const NavBar: React.FC = () => (
   <nav
@@ -10,25 +9,9 @@ export const NavBar: React.FC = () => (
   >
     <div className="container">
       <div className="navbar-brand">
-        <NavLink
-          className={({ isActive }) => cn(
-            'navbar-item',
-            { 'has-background-grey-lighter': isActive },
-          )}
-          to="/"
-        >
-          Home
-        </NavLink>
+        <NavBarLink to="/">Home</NavBarLink>
 
-        <NavLink
-          className={({ isActive }) => cn(
-            'navbar-item',
-            { 'has-background-grey-lighter': isActive },
-          )}
-          to="/people"
-        >
-          People
-        </NavLink>
+        <NavBarLink to="/people">People</NavBarLink>
       </div>
     </div>
   </nav>
