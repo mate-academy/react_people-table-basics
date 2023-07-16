@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
@@ -9,39 +9,38 @@ export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isError, setIsError] = useState(false);
   const [isDataUploaded, setIsDataUploaded] = useState(false);
+  const isUploadedDataEmpty = !isError && isDataUploaded && people.length === 0;
+
+  const getPeopleWithParents = (peopleFromServer: Person[]) => {
+    const peopleWithParents = peopleFromServer.map(child => {
+      const mother = peopleFromServer
+        .find(person => person.name === child.motherName);
+      const father = peopleFromServer
+        .find(person => person.name === child.fatherName);
+
+      return { ...child, father, mother };
+    });
+
+    return peopleWithParents;
+  };
 
   useEffect(() => {
-    getPeople()
-      .then(uploadedPeople => {
-        setPeople(uploadedPeople);
-      })
-      .catch(() => {
+    const dataFromServer = async () => {
+      try {
+        const uploadedPeople = await getPeople();
+        const peopleWithParents = getPeopleWithParents(uploadedPeople);
+
+        setPeople(peopleWithParents);
+      } catch {
         setIsError(true);
-      })
-      .finally(() => {
+      } finally {
         setIsDataUploaded(true);
-      });
+      }
+    };
+
+    dataFromServer();
   }, []);
 
-  const findMotherSlug = useCallback((child: Person): string | null => {
-    const mother = people.find(person => person.name === child.motherName);
-
-    if (mother) {
-      return mother.slug;
-    }
-
-    return null;
-  }, [people]);
-
-  const findFatherSlug = useCallback((child: Person): string | null => {
-    const father = people.find(person => person.name === child.fatherName);
-
-    if (father) {
-      return father.slug;
-    }
-
-    return null;
-  }, [people]);
   const { personSlug } = useParams();
 
   return (
@@ -57,7 +56,7 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {!isError && isDataUploaded && people.length === 0 && (
+          {isUploadedDataEmpty && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
@@ -66,8 +65,6 @@ export const PeoplePage: React.FC = () => {
           {people.length > 0 && (
             <PeopleTable
               people={people}
-              findMotherSlug={findMotherSlug}
-              findFatherSlug={findFatherSlug}
               selectedPerson={personSlug}
             />
           )}
