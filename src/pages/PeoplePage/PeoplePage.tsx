@@ -16,7 +16,7 @@ export const PeoplePage = () => {
       .then(setPeople)
       .catch(error => {
         // eslint-disable-next-line no-console
-        console.error(error.message);
+        throw new Error(error.message);
         setHasError(true);
       })
       .finally(() => setIsLoading(false));

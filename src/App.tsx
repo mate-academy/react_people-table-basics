@@ -1,28 +1,24 @@
-import { Outlet } from 'react-router-dom';
 import './App.scss';
-import { PageNavLink } from './components/PageNavLink/PageNavLink';
+import {
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
+import { Layout } from './Layout';
+import { HomePage } from './pages/HomePage/HomePage';
+import { PeoplePage } from './pages/PeoplePage/PeoplePage';
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 
 export const App = () => (
   <div data-cy="app">
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <PageNavLink to="/" title="Home" />
-
-          <PageNavLink to="people" title="People" />
-        </div>
-      </div>
-    </nav>
-
-    <main className="section">
-      <div className="container">
-        <Outlet />
-      </div>
-    </main>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="home" element={<Navigate to="/" replace />} />
+        <Route path="people" element={<PeoplePage />} />
+        <Route path="people/:slug" element={<PeoplePage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   </div>
 );
