@@ -9,38 +9,51 @@ interface TableRowProps {
 }
 
 export const TableRow: React.FC<TableRowProps> = ({ person }) => {
-  const { slug } = useParams();
+  const { selectedSlug } = useParams();
+
+  const {
+    sex,
+    born,
+    died,
+    fatherName,
+    motherName,
+    slug,
+    mother,
+    father,
+  } = person;
+
+  const isSelectedSlug = slug === selectedSlug;
 
   return (
     <tr
       data-cy="person"
       className={cn({
-        'has-background-warning': person.slug === slug,
+        'has-background-warning': isSelectedSlug,
       })}
     >
       <td>
         <PersonLink person={person} />
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
 
       <td>
-        {person.mother
+        {mother
           ? (
-            <PersonLink person={person.mother} />
+            <PersonLink person={mother} />
           ) : (
-            person.motherName || '-'
+            motherName || '-'
           )}
       </td>
 
       <td>
-        {person.father
+        {father
           ? (
-            <PersonLink person={person.father} />
+            <PersonLink person={father} />
           ) : (
-            person.fatherName || '-'
+            fatherName || '-'
           )}
       </td>
     </tr>

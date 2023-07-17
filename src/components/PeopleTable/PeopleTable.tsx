@@ -3,15 +3,6 @@ import { TableRow } from '../TableRow';
 import { TableHeaders } from '../TableHeaders';
 import { Person } from '../../types/Person';
 
-const tableHeaders = [
-  'Name',
-  'Sex',
-  'Born',
-  'Died',
-  'Mother',
-  'Father',
-];
-
 interface PeopleTableProps {
   people: Person[];
 }
@@ -22,7 +13,7 @@ export const PeopleTable: React.FC<PeopleTableProps> = ({ people }) => (
     className="table is-striped is-hoverable is-narrow is-fullwidth"
   >
     <thead>
-      <TableHeaders headers={tableHeaders} />
+      <TableHeaders />
     </thead>
 
     <tbody>

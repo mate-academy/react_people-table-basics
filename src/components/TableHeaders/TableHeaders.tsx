@@ -1,10 +1,15 @@
 import React from 'react';
 
-interface TableHeadersProps {
-  headers: string[];
-}
+const headers = [
+  'Name',
+  'Sex',
+  'Born',
+  'Died',
+  'Mother',
+  'Father',
+];
 
-export const TableHeaders: React.FC<TableHeadersProps> = ({ headers }) => (
+export const TableHeaders: React.FC = () => (
   <tr>
     {headers.map(header => (
       <th key={header}>

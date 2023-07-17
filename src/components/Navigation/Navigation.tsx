@@ -1,42 +1,17 @@
-import { NavLink, useLocation } from 'react-router-dom';
-import cn from 'classnames';
+import { NavigationLink } from '../NavigationLink';
 
-export const Navigation: React.FC = () => {
-  const location = useLocation();
-  const currentPath = location.pathname;
-
-  return (
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <NavLink
-            to="/"
-            className={cn(
-              'navbar-item', {
-                'has-background-grey-lighter': currentPath === '/',
-              },
-            )}
-          >
-            Home
-          </NavLink>
-
-          <NavLink
-            to="/people"
-            className={cn(
-              'navbar-item', {
-                'has-background-grey-lighter': currentPath === '/people',
-              },
-            )}
-          >
-            People
-          </NavLink>
-        </div>
+export const Navigation: React.FC = () => (
+  <nav
+    data-cy="nav"
+    className="navbar is-fixed-top has-shadow"
+    role="navigation"
+    aria-label="main navigation"
+  >
+    <div className="container">
+      <div className="navbar-brand">
+        <NavigationLink to="/" path="Home" />
+        <NavigationLink to="/people" path="People" />
       </div>
-    </nav>
-  );
-};
+    </div>
+  </nav>
+);

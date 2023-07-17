@@ -10,10 +10,12 @@ interface PersonLinkProps {
 export const PersonLink: React.FC<PersonLinkProps> = ({ person }) => {
   const { sex, slug, name } = person;
 
+  const isFemale = sex === 'f';
+
   return (
     <Link
       className={cn({
-        'has-text-danger': sex === 'f',
+        'has-text-danger': isFemale,
       })}
       to={slug}
     >
