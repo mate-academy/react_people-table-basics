@@ -4,14 +4,12 @@ import { Person } from '../types';
 import { PersonLink } from './PersonLink';
 
 interface Props {
-  key: string;
   person: Person;
   mother: Person | null;
   father: Person | null;
 }
 
 export const PersonInfo: React.FC <Props> = ({
-  key,
   person,
   mother,
   father,
@@ -26,13 +24,12 @@ export const PersonInfo: React.FC <Props> = ({
     slug,
   } = person;
 
-  const { slectedPersonSlug = '' } = useParams();
+  const { selectedPersonSlug = '' } = useParams();
 
-  const isSelected = (personSlug: string) => personSlug === slectedPersonSlug;
+  const isSelected = (personSlug: string) => personSlug === selectedPersonSlug;
 
   return (
     <tr
-      key={key}
       data-cy="person"
       className={classNames({
         'has-background-warning': isSelected(slug),

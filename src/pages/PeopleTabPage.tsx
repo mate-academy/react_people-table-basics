@@ -6,8 +6,8 @@ import { Person } from '../types';
 
 export const PeopleTabPage: React.FC = () => {
   const [peopleFromServer, setPeopleFromServer] = useState<Person[]>([]);
-  const [isLoadin, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const isEmpty = peopleFromServer.length === 0 && !errorMessage;
 
@@ -15,24 +15,22 @@ export const PeopleTabPage: React.FC = () => {
     setIsLoading(true);
     getPeople()
       .then(setPeopleFromServer)
-      .catch(() => {
-        setErrorMessage(true);
-      })
+      .catch((error) => setErrorMessage(`Something went wrong: ${error.message}`))
       .finally(() => setIsLoading(false));
   }, []);
 
   return (
-    <>
+    <div className="container">
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {isLoadin ? (
+          {isLoading ? (
             <Loader />
           ) : (
             <>
               {errorMessage && (
                 <p data-cy="peopleLoadingError" className="has-text-danger">
-                  Something went wrong
+                  {errorMessage}
                 </p>
               )}
 
@@ -49,6 +47,6 @@ export const PeopleTabPage: React.FC = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };

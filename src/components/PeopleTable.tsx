@@ -1,42 +1,35 @@
 import { Person } from '../types';
 import { PersonInfo } from './PersonInfo';
+import { getPersonByName } from '../helpers';
 
 interface Props {
   people: Person[];
 }
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const getPersonByName = (name: string | null): Person | null => (name
-    ? people.find(person => person.name === name) || null
-    : null
-  );
+const columnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
-  return (
-    <table
-      data-cy="peopleTable"
-      className="table is-striped is-hoverable is-narrow is-fullwidth"
-    >
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {people.map(person => (
-          <PersonInfo
-            key={person.slug}
-            person={person}
-            mother={getPersonByName(person.motherName)}
-            father={getPersonByName(person.fatherName)}
-          />
+export const PeopleTable: React.FC<Props> = ({ people }) => (
+  <table
+    data-cy="peopleTable"
+    className="table is-striped is-hoverable is-narrow is-fullwidth"
+  >
+    <thead>
+      <tr>
+        {columnNames.map(name => (
+          <th key={name}>{name}</th>
         ))}
-      </tbody>
-    </table>
-  );
-};
+      </tr>
+    </thead>
+
+    <tbody>
+      {people.map(person => (
+        <PersonInfo
+          key={person.slug}
+          person={person}
+          mother={getPersonByName(people, person.motherName)}
+          father={getPersonByName(people, person.fatherName)}
+        />
+      ))}
+    </tbody>
+  </table>
+);
