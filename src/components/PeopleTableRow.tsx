@@ -7,12 +7,14 @@ interface PeopleTableRowProps {
   person: Person,
 }
 
+const FEMALE = 'f';
+
 export const PeopleTableRow: FC<PeopleTableRowProps> = ({
   person,
 }) => {
   const { slug } = useParams();
   const isSelectedPerson = slug === person.slug;
-  const isWoman = person.sex === 'f';
+  const isWoman = person.sex === FEMALE;
 
   return (
     <tr
