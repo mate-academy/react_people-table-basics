@@ -8,6 +8,18 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
+  const prepairedPeople = people.map((person: Person) => {
+    return {
+      ...person,
+      mother: people.find(prepairedPerson => {
+        return prepairedPerson.name === person.motherName;
+      }),
+      father: people.find(prepairedPerson => {
+        return prepairedPerson.name === person.fatherName;
+      }),
+    };
+  });
+
   return (
     <table
       data-cy="peopleTable"
@@ -25,7 +37,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map((person: Person) => (
+        {prepairedPeople.map((person: Person) => (
           <PersonLink
             key={person.slug}
             person={person}
