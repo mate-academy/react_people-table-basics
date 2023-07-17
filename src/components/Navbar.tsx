@@ -9,15 +9,9 @@ export const Navbar: React.FC = () => (
   >
     <div className="container">
       <div className="navbar-brand">
-        <NavItem
-          title="Home"
-          link="/"
-        />
+        <NavItem title="Home" link="/" />
 
-        <NavItem
-          title="People"
-          link="/people"
-        />
+        <NavItem title="People" link="/people" />
       </div>
     </div>
   </nav>
