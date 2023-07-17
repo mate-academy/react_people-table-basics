@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
-import { createPeopleWithParents } from '../../helpers/helpers';
+import { setPeopleWithParents } from '../../helpers/helpers';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<Person[]>([]);
+  const [visiblePeople, setVisiblePeople] = useState<Person[]>([]);
   const [isTableLoading, setIsTableLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -17,20 +17,19 @@ export const PeoplePage: React.FC = () => {
     setIsTableLoading(true);
 
     getPeople()
-      .then(visiblePeople => {
-        const peopleMap = new Map<string, Person>();
+      .then(people => {
+        const peopleByName = new Map<string, Person>();
 
-        visiblePeople.forEach(person => {
-          peopleMap.set(person.name, person);
+        people.forEach(person => {
+          peopleByName.set(person.name, person);
         });
 
-        // eslint-disable-next-line max-len
-        const peopleWithParents = createPeopleWithParents(visiblePeople, peopleMap);
+        const peopleWithParents = setPeopleWithParents(people, peopleByName);
 
-        setPeople(peopleWithParents);
+        setVisiblePeople(peopleWithParents);
       })
-      .catch(errorName => {
-        setError(`Something went wrong: ${errorName}`);
+      .catch(visibleError => {
+        setError(`Something went wrong: ${visibleError}`);
       })
       .finally(() => {
         setIsTableLoading(false);
@@ -45,7 +44,7 @@ export const PeoplePage: React.FC = () => {
 
       {isTableVisible && (
         <PeopleTable
-          people={people}
+          people={visiblePeople}
         />
       )}
 

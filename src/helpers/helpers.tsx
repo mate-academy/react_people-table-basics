@@ -2,7 +2,10 @@ import { Person } from '../types';
 
 export const columnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
-export const createPeopleWithParents = (
+export enum Gender {
+  FEMALE = 'f',
+}
+export const setPeopleWithParents = (
   visiblePeople: Person[],
   peopleMap: Map<string, Person>,
 ): Person[] => {
