@@ -7,21 +7,13 @@ import { NO_VALUE } from '../../helpers/constants';
 import { findPerson } from '../../helpers/helperFunctions';
 
 type Props = {
-  persons: null | Person[],
+  people: Person[],
 };
 
-export const PersonList: FC<Props> = ({ persons }) => {
+export const PeopleList: FC<Props> = ({ people }) => {
   const { slug } = useParams();
 
   const tableHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
-
-  if (persons?.length === 0) {
-    return (
-      <p data-cy="noPeopleMessage">
-        There are no people on the server
-      </p>
-    );
-  }
 
   return (
     <table
@@ -31,13 +23,13 @@ export const PersonList: FC<Props> = ({ persons }) => {
       <thead>
         <tr>
           {tableHeaders.map(header => (
-            <th>{header}</th>
+            <th key={header}>{header}</th>
           ))}
         </tr>
       </thead>
 
       <tbody>
-        {persons?.map(person => {
+        {people.map(person => {
           const {
             name,
             sex,
@@ -66,8 +58,16 @@ export const PersonList: FC<Props> = ({ persons }) => {
               <td>{sex}</td>
               <td>{born}</td>
               <td>{died}</td>
-              <td>{findPerson(motherName || NO_VALUE, persons)}</td>
-              <td>{findPerson(fatherName || NO_VALUE, persons)}</td>
+              <td>
+                {motherName
+                  ? findPerson(motherName, people)
+                  : NO_VALUE}
+              </td>
+              <td>
+                {fatherName
+                  ? findPerson(fatherName, people)
+                  : NO_VALUE}
+              </td>
             </tr>
           );
         })}

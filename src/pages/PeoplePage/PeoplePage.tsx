@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { Loader } from '../../components/Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
-import { PersonList } from '../../components/PersonList/PersonList';
+import { PeopleList } from '../../components/PeopleList/PeopleList';
 
 export const PeoplePage = () => {
-  const [persons, setPersons] = useState<null | Person[]>(null);
+  const [people, setPeople] = useState<null | Person[]>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -13,7 +13,7 @@ export const PeoplePage = () => {
     setIsLoading(true);
 
     getPeople()
-      .then(setPersons)
+      .then(setPeople)
       .catch(error => {
         // eslint-disable-next-line no-console
         console.error(error.message);
@@ -21,6 +21,9 @@ export const PeoplePage = () => {
       })
       .finally(() => setIsLoading(false));
   }, []);
+
+  const hasPeople = people && Array.isArray(people);
+  const hasNoPeople = hasPeople && people.length === 0;
 
   return (
     <>
@@ -30,13 +33,19 @@ export const PeoplePage = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {hasError
+          {hasError && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )}
+          {hasPeople && (hasNoPeople
             ? (
-              <p data-cy="peopleLoadingError" className="has-text-danger">
-                Something went wrong
+              <p data-cy="noPeopleMessage">
+                There are no people on the server
               </p>
             )
-            : (persons && <PersonList persons={persons} />)}
+            : <PeopleList people={people} />
+          )}
         </div>
       </div>
     </>
