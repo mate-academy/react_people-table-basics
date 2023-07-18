@@ -15,15 +15,14 @@ export const PeoplePage = () => {
     getPeople()
       .then(setPeople)
       .catch(error => {
-        // eslint-disable-next-line no-console
-        throw new Error(error.message);
         setHasError(true);
+        throw new Error(error.message);
       })
       .finally(() => setIsLoading(false));
   }, []);
 
-  const hasPeople = people && Array.isArray(people);
-  const hasNoPeople = hasPeople && people.length === 0;
+  const hasResponse = people && Array.isArray(people);
+  const hasNoPeople = hasResponse && people.length === 0;
 
   return (
     <>
@@ -38,7 +37,7 @@ export const PeoplePage = () => {
               Something went wrong
             </p>
           )}
-          {hasPeople && (hasNoPeople
+          {hasResponse && (hasNoPeople
             ? (
               <p data-cy="noPeopleMessage">
                 There are no people on the server

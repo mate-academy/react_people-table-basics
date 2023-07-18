@@ -31,6 +31,7 @@ export const PeopleList: FC<Props> = ({ people }) => {
             people={people}
             person={person}
             slug={slug || null}
+            key={person.slug}
           />
         ))}
       </tbody>

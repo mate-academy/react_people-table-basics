@@ -23,7 +23,6 @@ export const PersonRow: FC<Props> = ({ people, person, slug }) => {
 
   return (
     <tr
-      key={person.slug}
       data-cy="person"
       className={classNames({
         'has-background-warning': person.slug === slug,

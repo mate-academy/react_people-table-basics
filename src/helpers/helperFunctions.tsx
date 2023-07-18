@@ -1,8 +1,8 @@
 import { PersonLink } from '../components/PersonLink/PersonLink';
 import { Person } from '../types/Person';
 
-export const findPerson = (personName: string, personsArray: Person[]) => {
-  const foundPerson = personsArray.find(pers => pers.name === personName);
+export const findPerson = (personName: string, people: Person[]) => {
+  const foundPerson = people.find(person => person.name === personName);
 
   if (foundPerson) {
     return (
