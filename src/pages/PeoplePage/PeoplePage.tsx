@@ -30,7 +30,8 @@ export const PeoplePage: React.FC = () => {
   });
 
   const isErrorVisible = isLoaded && isError;
-  const hasPeople = isLoaded && !isError && people.length > 0;
+  const isNoPeopleVisible = isLoaded && !isError && people.length === 0;
+  const isPeopleTabVisible = isLoaded && !isError && people.length > 0;
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -42,12 +43,14 @@ export const PeoplePage: React.FC = () => {
               Something went wrong
             </p>
           )}
-          {!hasPeople && (
-            <p data-cy="noPeopleMessage">
+          {isNoPeopleVisible && (
+            <p
+              data-cy="noPeopleMessage"
+            >
               There are no people on the server
             </p>
           )}
-          {hasPeople && <PeopleTable people={visiblePeople} />}
+          {isPeopleTabVisible && (<PeopleTable people={visiblePeople} />)}
         </div>
       </div>
     </>
