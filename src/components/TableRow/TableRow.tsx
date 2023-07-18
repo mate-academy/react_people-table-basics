@@ -41,11 +41,8 @@ export const TableRow: React.FC<TableRowProps> = ({ person }) => {
 
       <td>
         {mother
-          ? (
-            <PersonLink person={mother} />
-          ) : (
-            motherName || '-'
-          )}
+          ? <PersonLink person={mother} />
+          : motherName || '-'}
       </td>
 
       <td>
