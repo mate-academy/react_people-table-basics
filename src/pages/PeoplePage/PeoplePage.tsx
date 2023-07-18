@@ -11,7 +11,7 @@ export const PeoplePage: React.FC = () => {
 
   useEffect(() => {
     getPeople()
-      .then(response => setPeople(response))
+      .then(setPeople)
       .catch(() => setIsError(true))
       .finally(() => setIsLoaded(true));
   }, []);
@@ -30,33 +30,24 @@ export const PeoplePage: React.FC = () => {
   });
 
   const isErrorVisible = isLoaded && isError;
-  const isNoPeopleVisible = isLoaded && !isError && people.length === 0;
-  const isPeopleTabVisible = isLoaded && !isError && people.length > 0;
-
+  const hasPeople = isLoaded && !isError && people.length > 0;
   return (
     <>
       <h1 className="title">People Page</h1>
-
       <div className="block">
         <div className="box table-container">
           {!isLoaded && <Loader />}
-
           {isErrorVisible && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
-
-          {isNoPeopleVisible && (
-            <p
-              data-cy="noPeopleMessage"
-            >
+          {!hasPeople && (
+            <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
-
-          {isPeopleTabVisible && (<PeopleTable people={visiblePeople} />)}
-
+          {hasPeople && <PeopleTable people={visiblePeople} />}
         </div>
       </div>
     </>

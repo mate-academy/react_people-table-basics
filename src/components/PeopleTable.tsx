@@ -28,7 +28,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           <PersonInfo
             key={person.slug}
             person={person}
-            selectedPersonSlug={slug}
+            isSelected={slug}
           />
         ))}
 

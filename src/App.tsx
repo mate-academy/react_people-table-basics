@@ -5,9 +5,7 @@ import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import { HomePage } from './pages/HomePage/HomePage';
 import { NavBar } from './components/NavBar';
 
-export const App = () => {
-  return (
-    (
+export const App = () => (
       <div data-cy="app">
         <NavBar />
 
@@ -25,6 +23,4 @@ export const App = () => {
           </div>
         </main>
       </div>
-    )
-  );
-};
+);

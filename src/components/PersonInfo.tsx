@@ -4,14 +4,14 @@ import { PersonLink } from './PersonLink';
 
 type Props = {
   person: Person,
-  selectedPersonSlug: string,
+  isSelected: string,
 };
 
 export const PersonInfo: React.FC<Props> = ({
   person,
-  selectedPersonSlug,
+  isSelected,
 }) => {
-  const isSelectedSlug = person.slug === selectedPersonSlug;
+  const isSelectedSlug = person.slug === isSelected;
 
   return (
     <tr
@@ -31,14 +31,14 @@ export const PersonInfo: React.FC<Props> = ({
 
       <td>
         {person.mother
-          ? (<PersonLink person={person.mother} />)
-          : (person.motherName || '-')}
+          ? <PersonLink person={person.mother} />
+          : person.motherName || '-'}
       </td>
 
       <td>
         {person.father
-          ? (<PersonLink person={person.father} />)
-          : (person.fatherName || '-')}
+          ? <PersonLink person={person.father} />
+          : person.fatherName || '-'}
       </td>
     </tr>
   );
