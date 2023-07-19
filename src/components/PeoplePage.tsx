@@ -16,7 +16,7 @@ export const PeoplePage: React.FC<Props> = ({
   const { slug = '' } = useParams();
 
   return (
-    <>
+    <div className="container">
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
@@ -38,6 +38,6 @@ export const PeoplePage: React.FC<Props> = ({
             )}
         </div>
       </div>
-    </>
+    </div>
   );
 };

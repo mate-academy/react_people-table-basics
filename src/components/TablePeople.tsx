@@ -1,7 +1,7 @@
 import React from 'react';
-import cn from 'classnames';
+
 import { Person } from '../types/Person';
-import { PersonLink } from './PersonLink';
+import { PersonItem } from './PersonItem';
 
 type Props = {
   people: Person[],
@@ -28,38 +28,14 @@ export const TablePeople: React.FC<Props> = ({ people, slug }) => {
       </thead>
 
       <tbody>
-        {people.map(person => {
-          const mother = people
-            .find(parent => parent.name === person.motherName);
-          const father = people
-            .find(parent => parent.name === person.fatherName);
-
-          return (
-            <tr
-              data-cy="person"
-              key={person.slug}
-              className={cn({ 'has-background-warning': isSelected(person) })}
-            >
-              <td>
-                <PersonLink person={person} slug={person.slug} />
-              </td>
-
-              <td>{person.sex}</td>
-              <td>{person.born}</td>
-              <td>{person.died}</td>
-              <td>
-                {mother
-                  ? <PersonLink person={mother} slug={mother.slug} />
-                  : person.motherName || '-'}
-              </td>
-              <td>
-                {father
-                  ? <PersonLink person={father} slug={father.slug} />
-                  : person.fatherName || '-'}
-              </td>
-            </tr>
-          );
-        })}
+        {people.map(person => (
+          <PersonItem
+            key={person.slug}
+            isSelected={isSelected}
+            person={person}
+            people={people}
+          />
+        ))}
       </tbody>
     </table>
   );
