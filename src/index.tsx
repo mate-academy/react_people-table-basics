@@ -1,8 +1,10 @@
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Root } from './Root';
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
-const root = document.getElementById('root') as HTMLElement;
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement,
+);
 
-render(<Root />, root);
+root.render(<Root />);
