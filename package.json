@@ -16,7 +16,6 @@
   },
   "devDependencies": {
     "@cypress/react": "^5.12.4",
-    "@cypress/webpack-dev-server": "^1.8.4",
     "@mate-academy/cypress-tools": "^1.0.4",
     "@mate-academy/scripts": "^1.2.3",
     "@mate-academy/eslint-config-react-typescript": "^1.0.11",
