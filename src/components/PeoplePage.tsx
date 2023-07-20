@@ -11,8 +11,6 @@ export const PeoplePage: FC = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    setIsError(false);
-    setIsNoPeople(false);
 
     getPeople()
       .then(res => {
@@ -35,13 +33,13 @@ export const PeoplePage: FC = () => {
         <PeopleTable people={peopleFromServer} isLoading={isLoading} />
       )}
 
-      { isError && (
+      {isError && (
         <p data-cy="peopleLoadingError" className="has-text-danger">
           Something went wrong
         </p>
       )}
 
-      { isNoPeople && (
+      {isNoPeople && (
         <p data-cy="noPeopleMessage">
           There are no people on the server
         </p>

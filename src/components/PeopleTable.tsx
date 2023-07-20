@@ -35,15 +35,13 @@ export const PeopleTable: FC<Props> = ({ people, isLoading }) => {
                 </tr>
               </thead>
               <tbody>
-                {
-                  people.map(person => (
-                    <PersonLink
-                      person={person}
-                      key={person.slug}
-                      checkingPersonName={checkingMotherName}
-                    />
-                  ))
-                }
+                {people.map(person => (
+                  <PersonLink
+                    person={person}
+                    key={person.slug}
+                    checkingPersonName={checkingMotherName}
+                  />
+                ))}
               </tbody>
             </table>
           )}
