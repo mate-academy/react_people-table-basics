@@ -4,7 +4,7 @@ import { getPeople } from '../api';
 import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage: FC = () => {
-  const [peopleFromServer, setPeopleFromServer] = useState<Person[] | []>([]);
+  const [peopleFromServer, setPeopleFromServer] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isNoPeople, setIsNoPeople] = useState(false);
@@ -13,12 +13,12 @@ export const PeoplePage: FC = () => {
     setIsLoading(true);
 
     getPeople()
-      .then(res => {
-        if (!res.length) {
+      .then(people => {
+        if (!people.length) {
           setIsNoPeople(true);
         }
 
-        setPeopleFromServer(res);
+        setPeopleFromServer(people);
       })
       .catch(() => setIsError(true))
       .finally(() => {
