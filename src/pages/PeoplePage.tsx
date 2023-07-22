@@ -5,22 +5,24 @@ import { PeopleTable } from '../components/PeopleTable/PeopleTable';
 
 import { Person } from '../types';
 
+const setParents = (data: Person[]) => {
+  const preparedData = data.map((person) => {
+    return {
+      ...person,
+      father: data.find((f) => f.name === person.fatherName),
+      mother: data.find((m) => m.name === person.motherName),
+    };
+  });
+
+  return preparedData;
+};
+
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const setParents = (data: Person[]) => {
-    const preparedData = data.map((person) => {
-      return {
-        ...person,
-        father: data.find((f) => f.name === person.fatherName),
-        mother: data.find((m) => m.name === person.motherName),
-      };
-    });
-
-    setPeople(preparedData);
-  };
+  setPeople(setParents);
 
   useEffect(() => {
     setIsLoading(true);
