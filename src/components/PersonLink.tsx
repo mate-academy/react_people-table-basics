@@ -7,10 +7,12 @@ interface Props {
 }
 
 export const PersonLink:React.FC<Props> = ({ person }) => {
+  const FEMALE = 'f';
+
   return (
     <Link
-      to={`../${person?.slug}`}
-      className={cn({ 'has-text-danger': person?.sex === 'f' })}
+      to={`../people/${person?.slug}`}
+      className={cn({ 'has-text-danger': person?.sex === FEMALE })}
     >
       {person?.name}
     </Link>

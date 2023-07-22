@@ -1,19 +1,13 @@
 import { Person } from './types';
 
-// const getMother = (name: string | null) => {
-//   // if(name) {
-
-//   // }
-// }
-
 export const getPreparedPeople = (people: Person[]) => {
-  people.map(person => {
+  return people.map(person => {
     return {
       ...person,
       mother: people
-        .find(person1 => person1.name === person.motherName) || null,
+        .find(person1 => person1.name === person.motherName),
       father: people
-        .find(person1 => person1.name === person.fatherName) || null,
+        .find(person1 => person1.name === person.fatherName),
     };
   });
 };

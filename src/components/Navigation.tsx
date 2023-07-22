@@ -15,7 +15,7 @@ export const Navigation = () => {
             className={({ isActive }) => cn('navbar-item', {
               'has-background-grey-lighter': isActive,
             })}
-            to="../"
+            to="/"
           >
             Home
           </NavLink>
@@ -24,7 +24,7 @@ export const Navigation = () => {
             className={({ isActive }) => cn('navbar-item', {
               'has-background-grey-lighter': isActive,
             })}
-            to="../people"
+            to="/people"
           >
             People
           </NavLink>

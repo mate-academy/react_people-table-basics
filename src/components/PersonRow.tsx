@@ -21,10 +21,13 @@ export const PersonRow: React.FC<Props> = ({ person }) => {
 
   const { personSlug = '0' } = useParams();
 
-  const selected = personSlug === slug;
+  const isSelected = personSlug === slug;
 
   return (
-    <tr data-cy="person" className={cn({ 'has-background-warning': selected })}>
+    <tr
+      data-cy="person"
+      className={cn({ 'has-background-warning': isSelected })}
+    >
       <td>
         <PersonLink person={person} />
       </td>
