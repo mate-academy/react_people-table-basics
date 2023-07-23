@@ -7,10 +7,6 @@ type Props = {
 };
 
 export const PeopleTable: FC<Props> = ({ people }) => {
-  const searchedPerson = (personName: string | null) => (
-    people.find(person => person.name === personName) || null
-  );
-
   return (
     <table
       data-cy="peopleTable"
@@ -31,7 +27,6 @@ export const PeopleTable: FC<Props> = ({ people }) => {
         {people.map(person => (
           <PersonInfo
             person={person}
-            searchedPerson={searchedPerson}
             key={person.slug}
           />
         ))}

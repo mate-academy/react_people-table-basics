@@ -6,13 +6,9 @@ import { Person } from '../types';
 
 type Props = {
   person: Person;
-  searchedPerson: (personName: string | null) => Person | null;
 };
 
-export const PersonInfo: FC<Props> = ({ person, searchedPerson }) => {
-  const personMother = searchedPerson(person.motherName);
-  const personFather = searchedPerson(person.fatherName);
-
+export const PersonInfo: FC<Props> = ({ person }) => {
   const { slug } = useParams();
 
   return (
@@ -32,16 +28,16 @@ export const PersonInfo: FC<Props> = ({ person, searchedPerson }) => {
         <td>{person.died}</td>
 
         <td>
-          {personMother ? (
-            <PersonLink person={personMother} />
+          {person.mother ? (
+            <PersonLink person={person.mother} />
           ) : (
             person.motherName || '-'
           )}
         </td>
 
         <td>
-          {personFather ? (
-            <PersonLink person={personFather} />
+          {person.father ? (
+            <PersonLink person={person.father} />
           ) : (
             person.fatherName || '-'
           )}

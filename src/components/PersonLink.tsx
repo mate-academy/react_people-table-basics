@@ -7,19 +7,13 @@ type Props = {
   person: Person;
 };
 
-export const PersonLink: FC<Props> = ({ person }) => {
-  const getTextColor = (sex: 'f' | 'm') => (
-    classNames({
-      'has-text-danger': sex === 'f',
-    })
-  );
-
-  return (
-    <Link
-      to={`../${person.slug}`}
-      className={getTextColor(person.sex)}
-    >
-      {person.name || '-'}
-    </Link>
-  );
-};
+export const PersonLink: FC<Props> = ({ person }) => (
+  <Link
+    to={`../${person.slug}`}
+    className={classNames({
+      'has-text-danger': person.sex === 'f',
+    })}
+  >
+    {person.name || '-'}
+  </Link>
+);

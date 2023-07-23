@@ -4,6 +4,7 @@ import { Person, NotificationType } from '../types';
 import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
 import { Notification } from '../components/Notification';
+import { getPreparedPeople } from '../utils/getPreparedPeople';
 
 export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -14,16 +15,18 @@ export const PeoplePage: FC = () => {
     setIsError(false);
 
     getPeople()
-      .then((peopleData) => setPeople(peopleData))
+      .then((peopleData) => {
+        const preparedPeople = getPreparedPeople(peopleData);
+
+        setPeople(preparedPeople);
+      })
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
   }, []);
 
   const peopleLoaded = !isLoading && !isError;
 
-  const isEmptyPeopleList = !isError
-    && !isLoading
-    && people.length === 0;
+  const isEmptyPeopleList = peopleLoaded && people.length === 0;
 
   return (
     <>
