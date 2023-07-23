@@ -22,13 +22,12 @@ export const PeoplePage: React.FC = () => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  setPeople(setParents);
-
   useEffect(() => {
     setIsLoading(true);
 
     getPeople()
       .then(setParents)
+      .then((preparedData) => setPeople(preparedData))
       .catch(() => setIsError(true))
       .finally(() => {
         setIsLoading(false);
