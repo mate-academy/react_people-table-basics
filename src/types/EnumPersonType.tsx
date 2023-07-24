@@ -1,5 +1,5 @@
 export enum EnumPersonType {
-  name = 'name',
-  fatherName = 'fatherName',
-  motherName = 'motherName',
+  Name = 'name',
+  FatherName = 'fatherName',
+  MotherName = 'motherName',
 }

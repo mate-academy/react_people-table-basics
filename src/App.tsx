@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
+import { Loader } from './components/Loader';
 import { LoadingError } from './LoadingError';
 import { MainNav } from './MainNav';
 import { PageNotFound } from './PageNotFound';
@@ -9,7 +10,7 @@ import { Person } from './types';
 
 export const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [usersArr, setUsersArr] = useState<Person[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -22,10 +23,10 @@ export const App: React.FC = () => {
 
         const responseData = await response.json();
 
-        setUsersArr(responseData);
+        setPeople(responseData);
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log('error');
+        // eslint-disable-next-line no-alert
+        alert('error');
       } finally {
         setIsLoading(false);
       }
@@ -42,22 +43,29 @@ export const App: React.FC = () => {
         <div className="container">
 
           <Routes>
+
             <Route
               path="people"
               element={(
                 <>
                   <h1 className="title">People Page</h1>
-                  <PeoplePage usersArr={usersArr} />
+                  <PeoplePage people={people} />
                 </>
               )}
-            />
+            >
+              <Route
+                path=":personSlug"
+                element={(<h1 className="title">Andrey</h1>)}
+              />
+            </Route>
 
             <Route path="/" element={<h1 className="title">Home page</h1>} />
             <Route path="home" element={<Navigate to="/" replace />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
 
-          <LoadingError isLoading={isLoading} usersArr={usersArr} />
+          {isLoading && <Loader />}
+          {!people.length && <LoadingError />}
         </div>
       </main>
     </div>

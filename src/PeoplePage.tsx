@@ -4,10 +4,10 @@ import { PersonLink } from './PersonLink';
 import { Person } from './types';
 
 interface PeoplePageProps {
-  usersArr: Person[];
+  people: Person[];
 }
 
-export const PeoplePage:React.FC<PeoplePageProps> = ({ usersArr }) => {
+export const PeoplePage:React.FC<PeoplePageProps> = ({ people }) => {
   const [selectedPerson, setSelectedPerson] = useState<string | null>(null);
 
   const handlePersonClick = (personName: string | null) => {
@@ -15,7 +15,7 @@ export const PeoplePage:React.FC<PeoplePageProps> = ({ usersArr }) => {
   };
 
   const isPresentInTable = (name: string | null) => {
-    return usersArr.some((person) => person.name === name);
+    return people.some((person) => person.name === name);
   };
 
   return (
@@ -35,7 +35,7 @@ export const PeoplePage:React.FC<PeoplePageProps> = ({ usersArr }) => {
       </thead>
 
       <tbody>
-        {usersArr.map((person) => (
+        {people.map((person) => (
           <tr
             data-cy="person"
             key={person.name}
@@ -48,27 +48,25 @@ export const PeoplePage:React.FC<PeoplePageProps> = ({ usersArr }) => {
               <PersonLink
                 person={person}
                 handlePersonClick={handlePersonClick}
-                personType={EnumPersonType.name}
+                personType={EnumPersonType.Name}
               />
             </td>
 
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
-            {/* <td>{person.motherName}</td> */}
             <td>
               <PersonLink
                 person={person}
-                personType={EnumPersonType.motherName}
+                personType={EnumPersonType.MotherName}
                 isPresentInTable={isPresentInTable(person.motherName)}
                 handlePersonClick={handlePersonClick}
               />
             </td>
-            {/* <td>{person.fatherName}</td> */}
             <td>
               <PersonLink
                 person={person}
-                personType={EnumPersonType.fatherName}
+                personType={EnumPersonType.FatherName}
                 isPresentInTable={isPresentInTable(person.fatherName)}
                 handlePersonClick={handlePersonClick}
               />

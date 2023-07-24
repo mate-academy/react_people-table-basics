@@ -26,12 +26,12 @@ export const PersonLink: React.FC<PersonLinkProps> = (
         ? person[personType] || '-'
         : (
           <Link
-            to={`#/people/${person.slug}`}
+            to={`/people/${person.slug}`}
             onClick={handleClick}
-            className={classNames('', {
-              'has-text-danger': (personType === EnumPersonType.name
+            className={classNames({
+              'has-text-danger': (personType === EnumPersonType.Name
                 && person.sex === 'f')
-                || personType === EnumPersonType.motherName,
+                || personType === EnumPersonType.MotherName,
             })}
           >
             {person[personType]}
