@@ -8,24 +8,28 @@ import { getPeople } from '../../api';
 export const PeoplePage = () => {
   const { slug } = useParams();
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isEmpty, setIsEmpty] = useState<boolean>(false);
-  const [isDataFetched, setIsDataFetched] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDataFetched, setIsDataFetched] = useState(false);
+  const [error, setError] = useState('');
 
   const fetchData = async () => {
     setIsLoading(true);
-    const arrUsers = await getPeople();
 
-    if (!arrUsers.length) {
+    try {
+      const arrUsers = await getPeople();
+
+      if (!arrUsers.length) {
+        setIsLoading(false);
+
+        return;
+      }
+
+      setPeople(arrUsers);
+      setIsDataFetched(true);
       setIsLoading(false);
-      setIsEmpty(true);
-
-      return;
+    } catch {
+      setError('Something went wrong');
     }
-
-    setPeople(arrUsers);
-    setIsDataFetched(true);
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -49,10 +53,10 @@ export const PeoplePage = () => {
           {!isLoading && !isDataFetched
         && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
+            {error}
           </p>
         )}
-          {isEmpty && isDataFetched
+          {!people.length && isDataFetched
             ? (
               <p data-cy="noPeopleMessage">
                 There are no people on the server
