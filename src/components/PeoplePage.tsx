@@ -4,12 +4,13 @@ import { NavLink, useParams } from 'react-router-dom';
 import { getPeople } from '../api';
 import { Person } from '../types';
 import { Loader } from './Loader';
+import { PersonLink } from './PersonLink';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<Person[]>();
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const { slug = '' } = useParams();
+  const { slug } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,9 +31,13 @@ export const PeoplePage: React.FC = () => {
     );
   }
 
-  if (people?.length === 0) {
+  if (!people.length && !isLoading) {
     return <p data-cy="noPeopleMessage">There are no people on the server</p>;
   }
+
+  const getPersonByParent = (parent: string | null) => {
+    return people.find((person) => person.name === parent);
+  };
 
   return (
     <>
@@ -40,7 +45,6 @@ export const PeoplePage: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-
           {isLoading ? (
             <>
               <Loader />
@@ -83,8 +87,14 @@ export const PeoplePage: React.FC = () => {
                     <td>{person.sex}</td>
                     <td>{person.born}</td>
                     <td>{person.died}</td>
-                    <td>{person.fatherName ? person.fatherName : '-'}</td>
-                    <td>{person.motherName ? person.motherName : '-'}</td>
+                    <PersonLink
+                      parent={person.motherName}
+                      getPersonByParent={getPersonByParent}
+                    />
+                    <PersonLink
+                      parent={person.fatherName}
+                      getPersonByParent={getPersonByParent}
+                    />
                   </tr>
                 ))}
               </tbody>
