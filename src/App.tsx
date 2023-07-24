@@ -6,6 +6,7 @@ import { PeoplePage } from './Pages/PeoplePage';
 import { NotFoundPage } from './Pages/NotFoundPage';
 
 import './App.scss';
+import React from 'react';
 
 export const App = () => (
   <div data-cy="app">

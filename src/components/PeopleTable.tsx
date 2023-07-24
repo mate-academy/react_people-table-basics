@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Person } from '../types';
 import { Loader } from './Loader';
-import { PersonItem } from '../components/PersonItem';
+import { PersonItem } from './PersonItem';
 
 type Props = {
   people: Person[];
