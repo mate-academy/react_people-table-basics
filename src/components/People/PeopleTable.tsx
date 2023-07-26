@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { Loader } from '../components/Loader';
+import { Loader } from '../Loader';
 
-import { getPeople } from '../api';
-import { Person } from '../types';
+import { getPeople } from '../../api';
+import { Person } from '../../types';
 
 type Props = {
   selectedPerson: string | null,
@@ -16,7 +16,7 @@ enum ERROR {
   OTHERERROR,
 }
 
-export const People: React.FC<Props> = ({ selectedPerson }) => {
+export const PeopleTable: React.FC<Props> = ({ selectedPerson }) => {
   const [error, setError] = useState<ERROR>(ERROR.NONE);
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);

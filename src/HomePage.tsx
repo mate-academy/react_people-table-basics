@@ -10,7 +10,7 @@ const getLinkClass = (
   'has-background-grey-lighter': isActive,
 });
 
-export const Page = () => (
+export const HomePage = () => (
   <div data-cy="app">
     <nav
       className="navbar is-light is-fixed-top is-mobile has-shadow"

@@ -7,21 +7,20 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
-import { Page } from './Page';
-import { HomePage } from './pages/HomePage';
+import { HomePage } from './HomePage';
 import { PeoplePage } from './pages/PeoplePage';
-import { ErrorPage } from './pages/ErrorPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export const App = () => (
   <Router>
     <Routes>
-      <Route path="/" element={<Page />}>
-        <Route index element={<HomePage />} />
+      <Route path="/" element={<HomePage />}>
+        <Route index element={<h1 className="title">Home Page</h1>} />
         <Route path="home" element={<Navigate to="/" replace />} />
         <Route path="people" element={<PeoplePage />}>
           <Route path=":selectedPerson" element={<PeoplePage />} />
         </Route>
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   </Router>
