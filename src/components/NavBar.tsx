@@ -12,13 +12,13 @@ function NavBar() {
       <div className="container">
         <div className="navbar-brand">
           <NavLink
+            to="/"
             className={({ isActive }) => classNames(
               'navbar-item',
               {
                 'has-background-grey-lighter': isActive,
               },
             )}
-            to="/"
           >
             Home
           </NavLink>
