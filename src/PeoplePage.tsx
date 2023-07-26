@@ -13,7 +13,17 @@ export const PeoplePage = () => {
       const fetchData = async () => {
         const usersFromServer = await getPeople();
 
-        setUsers(usersFromServer);
+        const usersWithParents = usersFromServer.map(user => ({
+          ...user,
+          mother: usersFromServer.find(
+            findUser => user.motherName === findUser.name || null,
+          ),
+          father: usersFromServer.find(
+            findUser => user.fatherName === findUser.name || null,
+          ),
+        }));
+
+        setUsers(usersWithParents);
       };
 
       fetchData();
