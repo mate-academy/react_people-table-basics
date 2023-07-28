@@ -1,10 +1,11 @@
+import React from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { App } from './App';
 import { ErrorPage } from './pages/ErrorPage/ErrorPage';
 import { HomePage } from './pages/HomePage/HomePage';
 import { PeoplePage } from './pages/PeoplePage/PeoplePage';
 
-export const Root = () => (
+export const Root: React.FC = () => (
   <Router>
     <Routes>
       <Route path="/" element={<App />}>

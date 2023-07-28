@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 import { Loader } from '../../components/Loader';
@@ -6,7 +6,7 @@ import { Person } from '../../types/Person';
 import { getPeople } from '../../api';
 import { PersonItem } from '../../components/PersonItem/PersonItem';
 
-const getPreparedPeople = (people: Person[]) => {
+const getPreparedPeople = (people: Person[]): Person[] => {
   const preparedPeople = people.map(person => {
     return {
       ...person,
@@ -18,7 +18,7 @@ const getPreparedPeople = (people: Person[]) => {
   return preparedPeople;
 };
 
-export const PeoplePage = () => {
+export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
