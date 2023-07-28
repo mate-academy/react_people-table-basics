@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import { Loader } from "../../components/Loader";
-import { Person } from "../../types/Person";
-import { getPeople } from "../../api";
-import { PersonItem } from "../../components/PersonItem/PersonItem";
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+import { Loader } from '../../components/Loader';
+import { Person } from '../../types/Person';
+import { getPeople } from '../../api';
+import { PersonItem } from '../../components/PersonItem/PersonItem';
 
 const getPreparedPeople = (people: Person[]) => {
   const preparedPeople = people.map(person => {
@@ -12,7 +12,7 @@ const getPreparedPeople = (people: Person[]) => {
       ...person,
       father: people.find(p => p.name === person.fatherName),
       mother: people.find(p => p.name === person.motherName),
-    }
+    };
   });
 
   return preparedPeople;
@@ -73,10 +73,10 @@ export const PeoplePage = () => {
 
               <tbody>
                 {people.map(person => (
-                  <PersonItem 
+                  <PersonItem
                     person={person}
                     slug={slug}
-                    key={person.slug} 
+                    key={person.slug}
                   />
                 ))}
               </tbody>
@@ -86,4 +86,4 @@ export const PeoplePage = () => {
       </div>
     </>
   );
-}
+};
