@@ -1,0 +1,72 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Person } from '../../types';
+
+type Props = {
+  person: Person
+  onSelectPerson: (slug: string) => void
+  isSelected: boolean
+  motherSlug?: string
+  fatherSlug?: string
+};
+
+export const Row: React.FC<Props> = ({
+  person,
+  onSelectPerson,
+  isSelected,
+  motherSlug,
+  fatherSlug,
+}) => {
+  const {
+    slug, motherName, sex, born, died, name, fatherName,
+  } = person;
+
+  return (
+    <tr
+      data-cy="person"
+      className={
+        isSelected ? 'has-background-warning' : undefined
+      }
+    >
+
+      <td>
+        <Link
+          onClick={() => onSelectPerson(slug)}
+          to={`#/people/:${person.slug}`}
+          className={motherSlug ? 'has-text-danger' : undefined}
+        >
+          {name}
+        </Link>
+      </td>
+
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>
+        {motherSlug
+          ? (
+            <Link
+              to={`#/:${person.slug}`}
+              className={motherSlug ? 'has-text-danger' : undefined}
+              onClick={() => motherSlug && onSelectPerson(motherSlug)}
+            >
+              {motherName}
+            </Link>
+          )
+          : motherName || '-'}
+      </td>
+      <td>
+        {fatherSlug
+          ? (
+            <Link
+              to={`#/people/:${person.slug}`}
+              onClick={() => fatherSlug && onSelectPerson(fatherSlug)}
+            >
+              {fatherName}
+            </Link>
+          )
+          : fatherName || '-'}
+      </td>
+    </tr>
+  );
+};
