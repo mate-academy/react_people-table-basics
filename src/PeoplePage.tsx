@@ -5,7 +5,7 @@ import { Person } from './types';
 import { PersonLink } from './PersonLink';
 
 export const PeoplePage = () => {
-  const [users, setUsers] = useState<Person[] | null>(null);
+  const [users, setUsers] = useState<Person[]>([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -16,10 +16,10 @@ export const PeoplePage = () => {
         const usersWithParents = usersFromServer.map(user => ({
           ...user,
           mother: usersFromServer.find(
-            findUser => user.motherName === findUser.name || null,
+            findUser => user.motherName === findUser.name,
           ),
           father: usersFromServer.find(
-            findUser => user.fatherName === findUser.name || null,
+            findUser => user.fatherName === findUser.name,
           ),
         }));
 
@@ -71,9 +71,7 @@ export const PeoplePage = () => {
 
               <tbody>
                 {users.map((user) => (
-                  <>
-                    <PersonLink user={user} key={user.slug} />
-                  </>
+                  <PersonLink user={user} key={user.slug} />
                 ))}
               </tbody>
             </table>

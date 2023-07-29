@@ -34,12 +34,12 @@ export const PersonLink:React.FC<Props> = ({ user }) => {
             to={`/people/${user.mother.slug}`}
             className={classNames({ 'has-text-danger': user.motherName })}
           >
-            {user.motherName ? user.motherName : '-'}
+            {user.motherName || '-'}
           </Link>
         </td>
       ) : (
         <td>
-          {user.motherName ? user.motherName : '-'}
+          {user.motherName || '-'}
         </td>
       )}
 
