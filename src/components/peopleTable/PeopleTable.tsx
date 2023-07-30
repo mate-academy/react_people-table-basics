@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
-import { Person } from '../types';
+import './PeopleTable.scss';
+import { Person } from '../../types';
 
-import { Loader } from './Loader';
-import { PersonLink } from './PersonLink';
+import { Loader } from '../Loader';
+import { PersonLink } from '../PersonLink';
 
 type Props = {
   people: Person[] | null;
@@ -18,25 +19,21 @@ export const PeopleTable: React.FC<Props> = ({
 }) => {
   const { selectedSlug } = useParams();
 
-  const findMother = (person: Person) => {
-    if (!people) {
-      return null;
+  const findParent = (person: Person, parentSex: string) => {
+    if (people && parentSex === 'f') {
+      return people.find((mother) => mother.name === person.motherName);
     }
 
-    return people.find((mother) => mother.name === person.motherName);
-  };
-
-  const findFather = (person: Person) => {
-    if (!people) {
-      return null;
+    if (people && parentSex === 'm') {
+      return people.find((father) => father.name === person.fatherName);
     }
 
-    return people.find((father) => father.name === person.fatherName);
+    return null;
   };
 
   return (
     <div className="block">
-      <div className="box table-container">
+      <div className="box table-container has-min-height">
         {isLoading && (
           <Loader />
         )}
@@ -47,7 +44,7 @@ export const PeopleTable: React.FC<Props> = ({
           </p>
         ) : (
           <>
-            {!isLoading && !people?.length && (
+            {!isLoading && people?.length === 0 && (
               <p data-cy="noPeopleMessage">
                 There are no people on the server
               </p>
@@ -70,8 +67,8 @@ export const PeopleTable: React.FC<Props> = ({
 
                 <tbody>
                   {people.map(person => {
-                    const mother = findMother(person);
-                    const father = findFather(person);
+                    const mother = findParent(person, 'f');
+                    const father = findParent(person, 'm');
 
                     const {
                       sex,
