@@ -10,7 +10,11 @@ type Props = {
   people: Person[];
 };
 
-export const PersonDetails: React.FC<Props> = ({ person, isSelected, people }) => {
+export const PersonDetails: React.FC<Props> = ({
+  person,
+  isSelected,
+  people,
+}) => {
   const {
     motherName,
     fatherName,
