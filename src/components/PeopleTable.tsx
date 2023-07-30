@@ -6,7 +6,7 @@ import { Loader } from './Loader';
 import { PersonLink } from './PersonLink';
 
 type Props = {
-  people: Person[];
+  people: Person[] | null;
   isLoading: boolean;
   isError: boolean
 };
@@ -18,11 +18,21 @@ export const PeopleTable: React.FC<Props> = ({
 }) => {
   const { selectedSlug } = useParams();
 
-  const findMother = (person: Person) => people
-    .find((mother) => mother.name === person.motherName) || null;
+  const findMother = (person: Person) => {
+    if (!people) {
+      return null;
+    }
 
-  const findFather = (person: Person) => people
-    .find((father) => father.name === person.fatherName) || null;
+    return people.find((mother) => mother.name === person.motherName);
+  };
+
+  const findFather = (person: Person) => {
+    if (!people) {
+      return null;
+    }
+
+    return people.find((father) => father.name === person.fatherName);
+  };
 
   return (
     <div className="block">
@@ -37,12 +47,12 @@ export const PeopleTable: React.FC<Props> = ({
           </p>
         ) : (
           <>
-            {!isLoading && !people.length && (
+            {!isLoading && !people?.length && (
               <p data-cy="noPeopleMessage">
                 There are no people on the server
               </p>
             )}
-            {!isLoading && !!people.length && (
+            {!isLoading && !!people?.length && (
               <table
                 data-cy="peopleTable"
                 className="table is-striped is-hoverable is-narrow is-fullwidth"
