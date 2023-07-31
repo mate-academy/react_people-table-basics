@@ -3,9 +3,9 @@ import './App.scss';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const getLinkClass = ({ isActive }: { isActive: boolean }) => {
-  classNames('navbar-item', {
+  return classNames('navbar-item', {
     'has-background-grey-lighter': isActive,
-  })
+  });
 };
 
 export const App = () => (
