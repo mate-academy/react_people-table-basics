@@ -12,7 +12,7 @@ export const Navbar = () => (
       <div className="navbar-brand">
         <NavbarLink page={Pages.Home} />
 
-        <NavbarLink page={Pages.PEOPLE} />
+        <NavbarLink page={Pages.People} />
       </div>
     </div>
   </nav>

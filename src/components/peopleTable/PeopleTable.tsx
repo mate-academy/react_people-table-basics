@@ -1,10 +1,12 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
-import './PeopleTable.scss';
-import { Person } from '../../types';
 
+import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PersonLink } from '../PersonLink';
+
+import './PeopleTable.scss';
 
 type Props = {
   people: Person[] | null;
@@ -18,18 +20,6 @@ export const PeopleTable: React.FC<Props> = ({
   isError,
 }) => {
   const { selectedSlug } = useParams();
-
-  const findParent = (person: Person, parentSex: string) => {
-    if (people && parentSex === 'f') {
-      return people.find((mother) => mother.name === person.motherName);
-    }
-
-    if (people && parentSex === 'm') {
-      return people.find((father) => father.name === person.fatherName);
-    }
-
-    return null;
-  };
 
   return (
     <div className="block">
@@ -67,9 +57,6 @@ export const PeopleTable: React.FC<Props> = ({
 
                 <tbody>
                   {people.map(person => {
-                    const mother = findParent(person, 'f');
-                    const father = findParent(person, 'm');
-
                     const {
                       sex,
                       born,
@@ -77,6 +64,8 @@ export const PeopleTable: React.FC<Props> = ({
                       slug,
                       motherName,
                       fatherName,
+                      mother,
+                      father,
                     } = person;
 
                     return (
