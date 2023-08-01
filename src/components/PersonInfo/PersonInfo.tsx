@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
@@ -47,8 +47,6 @@ export const PersonInfo:React.FC<Props> = ({ person, findParent }) => {
           isDad
         )}
       </td>
-
-      <Outlet />
     </tr>
   );
 };

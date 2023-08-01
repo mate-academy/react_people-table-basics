@@ -1,11 +1,5 @@
-import { Outlet } from 'react-router-dom';
-
 export const NotFoundPage = () => {
   return (
-    <>
-      <h1 className="title">Page not found</h1>
-
-      <Outlet />
-    </>
+    <h1 className="title">Page not found</h1>
   );
 };
