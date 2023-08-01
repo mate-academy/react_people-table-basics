@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import { Person } from '../../types';
 
 type Props = {
@@ -18,15 +19,19 @@ export const Row: React.FC<Props> = ({
   fatherSlug,
 }) => {
   const {
-    slug, motherName, sex, born, died, name, fatherName,
+    slug,
+    motherName,
+    sex,
+    born,
+    died,
+    name,
+    fatherName,
   } = person;
 
   return (
     <tr
       data-cy="person"
-      className={
-        isSelected ? 'has-background-warning' : undefined
-      }
+      className={classNames({ 'has-background-warning': isSelected })}
     >
 
       <td>
@@ -59,7 +64,7 @@ export const Row: React.FC<Props> = ({
         {fatherSlug
           ? (
             <Link
-              to={`#/people/:${person.slug}`}
+              to={`#/:${person.slug}`}
               onClick={() => fatherSlug && onSelectPerson(fatherSlug)}
             >
               {fatherName}

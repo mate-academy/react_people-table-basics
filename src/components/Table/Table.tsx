@@ -26,9 +26,7 @@ export const Table: React.FC<Props> = ({
       return undefined;
     }
 
-    const personMother = persons.find(person => person.name === fullName);
-
-    return personMother?.slug;
+    return persons.find(({ name }) => name === fullName)?.slug;
   };
 
   const getPersonsFatherSlug = (fullName: string | null) => {
@@ -43,9 +41,7 @@ export const Table: React.FC<Props> = ({
       return undefined;
     }
 
-    const personFather = persons.find(person => person.name === fullName);
-
-    return personFather?.slug;
+    return persons.find(({ name }) => name === fullName)?.slug;
   };
 
   return (
@@ -73,7 +69,7 @@ export const Table: React.FC<Props> = ({
             isSelected={person.slug === selectedPersonSlug}
             motherSlug={getPersonsMotherSlug(person.motherName)}
             fatherSlug={getPersonsFatherSlug(person.fatherName)}
-            onSelectPerson={(slug) => setSelectedPersonSlug(slug)}
+            onSelectPerson={setSelectedPersonSlug}
           />
         ))}
 
