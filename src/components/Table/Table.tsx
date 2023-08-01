@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Person } from '../../types';
 import { Row } from '../Row/Row';
 
@@ -11,8 +11,9 @@ export const Table: React.FC<Props> = ({
 }) => {
   const [selectedPersonSlug, setSelectedPersonSlug] = useState<string>();
 
-  const personNamesFromSlug = persons.map(currPerson => currPerson.slug
-    .toLowerCase().split('-').join('').slice(0, -4));
+  const personNamesFromSlug = useMemo(() => persons
+    .map(currPerson => currPerson.slug
+      .toLowerCase().split('-').join('').slice(0, -4)), [persons]);
 
   const getPersonsMotherSlug = (fullName: string | null) => {
     if (!fullName) {

@@ -17,8 +17,10 @@ export const App = () => {
 
     getPeople().then(fatchData => {
       setData(fatchData);
-    }).catch(() => {
-      if (data.length === 0) {
+
+      return fatchData;
+    }).then(fatchData => {
+      if (fatchData.length === 0) {
         setError(ErrorTypes.NotData);
       }
 
