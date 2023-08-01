@@ -22,31 +22,29 @@ export const PersonItem: React.FC<Props> = ({ person }) => {
   const { slug } = useParams();
 
   return (
-    <>
-      <tr
-        data-cy="person"
-        className={classNames(
-          { 'has-background-warning': slug === person.slug },
-        )}
-      >
-        <td>
-          <PersonLink person={person} />
-        </td>
+    <tr
+      data-cy="person"
+      className={classNames(
+        { 'has-background-warning': slug === person.slug },
+      )}
+    >
+      <td>
+        <PersonLink person={person} />
+      </td>
 
-        <td>{sex}</td>
-        <td>{born}</td>
-        <td>{died}</td>
-        <td>
-          {mother ? <PersonLink person={mother} /> : (
-            motherName || '-'
-          )}
-        </td>
-        <td>
-          {father ? <PersonLink person={father} /> : (
-            fatherName || '-'
-          )}
-        </td>
-      </tr>
-    </>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>
+        {mother ? <PersonLink person={mother} /> : (
+          motherName || '-'
+        )}
+      </td>
+      <td>
+        {father ? <PersonLink person={father} /> : (
+          fatherName || '-'
+        )}
+      </td>
+    </tr>
   );
 };
