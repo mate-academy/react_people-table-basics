@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const PeopleList: React.FC<Props> = ({ people }) => {
-  const { slug } = useParams();
+  const { personSlug } = useParams();
 
   return (
     <table
@@ -28,30 +28,36 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <tr
-            key={person.slug}
-            data-cy="person"
-            className={classNames({
-              'has-background-warning': slug === person.slug,
-            })}
-          >
-            <PersonLink person={person} />
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
-            {person.mother ? (
-              <PersonLink person={person.mother} />
-            ) : (
-              <td>{person.motherName || '-'}</td>
-            )}
-            {person.father ? (
-              <PersonLink person={person.father} />
-            ) : (
-              <td>{person.fatherName || '-'}</td>
-            )}
-          </tr>
-        ))}
+        {people.map(person => {
+          const {
+            slug, sex, born, died, mother, motherName, father, fatherName,
+          } = person;
+
+          return (
+            <tr
+              key={slug}
+              data-cy="person"
+              className={classNames({
+                'has-background-warning': personSlug === slug,
+              })}
+            >
+              <PersonLink person={person} />
+              <td>{sex}</td>
+              <td>{born}</td>
+              <td>{died}</td>
+              {mother ? (
+                <PersonLink person={mother} />
+              ) : (
+                <td>{motherName || '-'}</td>
+              )}
+              {father ? (
+                <PersonLink person={father} />
+              ) : (
+                <td>{fatherName || '-'}</td>
+              )}
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

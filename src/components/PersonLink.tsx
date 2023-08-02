@@ -7,15 +7,17 @@ type Props = {
   person: Person;
 };
 
-export const PersonLink: React.FC<Props> = ({ person }) => (
+export const PersonLink: React.FC<Props> = ({
+  person: { sex, name, slug },
+}) => (
   <td>
     <Link
       className={cn({
-        'has-text-danger': person.sex === 'f',
+        'has-text-danger': sex === 'f',
       })}
-      to={`/people/${person?.slug}`}
+      to={`/people/${slug}`}
     >
-      {person.name}
+      {name}
     </Link>
   </td>
 );

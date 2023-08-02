@@ -16,7 +16,7 @@ export const Root: React.FC = () => (
 
         <Route path="people">
           <Route index element={<PeoplePage />} />
-          <Route path=":slug" element={<PeoplePage />} />
+          <Route path=":personSlug" element={<PeoplePage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />
