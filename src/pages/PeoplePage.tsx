@@ -10,7 +10,7 @@ const getParent = (personList: Person[], parentName: string | null) => {
   return personList.find(({ name }) => name === parentName);
 };
 
-export const PeoplePage = () => {
+export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setisError] = useState(false);

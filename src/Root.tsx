@@ -7,7 +7,7 @@ import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
-export const Root = () => (
+export const Root: React.FC = () => (
   <Router>
     <Routes>
       <Route path="/" element={<App />}>
