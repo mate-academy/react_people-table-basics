@@ -19,7 +19,7 @@ export const App = () => {
       setData(fatchData);
 
       return fatchData;
-    }).then(fatchData => {
+    }).then((fatchData) => {
       if (fatchData.length === 0) {
         setError(ErrorTypes.NotData);
       }
