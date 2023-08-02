@@ -26,23 +26,19 @@ export const BlockPeople: React.FC<Props> = ({
         <div className="box table-container">
           {loading && <Loader />}
 
-          {
-            error === ErrorTypes.Api
+          {error === ErrorTypes.Api
             && (
               <p data-cy="peopleLoadingError" className="has-text-danger">
                 {ErrorTypes.Api}
               </p>
-            )
-          }
+            )}
 
-          {
-            error === ErrorTypes.NotData
+          {error === ErrorTypes.NotData
             && (
               <p data-cy="noPeopleMessage">
                 {ErrorTypes.NotData}
               </p>
-            )
-          }
+            )}
 
           <Table
             persons={persons}

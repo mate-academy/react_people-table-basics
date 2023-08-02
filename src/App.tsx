@@ -18,12 +18,12 @@ export const App = () => {
     getPeople().then(fatchData => {
       setData(fatchData);
 
-      return fatchData;
-    }).then((fatchData) => {
-      if (fatchData.length === 0) {
+      if (data.length === 0) {
         setError(ErrorTypes.NotData);
       }
 
+      return fatchData;
+    }).catch(() => {
       if (!data) {
         setError(ErrorTypes.Api);
       }

@@ -38,7 +38,7 @@ export const Row: React.FC<Props> = ({
         <Link
           onClick={() => onSelectPerson(slug)}
           to={`#/people/:${person.slug}`}
-          className={motherSlug ? 'has-text-danger' : undefined}
+          className={classNames({ 'has-text-danger': motherSlug })}
         >
           {name}
         </Link>
@@ -52,7 +52,7 @@ export const Row: React.FC<Props> = ({
           ? (
             <Link
               to={`#/:${person.slug}`}
-              className={motherSlug ? 'has-text-danger' : undefined}
+              className={classNames({ 'has-text-danger': motherSlug })}
               onClick={() => motherSlug && onSelectPerson(motherSlug)}
             >
               {motherName}
