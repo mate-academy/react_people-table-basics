@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const findPerson = (name: string) => {
+  const findPerson = (name: string | null) => {
     return people.find(person => person.name === name);
   };
 

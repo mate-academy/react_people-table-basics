@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import classNames from 'classnames';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Person } from '../types';
 
 type Props = {
@@ -19,48 +19,50 @@ export const PeopleLink: React.FC<Props> = ({ person, onFindPerson }) => {
       })}
     >
       <td>
-        <a
-          href={`#/people/${person.slug}`}
+        <Link
+          to={`${person.slug}`}
           className={classNames({
             'has-text-danger': person.sex === 'f',
           })}
         >
           {person.name}
-        </a>
+        </Link>
       </td>
 
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
       <td>
-        {person.motherName ? (
-          onFindPerson(person.motherName) ? (
-            <a
-              className="has-text-danger"
-              href={`#/people/${
-                onFindPerson(person.motherName)?.slug || ''
-              }`}
-            >
-              {person.motherName}
-            </a>
-          ) : (
-            person.motherName
-          )
-        ) : (
-          '-'
+        {person.motherName !== null
+        && onFindPerson(person.motherName) !== undefined && (
+          <Link
+            className="has-text-danger"
+            to={`${
+              onFindPerson(person.motherName)?.slug || ''
+            }`}
+          >
+            {person.motherName}
+          </Link>
         )}
+
+        {person.motherName !== null
+        && onFindPerson(person.motherName) === undefined && (
+          `${person.motherName}`
+        )}
+
+        {!person.motherName && '-'}
       </td>
       <td>
         {person.fatherName ? (
           onFindPerson(person.fatherName) ? (
-            <a
-              href={`#/people/${
+            <Link
+              to={`${
                 onFindPerson(person.fatherName)?.slug
                 || ''
               }`}
             >
               {person.fatherName}
-            </a>
+            </Link>
           ) : (
             person.fatherName
           )
