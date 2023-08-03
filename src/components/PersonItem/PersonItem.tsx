@@ -5,12 +5,12 @@ import { Person } from '../../types/Person';
 
 interface Props {
   person: Person,
-  people: Person[],
+  findPerson: (name: string | null) => Person | undefined,
 }
 
 export const PersonItem: React.FC<Props> = ({
   person,
-  people,
+  findPerson,
 }) => {
   const {
     name,
@@ -24,13 +24,9 @@ export const PersonItem: React.FC<Props> = ({
 
   const { personSlug } = useParams();
 
-  const mother = people.find(personItem => {
-    return personItem.name === motherName;
-  });
+  const mother = findPerson(motherName);
 
-  const father = people.find(personItem => {
-    return personItem.name === fatherName;
-  });
+  const father = findPerson(fatherName);
 
   return (
     <tr

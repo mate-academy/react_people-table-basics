@@ -30,26 +30,19 @@ export const PeoplePage: React.FC = () => {
   );
 
   const renderingBlock = () => {
-    switch (true) {
-      case (isLoading): {
-        return <Loader />;
-      }
-
-      case (error): {
-        return ErrorBlock;
-      }
-
-      case (!people.length): {
-        return EmptyPeopleBlock;
-      }
-
-      case (people.length > 0): {
-        return <People people={people} />;
-      }
-
-      default:
-        return <></>;
+    if (isLoading) {
+      return <Loader />;
     }
+
+    if (error) {
+      return ErrorBlock;
+    }
+
+    if (!people.length) {
+      return EmptyPeopleBlock;
+    }
+
+    return <People people={people} />;
   };
 
   return (

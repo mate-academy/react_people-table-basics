@@ -9,6 +9,16 @@ interface Props {
 export const People: React.FC<Props> = ({
   people,
 }) => {
+  const findPerson = (name: string | null) => {
+    if (!name) {
+      return undefined;
+    }
+
+    return people.find(personItem => {
+      return personItem.name === name;
+    });
+  };
+
   return (
     <table
       data-cy="peopleTable"
@@ -25,13 +35,15 @@ export const People: React.FC<Props> = ({
         </tr>
       </thead>
 
-      {people.map(person => (
-        <PersonItem
-          person={person}
-          people={people}
-          key={person.slug}
-        />
-      ))}
+      <tbody>
+        {people.map(person => (
+          <PersonItem
+            person={person}
+            key={person.slug}
+            findPerson={findPerson}
+          />
+        ))}
+      </tbody>
     </table>
   );
 };
