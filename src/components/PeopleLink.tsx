@@ -34,7 +34,7 @@ export const PeopleLink: React.FC<Props> = ({ person, onFindPerson }) => {
       <td>{person.died}</td>
       <td>
         {person.motherName !== null
-        && !onFindPerson(person.motherName)
+        && onFindPerson(person.motherName) !== undefined
         && (
           <Link
             className="has-text-danger"
@@ -55,10 +55,9 @@ export const PeopleLink: React.FC<Props> = ({ person, onFindPerson }) => {
       </td>
       <td>
         {person.fatherName !== null
-        && !onFindPerson(person.fatherName)
+        && onFindPerson(person.fatherName) !== undefined
         && (
           <Link
-            className="has-text-danger"
             to={`${
               onFindPerson(person.fatherName)?.slug || ''
             }`}
