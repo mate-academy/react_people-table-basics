@@ -20,6 +20,36 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
     human.name === person.fatherName
   ));
 
+  const checkParentsObject = (
+    name: string | null,
+    parent: Person | undefined,
+  ) => {
+    if (!name) {
+      return (
+        <p>-</p>
+      );
+    }
+
+    if (parent) {
+      return (
+        <a
+          href={`#/people/${parent.slug}`}
+          className={classNames({
+            'has-text-danger': (parent.sex === 'f'),
+          })}
+        >
+          {name}
+        </a>
+      );
+    }
+
+    return (
+      <p>
+        {name}
+      </p>
+    );
+  };
+
   return (
     <tr
       data-cy="person"
@@ -45,44 +75,11 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
       <td>{person.died}</td>
 
       <td>
-        {!person.motherName && (
-          <p>-</p>
-        )}
-
-        {person.motherName && (
-          mother ? (
-            <a
-              className="has-text-danger"
-              href={`#/people/${mother.slug}`}
-            >
-              {person.motherName}
-            </a>
-          ) : (
-            <p>
-              {person.motherName}
-            </p>
-          )
-        )}
+        {checkParentsObject(person.motherName, mother)}
       </td>
 
       <td>
-        {!person.fatherName && (
-          <p>-</p>
-        )}
-
-        {person.fatherName && (
-          father ? (
-            <a
-              href={`#/people/${father.slug}`}
-            >
-              {person.fatherName}
-            </a>
-          ) : (
-            <p>
-              {person.fatherName}
-            </p>
-          )
-        )}
+        {checkParentsObject(person.fatherName, father)}
       </td>
     </tr>
   );
