@@ -18,14 +18,14 @@ export const App = () => {
     getPeople().then(fatchData => {
       setData(fatchData);
 
-      if (data.length === 0) {
-        setError(ErrorTypes.NotData);
-      }
-
       return fatchData;
     }).catch(() => {
       if (!data) {
         setError(ErrorTypes.Api);
+      }
+
+      if (data.length === 0) {
+        setError(ErrorTypes.NotData);
       }
     }).finally(() => setIsLoading(false));
   }, []);
