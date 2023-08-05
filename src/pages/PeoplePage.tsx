@@ -2,9 +2,7 @@ import { useContext } from 'react';
 
 import { PeopleContext } from '../context/PeopleContext';
 
-import { Loader } from '../components/Loader';
-import { PersonList } from '../components/PersonList';
-import { ErrorNotification } from '../components/ErrorNotification';
+import { Loader, PersonList, ErrorNotification } from '../components';
 
 export const PeoplePage = () => {
   const { loading, errorMessage } = useContext(PeopleContext);
