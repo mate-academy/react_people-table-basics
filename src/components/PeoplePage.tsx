@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { getPeople } from '../api';
@@ -35,6 +35,10 @@ export const PeoplePage: React.FC = () => {
       })
       .finally(() => setIsLoading(false));
   }, []);
+
+  const memoizedPeopleWithParents = useMemo(
+    () => peopleWithParents(people), [people],
+  );
 
   return (
     <>
@@ -76,7 +80,7 @@ export const PeoplePage: React.FC = () => {
               </thead>
 
               <tbody>
-                {peopleWithParents(people).map((person) => (
+                {memoizedPeopleWithParents.map((person) => (
                   <tr
                     data-cy="person"
                     key={person.slug}
