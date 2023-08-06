@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import classNames from 'classnames';
 import { Link, useParams } from 'react-router-dom';
@@ -43,31 +44,39 @@ export const PersonLink: React.FC<Props> = ({ people, findPerson }) => {
       <td>{people.born}</td>
       <td>{people.died}</td>
       <td>
-        {motherObj ? (
-          <Link
-            className={classNames({
-              'has-text-danger': motherObj.sex === 'f',
-            })}
-            to={motherObj.slug}
-          >
-            {people.motherName || '-'}
-          </Link>
+        {people.motherName ? (
+          motherObj ? (
+            <Link
+              className={classNames({
+                'has-text-danger': motherObj.sex === 'f',
+              })}
+              to={motherObj.slug}
+            >
+              {people.motherName}
+            </Link>
+          ) : (
+            people.motherName
+          )
         ) : (
-          people.motherName || '-'
+          '-'
         )}
       </td>
       <td>
-        {fatherObj ? (
-          <Link
-            className={classNames({
-              'has-text-danger': fatherObj.sex === 'f',
-            })}
-            to={fatherObj.slug}
-          >
-            {people.fatherName || '-'}
-          </Link>
+        {people.fatherName ? (
+          fatherObj ? (
+            <Link
+              className={classNames({
+                'has-text-danger': fatherObj.sex === 'f',
+              })}
+              to={fatherObj.slug}
+            >
+              {people.fatherName || '-'}
+            </Link>
+          ) : (
+            people.fatherName || '-'
+          )
         ) : (
-          people.fatherName || '-'
+          '-'
         )}
       </td>
     </tr>
