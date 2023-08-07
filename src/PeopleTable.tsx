@@ -1,21 +1,11 @@
-import React from 'react';
 import { PersonItem } from './PersonItem';
 import { Person } from './types';
 
 type Props = {
   peoples: Person[],
-  error: boolean,
 };
 
-export const PeopleTable: React.FC<Props> = ({ peoples, error }) => {
-  if (error) {
-    return (
-      <p data-cy="peopleLoadingError" className="has-text-danger">
-        Something went wrong
-      </p>
-    );
-  }
-
+export const PeopleTable = ({ peoples }: Props) => {
   return (
     <table
       data-cy="peopleTable"

@@ -1,21 +1,17 @@
-import React, { memo, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { PeopleTable } from './PeopleTable';
 import { getPeople } from './api';
 import { Person } from './types';
 import { Loader } from './components/Loader';
-import { PeopleTable } from './PeopleTable';
 
-export const PeoplePage: React.FC = memo(() => {
+export const PeoplePage: FC = () => {
+  const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     getPeople()
-      .then((data) => {
-        setUsers(data);
-        setError(false);
-      })
+      .then(setUsers)
       .catch(() => {
         setError(true);
       })
@@ -39,13 +35,21 @@ export const PeoplePage: React.FC = memo(() => {
 
       <div className="block">
         <div className="box table-container">
-          {loading ? (
+          {loading && (
             <Loader />
-          ) : (
-            <PeopleTable peoples={preparedUsers} error={error} />
+          )}
+          {error && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          ) }
+          {!loading && !error && (
+            <PeopleTable
+              peoples={preparedUsers}
+            />
           )}
         </div>
       </div>
     </>
   );
-});
+};
