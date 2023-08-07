@@ -3,28 +3,14 @@ import { getPeople } from '../api';
 import { Person } from '../types';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
-
-const peopleWithParents = (people: Person[]): Person[] => {
-  return people.map(person => {
-    const mother = people.find(({ name }) => name === person.motherName);
-    const father = people.find(({ name }) => name === person.fatherName);
-
-    return ({
-      ...person,
-      mother,
-      father,
-    });
-  });
-};
+import { peopleWithParents } from '../utils/peopleWithParents';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-
     getPeople()
       .then(data => setPeople(peopleWithParents(data)))
       .catch(() => setError(true))

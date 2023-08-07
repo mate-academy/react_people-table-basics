@@ -1,9 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.scss';
 import { Navbar } from './components/Navbar';
-import { HomePage } from './pages/HomePage';
-import { PeoplePage } from './pages/PeoplePage';
-import { NotFoundPage } from './pages/NotFoundPage';
+import { HomePage, PeoplePage, NotFoundPage } from './pages';
 
 export const App = () => (
   <div data-cy="app">
