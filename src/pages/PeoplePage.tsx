@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Loader } from '../components/Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
@@ -18,11 +18,11 @@ export const PeoplePage: React.FC = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const preparedPeople = people.map((person) => ({
+  const preparedPeople = useMemo(() => people.map((person) => ({
     ...person,
     mother: people.find((p) => p.name === (person.motherName || '-')),
     father: people.find((p) => p.name === (person.fatherName || '-')),
-  }));
+  })), [people]);
 
   return (
     <>
