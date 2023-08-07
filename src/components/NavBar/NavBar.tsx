@@ -15,8 +15,20 @@ export const NavBar = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink to="/" className={getActiveLink}>Home</NavLink>
-          <NavLink to="/people" className={getActiveLink}>People</NavLink>
+          <NavLink
+            to="/"
+            className={getActiveLink}
+            replace
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/people"
+            className={getActiveLink}
+            replace
+          >
+            People
+          </NavLink>
         </div>
       </div>
     </nav>

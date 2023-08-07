@@ -6,14 +6,14 @@ import { getAll } from '../../utils/fetchClient';
 import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage = () => {
-  const [visiblePeople, setVisiblePeople] = useState<Person[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     getAll()
       .then((peopleFromServer) => {
-        setVisiblePeople(peopleFromServer);
+        setPeople(peopleFromServer);
       })
       .catch(() => {
         setError(true);
@@ -23,6 +23,15 @@ export const PeoplePage = () => {
       });
   }, []);
 
+  const visiblePeople = people.map(person => {
+    const newPerson = { ...person };
+
+    newPerson.mother = people.find(mother => mother.name === person.motherName);
+    newPerson.father = people.find(father => father.name === person.fatherName);
+
+    return newPerson;
+  });
+
   return (
     <main className="section">
       <div className="container">
@@ -30,25 +39,11 @@ export const PeoplePage = () => {
 
         <div className="block">
           <div className="box table-container">
-            {error
-              ? (
-                <p data-cy="peopleLoadingError" className="has-text-danger">
-                  Something went wrong
-                </p>
-              )
-              : (
-                loading
-                  ? <Loader />
-                  : visiblePeople.length === 0
-                    ? (
-                      <p data-cy="noPeopleMessage">
-                        There are no people on the server
-                      </p>
-                    )
-                    : (
-                      <PeopleTable people={visiblePeople} />
-                    )
-              )}
+            {loading ? (
+              <Loader />
+            ) : (
+              <PeopleTable people={visiblePeople} error={error} />
+            )}
           </div>
         </div>
       </div>

@@ -5,10 +5,19 @@ import { PersonLink } from '../Links/PersonLink';
 
 type Props = {
   people: Person[],
+  error: boolean,
 };
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
+export const PeopleTable: React.FC<Props> = ({ people, error }) => {
   const { slug } = useParams();
+
+  if (error) {
+    return (
+      <p data-cy="peopleLoadingError" className="has-text-danger">
+        Something went wrong
+      </p>
+    );
+  }
 
   return (
     <table
@@ -28,20 +37,25 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <tr
-            data-cy="person"
-            key={person.slug}
-            className={classNames(null, {
-              'has-background-warning': person.slug === slug,
-            })}
-          >
-            <PersonLink
-              person={person}
-              people={people}
-            />
-          </tr>
-        ))}
+        {people.length === 0
+          ? (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
+            </p>
+          )
+          : (
+            people.map(person => (
+              <tr
+                data-cy="person"
+                key={person.slug}
+                className={classNames(null, {
+                  'has-background-warning': person.slug === slug,
+                })}
+              >
+                <PersonLink person={person} />
+              </tr>
+            ))
+          )}
       </tbody>
     </table>
   );
