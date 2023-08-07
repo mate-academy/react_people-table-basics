@@ -3,22 +3,17 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import cn from 'classnames';
-import { useParams } from 'react-router-dom';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink';
+import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-  const { slug } = useParams();
-
   useEffect(() => {
-    setError('');
     getPeople()
       .then(setPeople)
       .catch(() => {
@@ -58,55 +53,7 @@ export const PeoplePage: React.FC = () => {
           )}
 
           {!isLoading && !error && preparedPeople.length !== 0 && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {preparedPeople.map(person => (
-                  <tr
-                    data-cy="person"
-                    key={person.slug}
-                    className={cn({
-                      'has-background-warning': person.slug === slug,
-                    })}
-                  >
-                    <PersonLink person={person} />
-                    <td>{person.sex}</td>
-                    <td>{person.born}</td>
-                    <td>{person.died}</td>
-                    {person.mother
-                      ? (
-                        <PersonLink person={person.mother} />
-                      ) : (
-                        <td>
-                          {person.motherName || '-'}
-                        </td>
-                      )}
-
-                    {person.father
-                      ? (
-                        <PersonLink person={person.father} />
-                      ) : (
-                        <td>
-                          {person.fatherName || '-'}
-                        </td>
-                      )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <PeopleTable people={preparedPeople} />
           )}
 
           {!isLoading && !error && !preparedPeople.length && (
