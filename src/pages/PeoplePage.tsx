@@ -3,6 +3,7 @@ import { Loader } from '../components/Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { PeopleTable } from '../components/PeopleTable';
+import { findPeopleFamily } from '../helpers/findPeopleFamilly';
 
 export const PeoplePage: React.FC = () => {
   const [peoples, setPeoples] = useState<Person[]>([]);
@@ -19,6 +20,8 @@ export const PeoplePage: React.FC = () => {
       .finally(() => setPeopleLoading(false));
   }, []);
 
+  const normalizePeoples = findPeopleFamily(peoples);
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -33,7 +36,11 @@ export const PeoplePage: React.FC = () => {
               {peopleError}
             </p>
           )}
-          {peopleLoading ? <Loader /> : <PeopleTable peoples={peoples} />}
+          {peopleLoading ? (
+            <Loader />
+          ) : (
+            <PeopleTable peoples={normalizePeoples} />
+          )}
         </div>
       </div>
     </>

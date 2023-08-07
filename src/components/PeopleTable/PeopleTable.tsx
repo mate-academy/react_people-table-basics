@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink';
+import { PersonTableRow } from '../PersonTableRow';
 
 type Props = {
   peoples: Person[];
 };
 
 export const PeopleTable: React.FC<Props> = ({ peoples }) => {
-  const findPerson = (name: string) => {
+  const findPerson = useCallback((name: string) => {
     return peoples.find((people) => people.name === name) || null;
-  };
+  }, []);
 
   return (
     <table
@@ -29,9 +29,9 @@ export const PeopleTable: React.FC<Props> = ({ peoples }) => {
 
       <tbody>
         {peoples.map((people) => (
-          <PersonLink
+          <PersonTableRow
             key={people.slug}
-            people={people}
+            person={people}
             findPerson={findPerson}
           />
         ))}
