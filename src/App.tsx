@@ -1,9 +1,9 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import './App.scss';
-import React from 'react';
 import { activeClass } from './utils/activeClass';
+import React from 'react';
 
-export const App = () => (
+export const App: React.FC = () => (
   <div data-cy="app">
     <nav
       data-cy="nav"

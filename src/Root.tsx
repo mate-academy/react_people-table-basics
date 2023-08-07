@@ -4,7 +4,6 @@ import {
   Routes,
   Navigate,
 } from 'react-router-dom';
-import React from 'react';
 import { App } from './App';
 import { PeoplePage } from './components/PeoplePage';
 

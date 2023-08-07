@@ -5,7 +5,7 @@ import { peopleWithParents } from '../utils/peopleWithParents';
 import { Loader } from './Loader/Loader';
 import { PersonTableRow } from './PesonTableRow';
 
-export const PeoplePage = () => {
+export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[] | []>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
