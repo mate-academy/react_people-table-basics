@@ -9,12 +9,14 @@ type Props = {
   slug: string | undefined;
 };
 
-const isLinkedPerson = useMemo((name: string, table: Person[]) => {
+const isLinkedPerson = useMemo(() => {
+  (name: string, table: Person[]) => {
   const foundPerson = table.find(person => person.name === name);
 
   return foundPerson
     ? <PersonLink person={foundPerson} />
     : name;
+  }
 }, [name, table]);
 
 export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
