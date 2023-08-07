@@ -61,7 +61,7 @@ export const PeoplePage: React.FC = () => {
               {noPeopleText}
             </p>
           ) : (
-            <PeopleTable 
+            <PeopleTable
               people={people}
               slug={slug}
             />

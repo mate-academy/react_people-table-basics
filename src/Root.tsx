@@ -1,5 +1,7 @@
 import React from 'react';
-import { HashRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import {
+  HashRouter as Router, Navigate, Route, Routes,
+} from 'react-router-dom';
 import { App } from './App';
 import { ErrorPage } from './pages/ErrorPage/ErrorPage';
 import { HomePage } from './pages/HomePage/HomePage';

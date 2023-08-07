@@ -1,11 +1,11 @@
-import React from "react";
-import { Person } from "../../types";
-import { PersonItem } from "../PersonItem/PersonItem";
+import React from 'react';
+import { Person } from '../../types';
+import { PersonItem } from '../PersonItem/PersonItem';
 
 type Props = {
   people: Person[];
   slug: string | undefined;
-}
+};
 
 export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
   return (
