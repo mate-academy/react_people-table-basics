@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import classNames from 'classnames';
 
 import { Person } from '../../types';
@@ -9,13 +9,13 @@ type Props = {
   slug: string | undefined;
 };
 
-const isLinkedPerson = (name: string, table: Person[]) => {
+const isLinkedPerson = useMemo((name: string, table: Person[]) => {
   const foundPerson = table.find(person => person.name === name);
 
   return foundPerson
     ? <PersonLink person={foundPerson} />
     : name;
-};
+}, [name, table]);
 
 export const PeopleTable: React.FC<Props> = ({ people, slug }) => {
   return (
