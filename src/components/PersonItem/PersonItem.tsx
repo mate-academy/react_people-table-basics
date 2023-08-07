@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import cn from 'classnames';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types/Person';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 interface Props {
   person: Person,
@@ -13,7 +14,6 @@ export const PersonItem: React.FC<Props> = ({
   findPerson,
 }) => {
   const {
-    name,
     sex,
     born,
     died,
@@ -23,10 +23,8 @@ export const PersonItem: React.FC<Props> = ({
   } = person;
 
   const { personSlug } = useParams();
-
-  const mother = findPerson(motherName);
-
-  const father = findPerson(fatherName);
+  const mother = useMemo(() => findPerson(motherName), []);
+  const father = useMemo(() => findPerson(fatherName), []);
 
   return (
     <tr
@@ -36,44 +34,26 @@ export const PersonItem: React.FC<Props> = ({
       })}
     >
       <td>
-        <Link
-          to={`/people/${slug}`}
-          className={cn({
-            'has-text-danger': sex === 'f',
-          })}
-        >
-          {name}
-        </Link>
+        <PersonLink person={person} />
       </td>
 
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
-      {mother ? (
-        <td>
-          <Link
-            to={`/people/${mother.slug}`}
-            className={cn({
-              'has-text-danger': mother.sex === 'f',
-            })}
-          >
-            {mother.name}
-          </Link>
-        </td>
-      ) : (
-        <td>{motherName || '-'}</td>
-      )}
-      {father ? (
-        <td>
-          <Link
-            to={`/people/${father.slug}`}
-          >
-            {father.name}
-          </Link>
-        </td>
-      ) : (
-        <td>{fatherName || '-'}</td>
-      )}
+      <td>
+        {mother ? (
+          <PersonLink person={mother} />
+        ) : (
+          (motherName || '-')
+        )}
+      </td>
+      <td>
+        {father ? (
+          <PersonLink person={father} />
+        ) : (
+          (fatherName || '-')
+        )}
+      </td>
     </tr>
   );
 };

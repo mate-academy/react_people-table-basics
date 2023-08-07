@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Person } from '../../types/Person';
 import { PersonItem } from '../PersonItem/PersonItem';
 
@@ -9,7 +9,7 @@ interface Props {
 export const People: React.FC<Props> = ({
   people,
 }) => {
-  const findPerson = (name: string | null) => {
+  const findPerson = useCallback((name: string | null) => {
     if (!name) {
       return undefined;
     }
@@ -17,7 +17,7 @@ export const People: React.FC<Props> = ({
     return people.find(personItem => {
       return personItem.name === name;
     });
-  };
+  }, []);
 
   return (
     <table
