@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Person } from '../../types';
-import { Loader } from '../Loader';
-import { PeopleTable } from '../PeopleTable/PeopleTable';
 import { getPeople } from '../../api';
+import { Loader } from '../Loader';
+import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [hasError, setHasError] = useState(false);
-  const [processing, setProcessing] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getPeople()
       .then(setPeople)
       .catch(() => setHasError(true))
-      .finally(() => setProcessing(false));
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -22,7 +22,7 @@ export const PeoplePage: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {processing && <Loader />}
+          {isLoading && <Loader />}
 
           {hasError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
@@ -30,7 +30,7 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {people.length === 0 && !hasError && !processing && (
+          {people.length === 0 && !hasError && !isLoading && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>

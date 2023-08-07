@@ -1,5 +1,5 @@
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink/PersonLink';
+import { PersonLink } from '../PersonLink';
 
 interface Props{
   people: Person[],

@@ -8,7 +8,7 @@ interface Props{
 }
 
 export const PersonLink: React.FC<Props> = ({ person, people }) => {
-  const { slug } = useParams();
+  const { slug } = useParams<{ slug: string }>();
 
   const motherInList = people.find(
     mother => person.motherName === mother.name,

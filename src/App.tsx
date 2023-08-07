@@ -1,12 +1,10 @@
-import {
-  NavLink, Navigate, Route, Routes,
-} from 'react-router-dom';
-import cn from 'classnames';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.scss';
-import { HomePage } from './components/HomePage/HomePage';
-import { PeoplePage } from './components/PeoplePage/PeoplePage';
-import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
+import { NavigationLink } from './components/NavigationLink';
+import { HomePage } from './components/HomePage';
+import { PeoplePage } from './components/PeoplePage';
+import { NotFoundPage } from './components/NotFoundPage';
 
 export const App = () => (
   <div data-cy="app">
@@ -18,23 +16,15 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink
-            to="/"
-            className={({ isActive }) => (
-              cn('navbar-item', { 'has-background-grey-lighter': isActive })
-            )}
-          >
-            Home
-          </NavLink>
+          <NavigationLink
+            path="/"
+            label="Home"
+          />
 
-          <NavLink
-            to="/people"
-            className={({ isActive }) => (
-              cn('navbar-item', { 'has-background-grey-lighter': isActive })
-            )}
-          >
-            People
-          </NavLink>
+          <NavigationLink
+            path="/people"
+            label="People"
+          />
         </div>
       </div>
     </nav>
