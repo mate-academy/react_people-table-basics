@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { PersonLink } from './PersonLink';
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const findParentForPeople = () => {
+  const findParentForPeople = useMemo(() => {
     const temp = people.map(person => ({
       ...person,
       mother: people.find(mother => mother.name === person.motherName) || null,
@@ -17,11 +17,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     }));
 
     return temp;
-  };
+  }, [people]);
 
   const { slug } = useParams();
 
-  const parentLinks = (
+  const parentLinks = useCallback((
     parentName: string | null,
     parentInfo: Person | null,
   ) => {
@@ -34,7 +34,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     }
 
     return parentName;
-  };
+  }, []);
 
   return (
     <>
@@ -59,7 +59,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
         </thead>
 
         <tbody>
-          {findParentForPeople().map(person => (
+          {findParentForPeople.map(person => (
             <tr
               key={person.slug}
               data-cy="person"
