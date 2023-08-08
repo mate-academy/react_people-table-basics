@@ -12,7 +12,7 @@ export const Root: React.FC = () => (
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<HomePage />} />
-        <Route path="home" element={<Navigate to="/" />} />
+        <Route path="home" element={<Navigate to="/" replace />} />
         <Route path="people" element={<PeoplePage />} />
         <Route path="people/:slug" element={<PeoplePage />} />
         <Route path="*" element={<ErrorPage />} />
