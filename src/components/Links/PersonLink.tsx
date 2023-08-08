@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import { useMemo } from 'react';
 import { Person } from '../../types';
 
 type Props = {
@@ -7,30 +8,30 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
-  const getMother = (user: Person) => {
-    return user.mother
+  const getMother = useMemo(() => {
+    return person.mother
       ? (
         <Link
-          to={`../${user.mother.slug}`}
+          to={`../${person.mother.slug}`}
           className="has-text-danger"
         >
-          {user.mother.name}
+          {person.mother.name}
         </Link>
       )
-      : user.motherName;
-  };
+      : person.motherName;
+  }, []);
 
-  const getFather = (user: Person) => {
-    return user.father
+  const getFather = useMemo(() => {
+    return person.father
       ? (
         <Link
-          to={`../${user.father.slug}`}
+          to={`../${person.father.slug}`}
         >
-          {user.father.name}
+          {person.father.name}
         </Link>
       )
-      : user.fatherName;
-  };
+      : person.fatherName;
+  }, []);
 
   return (
     <>
@@ -47,10 +48,10 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       <td>{person.born}</td>
       <td>{person.died}</td>
       <td>
-        {person.motherName ? getMother(person) : '-'}
+        {person.motherName ? getMother : '-'}
       </td>
       <td>
-        {person.fatherName ? getFather(person) : '-'}
+        {person.fatherName ? getFather : '-'}
       </td>
     </>
   );

@@ -24,12 +24,11 @@ export const PeoplePage = () => {
   }, []);
 
   const visiblePeople = people.map(person => {
-    const newPerson = { ...person };
-
-    newPerson.mother = people.find(mother => mother.name === person.motherName);
-    newPerson.father = people.find(father => father.name === person.fatherName);
-
-    return newPerson;
+    return {
+      ...person,
+      mother: people.find(mother => mother.name === person.motherName),
+      father: people.find(father => father.name === person.fatherName),
+    };
   });
 
   return (
