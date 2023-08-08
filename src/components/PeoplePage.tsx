@@ -10,13 +10,13 @@ export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState(false);
 
+  const { slug } = useParams();
+
   useEffect(() => {
     setLoading(true);
 
     getPeople()
-      .then((value) => {
-        setPeople(value);
-      })
+      .then(setPeople)
       .catch(() => {
         setError(true);
       })
@@ -24,7 +24,6 @@ export const PeoplePage: React.FC = () => {
         setLoading(false);
       });
   }, []);
-  const { slug } = useParams();
 
   const getMother = (person: Person) => {
     return people.find(
