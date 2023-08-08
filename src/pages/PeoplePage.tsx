@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Loader } from '../components/Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
@@ -20,7 +20,9 @@ export const PeoplePage: React.FC = () => {
       .finally(() => setPeopleLoading(false));
   }, []);
 
-  const normalizePeoples = findPeopleFamily(peoples);
+  const normalizePeoples = useMemo(() => {
+    findPeopleFamily(peoples);
+  }, [peoples]);
 
   return (
     <>
