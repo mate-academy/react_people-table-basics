@@ -1,12 +1,12 @@
 import { Outlet } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { PersonInfo } from '../PersonInfo/PersonInfo';
 
 export const PeoplePage = () => {
-  const [peopele, setPeople] = useState<Person[] | null>([]);
+  const [people, setPeople] = useState<Person[] | null>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -23,11 +23,11 @@ export const PeoplePage = () => {
       });
   }, []);
 
-  const hasPeople = !loading && !errorMessage && peopele?.length !== 0;
+  const hasPeople = !loading && !errorMessage && people?.length !== 0;
 
-  const findParent = (parentName: string | null) => {
-    return peopele?.find(person => person.name === parentName) || null;
-  };
+  const findParent = useMemo(() => (parentName: string | null) => {
+    return people?.find(person => person.name === parentName) || null;
+  }, [people]);
 
   return (
     <>
@@ -47,7 +47,7 @@ export const PeoplePage = () => {
                 </p>
               )}
 
-              {!loading && !errorMessage && peopele?.length === 0 && (
+              {!loading && !errorMessage && people?.length === 0 && (
                 <p data-cy="noPeopleMessage">
                   There are no people on the server
                 </p>
@@ -72,7 +72,7 @@ export const PeoplePage = () => {
                   </thead>
 
                   <tbody>
-                    {peopele?.map(person => (
+                    {people?.map(person => (
                       <PersonInfo
                         person={person}
                         key={person.slug}

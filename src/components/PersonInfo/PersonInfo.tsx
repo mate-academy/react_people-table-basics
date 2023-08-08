@@ -5,18 +5,18 @@ import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
-  person: Person | null,
+  person: Person,
   findParent: (name: string | null) => Person | null,
 };
 
 export const PersonInfo:React.FC<Props> = ({ person, findParent }) => {
   const { personId } = useParams();
 
-  const mother = findParent(person?.motherName ? person?.motherName : null);
-  const father = findParent(person?.fatherName ? person?.fatherName : null);
+  const mother = findParent(person?.motherName || null);
+  const father = findParent(person?.fatherName || null);
 
-  const isMom = person?.motherName || '-';
-  const isDad = person?.fatherName || '-';
+  const momName = person?.motherName || '-';
+  const dadName = person?.fatherName || '-';
 
   return (
     <tr
@@ -36,7 +36,7 @@ export const PersonInfo:React.FC<Props> = ({ person, findParent }) => {
         {mother ? (
           <PersonLink person={mother} />
         ) : (
-          isMom
+          momName
         )}
       </td>
 
@@ -44,7 +44,7 @@ export const PersonInfo:React.FC<Props> = ({ person, findParent }) => {
         {father ? (
           <PersonLink person={father} />
         ) : (
-          isDad
+          dadName
         )}
       </td>
     </tr>
