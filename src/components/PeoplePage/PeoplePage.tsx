@@ -6,13 +6,13 @@ import { Person } from '../../types';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { slug: slugParams } = useParams();
 
   useEffect(() => {
-    setError(false);
-    setLoading(true);
+    setIsError(false);
+    setIsLoading(true);
     fetch('https://mate-academy.github.io/react_people-table/api/people.json')
       .then(res => res.json())
       .then(gettedPeople => setPeople(gettedPeople.map((person: Person) => {
@@ -28,8 +28,8 @@ export const PeoplePage = () => {
 
         return { ...person, mother: findedMother, father: findedFather };
       })))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -38,21 +38,21 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && (<Loader />)}
+          {isLoading && (<Loader />)}
 
-          {error && !loading && (
+          {isError && !isLoading && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {!error && !loading && people.length === 0 && (
+          {!isError && !isLoading && people.length === 0 && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {!error && !loading && people.length > 0 && (
+          {!isError && !isLoading && people.length > 0 && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -71,8 +71,15 @@ export const PeoplePage = () => {
               <tbody>
                 {people.map(person => {
                   const {
-                    name, sex, born, died, fatherName, motherName, slug,
-                    mother, father,
+                    name,
+                    sex,
+                    born,
+                    died,
+                    fatherName,
+                    motherName,
+                    slug,
+                    mother,
+                    father,
                   } = person;
 
                   return (

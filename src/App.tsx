@@ -1,5 +1,8 @@
 import {
-  NavLink, Routes, Route, Navigate,
+  NavLink,
+  Routes,
+  Route,
+  Navigate,
 } from 'react-router-dom';
 
 import classNames from 'classnames';
