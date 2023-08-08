@@ -52,20 +52,17 @@ export const PersonLink: React.FC<Props> = ({
       </td>
 
       <td>
-        {person.fatherName !== null
-          && personFind(person.fatherName) !== undefined
-          && (
+        {person.fatherName && (
+          personFind(person.fatherName) ? (
             <Link
               to={`${personFind(person.fatherName)?.slug || ''}`}
             >
               {person.fatherName}
             </Link>
-          )}
-
-        {person.fatherName !== null
-          && personFind(person.fatherName) === undefined
-          && (`${person.fatherName}`)}
-
+          ) : (
+            person.fatherName
+          )
+        )}
         {!person.fatherName && '-'}
       </td>
     </tr>
