@@ -18,14 +18,11 @@ export const PeoplePage = () => {
   useEffect(() => {
     setLoading(true);
     getPeople()
-      .then((allPeople) => {
-        return allPeople.map(person => (
-          {
-            ...person,
-            mother: findPerson(allPeople, person.motherName),
-            father: findPerson(allPeople, person.fatherName),
-          }));
-      })
+      .then((allPeople) => allPeople.map(person => ({
+        ...person,
+        mother: findPerson(allPeople, person.motherName),
+        father: findPerson(allPeople, person.fatherName),
+      })))
       .then(setPeople)
       .catch(() => setError(true))
       .finally(() => setLoading(false));
