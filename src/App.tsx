@@ -23,11 +23,18 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink className={getLinkClass} to="/">
+          <NavLink
+            className={getLinkClass}
+            to="/"
+            end
+          >
             Home
           </NavLink>
 
-          <NavLink className={getLinkClass} to="/people">
+          <NavLink
+            className={getLinkClass}
+            to="/people"
+          >
             People
           </NavLink>
         </div>
