@@ -1,9 +1,10 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
+import { PersonLink } from './PeopleLink';
 
 export const PeoplePage: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -25,17 +26,14 @@ export const PeoplePage: React.FC = () => {
       });
   }, []);
 
-  const getMother = (person: Person) => {
-    return people.find(
-      parent => parent.name === person.motherName,
-    );
-  };
+  const preparedPeople = people.map((user) => {
+    const newUser = { ...user };
 
-  const getFather = (person: Person) => {
-    return people.find(
-      parent => parent.name === person.fatherName,
-    );
-  };
+    newUser.mother = people.find((person) => person.name === user.motherName);
+    newUser.father = people.find((person) => person.name === user.fatherName);
+
+    return newUser;
+  });
 
   return (
     <>
@@ -65,51 +63,35 @@ export const PeoplePage: React.FC = () => {
                   </thead>
 
                   <tbody>
-                    {people.map(person => (
+                    {preparedPeople.map(person => (
                       <tr
                         data-cy="person"
                         className={classNames({
                           'has-background-warning': slug === person.slug,
                         })}
+                        // key={person.slug}
                       >
                         <td>
-                          <Link
-                            to={`../${person.slug}`}
-                            className={classNames({
-                              'has-text-danger': person.sex === 'f',
-                            })}
-                          >
-                            {person.name}
-                          </Link>
+                          <PersonLink
+                            person={person}
+                            personName={person.name}
+                          />
                         </td>
 
                         <td>{person.sex}</td>
                         <td>{person.born}</td>
                         <td>{person.died}</td>
                         <td>
-                          {getMother(person)
-                            ? (
-                              <Link
-                                to={`../${getMother(person)?.slug}`}
-                                className="has-text-danger"
-                              >
-                                {`${getMother(person)?.name}`}
-                              </Link>
-                            ) : (
-                              person.motherName || '-'
-                            )}
+                          <PersonLink
+                            person={person.mother}
+                            personName={person.motherName}
+                          />
                         </td>
                         <td>
-                          {getFather(person)
-                            ? (
-                              <Link
-                                to={`../${getFather(person)?.slug}`}
-                              >
-                                {`${getFather(person)?.name}`}
-                              </Link>
-                            ) : (
-                              person.fatherName || '-'
-                            )}
+                          <PersonLink
+                            person={person.father}
+                            personName={person.fatherName}
+                          />
                         </td>
                       </tr>
                     ))}
