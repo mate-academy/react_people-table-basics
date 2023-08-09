@@ -1,37 +1,15 @@
-import { Loader } from './components/Loader';
-
+import { Outlet } from 'react-router-dom';
 import './App.scss';
+import NavBar from './components/NavBar';
 
 export const App = () => (
   <div data-cy="app">
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
-            Home
-          </a>
-
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
-          >
-            People
-          </a>
-        </div>
-      </div>
-    </nav>
+    <NavBar />
 
     <main className="section">
       <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
-
+        <Outlet />
+        {/*
         <div className="block">
           <div className="box table-container">
             <Loader />
@@ -40,9 +18,7 @@ export const App = () => (
               Something went wrong
             </p>
 
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
+            <p data-cy="noPeopleMessage">There are no people on the server</p>
 
             <table
               data-cy="peopleTable"
@@ -62,9 +38,7 @@ export const App = () => (
               <tbody>
                 <tr data-cy="person">
                   <td>
-                    <a href="#/people/jan-van-brussel-1714">
-                      Jan van Brussel
-                    </a>
+                    <a href="#/people/jan-van-brussel-1714">Jan van Brussel</a>
                   </td>
 
                   <td>m</td>
@@ -95,9 +69,7 @@ export const App = () => (
                   </td>
 
                   <td>
-                    <a href="#/people/emile-haverbeke-1877">
-                      Emile Haverbeke
-                    </a>
+                    <a href="#/people/emile-haverbeke-1877">Emile Haverbeke</a>
                   </td>
                 </tr>
 
@@ -166,7 +138,7 @@ export const App = () => (
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   </div>
