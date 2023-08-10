@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../types';
+import { PersonLink } from './PersonLink';
 
 interface Props {
   people: Person[];
@@ -51,12 +52,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <td>{person.died}</td>
             <td>
               {person.mother ? (
-                <Link
-                  className="has-text-danger"
+                <PersonLink
                   to={`/people/${person.mother.slug}`}
-                >
-                  {person.motherName}
-                </Link>
+                  text={person.motherName}
+                  hasTextDanger
+                />
               ) : (
                 person.motherName || '-'
               )}
@@ -64,11 +64,10 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
 
             <td>
               {person.father ? (
-                <Link
+                <PersonLink
                   to={`/people/${person.father.slug}`}
-                >
-                  {person.fatherName}
-                </Link>
+                  text={person.fatherName}
+                />
               ) : (
                 person.fatherName || '-'
               )}
