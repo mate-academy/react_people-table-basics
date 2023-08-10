@@ -1,7 +1,7 @@
-/* eslint-disable no-console */
 import classNames from 'classnames';
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../types';
+import PersonLink from './PersonLink';
 
 interface PersonDataProps {
   person: Person;
@@ -29,33 +29,16 @@ const PersonData: React.FC<PersonDataProps> = ({ person, people }) => {
       className={classNames({ 'has-background-warning': person.slug === slug })}
     >
       <td>
-        <NavLink
-          to={`/people/${person.slug}`}
-          className={classNames({
-            'has-text-danger': person.sex === 'f',
-          })}
-        >
-          {person.name}
-        </NavLink>
+        <PersonLink person={person} />
       </td>
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
-      <td className={classNames({ 'has-text-danger': mother })}>
-        {mother ? (
-          <NavLink to={`/people/${mother.slug}`} className="has-text-danger">
-            {mother.name}
-          </NavLink>
-        ) : (
-          person.motherName || '-'
-        )}
+      <td>
+        {mother ? <PersonLink person={mother} /> : person.motherName || '-'}
       </td>
       <td>
-        {father ? (
-          <NavLink to={`/people/${father.slug}`}>{father.name}</NavLink>
-        ) : (
-          person.fatherName || '-'
-        )}
+        {father ? <PersonLink person={father} /> : person.fatherName || '-'}
       </td>
     </tr>
   );
