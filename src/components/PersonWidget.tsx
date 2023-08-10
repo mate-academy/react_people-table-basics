@@ -4,6 +4,12 @@ import { getPeople } from '../api';
 import { Loader } from './Loader';
 import PersonTable from './PersonTable';
 
+const getPerson = (
+  name: string, peopleFromApi: Person[],
+): Person | undefined => {
+  return peopleFromApi.find(person => person.name === name);
+};
+
 const PersonWidget:React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(true);
@@ -14,7 +20,11 @@ const PersonWidget:React.FC = () => {
       try {
         const peopleFromApi = await getPeople();
 
-        setPeople(peopleFromApi);
+        setPeople(peopleFromApi.map(person => ({
+          ...person,
+          mother: getPerson(person.motherName || '', peopleFromApi),
+          father: getPerson(person.fatherName || '', peopleFromApi),
+        })));
       } catch (e) {
         setError(true);
       } finally {

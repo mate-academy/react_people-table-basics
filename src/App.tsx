@@ -14,7 +14,7 @@ export const App = () => (
         <Route path=":personSlug?" element={<PeoplePage />} />
       </Route>
 
-      <Route path="home" element={<Navigate to="/" />} />
+      <Route path="home" element={<Navigate to="/" replace />} />
 
       <Route path="*" element={<ErrorPage />} />
     </Route>

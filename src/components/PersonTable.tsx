@@ -15,22 +15,6 @@ const PersonTable:React.FC<PersonTableProps> = ({ people }) => {
     return people.find(person => person.slug === slug);
   };
 
-  const getMotherSlug = (person: Person) => {
-    const personMother = people.find(
-      mother => person.motherName === mother.name,
-    );
-
-    return personMother?.slug;
-  };
-
-  const getFatherSlug = (person: Person) => {
-    const personFather = people.find(
-      father => person.fatherName === father.name,
-    );
-
-    return personFather?.slug;
-  };
-
   useEffect(() => {
     if (personSlug) {
       const person = getPersonBySlug(personSlug);
@@ -72,8 +56,8 @@ const PersonTable:React.FC<PersonTableProps> = ({ people }) => {
               person={person}
               key={person.slug}
               isSelected={selectedPerson?.slug === person.slug}
-              motherSlug={getMotherSlug(person)}
-              fatherSlug={getFatherSlug(person)}
+              motherSlug={person.mother?.slug}
+              fatherSlug={person.father?.slug}
             />
           ))
         }
