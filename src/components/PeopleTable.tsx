@@ -1,5 +1,5 @@
-import { Person } from "../types";
-import PersonData from "./PersonData";
+import { Person } from '../types';
+import PersonData from './PersonData';
 
 interface PeopleTableProps {
   people: Person[];
@@ -24,7 +24,7 @@ const PeopleTable: React.FC<PeopleTableProps> = ({ people }) => {
 
       <tbody>
         {people.map((person) => (
-          <PersonData key={person.name} person={person} />
+          <PersonData key={person.slug} person={person} people={people} />
         ))}
       </tbody>
     </table>

@@ -14,7 +14,7 @@ export const Root = () => {
           <Route path="/home" element={<HomeRedirect />} />
           <Route path="/people">
             <Route index element={<PeoplePage />} />
-            {/* <Route path=":tabId" element={<TabsPage />} /> */}
+            <Route path=":slug" element={<PeoplePage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
