@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 import { Link, useParams } from 'react-router-dom';
 import { Loader } from './Loader';
 import { getPeople } from '../api';
 import { Person } from '../types';
+import { matchMotherAndFather } from './utils';
 
 export const PeoplePage: React.FC = () => {
   const params = useParams();
@@ -11,20 +13,6 @@ export const PeoplePage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const selected = params.slug ? params.slug : '';
-
-  const matchMotherAndFather = (peopleFromServer: Person[]): Person[] => {
-    return peopleFromServer.map((per): Person => {
-      const mother = peopleFromServer.find(
-        person => person.name === per.motherName,
-      );
-
-      const father = peopleFromServer.find(
-        person => person.name === per.fatherName,
-      );
-
-      return { ...per, mother, father };
-    });
-  };
 
   useEffect(() => {
     setLoading(true);
@@ -51,74 +39,74 @@ export const PeoplePage: React.FC = () => {
           There are no people on the server
         </p>
       )}
-      { people.length !== 0 && !loading && (
+      {people.length !== 0 && !loading && (
         <div className="block">
           <div className="box table-container">
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
             >
-              {!loading && (
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Born</th>
-                    <th>Died</th>
-                    <th>Mother</th>
-                    <th>Father</th>
-                  </tr>
-                </thead>
-              )}
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sex</th>
+                  <th>Born</th>
+                  <th>Died</th>
+                  <th>Mother</th>
+                  <th>Father</th>
+                </tr>
+              </thead>
               <tbody>
-                {people.map(person => (
+                {people.map(({
+                  slug, name, sex, born, died, mother, motherName, father, fatherName,
+                }) => (
                   <tr
-                    key={person.slug}
+                    key={slug}
                     data-cy="person"
                     className={cn({
-                      'has-background-warning': selected === person.slug,
+                      'has-background-warning': selected === slug,
                     })}
                   >
                     <td>
                       <Link
-                        to={`/people/${person.slug}`}
+                        to={`/people/${slug}`}
                         className={cn({
-                          'has-text-danger': person.sex === 'f',
+                          'has-text-danger': sex === 'f',
                         })}
-                        onClick={() => selected === person.slug}
+                        onClick={() => selected === slug}
                       >
-                        {person.name}
+                        {name}
                       </Link>
                     </td>
 
-                    <td>{person.sex}</td>
-                    <td>{person.born}</td>
-                    <td>{person.died}</td>
+                    <td>{sex}</td>
+                    <td>{born}</td>
+                    <td>{died}</td>
                     <td>
-                      {person.mother?.slug ? (
+                      {mother?.slug ? (
                         <Link
-                          to={`/people/${person.mother?.slug}`}
+                          to={`/people/${mother?.slug}`}
                           className={cn({
-                            'has-text-danger': person.motherName,
+                            'has-text-danger': motherName,
                           })}
-                          onClick={() => selected === person.mother?.slug}
+                          onClick={() => selected === mother?.slug}
                         >
-                          {person.mother.name}
+                          {mother.name}
                         </Link>
                       ) : (
-                        <p>{person.motherName ? person.motherName : '-'}</p>
+                        <p>{motherName || '-'}</p>
                       )}
                     </td>
                     <td>
-                      {person.father?.slug ? (
+                      {father?.slug ? (
                         <Link
-                          to={`/people/${person.father?.slug}`}
-                          onClick={() => selected === person.father?.slug}
+                          to={`/people/${father?.slug}`}
+                          onClick={() => selected === father?.slug}
                         >
-                          {person.father.name}
+                          {father.name}
                         </Link>
                       ) : (
-                        <p>{person.fatherName ? person.fatherName : '-'}</p>
+                        <p>{fatherName || '-'}</p>
                       )}
                     </td>
                   </tr>
