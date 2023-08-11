@@ -34,28 +34,18 @@ export const PeoplePage: React.FC = () => {
           Something went wrong
         </p>
       )}
-      {!loading && people.length === 0 && (
+      {people.length === 0 && !loading && (
         <p data-cy="noPeopleMessage">
           There are no people on the server
         </p>
       )}
-      {!loading && people.length > 0 && (
+      {people.length !== 0 && !loading && (
         <div className="block">
           <div className="box table-container">
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
             >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
               <tbody>
                 {people.map(({
                   slug, name, sex, born, died, mother, motherName, father, fatherName,
@@ -112,6 +102,7 @@ export const PeoplePage: React.FC = () => {
                   </tr>
                 ))}
               </tbody>
+
             </table>
           </div>
         </div>
