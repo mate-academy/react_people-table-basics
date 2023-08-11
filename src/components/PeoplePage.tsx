@@ -34,12 +34,12 @@ export const PeoplePage: React.FC = () => {
           Something went wrong
         </p>
       )}
-      {people.length === 0 && !loading && (
+      {!loading && people.length === 0 && (
         <p data-cy="noPeopleMessage">
           There are no people on the server
         </p>
       )}
-      {people.length !== 0 && !loading && (
+      {!loading && people.length > 0 && (
         <div className="block">
           <div className="box table-container">
             <table
