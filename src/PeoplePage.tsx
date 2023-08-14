@@ -4,8 +4,9 @@ import { Person } from './types/Person';
 import { getPeople } from './api';
 import { Loader } from './components/Loader';
 import { NoPeople } from './NoPeople';
-import { NotFound } from './NotFound';
+import { LoadingError } from './components/LoadError';
 import { TablePeople } from './components/TablePeople';
+
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -36,7 +37,7 @@ export const PeoplePage = () => {
         ) : (
           <>
             {newError && (
-              <NotFound />
+              <LoadingError />
             )}
 
             {people.length === 0 && !load && (
