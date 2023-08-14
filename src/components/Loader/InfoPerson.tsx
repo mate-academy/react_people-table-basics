@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 
 import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { Person } from "../../types/Person";
+import { Person } from '../../types/Person';
 
 type Propds = {
   person: Person;
   ifPersonPind: (name: string | null) => Person | undefined;
-}
+};
 
-export const InfoPerson: React.FC<Propds> = ({ person, ifPersonPind}) => {
+export const InfoPerson: React.FC<Propds> = ({ person, ifPersonPind }) => {
   const { personLink } = useParams();
 
-  return(
+  return (
     <tr
       data-cy="person"
       className={classNames({
@@ -31,57 +31,57 @@ export const InfoPerson: React.FC<Propds> = ({ person, ifPersonPind}) => {
         </Link>
       </td>
 
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
+      <td>{person.sex}</td>
+      <td>{person.born}</td>
+      <td>{person.died}</td>
 
-          <td>
-            {person.motherName
+      <td>
+        {person.motherName
             && ifPersonPind(person.motherName)
-            ?(
-                <Link
-                  className="has-text-danger"
-                  to={`${
-                    ifPersonPind(person.motherName)?.slug || ''
-                  }`}
-                >
-                  {person.motherName}
-                </Link>
-            ) : (
-              <Link
-                  className="has-text-danger"
-                  to={`${
-                    ifPersonPind(person.motherName)?.slug || ''
-                  }`}
-                >
-                  {'-'}
-                </Link>
-            )}
-          </td>
+          ? (
+            <Link
+              className="has-text-danger"
+              to={`${
+                ifPersonPind(person.motherName)?.slug || ''
+              }`}
+            >
+              {person.motherName}
+            </Link>
+          ) : (
+            <Link
+              className="has-text-danger"
+              to={`${
+                ifPersonPind(person.motherName)?.slug || ''
+              }`}
+            >
+              -
+            </Link>
+          )}
+      </td>
 
-            <td>
-            {person.fatherName
+      <td>
+        {person.fatherName
             && ifPersonPind(person.fatherName)
-            ?(
-                <Link
-                  className="has-text-danger"
-                  to={`${
-                    ifPersonPind(person.fatherName)?.slug || ''
-                  }`}
-                >
-                  {person.fatherName}
-                </Link>
-            ) : (
-              <Link
-                  className="has-text-danger"
-                  to={`${
-                    ifPersonPind(person.fatherName)?.slug || ''
-                  }`}
-                >
-                  {'-'}
-                </Link>
-            )}
-            </td>
-          </tr>
-  )
-}
+          ? (
+            <Link
+              className="has-text-danger"
+              to={`${
+                ifPersonPind(person.fatherName)?.slug || ''
+              }`}
+            >
+              {person.fatherName}
+            </Link>
+          ) : (
+            <Link
+              className="has-text-danger"
+              to={`${
+                ifPersonPind(person.fatherName)?.slug || ''
+              }`}
+            >
+              -
+            </Link>
+          )}
+      </td>
+    </tr>
+  );
+};

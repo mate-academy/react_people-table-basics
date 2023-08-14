@@ -1,4 +1,3 @@
-
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
@@ -11,8 +10,8 @@ export const NavPage = () => {
     <nav
       className="navbar is-fixed-top has-shadow"
       data-cy="nav"
-      role='navigation'
-      aria-label='main navigation'
+      role="navigation"
+      aria-label="main navigation"
     >
       <div className="container">
         <div className="navbar-brand">

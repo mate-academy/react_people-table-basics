@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes} from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { PeoplePage } from './PeoplePage';
 import { Home } from './Home';
@@ -14,12 +14,12 @@ export const App = () => (
     <main>
       <div className="constainer">
         <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='/people' element={<PeoplePage />}>
-            <Route path=':personLink' element={<PeoplePage />}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/people" element={<PeoplePage />}>
+            <Route path=":personLink" element={<PeoplePage />} />
           </Route>
-          <Route path='/home' element={<Navigate to='/' replace />}/>
-          <Route path='*' element={<NotFound />}/>
+          <Route path="/home" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </main>
