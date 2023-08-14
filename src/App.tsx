@@ -13,12 +13,15 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <NavLink className={setNavLinkClassName} to="/">
+            <NavLink
+              className={({ isActive }) => setNavLinkClassName({ isActive })}
+              to="/"
+            >
               Home
             </NavLink>
 
             <NavLink
-              className={setNavLinkClassName}
+              className={({ isActive }) => setNavLinkClassName({ isActive })}
               to="/people"
             >
               People

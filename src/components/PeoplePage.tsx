@@ -9,7 +9,10 @@ import { generateNavLink } from '../utils/generateNavLink';
 export const PeoplePage = () => {
   const [peopleData, setPeopleData] = React.useState<Person[] | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isError, setError] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
+
+  const isSuccessfullyLoaded = !isError && !isLoading;
+  const isPeopleArrayEmpty = peopleData?.length === 0 && !isError;
 
   const { personID } = useParams();
 
@@ -21,14 +24,15 @@ export const PeoplePage = () => {
         setPeopleData(data);
       })
       .catch(() => {
-        setError(true);
+        setIsLoading(false);
+        setIsError(true);
       })
       .finally(() => {
         setIsLoading(false);
       });
   }, []);
 
-  const findPerson = (personName: string | null) => {
+  const findPerson = React.useMemo(() => (personName: string | null) => {
     const parent = peopleData?.find(
       (personFromAPI) => personFromAPI.name === personName,
     );
@@ -38,7 +42,7 @@ export const PeoplePage = () => {
     }
 
     return personName || '-';
-  };
+  }, [peopleData]);
 
   return (
     <>
@@ -46,18 +50,22 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isLoading && !isError && <Loader />}
+          {isLoading
+            && (
+              <Loader />
+            )}
 
           {isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
-          {peopleData?.length === 0 && !isError && (
+
+          {isPeopleArrayEmpty && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!isError && !isLoading
+          {isSuccessfullyLoaded
             && (
               <table
                 data-cy="peopleTable"
