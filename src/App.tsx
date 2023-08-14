@@ -12,7 +12,7 @@ export const App = () => (
     <NavPage />
 
     <main>
-      <div className="constainer">
+      <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/people" element={<PeoplePage />}>

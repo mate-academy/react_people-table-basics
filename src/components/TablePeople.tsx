@@ -3,11 +3,11 @@ import React from 'react';
 import { Person } from '../types';
 import { InfoPerson } from './Loader/InfoPerson';
 
-type Prors = {
+type Props = {
   people: Person[],
 };
 
-export const TablePeople: React.FC<Prors> = ({ people }) => {
+export const TablePeople: React.FC<Props> = ({ people }) => {
   const findPeople = (name: string | null) => {
     return people.find(person => person.name === name);
   };

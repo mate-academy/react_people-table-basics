@@ -7,7 +7,6 @@ import { NoPeople } from './NoPeople';
 import { LoadingError } from './components/LoadError';
 import { TablePeople } from './components/TablePeople';
 
-
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [newError, setNewError] = useState(false);
@@ -16,12 +15,10 @@ export const PeoplePage = () => {
   useEffect(() => {
     getPeople()
       .then((peopleFromServer) => {
-        setLoad(true);
         setPeople(peopleFromServer);
       })
-      .catch((error) => {
+      .catch(() => {
         setNewError(true);
-        throw error;
       })
       .finally(() => {
         setLoad(false);

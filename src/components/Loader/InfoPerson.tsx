@@ -5,12 +5,12 @@ import classNames from 'classnames';
 
 import { Person } from '../../types/Person';
 
-type Propds = {
+type Props = {
   person: Person;
   ifPersonPind: (name: string | null) => Person | undefined;
 };
 
-export const InfoPerson: React.FC<Propds> = ({ person, ifPersonPind }) => {
+export const InfoPerson: React.FC<Props> = ({ person, ifPersonPind }) => {
   const { personLink } = useParams();
 
   return (
