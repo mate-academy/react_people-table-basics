@@ -6,8 +6,8 @@ import classNames from 'classnames';
 import { Person } from '../../types/Person';
 
 type Props = {
-  person: Person;
-  ifPersonPind: (name: string | null) => Person | undefined;
+  person: Person,
+  ifPersonPind: (name: string | null) => Person | undefined,
 };
 
 export const InfoPerson: React.FC<Props> = ({ person, ifPersonPind }) => {
