@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Person } from '../types';
 import { PeopleItem } from './PeopleItem';
 
@@ -9,17 +9,9 @@ type Props = {
 export const PeopleList: React.FC<Props> = ({
   people,
 }) => {
-  const [isNoPeople, setIsNoPeople] = useState(false);
-
-  useEffect(() => {
-    if (!people.length) {
-      setIsNoPeople(true);
-    }
-  }, [people]);
-
   return (
     <>
-      {isNoPeople ? (
+      {!people.length ? (
         <p data-cy="noPeopleMessage">
           There are no people on the server
         </p>
