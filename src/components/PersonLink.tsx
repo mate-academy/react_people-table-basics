@@ -5,10 +5,9 @@ import { Person } from '../types';
 
 type Props = {
   person: Person;
-  people: Person[];
 };
 
-export const PersonLink: React.FC<Props> = ({ person, people }) => {
+export const PersonLink: React.FC<Props> = ({ person }) => {
   const { slug } = useParams();
 
   return (
@@ -33,11 +32,8 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
       <td>{person.born}</td>
       <td>{person.died}</td>
       <td>
-        {people.find(p => p.name === person.motherName) ? (
-          <Link
-            to={`/people/${people.find(p => p.name === person.motherName)?.slug}`}
-            className="has-text-danger"
-          >
+        {person.mother ? (
+          <Link to={`/people/${person.mother.slug}`} className="has-text-danger">
             {person.motherName}
           </Link>
         ) : (
@@ -45,10 +41,8 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
         )}
       </td>
       <td>
-        {people.find(p => p.name === person.fatherName) ? (
-          <Link
-            to={`/people/${people.find(p => p.name === person.fatherName)?.slug}`}
-          >
+        {person.father ? (
+          <Link to={`/people/${person.father.slug}`}>
             {person.fatherName}
           </Link>
         ) : (

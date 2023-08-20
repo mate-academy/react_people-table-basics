@@ -27,8 +27,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
         {people.map(person => (
           <PersonLink
             key={person.slug}
-            person={person}
-            people={people}
+            person={{
+              ...person,
+              mother: people.find(p => p.name === person.motherName),
+              father: people.find(p => p.name === person.fatherName),
+            }}
           />
         ))}
       </tbody>
