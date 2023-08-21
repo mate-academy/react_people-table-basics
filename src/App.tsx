@@ -14,9 +14,7 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     getPeople()
-      .then((people) => {
-        setPerson(people);
-      })
+      .then(setPerson)
       .catch(() => setError('Something went wrong'))
       .finally(() => setIsLoading(false));
   }, [setPerson, setIsLoading]);

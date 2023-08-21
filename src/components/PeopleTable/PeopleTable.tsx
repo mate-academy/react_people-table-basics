@@ -9,8 +9,15 @@ type Props = {
 };
 export const PeopleTable: React.FC<Props> = ({ person, isLoading }) => {
   const { slug } = useParams();
+  const findParent = (persons: Person[], parentName: string | null) => {
+    return persons.find(parent => parent.name === parentName);
+  };
 
-  return isLoading ? <Loader /> : (
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  return (
     <>
       <h1 className="title">People Page</h1>
       <table
@@ -50,16 +57,14 @@ export const PeopleTable: React.FC<Props> = ({ person, isLoading }) => {
               <td>{personItem.born}</td>
               <td>{personItem.died}</td>
               <td>
-                {person.some(
-                  filterName => filterName.name === personItem.motherName,
-                ) ? <Link className="has-text-danger" to={`/people/${person.find(p => p.name === personItem.motherName)?.slug}`}>{personItem.motherName}</Link> : (
+                {findParent(person, personItem.motherName)
+                  ? (<Link className="has-text-danger" to={`/people/${findParent(person, personItem.motherName)?.slug}`}>{personItem.motherName}</Link>) : (
                     personItem.motherName || '-'
                   )}
               </td>
               <td>
-                {person.some(
-                  filterName => filterName.name === personItem.fatherName,
-                ) ? <Link to={`/people/${person.find(p => p.name === personItem.fatherName)?.slug}`}>{personItem.fatherName}</Link> : (
+                {findParent(person, personItem.fatherName)
+                  ? (<Link to={`/people/${findParent(person, personItem.fatherName)?.slug}`}>{personItem.fatherName}</Link>) : (
                     personItem.fatherName || '-'
                   )}
               </td>
