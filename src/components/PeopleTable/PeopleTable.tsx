@@ -36,41 +36,40 @@ export const PeopleTable: React.FC<Props> = ({ person, isLoading }) => {
         </thead>
 
         <tbody>
-          {person.map(personItem => (
-            <tr
-              key={personItem.slug}
-              data-cy="person"
-              className={cn(
-                { 'has-background-warning': personItem.slug === slug },
-              )}
-            >
-              <td>
-                <Link
-                  className={cn({ 'has-text-danger': personItem.sex === 'f' })}
-                  to={`/people/${personItem.slug}`}
-                >
-                  {personItem.name}
-                </Link>
-              </td>
+          {person.map(personItem => {
+            const father = findParent(person, personItem.fatherName);
+            const mother = findParent(person, personItem.motherName);
 
-              <td>{personItem.sex}</td>
-              <td>{personItem.born}</td>
-              <td>{personItem.died}</td>
-              <td>
-                {findParent(person, personItem.motherName)
-                  ? (<Link className="has-text-danger" to={`/people/${findParent(person, personItem.motherName)?.slug}`}>{personItem.motherName}</Link>) : (
+            return (
+              <tr
+                key={personItem.slug}
+                data-cy="person"
+                className={cn(
+                  { 'has-background-warning': personItem.slug === slug },
+                )}
+              >
+                <td>
+                  <Link className={cn({ 'has-text-danger': personItem.sex === 'f' })} to={`/people/${personItem.slug}`}>
+                    {personItem.name}
+                  </Link>
+                </td>
+
+                <td>{personItem.sex}</td>
+                <td>{personItem.born}</td>
+                <td>{personItem.died}</td>
+                <td>
+                  {mother ? (<Link className="has-text-danger" to={`/people/${mother.slug}`}>{personItem.motherName}</Link>) : (
                     personItem.motherName || '-'
                   )}
-              </td>
-              <td>
-                {findParent(person, personItem.fatherName)
-                  ? (<Link to={`/people/${findParent(person, personItem.fatherName)?.slug}`}>{personItem.fatherName}</Link>) : (
+                </td>
+                <td>
+                  {father ? (<Link to={`/people/${father.slug}`}>{personItem.fatherName}</Link>) : (
                     personItem.fatherName || '-'
                   )}
-              </td>
-            </tr>
-          ))}
-
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </>
