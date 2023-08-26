@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Person } from '../../types';
-import { PersonTr } from '../Person/PersonTr';
+import { PersonTr } from '../Person/PersonLink';
 
 type Props = {
   people: Person[]
