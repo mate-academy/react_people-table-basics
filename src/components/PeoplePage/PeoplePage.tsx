@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Person } from '../../types/Person';
 import { getPeople } from '../../api';
 import { Loader } from '../Loader';
-import { PeopleList } from '../PeopleList/PeopleList';
+import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [isError, setIsError] = useState<boolean>(false);
@@ -65,7 +65,7 @@ export const PeoplePage: React.FC = () => {
           )}
 
           {isShow.peopleList
-            && <PeopleList people={people} />}
+            && <PeopleTable people={people} />}
         </div>
       </div>
     </>

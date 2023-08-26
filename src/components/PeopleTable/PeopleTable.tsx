@@ -7,7 +7,7 @@ type Props = {
   people: Person[]
 };
 
-export const PeopleList: React.FC<Props> = ({ people }) => {
+export const PeopleTable: React.FC<Props> = ({ people }) => {
   return (
     <table
       data-cy="peopleTable"
