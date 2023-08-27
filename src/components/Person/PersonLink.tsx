@@ -49,25 +49,19 @@ export const PersonTr: React.FC<Props> = ({ person }) => {
       <td>{born}</td>
       <td>{died}</td>
 
-      {mother && (
+      {mother ? (
         <td>
           <NavLink
             to={`../${mother.slug}`}
-            className="has-text-danger"
           >
-            {mother.name}
+            {motherName}
           </NavLink>
         </td>
+      ) : (
+        <td>{motherName || '-'}</td>
       )}
 
-      {!mother && motherName && (
-        <td>{motherName}</td>
-      )}
-      {!mother && !motherName && (
-        <td>-</td>
-      )}
-
-      {father && (
+      {father ? (
         <td>
           <NavLink
             to={`../${father.slug}`}
@@ -75,14 +69,8 @@ export const PersonTr: React.FC<Props> = ({ person }) => {
             {fatherName}
           </NavLink>
         </td>
-      )}
-
-      {!father && fatherName && (
-        <td>{fatherName}</td>
-      )}
-
-      {!father && !fatherName && (
-        <td>-</td>
+      ) : (
+        <td>{fatherName || '-'}</td>
       )}
     </tr>
 
