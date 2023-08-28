@@ -1,4 +1,5 @@
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink';
 
 /* eslint-disable no-nested-ternary */
 type Props = {
@@ -14,20 +15,6 @@ export const PersonItem = ({
   handleSlugUser,
   slugUser,
 }:Props) => {
-  const findParent = (child: Person) => {
-    let parent = people.find(one => one.name === child.motherName);
-
-    if (!parent) {
-      parent = people.find(one => one.name === child.fatherName);
-    }
-
-    if (!parent) {
-      return child;
-    }
-
-    return parent;
-  };
-
   return (
     <tr
       data-cy="person"
@@ -36,17 +23,12 @@ export const PersonItem = ({
         : ''}
     >
       <td>
-        <a
-          className={person.sex === 'f'
-            ? 'has-text-danger'
-            : ''}
-          href={`#/people/${person.slug}`}
-          onClick={() => {
-            return handleSlugUser(person.slug);
-          }}
-        >
-          {person.name}
-        </a>
+        <PersonLink
+          person={person}
+          handleSlugUser={handleSlugUser}
+          people={people}
+          isParent="no"
+        />
       </td>
 
       <td>{person.sex}</td>
@@ -55,17 +37,12 @@ export const PersonItem = ({
       {person.motherName !== null ? (
         people.some(one => one.name === person.motherName) ? (
           <td>
-            <a
-              className="has-text-danger"
-              href={`#/people/${findParent(person).slug}`}
-              onClick={() => {
-                return handleSlugUser(
-                  findParent(person).slug,
-                );
-              }}
-            >
-              {person.motherName}
-            </a>
+            <PersonLink
+              person={person}
+              handleSlugUser={handleSlugUser}
+              people={people}
+              isParent="mother"
+            />
           </td>
         ) : (
           <td>{person.motherName}</td>
@@ -76,16 +53,12 @@ export const PersonItem = ({
       {person.fatherName !== null ? (
         people.some(one => one.name === person.fatherName) ? (
           <td>
-            <a
-              href={`#/people/${findParent(person).slug}`}
-              onClick={() => {
-                return handleSlugUser(
-                  findParent(person).slug,
-                );
-              }}
-            >
-              {person.fatherName}
-            </a>
+            <PersonLink
+              person={person}
+              handleSlugUser={handleSlugUser}
+              people={people}
+              isParent="father"
+            />
           </td>
         ) : (
           <td>{person.fatherName}</td>
