@@ -11,6 +11,7 @@ import { Person } from './types';
 export const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [people, setPeople] = useState<Person[]>([]);
+  const [showError, setShowError] = useState<boolean>(false);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -25,8 +26,7 @@ export const App: React.FC = () => {
 
         setPeople(responseData);
       } catch (error) {
-        // eslint-disable-next-line no-alert
-        alert('error');
+        setShowError(true);
       } finally {
         setIsLoading(false);
       }
@@ -65,7 +65,7 @@ export const App: React.FC = () => {
           </Routes>
 
           {isLoading && <Loader />}
-          {!people.length && <LoadingError />}
+          {(!people.length || showError) && <LoadingError />}
         </div>
       </main>
     </div>
