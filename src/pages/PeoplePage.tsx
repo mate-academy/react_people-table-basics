@@ -24,7 +24,7 @@ export const PeoplePage = () => {
 
       {isLoading && <Loader />}
 
-      {!error && !isLoading && people.length === 0
+      {!error && people !== null && people.length < 1
         && (
           <p data-cy="noPeopleMessage">
             There are no people on the server
@@ -37,7 +37,7 @@ export const PeoplePage = () => {
         </p>
       )}
 
-      {!error && <People people={people} />}
+      {!error && people.length > 0 && <People people={people} />}
     </>
   );
 };
