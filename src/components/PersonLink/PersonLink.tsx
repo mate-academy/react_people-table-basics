@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../../types';
+import { findParent } from '../utils/findParent';
 
 type Props = {
   person: Person,
@@ -9,25 +10,6 @@ type Props = {
 
 export const PersonLink: React.FC<Props> = ({ person, people }) => {
   const { personLink } = useParams();
-
-  const findParent = (parent: string | null) => {
-    const parentSelected = people.find(human => human.name === parent);
-
-    if (parentSelected) {
-      return (
-        <Link
-          to={`/people/${parentSelected.slug}`}
-          className={cn({
-            'has-text-danger': parentSelected.sex === 'f',
-          })}
-        >
-          {parentSelected.name}
-        </Link>
-      );
-    }
-
-    return parent || '-';
-  };
 
   return (
     <tr
@@ -51,8 +33,8 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
-      <td>{findParent(person.motherName)}</td>
-      <td>{findParent(person.fatherName)}</td>
+      <td>{findParent(people, person.motherName)}</td>
+      <td>{findParent(people, person.fatherName)}</td>
     </tr>
   );
 };
