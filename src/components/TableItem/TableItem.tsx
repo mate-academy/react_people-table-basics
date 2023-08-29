@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import React from 'react';
 import { Person } from '../../types/Person';
+import { ErrorClassStyles } from '../../types/ErrorClassStyles';
 
 type Props = {
   person: Person;
@@ -23,17 +24,17 @@ export const TableItem: React.FC<Props> = ({ person, selectedUser }) => {
     <tr
       data-cy="person"
       className={cn(
-        { 'has-background-warning': personLink === selectedUser },
+        { [ErrorClassStyles.backgroundWarning]: personLink === selectedUser },
       )}
     >
       <td>
         <NavLink
           to={`../${personLink}`}
           className={cn(
-            { 'has-text-danger': sex === 'f' },
+            { [ErrorClassStyles.textDanger]: sex === 'f' },
           )}
         >
-          {person.name}
+          {name}
         </NavLink>
       </td>
 
@@ -49,7 +50,7 @@ export const TableItem: React.FC<Props> = ({ person, selectedUser }) => {
         {mother && (
           <Link
             to={`../${createLink(mother.name, mother.born)}`}
-            className="has-text-danger"
+            className={ErrorClassStyles.textDanger}
           >
             {mother.name}
           </Link>
