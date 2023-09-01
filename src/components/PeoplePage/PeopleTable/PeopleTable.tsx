@@ -78,13 +78,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
                 {person.motherName ? (
                   <>
                     {mother ? (
-                      <PeopleLink
-                        person={mother}
-                      />
+                      <PeopleLink person={mother} />
                     ) : (
-                      <>
-                        {person.motherName}
-                      </>
+                      person.motherName
                     )}
                   </>
                 ) : (
@@ -96,13 +92,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
                 {person.fatherName ? (
                   <>
                     {father ? (
-                      <PeopleLink
-                        person={father}
-                      />
+                      <PeopleLink person={father} />
                     ) : (
-                      <>
-                        {person.fatherName}
-                      </>
+                      person.fatherName
                     )}
                   </>
                 ) : (
