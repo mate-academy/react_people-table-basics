@@ -1,5 +1,5 @@
-import cn from 'classnames';
 import { Link, useParams } from 'react-router-dom';
+import cn from 'classnames';
 import { Person } from '../../types';
 
 type Props = {

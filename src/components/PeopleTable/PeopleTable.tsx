@@ -10,9 +10,32 @@ type Props = {
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
 
-  function getPersonByName(name: string) {
+  const getPersonByName = (name: string) => {
     return people.find(pers => pers.name === name);
-  }
+  };
+
+  const getPersonParent = (name: string | null): JSX.Element => {
+    return (name ? (
+      <>
+        {getPersonByName(name)
+          ? (
+            <Personlink
+              person={getPersonByName(name) as Person}
+            />
+          )
+          : (
+            <>
+              {name}
+            </>
+          )}
+      </>
+    )
+      : (
+        <>
+          -
+        </>
+      ));
+  };
 
   return (
     <table
@@ -47,45 +70,10 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <td>{person.born}</td>
             <td>{person.died}</td>
             <td>
-              {person.motherName ? (
-                <>
-                  {getPersonByName(person.motherName)
-                    ? (
-                      <Personlink
-                        person={getPersonByName(person.motherName) as Person}
-                      />
-                    )
-                    : (
-                      <>
-                        {person.motherName}
-                      </>
-                    )}
-                </>
-              )
-                : (
-                  '-'
-                )}
+              {getPersonParent(person.motherName)}
             </td>
             <td>
-              {person.fatherName
-                ? (
-                  <>
-                    {getPersonByName(person.fatherName)
-                      ? (
-                        <Personlink
-                          person={getPersonByName(person.fatherName) as Person}
-                        />
-                      )
-                      : (
-                        <>
-                          {person.fatherName}
-                        </>
-                      )}
-                  </>
-                )
-                : (
-                  '-'
-                )}
+              {getPersonParent(person.fatherName)}
             </td>
           </tr>
         ))}

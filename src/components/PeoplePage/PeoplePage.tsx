@@ -9,6 +9,32 @@ export const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
+  const loadPeopleTable = (): JSX.Element => {
+    return (
+      <>
+        {isError
+          ? (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )
+          : (
+            <>
+              {people.length > 0
+                ? (
+                  <PeopleTable people={people} />
+                )
+                : (
+                  <p data-cy="noPeopleMessage">
+                    There are no people on the server
+                  </p>
+                )}
+            </>
+          )}
+      </>
+    );
+  };
+
   useEffect(() => {
     getPeople()
       .then(setPeople)
@@ -25,27 +51,7 @@ export const PeoplePage: React.FC = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            <>
-              { isError
-                ? (
-                  <p data-cy="peopleLoadingError" className="has-text-danger">
-                    Something went wrong
-                  </p>
-                )
-                : (
-                  <>
-                    { people.length > 0
-                      ? (
-                        <PeopleTable people={people} />
-                      )
-                      : (
-                        <p data-cy="noPeopleMessage">
-                          There are no people on the server
-                        </p>
-                      )}
-                  </>
-                )}
-            </>
+            loadPeopleTable()
           )}
         </div>
       </div>
