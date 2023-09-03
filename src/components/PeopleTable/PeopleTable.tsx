@@ -15,12 +15,14 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
   };
 
   const getPersonParent = (name: string | null): JSX.Element => {
+    const personsParent = name && getPersonByName(name);
+
     return (name ? (
       <>
-        {getPersonByName(name)
+        {personsParent
           ? (
             <Personlink
-              person={getPersonByName(name) as Person}
+              person={personsParent}
             />
           )
           : (
