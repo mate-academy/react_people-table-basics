@@ -34,6 +34,14 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     }
   }, [slug]);
 
+  const getParent = (
+    parent: Person | undefined, personParent: string,
+  ) => {
+    return parent
+      ? <PeopleLink person={parent} />
+      : personParent;
+  };
+
   return (
     <table
       data-cy="peopleTable"
@@ -75,31 +83,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>{person.born}</td>
               <td>{person.died}</td>
               <td>
-                {person.motherName ? (
-                  <>
-                    {mother ? (
-                      <PeopleLink person={mother} />
-                    ) : (
-                      person.motherName
-                    )}
-                  </>
-                ) : (
-                  '-'
-                )}
+                {person.motherName ? getParent(mother, person.motherName) : '-'}
               </td>
 
               <td>
-                {person.fatherName ? (
-                  <>
-                    {father ? (
-                      <PeopleLink person={father} />
-                    ) : (
-                      person.fatherName
-                    )}
-                  </>
-                ) : (
-                  '-'
-                )}
+                {person.fatherName ? getParent(father, person.fatherName) : '-'}
               </td>
             </tr>
           );
