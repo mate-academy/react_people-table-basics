@@ -24,9 +24,8 @@ export const PeoplePage: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isLoading ? (
-            <Loader />
-          ) : (
+          {isLoading && <Loader />}
+          {!isLoading && (
             <>
               {isError ? (
                 <p data-cy="peopleLoadingError" className="has-text-danger">
