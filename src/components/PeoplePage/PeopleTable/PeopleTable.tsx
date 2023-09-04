@@ -14,9 +14,9 @@ type Props = {
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
 
-  function getFindPerson(name: string) {
+  const findPersonByName = (name: string) => {
     return people.find(currentPerson => currentPerson.name === name);
-  }
+  };
 
   useEffect(() => {
     const selectedPerson = document.querySelector('.has-background-warning');
@@ -35,17 +35,21 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
   }, [slug]);
 
   const getParent = (
-    parent: Person | undefined, personParent: string,
+    personParent: string,
+    parent?: Person,
   ) => {
-    return parent
-      ? <PeopleLink person={parent} />
-      : personParent;
+    return parent ? <PeopleLink person={parent} /> : personParent;
   };
 
   return (
     <table
       data-cy="peopleTable"
-      className="table is-striped is-hoverable is-narrow is-fullwidth"
+      className="
+        table
+        is-striped
+        is-hoverable
+        is-narrow
+        is-fullwidth"
     >
       <thead>
         <tr>
@@ -61,33 +65,37 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       <tbody>
         {people.map(person => {
           const mother = person.motherName
-            ? getFindPerson(person.motherName)
+            ? findPersonByName(person.motherName)
             : undefined;
           const father = person.fatherName
-            ? getFindPerson(person.fatherName)
+            ? findPersonByName(person.fatherName)
             : undefined;
+
+          const isPersonSelected = person.slug === slug;
 
           return (
             <tr
               key={person.slug}
               data-cy="person"
               className={classNames({
-                'has-background-warning': person.slug === slug,
+                'has-background-warning': isPersonSelected,
               })}
             >
               <td>
                 <PeopleLink person={person} />
               </td>
-
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
               <td>
-                {person.motherName ? getParent(mother, person.motherName) : '-'}
+                {person.motherName
+                  ? getParent(person.motherName, mother)
+                  : '-'}
               </td>
-
               <td>
-                {person.fatherName ? getParent(father, person.fatherName) : '-'}
+                {person.fatherName
+                  ? getParent(person.fatherName, father)
+                  : '-'}
               </td>
             </tr>
           );

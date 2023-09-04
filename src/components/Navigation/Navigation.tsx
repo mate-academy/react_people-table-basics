@@ -10,7 +10,7 @@ const getNavClass = ({ isActive }: { isActive: boolean }) => classNames(
 
 export const Navigation: React.FC = () => (
   <nav
-    data-cy="Nav"
+    data-cy="nav"
     className="
       navbar
       is-light

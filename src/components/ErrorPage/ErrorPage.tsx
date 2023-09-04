@@ -14,7 +14,7 @@ export const ErrorPage: React.FC = () => (
 
         <div className="error-page__description">
           <h3 className="label">
-            {'Look like you\'re lost'}
+            Look like you&apos;re lost
           </h3>
 
           <p>
