@@ -7,13 +7,11 @@ type Props = {
   people: Person[],
 };
 
+enum Sex {
+  female = 'f',
+}
+
 export const PersonLink: React.FC<Props> = ({ person, people }) => {
-  const createPersonId = (name: string, born: number) => {
-    const lowerRegister = name[0].toLowerCase() + name.slice(1);
-
-    return (`${lowerRegister} ${born}`).split(' ').join('-');
-  };
-
   const { personId } = useParams();
 
   const {
@@ -23,6 +21,7 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
     died,
     motherName,
     fatherName,
+    slug,
   } = person;
 
   const haveMotherFromPeople = () => {
@@ -48,13 +47,13 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
   return (
     <tr
       data-cy="person"
-      className={personId === createPersonId(name, born)
+      className={personId === slug
         ? 'has-background-warning' : ''}
     >
       <td>
         <Link
-          to={`/people/${createPersonId(name, born)}`}
-          className={sex === 'f' ? 'has-text-danger' : ''}
+          to={`/people/${slug}`}
+          className={sex === Sex.female ? 'has-text-danger' : ''}
         >
           {name}
         </Link>
@@ -67,7 +66,7 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
       <td>
         {isFindedMother ? (
           <Link
-            to={`/people/${createPersonId(isFindedMother.name, isFindedMother.born)}`}
+            to={`/people/${isFindedMother.slug}`}
             className="has-text-danger"
           >
             {isFindedMother.name}
@@ -80,7 +79,7 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
       <td>
         {isFindedFather ? (
           <Link
-            to={`/people/${createPersonId(isFindedFather.name, isFindedFather.born)}`}
+            to={`/people/${isFindedFather.slug}`}
           >
             {isFindedFather.name}
           </Link>
