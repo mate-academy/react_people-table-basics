@@ -43,7 +43,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => (
             <td>
               {person.motherName ? (
                 <>
-                  {person.mother !== undefined ? (
+                  {person.mother ? (
                     <PersonLink person={person.mother} />
                   ) : (
                     person.motherName
@@ -56,7 +56,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => (
             <td>
               {person.fatherName ? (
                 <>
-                  {person.father !== undefined ? (
+                  {person.father ? (
                     <PersonLink person={person.father} />
                   ) : (
                     person.fatherName
