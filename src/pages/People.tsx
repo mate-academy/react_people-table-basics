@@ -26,20 +26,20 @@ export const People: React.FC = () => {
       return '-';
     }
 
-    const parent = people.filter(el => el.name === name);
+    const parent = people.find(el => el.name === name);
 
-    if (!parent.length) {
+    if (!parent) {
       return name;
     }
 
     return (
       <Link
         className={cn(
-          { 'has-text-danger': parent[0].sex === 'f' },
+          { 'has-text-danger': parent.sex === 'f' },
         )}
-        to={`../${parent[0].slug}`}
+        to={`../${parent.slug}`}
       >
-        {parent[0].name}
+        {parent.name}
       </Link>
     );
   };
