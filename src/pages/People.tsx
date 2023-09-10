@@ -14,7 +14,7 @@ export const People: React.FC = () => {
   useEffect(() => {
     setLoading(true);
     getPeople()
-      .then((res) => setPeople(res))
+      .then(setPeople)
       .catch(err => {
         setError(true);
         Error(err.message);
@@ -122,25 +122,6 @@ export const People: React.FC = () => {
                       </tr>
                     );
                   })}
-                  <tr
-                    data-cy="person"
-                    // className="has-background-warning"
-                    // className="has-text-danger"
-                  >
-                    <td>
-                      <a
-                        href="#/people/jan-van-brussel-1714"
-                      >
-                        Jan van Brussel
-                      </a>
-                    </td>
-
-                    <td>m</td>
-                    <td>1714</td>
-                    <td>1748</td>
-                    <td>Joanna van Rooten</td>
-                    <td>Jacobus van Brussel</td>
-                  </tr>
                 </tbody>
               </table>
             )}
