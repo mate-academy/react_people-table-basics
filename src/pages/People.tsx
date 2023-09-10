@@ -15,10 +15,8 @@ export const People: React.FC = () => {
     setLoading(true);
     getPeople()
       .then(setPeople)
-      .catch(err => {
-        setError(true);
-        Error(err.message);
-      }).finally(() => setLoading(false));
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
   }, []);
 
   const parentLink = (name: string | null) => {
@@ -26,7 +24,7 @@ export const People: React.FC = () => {
       return '-';
     }
 
-    const parent = people.find(el => el.name === name);
+    const parent = people?.find(el => el.name === name);
 
     if (!parent) {
       return name;
@@ -58,7 +56,7 @@ export const People: React.FC = () => {
             </p>
           )}
 
-          {people.length === 0
+          {(people?.length === 0 && !loading)
             && (
               <p
                 data-cy="noPeopleMessage"
@@ -86,7 +84,7 @@ export const People: React.FC = () => {
                 </thead>
 
                 <tbody>
-                  {people.map(({
+                  {people?.map(({
                     name,
                     slug,
                     sex,
