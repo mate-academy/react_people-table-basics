@@ -22,30 +22,28 @@ export const PeoplePage: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <>
-              {isLoadingError ? (
-                <p
-                  data-cy="peopleLoadingError"
-                  className="has-text-danger"
-                >
-                  Something went wrong
-                </p>
-              ) : (
-                <>
-                  {people.length ? (
-                    <TablePage people={people} />
-                  ) : (
-                    <p data-cy="noPeopleMessage">
-                      There are no people on the server
-                    </p>
-                  )}
-                </>
-              )}
-            </>
-          )}
+          {isLoading && <Loader />}
+
+          <>
+            {isLoadingError ? (
+              <p
+                data-cy="peopleLoadingError"
+                className="has-text-danger"
+              >
+                Something went wrong
+              </p>
+            ) : (
+              <>
+                {people.length ? (
+                  <TablePage people={people} />
+                ) : (
+                  <p data-cy="noPeopleMessage">
+                    There are no people on the server
+                  </p>
+                )}
+              </>
+            )}
+          </>
         </div>
       </div>
     </>
