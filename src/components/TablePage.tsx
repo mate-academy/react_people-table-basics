@@ -45,16 +45,15 @@ export const TablePage: React.FC<Props> = ({ people }) => {
           </tr>
         </thead>
 
-        {people.map(person => {
-          const mother = person.motherName
-            ? getPersonByName(person.motherName)
-            : undefined;
-          const father = person.fatherName
-            ? getPersonByName(person.fatherName)
-            : undefined;
+        <tbody>
+          {people.map(person => {
+            const {
+              motherName, fatherName, sex, born, died,
+            } = person;
+            const mother = motherName ? getPersonByName(motherName) : undefined;
+            const father = fatherName ? getPersonByName(fatherName) : undefined;
 
-          return (
-            <tbody>
+            return (
               <tr
                 key={person.slug}
                 data-cy="person"
@@ -65,31 +64,23 @@ export const TablePage: React.FC<Props> = ({ people }) => {
                 <td>
                   <PersonLink person={person} />
                 </td>
-                <td>{person.sex}</td>
-                <td>{person.born}</td>
-                <td>{person.died}</td>
+                <td>{sex}</td>
+                <td>{born}</td>
+                <td>{died}</td>
                 <td>
-                  {(person.motherName
-                    && (mother ? (
-                      <PersonLink person={mother} />
-                    ) : (
-                      person.motherName
-                    )))
+                  {(motherName
+                    && (mother ? <PersonLink person={mother} /> : motherName))
                     || '-'}
                 </td>
                 <td>
-                  {(person.fatherName
-                    && (father ? (
-                      <PersonLink person={father} />
-                    ) : (
-                      person.fatherName
-                    )))
+                  {(fatherName
+                    && (father ? <PersonLink person={father} /> : fatherName))
                     || '-'}
                 </td>
               </tr>
-            </tbody>
-          );
-        })}
+            );
+          })}
+        </tbody>
       </table>
     </>
   );
