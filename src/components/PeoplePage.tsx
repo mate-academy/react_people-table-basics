@@ -22,9 +22,8 @@ export const PeoplePage: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isLoading ? (
-            <Loader />
-          ) : (
+          {isLoading && <Loader />}
+          {!isLoading && (
             <>
               {isLoadingError ? (
                 <p
@@ -35,7 +34,7 @@ export const PeoplePage: React.FC = () => {
                 </p>
               ) : (
                 <>
-                  {!isLoading && people.length > 0 ? (
+                  {people.length > 0 ? (
                     <TablePage people={people} />
                   ) : (
                     <p data-cy="noPeopleMessage">
