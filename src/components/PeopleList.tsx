@@ -8,7 +8,11 @@ type Props = {
 };
 
 export const PeopleList: React.FC<Props> = ({ people }) => {
-  const { slug } = useParams();
+  const { slugPerson } = useParams();
+
+  function getPersonName(name: string) {
+    return people.find(pers => pers.name === name);
+  }
 
   return (
     <table
@@ -27,24 +31,27 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => {
-          const {
-            sex, born, died, motherName, fatherName,
-          } = person;
+        {people.map(({
+          sex, born, died, motherName, fatherName, slug, name,
+        }) => {
           const mother = motherName
-            ? people.find(mam => mam.name === motherName) : undefined;
+            ? getPersonName(motherName) : undefined;
           const father = fatherName
-            ? people.find(dad => dad.name === fatherName) : undefined;
+            ? getPersonName(fatherName) : undefined;
 
           return (
             <tr
+              key={slug}
               data-cy="person"
               className={classNames({
-                'has-background-warning': person.slug === slug,
+                'has-background-warning': slug === slugPerson,
               })}
             >
               <td>
-                <PersonLink person={person} />
+                <PersonLink person={({
+                  sex, born, died, motherName, fatherName, slug, name,
+                })}
+                />
               </td>
 
               <td>{sex}</td>
@@ -55,14 +62,14 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
                   ? (
                     <PersonLink person={mother} />
                   )
-                  : motherName || (<span> - </span>)}
+                  : motherName || (<span>-</span>)}
               </td>
               <td>
                 {father
                   ? (
                     <PersonLink person={father} />
                   )
-                  : fatherName || (<span> - </span>)}
+                  : fatherName || (<span>-</span>)}
               </td>
             </tr>
           );
