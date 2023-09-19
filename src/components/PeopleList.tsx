@@ -11,7 +11,11 @@ type Props = {
 export const PeopleList:React.FC<Props> = ({ people }) => {
   const { slugPerson } = useParams();
 
-  const getPersonName = (name: string) => {
+  const getPersonName = (name: string | null) => {
+    if (!name) {
+      return undefined;
+    }
+
     return people.find(person => person.name === name);
   };
 
@@ -35,8 +39,8 @@ export const PeopleList:React.FC<Props> = ({ people }) => {
         {people.map(({
           name, sex, born, died, slug, fatherName, motherName,
         }) => {
-          const mother = motherName ? getPersonName(motherName) : undefined;
-          const father = fatherName ? getPersonName(fatherName) : undefined;
+          const mother = getPersonName(motherName);
+          const father = getPersonName(fatherName);
 
           return (
             <tr
