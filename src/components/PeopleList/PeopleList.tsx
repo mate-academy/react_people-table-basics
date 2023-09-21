@@ -7,6 +7,11 @@ import { getPeople } from '../../api';
 
 type Props = {};
 
+const GENDER_FEMALE = 'f';
+const GENDER_MALE = 'm';
+const tableColumnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+const NOT_SET_VALUE = '-';
+
 export const PeopleList: React.FC<Props> = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [people, setPeople] = useState<Person[]>([]);
@@ -21,9 +26,9 @@ export const PeopleList: React.FC<Props> = () => {
       .then((persons) => {
         const preparedPeople: Person[] = persons.map((person: Person) => ({
           ...person,
-          mother: persons.find(({ sex, name }: Person) => sex === 'f'
+          mother: persons.find(({ sex, name }: Person) => sex === GENDER_FEMALE
             && name === person.motherName),
-          father: persons.find(({ sex, name }: Person) => sex === 'm'
+          father: persons.find(({ sex, name }: Person) => sex === GENDER_MALE
             && name === person.fatherName),
         }));
 
@@ -35,6 +40,10 @@ export const PeopleList: React.FC<Props> = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
+  const isDataAvailable = !isLoadingErrorShown && !!people.length;
+  const isDataEmptyAndNoErrors = !people.length
+  && !isLoadingErrorShown && !isLoading;
+
   return (
     <div className="block">
       <div className="box table-container">
@@ -42,67 +51,73 @@ export const PeopleList: React.FC<Props> = () => {
           <Loader />
         ) : (
           <>
-            {(!isLoadingErrorShown && !!people.length) && (
+            {isDataAvailable && (
               <table
                 data-cy="peopleTable"
                 className="table is-striped is-hoverable is-narrow is-fullwidth"
               >
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Born</th>
-                    <th>Died</th>
-                    <th>Mother</th>
-                    <th>Father</th>
+                    {tableColumnNames.map(name => <th key={name}>{name}</th>)}
                   </tr>
                 </thead>
 
                 <tbody>
                   {people.map((person) => {
-                    const isFemale = person.sex === 'f';
+                    const isFemale = person.sex === GENDER_FEMALE;
+                    const {
+                      name,
+                      sex,
+                      slug,
+                      born,
+                      died,
+                      motherName,
+                      fatherName,
+                      mother,
+                      father,
+                    } = person;
 
                     return (
                       <tr
                         data-cy="person"
                         className={classNames({
-                          'has-background-warning': person.slug === personSlug,
+                          'has-background-warning': slug === personSlug,
                         })}
                       >
                         <td>
                           <Link
-                            to={person.slug}
+                            to={slug}
                             className={classNames({
                               'has-text-danger': isFemale,
                             })}
                           >
-                            {person.name}
+                            {name}
                           </Link>
                         </td>
 
-                        <td>{person.sex}</td>
-                        <td>{person.born}</td>
-                        <td>{person.died}</td>
+                        <td>{sex}</td>
+                        <td>{born}</td>
+                        <td>{died}</td>
                         <td>
-                          {person.mother ? (
+                          {mother ? (
                             <Link
-                              to={`${person.mother.slug}`}
+                              to={`${mother.slug}`}
                               replace
                               className="has-text-danger"
                             >
-                              {person.motherName}
+                              {motherName}
                             </Link>
                           ) : (
-                            person.motherName || '-'
+                            motherName || NOT_SET_VALUE
                           )}
                         </td>
                         <td>
-                          {person.father ? (
-                            <Link to={`${person.father.slug}`}>
-                              {person.fatherName}
+                          {father ? (
+                            <Link to={`${father.slug}`}>
+                              {fatherName}
                             </Link>
                           ) : (
-                            person.fatherName || '-'
+                            fatherName || NOT_SET_VALUE
                           )}
                         </td>
                       </tr>
@@ -119,7 +134,7 @@ export const PeopleList: React.FC<Props> = () => {
           </p>
         )}
 
-        {(!people.length && !isLoadingErrorShown && !isLoading) && (
+        {isDataEmptyAndNoErrors && (
           <p data-cy="noPeopleMessage">
             There are no people on the server
           </p>
