@@ -6,7 +6,7 @@ import { Person } from '../types';
 
 type Props = {
   person: Person,
-  peopleFromServer: Person[] | []
+  people: Person[],
 };
 
 const renderPersonName = (person: Person | undefined, name?: string | null) => {
@@ -32,16 +32,16 @@ const renderPersonName = (person: Person | undefined, name?: string | null) => {
 
 export const PersonLink: React.FC<Props> = ({
   person,
-  peopleFromServer,
+  people,
 }) => {
   const { slug } = useParams();
-  const selectedPerson = peopleFromServer.find(p => p.slug === slug);
+  const selectedPerson = people.find(p => p.slug === slug);
 
-  const personMother = peopleFromServer.find(
+  const personMother = people.find(
     mother => mother.name === person.motherName,
   );
 
-  const personFather = peopleFromServer.find(
+  const personFather = people.find(
     father => father.name === person.fatherName,
   );
 
