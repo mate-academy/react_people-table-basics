@@ -6,7 +6,7 @@ import { PersonLink } from '../PersonLink';
 import { tableColumnNames } from '../../utils/constants';
 
 type Props = {
-  people: Person[] | null;
+  people: Person[];
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
@@ -24,7 +24,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people?.map(person => {
+        {people.map(person => {
           const {
             sex,
             born,

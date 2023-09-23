@@ -10,12 +10,12 @@ type Props = {
 export const PersonLink: React.FC<Props> = ({ person }) => {
   return (
     <Link
-      to={`/people/${person?.slug}`}
+      to={`/people/${person.slug}`}
       className={classnames({
-        'has-text-danger': person?.sex === FEMALE_SEX,
+        'has-text-danger': person.sex === FEMALE_SEX,
       })}
     >
-      {person?.name}
+      {person.name}
     </Link>
   );
 };

@@ -7,22 +7,18 @@ import { PeopleTable } from '../components/PeopleTable';
 export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorHappened, setIsErrorHappened] = useState(false);
-  const [people, setPeople] = useState<Person[] | null>([]);
+  const [people, setPeople] = useState<Person[] | []>([]);
 
   useEffect(() => {
     setIsLoading(true);
 
     getPeople()
-      .then((peopleFromServer) => {
-        setPeople(peopleFromServer);
-      })
-      .catch(() => {
-        setIsErrorHappened(true);
-      })
+      .then(setPeople)
+      .catch(() => setIsErrorHappened(true))
       .finally(() => setIsLoading(false));
   }, []);
 
-  const isPeopleNotExist = !isLoading && !isErrorHappened && !people?.length;
+  const isPeopleNotExist = !isLoading && !isErrorHappened && !people.length;
 
   return (
     <>
@@ -44,7 +40,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!!people?.length && (
+          {!!people.length && (
             <PeopleTable people={people} />
           )}
         </div>
