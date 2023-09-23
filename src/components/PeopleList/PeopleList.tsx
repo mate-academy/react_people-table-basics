@@ -1,36 +1,33 @@
-import classNames from 'classnames';
-import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Person } from '../../types';
+import { PersonType } from '../../types';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
+import {
+  tableColumnNames,
+} from '../../utils/consts';
+import { getMother } from '../../utils/getMother';
+import { getFather } from '../../utils/getFather';
+import { Person } from '../Person/Person';
 
 type Props = {};
 
-const GENDER_FEMALE = 'f';
-const GENDER_MALE = 'm';
-const tableColumnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
-const NOT_SET_VALUE = '-';
-
 export const PeopleList: React.FC<Props> = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [people, setPeople] = useState<Person[]>([]);
+  const [people, setPeople] = useState<PersonType[]>([]);
 
   const [isLoadingErrorShown, setIsLoadingErrorShown] = useState(false);
-
-  const { personSlug } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
     getPeople()
       .then((persons) => {
-        const preparedPeople: Person[] = persons.map((person: Person) => ({
-          ...person,
-          mother: persons.find(({ sex, name }: Person) => sex === GENDER_FEMALE
-            && name === person.motherName),
-          father: persons.find(({ sex, name }: Person) => sex === GENDER_MALE
-            && name === person.fatherName),
-        }));
+        const preparedPeople: PersonType[] = persons.map(
+          (person: PersonType) => ({
+            ...person,
+            mother: getMother(persons, person),
+            father: getFather(persons, person),
+          }),
+        );
 
         setPeople(preparedPeople);
       })
@@ -42,7 +39,7 @@ export const PeopleList: React.FC<Props> = () => {
 
   const isDataAvailable = !isLoadingErrorShown && !!people.length;
   const isDataEmptyAndNoErrors = !people.length
-  && !isLoadingErrorShown && !isLoading;
+    && !isLoadingErrorShown && !isLoading;
 
   return (
     <div className="block">
@@ -64,63 +61,8 @@ export const PeopleList: React.FC<Props> = () => {
 
                 <tbody>
                   {people.map((person) => {
-                    const isFemale = person.sex === GENDER_FEMALE;
-                    const {
-                      name,
-                      sex,
-                      slug,
-                      born,
-                      died,
-                      motherName,
-                      fatherName,
-                      mother,
-                      father,
-                    } = person;
-
                     return (
-                      <tr
-                        data-cy="person"
-                        className={classNames({
-                          'has-background-warning': slug === personSlug,
-                        })}
-                      >
-                        <td>
-                          <Link
-                            to={slug}
-                            className={classNames({
-                              'has-text-danger': isFemale,
-                            })}
-                          >
-                            {name}
-                          </Link>
-                        </td>
-
-                        <td>{sex}</td>
-                        <td>{born}</td>
-                        <td>{died}</td>
-                        <td>
-                          {mother ? (
-                            <Link
-                              to={`${mother.slug}`}
-                              replace
-                              className="has-text-danger"
-                            >
-                              {motherName}
-                            </Link>
-                          ) : (
-                            motherName || NOT_SET_VALUE
-                          )}
-                        </td>
-                        <td>
-                          {father ? (
-                            <Link to={`${father.slug}`}>
-                              {fatherName}
-                            </Link>
-                          ) : (
-                            fatherName || NOT_SET_VALUE
-                          )}
-                        </td>
-                      </tr>
+                      <Person person={person} />
                     );
                   })}
                 </tbody>
