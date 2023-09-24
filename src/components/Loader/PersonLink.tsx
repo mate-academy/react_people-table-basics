@@ -33,6 +33,7 @@ export const PersoLink: React.FC<Props> = ({ person }) => {
         {person.mother ? (
           <Link
             to={`/people/${person.mother.slug}`}
+            className="has-text-danger"
           >
             {person.motherName}
           </Link>
