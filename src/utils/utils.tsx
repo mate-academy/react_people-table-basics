@@ -1,41 +1,16 @@
 import classnames from 'classnames';
-import { PersonLink } from '../components/PersonLink';
 import { Person } from '../types';
-import { NOT_SET_VALUE } from './constants';
+import { FEMALE_SEX, MALE_SEX } from './constants';
 
-export const getFatherPerson = (
-  people: Person[],
-  fatherName: string | null,
-) => {
-  if (fatherName === null) {
-    return NOT_SET_VALUE;
-  }
+export function getFatherPerson(persons: Person[], person: Person) {
+  return persons.find(({ sex, name }: Person) => sex === MALE_SEX
+    && name === person.fatherName);
+}
 
-  const person = people.find(({ name }) => name === fatherName);
-
-  if (!person) {
-    return fatherName;
-  }
-
-  return <PersonLink person={person} />;
-};
-
-export const getMotherPerson = (
-  people: Person[],
-  motherName: string | null,
-) => {
-  if (motherName === null) {
-    return NOT_SET_VALUE;
-  }
-
-  const person = people.find(({ name }) => name === motherName);
-
-  if (!person) {
-    return motherName;
-  }
-
-  return <PersonLink person={person} />;
-};
+export function getMotherPerson(persons: Person[], person: Person) {
+  return persons.find(({ sex, name }: Person) => sex === FEMALE_SEX
+    && name === person.motherName);
+}
 
 export const getLinkClass = ({ isActive }: { isActive: boolean }) => {
   return classnames('navbar-item', {

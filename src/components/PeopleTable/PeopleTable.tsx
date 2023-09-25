@@ -1,9 +1,8 @@
 import { useParams } from 'react-router-dom';
 import classnames from 'classnames';
 import { Person } from '../../types';
-import { getFatherPerson, getMotherPerson } from '../../utils/utils';
 import { PersonLink } from '../PersonLink';
-import { tableColumnNames } from '../../utils/constants';
+import { NOT_SET_VALUE, tableColumnNames } from '../../utils/constants';
 
 type Props = {
   people: Person[];
@@ -19,7 +18,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          {tableColumnNames.map(name => <th key={name}>{name}</th>)}
+          {tableColumnNames.map(name => (
+            <th key={name}>
+              {name}
+            </th>
+          ))}
         </tr>
       </thead>
 
@@ -32,6 +35,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             fatherName,
             motherName,
             slug,
+            mother,
+            father,
           } = person;
 
           return (
@@ -49,10 +54,14 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>{born}</td>
               <td>{died}</td>
               <td>
-                {getMotherPerson(people, motherName)}
+                {mother
+                  ? <PersonLink person={mother} />
+                  : motherName || NOT_SET_VALUE}
               </td>
               <td>
-                {getFatherPerson(people, fatherName)}
+                {father
+                  ? <PersonLink person={father} />
+                  : fatherName || NOT_SET_VALUE}
               </td>
             </tr>
           );
