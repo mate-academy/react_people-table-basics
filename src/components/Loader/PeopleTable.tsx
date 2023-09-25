@@ -54,7 +54,7 @@ export const PeopleTable: React.FC = () => {
           </p>
         )}
 
-        {people.length !== 0 && (
+        {!!people.length && (
           <table
             data-cy="peopleTable"
             className="table is-striped is-hoverable is-narrow is-fullwidth"
