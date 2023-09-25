@@ -5,14 +5,13 @@ import { getPeople } from '../../api';
 import {
   tableColumnNames,
 } from '../../utils/consts';
-import { getMother } from '../../utils/getMother';
-import { getFather } from '../../utils/getFather';
 import { Person } from '../Person/Person';
+import { getPreparedPeople } from '../../utils/getPreparedPeople';
 
 type Props = {};
 
 export const PeopleList: React.FC<Props> = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [people, setPeople] = useState<PersonType[]>([]);
 
   const [isLoadingErrorShown, setIsLoadingErrorShown] = useState(false);
@@ -21,13 +20,7 @@ export const PeopleList: React.FC<Props> = () => {
     setIsLoading(true);
     getPeople()
       .then((persons) => {
-        const preparedPeople: PersonType[] = persons.map(
-          (person: PersonType) => ({
-            ...person,
-            mother: getMother(persons, person),
-            father: getFather(persons, person),
-          }),
-        );
+        const preparedPeople: PersonType[] = getPreparedPeople(persons);
 
         setPeople(preparedPeople);
       })
@@ -55,7 +48,11 @@ export const PeopleList: React.FC<Props> = () => {
               >
                 <thead>
                   <tr>
-                    {tableColumnNames.map(name => <th key={name}>{name}</th>)}
+                    {tableColumnNames.map(name => (
+                      <th key={name}>
+                        {name}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
 
