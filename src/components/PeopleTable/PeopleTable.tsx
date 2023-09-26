@@ -5,6 +5,8 @@ import { Person } from '../../types';
 import { PeopleLink } from '../PeopleLink';
 import { ParentsLink } from '../ParentsLink';
 
+const columnsNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 type Props = {
   people: Person[];
 };
@@ -19,12 +21,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {columnsNames.map(columnName => (
+            <th key={columnName}>
+              {columnName}
+            </th>
+          ))}
         </tr>
       </thead>
 

@@ -13,7 +13,7 @@ export const ParentsLink: React.FC<Props> = ({ parentName }) => {
     return <>-</>;
   }
 
-  const personByName = people.find(pers => pers.name === parentName);
+  const personByName = people.find(({ name }) => name === parentName);
 
   if (personByName) {
     return <PeopleLink person={personByName} />;
