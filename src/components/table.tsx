@@ -7,6 +7,12 @@ interface Props {
 }
 
 export const Table: React.FC<Props> = ({ people }) => {
+  const getPersonLink = (name: string) => {
+    const person = people.find((p) => p.name === name);
+
+    return person ? <a href={`#/people/${person.slug}`}>{name}</a> : name;
+  };
+
   return (
     <table
       data-cy="peopleTable"
@@ -36,32 +42,8 @@ export const Table: React.FC<Props> = ({ people }) => {
             <td>{p.sex}</td>
             <td>{p.born}</td>
             <td>{p.died}</td>
-            <td>
-              {p.mother ? (
-                people.find((person) => person.name === p.mother) ? (
-                  <a href={`#/people/${people.find((person) => person.name === p.mother)?.slug}`}>
-                    {p.mother}
-                  </a>
-                ) : (
-                  p.mother
-                )
-              ) : (
-                '-'
-              )}
-            </td>
-            <td>
-              {p.father ? (
-                people.find((person) => person.name === p.father) ? (
-                  <a href={`#/people/${people.find((person) => person.name === p.father)?.slug}`}>
-                    {p.father}
-                  </a>
-                ) : (
-                  p.father
-                )
-              ) : (
-                '-'
-              )}
-            </td>
+            <td>{p.mother ? getPersonLink(p.mother.name) : '-'}</td>
+            <td>{p.father ? getPersonLink(p.father.name) : '-'}</td>
           </tr>
         ))}
       </tbody>

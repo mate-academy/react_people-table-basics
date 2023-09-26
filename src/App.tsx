@@ -10,13 +10,19 @@ import { Person } from './types';
 export const App: React.FC = () => {
   const [activePage, setActivePage] = useState('');
   const [people, setPeople] = useState<Person[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (activePage === 'people') {
       getPeople()
         .then(data => {
-          return setPeople(data);
+          setPeople(data);
+          setError(null);
         });
+    }
+
+    if (people) {
+      setError('could not load data');
     }
   }, [activePage]);
 
@@ -52,16 +58,20 @@ export const App: React.FC = () => {
 
         <main className="section">
           <div className="container">
-            <Route exact path="/people">
+            <Route path="/people">
               <div className="block">
                 <div className="box table-container">
                   <h1 className="title">People Page</h1>
-                  <Table people={people} />
+                  {error ? (
+                    <p className="has-text-danger">{error}</p>
+                  ) : (
+                    <Table people={people} />
+                  )}
                 </div>
               </div>
             </Route>
 
-            <Route exact path="/">
+            <Route path="/">
               <h1 className="title">Home Page</h1>
             </Route>
 
