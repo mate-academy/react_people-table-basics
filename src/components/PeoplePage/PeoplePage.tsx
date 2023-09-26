@@ -27,6 +27,8 @@ export const PeoplePage: React.FC = () => {
         setIsLoad(false);
       }
     })();
+
+    return () => setPeople([]);
   }, []);
 
   return (
