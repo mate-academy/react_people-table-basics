@@ -13,7 +13,9 @@ export const App = () => (
           <Route path="/" element={<NavBar />}>
             <Route index element={<HomePage />} />
             <Route path="*" element={<NotFoundPage />} />
-            <Route path="people" element={<PeoplePage />} />
+            <Route path="people" element={<PeoplePage />}>
+              <Route path=":slug" element={<PeoplePage />} />
+            </Route>
             <Route path="home" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>
