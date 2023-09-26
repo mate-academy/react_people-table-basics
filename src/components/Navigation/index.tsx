@@ -25,7 +25,7 @@ export const Navigation = () => {
               className={({ isActive }) => classNames('navbar-item',
                 { 'has-background-grey-lighter': isActive })}
             >
-              Home Page
+              Home
             </NavLink>
             <NavLink
               to="/people"
