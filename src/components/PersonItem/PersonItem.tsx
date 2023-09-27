@@ -36,20 +36,18 @@ export const PersonItem: React.FC<Props> = ({ person, selectedSlug }) => {
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {mother && (
+        {mother ? (
           <PersonLink person={mother} />
+        ) : (
+          motherName || NOT_SET_VALUE
         )}
-
-        {!mother && motherName}
-        {!motherName && NOT_SET_VALUE}
       </td>
       <td>
-        {father && (
+        {father ? (
           <PersonLink person={father} />
+        ) : (
+          fatherName || NOT_SET_VALUE
         )}
-
-        {!father && fatherName}
-        {!fatherName && NOT_SET_VALUE}
       </td>
     </tr>
   );

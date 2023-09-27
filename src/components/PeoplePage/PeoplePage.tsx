@@ -3,21 +3,7 @@ import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PeopleList } from '../PeopleList/PeopleList';
-
-function getFixedPeople(people: Person[]) {
-  const peopleCopy: Person[] = JSON.parse(JSON.stringify(people));
-
-  peopleCopy.forEach(person => {
-    // eslint-disable-next-line no-param-reassign
-    person.mother = people
-      .find(mother => mother.name === person.motherName);
-    // eslint-disable-next-line no-param-reassign
-    person.father = people
-      .find(father => father.name === person.fatherName);
-  });
-
-  return peopleCopy;
-}
+import { getFixedPeople } from '../../utils/PeopleUtils';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -55,7 +41,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {(!people.length && !isLoading) && (
+          {(!people.length && !isLoading && !isError) && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
