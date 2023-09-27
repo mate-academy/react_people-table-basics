@@ -5,11 +5,7 @@ export const PeopleTable: React.FC<{ people: Person[] }> = ({ people }) => {
   return (
     <table
       data-cy="peopleTable"
-      className="table
-                is-striped
-                is-hoverable
-                is-narrow
-                is-fullwidth"
+      className="table is-striped is-hoverable is-narrow is-fullwidth"
     >
       <thead>
         <tr>

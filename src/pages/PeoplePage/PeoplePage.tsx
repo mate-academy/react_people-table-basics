@@ -34,33 +34,29 @@ export const PeoplePage = () => {
     loadPeople();
   }, []);
 
+  const renderContent = () => {
+    if (loading) {
+      return <Loader />;
+    }
+
+    if (loadingError) {
+      return <LoadingError />;
+    }
+
+    if (people.length) {
+      return <PeopleTable people={people} />;
+    }
+
+    return <p data-cy="noPeopleMessage">There are no people on the server</p>;
+  };
+
   return (
     <>
       <h1 className="title">People Page</h1>
 
       <div className="block">
         <div className="box table-container">
-          {loading ? (
-            <Loader />
-          ) : (
-            <>
-              {loadingError ? (
-                <LoadingError />
-              ) : (
-                <>
-                  {people.length > 0 ? (
-                    <PeopleTable
-                      people={people}
-                    />
-                  ) : (
-                    <p data-cy="noPeopleMessage">
-                      There are no people on the server
-                    </p>
-                  )}
-                </>
-              )}
-            </>
-          )}
+          {renderContent()}
         </div>
       </div>
     </>

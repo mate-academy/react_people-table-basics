@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { Person } from '../../types';
+import { ParentsPage } from '../ParrentsPage';
 
 export const PersonPage: React.FC<{ person: Person }> = ({
   person: {
@@ -15,24 +16,6 @@ export const PersonPage: React.FC<{ person: Person }> = ({
   },
 }) => {
   const { personSlug } = useParams();
-
-  const renderParrents = (
-    parrentPerson: Person | null = null,
-    parrentName: string | null,
-  ) => {
-    if (parrentPerson) {
-      return (
-        <Link
-          className={parrentPerson.sex === 'f' ? 'has-text-danger' : ''}
-          to={parrentPerson.slug}
-        >
-          {parrentName}
-        </Link>
-      );
-    }
-
-    return parrentName || '-';
-  };
 
   return (
     <tr
@@ -52,10 +35,10 @@ export const PersonPage: React.FC<{ person: Person }> = ({
       <td>{ born }</td>
       <td>{died}</td>
       <td>
-        {renderParrents(mother, motherName)}
+        <ParentsPage parentPerson={mother} parentName={motherName} />
       </td>
       <td>
-        {renderParrents(father, fatherName)}
+        <ParentsPage parentPerson={father} parentName={fatherName} />
       </td>
     </tr>
   );
