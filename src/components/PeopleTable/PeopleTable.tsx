@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from './PersonLink/PersonLink';
 
@@ -10,27 +9,9 @@ type PeopleTableProps = {
 export const PeopleTable: React.FC<PeopleTableProps> = (
   { people },
 ) => {
-  const { personSlug } = useParams<{ personSlug?: string } >();
-  const [selectedPersonSlug, setSelectedPersonSlug]
-    = useState<string | null>(personSlug !== undefined ? personSlug : null);
+  const { personSlug } = useParams();
 
-  const handleSelectedPerson = (slug: string) => {
-    const findSelectedPerson = people
-      .find(person => person.slug === slug);
-
-    setSelectedPersonSlug(findSelectedPerson !== undefined
-      ? findSelectedPerson.slug : null);
-  };
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (selectedPersonSlug === null) {
-      navigate('/people');
-    } else {
-      navigate(`/people/${selectedPersonSlug}`);
-    }
-  }, [selectedPersonSlug]);
+  const selectedPerson = people.find(person => person.slug === personSlug);
 
   return (
     <table
@@ -53,12 +34,11 @@ export const PeopleTable: React.FC<PeopleTableProps> = (
           <tr
             data-cy="person"
             key={person.slug}
-            className={person.slug === selectedPersonSlug
+            className={person.slug === selectedPerson?.slug
               ? 'has-background-warning' : undefined}
           >
             <PersonLink
               person={person}
-              handleSelectedPerson={handleSelectedPerson}
             />
 
             <td>{person.sex}</td>
@@ -68,7 +48,6 @@ export const PeopleTable: React.FC<PeopleTableProps> = (
               ? (
                 <PersonLink
                   person={person.mother}
-                  handleSelectedPerson={handleSelectedPerson}
                 />
               )
               : (
@@ -81,7 +60,6 @@ export const PeopleTable: React.FC<PeopleTableProps> = (
               ? (
                 <PersonLink
                   person={person.father}
-                  handleSelectedPerson={handleSelectedPerson}
                 />
               )
               : (
