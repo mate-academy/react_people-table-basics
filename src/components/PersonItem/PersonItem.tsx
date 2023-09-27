@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
+import { NOT_SET_VALUE } from '../../variables';
 
 type Props = {
   person: Person;
@@ -39,16 +40,16 @@ export const PersonItem: React.FC<Props> = ({ person, selectedSlug }) => {
           <PersonLink person={mother} />
         )}
 
-        {(motherName && !mother) && motherName}
-        {!motherName && '-'}
+        {!mother && motherName}
+        {!motherName && NOT_SET_VALUE}
       </td>
       <td>
         {father && (
           <PersonLink person={father} />
         )}
 
-        {(fatherName && !father) && fatherName}
-        {!fatherName && '-'}
+        {!father && fatherName}
+        {!fatherName && NOT_SET_VALUE}
       </td>
     </tr>
   );

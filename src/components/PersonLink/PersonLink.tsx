@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import classNames from 'classnames';
-import { Person } from '../../types';
+import { Person, PersonSex } from '../../types';
 
 type Props = {
   person: Person
@@ -15,7 +15,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       to={slug}
       className={
         classNames({
-          'has-text-danger': sex === 'f',
+          'has-text-danger': sex === PersonSex.Female,
         })
       }
     >
