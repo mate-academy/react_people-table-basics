@@ -1,4 +1,4 @@
-import { PersonPage } from '../PersonPage';
+import { PersonComponent } from '../PersonComponent';
 import { Person } from '../../types';
 
 export const PeopleTable: React.FC<{ people: Person[] }> = ({ people }) => {
@@ -20,7 +20,7 @@ export const PeopleTable: React.FC<{ people: Person[] }> = ({ people }) => {
 
       <tbody>
         {people.map(person => (
-          <PersonPage
+          <PersonComponent
             key={person.slug}
             person={person}
           />

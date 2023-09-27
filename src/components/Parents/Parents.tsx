@@ -1,19 +1,20 @@
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 
-type ParentsPageProps = {
+type ParentsProps = {
   parentPerson?: Person | null;
   parentName?: string | null;
 };
 
-export const ParentsPage: React.FC<ParentsPageProps> = ({
+export const Parents: React.FC<ParentsProps> = ({
   parentPerson = null,
   parentName = null,
 }) => {
   if (parentPerson) {
     return (
       <Link
-        className={parentPerson.sex === 'f' ? 'has-text-danger' : ''}
+        className={classNames({ 'has-text-danger': parentPerson.sex === 'f' })}
         to={parentPerson.slug}
       >
         {parentName}

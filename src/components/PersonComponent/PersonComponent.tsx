@@ -1,8 +1,9 @@
+import classNames from 'classnames';
 import { Link, useParams } from 'react-router-dom';
 import { Person } from '../../types';
-import { ParentsPage } from '../ParrentsPage';
+import { Parents } from '../Parents';
 
-export const PersonPage: React.FC<{ person: Person }> = ({
+export const PersonComponent: React.FC<{ person: Person }> = ({
   person: {
     name,
     born,
@@ -20,12 +21,12 @@ export const PersonPage: React.FC<{ person: Person }> = ({
   return (
     <tr
       data-cy="person"
-      className={personSlug === slug ? 'has-background-warning' : ''}
+      className={classNames({ 'has-background-warning': personSlug === slug })}
     >
       <td>
         <Link
           to={`${slug}`}
-          className={sex === 'f' ? 'has-text-danger' : ''}
+          className={classNames({ 'has-text-danger': sex === 'f' })}
         >
           {name}
         </Link>
@@ -35,10 +36,10 @@ export const PersonPage: React.FC<{ person: Person }> = ({
       <td>{ born }</td>
       <td>{died}</td>
       <td>
-        <ParentsPage parentPerson={mother} parentName={motherName} />
+        <Parents parentPerson={mother} parentName={motherName} />
       </td>
       <td>
-        <ParentsPage parentPerson={father} parentName={fatherName} />
+        <Parents parentPerson={father} parentName={fatherName} />
       </td>
     </tr>
   );
