@@ -1,0 +1,25 @@
+import { Person } from '../types';
+
+export const getPrepearedPeople = (currentPeople: Person[]) => {
+  return currentPeople.map(person => {
+    const father = currentPeople.find(
+      ({ name }) => name === person.fatherName,
+    );
+
+    const mother = currentPeople.find(
+      ({ name }) => name === person.motherName,
+    );
+
+    const newPerson = { ...person };
+
+    if (father) {
+      newPerson.father = father;
+    }
+
+    if (mother) {
+      newPerson.mother = mother;
+    }
+
+    return newPerson;
+  });
+};
