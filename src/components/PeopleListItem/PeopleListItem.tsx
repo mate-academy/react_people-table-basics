@@ -1,14 +1,19 @@
-import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../../types';
-import { findPersonByName } from '../../utils/findPersonByName';
-import { PersonLink } from '../PersonLink/PersonLink';
+import { PersonLink } from '../PersonLink';
+import { PARENT_NOT_SATED_VALUE } from '../../utils/constants';
 
 interface Props {
   people: Person[];
   person: Person;
+  selectedPersonSlug: string | undefined;
 }
-export const PeopleListItem: React.FC<Props> = ({ person, people }) => {
+export const PeopleListItem: React.FC<Props> = (
+  {
+    person,
+    selectedPersonSlug,
+  },
+) => {
   const {
     sex,
     born,
@@ -16,12 +21,9 @@ export const PeopleListItem: React.FC<Props> = ({ person, people }) => {
     motherName,
     fatherName,
     slug,
+    mother,
+    father,
   } = person;
-
-  const { selectedPersonSlug } = useParams();
-
-  const mother = motherName && findPersonByName(people, motherName);
-  const father = fatherName && findPersonByName(people, fatherName);
 
   return (
     <tr
@@ -41,14 +43,14 @@ export const PeopleListItem: React.FC<Props> = ({ person, people }) => {
         {mother ? (
           <PersonLink person={mother} />
         ) : (
-          motherName || '-'
+          motherName || PARENT_NOT_SATED_VALUE
         )}
       </td>
       <td>
         {father ? (
           <PersonLink person={father} />
         ) : (
-          motherName || '-'
+          fatherName || PARENT_NOT_SATED_VALUE
         )}
       </td>
     </tr>
