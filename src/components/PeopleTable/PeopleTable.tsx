@@ -5,20 +5,14 @@ import classNames from 'classnames';
 import { Person } from '../../types';
 import { TableLink } from './TableLink';
 
+const EMPTY_FIELD = '-';
+
 type Props = {
   people: Person[],
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { person } = useParams();
-
-  if (!people.length) {
-    return (
-      <p data-cy="noPeopleMessage">
-        There are no people on the server
-      </p>
-    );
-  }
 
   return (
     <table
@@ -43,8 +37,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           name,
           born,
           died,
-          motherName = '-',
-          fatherName = '-',
+          motherName,
+          fatherName,
           mother,
           father,
         }) => (
@@ -73,7 +67,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
                 />
               )
               : (
-                <td>{motherName}</td>
+                <td>{motherName || EMPTY_FIELD}</td>
               )}
 
             {father
@@ -85,7 +79,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
                 />
               )
               : (
-                <td>{fatherName}</td>
+                <td>{fatherName || EMPTY_FIELD}</td>
               )}
           </tr>
         ))}

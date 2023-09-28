@@ -5,30 +5,24 @@ import { Person } from '../types';
 import { getPeople } from '../api';
 import { ErrorMessage } from '../types/ErrorMessage';
 import { PeopleTable } from '../components/PeopleTable';
-
-const findParents = (people: Person[]): Person[] => {
-  return people.map(person => {
-    const father = people.find(({ name }) => person.fatherName === name);
-    const mother = people.find(({ name }) => person.motherName === name);
-
-    return ({
-      ...person,
-      father,
-      mother,
-    });
-  });
-};
+import { addParentsToPeople } from '../services';
 
 export const People = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [errorMessage, setErrorMessage] = useState(ErrorMessage.Default);
   const [isLoading, setIsLoading] = useState(false);
 
+  const isErrorMessageDisplayed = !isLoading && errorMessage;
+  const isTableDisplayed = !isLoading && !errorMessage && people.length;
+  const isNoPeopleOnServer = !isLoading && !errorMessage && !people.length;
+
   useEffect(() => {
     setIsLoading(true);
 
     getPeople()
-      .then((peopleFromServ) => setPeople(findParents(peopleFromServ)))
+      .then((peopleFromServer) => (
+        setPeople(addParentsToPeople(peopleFromServer))
+      ))
       .catch(() => setErrorMessage(ErrorMessage.WentWrong))
       .finally(() => setIsLoading(false));
   }, []);
@@ -39,14 +33,23 @@ export const People = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isLoading
-            ? <Loader />
-            : <PeopleTable people={people} />}
+          {isLoading && (
+            <Loader />
+          )}
 
-          {/* Peoplee table or error message should be rendered */}
-          {errorMessage && (
+          {isErrorMessageDisplayed && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               {errorMessage}
+            </p>
+          )}
+
+          {isTableDisplayed && (
+            <PeopleTable people={people} />
+          )}
+
+          {isNoPeopleOnServer && (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
             </p>
           )}
 
