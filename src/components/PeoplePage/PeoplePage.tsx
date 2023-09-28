@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PeopleList } from '../PeopleList/PeopleList';
-import { getFixedPeople } from '../../utils/PeopleUtils';
+import { getPreparedPeople } from '../../utils/PeopleUtils';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -15,7 +15,7 @@ export const PeoplePage = () => {
 
     getPeople()
       .then(currentPeople => {
-        setPeople(getFixedPeople(currentPeople));
+        setPeople(getPreparedPeople(currentPeople));
       })
       .catch(() => {
         setIsError(true);
@@ -24,6 +24,18 @@ export const PeoplePage = () => {
         setIsLoading(false);
       });
   }, []);
+
+  const isDisplayErrorMessage = useMemo(() => {
+    return isError && !isLoading;
+  }, [isError, isLoading]);
+
+  const isNoPeopleOnServer = useMemo(() => {
+    return !people.length && !isLoading && !isError;
+  }, [isError, isLoading, people]);
+
+  const isPeopleOnServer = useMemo(() => {
+    return !!people.length && !isError;
+  }, [isError, isLoading, people]);
 
   return (
     <>
@@ -35,19 +47,19 @@ export const PeoplePage = () => {
             <Loader />
           )}
 
-          {(isError && !isLoading) && (
+          {isDisplayErrorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {(!people.length && !isLoading && !isError) && (
+          {isNoPeopleOnServer && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {(!!people.length && !isError) && (
+          {isPeopleOnServer && (
             <PeopleList people={people} />
           )}
         </div>
