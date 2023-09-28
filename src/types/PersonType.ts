@@ -6,6 +6,6 @@ export interface PersonType {
   fatherName: string | null,
   motherName: string | null,
   slug: string,
-  mother?: PersonType,
-  father?: PersonType,
+  mother?: PersonType | null,
+  father?: PersonType | null,
 }

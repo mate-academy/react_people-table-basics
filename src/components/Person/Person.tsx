@@ -8,8 +8,7 @@ type Props = {
 };
 
 export const Person: React.FC<Props> = ({ person }) => {
-  const { mother } = person;
-  const { father } = person;
+  const { mother, father } = person;
   const { slug } = useParams();
 
   return (

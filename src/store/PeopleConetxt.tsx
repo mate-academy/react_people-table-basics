@@ -31,28 +31,15 @@ export const PeopleProvider: React.FC<Props> = ({ children }) => {
         setIsLoading(true);
         try {
           const people = await getPeople();
-          const copy = people.map(child => {
-            const mother = people
-              .find(person => child.motherName === person.name);
-            const father = people
-              .find(person => child.fatherName === person.name);
+          const peopleWithParents = people.map(person => ({
+            ...person,
+            mother: people
+              .find(p => person.motherName === p.name) || null,
+            father: people
+              .find(p => person.fatherName === p.name) || null,
+          }));
 
-            if (mother && father) {
-              return { ...child, mother, father };
-            }
-
-            if (mother) {
-              return { ...child, mother };
-            }
-
-            if (father) {
-              return { ...child, father };
-            }
-
-            return child;
-          });
-
-          setPeopleList(copy);
+          setPeopleList(peopleWithParents);
         } catch {
           setErrorMessage('Something went wrong');
         } finally {
