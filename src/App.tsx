@@ -13,16 +13,3 @@ export const App = () => (
     </main>
   </div>
 );
-
-// <div className="block">
-//   <div className="box table-container">
-//     <Loader />
-//
-//     <p data-cy="peopleLoadingError" className="has-text-danger">
-//       Something went wrong
-//     </p>
-//
-//
-//     <PeopleList />
-//   </div>
-// </div>
