@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
+import { NOT_SET_VALUE } from '../../api';
 
 type Props = {
   person: Person;
@@ -15,8 +16,8 @@ export const PersonItem: React.FC<Props> = ({ person, selectedPersonSlug }) => {
     sex,
     born,
     died,
-    fatherName = '-',
-    motherName = '-',
+    fatherName,
+    motherName,
     mother,
     father,
   } = person;
@@ -41,13 +42,13 @@ export const PersonItem: React.FC<Props> = ({ person, selectedPersonSlug }) => {
       <td>
         {mother
           ? (<PersonLink person={mother} />)
-          : motherName || '-'}
+          : motherName || NOT_SET_VALUE}
       </td>
 
       <td>
         {father
           ? (<PersonLink person={father} />)
-          : fatherName || '-'}
+          : fatherName || NOT_SET_VALUE}
       </td>
     </tr>
   );

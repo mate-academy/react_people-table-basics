@@ -3,6 +3,7 @@ import { Outlet, useParams } from 'react-router-dom';
 
 import { Person } from '../../types';
 import { PersonItem } from '../PersonItem';
+import { COLUMN_NAMES } from '../../api';
 
 type Props = {
   people: Person[];
@@ -19,12 +20,9 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {COLUMN_NAMES.map(name => (
+            <th key={name}>{name}</th>
+          ))}
         </tr>
       </thead>
 
