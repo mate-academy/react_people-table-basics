@@ -19,6 +19,8 @@ export function preparePeople(people: Person[]): Person[] {
   });
 }
 
+const SEX_FEMALE = 'f';
+
 export function isFemale(person: Person) {
-  return person.sex === 'f';
+  return person.sex === SEX_FEMALE;
 }

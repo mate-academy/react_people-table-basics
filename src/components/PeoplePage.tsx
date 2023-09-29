@@ -21,8 +21,8 @@ export const PeoplePage = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const hasPeople = people.length > 0;
-  const isAllOk = !isLoading && !isError;
+  const hasPeople = !!people.length;
+  const isRequestSuccessful = !isLoading && !isError;
 
   return (
     <>
@@ -38,7 +38,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {isAllOk && (
+          {isRequestSuccessful && (
             hasPeople
               ? <PeopleTable people={people} selected={slug} />
               : (
