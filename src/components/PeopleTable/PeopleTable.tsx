@@ -3,16 +3,15 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../../types';
-import { TableLink } from './TableLink';
-
-const EMPTY_FIELD = '-';
+import { PersonLink } from './PersonLink';
+import { EMPTY_FIELD } from '../../utils/constants';
 
 type Props = {
   people: Person[],
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const { person } = useParams();
+  const { personSlug } = useParams();
 
   return (
     <table
@@ -31,56 +30,47 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(({
-          slug,
-          sex,
-          name,
-          born,
-          died,
-          motherName,
-          fatherName,
-          mother,
-          father,
-        }) => (
+        {people.map(person => (
           <tr
-            key={slug}
+            key={person.slug}
             data-cy="person"
             className={classNames({
-              'has-background-warning': slug === person,
+              'has-background-warning': person.slug === personSlug,
             })}
           >
-            <TableLink
-              name={name}
-              sex={sex}
-              slug={slug}
-            />
+            <td>
+              <PersonLink
+                person={person}
+              />
+            </td>
 
-            <td>{sex}</td>
-            <td>{born}</td>
-            <td>{died}</td>
-            {mother
-              ? (
-                <TableLink
-                  name={mother.name}
-                  sex={mother.sex}
-                  slug={mother.slug}
-                />
-              )
-              : (
-                <td>{motherName || EMPTY_FIELD}</td>
-              )}
+            <td>{person.sex}</td>
+            <td>{person.born}</td>
+            <td>{person.died}</td>
 
-            {father
-              ? (
-                <TableLink
-                  name={father.name}
-                  sex={father.sex}
-                  slug={father.slug}
-                />
-              )
-              : (
-                <td>{fatherName || EMPTY_FIELD}</td>
-              )}
+            <td>
+              {person.mother
+                ? (
+                  <PersonLink
+                    person={person.mother}
+                  />
+                )
+                : (
+                  person.motherName || EMPTY_FIELD
+                )}
+            </td>
+
+            <td>
+              {person.father
+                ? (
+                  <PersonLink
+                    person={person.father}
+                  />
+                )
+                : (
+                  person.fatherName || EMPTY_FIELD
+                )}
+            </td>
           </tr>
         ))}
       </tbody>

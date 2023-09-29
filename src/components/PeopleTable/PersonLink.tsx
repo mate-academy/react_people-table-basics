@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import { Person } from '../../types';
 
 const MALE_SEX = 'm';
 const isMale = (sex: string) => {
@@ -8,13 +9,13 @@ const isMale = (sex: string) => {
 };
 
 type Props = {
-  name: string,
-  slug: string,
-  sex: string,
+  person: Person
 };
 
-export const TableLink: React.FC<Props> = ({ name, slug, sex }) => (
-  <td>
+export const PersonLink: React.FC<Props> = ({ person }) => {
+  const { name, slug, sex } = person;
+
+  return (
     <Link
       className={classNames({
         'has-text-danger': !isMale(sex),
@@ -23,5 +24,5 @@ export const TableLink: React.FC<Props> = ({ name, slug, sex }) => (
     >
       {name}
     </Link>
-  </td>
-);
+  );
+};
