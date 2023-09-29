@@ -7,13 +7,14 @@ import { Loader } from '../components/Loader';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isPeopleLoading, setIsPeopleLoading] = useState(true);
+  const [isPeopleLoading, setIsPeopleLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  const isLoadedHasNoError = !hasError && !isPeopleLoading;
+  const isSuccessfullyLoaded = !hasError && !isPeopleLoading;
 
   useEffect(() => {
-    const fetchAndSetPeople = async () => {
+    setIsPeopleLoading(true);
+    const fetchtPeople = async () => {
       try {
         const peopleFromServer = await getPeople();
         const preparedPeople = getPreparedPeople(peopleFromServer);
@@ -26,7 +27,7 @@ export const PeoplePage: React.FC = () => {
       }
     };
 
-    fetchAndSetPeople();
+    fetchtPeople();
   }, []);
 
   return (
@@ -43,11 +44,11 @@ export const PeoplePage: React.FC = () => {
             <p data-cy="peopleLoadingError">Something went wrong</p>
           )}
 
-          {isLoadedHasNoError && !people.length && (
+          {isSuccessfullyLoaded && !people.length && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {isLoadedHasNoError && people.length && (
+          {isSuccessfullyLoaded && people.length && (
             <PeopleList people={people} />
           )}
         </div>

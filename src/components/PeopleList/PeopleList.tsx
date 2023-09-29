@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PeopleListItem } from '../PeopleListItem';
+import { TABLE_ATTRIBUTES } from '../../utils/constants';
 
 interface Props {
   people: Person[];
@@ -16,12 +17,11 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {TABLE_ATTRIBUTES.map(attribute => {
+            return (
+              <th>{attribute}</th>
+            );
+          })}
         </tr>
       </thead>
 

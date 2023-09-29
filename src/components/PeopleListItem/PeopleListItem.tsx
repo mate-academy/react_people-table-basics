@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
-import { PARENT_NOT_SATED_VALUE } from '../../utils/constants';
+import { PARENT_NOT_SET_VALUE } from '../../utils/constants';
 
 interface Props {
   people: Person[];
@@ -43,14 +43,14 @@ export const PeopleListItem: React.FC<Props> = (
         {mother ? (
           <PersonLink person={mother} />
         ) : (
-          motherName || PARENT_NOT_SATED_VALUE
+          motherName || PARENT_NOT_SET_VALUE
         )}
       </td>
       <td>
         {father ? (
           <PersonLink person={father} />
         ) : (
-          fatherName || PARENT_NOT_SATED_VALUE
+          fatherName || PARENT_NOT_SET_VALUE
         )}
       </td>
     </tr>
