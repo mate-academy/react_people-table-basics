@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../types';
-import { isFemale } from '../helpers';
 
 const EMPTY_VALUE = '-';
+const SEX_FEMALE = 'f';
 
 type Props = {
   person: Person | string | null | undefined;
@@ -18,14 +18,16 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
     return <>{person}</>;
   }
 
+  const { slug, name, sex } = person;
+
   return (
     <Link
-      to={`/people/${person.slug}`}
+      to={`/people/${slug}`}
       className={classNames({
-        'has-text-danger': isFemale(person),
+        'has-text-danger': sex === SEX_FEMALE,
       })}
     >
-      {person.name}
+      {name}
     </Link>
   );
 };
