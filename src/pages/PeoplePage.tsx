@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types/Person';
@@ -8,6 +9,9 @@ export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
   const [errorMassage, setErrorMassage] = useState('');
+
+  const { slug } = useParams();
+  const selectedSlug = slug;
 
   useEffect(() => {
     setLoading(true);
@@ -32,6 +36,7 @@ export const PeoplePage: React.FC = () => {
           {!loading && people.length > 0 && (
             <PeopleTable
               people={people}
+              selectedSlug={selectedSlug}
             />
           )}
 
