@@ -56,18 +56,15 @@ export const User: React.FC<Props> = ({ person, people, selectedUser }) => {
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {findMother && (
+        {findMother ? (
           <Link
             to={`/people/${findMother.slug}`}
             className={cn({ 'has-text-danger': findMother.sex === 'f' })}
           >
             {findMother.name}
           </Link>
-        )}
-
-        {(!findMother && motherName) ? (
-          motherName
-        ) : '-'}
+        )
+          : motherName || '-'}
       </td>
 
       <td>

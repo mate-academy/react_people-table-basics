@@ -9,9 +9,9 @@ import { User } from '../User';
 export const PeopleList = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isErrorToGetPeople, setIsErrorToGetPeople] = useState(false);
-  const { hasClickedPeopleLink } = useAppContext();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
+  const { hasClickedPeopleLink } = useAppContext();
   const { slug } = useParams();
   const selectId = slug || '';
   const selectedUser = people.find(p => p.slug === selectId);
@@ -24,7 +24,7 @@ export const PeopleList = () => {
           setIsErrorToGetPeople(true);
           throw new Error(' Something went wrong');
         })
-        .finally(() => setIsLoading(true));
+        .finally(() => setIsLoading(false));
     }
   }, [hasClickedPeopleLink]);
 
