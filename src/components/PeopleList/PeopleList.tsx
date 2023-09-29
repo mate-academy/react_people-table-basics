@@ -10,13 +10,11 @@ export const PeopleList = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isErrorToGetPeople, setIsErrorToGetPeople] = useState(false);
   const { hasClickedPeopleLink } = useAppContext();
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const { slug } = useParams();
-
-  const select = slug || '';
-
-  const selectedUser = people.find(p => p.slug === select);
+  const selectId = slug || '';
+  const selectedUser = people.find(p => p.slug === selectId);
 
   useEffect(() => {
     if (hasClickedPeopleLink) {

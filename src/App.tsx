@@ -11,9 +11,6 @@ export const App = () => (
       <main className="section">
         <div className="container">
           <Outlet />
-          {/* <HomePage /> */}
-          {/* <h1 className="title">Page not found</h1> */}
-          {/* <PeopleList /> */}
         </div>
       </main>
     </AppProvider>
