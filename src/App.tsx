@@ -1,74 +1,37 @@
-import { useEffect, useState } from 'react';
-
-import { Loader } from './components/Loader';
-import { NavBar } from './components/NavBar';
-import { Person } from './types';
-
+import { Link, Outlet } from 'react-router-dom';
 import './App.scss';
-import { PeopleTable } from './components/PeopleTable';
-import { getPeople } from './services/people';
 
-export const App: React.FC = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [errorMassage, setErrorMassage] = useState('');
+export const App = () => (
+  <div data-cy="app">
+    <nav
+      data-cy="nav"
+      className="navbar is-fixed-top has-shadow"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div className="container">
+        <div className="navbar-brand">
+          <Link
+            className="navbar-item"
+            to="/"
+          >
+            Home
+          </Link>
 
-  useEffect(() => {
-    setLoading(true);
-
-    setTimeout(() => {
-      getPeople()
-        .then(setPeople)
-        .catch(() => setErrorMassage('Something went wrong'))
-        .finally(() => setLoading(false));
-    }, 1000);
-  }, []);
-
-  return (
-    <div data-cy="app">
-
-      <NavBar />
-
-      <main className="section">
-        <div className="container">
-          <h1 className="title">Home Page</h1>
-          <h1 className="title">People Page</h1>
-          <h1 className="title">Page not found</h1>
-
-          <div className="block">
-            <div className="box table-container">
-              {loading && (
-                <Loader />
-              )}
-
-              {!loading && people.length > 0 && (
-                <PeopleTable
-                  people={people}
-                />
-              )}
-
-              {!loading
-                && !errorMassage
-                && people.length === 0
-                && (
-                  <p data-cy="noPeopleMessage">
-                    There are no people on the server
-                  </p>
-                )}
-
-              {errorMassage && (
-                <p
-                  data-cy="peopleLoadingError"
-                  className="has-text-danger"
-                >
-                  {errorMassage}
-                </p>
-              )}
-
-            </div>
-          </div>
+          <Link
+            className="navbar-item has-background-grey-lighter"
+            to="/people"
+          >
+            People
+          </Link>
         </div>
-      </main>
-    </div>
-  );
-};
+      </div>
+    </nav>
+
+    <main className="section">
+      <div className="container">
+        <Outlet />
+      </div>
+    </main>
+  </div>
+);
