@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const PeopleList: React.FC<Props> = ({ people }) => {
-  const { selectedPersonSlug } = useParams();
+  const { selectedPersonSlug = '' } = useParams();
 
   return (
     <table
@@ -17,11 +17,11 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          {TABLE_ATTRIBUTES.map(attribute => {
-            return (
-              <th>{attribute}</th>
-            );
-          })}
+          {TABLE_ATTRIBUTES.map(attribute => (
+            <th key={attribute}>
+              {attribute}
+            </th>
+          ))}
         </tr>
       </thead>
 

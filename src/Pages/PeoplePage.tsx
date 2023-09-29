@@ -14,7 +14,8 @@ export const PeoplePage: React.FC = () => {
 
   useEffect(() => {
     setIsPeopleLoading(true);
-    const fetchtPeople = async () => {
+
+    const fetchPeople = async () => {
       try {
         const peopleFromServer = await getPeople();
         const preparedPeople = getPreparedPeople(peopleFromServer);
@@ -27,7 +28,7 @@ export const PeoplePage: React.FC = () => {
       }
     };
 
-    fetchtPeople();
+    fetchPeople();
   }, []);
 
   return (
