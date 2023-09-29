@@ -28,7 +28,6 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
       <tbody>
         {people.map(person => (
           <PeopleListItem
-            people={people}
             person={person}
             key={person.slug}
             selectedPersonSlug={selectedPersonSlug}

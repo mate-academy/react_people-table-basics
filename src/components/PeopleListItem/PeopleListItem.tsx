@@ -4,7 +4,6 @@ import { PersonLink } from '../PersonLink';
 import { PARENT_NOT_SET_VALUE } from '../../utils/constants';
 
 interface Props {
-  people: Person[];
   person: Person;
   selectedPersonSlug: string;
 }
