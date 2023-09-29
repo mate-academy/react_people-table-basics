@@ -3,22 +3,7 @@ import { Loader } from './Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { PeopleTable } from './PeopleTable';
-
-const preparedPeople = (peopleFromServer: Person[]) => {
-  return peopleFromServer
-    .map(person => {
-      const tempPerson = person;
-
-      tempPerson.motherName = person.motherName || '-';
-      tempPerson.fatherName = person.fatherName || '-';
-      tempPerson.mother = peopleFromServer
-        .find(mother => mother.name === person.motherName);
-      tempPerson.father = peopleFromServer
-        .find(father => father.name === person.fatherName);
-
-      return tempPerson;
-    });
-};
+import { getPreparedPeople } from '../utils/getPreparedPeople';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -29,15 +14,10 @@ export const PeoplePage: React.FC = () => {
     setIsLoading(true);
     getPeople()
       .then(peopleFromServer => {
-        setPeople(preparedPeople(peopleFromServer));
-        setIsLoading(false);
+        setPeople(getPreparedPeople(peopleFromServer));
       })
-      .catch(error => {
-        // eslint-disable-next-line no-console
-        console.warn(error);
-        setIsLoading(false);
-        setIsError(true);
-      });
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   const isDisplayErrorMessage = isError && !isLoading;
@@ -67,10 +47,8 @@ export const PeoplePage: React.FC = () => {
           {isPeopleOnServer && (
             <PeopleTable people={people} />
           )}
-
         </div>
       </div>
     </>
-
   );
 };
