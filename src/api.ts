@@ -13,3 +13,28 @@ export function getPeople(): Promise<Person[]> {
     .then(() => fetch(API_URL))
     .then(response => response.json());
 }
+
+export function addParent(people: Person[]) {
+  function getParent(parentName: string) {
+    return people.find(person => person.name === parentName);
+  }
+
+  return people.map(person => {
+    let mother;
+    let father;
+
+    if (person.motherName) {
+      mother = getParent(person.motherName);
+    }
+
+    if (person.fatherName) {
+      father = getParent(person.fatherName);
+    }
+
+    return {
+      ...person,
+      mother,
+      father,
+    };
+  });
+}
