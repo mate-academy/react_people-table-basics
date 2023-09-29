@@ -10,16 +10,10 @@ export const getPrepearedPeople = (currentPeople: Person[]) => {
       ({ name }) => name === person.motherName,
     );
 
-    const newPerson = { ...person };
-
-    if (father) {
-      newPerson.father = father;
-    }
-
-    if (mother) {
-      newPerson.mother = mother;
-    }
-
-    return newPerson;
+    return {
+      ...person,
+      father,
+      mother,
+    };
   });
 };

@@ -3,14 +3,16 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
+import { FEMALE, NO_PARENT } from '../../utils/constants';
 
 type Props = {
   person: Person,
-  chosenUserSlug: string | undefined,
+  chosenUserSlug: string,
 };
 
 export const PersonItem: React.FC<Props> = ({ person, chosenUserSlug }) => {
   const {
+    name,
     slug,
     sex,
     born,
@@ -27,16 +29,15 @@ export const PersonItem: React.FC<Props> = ({ person, chosenUserSlug }) => {
       className={classNames({
         'has-background-warning': slug === chosenUserSlug,
       })}
-      key={slug}
     >
       <td>
         <Link
-          to={`../${person.slug}`}
+          to={`../${slug}`}
           className={classNames({
-            'has-text-danger': person.sex === 'f',
+            'has-text-danger': sex === FEMALE,
           })}
         >
-          {person.name}
+          {name}
         </Link>
       </td>
 
@@ -46,12 +47,12 @@ export const PersonItem: React.FC<Props> = ({ person, chosenUserSlug }) => {
       <td>
         {mother
           ? <PersonLink person={mother} />
-          : motherName || '-'}
+          : motherName || NO_PARENT}
       </td>
       <td>
         {father
           ? <PersonLink person={father} />
-          : fatherName || '-'}
+          : fatherName || NO_PARENT}
       </td>
     </tr>
   );

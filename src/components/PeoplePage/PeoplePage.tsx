@@ -9,6 +9,7 @@ export const PeoplePage = () => {
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [people, setPeople] = useState<Person[]>([]);
+  const shouldPeopleBeShown = !hasError && !isLoading;
 
   useEffect(() => {
     getPeople()
@@ -33,7 +34,7 @@ export const PeoplePage = () => {
               Something went wrong
             </p>
           )}
-          {!hasError && !isLoading && <PeopleTable people={people} />}
+          {shouldPeopleBeShown && <PeopleTable people={people} />}
         </div>
       </div>
     </>
