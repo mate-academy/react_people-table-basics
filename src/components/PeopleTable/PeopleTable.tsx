@@ -15,7 +15,9 @@ function setWomenClass(gender: string) {
 }
 
 export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
-// !!!!!!!!!!
+  function isParentInList(parentName: string | null) {
+    return !!people.find((person) => person.name === parentName);
+  }
 
   return (
     <table
@@ -63,8 +65,16 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
-            <td>{person.motherName ?? '-'}</td>
-            <td>{person.fatherName ?? '-'}</td>
+            <td
+              className={classNames({
+                'has-text-danger': isParentInList(person.motherName),
+              })}
+            >
+              {person.motherName ?? '-'}
+            </td>
+            <td>
+              {person.fatherName ?? '-'}
+            </td>
           </tr>
         ))}
       </tbody>
