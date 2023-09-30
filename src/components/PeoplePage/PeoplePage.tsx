@@ -7,11 +7,12 @@ import { getPrepearedPeople } from '../../utils/getPrepearedPeople';
 
 export const PeoplePage = () => {
   const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [people, setPeople] = useState<Person[]>([]);
   const shouldPeopleBeShown = !hasError && !isLoading;
 
   useEffect(() => {
+    setIsLoading(true);
     getPeople()
       .then(currentPeople => {
         const peopleWithParents = getPrepearedPeople(currentPeople);

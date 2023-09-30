@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../../types';
-
-const FEMALE = 'f';
+import { FEMALE } from '../../utils/constants';
 
 type Props = {
   person: Person,

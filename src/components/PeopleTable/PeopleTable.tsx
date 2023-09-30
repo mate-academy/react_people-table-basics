@@ -26,7 +26,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <thead>
               <tr>
                 {columnNames.map(name => (
-                  <th>{name}</th>
+                  <th
+                    key={name}
+                  >
+                    {name}
+                  </th>
                 ))}
               </tr>
             </thead>
