@@ -13,12 +13,22 @@ export const PeoplePage: React.FC = () => {
   const { slug } = useParams();
   const selectedSlug = slug;
 
+  function findParent(peopleList: Person[], parentName: string | null) {
+    return peopleList.find((person) => person.name === parentName);
+  }
+
   useEffect(() => {
     setLoading(true);
 
     setTimeout(() => {
       getPeople()
-        .then(setPeople)
+        .then(peopleList => {
+          setPeople(peopleList?.map(person => ({
+            ...person,
+            mother: findParent(peopleList, person.motherName),
+            father: findParent(peopleList, person.fatherName),
+          })));
+        })
         .catch(() => setErrorMassage('Something went wrong'))
         .finally(() => setLoading(false));
     }, 1000);

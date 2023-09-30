@@ -1,24 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   people: Person[],
   selectedSlug: string | undefined,
 };
 
-function setWomenClass(gender: string) {
-  return classNames({
-    'has-text-danger': gender === 'f',
-  });
-}
-
 export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
-  function isParentInList(parentName: string | null) {
-    return !!people.find((person) => person.name === parentName);
-  }
-
   return (
     <table
       data-cy="peopleTable"
@@ -41,39 +31,47 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
             className={classNames({
               'has-background-warning': person.slug === selectedSlug,
             })}
-            data-cy="/people"
+            data-cy="person"
             key={person.slug}
           >
             <td>
               {person.slug === selectedSlug ? (
-                <Link
-                  to="/"
-                  className={setWomenClass(person.sex)}
-                >
-                  {person.name}
-                </Link>
+                <PersonLink
+                  person={person}
+                />
               ) : (
-                <Link
-                  to={`/people/${person.slug}`}
-                  className={setWomenClass(person.sex)}
-                >
-                  {person.name}
-                </Link>
+                <PersonLink
+                  person={person}
+                />
               )}
             </td>
 
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
+
             <td
               className={classNames({
-                'has-text-danger': isParentInList(person.motherName),
+                'has-text-danger': person.mother,
               })}
             >
-              {person.motherName ?? '-'}
+              {person.mother ? (
+                <PersonLink
+                  person={person.mother}
+                />
+              ) : (
+                <span>{person.motherName ?? '-'}</span>
+              )}
             </td>
+
             <td>
-              {person.fatherName ?? '-'}
+              {person.father ? (
+                <PersonLink
+                  person={person.father}
+                />
+              ) : (
+                <span>{person.fatherName ?? '-'}</span>
+              )}
             </td>
           </tr>
         ))}
