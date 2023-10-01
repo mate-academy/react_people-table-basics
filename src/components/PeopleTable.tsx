@@ -2,6 +2,15 @@ import classNames from 'classnames';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
 
+const columnHeadings = [
+  'Name',
+  'Sex',
+  'Born',
+  'Died',
+  'Mother',
+  'Father',
+];
+
 type Props = {
   people: Person[];
   selected?: string;
@@ -15,12 +24,9 @@ export const PeopleTable: React.FC<Props> = ({ people, selected }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {columnHeadings.map(heading => (
+            <th key={heading}>{heading}</th>
+          ))}
         </tr>
       </thead>
 
