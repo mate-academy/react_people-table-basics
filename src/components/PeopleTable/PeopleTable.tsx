@@ -29,7 +29,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       <thead>
         <tr>
           {TABLE_HEADERS.map(header => (
-            <th>
+            <th key={header}>
               {header}
             </th>
           ))}
