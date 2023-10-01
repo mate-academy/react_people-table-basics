@@ -1,0 +1,45 @@
+import React, { useEffect, useMemo, useState } from 'react';
+import { Person } from './types';
+import { getPeople } from './api';
+import { ErrorMessages } from './types/ErrorMessages';
+
+export const PeopleContext = React.createContext({
+  peopleList: [] as Person[],
+  isLoading: false,
+  errorMessage: '',
+});
+
+type Props = {
+  children: React.ReactNode;
+};
+
+export const PostsProvider: React.FC<Props> = ({ children }) => {
+  const [peopleList, setPeopleList] = useState<Person[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(ErrorMessages.NoError);
+
+  const loadPeople = useEffect(() => {
+    setIsLoading(true);
+    getPeople()
+      .then(setPeopleList)
+      .catch(() => {
+        setErrorMessage(ErrorMessages.LoadError);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  const value = useMemo(() => ({
+    peopleList,
+    isLoading,
+    errorMessage,
+    loadPeople,
+  }), [peopleList, isLoading, errorMessage]);
+
+  return (
+    <PeopleContext.Provider value={value}>
+      {children}
+    </PeopleContext.Provider>
+  );
+};
