@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
-import { useAppContext } from '../context/AppContext';
+import { useAppContext } from '../Context/AppProvider';
 import { User } from '../User';
 
 export const PeopleList = () => {
@@ -16,23 +16,30 @@ export const PeopleList = () => {
   const selectId = slug || '';
   const selectedUser = people.find(p => p.slug === selectId);
 
+  const getPeopleFromServer = () => {
+    return getPeople()
+      .then(allPeople => allPeople)
+      .catch(() => {
+        setIsErrorToGetPeople(true);
+        throw new Error('Something went wrong');
+      });
+  };
+
   useEffect(() => {
     if (hasClickedPeopleLink) {
-      getPeople()
-        .then((allPersons) => setPeople(allPersons))
-        .catch(() => {
-          setIsErrorToGetPeople(true);
-          throw new Error(' Something went wrong');
-        })
-        .finally(() => setIsLoading(false));
+      getPeopleFromServer()
+        .then((allPersons) => {
+          setPeople(allPersons);
+          setIsLoading(false);
+        });
     }
   }, [hasClickedPeopleLink]);
 
   return (
     <div className="block">
-      <div className="box table-container">
-        <h1 className="title">People Page</h1>
+      <h1 className="title">People Page</h1>
 
+      <div className="box table-container">
         {isErrorToGetPeople && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             Something went wrong

@@ -1,7 +1,7 @@
 import './App.scss';
 import { Outlet } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
-import { AppProvider } from './components/context/AppContext';
+import { AppProvider } from './components/Context/AppProvider';
 
 export const App = () => (
   <div data-cy="app">

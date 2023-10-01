@@ -3,8 +3,8 @@ import {
 } from 'react-router-dom';
 import { App } from './App';
 import { HomePage } from './components/HomePage';
+import { PageNotFound } from './components/PageNotFound';
 import { PeopleList } from './components/PeopleList';
-import { PageNotFound } from './components/PageNotFound/PageNotFound';
 
 export const Root = () => (
   <HashRouter>
@@ -12,7 +12,7 @@ export const Root = () => (
       <Route path="/" element={<App />}>
         <Route index element={<HomePage />} />
         <Route path="people" element={<PeopleList />}>
-          <Route path="/people/:slug?" element={<PeopleList />} />
+          <Route path=":slug?" element={<PeopleList />} />
         </Route>
       </Route>
       <Route path="*" element={<App />}>

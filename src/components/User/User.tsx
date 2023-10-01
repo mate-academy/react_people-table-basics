@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import React from 'react';
 import { Person } from '../../types';
+import { PersonalLink } from '../PersonalLink';
+import { findRelative } from '../../helpers/findRelative';
 
 type Props = {
   person: Person,
@@ -9,23 +10,8 @@ type Props = {
   selectedUser?: Person,
 };
 
-const findRelative = (gender: string, user: Person, users: Person[]) => {
-  if (gender === 'm') {
-    return users.filter(oneUser => oneUser.sex === 'm')
-      .find(oneUser => oneUser.name === user.fatherName);
-  }
-
-  if (gender === 'f') {
-    return users.filter(oneUser => oneUser.sex === 'f')
-      .find(oneUser => oneUser.name === user.motherName);
-  }
-
-  return undefined;
-};
-
 export const User: React.FC<Props> = ({ person, people, selectedUser }) => {
   const {
-    name,
     sex,
     born,
     died,
@@ -34,8 +20,8 @@ export const User: React.FC<Props> = ({ person, people, selectedUser }) => {
     slug,
   } = person;
 
-  const findMother = findRelative('f', person, people);
-  const findFather = findRelative('m', person, people);
+  const mother = findRelative('f', person, people);
+  const father = findRelative('m', person, people);
 
   return (
     <tr
@@ -44,42 +30,24 @@ export const User: React.FC<Props> = ({ person, people, selectedUser }) => {
       data-cy="person"
     >
       <td>
-        <Link
-          to={`/people/${slug}`}
-          className={cn({ 'has-text-danger': sex === 'f' })}
-        >
-          {name}
-        </Link>
+        <PersonalLink person={person} />
       </td>
 
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {findMother ? (
-          <Link
-            to={`/people/${findMother.slug}`}
-            className={cn({ 'has-text-danger': findMother.sex === 'f' })}
-          >
-            {findMother.name}
-          </Link>
+        {mother ? (
+          <PersonalLink person={mother} />
         )
-          : motherName || '-'}
+          : (motherName || '-')}
       </td>
 
       <td>
-        {findFather && (
-          <Link
-            to={`/people/${findFather.slug}`}
-            className={cn({ 'has-text-danger': findFather.sex === 'f' })}
-          >
-            {findFather.name}
-          </Link>
-        )}
-
-        {(!findFather && fatherName) ? (
-          fatherName
-        ) : '-'}
+        {father ? (
+          <PersonalLink person={mother} />
+        )
+          : (fatherName || '-')}
       </td>
     </tr>
   );

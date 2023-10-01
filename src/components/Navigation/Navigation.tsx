@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
-import { useAppContext } from '../context/AppContext';
 
 const getClassLink = ({ isActive }: { isActive: boolean }) => {
   return (
@@ -9,12 +8,6 @@ const getClassLink = ({ isActive }: { isActive: boolean }) => {
 };
 
 export const Navigation = () => {
-  const { setHasClickedPeopleLink } = useAppContext();
-
-  const handlePeopleClick = () => {
-    setHasClickedPeopleLink(true);
-  };
-
   return (
     <nav
       data-cy="nav"
@@ -32,7 +25,6 @@ export const Navigation = () => {
           </NavLink>
 
           <NavLink
-            onClick={handlePeopleClick}
             to="/people"
             className={getClassLink}
           >
