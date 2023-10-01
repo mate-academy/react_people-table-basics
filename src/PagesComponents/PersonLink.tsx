@@ -34,7 +34,7 @@ export const PersonLink: React.FC<Props> = ({ person, selectedPersonSlug }) => {
           className={classNames(
             { 'has-text-danger': sex === FAMEL_GENDER },
           )}
-          href={`/#people/${slug}`}
+          href={`#/people/${slug}`}
         >
           {name}
         </a>
@@ -48,7 +48,7 @@ export const PersonLink: React.FC<Props> = ({ person, selectedPersonSlug }) => {
         {mother ? (
           <a
             className="has-text-danger"
-            href={`/#people/${mother.slug}`}
+            href={`#/people/${mother.slug}`}
           >
             {motherName}
           </a>
@@ -60,7 +60,7 @@ export const PersonLink: React.FC<Props> = ({ person, selectedPersonSlug }) => {
       <td>
         {father ? (
           <a
-            href={`/#people/${father.slug}`}
+            href={`#/people/${father.slug}`}
           >
             {fatherName}
           </a>
