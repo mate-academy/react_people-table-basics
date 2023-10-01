@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Person } from '../types';
+import { NOT_SET_VALUE, FAMEL_GENDER } from '../utils/Constans';
 
 type Props = {
   person: Person;
@@ -8,51 +9,63 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ person, selectedPersonSlug }) => {
-  const isSelectedPerson = selectedPersonSlug === person.slug;
+  const {
+    slug,
+    sex,
+    name,
+    born,
+    died,
+    motherName,
+    fatherName,
+    mother,
+    father,
+  } = person;
+  const isSelectedPerson = selectedPersonSlug === slug;
 
   return (
     <tr
       data-cy="person"
       className={classNames(
         { 'has-background-warning': isSelectedPerson },
-        { '': !isSelectedPerson },
       )}
     >
       <td>
         <a
-          className={person.sex === 'f' ? 'has-text-danger' : ''}
-          href={`#/people/${person.slug}`}
+          className={classNames(
+            { 'has-text-danger': sex === FAMEL_GENDER },
+          )}
+          href={`/#people/${slug}`}
         >
-          {person.name}
+          {name}
         </a>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
 
       <td>
-        {person.mother ? (
+        {mother ? (
           <a
             className="has-text-danger"
-            href={`#/people/${person.mother.slug}`}
+            href={`/#people/${mother.slug}`}
           >
-            {person.motherName}
+            {motherName}
           </a>
         ) : (
-          person.motherName || '-'
+          motherName || NOT_SET_VALUE
         )}
       </td>
 
       <td>
-        {person.father ? (
+        {father ? (
           <a
-            href={`#/people/${person.father.slug}`}
+            href={`/#people/${father.slug}`}
           >
-            {person.fatherName}
+            {fatherName}
           </a>
         ) : (
-          person.fatherName || '-'
+          fatherName || NOT_SET_VALUE
         )}
       </td>
     </tr>

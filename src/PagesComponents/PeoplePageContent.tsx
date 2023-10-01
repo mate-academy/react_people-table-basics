@@ -5,6 +5,7 @@ import { Loader } from '../components/Loader';
 import { getPeople } from '../api';
 import { PersonLink } from './PersonLink';
 import { Person } from '../types';
+import { columnsNames } from '../utils/Constans';
 
 export const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +13,6 @@ export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
 
   const { slug } = useParams();
-  const selectedPersonSlug = slug;
 
   useEffect(() => {
     setIsLoading(true);
@@ -26,8 +26,8 @@ export const PeoplePage: React.FC = () => {
   }, []);
 
   const peopleWithParents = people.map(person => {
-    const mother = people.find(element => element.name === person.motherName);
-    const father = people.find(element => element.name === person.fatherName);
+    const mother = people.find(({ name }) => name === person.motherName);
+    const father = people.find(({ name }) => name === person.fatherName);
 
     return { ...person, mother, father };
   });
@@ -55,7 +55,7 @@ export const PeoplePage: React.FC = () => {
   }
 
   return (
-    <div className="container">
+    <>
       <h1 className="title">People Page</h1>
 
       <div className="block">
@@ -66,12 +66,7 @@ export const PeoplePage: React.FC = () => {
           >
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
+                {columnsNames.map(columnName => <th>{columnName}</th>)}
               </tr>
             </thead>
 
@@ -79,13 +74,14 @@ export const PeoplePage: React.FC = () => {
               {peopleWithParents.map(person => (
                 <PersonLink
                   person={person}
-                  selectedPersonSlug={selectedPersonSlug}
+                  selectedPersonSlug={slug}
+                  key={person.slug}
                 />
               ))}
             </tbody>
           </table>
         </div>
       </div>
-    </div>
+    </>
   );
 };
