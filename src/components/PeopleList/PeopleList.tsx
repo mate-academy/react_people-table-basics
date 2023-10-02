@@ -4,6 +4,7 @@ import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { User } from '../User';
+import { findRelative } from '../../helpers/findRelative';
 
 export const PeopleList = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -13,17 +14,34 @@ export const PeopleList = () => {
   const { slug = '' } = useParams();
   const selectedUser = people.find(person => person.slug === slug);
 
+  const getPreparedPersons = (persons: Person[]) => {
+    return [...persons].map(onePerson => {
+      const mother = findRelative('f', onePerson, persons);
+      const father = findRelative('m', onePerson, persons);
+
+      return {
+        ...onePerson,
+        mother,
+        father,
+      };
+    });
+  };
+
   useEffect(() => {
     setIsLoading(true);
 
     getPeople()
-      .then(setPeople)
+      .then((allPersons) => {
+        const PeopleWithRelatives = getPreparedPersons(allPersons);
+
+        setPeople(PeopleWithRelatives);
+      })
       .catch((error) => {
         setIsErrorToGetPeople(true);
         throw error;
       })
       .finally(() => {
-        setIsLoading(true);
+        setIsLoading(false);
       });
   }, []);
 
@@ -32,13 +50,13 @@ export const PeopleList = () => {
       <h1 className="title">People Page</h1>
 
       <div className="box table-container">
-        {isErrorToGetPeople && isLoading && (
+        {isErrorToGetPeople && !isLoading && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             Something went wrong
           </p>
         )}
 
-        {!isLoading && (
+        {isLoading && (
           <Loader />
         )}
 
@@ -63,7 +81,6 @@ export const PeopleList = () => {
                 return (
                   <User
                     key={person.slug}
-                    people={people}
                     person={person}
                     selectedUser={selectedUser}
                   />
@@ -73,7 +90,7 @@ export const PeopleList = () => {
           </table>
         )}
 
-        {(!isLoading && !people.length) && (
+        {(!people.length && !isLoading) && (
           <p data-cy="noPeopleMessage">
             There are no people on the server
           </p>

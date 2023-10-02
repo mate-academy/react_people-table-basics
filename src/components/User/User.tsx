@@ -2,17 +2,16 @@ import cn from 'classnames';
 import React from 'react';
 import { Person } from '../../types';
 import { PersonalLink } from '../PersonalLink';
-import { findRelative } from '../../helpers/findRelative';
+// import { findRelative } from '../../helpers/findRelative';
 
 type Props = {
   person: Person,
-  people: Person[],
   selectedUser?: Person,
 };
 
 const WITHOUT_RELATIVE = '-';
 
-export const User: React.FC<Props> = ({ person, people, selectedUser }) => {
+export const User: React.FC<Props> = ({ person, selectedUser }) => {
   const {
     sex,
     born,
@@ -20,10 +19,12 @@ export const User: React.FC<Props> = ({ person, people, selectedUser }) => {
     motherName,
     fatherName,
     slug,
+    mother,
+    father,
   } = person;
 
-  const mother = findRelative('f', person, people);
-  const father = findRelative('m', person, people);
+  // const mother = findRelative('f', person, people);
+  // const father = findRelative('m', person, people);
 
   return (
     <tr
