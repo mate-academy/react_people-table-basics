@@ -11,9 +11,12 @@ import { PersonLink } from './PersonLink';
 export const People: React.FC = () => {
   const [people, setPeople] = useState<Person[]>();
   const [isClicked, setIsClicked] = useState<string | null>('');
+  const [isError, setIsError] = useState<string | null>(null);
 
   getPeople().then((res) => {
     setPeople(res);
+  }).catch((error) => {
+    setIsError(error);
   });
 
   const names = people?.map((person) => person.name);
@@ -27,7 +30,7 @@ export const People: React.FC = () => {
           <div className="box table-container">
             {(!people) && (<Loader />)}
 
-            {(!people) && (
+            {(isError) && (
               <p data-cy="peopleLoadingError" className="has-text-danger">
                 Something went wrong
               </p>
