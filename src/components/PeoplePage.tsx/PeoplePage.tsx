@@ -29,11 +29,12 @@ export const PeoplePage = () => {
       .then((response) => response.json())
       .then((result) => {
         setPeople(preparePeople(result));
-        setLoading(false);
       })
       .catch(() => {
-        setLoading(false);
         setLoadingError(true);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
