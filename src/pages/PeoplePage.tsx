@@ -15,7 +15,10 @@ export const PeoplePage: React.FC = () => {
   // const location = useLocation();
   // console.log(location);
 
-  const isPeople = !isLoading && people.length > 0;
+  const isShowTable = !isLoading && people.length > 0;
+  const isPeople = !isLoading
+  && !errorMassage
+  && people.length === 0;
 
   function findParent(peopleList: Person[], parentName: string | null) {
     return peopleList.find((person) => person.name === parentName);
@@ -45,16 +48,14 @@ export const PeoplePage: React.FC = () => {
             <Loader />
           )}
 
-          {isPeople && (
+          {isShowTable && (
             <PeopleTable
               people={people}
               selectedSlug={selectedSlug}
             />
           )}
 
-          {!isLoading
-          && !errorMassage
-          && people.length === 0
+          {isPeople
           && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
