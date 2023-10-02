@@ -1,14 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink/PersonLink';
+import { TABLE_ATTRIBUTES } from '../../utils/constants';
+import { People } from '../People/People';
 
 type Props = {
   people: Person[];
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const { personSlug } = useParams();
-  const selectedPerson = people.find(person => person.slug === personSlug);
+  const { personSlug = '' } = useParams();
 
   return (
     <table
@@ -17,49 +17,19 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {TABLE_ATTRIBUTES.map(attribute => (
+            <th>{attribute}</th>
+          ))}
         </tr>
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <tr
-            data-cy="person"
+        {people.map((person) => (
+          <People
+            person={person}
             key={person.slug}
-            className={person.slug === selectedPerson?.slug
-              ? 'has-background-warning'
-              : ''}
-          >
-            <PersonLink
-              person={person}
-            />
-
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
-
-            {person.mother
-              ? (
-                <PersonLink person={person.mother} />
-              ) : (
-                <td>
-                  {person.motherName || '-'}
-                </td>
-              )}
-            {person.father
-              ? (
-                <PersonLink person={person.father} />
-              ) : (
-                <td>
-                  {person.fatherName || '-'}
-                </td>
-              )}
-          </tr>
+            selectedPerson={personSlug}
+          />
         ))}
       </tbody>
     </table>

@@ -1,25 +1,27 @@
 import {
-  NavLink,
+  // NavLink,
   Navigate,
   Route,
   Routes,
 } from 'react-router-dom';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 
 import './App.scss';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
+import { Navigation } from './components/Navigation/Navigation';
 
 export const App = () => {
-  const activeLinkClass = ({ isActive }: { isActive: boolean }) => classNames(
-    'navbar-item',
-    { 'has-background-grey-lighter': isActive },
-  );
+  // const activeLinkClass = ({ isActive }: { isActive: boolean }) => classNames(
+  //   'navbar-item',
+  //   { 'has-background-grey-lighter': isActive },
+  // );
 
   return (
     <div data-cy="app">
-      <nav
+      <Navigation />
+      {/* <nav
         data-cy="nav"
         className="navbar is-fixed-top has-shadow"
         role="navigation"
@@ -42,42 +44,34 @@ export const App = () => {
             </NavLink>
           </div>
         </div>
-      </nav>
+      </nav> */}
+      <main className="section">
+        <div className="container">
+          {/* <h1 className="title">Home Page</h1> */}
+          <Routes>
+            <Route path="/" element={<HomePage />} />
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage />
-          }
-        />
+            <Route path="/people">
+              <Route path=":personSlug?" element={<PeoplePage />} />
+            </Route>
 
-        <Route
-          path="/people"
-          element={
-            <PeoplePage />
-          }
-        />
+            <Route path="/home" element={<Navigate to="/" replace />} />
 
-        <Route
-          path="/people/:personSlug"
-          element={
-            <PeoplePage />
-          }
-        />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
+      </main>
+      {/* <Routes>
+        <Route path="/" element={<HomePage />} />
 
-        <Route
-          path="/home"
-          element={
-            <Navigate to="/" replace />
-          }
-        />
+        <Route path="/people">
+          <Route path=":personSlug?" element={<PeoplePage />} />
+        </Route>
 
-        <Route
-          path="*"
-          element={<NotFoundPage />}
-        />
-      </Routes>
+        <Route path="/home" element={<Navigate to="/" replace />} />
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes> */}
     </div>
   );
 };
