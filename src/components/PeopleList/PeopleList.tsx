@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
-import { useAppContext } from '../Context/AppProvider';
 import { User } from '../User';
 
 export const PeopleList = () => {
@@ -11,7 +10,6 @@ export const PeopleList = () => {
   const [isErrorToGetPeople, setIsErrorToGetPeople] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { hasClickedPeopleLink } = useAppContext();
   const { slug } = useParams();
   const selectId = slug || '';
   const selectedUser = people.find(p => p.slug === selectId);
@@ -22,18 +20,16 @@ export const PeopleList = () => {
       .catch(() => {
         setIsErrorToGetPeople(true);
         throw new Error('Something went wrong');
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
-    if (hasClickedPeopleLink) {
-      getPeopleFromServer()
-        .then((allPersons) => {
-          setPeople(allPersons);
-          setIsLoading(false);
-        });
-    }
-  }, [hasClickedPeopleLink]);
+    getPeopleFromServer()
+      .then((allPersons) => {
+        setPeople(allPersons);
+      });
+  }, []);
 
   return (
     <div className="block">
