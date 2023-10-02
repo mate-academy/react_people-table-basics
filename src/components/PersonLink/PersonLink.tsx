@@ -9,16 +9,12 @@ type Props = {
 
 const FEMALE = 'f';
 
-function setWomenClass(gender: string) {
-  return classNames({
-    'has-text-danger': gender === FEMALE,
-  });
-}
-
 export const PersonLink: React.FC<Props> = ({ person }) => (
   <Link
     to={`/people/${person.slug}`}
-    className={setWomenClass(person.sex)}
+    className={classNames({
+      'has-text-danger': person.sex === FEMALE,
+    })}
   >
     {person.name}
   </Link>
