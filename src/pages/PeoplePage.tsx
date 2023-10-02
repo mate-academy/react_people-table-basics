@@ -9,7 +9,6 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [noPeopleOnServer, setNoPeopleOnServer] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -19,9 +18,6 @@ export const PeoplePage = () => {
 
         if (!currentPeople.length) {
           setErrorMessage(ERRORS.NO_PEOPLE_ERROR);
-          setNoPeopleOnServer(true);
-        } else {
-          setNoPeopleOnServer(false);
         }
 
         setPeople(getPreparedPeople(currentPeople));
@@ -47,11 +43,11 @@ export const PeoplePage = () => {
 
           {errorMessage && (
             <p
-              data-cy={!noPeopleOnServer
+              data-cy={errorMessage === ERRORS.DOWNLOAD_ERROR
                 ? 'peopleLoadingError'
                 : 'noPeopleMessage'}
               className={classNames({
-                'has-text-danger': !noPeopleOnServer,
+                'has-text-danger': errorMessage === ERRORS.DOWNLOAD_ERROR,
               })}
             >
               {errorMessage}

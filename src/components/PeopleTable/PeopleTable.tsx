@@ -2,15 +2,14 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonItem } from '../PersonItem';
-import { TabColumnTitles } from '../../types/TabColumnTitles';
+import { tabColumnTitles } from '../../utils';
 
 type Props = {
   people: Person[];
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const { slug } = useParams();
-  const personSlug = slug || '';
+  const { slug: personSlug = '' } = useParams();
 
   return (
     <table
@@ -19,9 +18,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          {Object.keys(TabColumnTitles).map(key => (
-            <th key={key}>
-              {key}
+          {tabColumnTitles.map(title => (
+            <th key={title}>
+              {title}
             </th>
           ))}
         </tr>

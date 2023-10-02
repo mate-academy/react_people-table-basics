@@ -4,3 +4,12 @@ export const ERRORS = {
 };
 
 export const NO_PARENT_MARK = '-';
+
+export const tabColumnTitles = [
+  'Name',
+  'Sex',
+  'Born',
+  'Died',
+  'Mother',
+  'Father',
+];
