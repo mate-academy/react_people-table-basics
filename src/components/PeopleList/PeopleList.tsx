@@ -14,20 +14,15 @@ export const PeopleList = () => {
   const selectId = slug || '';
   const selectedUser = people.find(p => p.slug === selectId);
 
-  const getPeopleFromServer = () => {
-    return getPeople()
-      .then(allPeople => allPeople)
-      .catch(() => {
-        setIsErrorToGetPeople(true);
-        throw new Error('Something went wrong');
-      })
-      .finally(() => setIsLoading(false));
-  };
-
   useEffect(() => {
-    getPeopleFromServer()
-      .then((allPersons) => {
-        setPeople(allPersons);
+    getPeople()
+      .then(setPeople)
+      .catch((error) => {
+        setIsErrorToGetPeople(true);
+        throw error;
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -36,13 +31,13 @@ export const PeopleList = () => {
       <h1 className="title">People Page</h1>
 
       <div className="box table-container">
-        {isErrorToGetPeople && (
+        {isErrorToGetPeople && !isLoading && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             Something went wrong
           </p>
         )}
 
-        {(!people.length && !isErrorToGetPeople) && (
+        {isLoading && (
           <Loader />
         )}
 
