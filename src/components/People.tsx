@@ -72,6 +72,9 @@ export const People: React.FC = () => {
                         data-cy="person"
                         className={(isClicked === person.name)
                           ? 'has-background-warning' : ''}
+                        onClick={() => {
+                          setIsClicked(person.name);
+                        }}
                       >
                         <td>
                           {/* <a
