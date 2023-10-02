@@ -82,7 +82,7 @@ export const PeoplePage = () => {
                     data-cy="person"
                     className={cn({
                       'has-background-warning':
-                    slug === `:${person.slug}`,
+                    slug === person.slug,
                     })}
                   >
                     <td>
@@ -90,7 +90,7 @@ export const PeoplePage = () => {
                         className={cn({
                           'has-text-danger': person.sex === 'f',
                         })}
-                        to={`:${person.slug}`}
+                        to={`${person.slug}`}
                       >
                         {person.name}
                       </Link>
@@ -104,7 +104,7 @@ export const PeoplePage = () => {
                         ? (
                           <Link
                             className="has-text-danger"
-                            to={`:${person.mother.slug}`}
+                            to={`${person.mother.slug}`}
                           >
                             {person.motherName}
                           </Link>
@@ -116,7 +116,7 @@ export const PeoplePage = () => {
                       {person.father
                         ? (
                           <Link
-                            to={`:${person.father.slug}`}
+                            to={`${person.father.slug}`}
                           >
                             {person.fatherName}
                           </Link>
