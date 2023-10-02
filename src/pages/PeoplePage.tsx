@@ -4,6 +4,7 @@ import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types/Person';
 import { getPeople } from '../services/people';
+import { getPeopleWithParents } from '../helper';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -20,20 +21,12 @@ export const PeoplePage: React.FC = () => {
   && !errorMassage
   && people.length === 0;
 
-  function findParent(peopleList: Person[], parentName: string | null) {
-    return peopleList.find((person) => person.name === parentName);
-  }
-
   useEffect(() => {
     setIsLoading(true);
 
     getPeople()
       .then(peopleList => {
-        setPeople(peopleList?.map(person => ({
-          ...person,
-          mother: findParent(peopleList, person.motherName),
-          father: findParent(peopleList, person.fatherName),
-        })));
+        setPeople(getPeopleWithParents(peopleList));
       })
       .catch(() => setErrorMassage('Something went wrong'))
       .finally(() => setIsLoading(false));
