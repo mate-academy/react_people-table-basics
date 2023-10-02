@@ -64,7 +64,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
                     person={mother}
                   />
                 ) : (
-                  <span>{motherName ?? '-'}</span>
+                  motherName ?? '-'
                 )}
               </td>
 
@@ -74,7 +74,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
                     person={father}
                   />
                 ) : (
-                  <span>{fatherName ?? '-'}</span>
+                  fatherName ?? '-'
                 )}
               </td>
             </tr>
