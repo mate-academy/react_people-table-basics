@@ -2,15 +2,8 @@ import { useEffect, useState } from 'react';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { Loader } from '../Loader';
-import { PersonInfo } from '../PersonInfo';
-
-const findParents = (people: Person[]) => (
-  people.map(person => ({
-    ...person,
-    mother: people.find(mom => mom.name === person.motherName),
-    father: people.find(dad => dad.name === person.fatherName),
-  }))
-);
+import { getPreparedPeople } from '../utils/PreparedPeople';
+import { PeopleList } from '../PeopleList/PeopleList';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -22,7 +15,7 @@ export const PeoplePage: React.FC = () => {
 
     getPeople()
       .then(currentPeople => {
-        setPeople(findParents(currentPeople));
+        setPeople(getPreparedPeople(currentPeople));
       })
       .catch(() => {
         setErrorMessage(true);
@@ -31,6 +24,9 @@ export const PeoplePage: React.FC = () => {
         setIsLoading(false);
       });
   }, []);
+
+  const peopleLoadingError = errorMessage && !isLoading;
+  const noPeopleMessage = !people.length && !isLoading && !errorMessage;
 
   return (
     <>
@@ -41,43 +37,21 @@ export const PeoplePage: React.FC = () => {
           {isLoading && (
             <Loader />
           )}
-          {(errorMessage && !isLoading) && (
+
+          {peopleLoadingError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {(!people.length && !isLoading && !errorMessage) && (
+          {noPeopleMessage && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {(!!people.length) && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map(person => (
-                  <PersonInfo
-                    person={person}
-                    key={person.slug}
-                  />
-                ))}
-              </tbody>
-            </table>
+          {!!people.length && (
+            <PeopleList people={people} />
           )}
         </div>
       </div>

@@ -2,6 +2,7 @@ import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
+import { NOT_PARENTS_NAME } from '../../variables';
 
 type Props = {
   person: Person
@@ -39,7 +40,7 @@ export const PersonInfo: React.FC<Props> = ({ person }) => {
         {mother ? (
           <PersonLink person={mother} />
         ) : (
-          motherName || '-'
+          motherName || NOT_PARENTS_NAME
         )}
       </td>
 
@@ -47,7 +48,7 @@ export const PersonInfo: React.FC<Props> = ({ person }) => {
         {father ? (
           <PersonLink person={father} />
         ) : (
-          fatherName || '-'
+          fatherName || NOT_PARENTS_NAME
         )}
       </td>
     </tr>
