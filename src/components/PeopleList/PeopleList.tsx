@@ -15,7 +15,9 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
       <thead>
         <tr>
           {COLUMN_NAMES.map(value => (
-            <th>{value}</th>
+            <th key={value}>
+              {value}
+            </th>
           ))}
         </tr>
       </thead>
