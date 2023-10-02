@@ -8,6 +8,7 @@ type Props = {
   selectedSlug: string | undefined,
 };
 
+const IS_NAME = '-';
 const tableHead = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
 export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
@@ -64,7 +65,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
                     person={mother}
                   />
                 ) : (
-                  motherName ?? '-'
+                  motherName ?? IS_NAME
                 )}
               </td>
 
@@ -74,7 +75,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
                     person={father}
                   />
                 ) : (
-                  fatherName ?? '-'
+                  fatherName ?? IS_NAME
                 )}
               </td>
             </tr>
