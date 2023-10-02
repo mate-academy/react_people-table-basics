@@ -7,6 +7,8 @@ type Props = {
 };
 
 export const PeopleTable = ({ people }: Props) => {
+  const tableHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
   return (
     <table
       data-cy="peopleTable"
@@ -18,12 +20,9 @@ export const PeopleTable = ({ people }: Props) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {tableHeaders.map(tableHeader => (
+            <th key={tableHeader}>{tableHeader}</th>
+          ))}
         </tr>
       </thead>
       <PeopleList people={people} />

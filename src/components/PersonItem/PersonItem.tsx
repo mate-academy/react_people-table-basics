@@ -24,16 +24,14 @@ export const PersonItem = ({
     fatherName,
   } = person;
 
-  const { slug: slugFromPath } = useParams();
-
-  const selectedPerson = slugFromPath;
+  const { slug: slugFromParams } = useParams();
 
   return (
     <tr
       data-cy="person"
       key={slug}
       className={classNames({
-        'has-background-warning': selectedPerson === slug,
+        'has-background-warning': slugFromParams === slug,
       })}
     >
       <td>

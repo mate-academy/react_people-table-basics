@@ -4,12 +4,12 @@ import { Person } from '../../types';
 import { FEMALE_SEX } from '../../utils/variables';
 
 type Props = {
-  person: Person | undefined
+  person: Person
 };
 
 export const PersonLink = ({ person }: Props) => (
   <Link
-    to={`/people/${person?.slug}`}
+    to={`../${person?.slug}`}
     className={classNames({
       'has-text-danger': person?.sex === FEMALE_SEX,
     })}
