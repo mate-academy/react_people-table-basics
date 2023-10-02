@@ -1,4 +1,5 @@
 import { Person } from '../types';
+import { EMPTY_VALUE } from '../variables/variables';
 
 export const getNormalizedPeopleList = (people: Person[]) => {
   const parentsList = people.reduce((acc, person) => {
@@ -13,17 +14,17 @@ export const getNormalizedPeopleList = (people: Person[]) => {
   });
 
   const list = people.map(person => {
-    const copyPerson = { ...person };
-    const normalizedMotherName = person.motherName || '-';
-    const normalizedFatherName = person.fatherName || '-';
+    const personCopy = { ...person };
+    const normalizedMotherName = person.motherName || EMPTY_VALUE;
+    const normalizedFatherName = person.fatherName || EMPTY_VALUE;
 
-    copyPerson.motherName = normalizedMotherName;
-    copyPerson.fatherName = normalizedFatherName;
+    personCopy.motherName = normalizedMotherName;
+    personCopy.fatherName = normalizedFatherName;
 
-    copyPerson.mother = parentsList[normalizedMotherName];
-    copyPerson.father = parentsList[normalizedFatherName];
+    personCopy.mother = parentsList[normalizedMotherName];
+    personCopy.father = parentsList[normalizedFatherName];
 
-    return copyPerson;
+    return personCopy;
   });
 
   return list;

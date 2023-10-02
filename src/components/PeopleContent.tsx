@@ -4,6 +4,7 @@ import cn from 'classnames';
 
 import { Loader } from './Loader';
 import { Person } from '../types';
+import { TABLE_COLUMNS, FEMALE } from '../variables/variables';
 
 type Props = {
   people: Person[],
@@ -47,12 +48,11 @@ export const PeopleContent: React.FC<Props> = ({
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {TABLE_COLUMNS.map(column => (
+            <th>
+              {column}
+            </th>
+          ))}
         </tr>
       </thead>
 
@@ -83,7 +83,7 @@ export const PeopleContent: React.FC<Props> = ({
                 <Link
                   to={`/people/${slug}`}
                   className={cn({
-                    'has-text-danger': sex === 'f',
+                    'has-text-danger': sex === FEMALE,
                   })}
                 >
                   {name}
