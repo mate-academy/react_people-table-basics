@@ -105,16 +105,16 @@ export const People: React.FC = () => {
                         <a
                           className=" "
                           onClick={() => {
-                            setIsClicked(person?.motherName);
+                            setIsClicked(person?.fatherName);
                           }}
                         >
-                          {person.fatherName || '-'}
+                          {person.fatherName}
                         </a>
                       )}
                       {person.fatherName
                       && !names?.includes(person.fatherName) && (
                         <>
-                          {person.fatherName || '-'}
+                          {person.fatherName}
                         </>
                       )}
                       {!person.fatherName && (
