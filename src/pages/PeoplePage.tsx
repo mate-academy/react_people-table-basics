@@ -13,13 +13,10 @@ export const PeoplePage: React.FC = () => {
 
   const { slug: selectedSlug } = useParams();
 
-  // const location = useLocation();
-  // console.log(location);
-
   const isShowTable = !isLoading && people.length > 0;
   const isPeople = !isLoading
-  && !errorMassage
-  && people.length === 0;
+    && !errorMassage
+    && people.length === 0;
 
   useEffect(() => {
     setIsLoading(true);

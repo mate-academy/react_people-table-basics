@@ -28,7 +28,6 @@ export const BodyTable: React.FC<Props> = ({ person, selectedSlug }) => {
         'has-background-warning': slug === selectedSlug,
       })}
       data-cy="person"
-      key={slug}
     >
       <td>
         <PersonLink
