@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { PersonType } from '../types';
-import { EMPTY_VALUE, FEMALE } from '../utils/constants';
+import { EMPTY_VALUE } from '../utils/constants';
 import { PersonLink } from './PersonLink';
 
 type Props = {
@@ -13,7 +13,6 @@ export const Person: React.FC<Props> = ({ person }) => {
   const { personSlug } = useParams();
 
   const {
-    name,
     sex,
     born,
     died,
@@ -24,8 +23,6 @@ export const Person: React.FC<Props> = ({ person }) => {
     father,
   } = person;
 
-  const isFemale = sex === FEMALE;
-
   return (
     <tr
       data-cy="person"
@@ -34,14 +31,7 @@ export const Person: React.FC<Props> = ({ person }) => {
       })}
     >
       <td>
-        <Link
-          to={slug}
-          className={cn({
-            'has-text-danger': isFemale,
-          })}
-        >
-          {name}
-        </Link>
+        <PersonLink person={person} />
       </td>
 
       <td>{sex}</td>
