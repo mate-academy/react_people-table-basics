@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
 import { Person } from '../types';
+import { PersonLink } from './PersonLink';
 
 export const People: React.FC = () => {
   const [people, setPeople] = useState<Person[]>();
@@ -61,14 +62,20 @@ export const People: React.FC = () => {
                       ? 'has-background-warning' : ''}
                   >
                     <td>
-                      <a
+                      {/* <a
                         href="#/people/jan-van-brussel-1714"
                         onClick={() => {
                           setIsClicked(person.name);
                         }}
                       >
                         {person.name}
-                      </a>
+                      </a> */}
+                      <span onClick={() => {
+                        setIsClicked(person.name);
+                      }}
+                      >
+                        <PersonLink person={person} />
+                      </span>
                     </td>
 
                     <td>{person.sex}</td>
