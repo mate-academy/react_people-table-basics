@@ -97,7 +97,7 @@ export const People: React.FC = () => {
                           {person.motherName
                           && names?.includes(person.motherName) && (
                             <a
-                              href={`/people/${mother?.slug}`}
+                              href={`#/people/${mother?.slug}`}
                               className="has-text-danger"
                               onClick={(e) => {
                                 e.preventDefault();
@@ -124,7 +124,7 @@ export const People: React.FC = () => {
                           {person.fatherName
                           && names?.includes(person.fatherName) && (
                             <a
-                              href={`/people/${father?.slug}`}
+                              href={`#/people/${father?.slug}`}
                               className=" "
                               onClick={(e) => {
                                 e.preventDefault();
