@@ -2,11 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 import './App.scss';
-import { Navigation } from './Navbar';
-
-// export const findPersonsMotherSlug = (people, person) => {
-//   return people.find(mother => mother.name === person.motherName).slug;
-// };
+import { Navigation } from './components/Loader/Navbar';
 
 export const App: React.FC = () => {
   return (

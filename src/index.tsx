@@ -7,10 +7,10 @@ import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 import { App } from './App';
-import { HomePage } from './HomePage';
-import { PeoplePage } from './PeoplePage';
+import { HomePage } from './components/Loader/HomePage';
+import { PeoplePage } from './components/Loader/PeoplePage';
 import { PostsProvider } from './PeopleContext';
-import { NotFoundPage } from './NotFoundPage';
+import { NotFoundPage } from './components/Loader/NotFoundPage';
 
 createRoot(document.getElementById('root') as HTMLDivElement)
   .render(
