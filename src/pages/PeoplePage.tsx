@@ -67,7 +67,6 @@ export const PeoplePage: React.FC = () => {
               {errorMassage}
             </p>
           )}
-
         </div>
       </div>
     </>
