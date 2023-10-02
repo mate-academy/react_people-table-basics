@@ -15,6 +15,8 @@ export const PeoplePage: React.FC = () => {
   // const location = useLocation();
   // console.log(location);
 
+  const isPeople = !isLoading && people.length > 0;
+
   function findParent(peopleList: Person[], parentName: string | null) {
     return peopleList.find((person) => person.name === parentName);
   }
@@ -43,7 +45,7 @@ export const PeoplePage: React.FC = () => {
             <Loader />
           )}
 
-          {!isLoading && people.length > 0 && (
+          {isPeople && (
             <PeopleTable
               people={people}
               selectedSlug={selectedSlug}
