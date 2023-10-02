@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const PeopleList: React.FC<Props> = ({ people }) => {
-  const { personId = '' } = useParams();
+  const { personSlug = '' } = useParams();
 
   return (
     <table
@@ -31,7 +31,7 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
           <PersonItem
             key={person.slug}
             person={person}
-            selectedSlug={personId}
+            selectedSlug={personSlug}
           />
         ))}
       </tbody>

@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { PageNavigation } from './PageNavigation';
 
-export const PageContent = () => {
+export const Page = () => {
   return (
     <>
       <PageNavigation />
