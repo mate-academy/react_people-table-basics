@@ -20,18 +20,16 @@ export const PeoplePage: React.FC = () => {
   useEffect(() => {
     setLoading(true);
 
-    setTimeout(() => {
-      getPeople()
-        .then(peopleList => {
-          setPeople(peopleList?.map(person => ({
-            ...person,
-            mother: findParent(peopleList, person.motherName),
-            father: findParent(peopleList, person.fatherName),
-          })));
-        })
-        .catch(() => setErrorMassage('Something went wrong'))
-        .finally(() => setLoading(false));
-    }, 1000);
+    getPeople()
+      .then(peopleList => {
+        setPeople(peopleList?.map(person => ({
+          ...person,
+          mother: findParent(peopleList, person.motherName),
+          father: findParent(peopleList, person.fatherName),
+        })));
+      })
+      .catch(() => setErrorMassage('Something went wrong'))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
