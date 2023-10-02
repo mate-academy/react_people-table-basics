@@ -1,6 +1,6 @@
-import classNames from "classnames";
-import React from "react";
-import { NavLink } from "react-router-dom";
+import classNames from 'classnames';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export const getLinkClass = ({ isActive }: { isActive: boolean }) => classNames(
   'navbar-item',
@@ -10,8 +10,6 @@ export const getLinkClass = ({ isActive }: { isActive: boolean }) => classNames(
 );
 
 export const Navbar: React.FC = () => {
-
-
   return (
     <nav
       data-cy="nav"
