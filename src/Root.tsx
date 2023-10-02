@@ -10,20 +10,13 @@ export const Root = () => (
   <HashRouter>
     <Routes>
       <Route path="/" element={<App />}>
+        <Route path="*" element={<PageNotFound />} />
         <Route index element={<HomePage />} />
         <Route path="people" element={<PeopleList />}>
           <Route path=":slug?" element={<PeopleList />} />
         </Route>
+        <Route path="home" element={<Navigate to="/" replace />} />
       </Route>
-
-      {/* <Route path="home" element={<Navigate to="/" replace />} /> */}
-      {/* <Route path="*" element={<PageNotFound />} /> */}
-
-      <Route path="*" element={<App />}>
-        <Route index element={<HomePage />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Route>
-      <Route path="home" element={<Navigate to=".." />} />
     </Routes>
   </HashRouter>
 );
