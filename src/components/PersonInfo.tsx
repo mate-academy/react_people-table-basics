@@ -11,7 +11,6 @@ type Props = {
 
 export const PersonInfo: React.FC<Props> = ({ person }) => {
   const { personSlug } = useParams();
-  const selectedPersonSlug = personSlug;
   const {
     sex,
     born,
@@ -28,7 +27,7 @@ export const PersonInfo: React.FC<Props> = ({ person }) => {
       data-cy="person"
       key={slug}
       className={classNames({
-        'has-background-warning': selectedPersonSlug === slug,
+        'has-background-warning': personSlug === slug,
       })}
     >
       <td>

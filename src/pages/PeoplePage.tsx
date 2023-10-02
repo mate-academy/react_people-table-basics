@@ -5,7 +5,7 @@ import { Person } from '../types';
 import { Loader } from '../components/Loader';
 
 export const PeoplePage = () => {
-  const [people, setPeople] = useState([] as Person[]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -52,7 +52,6 @@ export const PeoplePage = () => {
           {!!people.length && (
             <PeopleTable people={people} />
           )}
-
         </div>
       </div>
     </>

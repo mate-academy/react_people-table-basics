@@ -29,6 +29,5 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
         ))}
       </tbody>
     </table>
-
   );
 };
