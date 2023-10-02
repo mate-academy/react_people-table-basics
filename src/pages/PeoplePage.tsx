@@ -10,8 +10,7 @@ export const PeoplePage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [errorMassage, setErrorMassage] = useState('');
 
-  const { slug } = useParams();
-  const selectedSlug = slug;
+  const { slug: selectedSlug } = useParams();
 
   function findParent(peopleList: Person[], parentName: string | null) {
     return peopleList.find((person) => person.name === parentName);
