@@ -15,10 +15,11 @@ function PeoplePage() {
     getPeople()
       .then((data) => {
         setPeople(data);
-        setLoading(false);
       })
       .catch((err) => {
         setError(err.message);
+      })
+      .finally(() => {
         setLoading(false);
       });
   }, []);
