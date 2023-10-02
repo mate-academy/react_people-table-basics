@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Person } from './types';
 import { getPeople } from './api';
 import { ErrorMessages } from './types/ErrorMessages';
+import { getPreparedPeople } from './utils/functions';
 
 export const PeopleContext = React.createContext({
   peopleList: [] as Person[],
@@ -21,7 +22,9 @@ export const PostsProvider: React.FC<Props> = ({ children }) => {
   const loadPeople = useEffect(() => {
     setIsLoading(true);
     getPeople()
-      .then(setPeopleList)
+      .then((peopleFromServer) => {
+        setPeopleList(getPreparedPeople(peopleFromServer));
+      })
       .catch(() => {
         setErrorMessage(ErrorMessages.LoadError);
       })
