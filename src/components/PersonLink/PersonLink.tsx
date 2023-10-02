@@ -7,9 +7,11 @@ type Props = {
   person: Person,
 };
 
+const FEMALE = 'f';
+
 function setWomenClass(gender: string) {
   return classNames({
-    'has-text-danger': gender === 'f',
+    'has-text-danger': gender === FEMALE,
   });
 }
 
