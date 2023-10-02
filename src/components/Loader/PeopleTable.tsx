@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { PeopleContext } from '../../PeopleContext';
 import { columnNames } from '../../utils/constants';
-import { PeopleList } from './PeopleList';
+import { PersonRow } from './PersonRow';
 
 export const PeopleTable: React.FC = () => {
   const { peopleList } = useContext(PeopleContext);
@@ -23,7 +23,7 @@ export const PeopleTable: React.FC = () => {
 
       <tbody>
         {peopleList.map(person => (
-          <PeopleList
+          <PersonRow
             person={person}
             peopleSlug={peopleSlug}
             key={person.slug}

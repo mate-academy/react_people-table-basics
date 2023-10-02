@@ -7,35 +7,31 @@ import { PeopleTable } from './PeopleTable';
 export const PeoplePage: React.FC = () => {
   const { peopleList, isLoading, errorMessage } = useContext(PeopleContext);
 
-  const isErrorBlockVisible = !peopleList.length || errorMessage || isLoading;
-
   return (
     <>
       <h1 className="title">People Page</h1>
 
-      {isErrorBlockVisible && (
-        <div className="block">
-          <div className="box table-container">
-            {isLoading && (<Loader />)}
+      <div className="block">
+        <div className="box table-container">
+          {isLoading && (<Loader />)}
 
-            {errorMessage === ErrorMessages.LoadError && (
-              <p data-cy="peopleLoadingError" className="has-text-danger">
-                {ErrorMessages.SomethingWentWrong}
-              </p>
-            )}
+          {errorMessage === ErrorMessages.LoadError && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              {ErrorMessages.SomethingWentWrong}
+            </p>
+          )}
 
-            {(!peopleList.length && !isLoading) && (
-              <p data-cy="noPeopleMessage">
-                {ErrorMessages.NoPeople}
-              </p>
-            )}
-          </div>
+          {(!peopleList.length && !isLoading) && (
+            <p data-cy="noPeopleMessage">
+              {ErrorMessages.NoPeople}
+            </p>
+          )}
+
+          {!!peopleList.length && (
+            <PeopleTable />
+          )}
         </div>
-      )}
-
-      {!!peopleList.length && (
-        <PeopleTable />
-      )}
+      </div>
     </>
   );
 };

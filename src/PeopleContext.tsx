@@ -4,8 +4,14 @@ import { getPeople } from './api';
 import { ErrorMessages } from './types/ErrorMessages';
 import { getPreparedPeople } from './utils/functions';
 
-export const PeopleContext = React.createContext({
-  peopleList: [] as Person[],
+interface PeopleContextType {
+  peopleList: Person[];
+  isLoading: boolean;
+  errorMessage: string;
+}
+
+export const PeopleContext = React.createContext<PeopleContextType>({
+  peopleList: [],
   isLoading: false,
   errorMessage: '',
 });

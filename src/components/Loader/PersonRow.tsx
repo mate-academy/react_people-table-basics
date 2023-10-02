@@ -5,10 +5,10 @@ import { NO_PARENT } from '../../utils/constants';
 
 type Props = {
   person: Person,
-  peopleSlug: string | undefined,
+  peopleSlug?: string,
 };
 
-export const PeopleList: React.FC<Props> = ({ person, peopleSlug }) => {
+export const PersonRow: React.FC<Props> = ({ person, peopleSlug }) => {
   const {
     slug, sex, born, died, motherName, fatherName, mother, father,
   } = person;
