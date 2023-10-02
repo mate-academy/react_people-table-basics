@@ -7,7 +7,7 @@ import { getPeople } from '../services/people';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMassage, setErrorMassage] = useState('');
 
   const { slug: selectedSlug } = useParams();
@@ -17,7 +17,7 @@ export const PeoplePage: React.FC = () => {
   }
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
 
     getPeople()
       .then(peopleList => {
@@ -28,7 +28,7 @@ export const PeoplePage: React.FC = () => {
         })));
       })
       .catch(() => setErrorMassage('Something went wrong'))
-      .finally(() => setLoading(false));
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -36,18 +36,18 @@ export const PeoplePage: React.FC = () => {
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {loading && (
+          {isLoading && (
             <Loader />
           )}
 
-          {!loading && people.length > 0 && (
+          {!isLoading && people.length > 0 && (
             <PeopleTable
               people={people}
               selectedSlug={selectedSlug}
             />
           )}
 
-          {!loading
+          {!isLoading
           && !errorMassage
           && people.length === 0
           && (
