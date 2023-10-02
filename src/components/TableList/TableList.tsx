@@ -1,14 +1,20 @@
-import { FC } from 'react';
+import { useContext } from 'react';
+
+import { PeopleProvider } from '../../store/PeopleContext';
 import { TableItem } from '../TableItem';
 
-type TTableListProps = {
+export const TableList = () => {
+  const { people } = useContext(PeopleProvider);
 
-};
-
-export const TableList: FC<TTableListProps> = () => {
   return (
     <tbody>
-      <TableItem />
+      {people.map(person => (
+        <TableItem
+          people={people}
+          key={person.slug}
+          person={person}
+        />
+      ))}
     </tbody>
   );
 };
