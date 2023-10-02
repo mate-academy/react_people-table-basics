@@ -26,6 +26,8 @@ export const PeoplePage = () => {
     getCurrentPeople();
   }, []);
 
+  const isPeopleTableEmpty = !people.length && !errorMessage && !isLoading;
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -41,7 +43,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!people.length && !errorMessage && !isLoading && (
+          {isPeopleTableEmpty && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
