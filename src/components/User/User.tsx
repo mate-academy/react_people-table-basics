@@ -10,6 +10,8 @@ type Props = {
   selectedUser?: Person,
 };
 
+const WITHOUT_RELATIVE = '-';
+
 export const User: React.FC<Props> = ({ person, people, selectedUser }) => {
   const {
     sex,
@@ -40,14 +42,14 @@ export const User: React.FC<Props> = ({ person, people, selectedUser }) => {
         {mother ? (
           <PersonalLink person={mother} />
         )
-          : (motherName || '-')}
+          : (motherName || WITHOUT_RELATIVE)}
       </td>
 
       <td>
         {father ? (
           <PersonalLink person={father} />
         )
-          : (fatherName || '-')}
+          : (fatherName || WITHOUT_RELATIVE)}
       </td>
     </tr>
   );

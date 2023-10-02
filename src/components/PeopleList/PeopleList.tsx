@@ -8,13 +8,14 @@ import { User } from '../User';
 export const PeopleList = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isErrorToGetPeople, setIsErrorToGetPeople] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { slug } = useParams();
-  const selectId = slug || '';
-  const selectedUser = people.find(p => p.slug === selectId);
+  const { slug = '' } = useParams();
+  const selectedUser = people.find(person => person.slug === slug);
 
   useEffect(() => {
+    setIsLoading(true);
+
     getPeople()
       .then(setPeople)
       .catch((error) => {
@@ -22,7 +23,7 @@ export const PeopleList = () => {
         throw error;
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsLoading(true);
       });
   }, []);
 
@@ -31,13 +32,13 @@ export const PeopleList = () => {
       <h1 className="title">People Page</h1>
 
       <div className="box table-container">
-        {isErrorToGetPeople && !isLoading && (
+        {isErrorToGetPeople && isLoading && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             Something went wrong
           </p>
         )}
 
-        {isLoading && (
+        {!isLoading && (
           <Loader />
         )}
 
