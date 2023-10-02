@@ -1,6 +1,6 @@
-import classNames from 'classnames';
-import './App.scss';
-import { NavLink, Outlet } from 'react-router-dom';
+import classNames from "classnames";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 export const getLinkClass = ({ isActive }: { isActive: boolean }) => classNames(
   'navbar-item',
@@ -9,8 +9,10 @@ export const getLinkClass = ({ isActive }: { isActive: boolean }) => classNames(
   },
 );
 
-export const App = () => (
-  <div data-cy="app">
+export const Navbar: React.FC = () => {
+
+
+  return (
     <nav
       data-cy="nav"
       className="navbar is-fixed-top has-shadow"
@@ -29,10 +31,5 @@ export const App = () => (
         </div>
       </div>
     </nav>
-    <main className="section">
-      <div className="container">
-        <Outlet />
-      </div>
-    </main>
-  </div>
-);
+  );
+};
