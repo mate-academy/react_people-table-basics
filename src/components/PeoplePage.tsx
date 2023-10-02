@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
-import { preparePeople } from '../helpers';
+import { getPreparedPeople } from '../helpers';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
 import { PeopleTable } from './PeopleTable';
 
-export const PeoplePage = () => {
+export const PeoplePage = memo(() => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [people, setPeople] = useState<Person[]>([]);
@@ -16,7 +16,7 @@ export const PeoplePage = () => {
     setIsLoading(true);
 
     getPeople()
-      .then(peopleFromAfar => setPeople(preparePeople(peopleFromAfar)))
+      .then(peopleFromAfar => setPeople(getPreparedPeople(peopleFromAfar)))
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
   }, []);
@@ -40,7 +40,7 @@ export const PeoplePage = () => {
 
           {isRequestSuccessful && (
             hasPeople
-              ? <PeopleTable people={people} selected={slug} />
+              ? <PeopleTable people={people} selectedPersonSlug={slug} />
               : (
                 <p data-cy="noPeopleMessage">
                   There are no people on the server
@@ -51,4 +51,4 @@ export const PeoplePage = () => {
       </div>
     </>
   );
-};
+});

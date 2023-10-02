@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
-import classNames from 'classnames';
+import { getNavLinkClass } from '../helpers';
 
-export const Navbar = () => (
+export const Navbar = memo(() => (
   <nav
     data-cy="nav"
     className="navbar is-fixed-top has-shadow"
@@ -12,22 +13,18 @@ export const Navbar = () => (
       <div className="navbar-brand">
         <NavLink
           to="/"
-          className={({ isActive }) => classNames('navbar-item', {
-            'has-background-grey-lighter': isActive,
-          })}
+          className={getNavLinkClass}
         >
           Home
         </NavLink>
 
         <NavLink
           to="/people"
-          className={({ isActive }) => classNames('navbar-item', {
-            'has-background-grey-lighter': isActive,
-          })}
+          className={getNavLinkClass}
         >
           People
         </NavLink>
       </div>
     </div>
   </nav>
-);
+));

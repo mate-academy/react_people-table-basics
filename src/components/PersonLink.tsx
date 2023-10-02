@@ -1,23 +1,15 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../types';
 
-const EMPTY_VALUE = '-';
 const SEX_FEMALE = 'f';
 
 type Props = {
-  person: Person | string | null | undefined;
+  person: Person;
 };
 
-export const PersonLink: React.FC<Props> = ({ person }) => {
-  if (!person) {
-    return <>{EMPTY_VALUE}</>;
-  }
-
-  if (typeof person === 'string') {
-    return <>{person}</>;
-  }
-
+export const PersonLink: React.FC<Props> = memo(({ person }) => {
   const { slug, name, sex } = person;
 
   return (
@@ -30,4 +22,4 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       {name}
     </Link>
   );
-};
+});

@@ -1,20 +1,21 @@
+import classNames from 'classnames';
 import { Person } from './types';
 
-export function preparePeople(people: Person[]): Person[] {
+export function getPreparedPeople(people: Person[]): Person[] {
   return people.map(person => {
     const mother = people.find(({ name }) => name === person.motherName);
     const father = people.find(({ name }) => name === person.fatherName);
 
-    const newPerson = { ...person };
+    return {
+      ...person,
+      mother,
+      father,
+    };
+  });
+}
 
-    if (mother) {
-      newPerson.mother = { ...mother };
-    }
-
-    if (father) {
-      newPerson.father = { ...father };
-    }
-
-    return newPerson;
+export function getNavLinkClass({ isActive }: { isActive: boolean }) {
+  return classNames('navbar-item', {
+    'has-background-grey-lighter': isActive,
   });
 }
