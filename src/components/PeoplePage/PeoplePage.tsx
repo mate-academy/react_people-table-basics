@@ -4,7 +4,7 @@ import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
 import { ERROR_MESSAGE, NO_PEOPLE_ON_SERVER } from '../../utils/constants';
-import { addParentsToPeople } from '../../utils/helpers';
+import { getPreparedPeople } from '../../utils/helpers';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -19,9 +19,9 @@ export const PeoplePage: React.FC = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const peopleWithParents = addParentsToPeople(people);
+  const peopleWithParents = getPreparedPeople(people);
 
-  const noPeopleMessage = (!people.length && !isLoading && !isError);
+  const noPeopleMessage = !people.length && !isLoading && !isError;
 
   return (
     <>

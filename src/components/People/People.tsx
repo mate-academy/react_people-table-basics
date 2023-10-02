@@ -9,34 +9,45 @@ type Props = {
 };
 
 export const People: React.FC<Props> = ({ person, selectedPerson }) => {
+  const {
+    sex,
+    born,
+    died,
+    mother,
+    father,
+    motherName,
+    fatherName,
+    slug,
+  } = person;
+
   return (
     <tr
       data-cy="person"
-      key={person.slug}
+      key={slug}
       className={
-        classNames({ 'has-background-warning': selectedPerson === person.slug })
+        classNames({ 'has-background-warning': selectedPerson === slug })
       }
     >
       <PersonLink person={person} />
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
 
-      {person.mother
+      {mother
         ? (
-          <PersonLink person={person.mother} />
+          <PersonLink person={mother} />
         ) : (
           <td>
-            {person.motherName || EMPTY_VALUE}
+            {motherName || EMPTY_VALUE}
           </td>
         )}
-      {person.father
+      {father
         ? (
-          <PersonLink person={person.father} />
+          <PersonLink person={father} />
         ) : (
           <td>
-            {person.fatherName || EMPTY_VALUE}
+            {fatherName || EMPTY_VALUE}
           </td>
         )}
     </tr>
