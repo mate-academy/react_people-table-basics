@@ -5,9 +5,9 @@ import { getPeople } from '../api';
 import { Loader } from './Loader';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<Person[]>();
+  const [people, setPeople] = useState<Person[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,8 +30,9 @@ export const PeoplePage: React.FC = () => {
     return { ...person, mother, father };
   });
 
-  const isNoPeopleMessage = !people?.length && !errorMessage && !isLoading;
+  const isNoPeopleMessage = !people.length && !errorMessage && !isLoading;
   const isErrorMessage = errorMessage && !isLoading;
+  const isShowPeople = !isLoading && !isErrorMessage && !!people.length;
 
   return (
     <div className="container">
@@ -54,7 +55,7 @@ export const PeoplePage: React.FC = () => {
 
           {isLoading && <Loader />}
 
-          {!isLoading && (
+          {isShowPeople && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
