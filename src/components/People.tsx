@@ -42,30 +42,31 @@ export const People: React.FC = () => {
               </p>
             )}
 
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
+            {people && (
+              <table
+                data-cy="peopleTable"
+                className="table is-striped is-hoverable is-narrow is-fullwidth"
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Sex</th>
+                    <th>Born</th>
+                    <th>Died</th>
+                    <th>Mother</th>
+                    <th>Father</th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                {people?.map((person) => (
-                  <tr
-                    data-cy="person"
-                    className={(isClicked === person.name)
-                      ? 'has-background-warning' : ''}
-                  >
-                    <td>
-                      {/* <a
+                <tbody>
+                  {people?.map((person) => (
+                    <tr
+                      data-cy="person"
+                      className={(isClicked === person.name)
+                        ? 'has-background-warning' : ''}
+                    >
+                      <td>
+                        {/* <a
                         href="#/people/jan-van-brussel-1714"
                         onClick={() => {
                           setIsClicked(person.name);
@@ -73,71 +74,72 @@ export const People: React.FC = () => {
                       >
                         {person.name}
                       </a> */}
-                      <span onClick={() => {
-                        setIsClicked(person.name);
-                      }}
-                      >
-                        <PersonLink person={person} />
-                      </span>
-                    </td>
-
-                    <td>{person.sex}</td>
-                    <td>{person.born}</td>
-                    <td>{person.died}</td>
-                    <td>
-                      {person.motherName
-                      && names?.includes(person.motherName) && (
-                        <a
-                          className="has-text-danger"
-                          onClick={() => {
-                            setIsClicked(person?.motherName);
-                          }}
+                        <span onClick={() => {
+                          setIsClicked(person.name);
+                        }}
                         >
-                          {person.motherName}
-                        </a>
-                      )}
-                      {person.motherName
-                      && !names?.includes(person.motherName) && (
-                        <>
-                          {person.motherName}
-                        </>
-                      )}
-                      {!person.motherName && (
-                        <>
-                          -
-                        </>
-                      )}
+                          <PersonLink person={person} />
+                        </span>
+                      </td>
 
-                    </td>
-                    <td>
-                      {person.fatherName
-                      && names?.includes(person.fatherName) && (
-                        <a
-                          className=" "
-                          onClick={() => {
-                            setIsClicked(person?.fatherName);
-                          }}
-                        >
-                          {person.fatherName}
-                        </a>
-                      )}
-                      {person.fatherName
-                      && !names?.includes(person.fatherName) && (
-                        <>
-                          {person.fatherName}
-                        </>
-                      )}
-                      {!person.fatherName && (
-                        <>
-                          -
-                        </>
-                      )}
+                      <td>{person.sex}</td>
+                      <td>{person.born}</td>
+                      <td>{person.died}</td>
+                      <td>
+                        {person.motherName
+                          && names?.includes(person.motherName) && (
+                          <a
+                            className="has-text-danger"
+                            onClick={() => {
+                              setIsClicked(person?.motherName);
+                            }}
+                          >
+                            {person.motherName}
+                          </a>
+                        )}
+                        {person.motherName
+                          && !names?.includes(person.motherName) && (
+                          <>
+                            {person.motherName}
+                          </>
+                        )}
+                        {!person.motherName && (
+                          <>
+                            -
+                          </>
+                        )}
 
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      </td>
+                      <td>
+                        {person.fatherName
+                          && names?.includes(person.fatherName) && (
+                          <a
+                            className=" "
+                            onClick={() => {
+                              setIsClicked(person?.fatherName);
+                            }}
+                          >
+                            {person.fatherName}
+                          </a>
+                        )}
+                        {person.fatherName
+                          && !names?.includes(person.fatherName) && (
+                          <>
+                            {person.fatherName}
+                          </>
+                        )}
+                        {!person.fatherName && (
+                          <>
+                            -
+                          </>
+                        )}
+
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
       </div>
