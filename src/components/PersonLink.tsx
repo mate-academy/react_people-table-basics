@@ -12,7 +12,10 @@ export const PersonLink: React.FC<PersonLinkProps> = ({ person }) => {
    + '-' + person.born.toString();
 
   return (
-    <Link to={`/people/${slug}`}>
+    <Link
+      to={`/people/${slug}`}
+      className={person.sex === 'f' ? 'has-text-danger' : ''}
+    >
       {person.name}
     </Link>
   );
