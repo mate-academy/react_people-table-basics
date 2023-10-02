@@ -18,68 +18,68 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
     >
       <thead>
         <tr>
-          {tableHead.map(currentTh => (
-            <th key={`${currentTh}_Date.now()`}>{currentTh}</th>
+          {tableHead.map(currentColumn => (
+            <th key={`${currentColumn}_Date.now()`}>{currentColumn}</th>
           ))}
-          {/* <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th> */}
         </tr>
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <tr
-            className={classNames({
-              'has-background-warning': person.slug === selectedSlug,
-            })}
-            data-cy="person"
-            key={person.slug}
-          >
-            <td>
-              {person.slug === selectedSlug ? (
-                <PersonLink
-                  person={person}
-                />
-              ) : (
-                <PersonLink
-                  person={person}
-                />
-              )}
-            </td>
+        {people.map(person => {
+          const {
+            slug,
+            sex,
+            born,
+            died,
+            mother,
+            motherName,
+            father,
+            fatherName,
+          } = person;
 
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
-
-            <td
+          return (
+            <tr
               className={classNames({
-                'has-text-danger': person.mother,
+                'has-background-warning': slug === selectedSlug,
               })}
+              data-cy="person"
+              key={slug}
             >
-              {person.mother ? (
+              <td>
                 <PersonLink
-                  person={person.mother}
+                  person={person}
                 />
-              ) : (
-                <span>{person.motherName ?? '-'}</span>
-              )}
-            </td>
+              </td>
+              <td>{sex}</td>
+              <td>{born}</td>
+              <td>{died}</td>
 
-            <td>
-              {person.father ? (
-                <PersonLink
-                  person={person.father}
-                />
-              ) : (
-                <span>{person.fatherName ?? '-'}</span>
-              )}
-            </td>
-          </tr>
-        ))}
+              <td
+                className={classNames({
+                  'has-text-danger': mother,
+                })}
+              >
+                {mother ? (
+                  <PersonLink
+                    person={mother}
+                  />
+                ) : (
+                  <span>{motherName ?? '-'}</span>
+                )}
+              </td>
+
+              <td>
+                {father ? (
+                  <PersonLink
+                    person={father}
+                  />
+                ) : (
+                  <span>{fatherName ?? '-'}</span>
+                )}
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
