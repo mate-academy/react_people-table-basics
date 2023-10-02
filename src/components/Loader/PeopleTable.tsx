@@ -23,7 +23,11 @@ export const PeopleTable: React.FC = () => {
 
       <tbody>
         {peopleList.map(person => (
-          <PeopleList person={person} peopleSlug={peopleSlug} />
+          <PeopleList
+            person={person}
+            peopleSlug={peopleSlug}
+            key={person.slug}
+          />
         ))}
       </tbody>
     </table>
