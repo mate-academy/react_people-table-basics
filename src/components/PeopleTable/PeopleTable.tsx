@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { PersonType } from '../../types';
 import { Person } from '../Person/Person';
+import { TABLE_ATTRIBUTES } from '../../utils/constants';
 
 export const PeopleTable = ({ people }: { people: PersonType[] }) => {
   const { personId = '' } = useParams();
@@ -12,12 +13,9 @@ export const PeopleTable = ({ people }: { people: PersonType[] }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {TABLE_ATTRIBUTES.map(attribute => (
+            <th>{attribute}</th>
+          ))}
         </tr>
       </thead>
 
