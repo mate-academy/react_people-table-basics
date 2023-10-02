@@ -12,6 +12,9 @@ export const PeoplePage: React.FC = () => {
 
   const { slug: selectedSlug } = useParams();
 
+  // const location = useLocation();
+  // console.log(location);
+
   function findParent(peopleList: Person[], parentName: string | null) {
     return peopleList.find((person) => person.name === parentName);
   }

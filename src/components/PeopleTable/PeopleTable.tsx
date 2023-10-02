@@ -8,6 +8,8 @@ type Props = {
   selectedSlug: string | undefined,
 };
 
+const tableHead = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
   return (
     <table
@@ -16,12 +18,15 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
+          {tableHead.map(currentTh => (
+            <th key={`${currentTh}_Date.now()`}>{currentTh}</th>
+          ))}
+          {/* <th>Name</th>
           <th>Sex</th>
           <th>Born</th>
           <th>Died</th>
           <th>Mother</th>
-          <th>Father</th>
+          <th>Father</th> */}
         </tr>
       </thead>
 
