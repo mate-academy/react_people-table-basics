@@ -10,9 +10,6 @@ type Props = {
 const tableHead = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
 export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
-  // const location = useLocation();
-  // console.log(location);
-
   return (
     <table
       data-cy="peopleTable"
