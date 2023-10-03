@@ -3,7 +3,7 @@ import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
-import { getPreparedPeople } from '../../helpers/getPrepearedPeople';
+import { getPreparedPeople } from '../../helpers/getPreparedPeople';
 
 export const PeoplePage = () => {
   const [isError, setIsError] = useState(false);
