@@ -1,6 +1,8 @@
 import cn from 'classnames';
-import { Person } from '../types';
+import { Person } from '../types/Person';
 import { PersonLink } from './PersonLink';
+
+const NOT_SET_PARRENT_VALUE = '-';
 
 type Props = {
   person: Person,
@@ -15,6 +17,14 @@ export const PersonItem: React.FC<Props> = ({
   mother,
   father,
 }) => {
+  const {
+    sex,
+    born,
+    died,
+    motherName,
+    fatherName,
+  } = person;
+
   return (
     <tr
       data-cy="person"
@@ -26,15 +36,15 @@ export const PersonItem: React.FC<Props> = ({
         <PersonLink person={person} />
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
       {mother ? (
         <td>
           <PersonLink person={mother} />
         </td>
       ) : (
-        <td>{person.motherName || '-'}</td>
+        <td>{motherName || NOT_SET_PARRENT_VALUE}</td>
       )}
 
       {father ? (
@@ -42,7 +52,7 @@ export const PersonItem: React.FC<Props> = ({
           <PersonLink person={father} />
         </td>
       ) : (
-        <td>{person.fatherName || '-'}</td>
+        <td>{fatherName || NOT_SET_PARRENT_VALUE}</td>
       )}
     </tr>
   );

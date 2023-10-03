@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Person } from '../types';
+import { Person } from '../types/Person';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
 import { PeopleTable } from './PeopleTable';
@@ -20,8 +20,8 @@ export const PeoplePage = () => {
       });
   }, []);
 
-  const everythingOk = !isError && !isLoading && people.length > 0;
-  const isEmpty = !isError && !isLoading && people.length === 0;
+  const isEverythingOk = !isError && !isLoading && !!people.length;
+  const isNoPeopleOnServer = !isError && !isLoading && !people.length;
 
   return (
     <div className="container">
@@ -36,12 +36,12 @@ export const PeoplePage = () => {
               Something went wrong
             </p>
           ))}
-          {isEmpty && (
+          {isNoPeopleOnServer && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
-          {everythingOk && (
+          {isEverythingOk && (
             <PeopleTable people={people} />
           )}
         </div>
