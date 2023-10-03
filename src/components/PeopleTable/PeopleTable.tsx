@@ -22,9 +22,9 @@ export const PeopleTable = () => {
       return ({
         ...person,
         mother: people
-          .find(p => p.name === person.motherName),
+          .find(p => p.name === person.motherName || null),
         father: people
-          .find(p => p.name === person.fatherName),
+          .find(p => p.name === person.fatherName || null),
       });
     });
 

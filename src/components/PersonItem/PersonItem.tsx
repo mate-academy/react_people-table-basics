@@ -41,7 +41,7 @@ export const PersonItem: React.FC<PersonItemProps> = ({ person }) => {
 
       </td>
       <td>
-        {!person.mother
+        {!person.father
           ? (<td>{person.fatherName || '-'}</td>)
           : (
             <Link
@@ -50,7 +50,6 @@ export const PersonItem: React.FC<PersonItemProps> = ({ person }) => {
               {person.fatherName}
             </Link>
           )}
-
       </td>
     </tr>
   );
