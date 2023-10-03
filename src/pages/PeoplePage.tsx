@@ -16,7 +16,7 @@ export const PeoplePage: React.FC = () => {
   const isShowTable = !isLoading && !!people.length;
   const isPeople = !isLoading
     && !errorMessage
-    && people.length === 0;
+    && !people.length;
 
   useEffect(() => {
     setIsLoading(true);
