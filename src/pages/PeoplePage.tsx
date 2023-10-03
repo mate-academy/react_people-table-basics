@@ -13,7 +13,7 @@ export const PeoplePage: React.FC = () => {
 
   const { slug: selectedSlug } = useParams();
 
-  const isShowTable = !isLoading && people.length > 0;
+  const isShowTable = !isLoading && !!people.length;
   const isPeople = !isLoading
     && !errorMassage
     && people.length === 0;
