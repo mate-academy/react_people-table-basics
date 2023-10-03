@@ -1,9 +1,5 @@
-/* eslint-disable prefer-template */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
 import { Person } from '../types';
@@ -14,11 +10,21 @@ export const People: React.FC = () => {
   const [isClicked, setIsClicked] = useState<string | null>('');
   const [isError, setIsError] = useState<string | null>(null);
 
+  useEffect(() => {
+    getPeople().then((res) => {
+      setPeople(res);
+    }).catch((error) => {
+      setIsError(error);
+    });
+  }, []);
+
   getPeople().then((res) => {
     setPeople(res);
   }).catch((error) => {
     setIsError(error);
   });
+
+  const location = useLocation();
 
   const names = people?.map((person) => person.name);
 
@@ -67,27 +73,29 @@ export const People: React.FC = () => {
                     const father = people
                       .find(p => p.name === person.fatherName);
 
+                    const slug = `${person.name.toLowerCase().replace(/ /g, '-')}-${person.born.toString()}`;
+
                     return (
                       <tr
                         data-cy="person"
-                        className={(isClicked === person.name)
+                        className={(isClicked === person.name
+                          || location.pathname === `/people/${slug}`)
                           ? 'has-background-warning' : ''}
-                        onClick={() => {
-                          setIsClicked(person.name);
-                        }}
                       >
                         <td>
-                          {/* <a
-                        href="#/people/jan-van-brussel-1714"
-                        onClick={() => {
-                          setIsClicked(person.name);
-                        }}
-                      >
-                        {person.name}
-                      </a> */}
-                          <span onClick={() => {
-                            setIsClicked(person.name);
-                          }}
+                          <span
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setIsClicked(person.name);
+                            }}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                e.preventDefault();
+                                setIsClicked(person.name);
+                              }
+                            }}
+                            role="button"
+                            tabIndex={0}
                           >
                             <PersonLink person={person} />
                           </span>
