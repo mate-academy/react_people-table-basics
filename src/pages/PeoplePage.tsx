@@ -9,13 +9,13 @@ import { getPeopleWithParents } from '../helper';
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMassage, setErrorMassage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const { slug: selectedSlug } = useParams();
 
   const isShowTable = !isLoading && !!people.length;
   const isPeople = !isLoading
-    && !errorMassage
+    && !errorMessage
     && people.length === 0;
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const PeoplePage: React.FC = () => {
       .then(peopleList => {
         setPeople(getPeopleWithParents(peopleList));
       })
-      .catch(() => setErrorMassage('Something went wrong'))
+      .catch(() => setErrorMessage('Something went wrong'))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -52,12 +52,12 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {errorMassage && (
+          {errorMessage && (
             <p
               data-cy="peopleLoadingError"
               className="has-text-danger"
             >
-              {errorMassage}
+              {errorMessage}
             </p>
           )}
         </div>
