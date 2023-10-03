@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Person } from '../../types';
-import { getPeople } from '../../api';
-import { PeopleList } from '../PeopleList';
-import { Loader } from '../Loader';
+import { Person } from '../types';
+import { getPeople } from '../api';
+import { PeopleList } from './PeopleList';
+import { Loader } from './Loader';
 
 export const PeoplePage: React.FC = () => {
   const [persons, setPersons] = useState<Person[]>([]);
@@ -24,12 +24,12 @@ export const PeoplePage: React.FC = () => {
   const preparedPeople = persons.map(person => {
     return {
       ...person,
-      mother: persons.find(mother => person.motherName === mother.name),
-      father: persons.find(father => person.fatherName === father.name),
+      mother: persons.find(({ name }) => person.motherName === name),
+      father: persons.find(({ name }) => person.fatherName === name),
     };
   });
 
-  const somethingWrong = isError && !isLoading;
+  const isSomethingWrong = isError && !isLoading;
   const isLoaded = !isError && !isLoading;
 
   return (
@@ -42,7 +42,7 @@ export const PeoplePage: React.FC = () => {
             <Loader />
           )}
 
-          {somethingWrong && (
+          {isSomethingWrong && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
@@ -57,7 +57,6 @@ export const PeoplePage: React.FC = () => {
           {!!persons.length && (
             <PeopleList persons={preparedPeople} />
           )}
-
         </div>
       </div>
     </>

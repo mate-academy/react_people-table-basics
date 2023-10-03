@@ -1,13 +1,6 @@
-import classNames from 'classnames';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
-export const getLinkClass = ({ isActive }: { isActive: boolean }) => classNames(
-  'navbar-item',
-  {
-    'has-background-grey-lighter': isActive,
-  },
-);
+import { getLinkClass } from '../helpers/getLinkClass';
 
 export const Navbar: React.FC = () => {
   return (

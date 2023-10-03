@@ -1,6 +1,7 @@
 import React from 'react';
-import { Person } from '../../types';
-import { People } from '../People';
+import { Person } from '../types';
+import { People } from './People';
+import { THEAD_TITLES } from '../utils/constants';
 
 type Props = {
   persons: Person[],
@@ -13,12 +14,9 @@ export const PeopleList: React.FC<Props> = ({ persons }) => (
   >
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Sex</th>
-        <th>Born</th>
-        <th>Died</th>
-        <th>Mother</th>
-        <th>Father</th>
+        {THEAD_TITLES.map(title => (
+          <th key={title}>{title}</th>
+        ))}
       </tr>
     </thead>
 
