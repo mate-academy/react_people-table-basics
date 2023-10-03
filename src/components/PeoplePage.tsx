@@ -7,7 +7,7 @@ import { Loader } from './Loader';
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -41,6 +41,8 @@ export const PeoplePage: React.FC = () => {
       <div className="block">
         <div className="box table-container">
 
+          {isLoading && <Loader />}
+
           {isErrorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               {errorMessage}
@@ -52,8 +54,6 @@ export const PeoplePage: React.FC = () => {
               There are no people on the server
             </p>
           )}
-
-          {isLoading && <Loader />}
 
           {isShowPeople && (
             <table
@@ -72,9 +72,7 @@ export const PeoplePage: React.FC = () => {
               </thead>
 
               <tbody>
-                <PersonList
-                  people={peopleWithParents}
-                />
+                <PersonList people={peopleWithParents} />
               </tbody>
             </table>
           )}
