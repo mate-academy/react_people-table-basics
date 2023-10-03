@@ -110,8 +110,7 @@ export const People: React.FC = () => {
                             <a
                               href={`#/people/${mother?.slug}`}
                               className="has-text-danger"
-                              onClick={(e) => {
-                                e.preventDefault();
+                              onClick={() => {
                                 setIsClicked(person?.motherName);
                               }}
                             >
@@ -137,8 +136,7 @@ export const People: React.FC = () => {
                             <a
                               href={`#/people/${father?.slug}`}
                               className=" "
-                              onClick={(e) => {
-                                e.preventDefault();
+                              onClick={() => {
                                 setIsClicked(person?.fatherName);
                               }}
                             >
