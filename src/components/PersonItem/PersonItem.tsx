@@ -29,7 +29,7 @@ export const PersonItem: React.FC<PersonItemProps> = ({ person }) => {
       <td>{person.died}</td>
       <td>
         {!person.mother
-          ? (<td>{person.motherName || '-'}</td>)
+          ? (person.motherName || '-')
           : (
             <Link
               to={`/people/${person.mother?.slug}`}
@@ -42,7 +42,7 @@ export const PersonItem: React.FC<PersonItemProps> = ({ person }) => {
       </td>
       <td>
         {!person.father
-          ? (<td>{person.fatherName || '-'}</td>)
+          ? (person.fatherName || '-')
           : (
             <Link
               to={`/people/${person.father?.slug}`}
