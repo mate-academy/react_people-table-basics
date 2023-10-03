@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
-export const Nav = () => {
+export const Navbar = () => {
   return (
     <nav
       data-cy="nav"
