@@ -30,9 +30,7 @@ export const BodyTable: React.FC<Props> = ({ person, selectedSlug }) => {
       data-cy="person"
     >
       <td>
-        <PersonLink
-          person={person}
-        />
+        <PersonLink person={person} />
       </td>
       <td>{sex}</td>
       <td>{born}</td>
@@ -44,9 +42,7 @@ export const BodyTable: React.FC<Props> = ({ person, selectedSlug }) => {
         })}
       >
         {mother ? (
-          <PersonLink
-            person={mother}
-          />
+          <PersonLink person={mother} />
         ) : (
           motherName ?? IS_NAME
         )}
