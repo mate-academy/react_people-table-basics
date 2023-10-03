@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
-import { Person } from '../../types';
+import { Person, NamesColumnsTable } from '../../types';
 import { User } from '../User';
-import { findRelative } from '../../helpers/findRelative';
+import { getPreparedPersons } from '../../helpers/getPreparedPersons';
 
 export const PeopleList = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -14,18 +14,12 @@ export const PeopleList = () => {
   const { slug = '' } = useParams();
   const selectedUser = people.find(person => person.slug === slug);
 
-  const getPreparedPersons = (persons: Person[]) => {
-    return [...persons].map(onePerson => {
-      const mother = findRelative('f', onePerson, persons);
-      const father = findRelative('m', onePerson, persons);
+  const isNotPeopleOnServer
+    = !people.length
+    && !isLoading
+    && !isErrorToGetPeople;
 
-      return {
-        ...onePerson,
-        mother,
-        father,
-      };
-    });
-  };
+  const somethingWrong = isErrorToGetPeople && !isLoading;
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,9 +30,8 @@ export const PeopleList = () => {
 
         setPeople(PeopleWithRelatives);
       })
-      .catch((error) => {
+      .catch(() => {
         setIsErrorToGetPeople(true);
-        throw error;
       })
       .finally(() => {
         setIsLoading(false);
@@ -50,7 +43,7 @@ export const PeopleList = () => {
       <h1 className="title">People Page</h1>
 
       <div className="box table-container">
-        {isErrorToGetPeople && !isLoading && (
+        {somethingWrong && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             Something went wrong
           </p>
@@ -67,12 +60,9 @@ export const PeopleList = () => {
           >
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
+                {Object.values(NamesColumnsTable).map(name => (
+                  <th key={name}>{name}</th>
+                ))}
               </tr>
             </thead>
 
@@ -90,7 +80,7 @@ export const PeopleList = () => {
           </table>
         )}
 
-        {(!people.length && !isLoading) && (
+        {isNotPeopleOnServer && (
           <p data-cy="noPeopleMessage">
             There are no people on the server
           </p>

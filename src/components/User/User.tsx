@@ -2,7 +2,6 @@ import cn from 'classnames';
 import React from 'react';
 import { Person } from '../../types';
 import { PersonalLink } from '../PersonalLink';
-// import { findRelative } from '../../helpers/findRelative';
 
 type Props = {
   person: Person,
@@ -23,9 +22,6 @@ export const User: React.FC<Props> = ({ person, selectedUser }) => {
     father,
   } = person;
 
-  // const mother = findRelative('f', person, people);
-  // const father = findRelative('m', person, people);
-
   return (
     <tr
       key={slug}
@@ -43,14 +39,18 @@ export const User: React.FC<Props> = ({ person, selectedUser }) => {
         {mother ? (
           <PersonalLink person={mother} />
         )
-          : (motherName || WITHOUT_RELATIVE)}
+          : (
+            motherName || WITHOUT_RELATIVE
+          )}
       </td>
 
       <td>
         {father ? (
           <PersonalLink person={father} />
         )
-          : (fatherName || WITHOUT_RELATIVE)}
+          : (
+            fatherName || WITHOUT_RELATIVE
+          )}
       </td>
     </tr>
   );
