@@ -1,10 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 import { SortField } from '../../types/SortField';
-import { Sex } from '../../types/Sex';
 
 type Props = {
   people: Person[];
@@ -49,14 +48,7 @@ export const PersonPage: React.FC<Props> = ({ people }) => {
               })}
             >
               <td>
-                <Link
-                  to={person.slug}
-                  className={classNames({
-                    'has-text-danger': person.sex === Sex.Female,
-                  })}
-                >
-                  {person.name}
-                </Link>
+                <PersonLink person={person} />
               </td>
 
               <td>{person.sex}</td>

@@ -10,24 +10,30 @@ type Props = {
 };
 
 export const PeoplePage: React.FC<Props> = ({ setPeople, people }) => {
-  const [loading, setLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const isDisplayErrorMessage = isError && !isLoading;
+  const isNoPeopleOnServer = !people.length && !isLoading && !isError;
+  const isPeopleOnServer = !!people.length && !isError;
 
   useEffect(() => {
-    setHasError(false);
-    setLoading(true);
+    setIsError(false);
+    setIsLoading(true);
 
-    (async () => {
+    const fetchData = async () => {
       try {
-        setPeople(await getPeople());
-      } catch {
-        setHasError(true);
-      } finally {
-        setLoading(false);
-      }
-    })();
+        const peopleData = await getPeople();
 
-    return () => setPeople([]);
+        setPeople(peopleData);
+      } catch {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -36,22 +42,23 @@ export const PeoplePage: React.FC<Props> = ({ setPeople, people }) => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && !hasError && !people.length && <Loader />}
+          {isLoading && <Loader />}
 
-          {!loading && hasError && !people.length && (
+          {isDisplayErrorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {!loading && !hasError && !people.length && (
+          {isNoPeopleOnServer && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {!loading && !hasError && people.length
-            && <PersonPage people={people} />}
+          {isPeopleOnServer && (
+            <PersonPage people={people} />
+          )}
         </div>
       </div>
     </>

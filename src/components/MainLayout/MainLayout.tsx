@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { HeadOfTable } from '../HeadOfTable/HeadOfTable';
+import { Navigation } from '../Navigation/Navigation';
 
-export const Navigation: React.FC = () => {
+export const MainLayout: React.FC = () => {
   return (
     <>
       <nav
@@ -13,7 +13,7 @@ export const Navigation: React.FC = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <HeadOfTable />
+            <Navigation />
           </div>
         </div>
       </nav>

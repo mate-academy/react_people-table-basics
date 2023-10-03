@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export const HeadOfTable: React.FC = () => {
+export const Navigation : React.FC = () => {
   const handleNavLinkClass = ({ isActive }: { isActive: boolean }) => {
     return classNames('navbar-item', {
       'has-background-grey-lighter': isActive,

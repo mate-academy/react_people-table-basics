@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { getPeople } from './api';
 import { Person } from './types';
-import { HeadOfTable } from './components/HeadOfTable/HeadOfTable';
-import { Navigation } from './components/Naviagtion/Navigation';
-import { PeoplePage } from './components/PeoplePage/PeoplePage';
-import { HomePage } from './components/HomePage/HomePage';
-import { PagenotFound } from './components/PagenotFound/PagenotFound';
+import { Navigation } from './components/Navigation/Navigation';
+import { Root } from './Root';
 
 export const App: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -19,29 +15,11 @@ export const App: React.FC = () => {
 
   return (
     <div data-cy="app">
-      <HeadOfTable />
+      <Navigation />
 
       <main className="section">
         <div className="container">
-          <Routes>
-            <Route path="/" element={<Navigation />}>
-              <Route index element={<HomePage />} />
-              <Route
-                path="*"
-                element={<PagenotFound />}
-              />
-              <Route
-                path="people"
-                element={<PeoplePage people={people} setPeople={setPeople} />}
-              >
-                <Route
-                  path=":personSlug"
-                  element={<PeoplePage people={people} setPeople={setPeople} />}
-                />
-              </Route>
-              <Route path="home" element={<Navigate to="/" replace />} />
-            </Route>
-          </Routes>
+          <Root people={people} setPeople={setPeople} />
         </div>
       </main>
     </div>
