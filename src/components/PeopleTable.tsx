@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { PersonPage } from './PersonPage';
+import { COLUMN_NAMES } from '../utils/constants';
 
 export const PeopleTable = ({ people }: { people: Person[] }) => {
   const { personId = '' } = useParams();
@@ -12,12 +13,9 @@ export const PeopleTable = ({ people }: { people: Person[] }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {COLUMN_NAMES.map(name => (
+            <th key={name}>{name}</th>
+          ))}
         </tr>
       </thead>
 

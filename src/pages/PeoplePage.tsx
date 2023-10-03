@@ -8,8 +8,8 @@ const getPreparedPeople = (people: Person[]): Person[] => {
   return people.map(person => {
     return {
       ...person,
-      mother: people.find(mother => mother.name === person.motherName),
-      father: people.find(father => father.name === person.fatherName),
+      mother: people.find(({ name }) => name === person.motherName),
+      father: people.find(({ name }) => name === person.fatherName),
     };
   });
 };
@@ -19,20 +19,20 @@ export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
+  const fetchData = async () => {
+    try {
+      setIsLoading(true);
+      const peopleFromServer = await getPeople();
+
+      setPeople(getPreparedPeople(peopleFromServer));
+    } catch (error) {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const peopleFromServer = await getPeople();
-
-        setPeople(getPreparedPeople(peopleFromServer));
-      } catch (error) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchData();
   }, []);
 

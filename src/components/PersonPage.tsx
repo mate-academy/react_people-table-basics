@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
+import { NOT_SET_VALUE } from '../utils/constants';
 
 type Props = {
   person: Person;
@@ -39,7 +40,7 @@ export const PersonPage: React.FC<Props> = ({ person, selectedPerson }) => {
           ? (
             <PersonLink person={mother} />
           ) : (
-            motherName || '-'
+            motherName || NOT_SET_VALUE
           )}
       </td>
       <td>
@@ -47,7 +48,7 @@ export const PersonPage: React.FC<Props> = ({ person, selectedPerson }) => {
           ? (
             <PersonLink person={father} />
           ) : (
-            fatherName || '-'
+            fatherName || NOT_SET_VALUE
           )}
       </td>
     </tr>
