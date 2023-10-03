@@ -1,22 +1,16 @@
-import classNames from 'classnames';
 import { Person } from '../../types';
 import { PeopleList } from '../PeopleList';
+import { tableHeaders } from '../../utils/variables';
 
 type Props = {
   people: Person[]
 };
 
 export const PeopleTable = ({ people }: Props) => {
-  const tableHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
-
   return (
     <table
       data-cy="peopleTable"
-      className={classNames('table',
-        'is-striped',
-        'is-hoverable',
-        'is-narrow',
-        'is-fullwidth')}
+      className="table is-striped is-hoverable is-narrow is-fullwidth"
     >
       <thead>
         <tr>

@@ -6,14 +6,10 @@ import { NO_PARENT } from '../../utils/variables';
 
 type Props = {
   person: Person,
-  personMother?: Person,
-  personFather?: Person,
 };
 
 export const PersonItem = ({
   person,
-  personMother,
-  personFather,
 }: Props) => {
   const {
     slug,
@@ -22,6 +18,8 @@ export const PersonItem = ({
     died,
     motherName,
     fatherName,
+    mother,
+    father,
   } = person;
 
   const { slug: slugFromParams } = useParams();
@@ -41,13 +39,13 @@ export const PersonItem = ({
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {personMother
-          ? <PersonLink person={personMother} />
+        {mother
+          ? <PersonLink person={mother} />
           : motherName ?? NO_PARENT}
       </td>
       <td>
-        {personFather
-          ? <PersonLink person={personFather} />
+        {father
+          ? <PersonLink person={father} />
           : fatherName ?? NO_PARENT}
       </td>
     </tr>

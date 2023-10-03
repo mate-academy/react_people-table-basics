@@ -5,26 +5,41 @@ import { Person } from '../types';
 import { PeopleTable } from '../components/PeopleTable';
 
 export const PeoplePage = () => {
-  const [people, setPeople] = useState<Person[]>([]);
+  const [newPeople, setNewPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setError] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
 
     getPeople()
-      .then(setPeople)
+      .then(people => {
+        return people.map(person => {
+          const mother = people
+            .find(({ name }) => name === person.motherName);
+
+          const father = people
+            .find(({ name }) => name === person.fatherName);
+
+          return {
+            ...person,
+            mother,
+            father,
+          };
+        });
+      })
+      .then(setNewPeople)
       .catch(() => {
-        setError(true);
+        setIsError(true);
       })
       .finally(() => setIsLoading(false));
   }, []);
 
   const isDisplayErrorMessage = isError && !isLoading;
 
-  const isNoPeopleOnServer = !people.length && !isLoading && !isError;
+  const isNoPeopleOnServer = !newPeople.length && !isLoading && !isError;
 
-  const isPeopleOnServer = !!people.length && !isError;
+  const isPeopleOnServer = !!newPeople.length && !isError;
 
   return (
     <>
@@ -47,7 +62,7 @@ export const PeoplePage = () => {
           )}
 
           {isPeopleOnServer && (
-            <PeopleTable people={people} />
+            <PeopleTable people={newPeople} />
           )}
         </div>
       </div>
