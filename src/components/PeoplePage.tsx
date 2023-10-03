@@ -21,7 +21,6 @@ export const PeoplePage = memo(() => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const hasPeople = !!people.length;
   const isRequestSuccessful = !isLoading && !isError;
 
   return (
@@ -39,7 +38,7 @@ export const PeoplePage = memo(() => {
           )}
 
           {isRequestSuccessful && (
-            hasPeople
+            people.length
               ? <PeopleTable people={people} selectedPersonSlug={slug} />
               : (
                 <p data-cy="noPeopleMessage">

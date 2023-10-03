@@ -14,7 +14,7 @@ export const PersonLink: React.FC<Props> = memo(({ person }) => {
 
   return (
     <Link
-      to={`/people/${slug}`}
+      to={`../${slug}`}
       className={classNames({
         'has-text-danger': sex === SEX_FEMALE,
       })}
