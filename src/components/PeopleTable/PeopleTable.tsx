@@ -18,7 +18,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
       <thead>
         <tr>
           {tableHead.map(currentColumn => (
-            <th key={`${currentColumn}_Date.now()`}>{currentColumn}</th>
+            <th key={`${currentColumn}_${Date.now()}`}>{currentColumn}</th>
           ))}
         </tr>
       </thead>
