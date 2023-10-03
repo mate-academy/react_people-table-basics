@@ -21,7 +21,7 @@ export const App: React.FC = () => (
         aria-label="main navigation"
       >
         <div className="container">
-          <div className="nav-bar">
+          <div className="navbar-brand">
             <NavLink to="/" className={activeClass}>
               Home
             </NavLink>
