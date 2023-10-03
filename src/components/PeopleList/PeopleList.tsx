@@ -12,14 +12,13 @@ export const PeopleList = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { slug = '' } = useParams();
-  const selectedUser = people.find(person => person.slug === slug);
 
   const isNotPeopleOnServer
     = !people.length
     && !isLoading
     && !isErrorToGetPeople;
 
-  const somethingWrong = isErrorToGetPeople && !isLoading;
+  const isErrorMessageVisible = isErrorToGetPeople && !isLoading;
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,7 +42,7 @@ export const PeopleList = () => {
       <h1 className="title">People Page</h1>
 
       <div className="box table-container">
-        {somethingWrong && (
+        {isErrorMessageVisible && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             Something went wrong
           </p>
@@ -60,7 +59,7 @@ export const PeopleList = () => {
           >
             <thead>
               <tr>
-                {Object.values(NamesColumnsTable).map(name => (
+                {NamesColumnsTable.map(name => (
                   <th key={name}>{name}</th>
                 ))}
               </tr>
@@ -72,7 +71,7 @@ export const PeopleList = () => {
                   <User
                     key={person.slug}
                     person={person}
-                    selectedUser={selectedUser}
+                    selectedUser={slug}
                   />
                 );
               })}

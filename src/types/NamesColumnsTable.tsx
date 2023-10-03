@@ -1,8 +1,8 @@
-export enum NamesColumnsTable {
-  Name = 'Name',
-  Sex = 'Sex',
-  Born = 'Born',
-  Died = 'Died',
-  Mother = 'Mother',
-  Father = 'Father',
-}
+export const NamesColumnsTable = [
+  'Name',
+  'Sex',
+  'Born',
+  'Died',
+  'Mother',
+  'Father',
+];

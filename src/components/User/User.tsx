@@ -5,7 +5,7 @@ import { PersonalLink } from '../PersonalLink';
 
 type Props = {
   person: Person,
-  selectedUser?: Person,
+  selectedUser: string,
 };
 
 const WITHOUT_RELATIVE = '-';
@@ -25,7 +25,7 @@ export const User: React.FC<Props> = ({ person, selectedUser }) => {
   return (
     <tr
       key={slug}
-      className={cn({ 'has-background-warning': slug === selectedUser?.slug })}
+      className={cn({ 'has-background-warning': slug === selectedUser })}
       data-cy="person"
     >
       <td>

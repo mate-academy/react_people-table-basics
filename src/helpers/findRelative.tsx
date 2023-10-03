@@ -1,17 +1,10 @@
-import { Person } from '../types';
-import { MAN_MALE } from '../constants/MAN_MALE';
-import { WOMEN_MALE } from '../constants/WOMEN_MALE';
+import { Person, Gender } from '../types';
 
 export const findRelative = (gender: string, user: Person, users: Person[]) => {
-  if (gender === MAN_MALE) {
-    return users.filter(oneUser => oneUser.sex === MAN_MALE)
-      .find(oneUser => oneUser.name === user.fatherName);
-  }
+  const targetGender = gender === Gender.MALE ? Gender.MALE : Gender.FEMALE;
+  const targetName = gender === Gender.MALE ? user.fatherName : user.motherName;
 
-  if (gender === WOMEN_MALE) {
-    return users.filter(oneUser => oneUser.sex === WOMEN_MALE)
-      .find(oneUser => oneUser.name === user.motherName);
-  }
-
-  return undefined;
+  return users
+    .find(oneUser => oneUser.sex === targetGender
+      && oneUser.name === targetName);
 };
