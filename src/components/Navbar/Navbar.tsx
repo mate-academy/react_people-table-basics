@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
+import { NavLink } from 'react-router-dom';
 
 export const Navbar = () => {
   return (
