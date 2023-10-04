@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
-import { People } from '../People/People';
 import { Person } from '../../types';
+import { People } from '../People/People';
+import { getPreparedPeople } from '../../utils/PrepairedPeople';
 
-type Props = {
-  people: Person[],
-  setPeople: (newValue: Person[]) => void,
-};
+export const PeoplePage: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [people, setPeople] = useState<Person[]>([]);
 
-export const PeoplePage: React.FC<Props> = ({ setPeople, people }) => {
-  const [loading, setLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const isDisplayErrorMessage = isError && !isLoading;
+  const isNoPeopleOnServer = !people.length && !isLoading && !isError;
+  const isPeopleOnServer = !!people.length && !isError;
 
   useEffect(() => {
-    setHasError(false);
-    setLoading(true);
+    setIsError(false);
+    setIsLoading(true);
 
     (async () => {
       try {
-        setPeople(await getPeople());
+        const peopleFrom = await getPeople();
+        const preparedPeople = getPreparedPeople(peopleFrom);
+
+        setPeople(preparedPeople);
       } catch {
-        setHasError(true);
+        setIsError(true);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     })();
-
-    return () => setPeople([]);
   }, []);
 
   return (
@@ -36,22 +38,23 @@ export const PeoplePage: React.FC<Props> = ({ setPeople, people }) => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && !hasError && !people.length && <Loader />}
+          {isLoading && <Loader />}
 
-          {!loading && hasError && !people.length && (
+          {isDisplayErrorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {!loading && !hasError && !people.length && (
+          {isNoPeopleOnServer && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {!loading && !hasError && people.length
-            && <People people={people} />}
+          {isPeopleOnServer && (
+            <People people={people} />
+          )}
         </div>
       </div>
     </>

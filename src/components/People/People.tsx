@@ -1,10 +1,8 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
-import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink/PersonLink';
 import { SortField } from '../../types/SortFields';
-import { Sex } from '../../types/Sex';
+import { PersonCard } from '../PersonContent/PersonCard';
 
 type Props = {
   people: Person[];
@@ -12,19 +10,6 @@ type Props = {
 
 export const People: React.FC<Props> = ({ people }) => {
   const { personSlug } = useParams();
-  const getParentsLink = (personName: string | null) => {
-    if (!personName) {
-      return '-';
-    }
-
-    const parent = people.find(({ name }) => name === personName);
-
-    if (parent) {
-      return <PersonLink person={parent} />;
-    }
-
-    return personName;
-  };
 
   return (
     <>
@@ -34,38 +19,20 @@ export const People: React.FC<Props> = ({ people }) => {
       >
         <thead>
           <tr>
-            {Object.keys(SortField).map((key) => (
-              <th key={key}>{key}</th>
+            {SortField.map(sort => (
+              <th key={sort}>{sort}</th>
             ))}
           </tr>
         </thead>
-        {people.map((person) => (
-          <tbody key={person.slug}>
-            <tr
-              data-cy="person"
-              className={classNames({
-                'has-background-warning': person.slug === personSlug,
-              })}
-            >
-              <td>
-                <Link
-                  to={person.slug}
-                  className={classNames({
-                    'has-text-danger': person.sex === Sex.Femail,
-                  })}
-                >
-                  {person.name}
-                </Link>
-              </td>
-
-              <td>{person.sex}</td>
-              <td>{person.born}</td>
-              <td>{person.died}</td>
-              <td>{getParentsLink(person.motherName)}</td>
-              <td>{getParentsLink(person.fatherName)}</td>
-            </tr>
-          </tbody>
-        ))}
+        <tbody>
+          {people.map((person) => (
+            <PersonCard
+              person={person}
+              key={person.slug}
+              personSlug={personSlug}
+            />
+          ))}
+        </tbody>
       </table>
     </>
   );
