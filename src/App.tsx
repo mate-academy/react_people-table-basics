@@ -6,7 +6,6 @@ import './App.scss';
 import { Home } from './components/Home';
 import { PeopleTable } from './components/PeopleTable';
 import { NotFoundPage } from './components/NotFoundPage';
-// import { PersonLink } from './components/PersonLink';
 
 export const App = () => (
   <div data-cy="app">
