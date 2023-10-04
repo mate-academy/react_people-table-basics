@@ -8,7 +8,7 @@ type Props = {
   selectedPerson: string;
 };
 
-export const PersonPage: React.FC<Props> = ({ person, selectedPerson }) => {
+export const PersonItem: React.FC<Props> = ({ person, selectedPerson }) => {
   const {
     sex,
     born,

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
-import { PersonPage } from './PersonPage';
+import { PersonItem } from './PersonItem';
 import { COLUMN_NAMES } from '../utils/constants';
 
 export const PeopleTable = ({ people }: { people: Person[] }) => {
@@ -21,7 +21,7 @@ export const PeopleTable = ({ people }: { people: Person[] }) => {
 
       <tbody>
         {people.map((person) => (
-          <PersonPage
+          <PersonItem
             person={person}
             key={person.slug}
             selectedPerson={personId}

@@ -3,16 +3,7 @@ import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types';
 import { getPeople } from '../api';
-
-const getPreparedPeople = (people: Person[]): Person[] => {
-  return people.map(person => {
-    return {
-      ...person,
-      mother: people.find(({ name }) => name === person.motherName),
-      father: people.find(({ name }) => name === person.fatherName),
-    };
-  });
-};
+import { getPreparedPeople } from '../utils/findPeopleByName';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -36,6 +27,10 @@ export const PeoplePage = () => {
     fetchData();
   }, []);
 
+  const IS_TABLE_EMPTY = !people.length && !isLoading && !isError;
+  const IS_LOADING_ERROR = isError && !isLoading;
+  const HAS_PEOPLE_LIST = !!people?.length && !isError;
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -46,7 +41,7 @@ export const PeoplePage = () => {
             <Loader />
           )}
 
-          {isError && !isLoading && (
+          {IS_LOADING_ERROR && (
             <p
               data-cy="peopleLoadingError"
               className="has-text-danger"
@@ -55,7 +50,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!people?.length && !isLoading && !isError && (
+          {IS_TABLE_EMPTY && (
             <p
               data-cy="noPeopleMessage"
             >
@@ -63,12 +58,11 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!!people?.length && !isError && (
+          {HAS_PEOPLE_LIST && (
             <PeopleTable people={people} />
           )}
         </div>
       </div>
     </>
-
   );
 };
