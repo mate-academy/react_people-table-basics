@@ -2,18 +2,13 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Person } from '../types/Person';
 import { PersonItem } from './PersonItem';
-
-const tableHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+import { TABLE_HEADERS } from '../utils/constants';
 
 type Props = {
   people: Person[],
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const findPersonByName = (name: string | null) => {
-    return people.find(person => person.name === name) || null;
-  };
-
   const { slug: selectedSlug } = useParams();
 
   return (
@@ -24,11 +19,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <tr>
-            {tableHeaders.map(header => (
-              <th>{header}</th>
-            ))}
-          </tr>
+          {TABLE_HEADERS.map(header => (
+            <th key={header}>{header}</th>
+          ))}
         </tr>
       </thead>
 
@@ -37,8 +30,6 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           <PersonItem
             person={person}
             key={person.slug}
-            mother={findPersonByName(person.motherName)}
-            father={findPersonByName(person.fatherName)}
             isSelected={person.slug === selectedSlug}
           />
         ))}

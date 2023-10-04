@@ -1,21 +1,16 @@
 import cn from 'classnames';
 import { Person } from '../types/Person';
 import { PersonLink } from './PersonLink';
-
-const NOT_SET_PARRENT_VALUE = '-';
+import { NOT_SET_PARRENT_VALUE } from '../utils/constants';
 
 type Props = {
   person: Person,
   isSelected?: boolean,
-  mother: Person | null,
-  father: Person | null,
 };
 
 export const PersonItem: React.FC<Props> = ({
   person,
   isSelected = false,
-  mother,
-  father,
 }) => {
   const {
     sex,
@@ -23,6 +18,8 @@ export const PersonItem: React.FC<Props> = ({
     died,
     motherName,
     fatherName,
+    mother,
+    father,
   } = person;
 
   return (
@@ -39,21 +36,20 @@ export const PersonItem: React.FC<Props> = ({
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
-      {mother ? (
-        <td>
+      <td>
+        {mother ? (
           <PersonLink person={mother} />
-        </td>
-      ) : (
-        <td>{motherName || NOT_SET_PARRENT_VALUE}</td>
-      )}
-
-      {father ? (
-        <td>
+        ) : (
+          motherName || NOT_SET_PARRENT_VALUE
+        )}
+      </td>
+      <td>
+        {father ? (
           <PersonLink person={father} />
-        </td>
-      ) : (
-        <td>{fatherName || NOT_SET_PARRENT_VALUE}</td>
-      )}
+        ) : (
+          fatherName || NOT_SET_PARRENT_VALUE
+        )}
+      </td>
     </tr>
   );
 };

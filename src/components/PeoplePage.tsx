@@ -3,6 +3,7 @@ import { Person } from '../types/Person';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
 import { PeopleTable } from './PeopleTable';
+import { findPersonByName } from '../utils/helpers';
 
 export const PeoplePage = () => {
   const [isError, setIsError] = useState(false);
@@ -11,7 +12,15 @@ export const PeoplePage = () => {
 
   useEffect(() => {
     getPeople()
-      .then(setPeople)
+      .then(response => {
+        const newPeople = response.map(person => ({
+          ...person,
+          mother: findPersonByName(response, person.motherName),
+          father: findPersonByName(response, person.fatherName),
+        }));
+
+        setPeople(newPeople);
+      })
       .catch(() => {
         setIsError(true);
       })
@@ -19,7 +28,7 @@ export const PeoplePage = () => {
         setIsLoading(false);
       });
   }, []);
-
+  const isErrorDuringLoading = !isLoading && isError;
   const isEverythingOk = !isError && !isLoading && !!people.length;
   const isNoPeopleOnServer = !isError && !isLoading && !people.length;
 
@@ -29,13 +38,14 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isLoading ? (
+          {isLoading && (
             <Loader />
-          ) : (isError && (
+          )}
+          {isErrorDuringLoading && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
-          ))}
+          )}
           {isNoPeopleOnServer && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
