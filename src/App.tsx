@@ -1,11 +1,11 @@
 import './App.scss';
-import { Navigation } from './components/Navigation/Navigation';
+import { MainLayout } from './components/MainLayout/MainLayout';
 import { Root } from './Root';
 
 export const App: React.FC = () => {
   return (
     <div data-cy="app">
-      <Navigation />
+      <MainLayout />
 
       <main className="section">
         <div className="container">
