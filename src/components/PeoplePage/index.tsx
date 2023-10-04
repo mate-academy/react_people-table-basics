@@ -9,8 +9,7 @@ export const PeoplePage = () => {
     error,
     isLoading,
     getParentSlug,
-  }
-    = usePeople();
+  } = usePeople();
 
   return (
     <div data-cy="app">
