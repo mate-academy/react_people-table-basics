@@ -37,7 +37,7 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {(!error && people.length && !isLoading)
+          {(!error && !!people.length && !isLoading)
           && <PeopleTable people={people} />}
 
         </div>
