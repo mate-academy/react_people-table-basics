@@ -2,16 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
-import { PersonPage } from '../PersonPage/PersonPage';
+import { PeopleTable } from '../PeopleTable/PeopleTable';
+import { getPreparedPeople } from '../../utils/preparedPeople';
 
-type Props = {
-  people: Person[],
-  setPeople: (newValue: Person[]) => void,
-};
-
-export const PeoplePage: React.FC<Props> = ({ setPeople, people }) => {
+export const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [people, setPeople] = useState<Person[]>([]);
 
   const isDisplayErrorMessage = isError && !isLoading;
   const isNoPeopleOnServer = !people.length && !isLoading && !isError;
@@ -21,19 +18,18 @@ export const PeoplePage: React.FC<Props> = ({ setPeople, people }) => {
     setIsError(false);
     setIsLoading(true);
 
-    const fetchData = async () => {
+    (async () => {
       try {
-        const peopleData = await getPeople();
+        const peopleFrom = await getPeople();
+        const preparedPeople = getPreparedPeople(peopleFrom);
 
-        setPeople(peopleData);
+        setPeople(preparedPeople);
       } catch {
         setIsError(true);
       } finally {
         setIsLoading(false);
       }
-    };
-
-    fetchData();
+    })();
   }, []);
 
   return (
@@ -57,7 +53,7 @@ export const PeoplePage: React.FC<Props> = ({ setPeople, people }) => {
           )}
 
           {isPeopleOnServer && (
-            <PersonPage people={people} />
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
