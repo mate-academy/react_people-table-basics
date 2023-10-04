@@ -42,8 +42,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             motherName,
           } = person;
 
-          const mother = motherName ? getPerson(motherName) : undefined;
-          const father = fatherName ? getPerson(fatherName) : undefined;
+          const mother = getPerson(motherName);
+          const father = getPerson(fatherName);
 
           return (
             <tr
