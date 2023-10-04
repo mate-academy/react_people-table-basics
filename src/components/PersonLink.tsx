@@ -1,9 +1,8 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import { SEX_FEMALE } from '../constants';
 import { Person } from '../types';
-
-const SEX_FEMALE = 'f';
 
 type Props = {
   person: Person;
