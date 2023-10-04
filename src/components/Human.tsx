@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
@@ -21,14 +20,13 @@ export const Human: React.FC<Props> = ({
     father,
   } = person;
 
-  const { slug } = useParams();
-  const selectedPersonSlug = slug || '';
+  const { slug = '' } = useParams();
 
   return (
     <tr
       data-cy="person"
       className={classNames({
-        'has-background-warning': selectedPersonSlug === person.slug,
+        'has-background-warning': slug === person.slug,
       })}
     >
       <td>
@@ -40,27 +38,15 @@ export const Human: React.FC<Props> = ({
       <td>{died}</td>
 
       <td>
-        {motherName ? (
-          mother ? (
-            <PersonLink person={mother} />
-          ) : (
-            `${motherName}`
-          )
-        ) : (
-          '-'
-        )}
+        {motherName && mother
+          ? <PersonLink person={mother} />
+          : (motherName || '-')}
       </td>
 
       <td>
-        {fatherName ? (
-          father ? (
-            <PersonLink person={father} />
-          ) : (
-            `${fatherName}`
-          )
-        ) : (
-          '-'
-        )}
+        {fatherName && father
+          ? <PersonLink person={father} />
+          : (fatherName || '-')}
       </td>
     </tr>
   );
