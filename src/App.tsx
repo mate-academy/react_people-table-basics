@@ -28,7 +28,9 @@ export const App = () => (
           <Route
             path="/people"
             element={<PeoplePage />}
-          />
+          >
+            <Route path=":personSlug" />
+          </Route>
           <Route
             path="/*"
             element={<NotFoundPage />}

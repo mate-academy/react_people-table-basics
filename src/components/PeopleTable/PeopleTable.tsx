@@ -1,4 +1,5 @@
-// import { useParams } from 'react-router-dom';
+import cn from 'classnames';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
@@ -7,7 +8,7 @@ type PeopleTableProps = {
 };
 
 export const PeopleTable: React.FC<PeopleTableProps> = ({ people }) => {
-  // const { personSlug } = useParams();
+  const { personSlug } = useParams();
 
   return (
     <table
@@ -38,6 +39,9 @@ export const PeopleTable: React.FC<PeopleTableProps> = ({ people }) => {
             <tr
               data-cy="person"
               key={person.slug}
+              className={cn('', {
+                'has-background-warning': person.slug === personSlug,
+              })}
             >
               <td>
                 <PersonLink
