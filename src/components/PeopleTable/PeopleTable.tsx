@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
+import { useMemo } from 'react';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
@@ -12,7 +13,9 @@ export const PeopleTable: React.FC<PeoplePageTableProps> = (
 ) => {
   const { personSlug } = useParams();
 
-  const selectedPerson = people.find(person => person.slug === personSlug);
+  const selectedPerson = useMemo(() => {
+    return people.find(person => person.slug === personSlug);
+  }, [personSlug, people]);
 
   return (
     <table
