@@ -4,12 +4,8 @@ import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
 import { PageNotFound } from './components/PageNotFound';
 import { Navbar } from './components/Navbar';
-// import { useEffect, useState } from 'react';
-// import { getPeople } from './api';
-// import { Person } from './types';
 
 export const App = () => {
-
   return (
     <div data-cy="app">
 
@@ -18,14 +14,14 @@ export const App = () => {
       <main className="section">
         <div className="container">
           <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/home' element={<Navigate to="/" replace />} />
-            <Route path='/people' element={<PeoplePage />} />
-            <Route path='/people/:slug' element={<PeoplePage />} />
-            <Route path='/*' element={<PageNotFound />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="/people" element={<PeoplePage />} />
+            <Route path="/people/:slug" element={<PeoplePage />} />
+            <Route path="/*" element={<PageNotFound />} />
           </Routes>
         </div>
       </main>
     </div>
-    );
-}
+  );
+};

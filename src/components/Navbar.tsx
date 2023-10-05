@@ -13,18 +13,18 @@ export const Navbar = () => {
 
         <div className="navbar-brand">
           <NavLink
-            className={({ isActive }) =>
-              classNames('navbar-item', {
-                'has-background-grey-lighter': isActive,
-              })}
+            className={({ isActive }) => classNames('navbar-item', {
+              'has-background-grey-lighter': isActive,
+            })}
             to="/"
           >
             Home
           </NavLink>
 
           <NavLink
-            className={({ isActive }) =>
-              classNames('navbar-item', {'has-background-grey-lighter': isActive})}
+            className={({ isActive }) => classNames('navbar-item', {
+              'has-background-grey-lighter': isActive,
+            })}
             to="/people"
           >
             People
