@@ -7,10 +7,9 @@ import { PersonItem } from './PersonItem';
 export const PeopleTable = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isError, setIsError] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setIsLoading(true);
     getPeople()
       .then((response) => setPeople(response))
       .catch(() => setIsError(true))
