@@ -4,14 +4,10 @@ import { getPeople } from '../../api';
 import { People } from './PeopleTable';
 import { Person } from '../../types';
 
-type Props = {
-  people: Person[],
-  setPeople: (newValue: Person[]) => void,
-};
-
-export const PeoplePage: React.FC<Props> = ({ setPeople, people }) => {
+export const PeoplePage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [people, setPeople] = useState<Person[]>([]);
 
   useEffect(() => {
     setHasError(false);

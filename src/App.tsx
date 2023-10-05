@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.scss';
-
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { getPeople } from './api';
-import { Person } from './types';
 import { HeadOfTable } from './components/Table/Table';
 import { Navigation } from './components/Navi/Navigation';
 import { PeoplePage } from './components/People/PeoplePage';
 
 export const App: React.FC = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-
-  useEffect(() => {
-    getPeople()
-      .then(setPeople);
-  }, []);
-
   return (
     <div data-cy="app">
       <HeadOfTable />
@@ -30,11 +20,11 @@ export const App: React.FC = () => {
               />
               <Route
                 path="people"
-                element={<PeoplePage people={people} setPeople={setPeople} />}
+                element={<PeoplePage />}
               >
                 <Route
-                  path=":personSlug"
-                  element={<PeoplePage people={people} setPeople={setPeople} />}
+                  path="person/:personSlug"
+                  element={<PeoplePage />}
                 />
               </Route>
               <Route path="home" element={<Navigate to="/" replace />} />
