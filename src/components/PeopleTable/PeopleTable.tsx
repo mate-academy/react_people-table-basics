@@ -10,7 +10,6 @@ export const PeopleTable:React.FC = () => {
   const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsLoading(true);
     getPeople()
       .then((response) => setPeople(response))
       .catch(() => setHasError(true))
