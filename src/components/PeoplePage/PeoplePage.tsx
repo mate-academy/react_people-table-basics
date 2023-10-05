@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
@@ -8,22 +7,22 @@ import { getPeople } from '../../api';
 import { PersonLink } from '../PersonLink/PersonLint';
 
 export const PeoplePage = () => {
-  const [people, setPeople] = useState<Person[] | null>(null);
-  const [error, setError] = useState<boolean>(false);
-  const [loader, setLoader] = useState<boolean>(false);
+  const [people, setPeople] = useState<Person[]>([]);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { slug: selectedSlug } = useParams();
 
   useEffect(() => {
-    setLoader(true);
-    setError(false);
+    setIsLoading(true);
+    setIsError(false);
 
     getPeople()
       .then(setPeople)
       .catch(() => {
-        setError(true);
+        setIsError(true);
       })
       .finally(() => {
-        setLoader(false);
+        setIsLoading(false);
       });
   }, []);
 
@@ -34,13 +33,13 @@ export const PeoplePage = () => {
       <div className="block">
         <div className="box table-container">
           {
-            loader && (
+            isLoading && (
               <Loader />
             )
           }
 
           {
-            error && (
+            isError && (
               <p data-cy="peopleLoadingError" className="has-text-danger">
                 Something went wrong
               </p>
@@ -48,7 +47,7 @@ export const PeoplePage = () => {
           }
 
           {
-            !error && people && !people.length && (
+            !isError && !isLoading && !people.length && (
               <p data-cy="noPeopleMessage">
                 There are no people on the server
               </p>
@@ -56,7 +55,7 @@ export const PeoplePage = () => {
           }
 
           {
-            !error && people && (
+            !isError && !isLoading && !!people.length && (
               <table
                 data-cy="peopleTable"
                 className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -84,8 +83,10 @@ export const PeoplePage = () => {
                         slug,
                       } = person;
 
-                      const mother = people.find(mom => mom.name === motherName);
-                      const father = people.find(dad => dad.name === fatherName);
+                      const mother = people
+                        .find(mom => mom.name === motherName);
+                      const father = people
+                        .find(dad => dad.name === fatherName);
 
                       return (
                         <tr
