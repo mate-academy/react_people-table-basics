@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { ErrorComponent } from '../ErrorComponent/ErrorComponent';
 import { EmptyComponent } from '../EmptyComponent/EmptyComponent';
 import { PeopleComponent } from '../PeopleComponent/PeopleComponent';
+import { getPeople } from '../../api';
+import { getPreparedPeople } from '../../utils/getPreparedPeople';
 
-interface Props {
-  people: Person[],
-  isLoading: boolean
-  errorMessage: string
-}
+export const PeoplePage: React.FC = () => {
+  const [people, setPeople] = useState<Person[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-export const PeoplePage: React.FC<Props> = ({
-  people,
-  isLoading,
-  errorMessage,
-}) => {
+  useEffect(() => {
+    setIsLoading(true);
+    getPeople()
+      .then((response) => {
+        setPeople(getPreparedPeople(response));
+      })
+      .catch(() => {
+        setErrorMessage('Something went wrong');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
   const isDisplayErrorMessage = errorMessage && !isLoading;
   const isNoPeopleOnServer = !people.length && !isLoading && !errorMessage;
   const isPeopleOnServer = !!people.length && !errorMessage;
@@ -30,7 +40,7 @@ export const PeoplePage: React.FC<Props> = ({
           <ErrorComponent errorMessage={errorMessage} />
         )}
 
-        {isNoPeopleOnServer && <EmptyComponent /> }
+        {isNoPeopleOnServer && <EmptyComponent />}
 
         {isPeopleOnServer && <PeopleComponent people={people} />}
       </div>

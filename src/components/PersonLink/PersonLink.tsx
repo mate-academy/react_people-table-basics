@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../../types';
+import { SEX_FEMALE } from '../../utils/variablesHelpers';
 
 interface Props {
   person: Person
@@ -14,7 +15,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
     <Link
       to={`../${slug}`}
       className={cn({
-        'has-text-danger': sex === 'f',
+        'has-text-danger': sex === SEX_FEMALE,
       })}
     >
       {name}
