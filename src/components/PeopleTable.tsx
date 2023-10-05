@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
@@ -10,23 +10,24 @@ type Props = {
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
+  const selectedPersonRef = useRef<HTMLTableRowElement | null>(null);
 
   function getPersonByName(name: string) {
-    return people.find(pers => pers.name === name);
+    return people.find((person) => person.name === name);
   }
 
   useEffect(() => {
-    const selectedPerson = document.querySelector('.has-background-warning');
+    const selectedPerson = people.find((person) => person.slug === slug);
 
-    if (selectedPerson) {
-      selectedPerson.scrollIntoView({
+    if (selectedPersonRef.current && selectedPerson) {
+      selectedPersonRef.current.scrollIntoView({
         block: 'center',
         behavior: 'smooth',
       });
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [slug]);
+  }, [slug, people]);
 
   return (
     <>
@@ -46,9 +47,13 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
         </thead>
 
         <tbody>
-          {people.map(person => {
+          {people.map((person) => {
             const {
-              motherName, fatherName, sex, born, died,
+              motherName,
+              fatherName,
+              sex,
+              born,
+              died,
             } = person;
             const mother = motherName ? getPersonByName(motherName) : undefined;
             const father = fatherName ? getPersonByName(fatherName) : undefined;
@@ -60,6 +65,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
                 className={cn({
                   'has-background-warning': person.slug === slug,
                 })}
+                ref={(ref) => {
+                  if (person.slug === slug) {
+                    selectedPersonRef.current = ref;
+                  }
+                }}
               >
                 <td>
                   <PeopleLink person={person} />
