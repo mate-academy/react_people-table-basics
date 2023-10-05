@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
@@ -34,8 +35,9 @@ export const PeopleTable: React.FC<PeoplePageTableProps> = (
           <tr
             data-cy="person"
             key={person.slug}
-            className={person.slug === selectedPerson?.slug
-              ? 'has-background-warning' : undefined}
+            className={classNames({
+              'has-background-warning': person.slug === selectedPerson?.slug,
+            })}
           >
             <PersonLink
               person={person}
@@ -52,7 +54,7 @@ export const PeopleTable: React.FC<PeoplePageTableProps> = (
               )
               : (
                 <td>
-                  {person.motherName !== null
+                  {person.motherName
                     ? person.motherName : '-'}
                 </td>
               )}
@@ -64,7 +66,7 @@ export const PeopleTable: React.FC<PeoplePageTableProps> = (
               )
               : (
                 <td>
-                  {person.fatherName !== null
+                  {person.fatherName
                     ? person.fatherName : '-'}
                 </td>
               )}

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import { Person } from '../../types';
 
 type PersonLinkProps = {
@@ -12,7 +13,7 @@ export const PersonLink: React.FC<PersonLinkProps> = (
     <td>
       <Link
         to={`/people/${person.slug}`}
-        className={person.sex === 'f' ? 'has-text-danger' : ''}
+        className={classNames({ 'has-text-danger': person.sex === 'f' })}
       >
         {person.name}
       </Link>

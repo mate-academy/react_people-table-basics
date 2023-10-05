@@ -31,7 +31,7 @@ export const App = () => (
               })
             }
           >
-            PeoplePage
+            People
           </NavLink>
         </div>
       </div>
