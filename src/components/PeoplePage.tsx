@@ -93,9 +93,7 @@ export const People: React.FC = () => {
                         {isAnchorHere(person.motherName) ? (
                           <Link
                             to={`/people/${isAnchorHere(person.motherName)?.slug}`}
-                            className={classNames({
-                              'has-text-danger': person.sex === 'f',
-                            })}
+                            className="has-text-danger"
                             onClick={() => setIsSelected(false)}
                           >
                             {isAnchorHere(person.motherName)?.name}
