@@ -10,7 +10,6 @@ export const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
     getPeople()
       .then((data) => setPeople(data))
       .catch(() => setError(true))
