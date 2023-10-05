@@ -12,7 +12,7 @@ const getLinkClass = ({ isActive }: { isActive: boolean }) => classNames(
   'navbar-item', { 'has-background-grey-lighter': isActive },
 );
 
-const nothing = '-';
+const NOTHING = '-';
 
 const PeopleTable = ({ people }: { people: Person[] }) => {
   const { slug } = useParams<{ slug: string }>();
@@ -62,7 +62,7 @@ const PeopleTable = ({ people }: { people: Person[] }) => {
                     {person.motherName}
                   </Link>
                 ) : (
-                  person.motherName || nothing
+                  person.motherName || NOTHING
                 )}
             </td>
             <td>
@@ -75,7 +75,7 @@ const PeopleTable = ({ people }: { people: Person[] }) => {
                     {person.fatherName}
                   </Link>
                 ) : (
-                  person.fatherName || nothing
+                  person.fatherName || NOTHING
                 )}
             </td>
           </tr>
