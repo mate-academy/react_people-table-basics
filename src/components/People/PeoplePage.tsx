@@ -1,17 +1,23 @@
 import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PeopleTable } from './PeopleTable';
+import { getPeople } from '../../api';
 
-type PeoplePageProps = {
-  showLoader: boolean
-  showError: boolean
-  people: Person[] | null
-};
+export const PeoplePage = () => {
+  const [people, setPeople] = useState<Person[] | null>(null);
+  const [isError, setIsError] = useState(false);
 
-export const PeoplePage = (
-  { showLoader, showError, people }: PeoplePageProps,
-) => {
+  const showLoader = people === null && !isError;
+
+  useEffect(() => {
+    getPeople()
+      .then(setPeople)
+      .catch(() => setIsError(true));
+  }, []);
+
   const { slug } = useParams();
 
   return (
@@ -22,7 +28,7 @@ export const PeoplePage = (
         <div className="box table-container">
           {showLoader && <Loader />}
 
-          {showError && (
+          {isError && (
             <p
               data-cy="peopleLoadingError"
               className="has-text-danger"

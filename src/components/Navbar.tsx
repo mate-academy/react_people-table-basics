@@ -1,16 +1,11 @@
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import { Person } from '../types';
-
-type NavbarProps = {
-  setPeople: React.Dispatch<React.SetStateAction<Person[] | null>>
-};
 
 type Active = {
   isActive: boolean
 };
 
-export const Navbar = ({ setPeople }: NavbarProps) => {
+export const Navbar = () => {
   const linkClass = (active: Active) => classNames('navbar-item', {
     'has-background-grey-lighter': active.isActive,
   });
@@ -18,7 +13,6 @@ export const Navbar = ({ setPeople }: NavbarProps) => {
   return (
     <div className="navbar-brand">
       <NavLink
-        onClick={() => setPeople(null)}
         to="/"
         className={linkClass}
       >
