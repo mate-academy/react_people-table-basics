@@ -7,7 +7,7 @@ import { Person } from '../types';
 export const PeopleTable = () => {
   const { personSlug } = useParams();
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [people, setPeople] = useState<Person[] | []>([]);
   const [error, setError] = useState<boolean>(false);
 
@@ -15,7 +15,6 @@ export const PeopleTable = () => {
   const noPeopleFound = !error && people.length === 0 && !isLoading;
 
   useEffect(() => {
-    setIsLoading(true);
     getPeople().then((peopleFromServer) => {
       const peopleWithParents: Person[] = peopleFromServer.map(person => {
         const mother = peopleFromServer
