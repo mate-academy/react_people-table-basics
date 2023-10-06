@@ -7,12 +7,11 @@ import { Loader } from './Loader/Loader';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const { slug } = useParams();
 
   useEffect(() => {
-    setIsLoading(true);
     getPeople()
       .then((data) => {
         setPeople(data);
