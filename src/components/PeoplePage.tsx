@@ -76,6 +76,7 @@ export const PeoplePage: React.FC = () => {
 
                   return (
                     <tr
+                      key={slug}
                       data-cy="person"
                       className={classNames('', {
                         'has-background-warning': slug === selectedSlug,
