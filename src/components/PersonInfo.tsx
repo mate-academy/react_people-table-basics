@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import cn from 'classnames';
-import { Person } from '../../types';
+import { Person } from '../types';
 
 type PersonInfoProps = {
   person: Person;
