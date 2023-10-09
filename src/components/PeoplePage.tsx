@@ -6,11 +6,10 @@ import { Loader } from './Loader';
 
 export const PeoplePage: React.FC = () => {
   const [persons, setPersons] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
     getPeople()
       .then(setPersons)
       .catch(() => {
