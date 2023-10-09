@@ -18,7 +18,7 @@ Implement the `App` with 2 pages and ability to select a person in the table.
     - add the `has-text-danger` class for women names;
     - if there is no person with a given name among the people just keep the name as a text (not a link);
     - if the motherName or fatherName is empty put `-` to the table
-1. Highlight the row of the selected person with the `has-background-warning` class;
+1. Highlight the row of the selected person with the `has-background-warning` class
 
 ## Instructions
 
