@@ -9,6 +9,8 @@ interface PeopleTableProps {
   selected: string;
 }
 
+const COLUMN_NAMES = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 export const PeopleTable: React.FC<PeopleTableProps> = ({ people, selected }) => {
   return (
     <div className="block">
@@ -19,12 +21,9 @@ export const PeopleTable: React.FC<PeopleTableProps> = ({ people, selected }) =>
         >
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Sex</th>
-              <th>Born</th>
-              <th>Died</th>
-              <th>Mother</th>
-              <th>Father</th>
+              {COLUMN_NAMES.map(columnName => (
+                <th key={columnName}>{columnName}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
@@ -55,7 +54,7 @@ export const PeopleTable: React.FC<PeopleTableProps> = ({ people, selected }) =>
                       isMother
                     />
                   ) : (
-                    <p>{person.motherName ? person.motherName : '-'}</p>
+                    person.motherName || '-'
                   )}
                 </td>
                 <td>

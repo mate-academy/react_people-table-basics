@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader } from './Loader';
@@ -6,39 +7,34 @@ import { Person } from '../types';
 import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage: React.FC = () => {
-  const params = useParams();
+  const { slug = '' } = useParams();
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const selected = params.slug ? params.slug : '';
+  const selected = slug;
 
-  const matchMotherAndFather = (peopleFromServer: Person[]): Person[] => {
-    return peopleFromServer.map((per): Person => {
-      const mother = peopleFromServer.find(
-        person => person.name === per.motherName,
-      );
+  const getPreparedPeople = (peopleFromServer: Person[]): Person[] => {
+    return peopleFromServer.map((pers): Person => {
+      const mother = peopleFromServer.find(({ name }) => name === pers.motherName);
+      const father = peopleFromServer.find(({ name }) => name === pers.fatherName);
 
-      const father = peopleFromServer.find(
-        person => person.name === per.fatherName,
-      );
-
-      return { ...per, mother, father };
+      return { ...pers, mother, father };
     });
   };
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     getPeople()
-      .then(data => matchMotherAndFather(data))
+      .then(data => getPreparedPeople(data))
       .then((data) => setPeople(data))
       .catch(() => setHasError(true))
-      .finally(() => setLoading(false));
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
     <>
       <h1 className="title">People Page</h1>
-      {loading && (
+      {isLoading && (
         <Loader />
       )}
       {hasError && (
@@ -46,12 +42,12 @@ export const PeoplePage: React.FC = () => {
           Something went wrong
         </p>
       )}
-      {people.length === 0 && !loading && (
+      {people.length === 0 && !isLoading && (
         <p data-cy="noPeopleMessage">
           There are no people on the server
         </p>
       )}
-      {people.length !== 0 && !loading && (
+      {!!people.length && !isLoading && (
         <PeopleTable people={people} selected={selected} />
       )}
     </>
