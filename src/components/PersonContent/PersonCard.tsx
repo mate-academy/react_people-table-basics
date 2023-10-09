@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
+const NOT_SET_VALUE = '-';
+
 type Props = {
   person: Person,
   personSlug?: string,
@@ -28,14 +30,14 @@ export const PersonCard: React.FC<Props> = ({ person, personSlug }) => {
         {mother ? (
           <PersonLink person={mother} />
         ) : (
-          motherName || '-'
+          motherName || NOT_SET_VALUE
         )}
       </td>
       <td>
         {father ? (
           <PersonLink person={father} />
         ) : (
-          fatherName || '-'
+          fatherName || NOT_SET_VALUE
         )}
       </td>
     </tr>

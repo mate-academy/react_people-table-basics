@@ -12,28 +12,26 @@ export const People: React.FC<Props> = ({ people }) => {
   const { personSlug } = useParams();
 
   return (
-    <>
-      <table
-        data-cy="peopleTable"
-        className="table is-striped is-hoverable is-narrow is-fullwidth"
-      >
-        <thead>
-          <tr>
-            {SortField.map(sort => (
-              <th key={sort}>{sort}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {people.map((person) => (
-            <PersonCard
-              person={person}
-              key={person.slug}
-              personSlug={personSlug}
-            />
+    <table
+      data-cy="peopleTable"
+      className="table is-striped is-hoverable is-narrow is-fullwidth"
+    >
+      <thead>
+        <tr>
+          {SortField.map(sort => (
+            <th key={sort}>{sort}</th>
           ))}
-        </tbody>
-      </table>
-    </>
+        </tr>
+      </thead>
+      <tbody>
+        {people.map((person) => (
+          <PersonCard
+            person={person}
+            key={person.slug}
+            personSlug={personSlug}
+          />
+        ))}
+      </tbody>
+    </table>
   );
 };
