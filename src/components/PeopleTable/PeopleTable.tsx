@@ -28,33 +28,36 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <tr
-            data-cy="person"
-            key={person.slug}
-            className={classNames(
-              { 'has-background-warning': person.slug === slug },
-            )}
-          >
-            <td>
-              <PersonLink person={person} />
-            </td>
+        {people.map(person => {
+          const mother = people
+            .find(currPerson => currPerson.name === person.motherName);
+          const father = people
+            .find(currPerson => currPerson.name === person.fatherName);
 
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
-            {person.mother
-              ? (
-                <td>
-                  <PersonLink person={person.mother} />
-                </td>
-              )
-              : <td>{person.motherName ? person.motherName : '-'}</td>}
-            {person.father
-              ? <td><PersonLink person={person.father} /></td>
-              : <td>{ person.fatherName ? person.fatherName : '-'}</td>}
-          </tr>
-        ))}
+          return (
+            <tr
+              data-cy="person"
+              key={person.slug}
+              className={classNames(
+                { 'has-background-warning': person.slug === slug },
+              )}
+            >
+              <td>
+                <PersonLink person={person} />
+              </td>
+
+              <td>{person.sex}</td>
+              <td>{person.born}</td>
+              <td>{person.died}</td>
+              {mother
+                ? <td><PersonLink person={mother} /></td>
+                : <td>{person.motherName ? person.motherName : '-'}</td>}
+              {father
+                ? <td><PersonLink person={father} /></td>
+                : <td>{person.fatherName ? person.fatherName : '-'}</td>}
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
