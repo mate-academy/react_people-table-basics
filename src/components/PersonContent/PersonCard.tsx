@@ -11,7 +11,14 @@ type Props = {
 
 export const PersonCard: React.FC<Props> = ({ person, personSlug }) => {
   const {
-    slug, sex, born, died, motherName, fatherName, mother, father,
+    slug,
+    sex,
+    born,
+    died,
+    motherName,
+    fatherName,
+    mother,
+    father,
   } = person;
 
   return (

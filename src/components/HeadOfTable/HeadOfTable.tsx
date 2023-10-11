@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const handleNavLinkClass = ({ isActive }: { isActive: boolean }) => {
+const getNavLinkClass = ({ isActive }: { isActive: boolean }) => {
   return classNames('navbar-item', {
     'has-background-grey-lighter': isActive,
   });
@@ -18,17 +18,11 @@ export const HeadOfTable: React.FC = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink
-            className={handleNavLinkClass}
-            to="/"
-          >
+          <NavLink className={getNavLinkClass} to="/">
             Home
           </NavLink>
 
-          <NavLink
-            className={handleNavLinkClass}
-            to="/people"
-          >
+          <NavLink className={getNavLinkClass} to="/people">
             People
           </NavLink>
         </div>

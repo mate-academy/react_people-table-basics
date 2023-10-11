@@ -8,7 +8,7 @@ type Props = {
   people: Person[];
 };
 
-export const People: React.FC<Props> = ({ people }) => {
+export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { personSlug } = useParams();
 
   return (

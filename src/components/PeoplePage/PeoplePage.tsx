@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
-import { People } from '../People/People';
+import { PeopleTable } from '../PeopleTable/PeopleTable';
 import { getPreparedPeople } from '../../utils/PrepairedPeople';
 
 export const PeoplePage: React.FC = () => {
@@ -20,8 +20,8 @@ export const PeoplePage: React.FC = () => {
 
     (async () => {
       try {
-        const peopleFrom = await getPeople();
-        const preparedPeople = getPreparedPeople(peopleFrom);
+        const peopleFromServer = await getPeople();
+        const preparedPeople = getPreparedPeople(peopleFromServer);
 
         setPeople(preparedPeople);
       } catch {
@@ -53,7 +53,7 @@ export const PeoplePage: React.FC = () => {
           )}
 
           {isPeopleOnServer && (
-            <People people={people} />
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
