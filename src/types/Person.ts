@@ -9,3 +9,14 @@ export interface Person {
   mother?: Person,
   father?: Person,
 }
+
+export enum ErrorOption {
+  noError,
+  Wrong,
+  Empty,
+}
+
+export enum MagicWords {
+  FEMALE = 'f',
+  MALE = 'm',
+}
