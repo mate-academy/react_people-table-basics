@@ -15,9 +15,9 @@ export const PeopleTable = () => {
         const foundParents = response.map((person) => ({
           ...person,
           mother: response
-            .find(human => human.name === human.motherName || null),
+            .find(human => human.name === person.motherName || null),
           father: response
-            .find(human => human.name === human.fatherName || null),
+            .find(human => human.name === person.fatherName || null),
         }));
 
         setPeople(foundParents);
