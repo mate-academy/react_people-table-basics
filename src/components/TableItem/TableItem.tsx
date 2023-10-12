@@ -9,9 +9,13 @@ type TTableItemProps = {
   people: Person[];
 };
 
+enum ESex {
+  Female = 'f',
+}
+
 export const TableItem: FC<TTableItemProps> = ({ person, people }) => {
   const {
-    name,
+    name: PersonName,
     sex,
     born,
     died,
@@ -22,11 +26,11 @@ export const TableItem: FC<TTableItemProps> = ({ person, people }) => {
 
   const { peopleId } = useParams();
 
-  const mother = people
-    .find(currentPerson => currentPerson.name === motherName);
+  const mother = people.find(({ name }) => name === motherName);
 
-  const father = people
-    .find(currentPerson => currentPerson.name === fatherName);
+  const father = people.find(({ name }) => name === fatherName);
+
+  const NON_SELECTED_USER = '-';
 
   return (
     <tr
@@ -39,10 +43,10 @@ export const TableItem: FC<TTableItemProps> = ({ person, people }) => {
         <Link
           to={`/people/${slug}`}
           className={classNames({
-            'has-text-danger': sex === 'f',
+            'has-text-danger': sex === ESex.Female,
           })}
         >
-          {name}
+          {PersonName}
         </Link>
       </td>
 
@@ -58,7 +62,7 @@ export const TableItem: FC<TTableItemProps> = ({ person, people }) => {
             {motherName}
           </Link>
         ) : (
-          motherName || '-'
+          motherName || NON_SELECTED_USER
         )}
       </td>
 
@@ -70,7 +74,7 @@ export const TableItem: FC<TTableItemProps> = ({ person, people }) => {
             {fatherName}
           </Link>
         ) : (
-          fatherName || '-'
+          fatherName || NON_SELECTED_USER
         )}
       </td>
     </tr>

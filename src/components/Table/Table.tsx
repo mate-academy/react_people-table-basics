@@ -5,6 +5,8 @@ import { Loader } from '../Loader';
 
 import { TableList } from '../TableList';
 
+const columnsValues = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 export const Table = () => {
   const { isLoading, errorMessage, people } = useContext(PeopleProvider);
 
@@ -20,12 +22,13 @@ export const Table = () => {
           >
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
+                {columnsValues.map(name => (
+                  <th
+                    key={name}
+                  >
+                    {name}
+                  </th>
+                ))}
               </tr>
             </thead>
 
