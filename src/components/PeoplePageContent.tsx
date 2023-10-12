@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import cn from 'classnames';
-import { Person } from '../types';
+import { MagicWords, Person } from '../types';
 
 type Props = {
   person: Person;
@@ -10,7 +10,7 @@ type Props = {
 
 export const PeoplePageContent: FC<Props> = ({ person, getParentLink }) => {
   const generateClassForPerson = () => cn({
-    'has-text-danger': person.sex === 'f',
+    'has-text-danger': person.sex === MagicWords.FEMALE,
   });
 
   const { slug } = useParams();
@@ -25,7 +25,9 @@ export const PeoplePageContent: FC<Props> = ({ person, getParentLink }) => {
         <td>
           <NavLink
             to={`/people/${parent?.slug}`}
-            className={cn({ 'has-text-danger': parent?.sex === 'f' })}
+            className={cn({
+              'has-text-danger': parent?.sex === MagicWords.FEMALE,
+            })}
           >
             {parent?.name}
           </NavLink>
@@ -40,30 +42,40 @@ export const PeoplePageContent: FC<Props> = ({ person, getParentLink }) => {
     return result;
   };
 
-  const motherContent = person.motherName
-    ? getParentContent(person.motherName)
+  const {
+    motherName,
+    fatherName,
+    slug: adress,
+    name,
+    sex,
+    born,
+    died,
+  } = person;
+
+  const motherContent = motherName
+    ? getParentContent(motherName)
     : <td>-</td>;
 
-  const fatherContent = person.fatherName
-    ? getParentContent(person.fatherName)
+  const fatherContent = fatherName
+    ? getParentContent(fatherName)
     : <td>-</td>;
 
   return (
     <tr
       data-cy="person"
-      className={slug === person.slug ? 'has-background-warning' : ''}
+      className={slug === adress ? 'has-background-warning' : ''}
     >
       <td>
         <NavLink
           className={generateClassForPerson}
-          to={`/people/${person.slug}`}
+          to={`/people/${adress}`}
         >
-          {person.name}
+          {name}
         </NavLink>
       </td>
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
       {motherContent}
       {fatherContent}
     </tr>

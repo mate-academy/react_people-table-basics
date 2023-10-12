@@ -15,3 +15,8 @@ export enum ErrorOption {
   Wrong,
   Empty,
 }
+
+export enum MagicWords {
+  FEMALE = 'f',
+  MALE = 'm',
+}

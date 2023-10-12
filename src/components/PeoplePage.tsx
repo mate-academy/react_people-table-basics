@@ -7,10 +7,12 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorOption, setErrorOption] = useState(ErrorOption.noError);
+  const PEOPLE_URL
+  = 'https://mate-academy.github.io/react_people-table/api/people.json';
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('https://mate-academy.github.io/react_people-table/api/people.json')
+    fetch(PEOPLE_URL)
       .then((response) => response.json())
       .then((data) => {
         if (!data.length) {
@@ -30,7 +32,7 @@ export const PeoplePage = () => {
   return (
     <>
       {people.map((person) => (
-        <p>{person.mother?.slug}</p>
+        <p key={person.slug}>{person.mother?.slug}</p>
       ))}
       <h1 className="title">People Page</h1>
       <div className="block">
