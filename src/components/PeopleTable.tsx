@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import React from 'react'; // Import React
 import cn from 'classnames';
 import { useLocation } from 'react-router-dom';
 import { Person } from '../types';
@@ -14,47 +15,48 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
   const selectedLocation = location.hash.split('/').pop();
 
   return (
-    people.map((person) => (
-      <tr
-        className={cn('', { 'has-background-warning': selectedLocation === person.slug })}
-        data-cy="person"
-        key={person.slug}
-      >
-        <PersonLink
-          text={person.name}
-          redColorCondition={person.sex === 'f'}
-          to={`#/${person.slug}`}
-        />
-
-        <td>{person.sex}</td>
-        <td>{person.born}</td>
-        <td>{person.died}</td>
-
-        {people.some(p => p.name === person.motherName) ? (
+    <>
+      {people.map((person) => (
+        <tr
+          className={cn('', { 'has-background-warning': selectedLocation === person.slug })}
+          data-cy="person"
+          key={person.slug}
+        >
           <PersonLink
-            text={person.motherName}
-            redColorCondition={people.some(p => p.name === person.motherName)}
-            to={`#/${people.find(p => p.name === person.motherName)?.slug}`}
-
+            text={person.name}
+            redColorCondition={person.sex === 'f'}
+            to={`#/${person.slug}`}
           />
-        ) : (
-          <td>
-            {person.motherName}
-          </td>
-        )}
 
-        {people.some(p => p.name === person.fatherName) ? (
-          <PersonLink
-            text={person.fatherName}
-            redColorCondition={false}
-            to={`#/${people.find(p => p.name === person.motherName)?.slug}`}
-          />
-        ) : (
-          <td>
-            {person.fatherName}
-          </td>
-        )}
-      </tr>
-    ))
+          <td>{person.sex}</td>
+          <td>{person.born}</td>
+          <td>{person.died}</td>
+
+          {people.some(p => p.name === person.motherName) ? (
+            <PersonLink
+              text={person.motherName}
+              redColorCondition={people.some(p => p.name === person.motherName)}
+              to={`#/${people.find(p => p.name === person.motherName)?.slug}`}
+            />
+          ) : (
+            <td>
+              {person.motherName}
+            </td>
+          )}
+
+          {people.some(p => p.name === person.fatherName) ? (
+            <PersonLink
+              text={person.fatherName}
+              redColorCondition={false}
+              to={`#/${people.find(p => p.name === person.fatherName)?.slug}`}
+            />
+          ) : (
+            <td>
+              {person.fatherName}
+            </td>
+          )}
+        </tr>
+      ))}
+    </>
   );
 };
