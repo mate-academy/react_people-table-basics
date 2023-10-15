@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
-import { Error } from './Error';
 
 export const PeoplePage = () => {
   const [peopleFromServer, setPeopleFromServer] = useState<Person[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const { slugName } = useParams();
 
   useEffect(() => {
@@ -18,10 +18,8 @@ export const PeoplePage = () => {
         setPeopleFromServer(people);
         setLoading(false);
       })
-      .catch(() => {
-        <Error />;
-        setLoading(false);
-      });
+      .catch(() => setIsError(true))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -32,6 +30,12 @@ export const PeoplePage = () => {
         <div className="box table-container">
 
           {loading && <Loader />}
+
+          {isError && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )}
 
           {!loading && peopleFromServer.length < 1 && (
             <p data-cy="noPeopleMessage">
