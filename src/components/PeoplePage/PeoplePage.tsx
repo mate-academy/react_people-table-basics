@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import classNames from 'classnames';
 import { Person } from '../../types';
 import { Loader } from '../Loader/Loader';
 import { getPeople } from '../../api';
+import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 export const PeoplePage = () => {
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { personSlug } = useParams();
+
+  const NO_PEOPLE_CONDITION
+    = !errorMessage && !people.length && !isLoading;
 
   useEffect(() => {
     setIsLoading(true);
@@ -17,12 +18,23 @@ export const PeoplePage = () => {
     getPeople()
       .then(setPeople)
       .catch(() => {
-        setError('Something went wrong');
+        setErrorMessage('Something went wrong');
       })
       .finally(() => {
         setIsLoading(false);
       });
   }, []);
+
+  const preparedPeople = people.map(person => {
+    const mother = people.find(({ name }) => person.motherName === name);
+    const father = people.find(({ name }) => person.fatherName === name);
+
+    return {
+      ...person,
+      mother,
+      father,
+    };
+  });
 
   return (
     <>
@@ -32,88 +44,18 @@ export const PeoplePage = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {error && (
+          {errorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
-              {error}
+              {errorMessage}
             </p>
           )}
 
-          {(!error && !people.length && !isLoading) && (
+          {NO_PEOPLE_CONDITION && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
           <>
-
-            {people.length && (
-              <table
-                data-cy="peopleTable"
-                className="table is-striped is-hoverable is-narrow is-fullwidth"
-              >
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Born</th>
-                    <th>Died</th>
-                    <th>Mother</th>
-                    <th>Father</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {people.map((person) => {
-                    const mother = people.find(
-                      ({ name }) => name === person.motherName,
-                    );
-                    const father = people.find(
-                      ({ name }) => name === person.fatherName,
-                    );
-
-                    return (
-                      <tr
-                        data-cy="person"
-                        key={person.slug}
-                        className={classNames({
-                          'has-background-warning':
-                            person.slug === personSlug,
-                        })}
-                      >
-                        <td>
-                          <Link
-                            to={person.slug}
-                            className={classNames({
-                              'has-text-danger': person.sex === 'f',
-                            })}
-                          >
-                            {person.name}
-                          </Link>
-                        </td>
-
-                        <td>{person.sex}</td>
-                        <td>{person.born}</td>
-                        <td>{person.died}</td>
-
-                        {mother ? (
-                          <td>
-                            <Link to={mother?.slug} className="has-text-danger">
-                              {person.motherName}
-                            </Link>
-                          </td>
-                        ) : (
-                          <td>{person.motherName || '-'}</td>
-                        )}
-
-                        {father ? (
-                          <td>
-                            <Link to={father?.slug}>{person.fatherName}</Link>
-                          </td>
-                        ) : (
-                          <td>{person.fatherName || '-'}</td>
-                        )}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+            {!!preparedPeople.length && (
+              <PeopleTable people={preparedPeople} />
             )}
           </>
         </div>
