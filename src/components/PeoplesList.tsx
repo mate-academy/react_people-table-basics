@@ -32,54 +32,63 @@ export const PeoplesList: React.FC<Props> = ({ peoples }) => {
 
       <tbody>
         {peoples.map((person) => {
-          const mother = getParent(person.motherName, peoples);
-          const father = getParent(person.fatherName, peoples);
+          const {
+            name,
+            slug,
+            sex,
+            born,
+            died,
+            motherName,
+            fatherName,
+          } = person;
+          const mother = getParent(motherName, peoples);
+          const father = getParent(fatherName, peoples);
 
           return (
             <tr
               data-cy="person"
-              key={person.slug}
+              key={slug}
               className={classNames({
-                'has-background-warning': selectedPersonSlug === person.slug,
+                'has-background-warning': selectedPersonSlug === slug,
               })}
             >
               <td>
                 <NavLink
-                  to={person.slug}
+                  to={slug}
                   className={classNames({
-                    'has-text-danger': person.sex === 'f',
+                    'has-text-danger': sex === 'f',
                   })}
                 >
-                  {person.name}
+                  {name}
                 </NavLink>
               </td>
 
-              <td>{person.sex}</td>
-              <td>{person.born}</td>
-              <td>{person.died}</td>
+              <td>{sex}</td>
+              <td>{born}</td>
+              <td>{died}</td>
 
-              {person.motherName ? (
+              {motherName ? (
                 <td>
                   {mother ? (
                     <NavLink
                       className="has-text-danger"
                       to={`${mother.slug}`}
                     >
-                      {person.motherName}
+                      {motherName}
                     </NavLink>
-                  ) : person.motherName}
+                  ) : motherName}
                 </td>
               ) : (
                 <td>-</td>
               )}
 
-              {person.fatherName ? (
+              {fatherName ? (
                 <td>
                   {father ? (
                     <NavLink to={`${father.slug}`}>
-                      {person.fatherName}
+                      {fatherName}
                     </NavLink>
-                  ) : person.fatherName}
+                  ) : fatherName}
                 </td>
               ) : (
                 <td>-</td>

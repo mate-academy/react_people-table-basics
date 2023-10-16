@@ -1,17 +1,14 @@
 import {
-  Navigate, Route, Routes, HashRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+  HashRouter as Router,
 } from 'react-router-dom';
 import { App } from './App';
 import './App.scss';
 import { Table } from './components/Loader/Table';
-
-const HomeTitle = () => (
-  <h1 className="title">Home Page</h1>
-);
-
-const PageNotFound = () => (
-  <h1 className="title">Page not found</h1>
-);
+import { PageNotFound } from './components/PageNotFound';
+import { HomeTitle } from './components/HomeTitle';
 
 export const Root = () => (
   <Router>
