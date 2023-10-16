@@ -5,7 +5,7 @@ import './App.scss';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { Navigation } from './components/Navigation/Navigation';
 import { HomePage } from './components/HomePage/HomePage';
-import { PageNotFound } from './components/PageNotFound/PageNotFound';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
 export const App = () => {
   return (
@@ -18,7 +18,7 @@ export const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route
               path="*"
-              element={<PageNotFound />}
+              element={<NotFoundPage />}
             />
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="/people" element={<PeoplePage />}>

@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
+import { ABSENT_INFO } from '../../constants';
 
 interface Props {
   person: Person;
@@ -20,7 +21,6 @@ export const PersonInfo: React.FC<Props> = ({ person }) => {
   } = person;
 
   const { personSlug } = useParams();
-  const ABSENT_INFO = '-';
 
   return (
     <tr
@@ -39,11 +39,23 @@ export const PersonInfo: React.FC<Props> = ({ person }) => {
       <td>{died}</td>
 
       <td>
-        {mother ? <PersonLink person={mother} /> : motherName || ABSENT_INFO}
+        {mother
+          ? (
+            <PersonLink person={mother} />
+          )
+          : (
+            motherName || ABSENT_INFO
+          )}
       </td>
 
       <td>
-        {father ? <PersonLink person={father} /> : fatherName || ABSENT_INFO}
+        {father
+          ? (
+            <PersonLink person={father} />
+          )
+          : (
+            fatherName || ABSENT_INFO
+          )}
       </td>
     </tr>
   );

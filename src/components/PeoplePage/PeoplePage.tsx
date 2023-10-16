@@ -3,13 +3,14 @@ import { Person } from '../../types';
 import { Loader } from '../Loader/Loader';
 import { getPeople } from '../../api';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
+import { getPreparedPeople } from '../../HelperFunctions';
 
 export const PeoplePage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const NO_PEOPLE_CONDITION
+  const isNoPeopleOnServer
     = !errorMessage && !people.length && !isLoading;
 
   useEffect(() => {
@@ -25,16 +26,7 @@ export const PeoplePage = () => {
       });
   }, []);
 
-  const preparedPeople = people.map(person => {
-    const mother = people.find(({ name }) => person.motherName === name);
-    const father = people.find(({ name }) => person.fatherName === name);
-
-    return {
-      ...person,
-      mother,
-      father,
-    };
-  });
+  const preparedPeople = getPreparedPeople(people);
 
   return (
     <>
@@ -50,14 +42,11 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {NO_PEOPLE_CONDITION && (
+          {isNoPeopleOnServer && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
-          <>
-            {!!preparedPeople.length && (
-              <PeopleTable people={preparedPeople} />
-            )}
-          </>
+
+          {!!preparedPeople.length && <PeopleTable people={preparedPeople} />}
         </div>
       </div>
     </>

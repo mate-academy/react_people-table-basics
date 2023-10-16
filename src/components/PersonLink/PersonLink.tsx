@@ -1,12 +1,11 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Person } from '../../types';
+import { FEMALE_GENDER } from '../../constants';
 
 interface Props {
   person: Person;
 }
-
-const FEMALE_GENDER = 'f';
 
 export const PersonLink: React.FC<Props> = ({ person }) => (
   <Link
