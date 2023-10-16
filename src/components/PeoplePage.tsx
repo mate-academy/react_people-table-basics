@@ -61,11 +61,6 @@ export const PeoplePage = () => {
 
               <tbody>
                 {peopleFromServer.map(person => {
-                  const mother = peopleFromServer
-                    .find(pers => pers.name === person.motherName);
-                  const father = peopleFromServer
-                    .find(pers => pers.name === person.fatherName);
-
                   const {
                     name,
                     slug,
@@ -75,6 +70,10 @@ export const PeoplePage = () => {
                     motherName,
                     fatherName,
                   } = person;
+                  const mother = peopleFromServer
+                    .find(possibleMother => possibleMother.name === motherName);
+                  const father = peopleFromServer
+                    .find(possibleFather => possibleFather.name === fatherName);
 
                   return (
                     <tr
