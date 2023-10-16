@@ -66,28 +66,38 @@ export const PeoplePage = () => {
                   const father = peopleFromServer
                     .find(pers => pers.name === person.fatherName);
 
+                  const {
+                    name,
+                    slug,
+                    sex,
+                    born,
+                    died,
+                    motherName,
+                    fatherName,
+                  } = person;
+
                   return (
                     <tr
                       data-cy="person"
-                      key={person.slug}
+                      key={slug}
                       className={classNames({
-                        'has-background-warning': person.slug === slugName,
+                        'has-background-warning': slug === slugName,
                       })}
                     >
                       <td>
                         <Link
                           className={
-                            person.sex === 'f' ? 'has-text-danger' : ''
+                            sex === 'f' ? 'has-text-danger' : ''
                           }
-                          to={`/people/${person.slug}`}
+                          to={`/people/${slug}`}
                         >
-                          {person.name}
+                          {name}
                         </Link>
                       </td>
 
-                      <td>{person.sex}</td>
-                      <td>{person.born}</td>
-                      <td>{person.died}</td>
+                      <td>{sex}</td>
+                      <td>{born}</td>
+                      <td>{died}</td>
 
                       {mother ? (
                         <td>
@@ -96,7 +106,7 @@ export const PeoplePage = () => {
                           </Link>
                         </td>
                       ) : (
-                        <td>{person.motherName || '-'}</td>
+                        <td>{motherName || '-'}</td>
                       )}
 
                       {father ? (
@@ -106,7 +116,7 @@ export const PeoplePage = () => {
                           </Link>
                         </td>
                       ) : (
-                        <td>{person.fatherName || '-'}</td>
+                        <td>{fatherName || '-'}</td>
                       )}
                     </tr>
                   );
