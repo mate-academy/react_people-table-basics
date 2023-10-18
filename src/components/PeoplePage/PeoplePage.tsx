@@ -5,12 +5,13 @@ import { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
+import { SEX } from '../../consts/Sex';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
-  const { slug } = useParams();
+  const { slugParam } = useParams();
 
   useEffect(() => {
     setLoader(true);
@@ -78,57 +79,71 @@ export const PeoplePage = () => {
               </thead>
 
               <tbody>
-                {people.map((currentPeople: Person) => (
-                  <tr
-                    key={currentPeople.slug}
-                    data-cy="person"
-                    className={classNames({
-                      'has-background-warning': slug === currentPeople.slug,
-                    })}
-                  >
-                    <td>
-                      <NavLink
-                        to={currentPeople.slug}
-                        className={classNames({
-                          'has-text-danger': currentPeople.sex === 'f',
-                        })}
-                      >
-                        {currentPeople.name}
-                      </NavLink>
-                    </td>
+                {people.map((currentPeople: Person) => {
+                  const {
+                    name,
+                    sex,
+                    born,
+                    died,
+                    fatherName,
+                    motherName,
+                    slug,
+                    mother,
+                    father,
+                  } = currentPeople;
 
-                    <td>{currentPeople.sex}</td>
-                    <td>{currentPeople.born}</td>
-                    <td>{currentPeople.died}</td>
-                    <td>
-                      {currentPeople.mother ? (
-                        <Link
-                          className="has-text-danger"
-                          to={currentPeople.mother.slug}
+                  return (
+                    <tr
+                      key={slug}
+                      data-cy="person"
+                      className={classNames({
+                        'has-background-warning': slugParam === slug,
+                      })}
+                    >
+                      <td>
+                        <NavLink
+                          to={slug}
+                          className={classNames({
+                            'has-text-danger': sex === SEX.FEMALE,
+                          })}
                         >
-                          {currentPeople.mother.name}
-                        </Link>
-                      ) : (
-                        currentPeople.motherName
-                          ? currentPeople.motherName
-                          : '-'
-                      )}
-                    </td>
-                    <td>
-                      {currentPeople.father ? (
-                        <Link
-                          to={currentPeople.father.slug}
-                        >
-                          {currentPeople.father.name}
-                        </Link>
-                      ) : (
-                        currentPeople.fatherName
-                          ? currentPeople.fatherName
-                          : '-'
-                      )}
-                    </td>
-                  </tr>
-                ))}
+                          {name}
+                        </NavLink>
+                      </td>
+
+                      <td>{sex}</td>
+                      <td>{born}</td>
+                      <td>{died}</td>
+                      <td>
+                        {mother ? (
+                          <Link
+                            className="has-text-danger"
+                            to={mother.slug}
+                          >
+                            {mother.name}
+                          </Link>
+                        ) : (
+                          motherName !== null
+                            ? motherName
+                            : '-'
+                        )}
+                      </td>
+                      <td>
+                        {father ? (
+                          <Link
+                            to={father.slug}
+                          >
+                            {father.name}
+                          </Link>
+                        ) : (
+                          fatherName !== null
+                            ? fatherName
+                            : '-'
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           )}
