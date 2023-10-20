@@ -24,12 +24,8 @@ export const PeoplePage = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const findMother = (motherName: string) => {
-    return people.find(mother => mother.name === motherName)?.slug;
-  };
-
-  const findFather = (fatherName: string) => {
-    return people.find(father => father.name === fatherName)?.slug;
+  const findParent = (parentName: string) => {
+    return people.find(parent => parent.name === parentName)?.slug;
   };
 
   return (
@@ -54,7 +50,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {people.length && (
+          {!!people.length && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -73,6 +69,7 @@ export const PeoplePage = () => {
               <tbody>
                 {people.map(person => (
                   <tr
+                    key={person.slug}
                     data-cy="person"
                     className={classNames({
                       'has-background-warning': person.slug === slug,
@@ -98,7 +95,7 @@ export const PeoplePage = () => {
                         .some(mother => mother.name === person.motherName)
                         && person.motherName ? (
                           <PersonLink
-                            to={`/people/${findMother(person.motherName)}`}
+                            to={`/people/${findParent(person.motherName)}`}
                             className="has-text-danger"
                           >
                             {person.motherName}
@@ -115,7 +112,7 @@ export const PeoplePage = () => {
                         .some(father => father.name === person.fatherName)
                         && person.fatherName ? (
                           <PersonLink
-                            to={`/people/${findFather(person.fatherName)}`}
+                            to={`/people/${findParent(person.fatherName)}`}
                           >
                             {person.fatherName}
                           </PersonLink>
