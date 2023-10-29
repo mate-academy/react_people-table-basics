@@ -30,7 +30,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
 
   const getParentsInfo = (
     parentName: string | null,
-    personFromData: Person | undefined,
+    personFromData?: Person,
   ) => {
     if (parentName && personFromData) {
       return (
@@ -50,6 +50,9 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
     return '-';
   };
 
+  const motherInfo = getParentsInfo(motherName, mother);
+  const fatherInfo = getParentsInfo(fatherName, father);
+
   return (
     <tr
       data-cy="person"
@@ -67,10 +70,10 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {getParentsInfo(motherName, mother)}
+        {motherInfo}
       </td>
       <td>
-        {getParentsInfo(fatherName, father)}
+        {fatherInfo}
       </td>
     </tr>
   );
