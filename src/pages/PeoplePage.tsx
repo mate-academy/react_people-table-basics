@@ -16,11 +16,13 @@ export const PeoplePage = () => {
             <>
               {isLoading && (<Loader />)}
 
-              {!isLoading && !people.length ? (
+              {!isLoading && people && people.length > 0 ? (
+                <PeopleTable />
+              ) : (
                 <p data-cy="noPeopleMessage">
                   There are no people on the server
                 </p>
-              ) : <PeopleTable /> }
+              )}
             </>
           )}
 
