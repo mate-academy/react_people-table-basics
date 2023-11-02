@@ -47,56 +47,61 @@ export const PeoplePage = () => {
 
       {isLoader && <Loader />}
 
-      <h1 className="title">People Page</h1>
-      <div className="box table-container">
+      {(people && !isLoader) && (
+        <>
+          <h1 className="title">People Page</h1>
+          <div className="box table-container">
 
-        <table
-          data-cy="peopleTable"
-          className="table is-striped is-hoverable is-narrow is-fullwidth"
-        >
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Sex</th>
-              <th>Born</th>
-              <th>Died</th>
-              <th>Mother</th>
-              <th>Father</th>
-            </tr>
-          </thead>
+            <table
+              data-cy="peopleTable"
+              className="table is-striped is-hoverable is-narrow is-fullwidth"
+            >
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sex</th>
+                  <th>Born</th>
+                  <th>Died</th>
+                  <th>Mother</th>
+                  <th>Father</th>
+                </tr>
+              </thead>
 
-          <tbody>
-            {people.map(person => (
+              <tbody>
+                {people.map(person => (
 
-              <tr
-                data-cy="person"
-                key={person.slug}
-                className={classNames({
-                  // eslint-disable-next-line max-len
-                  'has-background-warning': selectedPerson?.slug === person.slug,
-                })}
-              >
-                <td>
-                  <PersonLink person={person} />
-                </td>
+                  <tr
+                    data-cy="person"
+                    key={person.slug}
+                    className={classNames({
+                      // eslint-disable-next-line max-len
+                      'has-background-warning': selectedPerson?.slug === person.slug,
+                    })}
+                  >
+                    <td>
+                      <PersonLink person={person} />
+                    </td>
 
-                <td>{person.sex}</td>
-                <td>{person.born}</td>
-                <td>{person.died}</td>
-                <td>
-                  {person.motherName ? getParent(person.motherName) : '-'}
-                </td>
+                    <td>{person.sex}</td>
+                    <td>{person.born}</td>
+                    <td>{person.died}</td>
+                    <td>
+                      {person.motherName ? getParent(person.motherName) : '-'}
+                    </td>
 
-                <td>
-                  {person.fatherName ? getParent(person.fatherName) : '-'}
-                </td>
-              </tr>
-            ))}
+                    <td>
+                      {person.fatherName ? getParent(person.fatherName) : '-'}
+                    </td>
+                  </tr>
+                ))}
 
-          </tbody>
-        </table>
+              </tbody>
+            </table>
 
-      </div>
+          </div>
+        </>
+      )}
+
     </>
   );
 };
