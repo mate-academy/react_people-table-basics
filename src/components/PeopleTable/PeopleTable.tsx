@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
@@ -8,18 +7,7 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const { personName } = useParams();
-
-  const changingEndOfLink = (currentPerson: Person) => {
-    return `${currentPerson.name.toLowerCase().replaceAll(' ', '-')}-${currentPerson.born}`;
-  };
-
-  const selectedPersonName
-  = people.find(
-    person => changingEndOfLink(person) === personName,
-  )?.name || null;
-
-  const personInTheList = (currentName: string | null): Person | null => {
+  const getPersonByName = (currentName: string | null): Person | null => {
     return people.find(person => person.name === currentName) || null;
   };
 
@@ -44,9 +32,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           <PersonLink
             key={person.name}
             person={person}
-            personInTheList={personInTheList}
-            selectedPersonName={selectedPersonName}
-            changingEndOfLink={changingEndOfLink}
+            getPersonByName={getPersonByName}
           />
         ))}
       </tbody>

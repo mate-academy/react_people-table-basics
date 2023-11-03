@@ -1,35 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../../types';
 
 type Props = {
   person: Person;
-  personInTheList: (personName: string | null) => Person | null;
-  selectedPersonName: Person['name'] | null;
-  changingEndOfLink: (obj: Person) => void;
+  getPersonByName: (personName: string | null) => Person | null;
 };
 
 export const PersonLink: React.FC<Props> = ({
   person,
-  personInTheList,
-  selectedPersonName,
-  changingEndOfLink,
+  getPersonByName,
 }) => {
-  const motherInList = personInTheList(person.motherName);
-  const fatherInList = personInTheList(person.fatherName);
+  const { personName } = useParams();
+
+  const motherInList = getPersonByName(person.motherName);
+  const fatherInList = getPersonByName(person.fatherName);
 
   return (
     <tr
       data-cy="person"
       className={
-        cn({ 'has-background-warning': person.name === selectedPersonName })
+        cn({ 'has-background-warning': person.slug === personName })
       }
     >
       <td>
         <Link
           className={cn({ 'has-text-danger': person.sex === 'f' })}
-          to={`/people/${changingEndOfLink(person)}`}
+          to={`/people/${person.slug}`}
         >
           {person.name}
         </Link>
@@ -39,12 +37,12 @@ export const PersonLink: React.FC<Props> = ({
       <td>{person.born}</td>
       <td>{person.died}</td>
 
-      {personInTheList(person.motherName)
+      {getPersonByName(person.motherName)
         ? (
           <td>
             <Link
               className="has-text-danger"
-              to={motherInList ? `/people/${changingEndOfLink(motherInList)}` : '#'}
+              to={motherInList ? `/people/${motherInList.slug}` : '#'}
             >
               {person.motherName}
             </Link>
@@ -54,11 +52,11 @@ export const PersonLink: React.FC<Props> = ({
           <td>{person.motherName || '-'}</td>
         )}
 
-      {personInTheList(person.fatherName)
+      {getPersonByName(person.fatherName)
         ? (
           <td>
             <Link
-              to={fatherInList ? `/people/${changingEndOfLink(fatherInList)}` : '#'}
+              to={fatherInList ? `/people/${fatherInList.slug}` : '#'}
             >
               {person.fatherName}
             </Link>
