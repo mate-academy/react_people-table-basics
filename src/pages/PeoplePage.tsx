@@ -1,35 +1,22 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import classNames from 'classnames';
 import { getPeople } from '../api';
 import { Person } from '../types';
-import { PersonLink } from './PersonLink';
 import { Loader } from '../components/Loader';
+import { PersonItem } from './PersonItem';
 
 export const PeoplePage = () => {
   const { slug } = useParams();
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoader, setIsLoader] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     getPeople()
-      .then((data) => {
-        setPeople(data);
-      })
+      .then(setPeople)
       .catch(() => setErrorMessage('Something went wrong'))
-      .finally(() => {
-        setIsLoader(false);
-      });
+      .finally(() => setIsLoading(false));
   }, []);
-
-  const selectedPerson = people.find(person => person.slug === slug);
-
-  const getParent = (personParent: string) => {
-    const parent = people.find(person => person.name === personParent);
-
-    return parent ? <PersonLink person={parent} /> : personParent;
-  };
 
   return (
     <>
@@ -39,15 +26,15 @@ export const PeoplePage = () => {
         </p>
       )}
 
-      {(!people.length && !isLoader) && (
+      {(!people.length && !isLoading) && (
         <p data-cy="noPeopleMessage">
           There are no people on the server
         </p>
       )}
 
-      {isLoader && <Loader />}
+      {isLoading && <Loader />}
 
-      {(people && !isLoader) && (
+      {(people && !isLoading) && (
         <>
           <h1 className="title">People Page</h1>
           <div className="box table-container">
@@ -69,30 +56,12 @@ export const PeoplePage = () => {
 
               <tbody>
                 {people.map(person => (
-
-                  <tr
-                    data-cy="person"
+                  <PersonItem
+                    person={person}
+                    people={people}
+                    slug={slug}
                     key={person.slug}
-                    className={classNames({
-                      // eslint-disable-next-line max-len
-                      'has-background-warning': selectedPerson?.slug === person.slug,
-                    })}
-                  >
-                    <td>
-                      <PersonLink person={person} />
-                    </td>
-
-                    <td>{person.sex}</td>
-                    <td>{person.born}</td>
-                    <td>{person.died}</td>
-                    <td>
-                      {person.motherName ? getParent(person.motherName) : '-'}
-                    </td>
-
-                    <td>
-                      {person.fatherName ? getParent(person.fatherName) : '-'}
-                    </td>
-                  </tr>
+                  />
                 ))}
 
               </tbody>
