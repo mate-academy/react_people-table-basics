@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Loader } from './Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
@@ -8,6 +8,8 @@ const preparePeople = (people: Person[]): Person[] => {
   return people.map((person) => {
     return {
       ...person,
+      motherName: person.motherName || '-',
+      fatherName: person.fatherName || '-',
       mother: people.find(mother => mother.name === person.motherName),
       father: people.find(father => father.name === person.fatherName),
     };
@@ -18,6 +20,14 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+
+  const isDataEmpty = useMemo(() => {
+    return !isError && !isLoading && people.length === 0;
+  }, [isLoading, isError, people]);
+
+  const isDataPrepared = useMemo(() => {
+    return !isError && !isLoading && people.length > 0;
+  }, [isLoading, isError, people]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,16 +53,13 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {people.length === 0 && !isLoading && !isError && (
+          {isDataEmpty && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {!isLoading
-            && !isError
-            && people.length > 0
-            && (<PeopleTable people={people} />)}
+          {isDataPrepared && <PeopleTable people={people} />}
         </div>
       </div>
     </>

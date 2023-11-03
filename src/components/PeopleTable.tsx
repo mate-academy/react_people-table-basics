@@ -23,48 +23,46 @@ export const PeopleTable = ({ people }: { people: Person[] }) => {
       </thead>
 
       <tbody>
-        {
-          people.map((person) => {
-            const {
-              sex,
-              born,
-              died,
-              motherName,
-              mother,
-              fatherName,
-              father,
-              slug,
-            } = person;
+        {people.map((person) => {
+          const {
+            sex,
+            born,
+            died,
+            motherName,
+            mother,
+            fatherName,
+            father,
+            slug,
+          } = person;
 
-            return (
-              <tr
-                key={slug}
-                data-cy="person"
-                className={classNames({
-                  'has-background-warning': slug === peopleSlug,
-                })}
-              >
-                <td>
-                  <PersonLink person={person} />
-                </td>
+          return (
+            <tr
+              key={slug}
+              data-cy="person"
+              className={classNames({
+                'has-background-warning': slug === peopleSlug,
+              })}
+            >
+              <td>
+                <PersonLink person={person} />
+              </td>
 
-                <td>{sex}</td>
-                <td>{born}</td>
-                <td>{died}</td>
-                <td>
-                  {mother !== undefined
-                    ? (<PersonLink person={mother} />)
-                    : (motherName || '-')}
-                </td>
-                <td>
-                  {father !== undefined
-                    ? (<PersonLink person={father} />)
-                    : (fatherName || '-')}
-                </td>
-              </tr>
-            );
-          })
-        }
+              <td>{sex}</td>
+              <td>{born}</td>
+              <td>{died}</td>
+              <td>
+                {mother !== undefined
+                  ? <PersonLink person={mother} />
+                  : motherName}
+              </td>
+              <td>
+                {father !== undefined
+                  ? <PersonLink person={father} />
+                  : fatherName}
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
