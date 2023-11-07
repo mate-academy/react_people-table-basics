@@ -1,30 +1,31 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import classnames from 'classnames';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
-import classnames from 'classnames';
 import { PersonLink } from '../PersonLink';
 
 export const TablePeople: React.FC = () => {
   const [getpeople, setGetPeople] = useState<Person[]>([]);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { slug } = useParams();
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     getPeople()
       .then(people => {
         if (!people.length) {
-          setError('There are no people on the server')
+          setError('There are no people on the server');
         }
+
         setGetPeople(people);
-        setLoading(false);
+        setIsLoading(false);
       })
       .catch(() => {
         setError('Something went wrong');
-        setLoading(false);
+        setIsLoading(false);
       });
   }, []);
 
@@ -44,10 +45,10 @@ export const TablePeople: React.FC = () => {
 
   return (
     <>
-    <h1 className="title">People Page</h1>
+      <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {loading && (
+          {isLoading && (
             <Loader />
           )}
           {!!error && (
@@ -62,7 +63,7 @@ export const TablePeople: React.FC = () => {
               )}
             </>
           )}
-          {getpeople.length > 0 && !loading && (
+          {getpeople.length > 0 && !isLoading && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
