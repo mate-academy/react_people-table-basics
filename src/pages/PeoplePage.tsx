@@ -9,12 +9,12 @@ import { SEX } from '../consts/Sex';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loader, setLoader] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const { slugParam } = useParams();
 
   useEffect(() => {
-    setLoader(true);
+    setIsLoading(true);
     getPeople()
       .then((allPeople) => {
         const resultPeople = allPeople.map((elem) => {
@@ -39,7 +39,7 @@ export const PeoplePage = () => {
         setError(true);
       })
       .finally(() => {
-        setLoader(false);
+        setIsLoading(false);
       });
   }, []);
 
@@ -48,19 +48,19 @@ export const PeoplePage = () => {
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {loader && <Loader />}
+          {isLoading && <Loader />}
 
-          {!loader && error && (
+          {!isLoading && error && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {!loader && people.length === 0 && (
+          {!isLoading && people.length === 0 && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!loader && people.length !== 0 && (
+          {!isLoading && !!people.length && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"

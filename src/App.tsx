@@ -1,6 +1,9 @@
 import classNames from 'classnames';
 import {
-  NavLink, Routes, Route, Navigate,
+  NavLink,
+  Routes,
+  Route,
+  Navigate,
 } from 'react-router-dom';
 
 import './App.scss';
