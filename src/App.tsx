@@ -47,9 +47,9 @@ export const App = () => {
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route
               path="people"
-              element={<h1 className="title">People Page</h1>}
             >
               <Route index element={<TablePeople />} />
+              <Route path=":slug" element={<TablePeople />} />
             </Route>
             <Route
               path="*"
@@ -60,4 +60,4 @@ export const App = () => {
       </main>
     </div>
   );
-};
+}
