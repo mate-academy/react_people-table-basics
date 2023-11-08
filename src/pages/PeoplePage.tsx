@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import cn from 'classnames';
 import { getPeople } from '../api';
 import { Person } from '../types';
 import { Loader } from '../components/Loader';
-import { PersonLink } from '../components/PersonLink';
+import { PersonInfo } from '../components/PersonInfo';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
@@ -58,54 +57,13 @@ export const PeoplePage: React.FC = () => {
               </thead>
 
               <tbody>
-                {people.map(person => {
-                  let personMother: React.ReactNode = '-';
-                  let personFather: React.ReactNode = '-';
-
-                  if (person.motherName) {
-                    const mother = people
-                      .find(m => m.name === person.motherName);
-
-                    personMother = typeof mother === 'object'
-                      ? <PersonLink person={mother} />
-                      : person.motherName;
-                  }
-
-                  if (person.fatherName) {
-                    const father = people
-                      .find(f => f.name === person.fatherName);
-
-                    personFather = typeof father === 'object'
-                      ? <PersonLink person={father} />
-                      : person.fatherName;
-                  }
-
-                  return (
-                    <tr
-                      data-cy="person"
-                      key={person.slug}
-                      className={cn(
-                        { 'has-background-warning': person.slug === personId },
-                      )}
-                    >
-                      <td>
-                        <PersonLink person={person} />
-                      </td>
-
-                      <td>{person.sex}</td>
-                      <td>{person.born}</td>
-                      <td>{person.died}</td>
-
-                      <td>
-                        {personMother}
-                      </td>
-
-                      <td>
-                        {personFather}
-                      </td>
-                    </tr>
-                  );
-                })}
+                {people.map(person => (
+                  <PersonInfo
+                    person={person}
+                    people={people}
+                    personId={personId}
+                  />
+                ))}
               </tbody>
             </table>
           )}
