@@ -35,7 +35,7 @@ export const App:React.FC = () => (
             path="/people"
           >
             <Route index element={<PeoplePage />} />
-            <Route path=":slugL" element={<PeoplePage />} />
+            <Route path=":slug" element={<PeoplePage />} />
           </Route>
           <Route
             path="*"

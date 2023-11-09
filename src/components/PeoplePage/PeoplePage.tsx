@@ -10,7 +10,7 @@ export const PeoplePage:React.FC = () => {
   const [peopleLoader, setPeopleLoader] = useState(true);
   const [error, setError] = useState(false);
 
-  const { slugL } = useParams();
+  const { slug } = useParams();
 
   const loadPeople = async () => {
     try {
@@ -36,6 +36,10 @@ export const PeoplePage:React.FC = () => {
     return foundPerson ? foundPerson.slug : null;
   };
 
+  const noPeopleOnServer = () => {
+    return !people.length && !error && !peopleLoader;
+  };
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -51,7 +55,7 @@ export const PeoplePage:React.FC = () => {
             </p>
           )}
 
-          {!people.length && !error && !peopleLoader && (
+          {noPeopleOnServer() && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
@@ -81,18 +85,18 @@ export const PeoplePage:React.FC = () => {
                   died,
                   fatherName,
                   motherName,
-                  slug,
+                  slug: link,
                 }) => (
                   <tr
                     key={name}
                     data-cy="person"
                     className={cn(
-                      { 'has-background-warning': slugL === slug },
+                      { 'has-background-warning': slug === link },
                     )}
                   >
                     <td>
                       <Link
-                        to={`/people/${slug}`}
+                        to={`/people/${link}`}
                         className={cn(
                           { 'has-text-danger': sex === 'f' },
                         )}
