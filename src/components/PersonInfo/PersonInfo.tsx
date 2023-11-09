@@ -5,40 +5,16 @@ import { PersonLink } from '../PersonLink';
 
 type Props = {
   person: Person;
-  people: Person[];
   personId: string | undefined;
 };
 
 export const PersonInfo: React.FC<Props> = ({
   person,
-  people,
   personId,
 }) => {
-  let personMother: React.ReactNode = '-';
-  let personFather: React.ReactNode = '-';
-
-  if (person.motherName) {
-    const mother = people
-      .find(m => m.name === person.motherName);
-
-    personMother = typeof mother === 'object'
-      ? <PersonLink person={mother} />
-      : person.motherName;
-  }
-
-  if (person.fatherName) {
-    const father = people
-      .find(f => f.name === person.fatherName);
-
-    personFather = typeof father === 'object'
-      ? <PersonLink person={father} />
-      : person.fatherName;
-  }
-
   return (
     <tr
       data-cy="person"
-      key={person.slug}
       className={cn(
         { 'has-background-warning': person.slug === personId },
       )}
@@ -52,11 +28,15 @@ export const PersonInfo: React.FC<Props> = ({
       <td>{person.died}</td>
 
       <td>
-        {personMother}
+        {person.mother
+          ? <PersonLink person={person.mother} />
+          : person.motherName || '-'}
       </td>
 
       <td>
-        {personFather}
+        {person.father
+          ? <PersonLink person={person.father} />
+          : person.fatherName || '-'}
       </td>
     </tr>
   );

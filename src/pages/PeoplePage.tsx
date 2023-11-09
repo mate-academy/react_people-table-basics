@@ -4,25 +4,28 @@ import { getPeople } from '../api';
 import { Person } from '../types';
 import { Loader } from '../components/Loader';
 import { PersonInfo } from '../components/PersonInfo';
+import { preparePeopleData } from '../helpers/prepareData';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
   const [peopleLoading, setPeopleLoading] = useState(false);
-  const [peopleLoadingError, setPeopleLoadingError] = useState(false);
+  const [isLoadingError, setIsLoadingError] = useState(false);
 
   const { personId } = useParams();
-  const renderTable = !peopleLoading && people && people.length > 0;
-  const renderNoPeopleError = !peopleLoading && people && people.length === 0;
+  const isDataAvailable = !peopleLoading && people && people.length > 0;
+  const isArrayEmpty = !peopleLoading && people && people.length === 0;
 
   useEffect(() => {
-    setPeopleLoadingError(false);
+    setIsLoadingError(false);
     setPeopleLoading(true);
 
     getPeople()
       .then((response) => {
-        setPeople(response as Person[]);
+        const preparedData = preparePeopleData(response);
+
+        setPeople(preparedData);
       })
-      .catch(() => setPeopleLoadingError(true))
+      .catch(() => setIsLoadingError(true))
       .finally(() => setPeopleLoading(false));
   }, []);
 
@@ -34,13 +37,13 @@ export const PeoplePage: React.FC = () => {
         <div className="box table-container">
           {peopleLoading && <Loader />}
 
-          {peopleLoadingError && (
+          {isLoadingError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {renderTable && (
+          {isDataAvailable && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -59,8 +62,8 @@ export const PeoplePage: React.FC = () => {
               <tbody>
                 {people.map(person => (
                   <PersonInfo
+                    key={person.slug}
                     person={person}
-                    people={people}
                     personId={personId}
                   />
                 ))}
@@ -68,7 +71,7 @@ export const PeoplePage: React.FC = () => {
             </table>
           )}
 
-          {renderNoPeopleError && (
+          {isArrayEmpty && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
