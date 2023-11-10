@@ -40,7 +40,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           const mother = people.find(parent => parent.name === motherName);
           const father = people.find(parent => parent.name === fatherName);
 
-          const mum = mother && people.includes(mother)
+          const mum = mother
             ? (
               <PersonLink
                 name={motherName}
@@ -50,7 +50,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             )
             : motherName;
 
-          const dad = father && people.includes(father)
+          const dad = father
             ? (
               <PersonLink
                 name={fatherName}

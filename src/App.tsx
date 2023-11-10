@@ -10,6 +10,3 @@ export const App = () => (
     <Outlet />
   </div>
 );
-// function classNames(arg0: string, arg1: { 'is-active': boolean; }) {
-//   throw new Error('Function not implemented.');
-// }
