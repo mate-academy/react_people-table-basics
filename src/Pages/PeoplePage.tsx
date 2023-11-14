@@ -5,10 +5,9 @@ import { PeopleContext } from '../PeopleContext';
 import { PeopleList } from '../components/PeopleList';
 
 export const PeoplePage: React.FC = () => {
-  const { setPersons } = useContext(PeopleContext);
+  const { persons, setPersons } = useContext(PeopleContext);
 
-  // const [errorMessage, setErrorMessage] = useState<string>('');
-  const [noPeopleMessage, setNoPeopleMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -20,10 +19,10 @@ export const PeoplePage: React.FC = () => {
       })
       .finally(() => {
         setLoading(false);
-        setNoPeopleMessage('');
+        setErrorMessage('');
       })
       .catch(() => {
-        setNoPeopleMessage('There are no people on the server');
+        setErrorMessage('Something went wrong');
       });
   }, []);
 
@@ -57,13 +56,16 @@ export const PeoplePage: React.FC = () => {
             </table>
           )}
 
-          {/* <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
-          </p> */}
+          {errorMessage && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              {errorMessage}
+            </p>
+          )}
 
-          {noPeopleMessage.length > 1 && (
+
+          {persons.length === 0 && !loading && !errorMessage && (
             <p data-cy="noPeopleMessage">
-              {noPeopleMessage}
+              There are no people on the server
             </p>
           )}
         </div>

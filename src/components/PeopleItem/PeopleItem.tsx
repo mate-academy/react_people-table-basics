@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const PeopleItem: React.FC<Props> = ({ person }) => {
-  const { motherName, fatherName, slug } = person;
+  const { motherName, sex, fatherName, slug } = person;
 
   const { personSlug } = useParams();
   const { persons } = useContext(PeopleContext);
@@ -22,9 +22,9 @@ export const PeopleItem: React.FC<Props> = ({ person }) => {
   };
 
   const findFather = (nameFather: string): Person | undefined => {
-    const mother = persons.find((p) => p.name === nameFather);
+    const father = persons.find((p) => p.name === nameFather);
 
-    return mother;
+    return father;
   };
 
   return (
@@ -38,6 +38,7 @@ export const PeopleItem: React.FC<Props> = ({ person }) => {
       <td>
         <Link
           to={`/people/${slug}`}
+          className={cn({'has-text-danger': sex === 'f'})}
         >
           {person.name}
         </Link>
@@ -80,7 +81,7 @@ export const PeopleItem: React.FC<Props> = ({ person }) => {
 
               return father !== undefined
                 ? (<PersonLink person={father} />)
-                : (motherName);
+                : (fatherName);
             }
 
             default:
