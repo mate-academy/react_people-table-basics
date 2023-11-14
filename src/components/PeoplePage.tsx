@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
 import { PeopleTable } from './PeopleTable';
@@ -10,10 +10,12 @@ export const PeoplePage = () => {
   const [hasError, setHasError] = useState(false);
   const isTableVisible = !isLoading && !hasError && people.length > 0;
 
-  getPeople()
+  useEffect (() => {
+    getPeople()
     .then(data => setPeople(data))
     .catch(() => setHasError(true))
     .finally(() => setIsLoading(false));
+  }, []);
 
   return (
     <div className="container">
