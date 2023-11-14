@@ -10,7 +10,9 @@ interface Props {
 }
 
 export const PeopleItem: React.FC<Props> = ({ person }) => {
-  const { motherName, sex, fatherName, slug } = person;
+  const {
+    motherName, sex, fatherName, slug,
+  } = person;
 
   const { personSlug } = useParams();
   const { persons } = useContext(PeopleContext);
@@ -38,7 +40,7 @@ export const PeopleItem: React.FC<Props> = ({ person }) => {
       <td>
         <Link
           to={`/people/${slug}`}
-          className={cn({'has-text-danger': sex === 'f'})}
+          className={cn({ 'has-text-danger': sex === 'f' })}
         >
           {person.name}
         </Link>

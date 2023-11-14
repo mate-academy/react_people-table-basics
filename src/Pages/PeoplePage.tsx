@@ -62,7 +62,6 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-
           {persons.length === 0 && !loading && !errorMessage && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
