@@ -6,9 +6,9 @@ import { NavLink, Outlet } from 'react-router-dom';
 export const App = () => {
   const getLinkClass = ({ isActive }: { isActive: boolean }) => classNames(
     'navbar-item',
-    {'has-background-grey-lighter': isActive}
+    { 'has-background-grey-lighter': isActive },
   );
-  
+
   return (
     <div data-cy="app">
       <nav
@@ -19,7 +19,7 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <NavLink 
+            <NavLink
               to="/"
               className={getLinkClass}
             >
@@ -39,10 +39,9 @@ export const App = () => {
       <main className="section">
         <div className="container">
           <Outlet />
-      
+
         </div>
       </main>
     </div>
   );
-}
-  
+};
