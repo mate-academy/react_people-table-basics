@@ -32,9 +32,7 @@ export const PeoplePage = () => {
       })
       .catch(() => {setError(true);
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => setLoading(false));
   }, []);
 
   const { slug } = useParams();
