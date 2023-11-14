@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { Loader } from '../Loader';
-// import { PersonRow } from '../PersonRow';
 import { PeopleTable } from '../PeopleTable';
 
 const preparePeople = (peopleFromServer: Person[]): Person[] => {
@@ -73,46 +72,6 @@ export const PeoplePage = () => {
       <div className="block">
         <div className="box table-container">
           {getBody(isLoading, errorMessage, people)}
-          {/* {isLoading && <Loader />}
-
-          {errorMessage && !isLoading
-          && (
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              {errorMessage}
-            </p>
-          )}
-
-          {!people.length && !isLoading
-          && (
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
-          )}
-
-          {people.length && !isLoading
-          && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map(person => (
-                  <PersonRow person={person} key={person.slug} />
-                ))}
-              </tbody>
-            </table>
-          )} */}
         </div>
       </div>
     </div>
