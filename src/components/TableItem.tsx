@@ -34,9 +34,7 @@ export const TableItem: React.FC<Props> = ({ person, people }) => {
         'has-background-warning': person.slug === slug,
       })}
     >
-      <td>
-        <PersonLink person={person} />
-      </td>
+      <td><PersonLink person={person} /></td>
 
       <td>
         {sex}
