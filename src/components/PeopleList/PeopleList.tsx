@@ -8,7 +8,7 @@ export const PeopleList: React.FC = () => {
   return (
     <tbody>
       {persons.map((person) => (
-        <PeopleItem person={person} />
+        <PeopleItem person={person} key={person.slug} />
       ))}
     </tbody>
   );

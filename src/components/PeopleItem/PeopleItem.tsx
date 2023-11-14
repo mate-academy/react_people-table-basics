@@ -29,6 +29,30 @@ export const PeopleItem: React.FC<Props> = ({ person }) => {
     return father;
   };
 
+  const father = findFather(fatherName ?? '');
+  const mother = findMother(motherName ?? '');
+
+  const renderContent = () => {
+    switch (true) {
+      case !!fatherName:
+        return (
+          father !== undefined
+            ? (<PersonLink person={father} />)
+            : (fatherName)
+        );
+
+      case !!motherName:
+        return (
+          mother !== undefined
+            ? (<PersonLink person={mother} />)
+            : (motherName)
+        );
+
+      default:
+        return '-';
+    }
+  };
+
   return (
     <tr
       key={person.slug}
@@ -59,37 +83,11 @@ export const PeopleItem: React.FC<Props> = ({ person }) => {
       </td>
 
       <td>
-        {(() => {
-          switch (true) {
-            case !!motherName: {
-              const mother = findMother(motherName ?? '');
-
-              return mother !== undefined
-                ? (<PersonLink person={mother} />)
-                : (motherName);
-            }
-
-            default:
-              return '-';
-          }
-        })()}
+        {renderContent()}
       </td>
 
       <td>
-        {(() => {
-          switch (true) {
-            case !!fatherName: {
-              const father = findFather(fatherName ?? '');
-
-              return father !== undefined
-                ? (<PersonLink person={father} />)
-                : (fatherName);
-            }
-
-            default:
-              return '-';
-          }
-        })()}
+        {renderContent()}
       </td>
     </tr>
   );

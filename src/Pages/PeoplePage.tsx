@@ -14,9 +14,7 @@ export const PeoplePage: React.FC = () => {
     setLoading(true);
 
     getPeople()
-      .then(person => {
-        setPersons(person);
-      })
+      .then(setPersons)
       .finally(() => {
         setLoading(false);
         setErrorMessage('');
