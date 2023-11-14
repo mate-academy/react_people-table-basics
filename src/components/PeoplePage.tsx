@@ -10,11 +10,11 @@ export const PeoplePage = () => {
   const [hasError, setHasError] = useState(false);
   const isTableVisible = !isLoading && !hasError && people.length > 0;
 
-  useEffect (() => {
+  useEffect(() => {
     getPeople()
-    .then(data => setPeople(data))
-    .catch(() => setHasError(true))
-    .finally(() => setIsLoading(false));
+      .then(data => setPeople(data))
+      .catch(() => setHasError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
