@@ -20,8 +20,6 @@ export const PeoplePage = () => {
       });
   }, []);
 
-  // SELECTED PERSON SHOULD HAVE "has-background-warning" class
-
   return (
     <>
       <h1 className="title">People Page</h1>

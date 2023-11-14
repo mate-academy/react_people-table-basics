@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
@@ -7,6 +7,7 @@ type Props = {
 };
 
 export const PeopleTable: FC<Props> = ({ people }) => {
+  const [selectedPersonId, setSelectedPersonId] = useState('');
   const getPersonByName = (name: string): Person | undefined => {
     return people.find(person => person.name === name);
   };
@@ -33,9 +34,20 @@ export const PeopleTable: FC<Props> = ({ people }) => {
           const father = getPersonByName(person.fatherName || '-');
 
           return (
-            <tr data-cy="person" key={person.slug}>
+            <tr
+              data-cy="person"
+              key={person.slug}
+              className={
+                selectedPersonId === person.slug
+                  ? 'has-background-warning'
+                  : ''
+              }
+            >
               <td>
-                <PersonLink person={person} />
+                <PersonLink
+                  person={person}
+                  setSelectedPersonId={setSelectedPersonId}
+                />
               </td>
 
               <td>{person.sex}</td>
@@ -43,14 +55,20 @@ export const PeopleTable: FC<Props> = ({ people }) => {
               <td>{person.died}</td>
               <td>
                 {mother ? (
-                  <PersonLink person={mother} />
+                  <PersonLink
+                    person={mother}
+                    setSelectedPersonId={setSelectedPersonId}
+                  />
                 ) : (
                   person.motherName || '-'
                 )}
               </td>
               <td>
                 {father ? (
-                  <PersonLink person={father} />
+                  <PersonLink
+                    person={father}
+                    setSelectedPersonId={setSelectedPersonId}
+                  />
                 ) : (
                   person.fatherName || '-'
                 )}
