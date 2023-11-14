@@ -11,51 +11,26 @@ interface Props {
 
 export const PeopleItem: React.FC<Props> = ({ person }) => {
   const {
-    motherName, sex, fatherName, slug,
+    motherName, sex, fatherName, slug, born, died,
   } = person;
 
   const { personSlug } = useParams();
   const { persons } = useContext(PeopleContext);
 
-  const findMother = (nameMother: string): Person | undefined => {
-    const mother = persons.find((p) => p.name === nameMother);
-
-    return mother;
+  const findPersonByName = (name: string): Person | undefined => {
+    return persons.find((p) => p.name === name);
   };
 
-  const findFather = (nameFather: string): Person | undefined => {
-    const father = persons.find((p) => p.name === nameFather);
+  const mother = findPersonByName(motherName ?? '');
+  const father = findPersonByName(fatherName ?? '');
 
-    return father;
-  };
-
-  const father = findFather(fatherName ?? '');
-  const mother = findMother(motherName ?? '');
-
-  const renderContent = () => {
-    switch (true) {
-      case !!fatherName:
-        return (
-          father !== undefined
-            ? (<PersonLink person={father} />)
-            : (fatherName)
-        );
-
-      case !!motherName:
-        return (
-          mother !== undefined
-            ? (<PersonLink person={mother} />)
-            : (motherName)
-        );
-
-      default:
-        return '-';
-    }
+  const renderParentLink = (parent: Person | undefined, parentName: string) => {
+    return parent !== undefined ? <PersonLink person={parent} /> : parentName;
   };
 
   return (
     <tr
-      key={person.slug}
+      key={slug}
       data-cy="person"
       className={cn({
         'has-background-warning': slug === personSlug,
@@ -70,25 +45,12 @@ export const PeopleItem: React.FC<Props> = ({ person }) => {
         </Link>
       </td>
 
-      <td>
-        {person.sex}
-      </td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
 
-      <td>
-        {person.born}
-      </td>
-
-      <td>
-        {person.died}
-      </td>
-
-      <td>
-        {renderContent()}
-      </td>
-
-      <td>
-        {renderContent()}
-      </td>
+      <td>{motherName && renderParentLink(mother, motherName)}</td>
+      <td>{fatherName && renderParentLink(father, fatherName)}</td>
     </tr>
   );
 };

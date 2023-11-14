@@ -16,9 +16,14 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
   return (
     <>
       {sex === 'm' ? (
-        <Link to={`/people/${slug}`}>{name}</Link>
+        <Link to={`/people/${slug}`}>
+          {name}
+        </Link>
       ) : (
-        <Link className="has-text-danger" to={`/people/${slug}`}>
+        <Link
+          className="has-text-danger"
+          to={`/people/${slug}`}
+        >
           {name}
         </Link>
       )}
