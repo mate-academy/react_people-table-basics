@@ -30,8 +30,7 @@ export const PeoplePage = () => {
       .then((response) => {
         setPeople(preparePeople(response));
       })
-      .catch(() => {setError(true);
-      })
+      .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, []);
 
