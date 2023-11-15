@@ -41,8 +41,14 @@ export const PeoplePage = () => {
         <div className="block">
           <div className="box table-container">
             {errorMessage && (
-              <p data-cy="peopleloaderError" className="has-text-danger">
+              <p data-cy="peopleLoadingError" className="has-text-danger">
                 {errorMessage}
+              </p>
+            )}
+
+            {!loader && people.length === 0 && !errorMessage && (
+              <p data-cy="noPeopleMessage">
+                There are no people on the server
               </p>
             )}
 
@@ -75,12 +81,6 @@ export const PeoplePage = () => {
               loader && (
                 <Loader />
               )
-            )}
-
-            {!loader && people.length === 0 && !errorMessage && (
-              <p data-cy="noPeopleMessage">
-                There are no people on the server
-              </p>
             )}
           </div>
         </div>
