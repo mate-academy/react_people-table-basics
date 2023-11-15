@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-// import { useParams } from 'react-router-dom';
 import { Loader } from './Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
-import { PersonInfo } from './PersonInfo';
+import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
@@ -17,8 +16,10 @@ export const PeoplePage: React.FC = () => {
         const peopleFromServer = await getPeople();
 
         setPeople(peopleFromServer);
-      } catch {
+      } catch (error) {
         setHasError(true);
+
+        throw error;
       } finally {
         setIsLoading(false);
       }
@@ -54,41 +55,9 @@ export const PeoplePage: React.FC = () => {
 
     case (!!people?.length):
       elementToRender = (
-        <table
-          data-cy="peopleTable"
-          className="table is-striped is-hoverable is-narrow is-fullwidth"
-        >
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Sex</th>
-              <th>Born</th>
-              <th>Died</th>
-              <th>Mother</th>
-              <th>Father</th>
-            </tr>
-          </thead>
-
-          <tbody>
-
-            {people?.map(person => {
-              const mother = people
-                .find(p => person.motherName === p.name);
-              const father = people
-                .find(p => person.fatherName === p.name);
-
-              return (
-                <PersonInfo
-                  key={person.slug}
-                  person={person}
-                  mother={mother}
-                  father={father}
-                />
-              );
-            })}
-
-          </tbody>
-        </table>
+        <PeopleTable
+          people={people}
+        />
       );
       break;
 

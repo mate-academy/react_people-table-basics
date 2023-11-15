@@ -16,51 +16,85 @@ export const PersonInfo: React.FC<Props> = ({
 }) => {
   const { personSlug } = useParams();
 
-  let motherElement;
-  let fatherElement;
+  const getElement = (parent: Person | undefined,
+    parentName: string | null) => {
+    let element;
 
-  switch (true) {
-    case (mother !== undefined):
-      motherElement = (
-        <Link
-          to={`${mother?.slug}`}
-          className={cn({
-            'has-text-danger': mother?.sex === 'f',
-          })}
-        >
-          {mother?.name}
-        </Link>
-      );
-      break;
+    switch (true) {
+      case (parent !== undefined):
+        element = (
+          <Link
+            to={`${parent?.slug}`}
+            className={cn({
+              'has-text-danger': parent?.sex === 'f',
+            })}
+          >
+            {parent?.name}
+          </Link>
+        );
+        break;
 
-    case (person.motherName !== null):
-      motherElement = person.motherName;
-      break;
+      case (parentName !== null):
+        element = parentName;
+        break;
 
-    default:
-      motherElement = '-';
-      break;
-  }
+        // case (person.fatherName !== null):
+        //   element = person.fatherName;
+        //   break;
 
-  switch (true) {
-    case (father !== undefined):
-      fatherElement = (
-        <Link
-          to={`${father?.slug}`}
-        >
-          {father?.name}
-        </Link>
-      );
-      break;
+      default:
+        element = '-';
+        break;
+    }
 
-    case (person.fatherName !== null):
-      fatherElement = person.fatherName;
-      break;
+    return element;
+  };
 
-    default:
-      fatherElement = '-';
-      break;
-  }
+  // switch (true) {
+  //   case (mother !== undefined):
+  //     motherElement = (
+  //       <Link
+  //         to={`${mother?.slug}`}
+  //         className={cn({
+  //           'has-text-danger': mother?.sex === 'f',
+  //         })}
+  //       >
+  //         {mother?.name}
+  //       </Link>
+  //     );
+  //     break;
+
+  //   case (person.motherName !== null):
+  //     motherElement = person.motherName;
+  //     break;
+
+  //   default:
+  //     motherElement = '-';
+  //     break;
+  // }
+
+  // switch (true) {
+  //   case (father !== undefined):
+  //     fatherElement = (
+  //       <Link
+  //         to={`${father?.slug}`}
+  //       >
+  //         {father?.name}
+  //       </Link>
+  //     );
+  //     break;
+
+  //   case (person.fatherName !== null):
+  //     fatherElement = person.fatherName;
+  //     break;
+
+  //   default:
+  //     fatherElement = '-';
+  //     break;
+  // }
+
+  const motherElement = getElement(mother, person.motherName);
+  const fatherElement = getElement(father, person.fatherName);
 
   return (
     <>
