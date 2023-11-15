@@ -40,6 +40,7 @@ export const PeopleTable: React.FC<Props> = ({ people, slugSelected }) => {
               <td>{personList.sex}</td>
               <td>{personList.born}</td>
               <td>{personList.died}</td>
+
               <td>
                 {personList.mother
                   ? (<PersonLink person={personList.mother} />)
