@@ -11,7 +11,7 @@ export const PersonRow: React.FC<Props> = ({ person }) => {
   const { slug } = useParams();
 
   const getParentText = (
-    parent: Person | undefined,
+    parent?: Person,
     parentName: string | null,
   ) => {
     if (parent) {
