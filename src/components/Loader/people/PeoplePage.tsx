@@ -11,7 +11,7 @@ export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState('');
 
-  const isMessageVisible = isError && people.length === 0 && !isLoading;
+  const isMessageVisible = !isError && people.length === 0 && !isLoading;
 
   useEffect(() => {
     const fetchData = async () => {
