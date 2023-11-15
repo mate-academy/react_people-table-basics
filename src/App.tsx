@@ -1,4 +1,8 @@
+import { NavLink } from 'react-router-dom';
+import cn from 'classnames';
+
 import { Loader } from './components/Loader';
+import { Person } from './components/Person';
 
 import './App.scss';
 
@@ -12,16 +16,22 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
+          <NavLink
+            to="/"
+            className={({ isActive }) => cn('navbar-item', {
+              'has-background-grey-lighter': isActive,
+            })}
+          >
             Home
-          </a>
-
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
+          </NavLink>
+          <NavLink
+            to="/people"
+            className={({ isActive }) => cn('navbar-item', {
+              'has-background-grey-lighter': isActive,
+            })}
           >
             People
-          </a>
+          </NavLink>
         </div>
       </div>
     </nav>
@@ -29,7 +39,6 @@ export const App = () => (
     <main className="section">
       <div className="container">
         <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
         <h1 className="title">Page not found</h1>
 
         <div className="block">
@@ -60,19 +69,7 @@ export const App = () => (
               </thead>
 
               <tbody>
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/jan-van-brussel-1714">
-                      Jan van Brussel
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1714</td>
-                  <td>1748</td>
-                  <td>Joanna van Rooten</td>
-                  <td>Jacobus van Brussel</td>
-                </tr>
+                <Person />
 
                 <tr data-cy="person">
                   <td>
