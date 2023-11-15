@@ -4,9 +4,15 @@ import { Person } from '../types';
 
 type Props = {
   person: Person,
+  motherNameLink: string | undefined,
+  fatherNameLink: string | undefined,
 };
 
-export const PersonRow: React.FC<Props> = ({ person }) => {
+export const PersonLink: React.FC<Props> = ({
+  person,
+  motherNameLink,
+  fatherNameLink,
+}) => {
   const { slug } = useParams();
 
   return (
@@ -31,8 +37,33 @@ export const PersonRow: React.FC<Props> = ({ person }) => {
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
-      <td>{person.motherName || '-'}</td>
-      <td>{person.fatherName || '-'}</td>
+      <td>
+        { motherNameLink ? (
+          <Link
+            to={`/people/${motherNameLink}`}
+            className="has-text-danger"
+          >
+            {person.motherName}
+          </Link>
+        ) : (
+          <>
+            { person.motherName || '-'}
+          </>
+        )}
+      </td>
+      <td>
+        { fatherNameLink ? (
+          <Link
+            to={`/people/${fatherNameLink}`}
+          >
+            {person.fatherName}
+          </Link>
+        ) : (
+          <>
+            { person.fatherName || '-'}
+          </>
+        )}
+      </td>
     </tr>
   );
 };

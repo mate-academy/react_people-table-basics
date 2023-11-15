@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { PersonRow } from './PersonLink';
+import { PersonLink } from './PersonLink';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
@@ -16,6 +16,10 @@ export const PeopleTable = () => {
       .catch(() => setErrorMessage(true))
       .finally(() => setLoading(false));
   }, []);
+
+  const getSlug = (name: string | null) => {
+    return people.find(person => person.name === name)?.slug;
+  };
 
   return (
     <>
@@ -52,7 +56,12 @@ export const PeopleTable = () => {
               <tbody>
                 { people.map(person => {
                   return (
-                    <PersonRow person={person} key={person.slug} />
+                    <PersonLink
+                      person={person}
+                      motherNameLink={getSlug(person.motherName)}
+                      fatherNameLink={getSlug(person.fatherName)}
+                      key={person.slug}
+                    />
                   );
                 })}
               </tbody>
