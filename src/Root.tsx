@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import { App } from './App';
 import { HomePage } from './components/Loader/homePage/HomePage';
+import { NotFoundPage } from './components/Loader/NotFoundPage';
 import { PeoplePage } from './components/Loader/people/PeoplePage';
 
 export const Root = () => (
@@ -19,7 +20,7 @@ export const Root = () => (
           <Route path=":personSlug?" element={<PeoplePage />} />
         </Route>
 
-        <Route path="*" element={<h1 className="title">Page not found</h1>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   </Router>

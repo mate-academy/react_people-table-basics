@@ -13,13 +13,12 @@ export const PeoplePage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
       try {
-        const peopleArray = await getPeople();
+        const getPeopleFromServer = await getPeople();
 
-        const peopleFromServer = peopleArray.map(person => {
-          const mother = peopleArray.find(p => p.name === person.motherName);
-          const father = peopleArray.find(p => p.name === person.fatherName);
+        const peopleFromServer = getPeopleFromServer.map(person => {
+          const mother = getPeopleFromServer.find(p => p.name === person.motherName);
+          const father = getPeopleFromServer.find(p => p.name === person.fatherName);
 
           return {
             ...person,
@@ -85,7 +84,11 @@ export const PeoplePage = () => {
 
             <tbody>
               {people.map(person => (
-                <PeopleRow person={person} key={person.slug} slug={personSlug} />
+                <PeopleRow
+                  person={person}
+                  key={person.slug}
+                  slug={personSlug}
+                />
               ))}
 
             </tbody>
