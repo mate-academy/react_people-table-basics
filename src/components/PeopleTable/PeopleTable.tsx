@@ -1,4 +1,6 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import { useParams } from 'react-router-dom';
+import cn from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 
@@ -7,7 +9,8 @@ type Props = {
 };
 
 export const PeopleTable: FC<Props> = ({ people }) => {
-  const [selectedPersonId, setSelectedPersonId] = useState('');
+  const { slug } = useParams();
+
   const getPersonByName = (name: string): Person | undefined => {
     return people.find(person => person.name === name);
   };
@@ -37,37 +40,36 @@ export const PeopleTable: FC<Props> = ({ people }) => {
             <tr
               data-cy="person"
               key={person.slug}
-              className={
-                selectedPersonId === person.slug
-                  ? 'has-background-warning'
-                  : ''
-              }
+              className={cn({
+                'has-background-warning': slug === person.slug,
+              })}
             >
               <td>
                 <PersonLink
                   person={person}
-                  setSelectedPersonId={setSelectedPersonId}
                 />
               </td>
 
               <td>{person.sex}</td>
+
               <td>{person.born}</td>
+
               <td>{person.died}</td>
+
               <td>
                 {mother ? (
                   <PersonLink
                     person={mother}
-                    setSelectedPersonId={setSelectedPersonId}
                   />
                 ) : (
                   person.motherName || '-'
                 )}
               </td>
+
               <td>
                 {father ? (
                   <PersonLink
                     person={father}
-                    setSelectedPersonId={setSelectedPersonId}
                   />
                 ) : (
                   person.fatherName || '-'
