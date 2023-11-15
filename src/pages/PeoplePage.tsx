@@ -6,11 +6,10 @@ import { PeopleTable } from '../components/PeopleTable/PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
   const loadPeople = async () => {
-    setIsLoading(true);
     try {
       const peopleData = await getPeople();
 
