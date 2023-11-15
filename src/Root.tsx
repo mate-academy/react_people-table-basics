@@ -15,11 +15,11 @@ export const Root = () => (
         />
 
         <Route index element={<Home />} />
-        <Route path="/home" element={<Navigate to="/" />} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
 
         <Route path="people">
           <Route index element={<PeopleTable />} />
-          <Route path=":person?" element={<PeopleTable />} />
+          <Route path=":slug" element={<PeopleTable />} />
         </Route>
       </Route>
     </Routes>

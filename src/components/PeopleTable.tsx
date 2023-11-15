@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { PersonRow } from './PersonRow';
+import { PersonRow } from './PersonLink';
 import { Person } from '../types';
 import { getPeople } from '../api';
 
@@ -32,7 +32,7 @@ export const PeopleTable = () => {
         <tbody>
           { people.map(person => {
             return (
-              <PersonRow person={person} />
+              <PersonRow person={person} key={person.slug} />
             );
           })}
 

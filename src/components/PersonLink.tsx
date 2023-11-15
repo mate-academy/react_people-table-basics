@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../types';
 
@@ -7,17 +7,19 @@ type Props = {
 };
 
 export const PersonRow: React.FC<Props> = ({ person }) => {
+  const { slug } = useParams();
+
   return (
     <tr
       key={person.slug}
       data-cy="person"
-      // onClick={() => {
-
-      // }}
+      className={cn({
+        'has-background-warning': slug === person.slug,
+      })}
     >
       <td>
         <Link
-          to={`#/people/${person.slug}`}
+          to={`/people/${person.slug}`}
           className={cn({
             'has-text-danger': person.sex === 'f',
           })}
