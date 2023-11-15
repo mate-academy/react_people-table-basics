@@ -38,10 +38,6 @@ export const PersonInfo: React.FC<Props> = ({
         element = parentName;
         break;
 
-        // case (person.fatherName !== null):
-        //   element = person.fatherName;
-        //   break;
-
       default:
         element = '-';
         break;
@@ -49,49 +45,6 @@ export const PersonInfo: React.FC<Props> = ({
 
     return element;
   };
-
-  // switch (true) {
-  //   case (mother !== undefined):
-  //     motherElement = (
-  //       <Link
-  //         to={`${mother?.slug}`}
-  //         className={cn({
-  //           'has-text-danger': mother?.sex === 'f',
-  //         })}
-  //       >
-  //         {mother?.name}
-  //       </Link>
-  //     );
-  //     break;
-
-  //   case (person.motherName !== null):
-  //     motherElement = person.motherName;
-  //     break;
-
-  //   default:
-  //     motherElement = '-';
-  //     break;
-  // }
-
-  // switch (true) {
-  //   case (father !== undefined):
-  //     fatherElement = (
-  //       <Link
-  //         to={`${father?.slug}`}
-  //       >
-  //         {father?.name}
-  //       </Link>
-  //     );
-  //     break;
-
-  //   case (person.fatherName !== null):
-  //     fatherElement = person.fatherName;
-  //     break;
-
-  //   default:
-  //     fatherElement = '-';
-  //     break;
-  // }
 
   const motherElement = getElement(mother, person.motherName);
   const fatherElement = getElement(father, person.fatherName);
