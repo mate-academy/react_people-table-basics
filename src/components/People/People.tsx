@@ -33,13 +33,13 @@ export const People = () => {
       <div className="box table-container">
         {isLoading && <Loader />}
 
-        {shownError === 'Something went wrong' && (
+        {shownError && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             {shownError}
           </p>
         )}
 
-        {shownError === 'There are no people on the server' && (
+        {shownError && (
           <p data-cy="noPeopleMessage">
             {shownError}
           </p>

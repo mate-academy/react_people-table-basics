@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
@@ -11,6 +11,15 @@ type Props = {
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { personSlug } = useParams();
+
+  const getPersonLink = (
+    person: Person | undefined,
+    parent?: string | null,
+  ) => {
+    return person
+      ? (<PersonLink person={person} />)
+      : parent || '-';
+  };
 
   return (
     <table
@@ -31,7 +40,6 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       <tbody>
         {people.map(person => {
           const {
-            name,
             sex,
             born,
             died,
@@ -49,12 +57,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               className={cn({ 'has-background-warning': slug === personSlug })}
             >
               <td>
-                <Link
-                  to={`/people/${slug}`}
-                  className={cn({ 'has-text-danger': sex === 'f' })}
-                >
-                  {name}
-                </Link>
+                {getPersonLink(person)}
               </td>
 
               <td>{sex}</td>
@@ -62,23 +65,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>{died}</td>
 
               <td>
-                {findMother ? (
-                  <PersonLink person={findMother} />
-                ) : (
-                  motherName
-                )}
-
-                {!motherName && '-'}
+                {getPersonLink(findMother, motherName)}
               </td>
 
               <td>
-                {findFather ? (
-                  <PersonLink person={findFather} />
-                ) : (
-                  fatherName
-                )}
-
-                {!fatherName && '-'}
+                {getPersonLink(findFather, fatherName)}
               </td>
             </tr>
           );
