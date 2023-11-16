@@ -17,7 +17,6 @@ export const PersonLink: React.FC<Props> = ({
 
   return (
     <tr
-      key={person.slug}
       data-cy="person"
       className={cn({
         'has-background-warning': slug === person.slug,

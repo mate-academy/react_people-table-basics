@@ -1,10 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import cn from 'classnames';
 
-// import { Loader } from './components/Loader';
-
 import './App.scss';
-// import { PeopleTable } from './components/PeopleTable';
 
 export const App = () => (
   <div data-cy="app">

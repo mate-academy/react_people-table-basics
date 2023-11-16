@@ -6,20 +6,22 @@ import { Loader } from './Loader';
 
 export const PeopleTable = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isErrorMessage, setIsErrorMessage] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     getPeople()
       .then(setPeople)
-      .catch(() => setErrorMessage(true))
-      .finally(() => setLoading(false));
+      .catch(() => setIsErrorMessage(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   const getSlug = (name: string | null) => {
     return people.find(person => person.name === name)?.slug;
   };
+
+  const noPeopleOnServer = !people.length && !isErrorMessage && !isLoading;
 
   return (
     <>
@@ -27,12 +29,12 @@ export const PeopleTable = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && (
+          {isLoading && (
             <Loader />
           )}
 
-          {errorMessage && !loading && (
-            <p data-cy="peopleLoadingError" className="has-text-danger">
+          {isErrorMessage && !isLoading && (
+            <p data-cy="peopleisLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
@@ -68,7 +70,7 @@ export const PeopleTable = () => {
             </table>
           )}
 
-          {!people.length && !errorMessage && !loading && (
+          {noPeopleOnServer && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
