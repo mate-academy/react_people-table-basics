@@ -6,12 +6,6 @@ import { PersonLink } from './PersonLink';
 export const PeopleTable = ({ people }: { people: Person[] }) => {
   const { slug: urlSlug } = useParams();
 
-  // const getClassByGender = (gender: string) => (
-  //   cn({
-  //     'has-tezt-danger': gender === 'f',
-  //   })
-  // );
-
   return (
     <table
       data-cy="peopleTable"
