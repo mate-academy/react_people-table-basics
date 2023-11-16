@@ -7,6 +7,12 @@ import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
 
 export const App = () => {
+  const getClassName = ({ isActive }: { isActive: boolean }) => {
+    return cn('navbar-item', {
+      'has-background-grey-lighter': isActive,
+    });
+  };
+
   return (
     <div data-cy="app">
       <nav
@@ -18,22 +24,14 @@ export const App = () => {
         <div className="container">
           <div className="navbar-brand">
             <NavLink
-              className={
-                ({ isActive }) => cn('navbar-item', {
-                  'has-background-grey-lighter': isActive,
-                })
-              }
+              className={getClassName}
               to="/"
             >
               Home
             </NavLink>
 
             <NavLink
-              className={
-                ({ isActive }) => cn('navbar-item', {
-                  'has-background-grey-lighter': isActive,
-                })
-              }
+              className={getClassName}
               to="/people"
             >
               People

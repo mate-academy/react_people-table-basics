@@ -6,13 +6,12 @@ import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const downloadPeople = async () => {
       try {
-        setIsLoading(true);
         const peopleFromServer = await getPeople();
 
         setPeople(peopleFromServer);

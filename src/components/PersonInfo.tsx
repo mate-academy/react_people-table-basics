@@ -5,8 +5,8 @@ import { Person } from '../types';
 
 type Props = {
   person: Person,
-  mother: Person | undefined,
-  father: Person | undefined,
+  mother?: Person,
+  father?: Person,
 };
 
 export const PersonInfo: React.FC<Props> = ({
@@ -21,7 +21,7 @@ export const PersonInfo: React.FC<Props> = ({
     let element;
 
     switch (true) {
-      case (parent !== undefined):
+      case (!!parent):
         element = (
           <Link
             to={`${parent?.slug}`}
