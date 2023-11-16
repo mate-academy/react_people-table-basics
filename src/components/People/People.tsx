@@ -17,6 +17,7 @@ export const People = () => {
         setIsShownPeople(true);
         if (!data.length) {
           setShownError('There are no people on the server');
+          setIsShownPeople(false);
         }
       })
       .catch((error) => {
@@ -33,13 +34,13 @@ export const People = () => {
       <div className="box table-container">
         {isLoading && <Loader />}
 
-        {shownError && (
+        {shownError.includes('went wrong') && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             {shownError}
           </p>
         )}
 
-        {shownError && (
+        {shownError.includes('no people') && (
           <p data-cy="noPeopleMessage">
             {shownError}
           </p>
