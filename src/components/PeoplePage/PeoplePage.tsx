@@ -13,11 +13,8 @@ export const PeoplePage = () => {
   useEffect(() => {
     getPeople()
       .then((data) => setPeopleFromServer(data))
-      .then(() => setIsLoading(false))
-      .catch(() => {
-        setIsLoading(false);
-        setError(true);
-      });
+      .catch(() => setError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
