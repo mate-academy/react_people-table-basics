@@ -36,7 +36,7 @@ export const PeoplePage = () => {
           )}
           {people && <PeopleTable people={people} />}
           {!isLoad && !error && !people && (
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
+            <p data-cy="noPeopleMessage">no people</p>
           )}
         </div>
       </div>
