@@ -34,7 +34,7 @@ export const PeopleTable = () => {
           )}
 
           {isErrorMessage && !isLoading && (
-            <p data-cy="peopleisLoadingError" className="has-text-danger">
+            <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
