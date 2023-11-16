@@ -9,13 +9,14 @@ type Props = {
 };
 
 const PeopleTable: React.FC<Props> = ({ people }) => {
-  function findSemeNameOnColumnName(
-    ParentName: string | null,
+  function findPerson(
+    parentName: string | null,
   ): Person | undefined {
-    return people.find((person) => person.name === ParentName);
+    return people.find((person) => person.name === parentName);
   }
 
   const { selectedName } = useParams();
+  const tableColumns = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
   return (
     <table
@@ -24,19 +25,16 @@ const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {tableColumns.map((item) => (
+            <th key={item}>{item}</th>
+          ))}
         </tr>
       </thead>
 
       <tbody>
         {people?.map((person) => {
-          const fatherPerson = findSemeNameOnColumnName(person.fatherName);
-          const motherPerson = findSemeNameOnColumnName(person.motherName);
+          const fatherPerson = findPerson(person.fatherName);
+          const motherPerson = findPerson(person.motherName);
 
           return (
             <tr

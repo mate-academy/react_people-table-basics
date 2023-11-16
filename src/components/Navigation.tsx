@@ -16,7 +16,11 @@ const Navigation = () => {
 
       <NavLink
         to="/people"
-        className={getActiveLinkClass}
+        className={({ isActive }) => {
+          return cn('navbar-item', {
+            'has-background-grey-lighter': isActive,
+          });
+        }}
       >
         People
       </NavLink>

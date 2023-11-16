@@ -15,8 +15,8 @@ const Root = () => {
       <Routes>
         <Route path="/" element={<App />}>
           <Route path="*" element={<ErrorPage />} />
-          <Route index path="/" element={<HomePage />} />
-          <Route path="home" element={<Navigate to="/" />} />
+          <Route index element={<HomePage />} />
+          <Route path="home" element={<Navigate to="/" replace />} />
 
           <Route path="people">
             <Route path=":selectedName?" element={<PeoplePage />} />

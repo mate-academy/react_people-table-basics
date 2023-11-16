@@ -6,15 +6,15 @@ import { Loader } from '../components/Loader';
 import PeopleTable from '../components/PeopleTable';
 
 const PeoplePage = () => {
-  const [data, setData] = useState<Person[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
     setIsLoading(true);
     getPeople()
-      .then((people) => {
-        setData(people);
+      .then((currentPeople) => {
+        setPeople(currentPeople);
       })
       .catch(() => {
         setErrorMessage('Something went wrong');
@@ -38,11 +38,11 @@ const PeoplePage = () => {
             </p>
           )}
 
-          {data.length === 0 && !isLoading && !errorMessage && (
+          {!people.length && !isLoading && !errorMessage && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
-          {(data.length > 0 && !isLoading && !errorMessage) && (
-            <PeopleTable people={data} />
+          {people.length > 0 && !isLoading && !errorMessage && (
+            <PeopleTable people={people} />
           )}
         </div>
       </div>

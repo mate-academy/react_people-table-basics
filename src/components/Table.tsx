@@ -5,16 +5,14 @@ import { Person } from '../types';
 import PeopleTable from './PeopleTable';
 
 const Table = () => {
-  const [data, setData] = useState<Person[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
     setIsLoading(true);
     getPeople()
-      .then((people) => {
-        setData(people);
-      })
+      .then(setPeople)
       .catch(() => {
         setErrorMessage('Something went wrong');
       })
@@ -34,10 +32,10 @@ const Table = () => {
           </p>
         )}
 
-        {data.length === 0 && !isLoading && (
+        {people.length === 0 && !isLoading && (
           <p data-cy="noPeopleMessage">There are no people on the server</p>
         )}
-        {data.length !== 0 && !isLoading && <PeopleTable people={data} />}
+        {people.length !== 0 && !isLoading && <PeopleTable people={people} />}
       </div>
     </div>
   );
