@@ -19,23 +19,23 @@ export const App = () => {
           <div className="navbar-brand">
             <NavLink className={isActiveButton} to="/">
               Home
-              </NavLink>
+            </NavLink>
 
-<NavLink
-  className={isActiveButton}
-  to="/people"
->
-People
+            <NavLink
+              className={isActiveButton}
+              to="/people"
+            >
+              People
             </NavLink>
           </div>
         </div>
-        </nav>
+      </nav>
 
-<main className="section">
-  <div className="container">
-    <Outlet />
-  </div>
-</main>
-</div>
-);
+      <main className="section">
+        <div className="container">
+          <Outlet />
+        </div>
+      </main>
+    </div>
+  );
 };

@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
-import { Person } from '../../src/types/Person';
+import { Person } from '../types/Person';
 
 interface Props {
   person: Person | null;

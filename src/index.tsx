@@ -13,7 +13,7 @@ import { App } from './App';
 createRoot(document.getElementById('root') as HTMLDivElement)
   .render(
     <Router>
-            <Routes>
+      <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<h1 className="title">Home Page</h1>} />
           <Route path="home" element={<Navigate to="/" replace />} />
