@@ -1,6 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import cn from 'classnames';
-// import { Loader } from './components/Loader';
 
 import './App.scss';
 
