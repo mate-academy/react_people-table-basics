@@ -8,9 +8,9 @@ import { Loader } from './Loader';
 export const PeopleTable: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const { personId } = useParams();
-  const selectedPerson = people.find(person => person.slug === personId);
-  const [isPeopleLoaded, setIsPeopleLoaded] = useState(true);
-  const [isPeopleLoading, setIsPeopleLoading] = useState(false);
+  // const selectedPerson = people.find(person => person.slug === personId);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [isPeopleLoading, setIsPeopleLoading] = useState(true);
 
   const loadPeople = async () => {
     setIsPeopleLoading(true);
@@ -20,7 +20,7 @@ export const PeopleTable: React.FC = () => {
 
       setPeople(peopleData);
     } catch {
-      setIsPeopleLoaded(false);
+      setErrorMessage(true);
     } finally {
       setIsPeopleLoading(false);
     }
@@ -82,7 +82,7 @@ export const PeopleTable: React.FC = () => {
       {/* {isPeopleLoaded && !isPeopleLoading */}
       {isPeopleLoading && (<Loader />)}
 
-      {!isPeopleLoading && isPeopleLoaded && (
+      {!isPeopleLoading && !errorMessage && (
         <table
           data-cy="peopleTable"
           className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -101,11 +101,14 @@ export const PeopleTable: React.FC = () => {
           {people.map(person => (
             <tbody
               key={person.slug}
-              className={cn({
-                'has-background-warning': person.slug === selectedPerson?.slug,
-              })}
             >
-              <tr data-cy="person">
+              <tr
+                data-cy="person"
+                className={cn({
+                  'has-background-warning':
+                  person.slug === personId,
+                })}
+              >
                 <td>
                   <Link
                     to={`/people/${person.slug}`}
@@ -218,19 +221,22 @@ export const PeopleTable: React.FC = () => {
         </table>
       )}
 
-      {!isPeopleLoaded && (
-        <div className="block">
-          <div className="box table-container">
+      <div className="block">
+        <div className="box table-container">
+
+          {errorMessage && !isPeopleLoading && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
+          )}
 
+          {people.length === 0 && !isPeopleLoading && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
-          </div>
+          )}
         </div>
-      )}
+      </div>
     </>
   );
 };
