@@ -17,15 +17,15 @@ const peopleWithParents = (people: Person[]) => {
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loader, setLoader] = useState(false);
+  const [isLoader, setIsLoader] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    setLoader(true);
+    setIsLoader(true);
     getPeople()
       .then((peopleList) => setPeople(peopleWithParents(peopleList)))
       .catch(() => setError(true))
-      .finally(() => setLoader(false));
+      .finally(() => setIsLoader(false));
   }, []);
 
   return (
@@ -34,14 +34,14 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loader && <Loader />}
+          {isLoader && <Loader />}
           {error && (
             <ErrorMessage />
           )}
-          {(!loader && people.length === 0) && (
+          {(!isLoader && people.length === 0) && (
             <EmptyPeopleList />
           )}
-          {(people.length !== 0 && !loader && !error) && (
+          {(people.length !== 0 && !isLoader && !error) && (
             <PeopleList people={people} />
           )}
         </div>
