@@ -1,26 +1,26 @@
-import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import {
+  HashRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
 import { NotFoundPage } from './NotFoundPage';
-import { Person } from './types';
 import { HomePage } from './HomePage';
+import { PeoplePage } from './PeoplePage.1';
+import { App } from './App';
 
-interface AppRoutesProps {
-  people: Person[];
-  onSelectPerson: (slug: string) => void;
-  getParent: (parentName: string | null) => Person | undefined;
-}
-
-export const AppRoutes: React.FC<AppRoutesProps> = () => {
-  return (
+export const Root = () => (
+  <Router>
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/home" element={<Navigate replace to="/" />} />
-      <Route path="/people" element={<h1 className="title">People Page</h1>} />
-      <Route
-        path="/people/:slug"
-        element={<h1 className="title">People Page</h1>}
-      />
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path="/" element={<App />}>
+        <Route index element={<HomePage />} />
+        <Route path="home" element={<Navigate to="/" replace />} />
+        <Route path="people">
+          <Route index element={<PeoplePage />} />
+          <Route path=":selectedPersonSlug?" element={<PeoplePage />} />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
     </Routes>
-  );
-};
+  </Router>
+);

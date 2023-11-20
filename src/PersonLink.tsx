@@ -1,11 +1,6 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { Person } from './types';
-
-interface PersonLinkProps {
-  person: Person;
-  onSelect: (slug: string) => void;
-}
+import { PersonLinkProps } from './PersonLinkProps';
 
 export const PersonLink: React.FC<PersonLinkProps> = ({ person, onSelect }) => {
   const handleClick = () => {
@@ -14,7 +9,7 @@ export const PersonLink: React.FC<PersonLinkProps> = ({ person, onSelect }) => {
 
   return (
     <Link
-      to={`people/${person.slug}`}
+      to={`/people/${person.slug}`}
       className={classNames({ 'has-text-danger': person.sex === 'f' })}
       onClick={handleClick}
     >
