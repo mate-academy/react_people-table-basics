@@ -9,25 +9,28 @@ import { Loader } from '../Loader';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loader, setLoader] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    setLoader(true);
     getPeople()
       .then(setPeople)
       .catch((error) => {
-        setLoader(false);
+        setIsLoading(false);
         setErrorMessage('Something went wrong');
         throw error;
       })
-      .finally(() => setLoader(false));
+      .finally(() => setIsLoading(false));
   }, []);
+
+  const findPeople = (parentName: string | null) => {
+    return people.find(p => p.name === parentName);
+  };
 
   const peopleFromServer = people.map(person => ({
     ...person,
-    mother: people.find(p => p.name === person.motherName),
-    father: people.find(p => p.name === person.fatherName),
+    mother: findPeople(person.motherName),
+    father: findPeople(person.fatherName),
   }));
 
   const { slug } = useParams();
@@ -46,7 +49,7 @@ export const PeoplePage = () => {
               </p>
             )}
 
-            {!loader && people.length === 0 && !errorMessage && (
+            {!isLoading && people.length === 0 && !errorMessage && (
               <p data-cy="noPeopleMessage">
                 There are no people on the server
               </p>
@@ -78,7 +81,7 @@ export const PeoplePage = () => {
                 </tbody>
               </table>
             ) : (
-              loader && (
+              isLoading && (
                 <Loader />
               )
             )}

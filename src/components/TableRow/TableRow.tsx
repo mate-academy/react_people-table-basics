@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import classNames from 'classnames';
 import { Person } from '../../types';
 
@@ -7,7 +5,7 @@ import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   person: Person,
-  slug: string | undefined,
+  slug?: string,
 };
 
 export const TableRow: React.FC<Props> = ({ person, slug }) => {
@@ -20,15 +18,8 @@ export const TableRow: React.FC<Props> = ({ person, slug }) => {
         })}
       >
         <td>
-          <Link
-            to={`../${person.slug}`}
-            className={classNames({
-              'has-text-link': person.sex === 'm',
-              'has-text-danger': person.sex === 'f',
-            })}
-          >
-            {person.name}
-          </Link>
+          {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
+          <PersonLink person={person} />
         </td>
 
         <td>{person.sex}</td>
