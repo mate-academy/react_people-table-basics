@@ -11,23 +11,20 @@ import '@fortawesome/fontawesome-free/css/all.css';
 
 import { App } from './App';
 import { PeoplePage } from './pages/PeoplePage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { HomePage } from './pages/HomePage';
 
 createRoot(document.getElementById('root') as HTMLDivElement)
   .render(
     <HashRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<h1 className="title">Home Page</h1>} />
+          <Route index element={<HomePage />} />
           <Route path="home" element={<Navigate to="/" replace />} />
           <Route path="people" element={<PeoplePage />}>
             <Route path=":selectedSlug?" />
           </Route>
-          <Route
-            path="*"
-            element={
-              <h1 className="title">Page not found</h1>
-            }
-          />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </HashRouter>,
