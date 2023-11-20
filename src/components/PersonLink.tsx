@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { PersonLinkProps } from './PersonLinkProps';
+import { PersonLinkProps } from '../types/PersonLinkProps';
 
 export const PersonLink: React.FC<PersonLinkProps> = ({ person, onSelect }) => {
   const handleClick = () => {

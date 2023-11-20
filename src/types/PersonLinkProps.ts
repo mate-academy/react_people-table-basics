@@ -1,4 +1,4 @@
-import { Person } from './types';
+import { Person } from '.';
 
 export interface PersonLinkProps {
   person: Person;

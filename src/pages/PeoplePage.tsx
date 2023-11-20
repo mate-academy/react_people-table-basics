@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
-import { Person } from './types';
-import { PersonLink } from './PersonLink';
-import { Loader } from './components/Loader';
-import { getPeople } from './api';
-import { TableHeaders } from './types/TableHeaders';
+import { Person } from '../types';
+import { PersonLink } from '../components/PersonLink';
+import { Loader } from '../components/Loader';
+import { getPeople } from '../api';
+import { TableHeaders } from '../types/TableHeaders';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -24,17 +24,11 @@ export const PeoplePage: React.FC = () => {
   useEffect(() => {
     const loadPeople = async () => {
       try {
-        const savedPersonSlug = localStorage.getItem('selectedPerson');
-
-        if (savedPersonSlug) {
-          setSelectedPersonSlug(savedPersonSlug);
-        }
-
         const data = await getPeople();
 
         setPeople(data);
       } catch (error) {
-        setErrorMessage('Error loading people');
+        setErrorMessage('Something went wrong');
       } finally {
         setIsLoading(false);
       }
@@ -52,7 +46,7 @@ export const PeoplePage: React.FC = () => {
 
           {errorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
+              {errorMessage}
             </p>
           )}
           {!isLoading && !errorMessage && people.length === 0 && (
@@ -60,7 +54,7 @@ export const PeoplePage: React.FC = () => {
               There are no people on the server
             </p>
           )}
-          {people && people.length > 0 && (
+          {people.length > 0 && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"

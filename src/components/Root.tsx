@@ -4,10 +4,10 @@ import {
   Routes,
   Navigate,
 } from 'react-router-dom';
-import { NotFoundPage } from './NotFoundPage';
-import { HomePage } from './HomePage';
-import { PeoplePage } from './PeoplePage.1';
-import { App } from './App';
+import { NotFoundPage } from '../pages/NotFoundPage';
+import { HomePage } from '../pages/HomePage';
+import { PeoplePage } from '../pages/PeoplePage';
+import { App } from '../App';
 
 export const Root = () => (
   <Router>
