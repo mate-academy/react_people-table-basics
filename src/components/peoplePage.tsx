@@ -1,19 +1,33 @@
 import cn from 'classnames';
 import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
 import { Loader } from './Loader/Loader';
+import { getPeople } from '../api';
 
-interface Props {
-  peopleList: Person[];
-  loadingError: boolean;
-  loading: boolean;
-}
-
-export const PeoplePage: React.FC<Props> = ({
-  peopleList, loadingError, loading,
-}) => {
+export const PeoplePage: React.FC = () => {
   const { slug } = useParams();
+  const [peopleList, setPeopleList] = useState<Person[]>([]);
+  const [loadingError, setLoadingError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const loadPeople = async () => {
+    setLoading(true);
+    try {
+      const peopleData = await getPeople();
+
+      setPeopleList(peopleData);
+    } catch {
+      setLoadingError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadPeople();
+  }, []);
 
   return (
     <>
