@@ -25,35 +25,18 @@ export const PeoplePage: React.FC = () => {
       });
   }, []);
 
-  if (isLoading) {
-    return (
-      <>
-        <h1 className="title">People Page</h1>
-        <Loader />
-      </>
-    );
-  }
-
-  if (isError) {
+  if (isLoading || isError) {
     return (
       <>
         <h1 className="title">People Page</h1>
 
-        <p data-cy="peopleLoadingError" className="has-text-danger">
-          Something went wrong
-        </p>
-      </>
-    );
-  }
+        {isLoading && <Loader />}
 
-  if (people.length === 0) {
-    return (
-      <>
-        <h1 className="title">People Page</h1>
-
-        <p data-cy="noPeopleMessage">
-          There are no people on the server
-        </p>
+        {isError && (
+          <p data-cy="peopleLoadingError" className="has-text-danger">
+            Something went wrong
+          </p>
+        )}
       </>
     );
   }
@@ -62,7 +45,13 @@ export const PeoplePage: React.FC = () => {
     <>
       <h1 className="title">People Page</h1>
 
-      <PeopleTable people={people} />
+      {people.length ? (
+        <PeopleTable people={people} />
+      ) : (
+        <p data-cy="noPeopleMessage">
+          There are no people on the server
+        </p>
+      )}
     </>
   );
 };
