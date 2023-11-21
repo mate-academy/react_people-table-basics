@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { PersonLink } from '../components/PersonLink';
 import { Loader } from '../components/Loader';
@@ -11,10 +12,10 @@ export const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [selectedPersonSlug, setSelectedPersonSlug] = useState<string>('');
+  const { slug } = useParams();
 
-  const handleSelectPerson = (slug: string) => {
-    setSelectedPersonSlug(slug);
-    localStorage.setItem('selectedPerson', slug);
+  const handleSelectPerson = (selectedSlug: string) => {
+    setSelectedPersonSlug(selectedSlug);
   };
 
   const getParent = (parentName: string | null) => {
@@ -27,6 +28,9 @@ export const PeoplePage: React.FC = () => {
         const data = await getPeople();
 
         setPeople(data);
+        if (slug) {
+          setSelectedPersonSlug(slug);
+        }
       } catch (error) {
         setErrorMessage('Something went wrong');
       } finally {
@@ -35,7 +39,7 @@ export const PeoplePage: React.FC = () => {
     };
 
     loadPeople();
-  }, []);
+  }, [slug]);
 
   return (
     <>
