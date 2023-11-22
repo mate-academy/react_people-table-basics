@@ -15,14 +15,9 @@ export const PeoplePage: React.FC = () => {
     setIsError(false);
 
     getPeople()
-      .then(peopleFromServer => {
-        setPeople(normalizePeople(peopleFromServer));
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsLoading(false);
-        setIsError(true);
-      });
+      .then(peopleFromServer => setPeople(normalizePeople(peopleFromServer)))
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   if (isLoading || isError) {
