@@ -29,9 +29,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       <tbody>
         {people.map(person => {
           const mother = people
-            .find(person2 => person.motherName === person2.name);
+            .find(possibleMother => person.motherName === possibleMother.name);
           const father = people
-            .find(person2 => person.fatherName === person2.name);
+            .find(possibleFather => person.fatherName === possibleFather.name);
 
           return (
             <tr
