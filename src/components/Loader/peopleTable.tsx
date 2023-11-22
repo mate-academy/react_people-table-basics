@@ -29,12 +29,8 @@ export const PeopleTable: React.FC = () => {
     loadPeople();
   }, []);
 
-  const isMotherExistInList = (motherName?: string | null) => {
-    return people.find(person => person.name === motherName);
-  };
-
-  const isFatherExistInList = (fatherName?: string | null) => {
-    return people.find(person => person.name === fatherName);
+  const isPersonExistInList = (personName?: string | null) => {
+    return people.find(person => person.name === personName);
   };
 
   const getParent = (person: Person, parentType: 'father' | 'mother') => {
@@ -46,9 +42,7 @@ export const PeopleTable: React.FC = () => {
       return <td>-</td>;
     }
 
-    const foundPerson = parentType === 'mother'
-      ? isMotherExistInList(person[parentTypeName])
-      : isFatherExistInList(person[parentTypeName]);
+    const foundPerson = isPersonExistInList(person[parentTypeName]);
 
     if (foundPerson) {
       return (
