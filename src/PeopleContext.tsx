@@ -49,9 +49,7 @@ export const PeopleContent: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     setIsLoading(true);
     getPeople()
-      .then(usersFromServer => {
-        setPeople(usersFromServer);
-      })
+      .then(setPeople)
       .catch(() => {
         setError('Something went wrong');
       })

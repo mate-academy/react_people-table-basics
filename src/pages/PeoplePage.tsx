@@ -1,10 +1,27 @@
-import { useContext } from 'react';
-import { PeopleList } from '../components/PeopleList/PeopleList';
-import { PeopleContext } from '../PeopleContext';
+import { useEffect, useState } from 'react';
 import { Loader } from '../components/Loader';
+import { PeopleTable } from '../components/PeopleTable/PeopleTable';
 
 export const PeoplePage = () => {
-  const { isLoading, error, people } = useContext(PeopleContext);
+  const [people, setPeople] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    fetch('https://mate-academy.github.io/react_people-table/api/people.json')
+      .then(response => response.json())
+      .then(setPeople)
+      .catch(() => {
+        setIsError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  const noPeople = !isError && !isLoading && !people.length;
 
   return (
     <>
@@ -12,38 +29,23 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {error
-            && (
-              <p data-cy="peopleLoadingError" className="has-text-danger">
-                Something went wrong
-              </p>
-            )}
-          {!isLoading && people.length === 0 && (
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
+          {isLoading && <Loader />}
+
+          {isError && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
             </p>
           )}
-          {isLoading && !error ? <Loader /> : (
-            <>
-              <table
-                data-cy="peopleTable"
-                className="table is-striped is-hoverable is-narrow is-fullwidth"
-              >
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Born</th>
-                    <th>Died</th>
-                    <th>Mother</th>
-                    <th>Father</th>
-                  </tr>
-                </thead>
 
-                <PeopleList />
-              </table>
-            </>
-          )}
+          {noPeople
+            && (
+              <p data-cy="noPeopleMessage">
+                There are no people on the server
+              </p>
+            )}
+
+          {people.length > 0
+            && (<PeopleTable people={people} />)}
         </div>
       </div>
     </>
