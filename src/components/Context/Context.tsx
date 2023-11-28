@@ -2,23 +2,28 @@ import React, { ReactNode, useContext, useState } from 'react';
 import { Person } from '../../types';
 
 interface ValuesTypes {
-  peoples: Person[] | undefined;
-  setPeoples: React.Dispatch<React.SetStateAction<Person[] | undefined>>;
+  peoples: Person[];
+  setPeoples: React.Dispatch<React.SetStateAction<Person[]>>;
   hasError: boolean;
   setHasError: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TableContext = React.createContext<ValuesTypes | undefined>(undefined);
+const defaultValue: ValuesTypes = {
+  peoples: [],
+  setPeoples: () => {},
+  hasError: false,
+  setHasError: () => {},
+  isLoading: false,
+  setIsLoading: () => {},
+};
 
-if (!TableContext) {
-  throw new Error('err');
-}
+const TableContext = React.createContext<ValuesTypes>(defaultValue);
 
-// eslint-disable-next-line max-len
-export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [peoples, setPeoples] = useState<Person[] | undefined>(undefined);
+export const TableProvider: React
+  .FC<{ children: ReactNode }> = ({ children }) => {
+  const [peoples, setPeoples] = useState<Person[]>([]);
 
   const [hasError, setHasError] = useState<boolean>(false);
 
@@ -42,10 +47,6 @@ export const TableProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 
 export const useTableContext = (): ValuesTypes => {
   const context = useContext(TableContext);
-
-  if (!context) {
-    throw new Error('err');
-  }
 
   return context;
 };

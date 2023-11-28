@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import { NavLink, useParams } from 'react-router-dom';
 import { useTableContext } from '../Context/Context';
 import { client } from '../../utils/fetchClient';
-import { Person } from '../../types';
 import { Loader } from '../Loader';
+import { Person } from '../../types';
 
 export const PeoplePage: React.FC = () => {
   const {
@@ -18,12 +18,59 @@ export const PeoplePage: React.FC = () => {
 
   const { slug } = useParams();
 
+  const renderParentsTableCell = (
+    people: Person,
+    peoplesArr: Person[],
+    sex: string,
+  ) => {
+    const familyMember = peoplesArr
+      .find((parent: Person) => parent.name === (sex === 'f'
+        ? people.motherName
+        : people.fatherName
+      ));
+
+    if (familyMember) {
+      return peoplesArr.map((parent: Person) => {
+        if (parent.name === (sex === 'f'
+          ? people.motherName
+          : people.fatherName)) {
+          return (
+            <td key={parent.slug}>
+              <NavLink
+                to={`${parent.slug}`}
+                className={classNames(
+                  {
+                    'has-text-danger': sex === 'f',
+                  },
+                )}
+              >
+                {parent.name}
+              </NavLink>
+            </td>
+          );
+        }
+
+        return null;
+      });
+    }
+
+    if (sex === 'f') {
+      return <td>{people.motherName ? people.motherName : '-'}</td>;
+    }
+
+    return <td>{people.fatherName ? people.fatherName : '-'}</td>;
+  };
+
   useEffect(() => {
     setIsLoading(true);
 
     client.get('people.json')
-      .then((response: unknown) => {
-        setPeoples(response as Person[]);
+      .then((response) => {
+        if (Array.isArray(response)) {
+          setPeoples(response);
+        } else {
+          setHasError(true);
+        }
       })
       .catch(() => {
         setHasError(true);
@@ -49,11 +96,12 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {peoples?.length === 0 && (
+          {(peoples?.length === 0 && !hasError) && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
+
           {!isLoading && (
             <table
               data-cy="peopleTable"
@@ -73,13 +121,16 @@ export const PeoplePage: React.FC = () => {
               <tbody>
                 {peoples?.map(people => {
                   const isActive = slug === people.slug;
-                  const trClassName = isActive ? 'has-background-warning' : '';
 
                   return (
                     <tr
                       data-cy="person"
                       key={people.slug}
-                      className={trClassName}
+                      className={classNames(
+                        {
+                          'has-background-warning': isActive,
+                        },
+                      )}
                     >
                       <td>
                         <NavLink
@@ -97,50 +148,8 @@ export const PeoplePage: React.FC = () => {
                       <td>{people.sex}</td>
                       <td>{people.born}</td>
                       <td>{people.died}</td>
-                      {peoples.find(mother => {
-                        return mother.name === people.motherName;
-                      }) ? (
-                          peoples.map(mother => {
-                            if (mother.name === people.motherName) {
-                              return (
-                                <td>
-                                  <NavLink
-                                    to={`${mother.slug}`}
-                                    className="has-text-danger"
-                                  >
-                                    {mother.name}
-                                  </NavLink>
-                                </td>
-                              );
-                            }
-
-                            return null;
-                          })
-                        ) : (
-                          <td>{people.motherName ? people.motherName : '-'}</td>
-                        )}
-
-                      {peoples.find(father => {
-                        return father.name === people.fatherName;
-                      }) ? (
-                          peoples.map(father => {
-                            if (father.name === people.fatherName) {
-                              return (
-                                <td>
-                                  <NavLink
-                                    to={`${father.slug}`}
-                                  >
-                                    {father.name}
-                                  </NavLink>
-                                </td>
-                              );
-                            }
-
-                            return null;
-                          })
-                        ) : (
-                          <td>{people.fatherName ? people.fatherName : '-'}</td>
-                        )}
+                      {renderParentsTableCell(people, peoples, 'f')}
+                      {renderParentsTableCell(people, peoples, 'm')}
                     </tr>
                   );
                 })}
