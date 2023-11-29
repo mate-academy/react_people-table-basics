@@ -9,7 +9,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import 'bulma/css/bulma.css';
 
 export const PeoplePage = () => {
-  const { personId } = useParams();
+  const { slug } = useParams();
 
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -57,7 +57,7 @@ export const PeoplePage = () => {
                     data-cy="person"
                     key={person.slug}
                     className={classNames({
-                      'has-background-warning': person.slug === personId,
+                      'has-background-warning': person.slug === slug,
                     })}
                   >
                     <td>

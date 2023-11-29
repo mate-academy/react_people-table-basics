@@ -36,14 +36,6 @@ export const App = () => {
           </div>
         </div>
       </nav>
-
-      {/* <main className="section">
-        <div className="container">
-          <h1 className="title">Home Page</h1>
-          <h1 className="title">People Page</h1>
-          <h1 className="title">Page not found</h1>
-        </div>
-      </main> */}
       <Outlet />
     </div>
   );
