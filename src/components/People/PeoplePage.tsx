@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { Loader } from '../Loader';
 import { PeopleContext } from '../../context/PeopleContext';
+import { Person } from '../../types';
 
 export const PeoplePage: React.FC = () => {
   const { dispatch } = useContext(PeopleContext);
@@ -10,6 +11,12 @@ export const PeoplePage: React.FC = () => {
   const {
     isLoading, people, selectedPerson, error,
   } = state;
+
+  const findPersonSlugByName = (name: string | null, peopleArr: Person[]) => {
+    const person = peopleArr.find(p => p.name === name);
+
+    return person ? person.slug : '';
+  };
 
   return (
     <div className="container">
@@ -68,8 +75,41 @@ export const PeoplePage: React.FC = () => {
                     <td>{person.sex}</td>
                     <td>{person.born}</td>
                     <td>{person.died}</td>
-                    <td>{person.motherName}</td>
-                    <td>{person.fatherName}</td>
+                    <td>
+                      <Link
+                        to={`/people/${findPersonSlugByName(person.motherName, people)}`}
+                        onClick={() => {
+                          const motherSlug
+                            = findPersonSlugByName(person.motherName, people);
+
+                          if (motherSlug) {
+                            dispatch(
+                              { type: 'SELECT_PERSON', payload: motherSlug },
+                            );
+                          }
+                        }}
+                        className={person.sex === 'f' ? 'has-text-danger' : ''}
+                      >
+                        {person.motherName}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link
+                        to={`/people/${findPersonSlugByName(person.fatherName, people)}`}
+                        onClick={() => {
+                          const fatherSlug
+                            = findPersonSlugByName(person.motherName, people);
+
+                          if (fatherSlug) {
+                            dispatch(
+                              { type: 'SELECT_PERSON', payload: fatherSlug },
+                            );
+                          }
+                        }}
+                      >
+                        {person.fatherName}
+                      </Link>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -81,5 +121,3 @@ export const PeoplePage: React.FC = () => {
     </div>
   );
 };
-
-// to make my jsx cleaner I can create a file for dispatchActions instead?
