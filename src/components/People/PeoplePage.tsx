@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { Loader } from '../Loader';
 import { PeopleContext } from '../../context/PeopleContext';
+import {
+  selectPerson, DispatchFunction,
+} from '../../context/PeopleActions';
 import { Person } from '../../types';
 
 export const PeoplePage: React.FC = () => {
@@ -12,10 +15,26 @@ export const PeoplePage: React.FC = () => {
     isLoading, people, selectedPerson, error,
   } = state;
 
-  const findPersonSlugByName = (name: string | null, peopleArr: Person[]) => {
-    const person = peopleArr.find(p => p.name === name);
+  const createParentLink = (
+    parentName: string | null,
+    peopleArray: Person[],
+    localDispatch: DispatchFunction,
+  ) => {
+    const parent = peopleArray.find(p => p.name === parentName);
+    const parentSlug = parent ? parent.slug : null;
+    const className = parent?.sex === 'f' ? 'has-text-danger' : '';
 
-    return person ? person.slug : '';
+    return parentSlug ? (
+      <Link
+        to={`/people/${parentSlug}`}
+        onClick={() => localDispatch(
+          { type: 'SELECT_PERSON', payload: parentSlug },
+        )}
+        className={className}
+      >
+        {parentName}
+      </Link>
+    ) : parentName;
   };
 
   return (
@@ -65,9 +84,7 @@ export const PeoplePage: React.FC = () => {
                       <Link
                         to={`/people/${person.slug}`}
                         className={person.sex === 'f' ? 'has-text-danger' : ''}
-                        onClick={() => dispatch(
-                          { type: 'SELECT_PERSON', payload: person.slug },
-                        )}
+                        onClick={() => selectPerson(dispatch, person.slug)}
                       >
                         {person.name}
                       </Link>
@@ -75,47 +92,53 @@ export const PeoplePage: React.FC = () => {
                     <td>{person.sex}</td>
                     <td>{person.born}</td>
                     <td>{person.died}</td>
-                    <td>
-                      <Link
-                        to={`/people/${findPersonSlugByName(person.motherName, people)}`}
-                        onClick={() => {
-                          const motherSlug
-                            = findPersonSlugByName(person.motherName, people);
+                    {/* <td>
+                      {
+                        findPersonSlugByName(person.motherName, people) ? (
+                          <Link
+                            to={`/people/${findPersonSlugByName(person.motherName, people)}`}
+                            onClick={() => selectParentByName(
+                              dispatch, person.motherName, people,
+                            )}
+                            className={
+                              person.sex === 'f' ? 'has-text-danger' : ''
+                            }
+                          >
+                            {person.motherName}
+                          </Link>
+                        ) : person.motherName
+                      }
+                    </td>
 
-                          if (motherSlug) {
-                            dispatch(
-                              { type: 'SELECT_PERSON', payload: motherSlug },
-                            );
-                          }
-                        }}
-                        className={person.sex === 'f' ? 'has-text-danger' : ''}
-                      >
-                        {person.motherName}
-                      </Link>
+                    <td>
+                      {
+                        findPersonSlugByName(person.fatherName, people) ? (
+                          <Link
+                            to={`/people/${findPersonSlugByName(person.fatherName, people)}`}
+                            onClick={() => selectParentByName(
+                              dispatch, person.fatherName, people,
+                            )}
+                            className={
+                              person.sex === 'f' ? 'has-text-danger' : ''
+                            }
+                          >
+                            {person.fatherName}
+                          </Link>
+                        ) : person.fatherName
+                      }
+                    </td> */}
+
+                    <td>
+                      {createParentLink(person.motherName, people, dispatch)}
                     </td>
                     <td>
-                      <Link
-                        to={`/people/${findPersonSlugByName(person.fatherName, people)}`}
-                        onClick={() => {
-                          const fatherSlug
-                            = findPersonSlugByName(person.motherName, people);
-
-                          if (fatherSlug) {
-                            dispatch(
-                              { type: 'SELECT_PERSON', payload: fatherSlug },
-                            );
-                          }
-                        }}
-                      >
-                        {person.fatherName}
-                      </Link>
+                      {createParentLink(person.fatherName, people, dispatch)}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           )}
-
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { Person } from '../types';
 import { getPeople } from '../api';
+import { PeopleAction } from './PeopleActions';
 
 interface PeopleState {
   people: Person[];
@@ -10,14 +11,6 @@ interface PeopleState {
   isLoading: boolean;
   error: string | null;
 }
-
-type PeopleAction =
-  | { type: 'SET_PEOPLE'; payload: Person[] }
-  | { type: 'SELECT_PERSON'; payload: string }
-  | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_ERROR'; payload: string | null }
-  | { type: 'SELECT_MOTHER_BY_NAME'; payload: string }
-  | { type: 'SELECT_FATHER_BY_NAME'; payload: string };
 
 interface StateProviderProps {
   children: ReactNode;
@@ -44,24 +37,6 @@ const peopleReducer = (state: PeopleState, action: PeopleAction) => {
       return { ...state, isLoading: action.payload };
     case 'SET_ERROR':
       return { ...state, error: action.payload };
-    case 'SELECT_MOTHER_BY_NAME': {
-      const mother = state.people.find(p => p.name === action.payload);
-
-      return {
-        ...state,
-        selectedPerson: mother ?? null,
-      };
-    }
-
-    case 'SELECT_FATHER_BY_NAME': {
-      const father = state.people.find(p => p.name === action.payload);
-
-      return {
-        ...state,
-        selectedPerson: father ?? null,
-      };
-    }
-
     default:
       return state;
   }
@@ -91,8 +66,6 @@ export const PeopleProvider: React.FC<StateProviderProps> = ({ children }) => {
   }, []);
 
   const value = { state, dispatch };
-
-  // console.log(state);
 
   return (
     <PeopleContext.Provider value={value}>
