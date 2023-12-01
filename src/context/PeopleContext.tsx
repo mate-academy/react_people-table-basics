@@ -4,12 +4,13 @@ import React, {
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { PeopleAction } from './PeopleActions';
+import { ErrorType } from '../types/ErrorType';
 
 interface PeopleState {
   people: Person[];
   selectedPerson: Person | null;
   isLoading: boolean;
-  error: string | null;
+  error: ErrorType | null;
 }
 
 interface StateProviderProps {
@@ -57,10 +58,15 @@ export const PeopleProvider: React.FC<StateProviderProps> = ({ children }) => {
     getPeople()
       .then(fetchedPeople => {
         dispatch({ type: 'SET_PEOPLE', payload: fetchedPeople });
+
+        if (!fetchedPeople.length) {
+          dispatch({ type: 'SET_ERROR', payload: ErrorType.EMPTY_ERROR });
+        }
+
         dispatch({ type: 'SET_LOADING', payload: false });
       })
-      .catch((err) => {
-        dispatch({ type: 'SET_ERROR', payload: `Failed to fetch people, ${err}` });
+      .catch(() => {
+        dispatch({ type: 'SET_ERROR', payload: ErrorType.FETCH_ERROR });
         dispatch({ type: 'SET_LOADING', payload: false });
       });
   }, []);

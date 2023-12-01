@@ -7,6 +7,7 @@ import {
   selectPerson, DispatchFunction,
 } from '../../context/PeopleActions';
 import { Person } from '../../types';
+import { ErrorType } from '../../types/ErrorType';
 
 export const PeoplePage: React.FC = () => {
   const { dispatch } = useContext(PeopleContext);
@@ -45,13 +46,13 @@ export const PeoplePage: React.FC = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {!people && (
+          {error === ErrorType.EMPTY_ERROR && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
           )}
 
-          {error ? (
+          {error === ErrorType.FETCH_ERROR ? (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
@@ -92,42 +93,6 @@ export const PeoplePage: React.FC = () => {
                     <td>{person.sex}</td>
                     <td>{person.born}</td>
                     <td>{person.died}</td>
-                    {/* <td>
-                      {
-                        findPersonSlugByName(person.motherName, people) ? (
-                          <Link
-                            to={`/people/${findPersonSlugByName(person.motherName, people)}`}
-                            onClick={() => selectParentByName(
-                              dispatch, person.motherName, people,
-                            )}
-                            className={
-                              person.sex === 'f' ? 'has-text-danger' : ''
-                            }
-                          >
-                            {person.motherName}
-                          </Link>
-                        ) : person.motherName
-                      }
-                    </td>
-
-                    <td>
-                      {
-                        findPersonSlugByName(person.fatherName, people) ? (
-                          <Link
-                            to={`/people/${findPersonSlugByName(person.fatherName, people)}`}
-                            onClick={() => selectParentByName(
-                              dispatch, person.fatherName, people,
-                            )}
-                            className={
-                              person.sex === 'f' ? 'has-text-danger' : ''
-                            }
-                          >
-                            {person.fatherName}
-                          </Link>
-                        ) : person.fatherName
-                      }
-                    </td> */}
-
                     <td>
                       {createParentLink(person.motherName, people, dispatch)}
                     </td>
