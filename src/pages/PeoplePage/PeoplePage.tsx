@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Loader } from '../Loader';
-import { PeopleTable } from '../PeopleTable';
+import { Loader } from '../../components/Loader';
+import { PeopleTable } from '../../components/PeopleTable';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 

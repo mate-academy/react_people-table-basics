@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import cn from 'classnames';
+import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 
 type Props = {
@@ -11,16 +12,16 @@ export const PersonLink: React.FC<Props> = ({ person, selectedSlug }) => {
   return (
     <tr
       data-cy="person"
-      key={person.slug}
       className={cn({ 'has-background-warning': selectedSlug === person.slug })}
     >
       <td>
-        <a
-          href={`#/people/${person.slug}`}
+        <Link
+          to={`/people/${person.slug}`}
           className={cn({ 'has-text-danger': person.sex === 'f' })}
+          replace
         >
           {person.name}
-        </a>
+        </Link>
       </td>
 
       <td>{person.sex}</td>
@@ -28,22 +29,24 @@ export const PersonLink: React.FC<Props> = ({ person, selectedSlug }) => {
       <td>{person.died}</td>
       <td>
         {person.mother?.slug ? (
-          <a
+          <Link
             className="has-text-danger"
-            href={`#/people/${person.mother?.slug}`}
+            to={`/people/${person.mother?.slug}`}
+            replace
           >
             {person.motherName}
-          </a>
+          </Link>
         ) : person.motherName ? person.motherName : '-'}
       </td>
 
       <td>
         {person.father?.slug ? (
-          <a
-            href={`#/people/${person.father?.slug}`}
+          <Link
+            to={`/people/${person.father?.slug}`}
+            replace
           >
             {person.fatherName}
-          </a>
+          </Link>
         ) : person.fatherName ? person.fatherName : '-'}
       </td>
     </tr>
