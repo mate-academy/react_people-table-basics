@@ -1,5 +1,4 @@
 import * as R from 'react';
-// import { Link } from 'react-router-dom';
 
 import { Loader } from '../components/Loader';
 import { Person } from '../types';
@@ -17,9 +16,7 @@ export const PeoplePage: R.FC = () => {
     getPeople()
       .then((peopleFromServer: Person[]) => {
         peopleFromServer.forEach((p: Person, i: number, arr: Person[]) => {
-          // eslint-disable-next-line
           arr[i].father = arr.find((perent) => perent.name === p.fatherName);
-          // eslint-disable-next-line
           arr[i].mother = arr.find((perent) => perent.name === p.motherName);
         });
 
