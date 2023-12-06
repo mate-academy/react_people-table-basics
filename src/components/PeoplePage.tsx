@@ -7,10 +7,12 @@ import { PeopleTable } from './PeopleTable';
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<PersonType[]>([]);
   const [error, setError] = useState(false);
-  const [isLoading, setIsLoadig] = useState(false);
+  const [isLoading, setIsLoadig] = useState(true);
   const [noData, setNoData] = useState(false);
 
   useEffect(() => {
+    setIsLoadig(true);
+
     getPeople()
       .then((data) => {
         if (data.length < 1) {
@@ -18,7 +20,6 @@ export const PeoplePage: React.FC = () => {
         }
 
         setPeople(data);
-        setIsLoadig(true);
       })
       .catch(() => setError(true))
       .finally(() => setIsLoadig(false));
@@ -30,9 +31,6 @@ export const PeoplePage: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-
-          {isLoading
-            && <Loader />}
 
           {error
             && (
@@ -53,7 +51,9 @@ export const PeoplePage: React.FC = () => {
             className="table is-striped is-hoverable is-narrow is-fullwidth"
           >
             <tbody>
-              {people && <PeopleTable people={people} />}
+              {isLoading
+                ? <Loader />
+                : people && <PeopleTable people={people} />}
             </tbody>
           </table>
         </div>
