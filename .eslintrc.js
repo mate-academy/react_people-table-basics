@@ -5,9 +5,6 @@ module.exports = {
       ignoreTemplateLiterals: true,
       ignoreComments: true,
     }],
-    'no-param-reassign': ["error", {
-      props: false,
-    }],
     'jsx-a11y/label-has-associated-control': ["error", {
       assert: "either",
     }],
