@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
+import { getPeople } from '../../api';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -11,8 +12,7 @@ export const PeoplePage: React.FC = () => {
   const isPeopleListEmpty = !people.length && !errorMessage && !isSpinnerShown;
 
   useEffect(() => {
-    fetch('https://mate-academy.github.io/react_people-table/api/people.json')
-      .then<Person[]>(response => response.json())
+    getPeople()
       .then(value => {
         const peopleWithParents = value.map(person => {
           const newPerson = { ...person };
