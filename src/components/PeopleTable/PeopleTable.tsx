@@ -1,9 +1,13 @@
-import classNames from 'classnames';
-import { Link, useParams } from 'react-router-dom';
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink';
 
 export const PeopleTable = ({ people }: { people: Person[] }) => {
-  const { personSlug } = useParams();
+  const normalizedPeople = people
+    .map(person => ({
+      ...person,
+      mother: people.find(p => p.name === person.motherName),
+      father: people.find(p => p.name === person.fatherName),
+    }));
 
   return (
     <table
@@ -22,61 +26,8 @@ export const PeopleTable = ({ people }: { people: Person[] }) => {
       </thead>
 
       <tbody>
-        {people.map(({
-          name,
-          sex,
-          born,
-          died,
-          fatherName,
-          motherName,
-          slug,
-          mother = people.find(user => user.name === motherName),
-          father = people.find(user => user.name === fatherName),
-        }) => (
-          <tr
-            data-cy="person"
-            className={classNames({
-              'has-background-warning': personSlug === slug,
-            })}
-          >
-            <td>
-              <Link
-                to={`../${slug}`}
-                className={classNames({ 'has-text-danger': sex === 'f' })}
-              >
-                {name}
-              </Link>
-            </td>
-
-            <td>{sex}</td>
-            <td>{born}</td>
-            <td>{died}</td>
-            <td>
-              {mother ? (
-                <Link
-                  to={`../${mother.slug}`}
-                  className="has-text-danger"
-                >
-                  {mother.name}
-                </Link>
-              )
-                : motherName || '-'}
-            </td>
-
-            <td>
-              {father ? (
-                <Link
-                  to={`../${father.slug}`}
-                >
-                  {father.name}
-                </Link>
-              )
-                : fatherName || '-'}
-            </td>
-
-          </tr>
-        ))}
-
+        {normalizedPeople
+          .map(person => (<PersonLink person={person} key={person.slug} />))}
       </tbody>
     </table>
   );
