@@ -22,9 +22,19 @@ export const PersonLink: React.FC<PersonLinkType> = ({ person, people }) => {
       })}
     >
       <td>
-        <Link to={`/people/${person.slug}`}>
-          {person.name}
-        </Link>
+        {person.sex === 'm'
+          ? (
+            <Link to={`/people/${person.slug}`}>
+              {person.name}
+            </Link>
+          ) : (
+            <Link
+              className="has-text-danger"
+              to={`/people/${person.slug}`}
+            >
+              {person.name}
+            </Link>
+          )}
       </td>
 
       <td>{person.sex}</td>
@@ -39,7 +49,7 @@ export const PersonLink: React.FC<PersonLinkType> = ({ person, people }) => {
             >
               {selectedMother.name}
             </Link>
-          ) : person.motherName || '-' }
+          ) : person.motherName || '-'}
       </td>
       <td>
         {selectedFather
