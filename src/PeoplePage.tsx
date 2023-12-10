@@ -13,7 +13,7 @@ export const PeoplePage: React.FC = () => {
     setIsLoading(true);
 
     getPeople()
-      .then(pers => setPeople(pers))
+      .then(setPeople)
       .catch(() => {
         setErrorMessage('Something went wrong');
       })
@@ -33,7 +33,7 @@ export const PeoplePage: React.FC = () => {
               {errorMessage}
             </p>
 
-            {people.length === 0 && !isLoading && (
+            {!people.length && !isLoading && (
               <p data-cy="noPeopleMessage">
                 There are no people on the server
               </p>
