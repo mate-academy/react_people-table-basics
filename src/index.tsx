@@ -19,9 +19,7 @@ createRoot(document.getElementById('root') as HTMLDivElement)
       <Routes>
         <Route
           path="/"
-          element={
-            <App />
-          }
+          element={<App />}
         >
           <Route
             path="/"

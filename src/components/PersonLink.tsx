@@ -9,8 +9,15 @@ interface PersonLinkType {
 
 export const PersonLink: React.FC<PersonLinkType> = ({ person, people }) => {
   const { slug } = useParams();
+  const {
+    sex,
+    name,
+    born,
+    died,
+    fatherName,
+    motherName,
+  } = person;
 
-  const selectedPerson = people.find(pers => pers.slug === slug);
   const selectedFather = people.find(pers => pers.name === person.fatherName);
   const selectedMother = people.find(pers => pers.name === person.motherName);
 
@@ -18,28 +25,28 @@ export const PersonLink: React.FC<PersonLinkType> = ({ person, people }) => {
     <tr
       data-cy="person"
       className={classNames({
-        'has-background-warning': selectedPerson === person,
+        'has-background-warning': slug === person.slug,
       })}
     >
       <td>
-        {person.sex === 'm'
+        {sex === 'm'
           ? (
             <Link to={`/people/${person.slug}`}>
-              {person.name}
+              {name}
             </Link>
           ) : (
             <Link
               className="has-text-danger"
               to={`/people/${person.slug}`}
             >
-              {person.name}
+              {name}
             </Link>
           )}
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
       <td>
         {selectedMother
           ? (
@@ -49,7 +56,7 @@ export const PersonLink: React.FC<PersonLinkType> = ({ person, people }) => {
             >
               {selectedMother.name}
             </Link>
-          ) : person.motherName || '-'}
+          ) : motherName || '-'}
       </td>
       <td>
         {selectedFather
@@ -59,7 +66,7 @@ export const PersonLink: React.FC<PersonLinkType> = ({ person, people }) => {
             >
               {selectedFather.name}
             </Link>
-          ) : person.fatherName || '-'}
+          ) : fatherName || '-'}
       </td>
     </tr>
   );
