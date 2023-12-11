@@ -35,13 +35,13 @@ export const PeoplePage = () => {
           </p>
         )}
 
-        {!data[0] && !hasError && !isLoading && (
-          <p data-cy="noPeopleMessage">
-            There are no people on the server
-          </p>
+        {!isLoading && (
+          !data.length ? (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
+            </p>
+          ) : <PeopleTable people={data} />
         )}
-
-        {!hasError && !isLoading && data[0] && <PeopleTable people={data} />}
       </div>
     </div>
   );
