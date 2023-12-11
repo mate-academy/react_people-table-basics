@@ -1,7 +1,10 @@
 import classNames from 'classnames';
 import './App.scss';
 import {
-  NavLink, Navigate, Route, Routes,
+  NavLink,
+  Navigate,
+  Route,
+  Routes,
 } from 'react-router-dom';
 import { HomePage } from './components/Pages/HomePage';
 import { NotFoundPage } from './components/Pages/NotFoundPage';
