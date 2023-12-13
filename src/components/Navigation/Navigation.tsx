@@ -10,10 +10,10 @@ type Props = {
 export const Navigation: FC<Props> = ({ to, title }) => {
   return (
     <NavLink
-      className={({ isActive }) => classNames(
-        'navbar-item',
-        { 'has-background-grey-lighter': isActive },
-      )}
+      className={({ isActive }) => {
+        return classNames('navbar-item',
+          { 'has-background-grey-lighter': isActive });
+      }}
       to={to}
     >
       {title}
