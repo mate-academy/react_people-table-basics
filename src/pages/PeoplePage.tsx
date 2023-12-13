@@ -6,6 +6,18 @@ import { Person } from '../types';
 import { getPeople } from '../api';
 import { PersonLink } from '../components/Person/PersonLink';
 
+const getParentContent = (parentName: string, peopleArr: Person[]) => {
+  const parent = peopleArr.find(({ name }) => name === parentName);
+
+  if (parent) {
+    return (
+      <PersonLink person={parent} />
+    );
+  }
+
+  return parentName;
+};
+
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,18 +34,6 @@ export const PeoplePage: React.FC = () => {
       .catch(() => setHasError(true))
       .finally(() => setIsLoading(false));
   }, []);
-
-  const parentInfo = (parentName: string) => {
-    const parent = people.find(person => person.name === parentName);
-
-    if (parent) {
-      return (
-        <PersonLink person={parent} />
-      );
-    }
-
-    return parentName;
-  };
 
   return (
     <>
@@ -86,14 +86,14 @@ export const PeoplePage: React.FC = () => {
                     <td>
                       {
                         person.motherName
-                          ? parentInfo(person.motherName)
+                          ? getParentContent(person.motherName, people)
                           : '-'
                       }
                     </td>
                     <td>
                       {
                         person.fatherName
-                          ? parentInfo(person.fatherName)
+                          ? getParentContent(person.fatherName, people)
                           : '-'
                       }
                     </td>
