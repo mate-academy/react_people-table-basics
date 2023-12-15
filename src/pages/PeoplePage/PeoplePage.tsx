@@ -7,25 +7,27 @@ import { Person } from '../../types';
 import { PersonLink } from '../../components/PersonLink';
 
 export const PeoplePage = () => {
+  const NOT_SET_VALUE = '-';
+
   const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { humanId } = useParams();
 
   const displayPeopleTable = useMemo(() => {
-    return !error && !loading && !!people.length;
-  }, [error, loading, people]);
+    return !error && !isLoading && !!people.length;
+  }, [error, isLoading, people]);
 
   const fetchPeople = () => {
     setError(false);
     setPeople([]);
-    setLoading(true);
+    setIsLoading(true);
     getPeople()
       .then((data) => {
         const mappedPeople = data.map((person) => {
           const editedPerson = { ...person };
-          const mother = data.find((p) => p.name === person.motherName);
-          const father = data.find((p) => p.name === person.fatherName);
+          const mother = data.find(({ name }) => name === person.motherName);
+          const father = data.find(({ name }) => name === person.fatherName);
 
           if (mother) {
             editedPerson.mother = mother;
@@ -41,7 +43,7 @@ export const PeoplePage = () => {
         setPeople(mappedPeople);
       })
       .catch(() => setError(true))
-      .finally(() => setLoading(false));
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -54,7 +56,7 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && <Loader />}
+          {isLoading && <Loader />}
 
           {error && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
@@ -62,7 +64,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {(!error && !loading && !people.length) && (
+          {(!error && !isLoading && !people.length) && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
@@ -103,14 +105,14 @@ export const PeoplePage = () => {
                       {
                         person.mother
                           ? <PersonLink person={person.mother} />
-                          : person.motherName || '-'
+                          : person.motherName || NOT_SET_VALUE
                       }
                     </td>
                     <td>
                       {
                         person.father
                           ? <PersonLink person={person.father} />
-                          : person.fatherName || '-'
+                          : person.fatherName || NOT_SET_VALUE
                       }
                     </td>
                   </tr>
