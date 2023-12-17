@@ -58,6 +58,14 @@ export const TablePeople = () => {
     fetchData();
   }, []);
 
+  const isMotherInArray = (name: string | null) => {
+    return name ? people.map(p => p.name).includes(name) : false;
+  };
+
+  const isFatherInArray = (name: string | null) => {
+    return name ? people.map(p => p.name).includes(name) : false;
+  };
+
   return (
     <div className="block">
       <div className="box table-container">
@@ -108,10 +116,6 @@ export const TablePeople = () => {
                 const {
                   name, sex, born, died, motherName, fatherName,
                 } = person;
-                const isMotherInArray = motherName ? people.map(p => p.name)
-                  .includes(motherName) : false;
-                const isFatherInArray = fatherName ? people.map(p => p.name)
-                  .includes(fatherName) : false;
 
                 return (
                   <tr
@@ -119,30 +123,30 @@ export const TablePeople = () => {
                     data-cy="person"
                     className={getRowClassName(person, slug)}
                   >
-                    <td
-                      aria-label="CHOOSE"
-                    >
+                    <td aria-label="CHOOSE">
                       <PersonLink person={person} />
                     </td>
                     <td>{sex}</td>
                     <td>{born}</td>
                     <td>{died}</td>
                     <td>
-                      {isMotherInArray ? (
-                        <PersonLink
-                          person={getPersonByName(motherName!, people)}
+                      {isMotherInArray(motherName) ? (
+                        <PersonLink person={
+                          getPersonByName(motherName!, people)
+                        }
                         />
                       ) : (
                         motherName ?? '-'
                       )}
                     </td>
                     <td>
-                      {isFatherInArray ? (
-                        <PersonLink
-                          person={getPersonByName(fatherName!, people)}
+                      {isFatherInArray(fatherName) ? (
+                        <PersonLink person={
+                          getPersonByName(fatherName!, people)
+                        }
                         />
                       ) : (
-                        motherName ?? '-'
+                        fatherName ?? '-'
                       )}
                     </td>
                   </tr>
