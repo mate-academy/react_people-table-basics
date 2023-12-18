@@ -1,22 +1,18 @@
-import { useEffect, useMemo, useState } from 'react';
-import cn from 'classnames';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { Loader } from '../../components/Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
-import { PersonLink } from '../../components/PersonLink';
+import { mappedPeople } from '../../utils/proceedPeople';
+import { PeopleTable } from '../../components/PeopleTable/PeopleTable';
 
 export const PeoplePage = () => {
-  const NOT_SET_VALUE = '-';
-
   const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { humanId } = useParams();
 
-  const displayPeopleTable = useMemo(() => {
-    return !error && !isLoading && !!people.length;
-  }, [error, isLoading, people]);
+  const displayPeopleTable = () => (
+    !error && !isLoading && !!people.length
+  );
 
   const fetchPeople = () => {
     setError(false);
@@ -24,23 +20,7 @@ export const PeoplePage = () => {
     setIsLoading(true);
     getPeople()
       .then((data) => {
-        const mappedPeople = data.map((person) => {
-          const editedPerson = { ...person };
-          const mother = data.find(({ name }) => name === person.motherName);
-          const father = data.find(({ name }) => name === person.fatherName);
-
-          if (mother) {
-            editedPerson.mother = mother;
-          }
-
-          if (father) {
-            editedPerson.father = father;
-          }
-
-          return editedPerson;
-        });
-
-        setPeople(mappedPeople);
+        setPeople(mappedPeople(data));
       })
       .catch(() => setError(true))
       .finally(() => setIsLoading(false));
@@ -70,55 +50,8 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {displayPeopleTable && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map((person) => (
-                  <tr
-                    data-cy="person"
-                    className={cn(
-                      { 'has-background-warning': person.slug === humanId },
-                    )}
-                  >
-                    <td aria-label="person">
-                      <PersonLink person={person} />
-                    </td>
-
-                    <td>{person.sex}</td>
-                    <td>{person.born}</td>
-                    <td>{person.died}</td>
-                    <td>
-                      {
-                        person.mother
-                          ? <PersonLink person={person.mother} />
-                          : person.motherName || NOT_SET_VALUE
-                      }
-                    </td>
-                    <td>
-                      {
-                        person.father
-                          ? <PersonLink person={person.father} />
-                          : person.fatherName || NOT_SET_VALUE
-                      }
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          {displayPeopleTable() && (
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
