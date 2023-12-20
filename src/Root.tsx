@@ -2,7 +2,7 @@ import {
   HashRouter as Router, Routes, Route, Navigate,
 } from 'react-router-dom';
 import { App } from './App';
-import { PersonLink } from './components/PersonLink';
+import { PeopleTable } from './components/PeopleTable';
 
 export const Root = () => {
   return (
@@ -12,8 +12,8 @@ export const Root = () => {
         <Route path="/" element={<App />}>
           <Route index element={<h1 className="title">Home Page</h1>} />
           <Route path="people">
-            <Route index element={<PersonLink />} />
-            <Route path=":slug" element={<PersonLink />} />
+            <Route index element={<PeopleTable />} />
+            <Route path=":slug" element={<PeopleTable />} />
           </Route>
           <Route
             path="*"
