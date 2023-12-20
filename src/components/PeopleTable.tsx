@@ -43,7 +43,7 @@ export const PeopleTable: React.FC = () => {
             </p>
           )}
 
-          {people.length !== 0 && (
+          {!!people.length && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -60,8 +60,9 @@ export const PeopleTable: React.FC = () => {
               </thead>
 
               <tbody>
-                {people.length !== 0 && (people.map(person => (
+                {people.length && (people.map(person => (
                   <PersonLink
+                    key={people.indexOf(person)}
                     person={person}
                     people={people}
                   />

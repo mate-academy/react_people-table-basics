@@ -8,52 +8,69 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ person, people }) => {
-  const { slug } = useParams();
+  const { urlSlug } = useParams();
+  const {
+    name, sex, born, died, fatherName, motherName, slug,
+  } = person;
 
-  const mother = (name: string | null, woman?: boolean) => {
-    if (name) {
+  function getMother() {
+    if (motherName) {
       return (
-        people.some(p => p.name === name)
+        people.some(p => p.name === motherName)
           ? (
             <a
-              className={
-                cn({ 'has-text-danger': woman })
-              }
-              href={`#/people/${people.find(p => p.name === name)?.slug}`}
+              className="has-text-danger"
+              href={`#/people/${people.find(p => p.name === motherName)?.slug}`}
             >
-              {name}
+              {motherName}
             </a>
           )
-          : name
+          : motherName
       );
     }
 
     return '-';
-  };
+  }
+
+  function getFather() {
+    if (fatherName) {
+      return (
+        people.some(p => p.name === fatherName)
+          ? (
+            <a href={`#/people/${people.find(p => p.name === fatherName)?.slug}`}>
+              {fatherName}
+            </a>
+          )
+          : fatherName
+      );
+    }
+
+    return '-';
+  }
 
   return (
     <tr
       className={
-        cn({ 'has-background-warning': person.slug === slug })
+        cn({ 'has-background-warning': slug === urlSlug })
       }
       data-cy="person"
     >
       <td>
         <a
           className={
-            cn({ 'has-text-danger': person.sex === 'f' })
+            cn({ 'has-text-danger': sex === 'f' })
           }
-          href={`#/people/${person.slug}`}
+          href={`#/people/${slug}`}
         >
-          {person.name}
+          {name}
         </a>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-      <td>{mother(person.motherName, true)}</td>
-      <td>{mother(person.fatherName)}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>{getMother()}</td>
+      <td>{getFather()}</td>
     </tr>
   );
 };

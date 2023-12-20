@@ -4,23 +4,21 @@ import {
 import { App } from './App';
 import { PeopleTable } from './components/PeopleTable';
 
-export const Root = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/home" element={<Navigate to="/" replace />} />
-        <Route path="/" element={<App />}>
-          <Route index element={<h1 className="title">Home Page</h1>} />
-          <Route path="people">
-            <Route index element={<PeopleTable />} />
-            <Route path=":slug" element={<PeopleTable />} />
-          </Route>
-          <Route
-            path="*"
-            element={<h1 className="title">Page not found</h1>}
-          />
+export const Root = () => (
+  <Router>
+    <Routes>
+      <Route path="/home" element={<Navigate to="/" replace />} />
+      <Route path="/" element={<App />}>
+        <Route index element={<h1 className="title">Home Page</h1>} />
+        <Route path="people">
+          <Route index element={<PeopleTable />} />
+          <Route path=":urlSlug" element={<PeopleTable />} />
         </Route>
-      </Routes>
-    </Router>
-  );
-};
+        <Route
+          path="*"
+          element={<h1 className="title">Page not found</h1>}
+        />
+      </Route>
+    </Routes>
+  </Router>
+);
