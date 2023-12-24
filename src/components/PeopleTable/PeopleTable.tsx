@@ -24,7 +24,7 @@ export const PeopleTable: React.FC = () => {
       .then(setPeople)
       .catch(() => setError(true))
       .finally(() => setLoading(false));
-  }, []);
+  }, [setError, setLoading, setPeople]);
 
   const succesfulPeopleRender = !loading && !error;
   const appiSendNoPeople = !people.length && !loading;
