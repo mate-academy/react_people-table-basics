@@ -1,52 +1,67 @@
 import classNames from 'classnames';
 import { Link, useParams } from 'react-router-dom';
 import { Person } from '../../types';
+import { Sex } from '../../types/Sex';
 
 type Props = {
   person: Person;
 };
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
+  const {
+    name,
+    sex,
+    born,
+    died,
+    fatherName,
+    motherName,
+    slug,
+    mother,
+    father,
+  } = person;
+
   const { personSelected } = useParams();
 
   return (
     <tr
-      key={person.slug}
+      key={slug}
       data-cy="person"
       className={classNames({
-        'has-background-warning': personSelected === person.slug,
+        'has-background-warning': personSelected === slug,
       })}
     >
       <td>
         <Link
           to={`../${person.slug}`}
-          className={classNames({ 'has-text-danger': person.sex === 'f' })}
+          className={classNames(
+            { 'has-text-danger': sex === Sex.FEMALE },
+          )}
         >
-          {person.name}
+          {name}
         </Link>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-      {person.mother ? (
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      {mother ? (
         <td>
-          <Link to={`../${person.mother.slug}`} className="has-text-danger">
-            {person.motherName}
+          <Link to={`../${mother.slug}`} className="has-text-danger">
+            {motherName}
           </Link>
         </td>
       ) : (
-        <td>{person.motherName || '-'}</td>
+        <td>{motherName || '-'}</td>
       )}
 
-      {person.father ? (
+      {father ? (
         <td>
-          <Link to={`../${person.father.slug}`}>
-            {person.fatherName}
+          <Link to={`../${father.slug}`}>
+            {fatherName}
           </Link>
         </td>
       ) : (
-        <td>{person.fatherName || '-'}</td>
+        <td>{fatherName || '-'}</td>
       )}
     </tr>
   );

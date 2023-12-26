@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { getPeople } from "../../api";
-import { Person } from "../../types";
-import { Loader } from "../Loader";
-import { PersonLink } from "../PersonLink/PersonLink";
-import { getFullInfo } from "../../helpers/getFullInfo";
-import { ErrorAPI } from "../ErrorAPI/ErrorAPI";
-import { NoPeopleMessage } from "../NoPeopleMessage/NoPeopleMessage";
+import React, { useEffect, useState } from 'react';
+import { getPeople } from '../../api';
+import { Person } from '../../types';
+import { Loader } from '../Loader';
+import { PersonLink } from '../PersonLink/PersonLink';
+import { getFullInfo } from '../../helpers/getFullInfo';
+import { ErrorAPI } from '../ErrorAPI/ErrorAPI';
+import { NoPeopleMessage } from '../NoPeopleMessage/NoPeopleMessage';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -46,7 +46,7 @@ export const PeoplePage: React.FC = () => {
               </thead>
 
               <tbody>
-                {people.length === 0 ? (
+                {!people.length ? (
                   <NoPeopleMessage />
                 ) : (
                   people.map((person) => <PersonLink person={person} />)
