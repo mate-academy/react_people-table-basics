@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
 import cn from 'classnames';
+import { useParams } from 'react-router-dom';
 
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
@@ -39,48 +39,66 @@ export const PeopleTable = ({ people }: Props) => {
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <tr
-            data-cy="person"
-            className={cn({
-              'has-background-warning': person.slug === personSlug,
-            })}
-          >
-            <PersonLink person={person} />
+        {people.map(person => {
+          const {
+            slug,
+            sex,
+            born,
+            died,
+          } = person;
 
-            <td>{person.sex}</td>
+          const mother = people.find(
+            possibleMother => possibleMother.name === person.motherName,
+          );
 
-            <td>{person.born}</td>
+          const motherName = mother
+            ? <PersonLink person={mother} />
+            : <td>{person.motherName}</td>;
 
-            <td>{person.died}</td>
+          const father = people.find(
+            possibleFather => possibleFather.name === person.fatherName,
+          );
 
-            {person.motherName ? (
-              <PersonLink person={
-                people.find(
-                  possibleMother => possibleMother.name === person.motherName,
-                ) || person.motherName
-              }
-              />
-            ) : (
-              <td>
-                -
-              </td>
-            )}
+          const fatherName = father
+            ? <PersonLink person={father} />
+            : <td>{person.fatherName}</td>;
 
-            {person.fatherName ? (
-              <PersonLink person={
-                people.find(
-                  possibleFather => possibleFather.name === person.fatherName,
-                ) || person.fatherName
-              }
-              />
-            ) : (
-              <td>
-                -
-              </td>
-            )}
-          </tr>
-        ))}
+          return (
+            (
+              <tr
+                data-cy="person"
+                className={cn({
+                  'has-background-warning': slug === personSlug,
+                })}
+                key={slug}
+              >
+                <PersonLink person={person} />
+
+                <td>{sex}</td>
+
+                <td>{born}</td>
+
+                <td>{died}</td>
+
+                {person.motherName ? (
+                  motherName
+                ) : (
+                  <td>
+                    -
+                  </td>
+                )}
+
+                {person.fatherName ? (
+                  fatherName
+                ) : (
+                  <td>
+                    -
+                  </td>
+                )}
+              </tr>
+            )
+          );
+        })}
       </tbody>
     </table>
   );
