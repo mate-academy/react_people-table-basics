@@ -19,6 +19,7 @@ export const PersonRow: React.FC<Props> = ({ person }) => {
     father,
   } = person;
 
+  const isFemale = sex === 'f';
   const { personSlug } = useParams();
 
   return (
@@ -29,7 +30,7 @@ export const PersonRow: React.FC<Props> = ({ person }) => {
       <td>
         <Link
           to={`/people/${slug}`}
-          className={cn({ 'has-text-danger': sex === 'f' })}
+          className={cn({ 'has-text-danger': isFemale })}
         >
           {name}
         </Link>

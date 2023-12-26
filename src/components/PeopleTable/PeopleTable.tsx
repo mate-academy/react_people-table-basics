@@ -1,4 +1,3 @@
-/// <reference lib="dom" />
 import { getPeopleWithParents } from '../../helpers';
 import { Person } from '../../types';
 import { PersonRow } from '../Person/PersonRow';
