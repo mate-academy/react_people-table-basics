@@ -1,8 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
+import { WOMAN } from '../../constants';
 import { getPeople } from '../../api';
-import { preparedData } from '../../helper';
+import { preparePeople } from '../../helper';
 import { Person } from '../../types/Person';
 import { Loader } from '../Loader';
 
@@ -11,23 +12,22 @@ export const Table: FC = () => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentRowSlug, setCurrentRowSlug] = useState('');
-  const isWoman = 'f';
-  const { slug } = useParams();
+  const { slug: slugParam } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
 
     getPeople()
-      .then((resp) => setPeople(preparedData<Person>(resp)))
+      .then((resp) => setPeople(preparePeople<Person>(resp)))
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
   }, []);
 
   useEffect(() => {
-    if (slug) {
-      setCurrentRowSlug(slug);
+    if (slugParam) {
+      setCurrentRowSlug(slugParam);
     }
-  }, [slug]);
+  }, [slugParam]);
 
   return (
     <div className="block">
@@ -63,64 +63,74 @@ export const Table: FC = () => {
             </thead>
 
             <tbody>
-              {people.map(person => (
+              {people.map(({
+                slug,
+                sex,
+                name,
+                born,
+                died,
+                motherName,
+                fatherName,
+                mother,
+                father,
+              }) => (
                 <tr
-                  key={person.slug}
+                  key={slug}
                   data-cy="person"
                   className={cn({
-                    'has-background-warning': person.slug === currentRowSlug,
+                    'has-background-warning': slug === currentRowSlug,
                   })}
                 >
                   <td>
                     <a
-                      href={`#/people/${person.slug}`}
+                      href={`#/people/${slug}`}
                       className={cn({
-                        'has-text-danger': person.sex === isWoman,
+                        'has-text-danger': sex === WOMAN,
                       })}
                     >
-                      {person.name}
+                      {name}
                     </a>
                   </td>
 
-                  <td>{person.sex}</td>
-                  <td>{person.born}</td>
-                  <td>{person.died}</td>
-                  {!person.motherName && (
+                  <td>{sex}</td>
+                  <td>{born}</td>
+                  <td>{died}</td>
+                  {!motherName && (
                     <td>-</td>
                   )}
 
-                  {(person.motherName && person.mother?.slug) && (
+                  {(motherName && mother?.slug) && (
                     <td>
                       <a
                         className="has-text-danger"
-                        href={`#/people/${person.mother?.slug}`}
+                        href={`#/people/${mother?.slug}`}
                       >
-                        {person.motherName}
+                        {motherName}
                       </a>
                     </td>
                   )}
-                  {(person.motherName && !person.mother?.slug) && (
+                  {(motherName && !mother?.slug) && (
                     <td>
-                      {person.motherName}
+                      {motherName}
                     </td>
                   )}
 
-                  {!person.fatherName && (
+                  {!fatherName && (
                     <td>-</td>
                   )}
 
-                  {(person.fatherName && person.father?.slug) && (
+                  {(fatherName && father?.slug) && (
                     <td>
                       <a
-                        href={`#/people/${person.father.slug}`}
+                        href={`#/people/${father.slug}`}
                       >
-                        {person.fatherName}
+                        {fatherName}
                       </a>
                     </td>
                   )}
-                  {(person.fatherName && !person.father?.slug) && (
+                  {(fatherName && !father?.slug) && (
                     <td>
-                      {person.fatherName}
+                      {fatherName}
                     </td>
                   )}
                 </tr>

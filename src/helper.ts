@@ -1,16 +1,14 @@
 import { Data } from './types/types';
 
-export const preparedData = <T extends Data>(data: T[]): T[] => {
-  return data.map(item => {
-    const mother = data.find(el => el.name === item.motherName);
-    const father = data.find(el => el.name === item.fatherName);
+export const preparePeople = <T extends Data>(people: T[]): T[] => {
+  return people.map(person => {
+    const mother = people.find(({ name }) => name === person.motherName);
+    const father = people.find(({ name }) => name === person.fatherName);
 
-    const obj = {
-      ...item,
+    return {
+      ...person,
       ...(mother && { mother }),
       ...(father && { father }),
     };
-
-    return obj;
   });
 };
