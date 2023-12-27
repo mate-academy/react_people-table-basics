@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { Person } from '../../types';
+import { Person, Sex } from '../../types';
 
 type Props = {
   person: Person;
@@ -10,53 +10,57 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ person, people }) => {
-  const isWomen = classNames({
-    'has-text-danger': person.sex === 'f',
+  const {
+    name, slug, sex, born, died, motherName, fatherName,
+  } = person;
+
+  const styleRed = classNames({
+    'has-text-danger': person.sex === Sex.Female,
   });
 
-  const isMother = people
-    .find(currentPerson => currentPerson.name === person.motherName);
-  const isFather = people
-    .find(currentPerson => currentPerson.name === person.fatherName);
+  const hasMother = people
+    .find(mother => mother.name === person.motherName);
+  const hasFather = people
+    .find(father => father.name === person.fatherName);
 
   return (
     <>
       <td>
         <Link
-          to={`./${person.slug}`}
-          className={isWomen}
+          to={`./${slug}`}
+          className={styleRed}
         >
-          {person.name}
+          {name}
         </Link>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-      <td className={isWomen}>
-        {isMother
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td className={styleRed}>
+        {hasMother
           ? (
             <Link
-              to={`./${isMother.slug}`}
+              to={`./${hasMother.slug}`}
               className="has-text-danger"
             >
-              {person.motherName}
+              {motherName}
             </Link>
           ) : (
-            person.motherName ?? '-'
+            motherName ?? '-'
           )}
       </td>
 
       <td>
-        {isFather
+        {hasFather
           ? (
             <Link
-              to={`./${isFather.slug}`}
+              to={`./${hasFather.slug}`}
             >
-              {person.fatherName}
+              {fatherName}
             </Link>
           ) : (
-            person.fatherName ?? '-'
+            fatherName ?? '-'
           )}
       </td>
     </>

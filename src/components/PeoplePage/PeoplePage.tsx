@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import classNames from 'classnames';
 
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
@@ -75,11 +76,9 @@ export const PeoplePage = () => {
                         <tr
                           data-cy="person"
                           key={person.slug}
-                          className={
-                            peopleId.pathname === `/people/${person.slug}`
-                              ? 'has-background-warning'
-                              : ''
-                          }
+                          className={classNames({
+                            'has-background-warning': peopleId.pathname === `/people/${person.slug}`,
+                          })}
                         >
                           <PersonLink person={person} people={people} />
                         </tr>
@@ -91,7 +90,6 @@ export const PeoplePage = () => {
             </div>
           </>
         )}
-
       </div>
     </>
   );
