@@ -6,29 +6,29 @@ import { Person, Sex } from '../../types';
 
 type Props = {
   person: Person;
-  people: Person[];
+  hasMother: Person | null;
+  hasFather: Person | null;
 };
 
-export const PersonLink: React.FC<Props> = ({ person, people }) => {
+export const PersonLink: React.FC<Props> = ({
+  person,
+  hasMother,
+  hasFather,
+}) => {
   const {
     name, slug, sex, born, died, motherName, fatherName,
   } = person;
 
-  const styleRed = classNames({
+  const personLink = classNames({
     'has-text-danger': person.sex === Sex.Female,
   });
-
-  const hasMother = people
-    .find(mother => mother.name === person.motherName);
-  const hasFather = people
-    .find(father => father.name === person.fatherName);
 
   return (
     <>
       <td>
         <Link
           to={`./${slug}`}
-          className={styleRed}
+          className={personLink}
         >
           {name}
         </Link>
@@ -37,7 +37,7 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
-      <td className={styleRed}>
+      <td className={personLink}>
         {hasMother
           ? (
             <Link

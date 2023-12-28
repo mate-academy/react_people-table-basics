@@ -68,21 +68,35 @@ export const PeoplePage = () => {
 
                   <tbody>
                     {people.length === 0 ? (
-                      <p data-cy="noPeopleMessage">
-                        There are no people on the server
-                      </p>
+                      <tr>
+                        <td colSpan={6} data-cy="noPeopleMessage">
+                          There are no people on the server
+                        </td>
+                      </tr>
                     ) : (
-                      people.map((person) => (
-                        <tr
-                          data-cy="person"
-                          key={person.slug}
-                          className={classNames({
-                            'has-background-warning': peopleId.pathname === `/people/${person.slug}`,
-                          })}
-                        >
-                          <PersonLink person={person} people={people} />
-                        </tr>
-                      ))
+                      people.map((person) => {
+                        const hasMother = people
+                          .find(({ name }) => name === person.motherName)
+                          || null;
+                        const hasFather = people
+                          .find(({ name }) => name === person.fatherName)
+                          || null;
+
+                        return (
+                          <tr
+                            key={person.slug}
+                            className={classNames({
+                              'has-background-warning': peopleId.pathname === `/people/${person.slug}`,
+                            })}
+                          >
+                            <PersonLink
+                              person={person}
+                              hasMother={hasMother}
+                              hasFather={hasFather}
+                            />
+                          </tr>
+                        );
+                      })
                     )}
                   </tbody>
                 </table>
