@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import React from 'react';
@@ -40,8 +39,12 @@ export const PeopleRending: React.FC<Props> = ({ people }) => {
             motherName,
           } = person;
 
-          const mother = people.find(parent => parent.name === motherName);
-          const father = people.find(parent => parent.name === fatherName);
+          const mother = people.find(({ name: momName }) => (
+            momName === motherName
+          ));
+          const father = people.find(({ name: dadName }) => (
+            dadName === fatherName
+          ));
 
           const mom = mother
             ? (
@@ -68,7 +71,7 @@ export const PeopleRending: React.FC<Props> = ({ people }) => {
               data-cy="person"
               className={cn({ 'has-background-warning': slugFromURL === slug })}
             >
-              <td>
+              <td aria-label={name}>
                 <PersonLink
                   name={name}
                   sex={sex}
