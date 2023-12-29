@@ -5,20 +5,21 @@ import { Person as PersonType } from '../../types';
 
 type Props = {
   person: PersonType,
-  findMotherSlug: string | undefined,
-  findFatherSlug: string | undefined,
+  findSlug: (name:string) => string | undefined,
 };
 
-export const Person: FC<Props> = ({
+export const PersonLink: FC<Props> = ({
   person,
-  findMotherSlug,
-  findFatherSlug,
+  findSlug,
 
 }) => {
   const { peopleId } = useParams();
 
   const motherName = person.motherName ? person.motherName : '-';
   const fatherName = person.fatherName ? person.fatherName : '-';
+
+  const motherSlug = findSlug(motherName);
+  const fatherSlug = findSlug(fatherName);
 
   return (
     <tr
@@ -38,10 +39,10 @@ export const Person: FC<Props> = ({
       <td>{person.born}</td>
       <td>{person.died}</td>
       <td>
-        {findMotherSlug
+        {motherSlug
           ? (
             <Link
-              to={`../${findMotherSlug}`}
+              to={`../${motherSlug}`}
               className="has-text-danger"
             >
               {person.motherName}
@@ -50,10 +51,10 @@ export const Person: FC<Props> = ({
           : motherName}
       </td>
       <td>
-        {findFatherSlug
+        {fatherSlug
           ? (
             <Link
-              to={`../${findFatherSlug}`}
+              to={`../${fatherSlug}`}
             >
               {fatherName}
             </Link>

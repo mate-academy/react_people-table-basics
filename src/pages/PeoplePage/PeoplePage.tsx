@@ -1,7 +1,7 @@
-import { People } from '../../components/People/People';
+import { PeopleTable } from '../../components/PeopleTable/PeopleTable';
 
 export const PeoplePage = () => {
   return (
-    <People />
+    <PeopleTable />
   );
 };
