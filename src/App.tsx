@@ -1,7 +1,7 @@
-import { NavLink, Outlet } from 'react-router-dom';
-import cn from 'classnames';
+import { Outlet } from 'react-router-dom';
 
 import './App.scss';
+import { Navbar } from './components/Navbar';
 
 export const App = () => (
   <div data-cy="app">
@@ -12,29 +12,7 @@ export const App = () => (
       aria-label="main navigation"
     >
       <div className="container">
-        <div className="navbar-brand">
-          <NavLink
-            className={({ isActive }) => (
-              cn('navbar-item', {
-                'has-background-grey-lighter': isActive,
-              })
-            )}
-            to="/"
-          >
-            Home
-          </NavLink>
-
-          <NavLink
-            className={({ isActive }) => (
-              cn('navbar-item', {
-                'has-background-grey-lighter': isActive,
-              })
-            )}
-            to="/people"
-          >
-            People
-          </NavLink>
-        </div>
+        <Navbar />
       </div>
     </nav>
 

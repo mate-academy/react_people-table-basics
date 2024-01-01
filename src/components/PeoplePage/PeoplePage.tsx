@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
-import { PersonLink } from '../PersonLink';
+import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,33 +38,7 @@ export const PeoplePage = () => {
           )}
 
           {hasAbleRender && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map((person) => {
-                  return (
-                    <PersonLink
-                      people={people}
-                      person={person}
-                      key={person.slug}
-                    />
-                  );
-                })}
-              </tbody>
-            </table>
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
