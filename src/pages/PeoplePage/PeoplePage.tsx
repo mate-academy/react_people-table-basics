@@ -22,6 +22,9 @@ export const PeoplePage = () => {
       });
   }, []);
 
+  const isNoPeople = !isError && !isLoadingData && !people.length;
+  const toShowPeople = !isError && !isLoadingData && people.length;
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -36,14 +39,14 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!isError && !isLoadingData && people.length && (
-            <PeopleTable people={people} />
-          )}
-
-          {!isError && !isLoadingData && !people.length && (
+          {isNoPeople && (
             <p data-cy="noPeopleMessage">
               There are no people on the server
             </p>
+          )}
+
+          {toShowPeople && (
+            <PeopleTable people={people} />
           )}
 
         </div>
