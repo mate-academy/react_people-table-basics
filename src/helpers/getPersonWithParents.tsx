@@ -7,7 +7,7 @@ export const getPersonWithParents = (peopleFromServer: Person[]) => {
     );
 
     const father = peopleFromServer.find(
-      dad => dad.name === person.motherName,
+      dad => dad.name === person.fatherName,
     );
 
     return {
