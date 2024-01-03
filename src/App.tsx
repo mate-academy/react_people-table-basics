@@ -1,6 +1,8 @@
+import { NavLink, Route, Routes } from 'react-router-dom';
 import { Loader } from './components/Loader';
 
 import './App.scss';
+import { HomePage } from './components/HomePage';
 
 export const App = () => {
   return (
@@ -13,9 +15,9 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <a className="navbar-item" href="#/">
+            <NavLink to="/" className="navbar-item" end>
               Home
-            </a>
+            </NavLink>
 
             <a
               className="navbar-item has-background-grey-lighter"
@@ -29,13 +31,15 @@ export const App = () => {
 
       <main className="section">
         <div className="container">
-          <h1 className="title">Home Page</h1>
           <h1 className="title">People Page</h1>
           <h1 className="title">Page not found</h1>
 
           <div className="block">
             <div className="box table-container">
               <Loader />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+              </Routes>
 
               <p data-cy="peopleLoadingError" className="has-text-danger">
                 Something went wrong
