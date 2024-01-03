@@ -1,11 +1,6 @@
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
-import { Person } from '../../types';
-
-interface PeopleTableProps {
-  people: Person[];
-  person: Person;
-}
+import { PeopleTableProps } from './PeopleTable.types';
 
 export const PeopleTable: React.FC<PeopleTableProps> = ({ people, person }) => {
   const mother = people.find(mum => mum.name === person.motherName);
