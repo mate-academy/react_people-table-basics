@@ -2,10 +2,18 @@ import {
   Routes,
   Route,
   NavLink,
+  Navigate,
 } from 'react-router-dom';
 
 import './App.scss';
+import classNames from 'classnames';
 import { People } from './components/People';
+
+const handlerActive = ({ isActive }: { isActive: boolean }) => (
+  classNames('navbar-item', {
+    'has-background-grey-lighter': isActive,
+  })
+);
 
 export const App = () => (
   <div data-cy="app">
@@ -17,12 +25,12 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink className="navbar-item" to="/">
+          <NavLink className={handlerActive} to="/">
             Home
           </NavLink>
 
           <NavLink
-            className="navbar-item has-background-grey-lighter"
+            className={handlerActive}
             to="/people"
           >
             People
@@ -40,7 +48,8 @@ export const App = () => (
             <Route path=":slug?" element={<People />} />
           </Route>
 
-          <Route element={<h1 className="title">Page not found</h1>} />
+          <Route path="/home" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<h1 className="title">Page not found</h1>} />
         </Routes>
       </div>
     </main>
