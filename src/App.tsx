@@ -1,4 +1,7 @@
-import { NavLink, Route, Routes } from 'react-router-dom';
+import {
+  NavLink, Navigate, Route, Routes,
+} from 'react-router-dom';
+import cn from 'classnames';
 
 import './App.scss';
 import { HomePage } from './components/HomePage';
@@ -15,12 +18,27 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <NavLink to="/" className="navbar-item" end>
+            <NavLink
+              to="/"
+              className={
+                ({ isActive }) => cn('navbar-item', {
+                  'has-background-grey-lighter': isActive,
+                })
+              }
+              end
+            >
               Home
             </NavLink>
 
             {/* className="navbar-item has-background-grey-lighter" */}
-            <NavLink to="/people" className="navbar-item">
+            <NavLink
+              to="/people"
+              className={
+                ({ isActive }) => cn('navbar-item', {
+                  'has-background-grey-lighter': isActive,
+                })
+              }
+            >
               People
             </NavLink>
           </div>
@@ -31,6 +49,7 @@ export const App = () => {
         <div className="container">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="home" element={<Navigate to="/" />} />
             <Route
               path="*"
               element={<h1 className="title">Page not found</h1>}
