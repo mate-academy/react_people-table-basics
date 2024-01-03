@@ -5,7 +5,7 @@ import { Person } from '../types';
 import { getPeople } from '../api';
 import { Table } from '../components/Table';
 
-const peopleToRender = (people: Person[]) => {
+const preparePeople = (people: Person[]) => {
   return people.map(person => {
     const mother = people.find(mom => mom.name === person.motherName);
     const father = people.find(dad => dad.name === person.fatherName);
@@ -26,7 +26,7 @@ export const People = () => {
   useEffect(() => {
     getPeople()
       .then((peopleFromServer) => {
-        setPeople(peopleToRender(peopleFromServer));
+        setPeople(preparePeople(peopleFromServer));
       })
       .catch(() => {
         setIsError(true);
@@ -56,29 +56,8 @@ export const People = () => {
           )}
 
           {people.length > 0 && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map(person => (
-                  <Table person={person} key={person.slug} />
-                ))}
-              </tbody>
-            </table>
+            <Table people={people} />
           )}
-
         </div>
       </div>
     </>

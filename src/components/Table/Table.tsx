@@ -1,50 +1,37 @@
-import { useParams } from 'react-router-dom';
-import cn from 'classnames';
 import React from 'react';
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink';
+import { PersonRow } from '../PersonRow';
 
 type Props = {
-  person: Person;
+  people: Person[];
 };
 
-export const Table: React.FC<Props> = ({ person }) => {
+export const Table: React.FC<Props> = (props) => {
   const {
-    sex,
-    born,
-    died,
-    motherName,
-    fatherName,
-    mother,
-    father,
-  } = person;
-
-  const { slug } = useParams();
+    people,
+  } = props;
 
   return (
-    <tr
-      data-cy="person"
-      className={cn(
-        { 'has-background-warning': slug === person.slug },
-      )}
+    <table
+      data-cy="peopleTable"
+      className="table is-striped is-hoverable is-narrow is-fullwidth"
     >
-      <td aria-label="Person">
-        <PersonLink person={person} />
-      </td>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Sex</th>
+          <th>Born</th>
+          <th>Died</th>
+          <th>Mother</th>
+          <th>Father</th>
+        </tr>
+      </thead>
 
-      <td aria-label="Sex">{sex}</td>
-      <td aria-label="Born">{born}</td>
-      <td aria-label="Died">{died}</td>
-      <td aria-label="Mother">
-        {(mother)
-          ? (<PersonLink person={mother} />)
-          : (motherName || '-')}
-      </td>
-      <td aria-label="Father">
-        {(father)
-          ? (<PersonLink person={father} />)
-          : (fatherName || '-')}
-      </td>
-    </tr>
+      <tbody>
+        {people.map(person => (
+          <PersonRow person={person} key={person.slug} />
+        ))}
+      </tbody>
+    </table>
   );
 };
