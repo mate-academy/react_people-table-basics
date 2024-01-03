@@ -1,8 +1,23 @@
-import { Loader } from './components/Loader';
-
+import {
+  NavLink,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
+import classNames from 'classnames';
+// import { Loader } from './components/Loader';
 import './App.scss';
+import { HomePage } from './pages/HomePage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { PeoplePage } from './pages/PeoplePage';
+
+const getLinkActive
+  = ({ isActive }: { isActive: boolean }) => classNames('navbar-item', {
+    'has-background-grey-lighter': isActive,
+  });
 
 export const App = () => (
+
   <div data-cy="app">
     <nav
       data-cy="nav"
@@ -12,26 +27,24 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
-            Home
-          </a>
-
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
-          >
-            People
-          </a>
+          <NavLink to="/" className={getLinkActive}>Home</NavLink>
+          <NavLink to="/people" className={getLinkActive}>People</NavLink>
         </div>
       </div>
     </nav>
 
     <main className="section">
       <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
-
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="home" element={<Navigate to="/" replace />} />
+          <Route path="people">
+            <Route index element={<PeoplePage />} />
+            <Route path=":slug" element={<PeoplePage />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+        {/*
         <div className="block">
           <div className="box table-container">
             <Loader />
@@ -166,7 +179,7 @@ export const App = () => (
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   </div>
