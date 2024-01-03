@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
@@ -8,6 +9,7 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { personSlug } = useParams();
 
   useEffect(() => {
     getPeople()
@@ -59,6 +61,7 @@ export const PeoplePage = () => {
                     key={person.slug}
                     people={people}
                     person={person}
+                    personSlug={personSlug}
                   />
                 ))}
               </tbody>

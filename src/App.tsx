@@ -30,7 +30,6 @@ export const App = () => {
               Home
             </NavLink>
 
-            {/* className="navbar-item has-background-grey-lighter" */}
             <NavLink
               to="/people"
               className={
@@ -54,7 +53,10 @@ export const App = () => {
               path="*"
               element={<h1 className="title">Page not found</h1>}
             />
-            <Route path="/people" element={<PeoplePage />} />
+            <Route path="/people">
+              <Route index element={<PeoplePage />} />
+              <Route path=":personSlug" element={<PeoplePage />} />
+            </Route>
           </Routes>
 
         </div>

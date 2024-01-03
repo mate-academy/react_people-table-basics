@@ -2,16 +2,23 @@ import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { PeopleTableProps } from './PeopleTable.types';
 
-export const PeopleTable: React.FC<PeopleTableProps> = ({ people, person }) => {
+export const PeopleTable: React.FC<PeopleTableProps> = (
+  { people, person, personSlug },
+) => {
   const mother = people.find(mum => mum.name === person.motherName);
   const father = people.find(dad => dad.name === person.fatherName);
 
   return (
-    <tr data-cy="person">
+    <tr
+      data-cy="person"
+      className={cn(
+        { 'has-background-warning': personSlug === person.slug },
+      )}
+    >
       <td>
         <a
           className={cn({
-            'has-text-danger': person.sex === 'm',
+            'has-text-danger': person.sex === 'f',
           })}
           href={`#/people/${person.slug}`}
         >
