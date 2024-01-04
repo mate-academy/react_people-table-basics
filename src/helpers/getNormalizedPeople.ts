@@ -14,9 +14,9 @@ const getParent: GetParentType = (people, parentName) => {
 };
 
 export const getNormalizedPeople = (people: Person[]) => (
-  people.map((person, _index, peopleArray) => ({
+  people.map((person) => ({
     ...person,
-    mother: getParent(peopleArray, person.motherName),
-    father: getParent(peopleArray, person.fatherName),
+    mother: getParent(people, person.motherName),
+    father: getParent(people, person.fatherName),
   }))
 );
