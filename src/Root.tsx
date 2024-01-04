@@ -12,7 +12,6 @@ export const Root = () => (
         <Route index element={<HomePage />} />
 
         <Route path={AppRoute.PEOPLE}>
-          <Route index element={<PeoplePage />} />
           <Route path={AppRoute.PERSON} element={<PeoplePage />} />
         </Route>
 

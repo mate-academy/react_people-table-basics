@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { Person } from '../types';
-import { AppRoute, Sex } from '../enums';
+import { Sex } from '../enums';
 
 type Props = {
   person: Person,
@@ -14,7 +14,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
   return (
     <Link
       className={classNames({ 'has-text-danger': sex === Sex.FEMALE })}
-      to={`${AppRoute.ROOT}${AppRoute.PEOPLE}/${slug}`}
+      to={`../${slug}`}
     >
       {name}
     </Link>

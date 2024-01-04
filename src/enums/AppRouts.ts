@@ -3,5 +3,5 @@ export enum AppRoute {
   HOME = 'home',
   ANY = '*',
   PEOPLE = 'people',
-  PERSON = ':slug',
+  PERSON = ':slug?',
 }
