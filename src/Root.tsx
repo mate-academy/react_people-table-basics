@@ -12,7 +12,8 @@ export const Root = () => (
       <Route path="people" element={<PeoplePage />}>
         <Route path=":slug" element={<PeoplePage />} />
       </Route>
+      <Route path="*" element={<Page404 />} />
     </Route>
-    <Route path="*" element={<Page404 />} />
+
   </Routes>
 );

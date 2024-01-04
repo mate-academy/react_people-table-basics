@@ -6,11 +6,11 @@ import { ErrorType } from '../../types/error-enum';
 import { PersonInfo } from '../PersonInfo/PersonInfo';
 
 export const PeoplePage = () => {
-  const [peopleFS, setPeopleFS] = useState<Person[]>([]);
+  const [peopleFS, setPeopleFS] = useState<Person[] | null>(null);
   const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const hasNoPeopleFromSrver = peopleFS.length === 0;
+  const hasNoPeopleFromSrver = peopleFS?.length === 0;
   const hasLoadingError = error === ErrorType.PEOPLE_LOADING;
 
   useEffect(() => {
@@ -32,46 +32,49 @@ export const PeoplePage = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {hasLoadingError
+          {hasNoPeopleFromSrver && !error
             && (
-              <p data-cy="peopleLoadingError" className="has-text-danger">
-                Something went wrong
+              <p data-cy="noPeopleMessage">
+                {ErrorType.NO_PEOPLE_ON_SERVER}
               </p>
             )}
 
-          {hasNoPeopleFromSrver
+          {hasLoadingError
             && (
-              <p data-cy="noPeopleMessage">
-                There are no people on the server
+              <p data-cy="peopleLoadingError" className="has-text-danger">
+                {ErrorType.PEOPLE_LOADING}
               </p>
-            ) }
+            )}
 
-          <table
-            data-cy="peopleTable"
-            className="table is-striped is-hoverable is-narrow is-fullwidth"
-          >
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
-              </tr>
-            </thead>
+          {peopleFS
+            && (
+              <table
+                data-cy="peopleTable"
+                className="table is-striped is-hoverable is-narrow is-fullwidth"
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Sex</th>
+                    <th>Born</th>
+                    <th>Died</th>
+                    <th>Mother</th>
+                    <th>Father</th>
+                  </tr>
+                </thead>
 
-            <tbody>
+                <tbody>
 
-              {peopleFS.map(person => (
-                <PersonInfo
-                  key={person.slug}
-                  person={person}
-                  peopleFromServer={peopleFS}
-                />
-              ))}
-            </tbody>
-          </table>
+                  {peopleFS?.map(person => (
+                    <PersonInfo
+                      key={person.slug}
+                      person={person}
+                      peopleFromServer={peopleFS}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            )}
         </div>
       </div>
     </>
