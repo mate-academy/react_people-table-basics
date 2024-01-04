@@ -1,54 +1,70 @@
-import cn from 'classnames';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { PeopleTableProps } from './PeopleTable.types';
+import { Person } from '../../types';
+import { getPeople } from '../../api';
+import { Loader } from '../Loader';
+import { PersonLink } from '../PersonLink';
 
 export const PeopleTable: React.FC<PeopleTableProps> = (
-  { people, person, personSlug },
+  { personSlug },
 ) => {
-  const mother = people.find(mum => mum.name === person.motherName);
-  const father = people.find(dad => dad.name === person.fatherName);
+  const [people, setPeople] = useState<Person[]>([]);
+  const [error, setError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    getPeople()
+      .then(allPeople => setPeople(allPeople))
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
 
   return (
-    <tr
-      data-cy="person"
-      className={cn(
-        { 'has-background-warning': personSlug === person.slug },
+    <div className="box table-container">
+      {isLoading && <Loader />}
+
+      {error && (
+        <p data-cy="peopleLoadingError" className="has-text-danger">
+          Something went wrong
+        </p>
       )}
-    >
-      <td>
-        <a
-          className={cn({
-            'has-text-danger': person.sex === 'f',
-          })}
-          href={`#/people/${person.slug}`}
+
+      {(people.length === 0 && !isLoading) && (
+        <p data-cy="noPeopleMessage">
+          There are no people on the server
+        </p>
+      )}
+
+      {!isLoading && (
+        <table
+          data-cy="peopleTable"
+          className="table is-striped is-hoverable is-narrow is-fullwidth"
         >
-          {person.name}
-        </a>
-      </td>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Sex</th>
+              <th>Born</th>
+              <th>Died</th>
+              <th>Mother</th>
+              <th>Father</th>
+            </tr>
+          </thead>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-
-      {mother ? (
-        <td>
-          <Link to={`../${mother.slug}`} className="has-text-danger">
-            {mother.name}
-          </Link>
-        </td>
-      ) : (
-        <td>{person.motherName || '-'}</td>
+          <tbody>
+            {people.map(person => (
+              <PersonLink
+                key={person.slug}
+                people={people}
+                person={person}
+                personSlug={personSlug}
+              />
+            ))}
+          </tbody>
+        </table>
       )}
-
-      {father ? (
-        <td>
-          <Link to={`../${father.slug}`}>
-            {father.name}
-          </Link>
-        </td>
-      ) : (
-        <td>{person.fatherName || '-'}</td>
-      )}
-    </tr>
+    </div>
   );
 };
