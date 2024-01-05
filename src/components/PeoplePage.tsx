@@ -4,31 +4,23 @@ import { PeoplePageContent } from './PeoplePageContent';
 
 export const PeoplePage = () => {
   const {
-    getPeopleFromApi,
+    getPeopleWithParents,
     resetPeople,
   } = usePeople();
 
   useEffect(() => {
-    getPeopleFromApi();
+    getPeopleWithParents();
 
     return () => {
       resetPeople();
     };
-  }, [getPeopleFromApi, resetPeople]);
+  }, [getPeopleWithParents, resetPeople]);
 
   return (
     <>
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {/* {isLoading && <Loader />}
-          {isError && <ErrorMessage />}
-          {!isLoading && !!people && <PeopleList />}
-          {!isError && !isLoading && !people?.length && (
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
-          )} */}
           <PeoplePageContent />
         </div>
       </div>

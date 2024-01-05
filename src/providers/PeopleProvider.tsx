@@ -10,7 +10,7 @@ type PeopleContextType = {
   resetPeople: () => void;
   isLoading: boolean;
   isError: boolean;
-  getPeopleFromApi: () => void;
+  getPeopleWithParents: () => void;
 };
 
 const PeopleContext = createContext<PeopleContextType>({} as PeopleContextType);
@@ -41,7 +41,7 @@ export const PeopleProvider: FC<Props> = ({ children }) => {
     people,
     isLoading,
     isError,
-    getPeopleFromApi: getPeopleWithParents,
+    getPeopleWithParents,
   };
 
   return (
