@@ -6,13 +6,11 @@ import { Person } from '../types';
 import { getNormalizedPeople } from '../helpers';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<Person[] | []>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [people, setPeople] = useState<Person[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [hasLoadingError, setHasLoadingError] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-
     getPeople()
       .then((response) => {
         const normalizedPeople = getNormalizedPeople(response);
