@@ -1,5 +1,8 @@
+import {
+  NavLink,
+} from 'react-router-dom';
+import classNames from 'classnames';
 import { Loader } from './components/Loader';
-
 import './App.scss';
 
 export const App = () => (
@@ -12,16 +15,21 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
+          <NavLink
+            to="/"
+            className={({ isActive }) => classNames('navbar-item',
+              { 'has-background-grey-lighter': isActive })}
+          >
             Home
-          </a>
+          </NavLink>
 
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
+          <NavLink
+            to="/people"
+            className={({ isActive }) => classNames('navbar-item',
+              { 'has-background-grey-lighter': isActive })}
           >
             People
-          </a>
+          </NavLink>
         </div>
       </div>
     </nav>
