@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person as PersonType } from '../types';
@@ -26,7 +27,6 @@ export const Person: React.FC<Props> = ({ person, key, people }) => {
       <td>
         <PersonLink
           person={person}
-          aria-label={`${person.name}`}
         />
       </td>
 
