@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { getPeopleWithParrents } from '../helpers';
-import { Loader, PersonItem } from '../components';
+import { PersonItem } from '../components';
+import { Loader } from '../components/loader';
 
 export const PeoplePage = () => {
   const [loadingPeople, setLoadingPeople] = useState<boolean>(true);
