@@ -4,10 +4,9 @@ import { Navigation } from './components/Navigation';
 import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
 import { PageNotFound } from './components/PageNotFound';
-import { PeopleProvider } from './providers/PeopleProvider';
 
-export const App = () => (
-  <PeopleProvider>
+export const App = () => {
+  return (
     <div data-cy="app">
       <Navigation />
 
@@ -25,5 +24,5 @@ export const App = () => (
         </div>
       </main>
     </div>
-  </PeopleProvider>
-);
+  );
+};

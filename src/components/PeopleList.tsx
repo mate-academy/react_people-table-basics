@@ -1,9 +1,12 @@
-import { usePeople } from '../providers/PeopleProvider';
+import { FC } from 'react';
+import { Person } from '../types';
 import { PersonInfo } from './PersonInfo';
 
-export const PeopleList = () => {
-  const { people } = usePeople();
+type Props = {
+  people: Person[]
+};
 
+export const PeopleList: FC<Props> = ({ people }) => {
   return (
     <table
       data-cy="peopleTable"

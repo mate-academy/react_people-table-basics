@@ -1,27 +1,34 @@
-import { useEffect } from 'react';
-import { usePeople } from '../providers/PeopleProvider';
-import { PeoplePageContent } from './PeoplePageContent';
+import { useEffect, useState } from 'react';
+import { getPeople } from '../api';
+import { Loader } from './Loader';
+import { ErrorMessage } from './ErrorMessage';
+import { PeopleList } from './PeopleList';
+import { getParents } from '../utils/getParents';
+import { NoPeople } from './NoPeople';
 
 export const PeoplePage = () => {
-  const {
-    getPeopleWithParents,
-    resetPeople,
-  } = usePeople();
+  const [content, setContent] = useState<JSX.Element>(<Loader />);
 
   useEffect(() => {
-    getPeopleWithParents();
+    getPeople()
+      .then(data => {
+        const peopleWithParents = getParents(data);
 
-    return () => {
-      resetPeople();
-    };
-  }, [getPeopleWithParents, resetPeople]);
+        if (data.length) {
+          setContent(<PeopleList people={peopleWithParents} />);
+        } else {
+          setContent(<NoPeople />);
+        }
+      })
+      .catch(() => setContent(ErrorMessage));
+  }, []);
 
   return (
     <>
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          <PeoplePageContent />
+          {content}
         </div>
       </div>
     </>
