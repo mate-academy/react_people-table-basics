@@ -12,8 +12,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
     name, sex, born, died, fatherName, motherName, slug, mother, father,
   } = person;
 
-  const { personSlug } = useParams();
-  const selectedUser = personSlug;
+  const { personSlug: selectedUser } = useParams();
 
   const getClassForWomen
     = (personSex: string | undefined): string | undefined => {
