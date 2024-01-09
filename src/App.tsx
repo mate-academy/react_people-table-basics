@@ -3,7 +3,6 @@ import {
 } from 'react-router-dom';
 import classNames from 'classnames';
 import { People } from './components/People';
-import { Loader } from './components/Loader';
 import './App.scss';
 
 export const App = () => (
@@ -38,18 +37,18 @@ export const App = () => (
     <main className="section">
       <div className="container">
         <Routes>
-          <Route path="/" element={<h1 className="title">Home page</h1>} />
+          <Route path="/" element={<h1 className="title">Home Page</h1>} />
           <Route path="/home" element={<Navigate to="/" />} />
           <Route path="people">
             <Route index element={<People />} />
-            <Route path=":personString" element={<People />} />
+            <Route path=":personSlug" element={<People />} />
           </Route>
           <Route
             path="*"
             element={<h1 className="title">Page not found</h1>}
           />
         </Routes>
-        <div className="block">
+        {/* <div className="block">
           <div className="box table-container">
             <Loader />
 
@@ -173,7 +172,7 @@ export const App = () => (
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   </div>
