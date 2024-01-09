@@ -3,6 +3,12 @@ import classNames from 'classnames';
 
 import './App.scss';
 
+const getLinkClass = (
+  { isActive }: { isActive: boolean },
+) => classNames('navbar-item', {
+  'has-background-grey-lighter': isActive,
+});
+
 export const App = () => (
   <div data-cy="app">
     <nav
@@ -14,20 +20,14 @@ export const App = () => (
       <div className="container">
         <div className="navbar-brand">
           <NavLink
-            className={({ isActive }) => classNames('navbar-item', {
-              'has-background-grey-lighter': isActive,
-            })}
-            // className="navbar-item has-background-grey-lighter"
+            className={getLinkClass}
             to="/"
           >
             Home
           </NavLink>
 
           <NavLink
-            className={({ isActive }) => classNames('navbar-item', {
-              'has-background-grey-lighter': isActive,
-            })}
-            // className="navbar-item has-background-grey-lighter"
+            className={getLinkClass}
             to="people"
           >
             People

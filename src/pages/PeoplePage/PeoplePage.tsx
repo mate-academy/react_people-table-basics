@@ -10,17 +10,19 @@ export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const getPpl = async () => {
+    const gettingPeople = async () => {
       try {
         setIsLoading(true);
 
-        const response = await getPeople();
+        const peopleFromServer = await getPeople();
 
-        const peopleToRender = response.map(person => {
+        const peopleToRender = peopleFromServer.map(person => {
           return {
             ...person,
-            mother: response.find(p => p.name === person.motherName),
-            father: response.find(p => p.name === person.fatherName),
+            mother: peopleFromServer
+              .find(({ name }) => name === person.motherName),
+            father: peopleFromServer
+              .find(({ name }) => name === person.fatherName),
           };
         });
 
@@ -36,7 +38,7 @@ export const PeoplePage = () => {
       }
     };
 
-    getPpl();
+    gettingPeople();
   }, []);
 
   return (
