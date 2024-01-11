@@ -7,7 +7,7 @@ import { getPeople } from '../api';
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const preparedParents = (parents: Person[]) => parents.map(parent => ({
     ...parent,

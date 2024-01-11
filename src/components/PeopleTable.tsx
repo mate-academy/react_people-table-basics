@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import React from 'react';
+import classNames from 'classnames';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
-import classNames from 'classnames';
 
 type Props = {
   people: Person[],
@@ -36,6 +36,7 @@ export const PeopleTable: React.FC<Props> = ({
               'has-background-warning': slug === person.slug,
             })}
             data-cy="person"
+            key={person.slug}
           >
             <td
               aria-label={`${person.name}`}
