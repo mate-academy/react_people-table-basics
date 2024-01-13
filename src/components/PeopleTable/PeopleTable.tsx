@@ -35,17 +35,21 @@ export const PeopleTable = () => {
       <div className="box table-container">
         {isLoading && <Loader />}
 
-        {showError && (
-          <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
-          </p>
-        )}
+        {
+          showError && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )
+        }
 
-        {people !== null && !people.length && (
-          <p data-cy="noPeopleMessage">
-            There are no people on the server
-          </p>
-        )}
+        {
+          people !== null && !people.length && (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
+            </p>
+          )
+        }
 
         {
           people !== null && people.length > 0 && (
