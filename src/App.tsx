@@ -1,7 +1,6 @@
 import {
   NavLink, Routes, Route, Navigate,
 } from 'react-router-dom';
-
 import './App.scss';
 import { PeopleTable } from './components/PeopleTable';
 
