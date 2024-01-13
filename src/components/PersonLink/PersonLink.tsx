@@ -1,12 +1,14 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Person } from '../../types';
 
 type Props = {
   person: Person,
 };
 
-export const PersonItem: FC<Props> = ({ person }) => {
+export const PersonLink: FC<Props> = ({ person }) => {
+  const { personSlug } = useParams();
+
   const {
     slug,
     name,
@@ -19,10 +21,13 @@ export const PersonItem: FC<Props> = ({ person }) => {
     father,
   } = person;
 
+  const isSelected = slug === personSlug;
+  const selectedClass = isSelected ? 'has-background-warning' : undefined;
+
   const personClass = sex === 'f' ? 'has-text-danger' : undefined;
 
   return (
-    <>
+    <tr className={selectedClass} data-cy="person">
       <td>
         <Link to={`/people/${slug}`} className={personClass}>
           {name}
@@ -36,7 +41,7 @@ export const PersonItem: FC<Props> = ({ person }) => {
         {
           mother
             ? (
-              <Link to={`/people/${motherName}`} className="has-text-danger">
+              <Link to={`/people/${mother.slug}`} className="has-text-danger">
                 {motherName}
               </Link>
             )
@@ -46,10 +51,10 @@ export const PersonItem: FC<Props> = ({ person }) => {
       <td>
         {
           father
-            ? <Link to={`/people/${fatherName}`}>{fatherName}</Link>
+            ? <Link to={`/people/${father.slug}`}>{fatherName}</Link>
             : fatherName || '-'
         }
       </td>
-    </>
+    </tr>
   );
 };
