@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const PersonLink: FC<Props> = ({ person }) => {
-  const { personSlug } = useParams();
+  const { selectedPersonSlug } = useParams();
 
   const {
     slug,
@@ -21,13 +21,12 @@ export const PersonLink: FC<Props> = ({ person }) => {
     father,
   } = person;
 
-  const isSelected = slug === personSlug;
-  const selectedClass = isSelected ? 'has-background-warning' : undefined;
-
+  const isSelected = slug === selectedPersonSlug;
+  const selectedPersonClass = isSelected ? 'has-background-warning' : undefined;
   const personClass = sex === 'f' ? 'has-text-danger' : undefined;
 
   return (
-    <tr className={selectedClass} data-cy="person">
+    <tr className={selectedPersonClass} data-cy="person">
       <td>
         <Link to={`/people/${slug}`} className={personClass}>
           {name}

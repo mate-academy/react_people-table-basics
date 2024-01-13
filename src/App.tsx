@@ -1,7 +1,6 @@
 import {
   NavLink, Routes, Route, Navigate,
 } from 'react-router-dom';
-
 import './App.scss';
 import { PeopleTable } from './components/PeopleTable';
 
@@ -22,13 +21,13 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <NavLink className={isNavLinkActive} to="/">
+            <NavLink to="/" className={isNavLinkActive}>
               Home
             </NavLink>
 
             <NavLink
-              className={isNavLinkActive}
               to="/people"
+              className={isNavLinkActive}
             >
               People
             </NavLink>
@@ -39,9 +38,7 @@ export const App = () => {
       <main className="section">
         <div className="container">
           <Routes>
-
             <Route path="/" element={<h1 className="title">Home Page</h1>} />
-
             <Route
               path="/people"
               element={(
@@ -51,16 +48,13 @@ export const App = () => {
                 </>
               )}
             >
-              <Route path=":personSlug" element={<PeopleTable />} />
+              <Route path=":selectedPersonSlug" element={<PeopleTable />} />
             </Route>
-
             <Route path="/home" element={<Navigate to="/" replace />} />
-
             <Route
               path="*"
               element={<h1 className="title">Page not found</h1>}
             />
-
           </Routes>
         </div>
       </main>
