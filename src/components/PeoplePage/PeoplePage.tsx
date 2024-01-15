@@ -5,12 +5,11 @@ import { PersonType } from '../../types';
 import { PersonInfo } from '../PersonInfo';
 
 export const PeoplePage = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [people, setPeople] = useState<PersonType[]>([]);
   const [errorMessage, setErrorMessage] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     getPeople()
       .then((peopleFromServer) => {
         const newPeople = peopleFromServer.map(person => {
