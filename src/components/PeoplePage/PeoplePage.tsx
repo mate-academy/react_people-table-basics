@@ -5,7 +5,7 @@ import { getPeople } from '../../api';
 import { PersonLink } from '../Person/Person';
 
 export const PeoplePage = () => {
-  const [people, setPeople] = useState<Person[] | []>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
