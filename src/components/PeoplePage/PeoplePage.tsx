@@ -6,7 +6,7 @@ import { PersonLink } from '../Person/Person';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
