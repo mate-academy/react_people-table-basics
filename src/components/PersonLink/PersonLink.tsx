@@ -11,7 +11,6 @@ interface Props {
 }
 
 const getLinkClass = (sex: string) => classNames(
-  '',
   { 'has-text-danger': sex === 'f' },
 );
 
