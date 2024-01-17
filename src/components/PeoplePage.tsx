@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Loader } from './Loader';
-import { getPeople } from '../../api';
-import { Person } from '../../types';
-import { PersonLink } from '../PersonLink';
+import { Loader } from './Loader/Loader';
+import { getPeople } from '../api';
+import { Person } from '../types';
+import { PersonLink } from './PersonLink';
 
 export const PeoplePage = () => {
   const [isLoader, setIsLoader] = useState(false);
