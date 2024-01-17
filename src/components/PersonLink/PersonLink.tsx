@@ -6,8 +6,8 @@ import { Person } from '../../types';
 interface Props {
   person: Person
   className: string
-  fatherBirth: number | null
   motherBirth: number | null
+  fatherBirth: number | null
 }
 
 const getLinkClass = (sex: string) => classNames(

@@ -13,7 +13,7 @@ const getLinkClass = (prop: NavLinkProps) => classNames(
   { 'has-background-grey-lighter': prop.isActive },
 );
 
-export const NavBar = () => {
+export const NavBar: React.FC = () => {
   return (
     <nav
       data-cy="nav"
