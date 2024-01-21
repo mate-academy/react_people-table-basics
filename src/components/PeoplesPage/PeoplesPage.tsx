@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
@@ -8,19 +8,12 @@ export const PeoplesPage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [noPeople, setNoPeople] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
     getPeople()
       .then(result => {
-        if (result.length === 0) {
-          setNoPeople(true);
-
-          return;
-        }
-
         const peopleWithParents = result.map(person => {
           return {
             ...person,
@@ -37,6 +30,10 @@ export const PeoplesPage = () => {
       })
       .finally(() => setIsLoading(false));
   }, []);
+
+  const noPeople = useMemo(() => {
+    return people.length === 0;
+  }, [people]);
 
   return (
     <>
