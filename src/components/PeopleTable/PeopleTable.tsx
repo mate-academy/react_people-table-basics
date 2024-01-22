@@ -29,7 +29,7 @@ export const PeopleTable = (props: PeopleTableProps) => {
       <tbody>
         {people.map(person => (
           <>
-            <React.Fragment key={person.slug}>
+            <React.Component key={person.slug}>
               <tr
                 className={classNames({
                   'has-background-warning': slug === person.slug,
@@ -76,7 +76,7 @@ export const PeopleTable = (props: PeopleTableProps) => {
                   {!person.fatherName && '-'}
                 </td>
               </tr>
-            </React.Fragment>
+            </React.Component>
           </>
         ))}
       </tbody>
