@@ -1,5 +1,3 @@
-// import { Loader } from './components/Loader';
-
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { Layout } from './components/Layout';
@@ -14,7 +12,6 @@ export const App = () => (
       <Route path="/home" element={<Navigate to="/" replace />} />
       <Route path="/people/:slug?" element={<PeoplePage />} />
 
-      {/* </Route> */}
       <Route path="*" element={<NotFoundPage />} />
     </Route>
   </Routes>
