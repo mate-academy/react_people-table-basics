@@ -25,7 +25,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
 
       <tbody>
         {people.map(person => (
-          <PersonLink people={people} person={person} />
+          <PersonLink
+            people={people}
+            person={person}
+            key={person.slug}
+          />
         ))}
       </tbody>
     </table>
