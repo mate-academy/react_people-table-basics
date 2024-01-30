@@ -28,4 +28,4 @@ export const NavBar = () => {
       </div>
     </nav>
   );
-}
+};
