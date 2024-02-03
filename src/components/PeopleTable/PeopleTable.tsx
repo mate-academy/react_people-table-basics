@@ -27,7 +27,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             const fatherLink
               = people.find(el => el.name === person.fatherName)?.slug || null;
             const motherLink
-              = people.find(el => el.name === person.fatherName)?.slug || null;
+              = people.find(el => el.name === person.motherName)?.slug || null;
 
             return (
               <PersonItem
