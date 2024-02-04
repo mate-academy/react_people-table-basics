@@ -26,10 +26,10 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
         <tbody>
           {people.map(person => {
             const fatherLink = people.find(
-              dad => dad.name === person.fatherName
+              dad => dad.name === person.fatherName,
             )?.slug || null;
             const motherLink = people.find(
-              mom => mom.name === person.motherName
+              mom => mom.name === person.motherName,
             )?.slug || null;
 
             return (
