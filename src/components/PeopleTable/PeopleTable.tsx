@@ -1,7 +1,7 @@
 import React from 'react';
 import { Person } from '../../types';
 import { PersonInfo } from '../PersonInfo';
-import { findPerson } from '../../services/findPerson';
+import { getParent } from '../../services/getParent';
 
 interface Props {
   people: Person[],
@@ -28,8 +28,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => (
         <PersonInfo
           person={person}
           key={person.slug}
-          mother={findPerson(people, person.motherName)}
-          father={findPerson(people, person.fatherName)}
+          mother={getParent(people, person.motherName)}
+          father={getParent(people, person.fatherName)}
         />
       ))}
     </tbody>

@@ -6,8 +6,8 @@ import { PersonLink } from '../PersonLink';
 
 interface Props {
   person: Person,
-  mother: Person | null,
-  father: Person | null,
+  mother: JSX.Element | string,
+  father: JSX.Element | string,
 }
 
 export const PersonInfo: React.FC<Props> = ({
@@ -19,8 +19,6 @@ export const PersonInfo: React.FC<Props> = ({
     sex,
     born,
     died,
-    motherName,
-    fatherName,
   } = person;
 
   const { slug } = useParams();
@@ -39,10 +37,10 @@ export const PersonInfo: React.FC<Props> = ({
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {mother ? (<PersonLink person={mother} />) : motherName || '-'}
+        {mother}
       </td>
       <td>
-        {father ? (<PersonLink person={father} />) : fatherName || '-'}
+        {father}
       </td>
     </tr>
   );
