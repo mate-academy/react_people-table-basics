@@ -8,7 +8,7 @@ import './App.scss';
 
 const getLinkClass = ({ isActive }: { isActive: boolean }) => cn(
   'navbar-item',
-  { 'is-active': isActive, 'has-background-grey-lighter': isActive },
+  { 'has-background-grey-lighter': isActive },
 );
 
 export const App = () => (
