@@ -20,14 +20,12 @@ const getParent = (parentName: string | null, parent?: Person) => {
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   const { slug: slugParam } = useParams();
 
   useEffect(() => {
-    setLoading(true);
-
     getPeople()
       .then((res) => setPeople(res))
       .catch(() => setIsError(true))
