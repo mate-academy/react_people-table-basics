@@ -58,6 +58,7 @@ export const PersonsList: React.FC = () => {
                 <tbody>
                   {people.map((person: Person) => (
                     <PersonLink
+                      people={people}
                       key={person.slug}
                       person={person}
                       personSlug={personSlug}

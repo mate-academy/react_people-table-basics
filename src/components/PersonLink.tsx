@@ -8,9 +8,11 @@ type Props = {
   selectedPerson: boolean;
   selectedMother: boolean;
   selectedFather: boolean;
+  people: Person[];
 };
 
 export const PersonLink: React.FC<Props> = ({
+  people,
   person,
   personSlug,
   selectedPerson,
@@ -21,6 +23,13 @@ export const PersonLink: React.FC<Props> = ({
   const selectPerson = selectedPerson ? 'has-background-warning' : undefined;
   const selectMother = selectedMother ? 'has-background-warning' : undefined;
   const selectFather = selectedFather ? 'has-background-warning' : undefined;
+  const father = people.find(
+    dad => dad.name === person.fatherName,
+  )?.slug;
+
+  const mother = people.find(
+    mom => mom.name === person.motherName,
+  )?.slug;
 
   return (
     <tr
@@ -43,7 +52,7 @@ export const PersonLink: React.FC<Props> = ({
       <td>
         {person.motherName ? (
           <Link
-            to={`/${person.motherName}`}
+            to={`/people/${mother}`}
             className={isFemale}
             key={personSlug}
           >
@@ -54,7 +63,7 @@ export const PersonLink: React.FC<Props> = ({
       <td>
         {person.fatherName ? (
           <Link
-            to={`/${person.fatherName}`}
+            to={`/people/${father}`}
             className={isFemale}
             key={personSlug}
           >
