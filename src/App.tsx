@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.scss';
-import { NavBar } from './NavBar';
-import { PeopleTable } from './PeopleTable';
-import { HomePage } from './HomePage';
-import { PageNotFound } from './PageNotFound';
+import { NavBar } from './components/Loader/NavBar';
+import { PeoplePage } from './pages/PeoplePage';
+import { HomePage } from './pages/HomePage';
+import { PageNotFound } from './pages/PageNotFound';
 
 export const App = () => {
   return (
@@ -21,7 +21,7 @@ export const App = () => {
                 element={<Navigate to=".." replace />}
               />
               <Route path="people">
-                <Route path=":slug?" element={<PeopleTable />} />
+                <Route path=":slug?" element={<PeoplePage />} />
               </Route>
             </Route>
             <Route path="*" element={<PageNotFound />} />

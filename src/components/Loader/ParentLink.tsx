@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { ParentInterface } from './types/ParentInterface';
+import { ParentInterface } from '../../types/ParentInterface';
 
 export const ParentLink: React.FC<ParentInterface> = ({ parent }) => {
   return (
