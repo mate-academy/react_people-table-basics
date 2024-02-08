@@ -14,8 +14,8 @@ export const PersonLink: React.FC<Props> = ({
   person,
   personSlug,
   selectedPerson,
-  selectedMother, // Додано параметр selectedMother
-  selectedFather, // Додано параметр selectedFather
+  selectedMother,
+  selectedFather,
 }) => {
   const isFemale = person.sex === 'f' ? 'has-text-danger' : undefined;
   const selectPerson = selectedPerson ? 'has-background-warning' : undefined;
