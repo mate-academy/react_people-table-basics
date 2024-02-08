@@ -5,13 +5,11 @@ import { getPeople } from '../../api';
 import { PeopleTable } from '../../components/PeopleTable';
 
 export const PeoplePage = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [people, setPeople] = useState<Person[]>([]);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    setIsLoading(true);
-
     getPeople()
       .then(setPeople)
       .catch(() => {
