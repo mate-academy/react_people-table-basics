@@ -6,9 +6,9 @@ import {
   Routes,
 } from 'react-router-dom';
 import { App } from '../App';
-import { HomePage } from '../components/HomePage/HomePage';
-import { NotFoundPage } from '../components/NotFoundPage/NotFoundPage';
-import { PeoplePage } from '../components/PeoplePage/PeoplePage';
+import { HomePage } from '../Pages/HomePage/HomePage';
+import { NotFoundPage } from '../Pages/NotFoundPage/NotFoundPage';
+import { PeoplePage } from '../Pages/PeoplePage/PeoplePage';
 
 export const Root: React.FC = () => (
   <Router>

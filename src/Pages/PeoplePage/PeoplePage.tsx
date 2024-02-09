@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Loader } from '../Loader';
+import { Loader } from '../../components/Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
-import { PeopleTable } from '../PeopleTable/PeopleTable';
+import { PeopleTable } from '../../components/PeopleTable/PeopleTable';
+import { getParent } from '../../utils/getParent';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const getParent = (name: string) => {
-    return people.find(p => p.name === name);
-  };
-
   const visiblePeople = people.map(person => {
-    const mother = person.motherName ? getParent(person.motherName) : null;
-    const father = person.fatherName ? getParent(person.fatherName) : null;
+    const mother = person.motherName
+      ? getParent(person.motherName, people) : undefined;
+    const father = person.fatherName
+      ? getParent(person.fatherName, people) : undefined;
 
     return {
       ...person,
-      ...(mother && { mother }),
-      ...(father && { father }),
+      mother,
+      father,
     };
   });
 
