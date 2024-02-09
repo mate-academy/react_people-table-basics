@@ -58,7 +58,7 @@ export const App = () => {
               }
             />
             <Route
-              path="/people/:personName?"
+              path="/people/:slug?"
               element={
                 <People />
               }

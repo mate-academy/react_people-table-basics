@@ -14,8 +14,7 @@ export const People = () => {
   const [err, setErr] = useState(false);
   const [dataComes, setDataComes] = useState('');
 
-  const { personName } = useParams();
-  const selectedTab = personName;
+  const { slug } = useParams();
 
   useEffect(() => {
     setloading(true);
@@ -36,10 +35,6 @@ export const People = () => {
         setloading(false);
       });
   }, []);
-
-  const linkMaker = (person: Person) => {
-    return `${person.name.toLocaleLowerCase().split(' ').join('-')}-${person.born}`;
-  };
 
   const existingPerson = (Name: string | null) => {
     if (Name === null) {
@@ -100,7 +95,7 @@ export const People = () => {
                     data-cy="person"
                     className={classNames({
                       'has-background-warning':
-                        linkMaker(person) === selectedTab,
+                        person.slug === slug,
                     })}
                   >
                     <td>
