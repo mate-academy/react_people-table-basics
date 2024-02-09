@@ -19,57 +19,67 @@ export const PersonLink: React.FC<Props> = ({
   selectedMother,
   selectedFather,
 }) => {
-  const isFemale = person.sex === 'f' ? 'has-text-danger' : undefined;
-  const selectPerson = selectedPerson ? 'has-background-warning' : undefined;
-  const selectMother = selectedMother ? 'has-background-warning' : undefined;
-  const selectFather = selectedFather ? 'has-background-warning' : undefined;
+  const {
+    sex,
+    name,
+    motherName,
+    fatherName,
+    slug,
+    born,
+    died,
+  } = person;
+  const isFemale = person.sex === 'f' ? 'has-text-danger' : '';
+  const selectPerson
+ = selectedPerson
+ || selectedMother
+  || selectedFather ? 'has-background-warning' : '';
   const father = people.find(
-    dad => dad.name === person.fatherName,
+    dad => dad.name === fatherName,
   )?.slug;
 
   const mother = people.find(
-    mom => mom.name === person.motherName,
+    mom => mom.name === motherName,
   )?.slug;
 
   return (
     <tr
       data-cy="person"
-      className={cn(selectPerson, selectMother, selectFather)}
+      className={cn(selectPerson)}
     >
       <td>
         <Link
-          to={`/people/${person.slug}`}
+          to={`/people/${slug}`}
           className={isFemale}
           key={personSlug}
         >
-          {person.name}
+          {name}
         </Link>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
       <td>
-        {person.motherName ? (
+        {motherName ? (
           <Link
             to={`/people/${mother}`}
             className={isFemale}
             key={personSlug}
           >
-            {person.motherName}
+            {motherName}
           </Link>
-        ) : (<>{person.motherName || '-'}</>)}
+        ) : (<>{motherName || '-'}</>)}
       </td>
       <td>
-        {person.fatherName ? (
+        {fatherName ? (
           <Link
             to={`/people/${father}`}
             className={isFemale}
             key={personSlug}
           >
-            {person.fatherName}
+            {fatherName}
           </Link>
-        ) : (<>{person.fatherName || '-'}</>)}
+        ) : (<>{fatherName || '-'}</>)}
       </td>
     </tr>
   );

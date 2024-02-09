@@ -33,44 +33,47 @@ export const PersonsList: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loader ? <Loader /> : (
-            <>
-              {people.length === 0 && (
-                <p data-cy="noPeopleMessage">
-                  There are no people on the server
-                </p>
-              )}
-              <table
-                data-cy="peopleTable"
-                className="table is-striped is-hoverable is-narrow is-fullwidth"
-              >
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Born</th>
-                    <th>Died</th>
-                    <th>Mother</th>
-                    <th>Father</th>
-                  </tr>
-                </thead>
+          {loader
+            ? <Loader />
+            : (
+              <>
+                {people.length === 0 && (
+                  <p data-cy="noPeopleMessage">
+                    There are no people on the server
+                  </p>
+                )}
+                <table
+                  data-cy="peopleTable"
+                  // eslint-disable-next-line max-len
+                  className="table is-striped is-hoverable is-narrow is-fullwidth"
+                >
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Sex</th>
+                      <th>Born</th>
+                      <th>Died</th>
+                      <th>Mother</th>
+                      <th>Father</th>
+                    </tr>
+                  </thead>
 
-                <tbody>
-                  {people.map((person: Person) => (
-                    <PersonLink
-                      people={people}
-                      key={person.slug}
-                      person={person}
-                      personSlug={personSlug}
-                      selectedPerson={person.slug === personSlug}
-                      selectedMother={person.motherName === personSlug}
-                      selectedFather={person.fatherName === personSlug}
-                    />
-                  ))}
-                </tbody>
-              </table>
-            </>
-          )}
+                  <tbody>
+                    {people.map((person: Person) => (
+                      <PersonLink
+                        people={people}
+                        key={person.slug}
+                        person={person}
+                        personSlug={personSlug}
+                        selectedPerson={person.slug === personSlug}
+                        selectedMother={person.motherName === personSlug}
+                        selectedFather={person.fatherName === personSlug}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+              </>
+            )}
         </div>
       </div>
     </>
