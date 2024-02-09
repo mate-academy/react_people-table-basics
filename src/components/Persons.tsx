@@ -65,9 +65,6 @@ export const PersonsList: React.FC = () => {
                         key={person.slug}
                         person={person}
                         personSlug={personSlug}
-                        selectedPerson={person.slug === personSlug}
-                        selectedMother={person.motherName === personSlug}
-                        selectedFather={person.fatherName === personSlug}
                       />
                     ))}
                   </tbody>

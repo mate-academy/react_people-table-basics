@@ -5,9 +5,6 @@ import { Person } from '../types';
 type Props = {
   person: Person;
   personSlug?: string;
-  selectedPerson: boolean;
-  selectedMother: boolean;
-  selectedFather: boolean;
   people: Person[];
 };
 
@@ -15,9 +12,6 @@ export const PersonLink: React.FC<Props> = ({
   people,
   person,
   personSlug,
-  selectedPerson,
-  selectedMother,
-  selectedFather,
 }) => {
   const {
     sex,
@@ -30,9 +24,9 @@ export const PersonLink: React.FC<Props> = ({
   } = person;
   const isFemale = person.sex === 'f' ? 'has-text-danger' : '';
   const selectPerson
- = selectedPerson
- || selectedMother
-  || selectedFather ? 'has-background-warning' : '';
+ = slug === personSlug
+ || motherName === personSlug
+  || fatherName === personSlug ? 'has-background-warning' : '';
   const father = people.find(
     dad => dad.name === fatherName,
   )?.slug;
