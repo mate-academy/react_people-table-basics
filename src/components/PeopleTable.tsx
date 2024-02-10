@@ -10,6 +10,11 @@ interface Props {
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
 
+  const allNamesOnServer = people.map(person => person.name);
+
+  const getParentSlug = (choseName: string) => people
+    .find(person => person.name === choseName)?.slug;
+
   return (
     <table
       data-cy="peopleTable"
@@ -36,8 +41,6 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             fatherName,
             motherName,
             slug: currentSlug,
-            // mother,
-            // father,
           } = person;
 
           return (
@@ -63,11 +66,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>{born}</td>
               <td>{died}</td>
 
-              {motherName ? (
+              {motherName && allNamesOnServer.includes(motherName) ? (
                 <td>
                   <Link
                     className="has-text-danger"
-                    to="#/people/emma-de-milliano-1876"
+                    to={`../${getParentSlug(motherName)}`}
                   >
                     {motherName}
                   </Link>
@@ -76,9 +79,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
                 <td>{motherName || '-'}</td>
               )}
 
-              {fatherName ? (
+              {fatherName && allNamesOnServer.includes(fatherName) ? (
                 <td>
-                  <Link to="#/people/emile-haverbeke-1877">
+                  <Link to={`../${getParentSlug(fatherName)}`}>
                     {fatherName}
                   </Link>
                 </td>

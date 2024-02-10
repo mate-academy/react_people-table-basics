@@ -37,8 +37,11 @@ export const PeoplePage = () => {
             <Loader />
           )}
 
-          {!errorMessage && (
-            <p data-cy="peopleLoadingError" className="has-text-danger">
+          {errorMessage && (
+            <p
+              data-cy="peopleLoadingError"
+              className="has-text-danger"
+            >
               {errorMessage}
             </p>
           )}
@@ -52,7 +55,7 @@ export const PeoplePage = () => {
               </p>
             )}
 
-          {!isLoading && (
+          {!!people.length && (
             <PeopleTable people={people} />
           )}
         </div>
