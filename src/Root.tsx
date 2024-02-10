@@ -13,10 +13,9 @@ export const Root = () => (
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<HomePage />} />
-        <Route path="home" element={<Navigate to="/" />} />
+        <Route path="home" element={<Navigate to="/" replace />} />
         <Route path="people" element={<PeoplePage />}>
-          <Route index />
-          <Route path=":tabId" />
+          <Route path=":slug?" />
         </Route>
 
         <Route path="*" element={<h1 className="title">Page not found</h1>} />
