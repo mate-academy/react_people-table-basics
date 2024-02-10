@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
-import { PeopleList } from '../components/PeopleList';
+import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types';
 
 export const PeoplePage = () => {
@@ -18,7 +18,7 @@ export const PeoplePage = () => {
 
         setPeople(response);
       } catch (error) {
-        setErrorMessage('There are no people on the server');
+        setErrorMessage('Something went wrong');
       } finally {
         setIsLoading(false);
       }
@@ -37,18 +37,23 @@ export const PeoplePage = () => {
             <Loader />
           )}
 
-          <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
-          </p>
-
           {!errorMessage && (
-            <p data-cy="noPeopleMessage">
+            <p data-cy="peopleLoadingError" className="has-text-danger">
               {errorMessage}
             </p>
           )}
 
+          {!errorMessage
+            && !people.length
+            && !isLoading
+            && (
+              <p data-cy="noPeopleMessage">
+                There are no people on the server
+              </p>
+            )}
+
           {!isLoading && (
-            <PeopleList people={people} />
+            <PeopleTable people={people} />
           )}
         </div>
       </div>

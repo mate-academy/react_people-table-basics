@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import React from 'react';
 import { Person } from '../types';
@@ -7,8 +7,8 @@ interface Props {
   people: Person[];
 }
 
-export const PeopleList: React.FC<Props> = ({ people }) => {
-  // const { slug } = useParams();
+export const PeopleTable: React.FC<Props> = ({ people }) => {
+  const { slug } = useParams();
 
   return (
     <table
@@ -27,20 +27,6 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {/* <tr data-cy="person">
-          <td>
-            <a href="#/people/jan-van-brussel-1714">
-              Jan van Brussel
-            </a>
-          </td>
-
-          <td>m</td>
-          <td>1714</td>
-          <td>1748</td>
-          <td>Joanna van Rooten</td>
-          <td>Jacobus van Brussel</td>
-        </tr> */}
-
         {people.map(person => {
           const {
             name,
@@ -58,13 +44,13 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
             <tr
               key={currentSlug}
               data-cy="person"
-            // className={classNames({
-            //   'has-background-warning': slug = ,
-            // })}
+              className={classNames({
+                'has-background-warning': currentSlug === slug,
+              })}
             >
               <td>
                 <Link
-                  to={`#/{${currentSlug}}`}
+                  to={`../${currentSlug}`}
                   className={classNames({
                     'has-text-danger': sex === 'f',
                   })}
@@ -77,23 +63,45 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
               <td>{born}</td>
               <td>{died}</td>
 
-              <td>
-                <Link
-                  className="has-text-danger"
-                  to="#/people/emma-de-milliano-1876"
-                >
-                  {motherName}
-                </Link>
-              </td>
+              {motherName ? (
+                <td>
+                  <Link
+                    className="has-text-danger"
+                    to="#/people/emma-de-milliano-1876"
+                  >
+                    {motherName}
+                  </Link>
+                </td>
+              ) : (
+                <td>{motherName || '-'}</td>
+              )}
 
-              <td>
-                <Link to="#/people/emile-haverbeke-1877">
-                  {fatherName}
-                </Link>
-              </td>
+              {fatherName ? (
+                <td>
+                  <Link to="#/people/emile-haverbeke-1877">
+                    {fatherName}
+                  </Link>
+                </td>
+              ) : (
+                <td>{fatherName || '-'}</td>
+              )}
             </tr>
           );
         })}
+
+        {/* <tr data-cy="person">
+          <td>
+            <a href="#/people/jan-van-brussel-1714">
+              Jan van Brussel
+            </a>
+          </td>
+
+          <td>m</td>
+          <td>1714</td>
+          <td>1748</td>
+          <td>Joanna van Rooten</td>
+          <td>Jacobus van Brussel</td>
+        </tr> */}
 
         {/* <tr data-cy="person">
           <td>
