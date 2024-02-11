@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
-import { PersonLink } from '../components/Loader/PersonLink';
-import { ParentLink } from '../components/Loader/ParentLink';
+import { PersonLink } from '../components/PersonLink';
+import { ParentLink } from '../components/ParentLink';
 import { Person } from '../types';
 
 interface Props {
@@ -46,13 +46,11 @@ export const PersonInfo: React.FC<Props> = ({ person }) => {
       <td>{died}</td>
       <td>
         {mother
-          && motherName
           ? <ParentLink parent={mother} />
           : motherName || '-'}
       </td>
       <td>
         {father
-          && fatherName
           ? <ParentLink parent={father} />
           : fatherName || '-'}
       </td>

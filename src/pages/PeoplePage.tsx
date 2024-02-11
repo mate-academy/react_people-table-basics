@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { Loader } from '../components/Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
-import { Error } from '../components/Loader/Error';
-import { NoPeople } from '../components/Loader/NoPeople';
+import { Error } from '../components/Error';
+import { NoPeopleMessage } from '../components/NoPeople';
 import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage = () => {
@@ -37,7 +37,7 @@ export const PeoplePage = () => {
           {!people.length
             && !isLoading
             && !error
-            && <NoPeople />}
+            && <NoPeopleMessage />}
         </div>
       </div>
     </>
