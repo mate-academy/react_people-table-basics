@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 import { getPeople } from '../../api';
-import { Loader } from '../Loader';
+import { Loader } from '../../components/Loader';
 import { Person } from '../../types';
-import { PeopleTable } from '../PeopleTable/PeopleTable';
+import { PeopleTable } from '../../components/PeopleTable/PeopleTable';
 
 export const PeoplePage = () => {
   const [peoples, setPeoples] = useState<Person[]>([]);
-  const [showLoader, setShowLoader] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
-    setShowLoader(true);
     getPeople()
       .then(setPeoples)
       .catch(() => setShowError(true))
