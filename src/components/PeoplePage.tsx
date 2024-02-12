@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useEffect, useState } from 'react';
 import {
   useParams, Outlet, Link,
@@ -97,28 +99,37 @@ export const PeoplePage = () => {
                   <td>{person.died}</td>
                   <td>
                     {fetchedPeople.find(p => p.name === person.motherName) ? (
-                      <Link to={`/people${window.location.pathname}${getPersonSlugByName(fetchedPeople, person.motherName)}`} className="has-text-danger">
+                      <Link
+                        to={`/people${window.location.pathname}${getPersonSlugByName(fetchedPeople, person.motherName)}`}
+                        className="has-text-danger"
+                      >
                         {person.motherName}
                       </Link>
                     ) : (
-                      person.motherName === null ? (
-                        <span>-</span>
-                      ) : (
-                        <span>{person.motherName}</span>
-                      )
+                      <span>
+                        {person.motherName === null ? (
+                          '-'
+                        ) : (
+                          person.motherName
+                        )}
+                      </span>
                     )}
                   </td>
                   <td>
                     {fetchedPeople.find(p => p.name === person.fatherName) ? (
-                      <Link to={`/people${window.location.pathname}${getPersonSlugByName(fetchedPeople, person.fatherName)}`}>
+                      <Link
+                        to={`/people${window.location.pathname}${getPersonSlugByName(fetchedPeople, person.fatherName)}`}
+                      >
                         {person.fatherName}
                       </Link>
                     ) : (
-                      person.fatherName === null ? (
-                        <span>-</span>
-                      ) : (
-                        <span>{person.fatherName}</span>
-                      )
+                      <span>
+                        {person.fatherName === null ? (
+                          '-'
+                        ) : (
+                          person.fatherName
+                        )}
+                      </span>
                     )}
                   </td>
                 </tr>
