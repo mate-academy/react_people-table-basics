@@ -10,6 +10,8 @@ export const PeoplePage: React.FC = () => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
+
     getPeople()
       .then((res) => setPeople(res))
       .catch(() => setIsError(true))
