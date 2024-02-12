@@ -7,9 +7,7 @@ interface Props {
   person: Person | string;
 }
 
-export const PersonLink: React.FC<Props> = (props) => {
-  const { person } = props;
-
+export const PersonLink: React.FC<Props> = ({ person }) => {
   if (typeof person === 'string') {
     return <>{person}</>;
   }

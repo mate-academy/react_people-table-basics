@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useEffect, useState } from 'react';
-import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Person } from '../../../types';
 import { getPeople } from '../../../api';
 import { Loader } from '../../Loader';
-import { PersonLink } from '../../PersonLink/PersonLink';
-import { getPersonParent } from '../../../utils/helpfulFunctions';
+import { PeopleTable } from '../../PeopleTable/PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -47,54 +45,7 @@ export const PeoplePage = () => {
           )}
 
           {people.length > 0 && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map(person => {
-                  const personMother: Person | string
-                    = getPersonParent(person, people, 'mother');
-                  const personFather: Person | string
-                    = getPersonParent(person, people, 'father');
-
-                  return (
-                    <tr
-                      key={person.slug}
-                      data-cy="person"
-                      className={classNames({
-                        'has-background-warning': person.slug === slug,
-                      })}
-                    >
-                      <td>
-                        <PersonLink person={person} />
-                      </td>
-
-                      <td>{person.sex}</td>
-                      <td>{person.born}</td>
-                      <td>{person.died}</td>
-                      <td>
-                        <PersonLink person={personMother} />
-                      </td>
-                      <td>
-                        <PersonLink person={personFather} />
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <PeopleTable people={people} selectedPerson={slug} />
           )}
 
         </div>
