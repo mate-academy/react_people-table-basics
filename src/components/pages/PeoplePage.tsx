@@ -22,8 +22,6 @@ export const PeoplePage = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const personName = people.map(person => person.name);
-
   const findSlug = (clickedPerson: string) => {
     return people.find(person => person.name === clickedPerson)?.slug;
   };
@@ -67,6 +65,12 @@ export const PeoplePage = () => {
 
               <tbody>
                 {people.map(person => {
+                  const motherSlug = person.motherName
+                  && findSlug(person.motherName);
+
+                  const fatherSlug = person.fatherName
+                  && findSlug(person.fatherName);
+
                   return (
                     <>
                       <tr
@@ -89,12 +93,11 @@ export const PeoplePage = () => {
                         <td>{person.sex}</td>
                         <td>{person.born}</td>
                         <td>{person.died}</td>
-                        {person.motherName
-                          && personName.includes(person.motherName)
+                        {motherSlug
                           ? (
                             <td>
                               <Link
-                                to={`../${findSlug(person.motherName)}`}
+                                to={`../${motherSlug}`}
                                 className="has-text-danger"
                               >
                                 {person.motherName}
@@ -104,12 +107,11 @@ export const PeoplePage = () => {
                             <td>{person.motherName || '-'}</td>
                           )}
 
-                        {person.fatherName
-                          && personName.includes(person.fatherName)
+                        {fatherSlug
                           ? (
                             <td>
                               <Link
-                                to={`../${findSlug(person.fatherName)}`}
+                                to={`../${fatherSlug}`}
                               >
                                 {person.fatherName}
                               </Link>

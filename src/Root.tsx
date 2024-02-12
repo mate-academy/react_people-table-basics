@@ -18,7 +18,6 @@ export const Root = () => (
           element={<h1 className="title" data-cy="app">Page not found</h1>}
         />
       </Route>
-
     </Routes>
   </HashRouter>
 );
