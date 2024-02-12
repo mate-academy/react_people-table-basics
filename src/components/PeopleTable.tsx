@@ -9,10 +9,10 @@ type Props = {
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
 
-  const peopleNames = people?.map(person => person.name);
+  const peopleNames = people.map(person => person.name);
 
   const findPerson = (selectedPerson: string) => {
-    return people?.find(person => person.name === selectedPerson)?.slug;
+    return people.find(person => person.name === selectedPerson)?.slug;
   };
 
   return (
@@ -54,7 +54,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
-            {person.motherName && peopleNames?.includes(person.motherName) ? (
+            {person.motherName && peopleNames.includes(person.motherName) ? (
               <td>
                 <Link
                   className="has-text-danger"
@@ -65,7 +65,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               </td>
             ) : <td>{person.motherName || '-'}</td>}
 
-            {person.fatherName && peopleNames?.includes(person.fatherName) ? (
+            {person.fatherName && peopleNames.includes(person.fatherName) ? (
               <td>
                 <Link
                   to={`../${findPerson(person.fatherName)}`}
