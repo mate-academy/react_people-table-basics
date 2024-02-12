@@ -6,6 +6,7 @@ import { Person } from '../../../types';
 import { getPeople } from '../../../api';
 import { Loader } from '../../Loader';
 import { PersonLink } from '../../PersonLink/PersonLink';
+import { getPersonParent } from '../../../utils/helpfulFunctions';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -63,22 +64,10 @@ export const PeoplePage = () => {
 
               <tbody>
                 {people.map(person => {
-                  let personMother: Person | string = '-';
-                  let personFather: Person | string = '-';
-
-                  if (person.motherName !== null) {
-                    personMother = people.find(
-                      mother => mother.name === person.motherName,
-                    )
-                      || person.motherName;
-                  }
-
-                  if (person.fatherName !== null) {
-                    personFather = people.find(
-                      mother => mother.name === person.fatherName,
-                    )
-                      || person.fatherName;
-                  }
+                  const personMother: Person | string
+                    = getPersonParent(person, people, 'mother');
+                  const personFather: Person | string
+                    = getPersonParent(person, people, 'father');
 
                   return (
                     <tr
@@ -96,14 +85,10 @@ export const PeoplePage = () => {
                       <td>{person.born}</td>
                       <td>{person.died}</td>
                       <td>
-                        {typeof personMother !== 'string'
-                          ? (<PersonLink person={personMother} />)
-                          : personMother}
+                        <PersonLink person={personMother} />
                       </td>
                       <td>
-                        {typeof personFather !== 'string'
-                          ? (<PersonLink person={personFather} />)
-                          : personFather}
+                        <PersonLink person={personFather} />
                       </td>
                     </tr>
                   );

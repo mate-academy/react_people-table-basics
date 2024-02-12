@@ -4,11 +4,15 @@ import classNames from 'classnames';
 import { Person } from '../../types';
 
 interface Props {
-  person: Person;
+  person: Person | string;
 }
 
 export const PersonLink: React.FC<Props> = (props) => {
   const { person } = props;
+
+  if (typeof person === 'string') {
+    return <>{person}</>;
+  }
 
   return (
     <Link
