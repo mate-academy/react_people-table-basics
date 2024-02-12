@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { PersonFromServer } from '../PersonFromServer';
+import { getPeople } from '../../api';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -9,26 +10,10 @@ export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const getPeople = async () => {
-      try {
-        const response = await fetch('/api/people.json');
-        const peopleFromServer = await response.json();
-
-        setPeople(peopleFromServer);
-      } catch {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    const timerId = setTimeout(() => {
-      getPeople();
-    }, 1000);
-
-    return () => {
-      clearTimeout(timerId);
-    };
+    getPeople()
+      .then((response) => setPeople(response))
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
