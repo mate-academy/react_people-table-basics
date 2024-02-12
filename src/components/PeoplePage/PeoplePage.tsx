@@ -8,11 +8,18 @@ export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
+  const [peopleError, setPeopleError] = useState(false);
 
   useEffect(() => {
     setLoader(true);
     getPeople()
-      .then(setPeople)
+      .then(pep => {
+        if (pep.length <= 0) {
+          setPeopleError(true);
+        }
+
+        setPeople(pep);
+      })
       .catch(() => {
         setError(true);
       })
@@ -35,11 +42,14 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {/* <p data-cy="noPeopleMessage">
-            There are no people on the server
-          </p> */}
+          {peopleError && (
+            <p data-cy="noPeopleMessage">
+              There are no people on the server
+            </p>
+          )}
 
           {!loader && <PeopleTable people={people} />}
+
         </div>
       </div>
     </div>
