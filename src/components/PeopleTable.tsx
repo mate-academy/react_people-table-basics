@@ -10,8 +10,6 @@ interface Props {
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
 
-  const allNamesOnServer = people.map(person => person.name);
-
   const getParentSlug = (choseName: string) => people
     .find(person => person.name === choseName)?.slug;
 
@@ -43,6 +41,10 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             slug: currentSlug,
           } = person;
 
+          const fatherSlug = getParentSlug(fatherName ?? '');
+
+          const motherSlug = getParentSlug(motherName ?? '');
+
           return (
             <tr
               key={currentSlug}
@@ -66,11 +68,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>{born}</td>
               <td>{died}</td>
 
-              {motherName && allNamesOnServer.includes(motherName) ? (
+              {motherName && motherSlug ? (
                 <td>
                   <Link
                     className="has-text-danger"
-                    to={`../${getParentSlug(motherName)}`}
+                    to={`../${motherSlug}`}
                   >
                     {motherName}
                   </Link>
@@ -79,9 +81,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
                 <td>{motherName || '-'}</td>
               )}
 
-              {fatherName && allNamesOnServer.includes(fatherName) ? (
+              {fatherName && fatherSlug ? (
                 <td>
-                  <Link to={`../${getParentSlug(fatherName)}`}>
+                  <Link to={`../${fatherSlug}`}>
                     {fatherName}
                   </Link>
                 </td>
