@@ -12,8 +12,10 @@ interface Props {
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const preparedPeople = useMemo(() => {
     return people.map(person => {
-      const father = people.find(p => p.name === person.fatherName);
-      const mother = people.find(p => p.name === person.motherName);
+      const father = people
+        .find(persons => persons.name === person.fatherName) || null;
+      const mother = people
+        .find(persons => persons.name === person.motherName) || null;
 
       return { ...person, father, mother };
     });
