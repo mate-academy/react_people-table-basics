@@ -40,9 +40,7 @@ export const App = () => (
               Something went wrong
             </p>
 
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
+            <p data-cy="noPeopleMessage">There are no people on the server</p>
 
             <table
               data-cy="peopleTable"
@@ -62,9 +60,7 @@ export const App = () => (
               <tbody>
                 <tr data-cy="person">
                   <td>
-                    <a href="#/people/jan-van-brussel-1714">
-                      Jan van Brussel
-                    </a>
+                    <a href="#/people/jan-van-brussel-1714">Jan van Brussel</a>
                   </td>
 
                   <td>m</td>
@@ -95,9 +91,7 @@ export const App = () => (
                   </td>
 
                   <td>
-                    <a href="#/people/emile-haverbeke-1877">
-                      Emile Haverbeke
-                    </a>
+                    <a href="#/people/emile-haverbeke-1877">Emile Haverbeke</a>
                   </td>
                 </tr>
 
