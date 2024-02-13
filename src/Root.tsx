@@ -1,8 +1,8 @@
 import { Route, HashRouter as Router, Routes } from 'react-router-dom';
 import { App } from './App';
-import { HomePage } from './components/HomePage';
-import { PeoplePage } from './components/PeoplePage';
-import { PageNotFound } from './components/PageNotFound';
+import { HomePage } from './pages/HomePage';
+import { PeoplePage } from './pages/PeoplePage';
+import { PageNotFound } from './pages/PageNotFound';
 import { NavigateHome } from './components/NavigateHome';
 
 export const Root = () => (

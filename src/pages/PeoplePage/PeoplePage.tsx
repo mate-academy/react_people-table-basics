@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Loader } from '../Loader';
+import { Loader } from '../../components/Loader';
 import { Person } from '../../types';
-import { PersonFromServer } from '../PersonFromServer';
 import { getPeople } from '../../api';
+import { Table } from '../../components/Table';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -36,33 +36,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!!people.length && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map(person => (
-                  <PersonFromServer
-                    key={person.slug}
-                    person={person}
-                    people={people}
-                  />
-                ))}
-              </tbody>
-            </table>
-          )}
+          {!!people.length && <Table people={people} />}
         </div>
       </div>
     </>

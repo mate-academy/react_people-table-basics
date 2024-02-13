@@ -9,7 +9,7 @@ interface Props {
   people: Person[],
 }
 
-export const PersonFromServer: React.FC<Props> = ({ person, people }) => {
+export const TableContent: React.FC<Props> = ({ person, people }) => {
   const {
     sex,
     born,
@@ -37,18 +37,18 @@ export const PersonFromServer: React.FC<Props> = ({ person, people }) => {
       <td>{died}</td>
 
       <td>
-        {mother !== undefined ? (
-          <PersonLink person={mother} />
-        ) : (
+        {!mother ? (
           motherName || '-'
+        ) : (
+          <PersonLink person={mother} />
         )}
       </td>
 
       <td>
-        {father !== undefined ? (
-          <PersonLink person={father} />
-        ) : (
+        {!father ? (
           fatherName || '-'
+        ) : (
+          <PersonLink person={father} />
         )}
       </td>
     </tr>
