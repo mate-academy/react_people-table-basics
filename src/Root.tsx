@@ -5,8 +5,8 @@ import {
   Routes,
 } from 'react-router-dom';
 import { App } from './App';
-import { HomePage } from './components/HomePage';
-import { PeoplePage } from './components/PeoplePage';
+import { HomePage } from './Pages/HomePage';
+import { PeoplePage } from './Pages/PeoplePage';
 
 export const Root = () => (
   <Router>
