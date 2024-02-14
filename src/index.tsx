@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import { RouterProvider, createHashRouter } from 'react-router-dom';
+import { Navigate, RouterProvider, createHashRouter } from 'react-router-dom';
 
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
@@ -24,6 +24,10 @@ const router = createHashRouter([
         element: <PeoplePage />,
       },
     ],
+  },
+  {
+    path: '/home',
+    element: <Navigate to="/" />,
   },
 ]);
 
