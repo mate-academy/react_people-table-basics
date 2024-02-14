@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 // import { Loader } from './components/Loader';
 
 import './App.scss';
-import { Nav } from './components/Loader/Nav/Nav';
+import { Nav } from './components/Nav/Nav';
 
 export const App = () => (
   <div data-cy="app">
