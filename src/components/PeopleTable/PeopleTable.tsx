@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 
 type PeopleTableProps = {
@@ -5,6 +6,8 @@ type PeopleTableProps = {
 };
 
 export const PeopleTable = ({ people }: PeopleTableProps) => {
+  const { slug } = useParams();
+
   return (
     <table
       data-cy="peopleTable"
@@ -23,9 +26,15 @@ export const PeopleTable = ({ people }: PeopleTableProps) => {
 
       <tbody>
         {people?.map((person) => (
-          <tr data-cy="person">
+          <tr
+            data-cy="person"
+            className={slug === person.slug
+              ? 'has-background-warning'
+              : ''}
+            key={person.slug}
+          >
             <td>
-              <a href="#/people/jan-van-brussel-1714">
+              <a href={`#/people/${person.slug}`}>
                 {person.name}
               </a>
             </td>
