@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import { Person } from '../../types';
 import { PeopleList } from '../../PeopleContext';
 
-type Props = {
+interface Props {
   person: Person;
-};
+}
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
   const { peopleList } = useContext(PeopleList);
@@ -14,7 +14,6 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
 
   const mother = peopleList.find(m => m.name === person.motherName);
   const father = peopleList.find(f => f.name === person.fatherName);
-  // const selectedPerson = person.slug === slug;
 
   return (
     <tr

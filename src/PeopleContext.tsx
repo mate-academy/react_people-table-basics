@@ -1,18 +1,18 @@
 import React, { createContext, useState } from 'react';
 import { Person } from './types';
 
-type ContextProps = {
+interface ContextProps {
   peopleList: Person[];
   setPeopleList: (list: Person[]) => void;
   isLoading: boolean;
   setIsLoading: (b: boolean) => void;
   isError: boolean;
   setIsError: (b: boolean) => void;
-};
+}
 
-type Props = {
+interface Props {
   children: React.ReactNode;
-};
+}
 
 export const PeopleList = createContext<ContextProps>({
   peopleList: [],

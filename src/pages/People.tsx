@@ -19,6 +19,7 @@ export const People = () => {
       .then(setPeopleList)
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
