@@ -1,37 +1,29 @@
-import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
+import { activeLink } from '../../utils/activeLink';
 
-export const Navigation = () => {
-  const activeLink
-    = ({ isActive }: { isActive: boolean }) => classNames(
-      'navbar-item',
-      { 'has-background-grey-lighter': isActive },
-    );
+export const Navigation = () => (
+  <nav
+    data-cy="nav"
+    className="navbar is-fixed-top has-shadow"
+    role="navigation"
+    aria-label="main navigation"
+  >
+    <div className="container">
+      <div className="navbar-brand">
+        <NavLink
+          className={activeLink}
+          to="/"
+        >
+          Home
+        </NavLink>
 
-  return (
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <NavLink
-            className={activeLink}
-            to="/"
-          >
-            Home
-          </NavLink>
-
-          <NavLink
-            className={activeLink}
-            to="/people"
-          >
-            People
-          </NavLink>
-        </div>
+        <NavLink
+          className={activeLink}
+          to="/people"
+        >
+          People
+        </NavLink>
       </div>
-    </nav>
-  );
-};
+    </div>
+  </nav>
+);
