@@ -9,11 +9,11 @@ export const Nav = () => (
   >
     <div className="container">
       <div className="navbar-brand">
-        <NavLink className="navbar-item" to="/">
+        <NavLink className={({ isActive }) => `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`} to="/">
           Home
         </NavLink>
 
-        <NavLink className="navbar-item" to="/people">
+        <NavLink className={({ isActive }) => `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`} to="/people">
           People
         </NavLink>
 

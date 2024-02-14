@@ -20,13 +20,13 @@ const router = createHashRouter([
         element: <HomePage />,
       },
       {
-        path: '/people',
+        path: 'people',
         element: <PeoplePage />,
       },
     ],
   },
   {
-    path: '/home',
+    path: 'home',
     element: <Navigate to="/" replace />,
   },
 ]);
