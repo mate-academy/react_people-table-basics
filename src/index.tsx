@@ -21,7 +21,16 @@ const router = createHashRouter([
       },
       {
         path: 'people',
-        element: <PeoplePage />,
+        children: [
+          {
+            index: true,
+            element: <PeoplePage />,
+          },
+          {
+            path: ':slug',
+            element: <PeoplePage />,
+          },
+        ],
       },
     ],
   },
