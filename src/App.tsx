@@ -1,15 +1,9 @@
 import cn from 'classnames';
 import './App.scss';
-// import { Person } from './types';
 import {
-  Routes,
-  Route,
   NavLink,
-  Navigate,
+  Outlet,
 } from 'react-router-dom';
-import { HomePage } from './components/HomePage';
-import { Error } from './components/Error';
-import { PeoplePage } from './components/PeoplePage';
 
 export const App = () => {
   return (
@@ -45,15 +39,7 @@ export const App = () => {
 
       <main className="section">
         <div className="container">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="people">
-              <Route index element={<PeoplePage />} />
-              <Route path=":peopleSlug" element={<PeoplePage />} />
-            </Route>
-            <Route path="home" element={<Navigate to="/" />} />
-            <Route path="*" element={<Error />} />
-          </Routes>
+          <Outlet />
         </div>
       </main>
 
