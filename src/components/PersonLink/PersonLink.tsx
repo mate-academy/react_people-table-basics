@@ -19,23 +19,15 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
       return <Link to={`/people/${mother?.slug}`} className={classNames({ 'has-text-danger': mother?.sex === 'f' })}>{mother?.name}</Link>;
     }
 
-    if (person.motherName) {
-      return person.motherName;
-    }
-
-    return '-';
+    return person.motherName || '-';
   };
 
   const dada = () => {
     if (father) {
-      return <Link to={`/people/${father?.slug}`}>{father?.name}</Link>;
+      return <Link to={`/people/${father.slug}`}>{father.name}</Link>;
     }
 
-    if (person.fatherName) {
-      return person.fatherName;
-    }
-
-    return '-';
+    return person.fatherName || '-';
   };
 
   return (
