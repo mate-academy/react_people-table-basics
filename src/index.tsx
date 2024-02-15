@@ -13,7 +13,6 @@ const router = createHashRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <NotFoundPage />,
     children: [
       {
         path: '/',
@@ -31,6 +30,10 @@ const router = createHashRouter([
             element: <PeoplePage />,
           },
         ],
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
       },
     ],
   },
