@@ -1,39 +1,20 @@
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../../types';
-import { Loader } from '../Loader';
 import { PersonLink } from '../PersonLink/PersonLink';
 
-// eslint-disable-next-line max-len
-const peopleFromServer = fetch(
-  'https://mate-academy.github.io/react_people-table/api/people.json'
-);
+type Props = {
+  people: Person[];
+};
 
-export const PeopleTable: React.FC = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState('');
-
+export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { peopleId } = useParams();
 
-  useEffect(() => {
-    const getData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await peopleFromServer;
-        const data = await response.json();
+  const findParents = (parentName: string | null) => {
+    const parents = people.find((person) => person.name === parentName);
 
-        setPeople(data);
-      } catch {
-        setError('Something went wrong');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getData();
-  }, []);
+    return parents ? <PersonLink person={parents} /> : parentName;
+  };
 
   return (
     <>
@@ -61,37 +42,30 @@ export const PeopleTable: React.FC = () => {
                 'has-background-warning': peopleId === person.slug,
               })}
             >
-              <PersonLink person={person} />
+              <td>
+                <Link
+                  to={`/people/${person.slug}`}
+                  className={cn({
+                    'has-text-danger': person.sex === 'f',
+                  })}
+                >
+                  {person.name}
+                </Link>
+              </td>
 
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
-              {person.motherName === null ? (
-                <td>-</td>
-              ) : (
-                <td>{person.motherName}</td>
-              )}
-              {person.fatherName === null ? (
-                <td>-</td>
-              ) : (
-                <td>{person.fatherName}</td>
-              )}
+              <td>
+                {person.motherName ? findParents(person.motherName) : '-'}
+              </td>
+              <td>
+                {person.fatherName ? findParents(person.fatherName) : '-'}
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div className="block">
-        <div className="box table-container">
-          {isLoading && <Loader />}
-
-          <p data-cy="peopleLoadingError" className="has-text-danger">
-            {error}
-          </p>
-          {!people && (
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-          )}
-        </div>
-      </div>
     </>
   );
 };
