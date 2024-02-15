@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-// import { Loader } from './components/Loader';
 
 import './App.scss';
 import { Nav } from './components/Nav/Nav';

@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
@@ -29,9 +30,9 @@ export const PeopleTable = ({ people }: PeopleTableProps) => {
         {people?.map((person) => (
           <tr
             data-cy="person"
-            className={slug === person.slug
-              ? 'has-background-warning'
-              : ''}
+            className={classNames({
+              'has-background-warning': slug === person.slug,
+            })}
             key={person.slug}
           >
             <td>
