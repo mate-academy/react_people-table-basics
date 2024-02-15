@@ -12,13 +12,14 @@
 <!-- 1. Add the `Navbar` with 2 links `Home` and `People`. Active one should have the `has-background-grey-lighter` class; -->
 <!-- 1. Use `HashRouter` to be able to share a link to any page on Github pages; -->
 <!-- 1. Fetch `people` from [the API](https://mate-academy.github.io/react_people-table/api/people.json) when `PeoplePage` is opened; -->
-1. Pass `people` to `PeopleTable` component and render as a table (see the given markup);
-1. Make each name in the table a link a to `/people/:slug` (including mother and father)
-    - create the `<PersonLink person={person} />` and use it for all existing people;
-    - add the `has-text-danger` class for women names;
+<!-- 1. Pass `people` to `PeopleTable` component and render as a table (see the given markup); -->
+1.
+    <!-- - Make each name in the table a link a to `/people/:slug` (including mother and father) -->
+    <!-- - create the `<PersonLink person={person} />` and use it for all existing people; -->
+    <!-- - add the `has-text-danger` class for women names; -->
     - if there is no person with a given name among the people just keep the name as a text (not a link);
-    - if the motherName or fatherName is empty put `-` to the table
-1. Highlight the row of the selected person with the `has-background-warning` class;
+    <!-- - if the motherName or fatherName is empty put `-` to the table -->
+<!-- 1. Highlight the row of the selected person with the `has-background-warning` class; -->
 
 ## Instructions
 
