@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 type PeopleTableProps = {
   people: Person[] | null;
@@ -34,16 +35,22 @@ export const PeopleTable = ({ people }: PeopleTableProps) => {
             key={person.slug}
           >
             <td>
-              <a href={`#/people/${person.slug}`}>
-                {person.name}
-              </a>
+              {<PersonLink person={person} /> || '-'}
             </td>
 
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
-            <td>{person.motherName ? person.motherName : '-'}</td>
-            <td>{person.fatherName ? person.fatherName : '-'}</td>
+            <td>
+              {person.mother
+                ? <PersonLink person={person.mother} />
+                : person.motherName || '-'}
+            </td>
+            <td>
+              {person.father
+                ? <PersonLink person={person.father} />
+                : person.fatherName || '-'}
+            </td>
           </tr>
         ))}
         <tr data-cy="person">

@@ -14,7 +14,16 @@ export const PeoplePage = () => {
     setLoading(true);
     getPeople()
       .then((data) => {
-        setPeople(data);
+        const updatedPeople = data.map(person => {
+          const mother = person.motherName
+            ? data.find(p => p.name === person.motherName) : undefined;
+          const father = person.fatherName
+            ? data.find(p => p.name === person.fatherName) : undefined;
+
+          return { ...person, mother, father };
+        });
+
+        setPeople(updatedPeople);
       })
       .catch(() => {
         setError(true);
