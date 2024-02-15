@@ -7,7 +7,10 @@ type PersonLinkProps = {
 
 export const PersonLink = ({ person }: PersonLinkProps) => {
   return (
-    <Link to={`/people/${person.slug}`}>
+    <Link
+      to={`/people/${person.slug}`}
+      className={person.sex === 'f' ? 'has-text-danger' : ''}
+    >
       {person.name}
     </Link>
   );
