@@ -1,1 +1,1 @@
-export * from './Person';
+export * from './PersonTypes';
