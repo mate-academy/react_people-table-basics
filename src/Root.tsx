@@ -4,8 +4,8 @@ import {
   HashRouter as Router, Routes,
 } from 'react-router-dom';
 import { App } from './App';
-import { HomePage } from './components/HomePage';
-import { PeoplePage } from './components/PeoplePage';
+import { HomePage } from './pages/HomePage';
+import { PeoplePage } from './pages/PeoplePage';
 import { Error } from './components/Error';
 
 export const Root = () => (
