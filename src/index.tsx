@@ -1,14 +1,49 @@
 import { createRoot } from 'react-dom/client';
-import { HashRouter as Router } from 'react-router-dom';
+import { Navigate, RouterProvider, createHashRouter } from 'react-router-dom';
 
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 import { App } from './App';
+import { HomePage } from './pages/HomePage';
+import { PeoplePage } from './pages/PeoplePage';
+import { NotFoundPage } from './pages/NotFoundPage';
+
+const router = createHashRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        path: '/',
+        element: <HomePage />,
+      },
+      {
+        path: 'people',
+        children: [
+          {
+            index: true,
+            element: <PeoplePage />,
+          },
+          {
+            path: ':slug',
+            element: <PeoplePage />,
+          },
+        ],
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
+      },
+    ],
+  },
+  {
+    path: 'home',
+    element: <Navigate to="/" replace />,
+  },
+]);
 
 createRoot(document.getElementById('root') as HTMLDivElement)
   .render(
-    <Router>
-      <App />
-    </Router>,
+    <RouterProvider router={router} />,
   );
