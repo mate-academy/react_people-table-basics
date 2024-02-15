@@ -1,8 +1,10 @@
 import { useContext, useLayoutEffect, useState } from 'react';
 import { PeopleContext } from '../context/PeopleContext';
-import { getAllPeople, URL } from '../utils/fethcClient';
+// import { getAllPeople, URL } from '../utils/fethcClient';
+
 import { PersonComponent } from './PersonComponent';
 import { Loader } from './Loader/Loader';
+import { getPeople } from '../api';
 
 export const PeopleTable = () => {
   const { people, setPeople } = useContext(PeopleContext);
@@ -14,7 +16,7 @@ export const PeopleTable = () => {
       setIsLoading(true);
       setTimeout(async () => {
         try {
-          const allPeople = await getAllPeople(URL);
+          const allPeople = await getPeople();
 
           setPeople(allPeople);
         } catch {
