@@ -7,12 +7,11 @@ type Props = {
 };
 
 const PersonLink: React.FC<Props> = ({ person }) => {
-  const slug = `${person.name.toLowerCase().replace(/\s+/g, '-')}-${person.born}`;
   const isFemale = person.sex === 'f';
 
   return (
     <Link
-      to={`/people/${slug}`}
+      to={`/people/${person.slug}`}
       className={cn({ 'has-text-danger': isFemale })}
     >
       {person.name}
