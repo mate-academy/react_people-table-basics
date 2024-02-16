@@ -3,19 +3,19 @@ import cn from 'classnames';
 import { Person } from '../../types';
 
 type Props = {
-  person: Person | undefined;
+  person: Person;
 };
 
 const PersonLink: React.FC<Props> = ({ person }) => {
-  const slug = `${person?.name.toLowerCase().replace(/\s+/g, '-')}-${person?.born}`;
-  const isFemale = person?.sex === 'f';
+  const slug = `${person.name.toLowerCase().replace(/\s+/g, '-')}-${person.born}`;
+  const isFemale = person.sex === 'f';
 
   return (
     <Link
       to={`/people/${slug}`}
       className={cn({ 'has-text-danger': isFemale })}
     >
-      {person?.name}
+      {person.name}
     </Link>
   );
 };

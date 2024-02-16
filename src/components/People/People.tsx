@@ -62,15 +62,11 @@ export const People = () => {
                   const parentObj = people
                     .find(pers => pers.name === parentName);
 
-                  if (!parentObj && !parentName) {
-                    return '-';
-                  }
-
-                  if (parentObj && parentName) {
+                  if (parentObj) {
                     return <PersonLink person={parentObj} />;
                   }
 
-                  return parentName;
+                  return parentName || '-';
                 };
 
                 const personSlug = `${person?.name.toLowerCase().replace(/\s+/g, '-')}-${person?.born}`;
