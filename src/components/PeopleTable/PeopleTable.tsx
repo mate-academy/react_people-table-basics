@@ -7,27 +7,38 @@ import { PersonLink } from '../PersonLink';
 export const PeopleTable = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loader, setLoader] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [noPeopleOnServer, setNoPeopleOnServer] = useState<boolean>(false);
 
   useEffect(() => {
     setLoader(true);
+    setError(false);
+    setNoPeopleOnServer(false);
     getPeople()
       .then(setPeople)
-      .finally(() => setLoader(false));
-  }, []);
+      .catch(() => setError(true))
+      .finally(() => {
+        if (people.length === 0) {
+          setNoPeopleOnServer(true);
+        }
+
+        setLoader(false);
+      });
+  }, [people.length]);
 
   return (
     <div className="block">
       <div className="box table-container">
         {loader && <Loader />}
 
-        {false && (
-          <>
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
+        {error && (
+          <p data-cy="peopleLoadingError" className="has-text-danger">
+            Something went wrong
+          </p>
+        )}
 
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-          </>
+        {noPeopleOnServer && (
+          <p data-cy="noPeopleMessage">There are no people on the server</p>
         )}
 
         <table
