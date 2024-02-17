@@ -1,0 +1,62 @@
+import { useEffect, useState } from 'react';
+import { getPeople } from '../../api';
+import { Person } from '../../types';
+import { Loader } from '../Loader';
+import { PersonLink } from '../PersonLink';
+
+export const PeopleTable = () => {
+  const [people, setPeople] = useState<Person[]>([]);
+  const [loader, setLoader] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLoader(true);
+    getPeople()
+      .then(setPeople)
+      .finally(() => setLoader(false));
+  }, []);
+
+  return (
+    <div className="block">
+      <div className="box table-container">
+        {loader && <Loader />}
+
+        {false && (
+          <>
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+
+            <p data-cy="noPeopleMessage">There are no people on the server</p>
+          </>
+        )}
+
+        <table
+          data-cy="peopleTable"
+          className="table is-striped is-hoverable is-narrow is-fullwidth"
+        >
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Sex</th>
+              <th>Born</th>
+              <th>Died</th>
+              <th>Mother</th>
+              <th>Father</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {people.map((person: Person) => (
+              <tr
+                data-cy="person"
+                key={person.name + person.motherName + person.father}
+              >
+                <PersonLink person={person} people={people} />
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
