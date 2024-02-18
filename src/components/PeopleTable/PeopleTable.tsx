@@ -1,3 +1,6 @@
+import classNames from 'classnames';
+import { useParams } from 'react-router-dom';
+
 import { useEffect, useState } from 'react';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
@@ -9,6 +12,7 @@ export const PeopleTable = () => {
   const [loader, setLoader] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [noPeopleOnServer, setNoPeopleOnServer] = useState<boolean>(false);
+  const { slug } = useParams();
 
   useEffect(() => {
     setLoader(true);
@@ -61,6 +65,9 @@ export const PeopleTable = () => {
               <tr
                 data-cy="person"
                 key={person.name + person.motherName + person.father}
+                className={classNames({
+                  'has-background-warning': slug === person.slug,
+                })}
               >
                 <PersonLink person={person} people={people} />
               </tr>
