@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
 import { PeopleContex } from '../store/PeopleContex';
-import { getPerson } from '../services/personApi';
+import { getPeople } from '../api';
 
 export const PeoplePage = () => {
   const {
@@ -12,14 +12,12 @@ export const PeoplePage = () => {
   useEffect(() => {
     setLoading(true);
 
-    getPerson().then(setPeople)
+    getPeople().then(setPeople)
       .catch(() => {
         setErrorMassage(true);
       })
-      .finally(() => setTimeout(() => {
-        setLoading(false);
-      }, 1000));
-  }, [setErrorMassage, setLoading, setPeople]);
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <div className="container">
