@@ -3,6 +3,7 @@ import {
 } from 'react-router-dom';
 
 import './App.scss';
+
 import classNames from 'classnames';
 
 export const App = () => {
@@ -34,6 +35,7 @@ export const App = () => {
             >
               People
             </NavLink>
+
           </div>
         </div>
       </nav>
