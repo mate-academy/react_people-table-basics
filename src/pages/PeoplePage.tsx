@@ -33,21 +33,25 @@ const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isError && (
+          {isError ? (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
-          )}
-
-          {isLoading && <Loader />}
-
-          {!people && (
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-          )}
-
-          {!isLoading && people.length > 0 && (
+          ) : (
             <>
-              <Table people={people} />
+              {isLoading ? (
+                <Loader />
+              ) : (
+                <>
+                  {people.length === 0 ? (
+                    <p data-cy="noPeopleMessage">
+                      There are no people on the server
+                    </p>
+                  ) : (
+                    <Table people={people} />
+                  )}
+                </>
+              )}
             </>
           )}
         </div>
