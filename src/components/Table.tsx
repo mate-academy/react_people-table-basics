@@ -4,13 +4,13 @@ import cn from 'classnames';
 import { useMemo } from 'react';
 import { Person } from '../types';
 
-const PersonLink = ({ person }: { person: Person }) => {
+const PersonLink = ({ slug, sex, name }: Record<string, string>) => {
   return (
     <Link
-      to={`/people/${person.slug}`}
-      className={cn({ 'has-text-danger': person.sex === 'f' })}
+      to={`/people/${slug}`}
+      className={cn({ 'has-text-danger': sex === 'f' })}
     >
-      {person.name}
+      {name}
     </Link>
   );
 };
@@ -46,37 +46,59 @@ const Table = ({ people }: { people: Person[] }) => {
       </thead>
 
       <tbody>
-        {computedPeople.map(person => (
-          <tr
-            data-cy="person"
-            key={person.name}
-            className={cn({
-              'has-background-warning': person.slug === param.slug,
-            })}
-          >
-            <td>
-              <PersonLink person={person} />
-            </td>
+        {computedPeople.map(
+          ({
+            name,
+            sex,
+            born,
+            died,
+            mother,
+            motherName,
+            father,
+            fatherName,
+            slug,
+          }) => {
+            return (
+              <tr
+                data-cy="person"
+                key={name}
+                className={cn({
+                  'has-background-warning': slug === param.slug,
+                })}
+              >
+                <td>
+                  <PersonLink slug={slug} sex={sex} name={name} />
+                </td>
 
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
-            <td>
-              {person.mother ? (
-                <PersonLink person={person.mother} />
-              ) : (
-                person.motherName || '-'
-              )}
-            </td>
-            <td>
-              {person.father ? (
-                <PersonLink person={person.father} />
-              ) : (
-                person.fatherName || '-'
-              )}
-            </td>
-          </tr>
-        ))}
+                <td>{sex}</td>
+                <td>{born}</td>
+                <td>{died}</td>
+                <td>
+                  {mother ? (
+                    <PersonLink
+                      slug={mother.slug}
+                      sex={mother.sex}
+                      name={mother.name}
+                    />
+                  ) : (
+                    motherName || '-'
+                  )}
+                </td>
+                <td>
+                  {father ? (
+                    <PersonLink
+                      slug={father.slug}
+                      sex={father.sex}
+                      name={father.name}
+                    />
+                  ) : (
+                    fatherName || '-'
+                  )}
+                </td>
+              </tr>
+            );
+          },
+        )}
       </tbody>
     </table>
   );
