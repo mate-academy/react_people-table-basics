@@ -8,7 +8,7 @@ interface Prop {
 export const PeopleTable:React.FC<Prop> = ({ people }) => {
   return (
     <tbody>
-      {people?.map(person => (
+      {people.map(person => (
         <PersonLink
           person={person}
           key={person.name}

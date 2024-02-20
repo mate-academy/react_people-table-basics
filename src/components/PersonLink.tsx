@@ -42,7 +42,7 @@ export const PersonLink:React.FC<Prop> = ({ person }) => {
       <td>{person.born}</td>
       <td>{person.died}</td>
       <td>
-        {samePersonMother && (
+        {samePersonMother ? (
           <Link
             to={`/people/${samePersonMother.slug}`}
             className="has-text-danger"
@@ -50,22 +50,17 @@ export const PersonLink:React.FC<Prop> = ({ person }) => {
           >
             {person.motherName ? person.motherName : '-'}
           </Link>
-        ) }
-
-        {!samePersonMother && (
-          person.motherName ? person.motherName : '-'
-        )}
+        )
+          : (person.motherName || '-') }
       </td>
       <td>
-        {samePersonFather && (
+        {samePersonFather ? (
           <Link to={`/people/${samePersonFather.slug}`}>
             {person.fatherName ? person.fatherName : '-'}
           </Link>
-        ) }
+        )
 
-        {!samePersonFather && (
-          person.fatherName ? person.fatherName : '-'
-        )}
+          : (person.fatherName || '-')}
 
       </td>
     </tr>

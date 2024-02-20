@@ -5,8 +5,6 @@ interface Props {
   people: Person[] | null,
   errorMassage: boolean,
   setPeople: (value: Person[] | null) => void,
-  // person: Person,
-  // setPerson: (value: Person) => void
   setErrorMassage: (value: boolean) => void,
   setLoading: (value: boolean) => void;
   loading: boolean;
@@ -36,9 +34,7 @@ export const PeopleProvider: React.FC<Prop> = ({ children }) => {
     loading,
     setErrorMassage,
     setLoading,
-    // person,
     setPeople,
-    // setPerson,
   }), [people, errorMassage, loading]);
 
   return (
