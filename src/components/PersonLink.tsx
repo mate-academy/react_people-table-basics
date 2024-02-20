@@ -14,6 +14,8 @@ export const PersonLink:React.FC<Prop> = ({ person }) => {
   const { people } = useContext(PeopleContex);
 
   const women = person.sex === 'f';
+  const mother = person.motherName || '-';
+  const father = person.fatherName || '-';
   const samePersonMother = people?.find(
     el => el.name === person.motherName,
   );
@@ -48,19 +50,20 @@ export const PersonLink:React.FC<Prop> = ({ person }) => {
             className="has-text-danger"
 
           >
-            {person.motherName ? person.motherName : '-'}
+            {mother}
           </Link>
         )
-          : (person.motherName || '-') }
+          : mother }
       </td>
       <td>
-        {samePersonFather ? (
-          <Link to={`/people/${samePersonFather.slug}`}>
-            {person.fatherName ? person.fatherName : '-'}
-          </Link>
-        )
+        {samePersonFather
+          ? (
+            <Link to={`/people/${samePersonFather.slug}`}>
+              {father}
+            </Link>
+          )
 
-          : (person.fatherName || '-')}
+          : father}
 
       </td>
     </tr>

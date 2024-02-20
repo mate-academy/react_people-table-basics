@@ -9,6 +9,10 @@ export const PeoplePage = () => {
     people, setPeople, setErrorMassage, errorMassage, setLoading, loading,
   } = useContext(PeopleContex);
 
+  const isPeopleList = people && !!people.length && !loading;
+  const noPeopleMessage = !people?.length && !loading;
+  const isErrorMassage = errorMassage && !loading;
+
   useEffect(() => {
     setLoading(true);
 
@@ -27,36 +31,36 @@ export const PeoplePage = () => {
       <div className="block">
         <div className="box table-container">
 
-          {(loading && people?.length !== 0) ? <Loader /> : (
-            people && people.length > 0 && !loading) && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped
+          {loading ? <Loader />
+            : isPeopleList && (
+              <table
+                data-cy="peopleTable"
+                className="table is-striped
               is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Sex</th>
+                    <th>Born</th>
+                    <th>Died</th>
+                    <th>Mother</th>
+                    <th>Father</th>
+                  </tr>
+                </thead>
 
-              <PeopleTable people={people} />
+                <PeopleTable people={people} />
 
-            </table>
-          ) }
+              </table>
+            ) }
 
-          {(people?.length === 0 && !loading) && (
+          {noPeopleMessage && (
             <p data-cy="noPeopleMessage" className="has-text-danger">
               There are now people
             </p>
           )}
 
-          {(errorMassage && !loading) && (
+          {isErrorMassage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
