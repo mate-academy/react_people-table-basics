@@ -59,7 +59,7 @@ export const PeopleTable = () => {
       );
     }
 
-    return <>{name}</>;
+    return name;
   }
 
   return (
