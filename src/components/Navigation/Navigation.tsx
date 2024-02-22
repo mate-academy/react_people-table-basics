@@ -2,7 +2,10 @@ import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 
 export const Navigation = () => {
-  const navLinks = { Home: '/', People: '/People' };
+  const navLinks = [
+    { name: 'Home', link: '/' },
+    { name: 'People', link: '/people' },
+  ];
 
   return (
     <nav
@@ -13,17 +16,17 @@ export const Navigation = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          {Object.entries(navLinks).map(([key, value]) => (
+          {navLinks.map(({ name, link }) => (
             <NavLink
-              key={key}
-              to={value}
+              key={name}
+              to={link}
               className={({ isActive }) =>
                 classNames('navbar-item', {
                   'has-background-grey-lighter': isActive,
                 })
               }
             >
-              {key}
+              {name}
             </NavLink>
           ))}
         </div>
