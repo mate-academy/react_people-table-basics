@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" class="has-navbar-fixed-top">
+<html lang="uk" class="has-navbar-fixed-top">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>People table</title>
-  </head>
-  <body>
+    <meta name="google-site-verification" content="8LMIldRiUQ0wB_3H1xUFXGV4bUXTlFQ4eT817PgCIWY" />
+    <meta name="description" content="Bogdanow Wadim | (č) 8ogdanovv bit.ly/2PDFcv || React people table">
+    <title>Bogdanow Wadim | React people table</title>
+    <style>
+    .seo {
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    </style>
+    <script>
+        window.onload = () => {
+          const splat = document.title.split(' | ')
+          splat.splice(1, 0, '(č) 8ogdanovv')
+          document.title = splat.join(' | ')
+        };
+    </script>
+</head>
+<body>
     <div id="root"></div>
   </body>
 </html>
