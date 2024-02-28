@@ -7,39 +7,27 @@
 1. Rename `.tsx` files to `.jsx`
 1. use `eslint-config-react` in `.eslintrs.js`
 
-## Basic tasks
-1. Install all the NPM packages you need and types for them.
-1. Implement `HomePage` available at `/` with just a title `Home page`
-1. Implement `PeoplePage` available at `/people` with a title `Peope page`
-1. Redirect to `/` from `/home`
-1. Implement `NotFoundPage` with a title `Page not found` that is shown for all the other URLs
-1. Add a `Header` visible everywhere with navigation links to both pages
-1. Create `getPeople` method fetching `people` from [API](https://mate-academy.github.io/react_people-table/api/people.json)
-  when `PeoplePage` is opened
-    - Find a `mother` and a `father` by `motherName` and `fatherName` and add them to the person for future use
-1. Implement `PeopleTable` component accepting an array of people as a param and rendering them in a table
-  It should show these columns:
-    - `name`
-    - `sex`
-    - `born`
-    - `died`
-    - `mother`
-    - `father`
-      ```jsx harmony
-      <PeopleTable people={people} />
-      ```
-      ```html
-      <table className="PeopleTable">
-        <thead>...</thead>
-        <tbody>...</tbody>
-      </table>
-      ```
-    - add `border-collapse: collapse` style to the table
-1. Implement `PersonRow` component accepting a `person` and displaying all the data described above
-    ```html
-    <tr class="Person">
-      <td></td>
-      ...
-      <td></td>
-    </tr>
-    ```
+Implement the `App` with 2 pages and ability to select a person in the table.
+
+1. Create the `HomePage` available at `/` with just a title `Home Page`
+1. Create the `PeoplePage` available at `/people` with a title `People Page`
+1. Use [Navigate](https://reactrouter.com/docs/en/v6/components/navigate) component to redirect from `/home` to `/`;
+    - add `replace` attribute not to save `/home` URL in the [browser history](https://reactrouter.com/en/main/start/tutorial#managing-the-history-stack) and avoid navigation loop when you press browser `Go back` button.
+1. Implement `NotFoundPage` with a title `Page not found` that is shown for all the other URLs;
+1. Add the `Navbar` with 2 links `Home` and `People`. Active one should have the `has-background-grey-lighter` class;
+1. Use `HashRouter` to be able to share a link to any page on Github pages;
+1. Fetch `people` from [the API](https://mate-academy.github.io/react_people-table/api/people.json) when `PeoplePage` is opened;
+1. Pass `people` to `PeopleTable` component and render as a table (see the given markup);
+1. Make each name in the table a link a to `/people/:slug` (including mother and father)
+    - create the `<PersonLink person={person} />` and use it for all existing people;
+    - add the `has-text-danger` class for women names;
+    - if there is no person with a given name among the people just keep the name as a text (not a link);
+    - if the motherName or fatherName is empty put `-` to the table
+1. Highlight the row of the selected person with the `has-background-warning` class;
+
+## Instructions
+- Install Prettier Extention and use this [VSCode settings](https://mate-academy.github.io/fe-program/tools/vscode/settings.json) to enable format on save.
+- Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
+- Use the [React TypeScript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript).
+- Open one more terminal and run tests with `npm test` to ensure your solution is correct.
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_people-table-basics/) and add it to the PR description.

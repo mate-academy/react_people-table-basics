@@ -1,11 +1,7 @@
+
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
-
-import './App.scss';
-import { HomePage } from './components/HomePage/HomePage';
-import { Header } from './components/Header/Header';
-import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
-import { PeoplePage } from './components/PeoplePage/PeoplePage';
+import { Loader } from './components/Loader';
 
 const App = () => (
   <div className="App">
@@ -32,5 +28,3 @@ const App = () => (
     </div>
   </div>
 );
-
-export default App;
