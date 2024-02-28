@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import './App.scss';
 
