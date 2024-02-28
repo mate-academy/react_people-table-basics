@@ -1,6 +1,11 @@
-# React People Table
+# React - People table
+- Replace `<your_account>` with your Github username in the
+  [DEMO LINK](https://tarasholiuk.github.io/react_people-table-basics/)
+- Follow the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline)
 
-> Here is [the working example](https://mate-academy.github.io/react_people-table-basics/)
+## If you don't use **Typescript**
+1. Rename `.tsx` files to `.jsx`
+1. use `eslint-config-react` in `.eslintrs.js`
 
 Implement the `App` with 2 pages and ability to select a person in the table.
 
