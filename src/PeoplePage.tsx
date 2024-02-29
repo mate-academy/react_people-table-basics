@@ -55,7 +55,7 @@ export const PeoplePage = () => {
       );
     }
 
-    if (people.length === 0) {
+    if (!people.length) {
       return <p data-cy="noPeopleMessage">There are no people on the server</p>;
     }
 

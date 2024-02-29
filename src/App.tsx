@@ -18,7 +18,6 @@ export const App = () => {
   };
 
   return (
-    <>
       <div data-cy="app">
         <nav
           data-cy="nav"
@@ -58,6 +57,5 @@ export const App = () => {
           </div>
         </main>
       </div>
-    </>
   );
 };
