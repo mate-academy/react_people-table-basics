@@ -1,4 +1,3 @@
-// import { Loader } from './components/Loader';
 import { Outlet, NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 

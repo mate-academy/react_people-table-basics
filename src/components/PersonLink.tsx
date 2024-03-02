@@ -7,41 +7,46 @@ type Props = {
   people: Person[];
 };
 
-export const PersonPage: React.FC<Props> = ({ person, people }) => {
-  const { slug } = useParams();
+enum PersonSex {
+  sex = 'f',
+}
 
-  const mother = people.find(p => p.name === person.motherName);
-  const father = people.find(p => p.name === person.fatherName);
+export const PersonPage: React.FC<Props> = ({ person, people }) => {
+  const { name, sex, born, died, motherName, fatherName, slug } = person;
+  const { slugId } = useParams();
+
+  const mother = people.find(p => p.name === motherName);
+  const father = people.find(p => p.name === fatherName);
 
   return (
     <tr
       data-cy="person"
       className={classNames({
-        'has-background-warning': slug === person.slug,
+        'has-background-warning': slugId === slug,
       })}
     >
       <td>
         <Link
-          to={`/people/${person.slug}`}
+          to={`/people/${slug}`}
           className={classNames({
-            'has-text-danger': person.sex === 'f',
+            'has-text-danger': sex === PersonSex.sex,
           })}
         >
-          {person.name}
+          {name}
         </Link>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
       <td
         className={classNames({
-          'has-text-danger': person.sex === 'f',
+          'has-text-danger': sex === PersonSex.sex,
         })}
       >
         {mother ? (
           <Link to={`/people/${mother.slug}`} className="has-text-danger">
-            {mother.name}
+            {name}
           </Link>
         ) : (
           person?.motherName || '-'
@@ -49,7 +54,7 @@ export const PersonPage: React.FC<Props> = ({ person, people }) => {
       </td>
       <td>
         {father ? (
-          <Link to={`/people/${father.slug}`}>{father.name}</Link>
+          <Link to={`/people/${father.slug}`}>{name}</Link>
         ) : (
           person?.fatherName || '-'
         )}
