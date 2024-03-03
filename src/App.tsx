@@ -19,18 +19,14 @@ export const App = () => {
         aria-label="main navigation"
       >
         <div className="container">
-          <ul className="navbar-brand">
-            <li>
-              <NavLink to="/" className={getLinkClass}>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/people" className={getLinkClass}>
-                People
-              </NavLink>
-            </li>
-          </ul>
+          <div className="navbar-brand">
+            <NavLink to="/" className={getLinkClass}>
+              Home
+            </NavLink>
+            <NavLink to="/people" className={getLinkClass}>
+              People
+            </NavLink>
+          </div>
         </div>
       </nav>
 
