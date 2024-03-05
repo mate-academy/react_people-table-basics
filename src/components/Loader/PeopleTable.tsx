@@ -47,28 +47,28 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <td>{person.born}</td>
             <td>{person.died}</td>
 
-            {person.mother ? (
-              <td>
+            <td>
+              {person.mother ? (
                 <Link
                   to={`/people/${person.mother.slug}`}
                   className="has-text-danger"
                 >
                   {person.motherName}
                 </Link>
-              </td>
-            ) : (
-              person.motherName || '-'
-            )}
+              ) : (
+                person.motherName || '-'
+              )}
+            </td>
 
-            {person.father ? (
-              <td>
+            <td>
+              {person.father ? (
                 <Link to={`/people/${person.father.slug}`}>
                   {person.fatherName}
                 </Link>
-              </td>
-            ) : (
-              <td>{person.fatherName ? person.fatherName : '-'}</td>
-            )}
+              ) : (
+                person.fatherName || '-'
+              )}
+            </td>
           </tr>
         ))}
       </tbody>
