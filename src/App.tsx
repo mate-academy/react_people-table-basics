@@ -18,17 +18,11 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink
-            to="/"
-            className={applyNavLinkStyles}
-          >
+          <NavLink to="/" className={applyNavLinkStyles}>
             Home
           </NavLink>
 
-          <NavLink
-            to="/people"
-            className={applyNavLinkStyles}
-          >
+          <NavLink to="/people" className={applyNavLinkStyles}>
             People
           </NavLink>
         </div>

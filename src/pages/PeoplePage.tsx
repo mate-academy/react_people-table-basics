@@ -6,11 +6,13 @@ import { PeopleTable } from '../components/Loader/PeopleTable';
 
 const findParents = (people: Person[]) => {
   return people.map(person => {
-    const personFather = people
-      .find(parent => parent.name === person.fatherName);
+    const personFather = people.find(
+      parent => parent.name === person.fatherName,
+    );
 
-    const personMother = people
-      .find(parent => parent.name === person.motherName);
+    const personMother = people.find(
+      parent => parent.name === person.motherName,
+    );
 
     return { ...person, mother: personMother, father: personFather };
   });
@@ -41,15 +43,13 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!isLoading && !hasError && (
-            people.length > 0 ? (
+          {!isLoading &&
+            !hasError &&
+            (people.length > 0 ? (
               <PeopleTable people={people} />
             ) : (
-              <p data-cy="noPeopleMessage">
-                There are no people on the server
-              </p>
-            )
-          )}
+              <p data-cy="noPeopleMessage">There are no people on the server</p>
+            ))}
         </div>
       </div>
     </>
