@@ -1,10 +1,14 @@
-import { Loader } from './components/Loader';
-
+// import { Outlet } from 'react-router-dom';
 import './App.scss';
+import { MainSection } from './components/MainSection/MainSection';
+import { Navbar } from './components/Navbar/Navbar';
 
 export const App = () => (
   <div data-cy="app">
-    <nav
+    <Navbar />
+    <MainSection />
+    {/* <Outlet /> */}
+    {/* <nav
       data-cy="nav"
       className="navbar is-fixed-top has-shadow"
       role="navigation"
@@ -24,9 +28,9 @@ export const App = () => (
           </a>
         </div>
       </div>
-    </nav>
+    </nav> */}
 
-    <main className="section">
+    {/* <main className="section">
       <div className="container">
         <h1 className="title">Home Page</h1>
         <h1 className="title">People Page</h1>
@@ -162,6 +166,6 @@ export const App = () => (
           </div>
         </div>
       </div>
-    </main>
+    </main> */}
   </div>
 );
