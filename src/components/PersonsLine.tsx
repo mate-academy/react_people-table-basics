@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
@@ -19,7 +20,9 @@ export const PersonLine: React.FC<Props> = ({ person, people }) => {
   return (
     <tr
       data-cy="person"
-      className={slug === person.slug ? 'has-background-warning' : ''}
+      className={classNames('', {
+        'has-background-warning': slug === person.slug,
+      })}
     >
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
       <td>
