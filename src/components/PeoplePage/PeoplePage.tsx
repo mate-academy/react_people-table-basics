@@ -10,7 +10,6 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [peopleLoadingError, setPeopleLoadingError] = useState(false);
-  const [noPeopleFromServer, setNoPeopleFromServer] = useState(false);
   const { slug } = useParams();
   const selectedPerson = slug ? `${slug}` : '';
 
@@ -21,7 +20,7 @@ export const PeoplePage = () => {
       try {
         const persons = await getPeople();
 
-        persons.length === 0 ? setNoPeopleFromServer(true) : setPeople(persons);
+        persons.length > 0 ? setPeople(persons) : setPeopleLoadingError(true);
       } catch {
         setPeopleLoadingError(true);
       } finally {
@@ -41,13 +40,13 @@ export const PeoplePage = () => {
           {isLoading && <Loader />}
 
           {peopleLoadingError && (
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
-          )}
+            <>
+              <p data-cy="peopleLoadingError" className="has-text-danger">
+                Something went wrong
+              </p>
 
-          {noPeopleFromServer && (
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
+              <p data-cy="noPeopleMessage">There are no people on the server</p>
+            </>
           )}
 
           {!!people.length && (
