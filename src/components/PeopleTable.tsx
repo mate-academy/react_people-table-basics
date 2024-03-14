@@ -6,20 +6,11 @@ import { Person } from '../types';
 import { getPeople } from '../api';
 import { PersonLink } from './PersonLink';
 
-interface Parent {
-  name: string;
-  slug: string;
-}
-
 export const PeopleTable = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorShown, setIsErrorShown] = useState(false);
   const { slug } = useParams();
-  let parents: Parent = {
-    name: '',
-    slug: '',
-  };
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -38,23 +29,6 @@ export const PeopleTable = () => {
 
     fetchPeople();
   }, []);
-
-  function doesThePersonExist(name: string) {
-    const parent: Person | undefined = people.find(
-      person => person.name === name,
-    );
-
-    if (parent) {
-      parents = {
-        name: parent.name,
-        slug: parent.slug,
-      };
-
-      return true;
-    }
-
-    return false;
-  }
 
   return (
     <div className="block">
@@ -103,30 +77,32 @@ export const PeopleTable = () => {
                   <td>{person.died}</td>
 
                   {/* eslint-disable */}
-                  {person.motherName &&
-                  doesThePersonExist(person.motherName) ? (
-                    <td>
+                  <td>
+                    {person.motherName &&
+                    people.some(p => p.name === person.motherName) ? (
                       <Link
-                        to={`/people/${parents.slug}`}
+                        to={`/people/${
+                          people.find(p => p.name === person.motherName)?.slug
+                        }`}
                         className="has-text-danger"
                       >
-                        {parents.name}
+                        {person.motherName}
                       </Link>
-                    </td>
-                  ) : (
-                    <td>{person.motherName ? person.motherName : '-'}</td>
-                  )}
+                    ) : person.motherName || '-'
+                    }
+                  </td>
 
-                  {person.fatherName &&
-                  doesThePersonExist(person.fatherName) ? (
-                    <td>
-                      <Link to={`/people/${parents.slug}`}>
-                        {parents.name}
-                      </Link>
-                    </td>
-                  ) : (
-                    <td>{person.fatherName ? person.fatherName : '-'}</td>
-                  )}
+                  <td>
+                    {person.fatherName &&
+                    people.some(p => p.name === person.fatherName) ? (
+                        <Link to={`/people/${
+                          people.find(p => p.name === person.fatherName)?.slug
+                        }`}>
+                          {person.fatherName}
+                        </Link>
+                    ) : person.fatherName || '-'
+                    }
+                  </td>
                   {/* eslint-enable */}
                 </tr>
               ))}
