@@ -83,6 +83,7 @@ export const PeopleTable = () => {
             <tbody>
               {people.map(person => (
                 <tr
+                  key={person.slug}
                   data-cy="person"
                   className={cn({
                     'has-background-warning': person.slug === slug,
