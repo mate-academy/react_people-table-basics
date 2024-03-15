@@ -13,9 +13,7 @@ export const People = () => {
     setIsLoading(true);
     setError(false);
     getPeople()
-      .then(data => {
-        setPeople(data);
-      })
+      .then(setPeople)
       .catch(() => {
         setError(true);
       })
