@@ -37,7 +37,9 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
         <td>
           {hasMother ? (
             <Link
-              className={classNames({ 'has-text-danger': hasMother.sex === 'f' })}
+              className={classNames({
+                'has-text-danger': hasMother.sex === 'f',
+              })}
               to={`/people/${hasMother.slug}`}
             >
               {motherName}
