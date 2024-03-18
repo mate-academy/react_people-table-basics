@@ -15,47 +15,43 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
   const hasFather = people.find(p => p.name === person.fatherName);
 
   return (
-    <>
-      <tr
-        data-cy="person"
-        className={classNames({
-          'has-background-warning': slug === slugParam,
-        })}
-      >
-        <td>
-          <Link
-            className={classNames({ 'has-text-danger': sex === 'f' })}
-            to={`/people/${slug}`}
-          >
-            {name}
-          </Link>
-        </td>
+    <tr
+      data-cy="person"
+      className={classNames({
+        'has-background-warning': slug === slugParam,
+      })}
+    >
+      <td>
+        <Link
+          className={classNames({ 'has-text-danger': sex === 'f' })}
+          to={`/people/${slug}`}
+        >
+          {name}
+        </Link>
+      </td>
 
-        <td>{sex}</td>
-        <td>{born}</td>
-        <td>{died}</td>
-        <td>
-          {hasMother ? (
-            <Link
-              className={classNames({
-                'has-text-danger': hasMother.sex === 'f',
-              })}
-              to={`/people/${hasMother.slug}`}
-            >
-              {motherName}
-            </Link>
-          ) : (
-            motherName || '-'
-          )}
-        </td>
-        <td>
-          {hasFather ? (
-            <Link to={`/people/${hasFather.slug}`}>{fatherName}</Link>
-          ) : (
-            fatherName || '-'
-          )}
-        </td>
-      </tr>
-    </>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>
+        {hasMother ? (
+          <Link
+            className={classNames({ 'has-text-danger': hasMother.sex === 'f' })}
+            to={`/people/${hasMother.slug}`}
+          >
+            {motherName}
+          </Link>
+        ) : (
+          motherName || '-'
+        )}
+      </td>
+      <td>
+        {hasFather ? (
+          <Link to={`/people/${hasFather.slug}`}>{fatherName}</Link>
+        ) : (
+          fatherName || '-'
+        )}
+      </td>
+    </tr>
   );
 };
