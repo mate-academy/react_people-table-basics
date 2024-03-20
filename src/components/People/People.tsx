@@ -15,9 +15,7 @@ export const People = () => {
     setCustomError(false);
     setLoading(true);
     getPeople()
-      .then(data => {
-        setPeople(data);
-      })
+      .then(setPeople)
       .catch(() => {
         setCustomError(true);
       })
