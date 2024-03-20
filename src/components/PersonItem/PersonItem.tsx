@@ -9,14 +9,16 @@ interface Props {
 }
 
 export const PersonItem: React.FC<Props> = ({ person, params, people }) => {
-  const hasMother = !!person.motherName ? <>{person.motherName}</> : <>-</>;
+  const hasMother = person.motherName ? <>{person.motherName}</> : <>-</>;
   const hasFather = person.fatherName ? <>{person.fatherName}</> : <>-</>;
 
-  const arrayIncludesFather =
-    people.filter((elem: Person) => person.fatherName === elem.name).length > 0;
+  const arrayIncludesFather = people.filter(
+    (elem: Person) => person.fatherName === elem.name,
+  );
 
-  const arrayIncludesMother =
-    people.filter((elem: Person) => person.motherName === elem.name).length > 0;
+  const arrayIncludesMother = people.filter(
+    (elem: Person) => person.motherName === elem.name,
+  );
 
   const isWomen = person.sex === 'f';
   const isActive = params === person.slug;
@@ -39,8 +41,8 @@ export const PersonItem: React.FC<Props> = ({ person, params, people }) => {
       <td>{person.born}</td>
       <td>{person.died}</td>
       <td>
-        {arrayIncludesMother ? (
-          <NavLink to={person.slug} className="has-text-danger">
+        {arrayIncludesMother.length > 0 ? (
+          <NavLink to={arrayIncludesMother[0].slug} className="has-text-danger">
             {person.motherName}
           </NavLink>
         ) : (
@@ -48,8 +50,10 @@ export const PersonItem: React.FC<Props> = ({ person, params, people }) => {
         )}
       </td>
       <td>
-        {arrayIncludesFather ? (
-          <NavLink to={person.slug}>{person.fatherName}</NavLink>
+        {arrayIncludesFather.length > 0 ? (
+          <NavLink to={arrayIncludesFather[0].slug}>
+            {person.fatherName}
+          </NavLink>
         ) : (
           hasFather
         )}
