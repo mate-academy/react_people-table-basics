@@ -1,15 +1,15 @@
 import React from 'react';
 import { Person } from '../../types';
-import { Link, NavLink, useParams } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 type Props = {
   person: Person;
   people: Person[];
+  slug: string | undefined;
 };
 
-export const PeopleItem: React.FC<Props> = ({ person, people }) => {
+export const PeopleItem: React.FC<Props> = ({ person, people, slug }) => {
   const { sex, motherName, fatherName, died, born, name } = person;
-  const { slug } = useParams();
 
   const mother = motherName
     ? people.find(anotherPerson => motherName === anotherPerson.name) || null

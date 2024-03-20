@@ -11,6 +11,7 @@ export const Rooot = () => (
       <Route path="*" element={<h1 className="title">Page not found</h1>} />
 
       <Route path="people" element={<PeoplePage />}>
+        <Route index element={<PeoplePage />} />
         <Route path=":slug" element={<PeoplePage />} />
       </Route>
     </Route>

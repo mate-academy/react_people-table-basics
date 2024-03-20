@@ -3,11 +3,13 @@ import { Loader } from '../Loader';
 import { PeopleItem } from '../PeopleItem/PeopleItem';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
+import { useParams } from 'react-router-dom';
 
 export const PeopleList = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const { slug } = useParams();
 
   const fatchData = async () => {
     try {
@@ -60,7 +62,12 @@ export const PeopleList = () => {
 
             <tbody>
               {people.map(person => (
-                <PeopleItem person={person} key={person.slug} people={people} />
+                <PeopleItem
+                  person={person}
+                  key={person.slug}
+                  people={people}
+                  slug={slug}
+                />
               ))}
             </tbody>
           </table>
