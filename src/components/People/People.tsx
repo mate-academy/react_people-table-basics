@@ -9,7 +9,7 @@ export const People = () => {
   const [loading, setLoading] = useState(false);
   const [customError, setCustomError] = useState(true);
 
-  // const has
+  const isPeople = people.length > 0;
 
   useEffect(() => {
     setCustomError(false);
@@ -48,7 +48,7 @@ export const People = () => {
 
       <div className="block">
         <div className="box table-container">
-          {people.length > 0 ? (
+          {isPeople ? (
             <PeopleTable people={people} />
           ) : (
             <p data-cy="noPeopleMessage">There are no people on the server</p>

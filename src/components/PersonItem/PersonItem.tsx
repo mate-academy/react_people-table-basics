@@ -49,9 +49,7 @@ export const PersonItem: React.FC<Props> = ({ person, params, people }) => {
       </td>
       <td>
         {arrayIncludesFather ? (
-          <NavLink to={person.slug} className="person">
-            {person.fatherName}
-          </NavLink>
+          <NavLink to={person.slug}>{person.fatherName}</NavLink>
         ) : (
           hasFather
         )}
