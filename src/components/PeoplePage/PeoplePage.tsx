@@ -14,8 +14,8 @@ export const PeoplePage: React.FC = () => {
     setError(false);
 
     getPeople()
-      .then(people => {
-        let allPeople = [...people];
+      .then(peopleFromServer => {
+        const allPeople = [...peopleFromServer];
         const updatePeople = [...allPeople];
 
         updatePeople.forEach(person => {
@@ -36,12 +36,14 @@ export const PeoplePage: React.FC = () => {
               mother,
             };
           }
+
           if (father) {
             allPeople[currentPersonIndex] = {
               ...allPeople[currentPersonIndex],
               father,
             };
           }
+
           if (father || mother) {
             allPeople.splice(
               currentPersonIndex,
@@ -55,7 +57,6 @@ export const PeoplePage: React.FC = () => {
       })
       .catch(() => {
         setError(true);
-        console.log('error');
       })
       .finally(() => {
         setLoading(false);
