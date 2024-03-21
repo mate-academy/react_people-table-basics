@@ -35,7 +35,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               'has-background-warning': slug === human.slug,
             })}
           >
-            <td aria-label={`${human.name}`}>
+            <td aria-label={human.name}>
               <HumanLink person={human} />
             </td>
 
@@ -43,7 +43,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <td>{human.born}</td>
             <td>{human.died}</td>
 
-            <td className="has-text-danger">
+            <td>
               {human.mother ? (
                 <HumanLink person={human.mother} />
               ) : (
