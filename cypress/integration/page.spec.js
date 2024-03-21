@@ -474,49 +474,38 @@ describe('', () => {
   describe('#/people/:correct-slug page', () => {
     beforeEach(() => {
       page.mockPeople();
-    });
-    it('should have correct address', () => {
       page.visit('/#/people/emma-de-milliano-1876');
+    });
+
+    it('should have correct address', () => {
       page.assertHash('#/people/emma-de-milliano-1876');
     });
 
     it('should have People nav link active', () => {
-      page.visit('/#/people/emma-de-milliano-1876');
       page.nav()
         .contains('a', 'People')
         .and('have.class', ACTIVE_NAV_LINK_CLASS);
     });
 
     it('should have only correct title', () => {
-      page.visit('/#/people/emma-de-milliano-1876');
       page.assetTitle('People Page');
     });
 
     it('should have people table', () => {
-      page.visit('/#/people/emma-de-milliano-1876');
       page.peopleTable().should('exist');
     });
 
-    it('should have one selected person', () => {
-      page.visit('/#/people/emma-de-milliano-1876');
-
+    it('should highlight person with given slug', () => {
       page.people().eq(1)
-        .should('have.class', SELECTED_PERSON_CLASS);
+        .should('have.class', SELECTED_PERSON_CLASS)
+    });
 
+    it('should have one selected person', () => {
       cy.get('[data-cy="person"].' + SELECTED_PERSON_CLASS)
         .should('have.length', 1);
     });
 
-    it('should highlight person with given slug', () => {
-      page.visit('/#/people/jan-van-brussel-1714');
-
-      page.people().eq(3)
-        .should('have.class', SELECTED_PERSON_CLASS)
-    });
-
     it('should allow to select another person', () => {
-      page.visit('/#/people');
-
       page.people().eq(3)
         .find('td').eq(0)
         .find('a')
