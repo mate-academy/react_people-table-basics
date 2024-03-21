@@ -15,22 +15,20 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
     died,
     fatherName,
     motherName,
-    slug: slugg,
+    slug: personSlug,
     mother,
     father,
   } = person;
   const { slug } = useParams();
 
-  console.log(slug);
-
   return (
     <tr
       data-cy="person"
-      className={classNames({ 'has-background-warning': slug === slugg })}
+      className={classNames({ 'has-background-warning': slug === personSlug })}
     >
       <td>
         <a
-          href={`#/people/${slugg}`}
+          href={`#/people/${personSlug}`}
           className={classNames({
             'has-text-danger': sex === 'f',
           })}
