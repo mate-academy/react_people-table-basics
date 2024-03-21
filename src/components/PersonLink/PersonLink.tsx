@@ -36,7 +36,6 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
           {name}
         </a>
       </td>
-
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
