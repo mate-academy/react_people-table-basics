@@ -6,7 +6,7 @@ import { getPeople } from '../../api';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [islanding, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setError] = useState('');
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export const PeoplePage: React.FC = () => {
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {islanding ? (
+          {isLoading ? (
             <Loader />
           ) : (
             <>
