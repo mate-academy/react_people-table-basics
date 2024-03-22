@@ -50,7 +50,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
             {mother.name}
           </a>
         ) : (
-          <>{motherName ? motherName : '-'}</>
+          motherName || '-'
         )}
       </td>
       <td>
@@ -64,7 +64,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
             {father.name}
           </a>
         ) : (
-          <>{fatherName ? fatherName : '-'}</>
+          fatherName || '-'
         )}
       </td>
     </tr>

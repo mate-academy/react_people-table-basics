@@ -15,42 +15,21 @@ export const PeoplePage: React.FC = () => {
 
     getPeople()
       .then(peopleFromServer => {
-        const allPeople = [...peopleFromServer];
-        const updatePeople = [...allPeople];
+        let allPeople = peopleFromServer;
 
-        updatePeople.forEach(person => {
-          const currentPersonIndex = allPeople.findIndex(
-            eachPerson => eachPerson.name === person.name,
-          );
-
-          const mother = updatePeople.find(
+        allPeople = allPeople.map(person => {
+          const mother = peopleFromServer.find(
             one => one.name === person.motherName,
           );
-          const father = updatePeople.find(
+          const father = peopleFromServer.find(
             one => one.name === person.fatherName,
           );
 
-          if (mother) {
-            allPeople[currentPersonIndex] = {
-              ...allPeople[currentPersonIndex],
-              mother,
-            };
-          }
-
-          if (father) {
-            allPeople[currentPersonIndex] = {
-              ...allPeople[currentPersonIndex],
-              father,
-            };
-          }
-
-          if (father || mother) {
-            allPeople.splice(
-              currentPersonIndex,
-              1,
-              allPeople[currentPersonIndex],
-            );
-          }
+          return {
+            ...person,
+            mother: mother || null,
+            father: father || null,
+          };
         });
 
         setPeople(allPeople);
