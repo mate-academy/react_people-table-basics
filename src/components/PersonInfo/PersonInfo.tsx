@@ -9,6 +9,8 @@ interface Props {
 export const PersonInfo: React.FC<Props> = ({ person, people }) => {
   const { sex, born, died, name, fatherName, motherName, slug } = person;
 
+  const female = 'f';
+
   const motherSlug = people.find(
     ({ name: personName }) => personName === motherName,
   );
@@ -28,7 +30,7 @@ export const PersonInfo: React.FC<Props> = ({ person, people }) => {
     >
       <td>
         <Link
-          className={classNames({ 'has-text-danger': sex === 'f' })}
+          className={classNames({ 'has-text-danger': sex === female })}
           to={`/people/${slug}`}
         >
           {name}

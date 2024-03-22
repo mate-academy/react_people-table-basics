@@ -5,9 +5,9 @@ import { Person } from '../../types';
 import { getPeople } from '../../api';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<Person[] | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [people, setPeople] = useState<Person[]>([]);
+  const [islanding, setIsLoading] = useState(true);
+  const [isError, setError] = useState('');
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -20,7 +20,7 @@ export const PeoplePage: React.FC = () => {
       } catch {
         setError('something went wrong');
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -32,13 +32,13 @@ export const PeoplePage: React.FC = () => {
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {loading ? (
+          {islanding ? (
             <Loader />
           ) : (
             <>
-              {error && (
+              {isError && (
                 <p data-cy="peopleLoadingError" className="has-text-danger">
-                  {error}
+                  {isError}
                 </p>
               )}
 
@@ -48,7 +48,7 @@ export const PeoplePage: React.FC = () => {
                 </p>
               )}
 
-              {people && <PeopleTable people={people} />}
+              {!!people.length && <PeopleTable people={people} />}
             </>
           )}
         </div>
