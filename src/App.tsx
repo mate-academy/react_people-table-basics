@@ -8,7 +8,7 @@ export const App = () => (
     <Navbar />
     <main className="section">
       <div className="container">
-      <Outlet />
+        <Outlet />
       </div>
     </main>
   </div>
