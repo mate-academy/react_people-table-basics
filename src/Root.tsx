@@ -7,6 +7,7 @@ import {
 import { App } from './App';
 import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
+import React from 'react';
 
 export const Root = () => {
   return (
