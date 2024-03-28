@@ -35,7 +35,7 @@ export const PeoplePage: React.FC = () => {
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {people.length && !isLoading && !error && (
+          {people.length > 0 && !isLoading && !error && (
             <PeopleTable people={people} />
           )}
         </div>
