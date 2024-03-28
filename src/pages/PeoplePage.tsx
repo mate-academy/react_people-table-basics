@@ -37,7 +37,7 @@ export const PeoplePage = () => {
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!isLoading && !error && ( <PeopleTable people={people} />)}
+          {!isLoading && !error && <PeopleTable people={people} />}
         </div>
       </div>
     </>
