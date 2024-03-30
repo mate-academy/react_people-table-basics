@@ -9,16 +9,12 @@ import { PeopleTable } from '../../components/PeopleTable';
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState('');
-  const [isPeopleVisible, setIsPeopleVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
-
     getPeople()
       .then(data => {
         setPeople(data);
-        setIsPeopleVisible(true);
         setError('');
       })
       .catch(() => setError('Something went wrong'))
@@ -39,7 +35,7 @@ export const PeoplePage = () => {
 
           {isLoading && !error && <Loader />}
 
-          {isPeopleVisible && (
+          {!isLoading && !error && (
             <>
               {people.length < 1 ? (
                 <p data-cy="noPeopleMessage">

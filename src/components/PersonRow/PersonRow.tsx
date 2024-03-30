@@ -28,24 +28,8 @@ export const PersonRow: React.FC<Props> = ({ person, mother, father }) => {
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
-      <td>
-        {mother ? (
-          <PersonLink person={mother} />
-        ) : motherName ? (
-          motherName
-        ) : (
-          '-'
-        )}
-      </td>
-      <td>
-        {father ? (
-          <PersonLink person={father} />
-        ) : fatherName ? (
-          fatherName
-        ) : (
-          '-'
-        )}
-      </td>
+      <td>{mother ? <PersonLink person={mother} /> : motherName || '-'}</td>
+      <td>{father ? <PersonLink person={father} /> : fatherName || '-'}</td>
     </tr>
   );
 };

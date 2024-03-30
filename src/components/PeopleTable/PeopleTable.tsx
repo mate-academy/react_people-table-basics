@@ -6,6 +6,10 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
+  const findPerson = (peopleArray: Person[], parentName: string | null) => {
+    return peopleArray.find(parent => parent.name === parentName);
+  };
+
   return (
     <table
       data-cy="peopleTable"
@@ -26,8 +30,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
         {people.map(person => {
           const { motherName, fatherName } = person;
 
-          const mother = people.find(parent => parent.name === motherName);
-          const father = people.find(parent => parent.name === fatherName);
+          const mother = findPerson(people, motherName);
+          const father = findPerson(people, fatherName);
 
           return (
             <PersonRow
