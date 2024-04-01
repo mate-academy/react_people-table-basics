@@ -5,8 +5,8 @@ import { PersonLink } from '../PersonLink';
 
 type Props = {
   person: Person;
-  mother: Person | undefined;
-  father: Person | undefined;
+  mother?: Person;
+  father?: Person;
 };
 
 export const PersonRow: React.FC<Props> = ({ person, mother, father }) => {
