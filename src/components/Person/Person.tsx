@@ -1,52 +1,33 @@
 import cn from 'classnames';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { PersonType } from '../../types';
+import PersonLink from '../PersonLink/PersonLink';
 
 interface Props {
   person: PersonType;
 }
 
 const Person: React.FC<Props> = ({ person }) => {
-  const { slug } = useParams();
+  const { sex, born, died, motherName, fatherName, slug, mother, father } =
+    person;
+
+  const { personSlug } = useParams();
 
   return (
     <tr
       data-cy="person"
-      className={cn({ 'has-background-warning': slug === person.slug })}
+      className={cn({ 'has-background-warning': personSlug === slug })}
     >
       <td>
-        <Link
-          to={`/people/${person.slug}`}
-          className={cn({ 'has-text-danger': person.sex === 'f' })}
-        >
-          {person.name}
-        </Link>
+        <PersonLink person={person} />
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-      {person.mother ? (
-        <td>
-          <Link
-            to={`/people/${person.mother.slug}`}
-            className="has-text-danger"
-          >
-            {person.mother.name}
-          </Link>
-        </td>
-      ) : (
-        <td>{person.motherName || '-'}</td>
-      )}
-
-      {person.father ? (
-        <td>
-          <Link to={`/people/${person.father.slug}`}>{person.father.name}</Link>
-        </td>
-      ) : (
-        <td>{person.fatherName || '-'}</td>
-      )}
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>{mother ? <PersonLink person={mother} /> : motherName || '-'}</td>
+      <td>{father ? <PersonLink person={father} /> : fatherName || '-'}</td>
     </tr>
   );
 };

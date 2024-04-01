@@ -3,8 +3,11 @@ import { useEffect, useState } from 'react';
 import { Loader } from '../../components/Loader';
 import Person from '../../components/Person/Person';
 
+import { getPreparedPeople } from '../../utils/getPreparedPeople';
 import { PersonType } from '../../types';
 import { getPeople } from '../../api';
+
+const tableHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
 const PeoplePage = () => {
   const [people, setPeople] = useState<PersonType[]>([]);
@@ -29,15 +32,7 @@ const PeoplePage = () => {
     fetchPeople();
   }, []);
 
-  const preparedPeople = people.map(person => ({
-    ...person,
-    mother: people.find(
-      currentPerson => currentPerson.name === person.motherName,
-    ),
-    father: people.find(
-      currentPerson => currentPerson.name === person.fatherName,
-    ),
-  }));
+  const preparedPeople = getPreparedPeople(people);
 
   return (
     <>
@@ -53,19 +48,16 @@ const PeoplePage = () => {
             </p>
           )}
 
-          {people.length > 0 && (
+          {!!people.length && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
+                  {tableHeaders.map(header => (
+                    <th key={header}>{header}</th>
+                  ))}
                 </tr>
               </thead>
 
@@ -76,7 +68,7 @@ const PeoplePage = () => {
               </tbody>
             </table>
           )}
-          {people.length < 1 && !isLoading && !error && (
+          {!people.length && !isLoading && !error && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
         </div>

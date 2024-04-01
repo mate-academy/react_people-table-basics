@@ -5,6 +5,7 @@ import PeoplePage from './pages/PeoplePage/PeoplePage';
 import HomePage from './pages/HomePage/HomePage';
 
 import './App.scss';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 export const App = () => (
   <div data-cy="app">
@@ -14,11 +15,11 @@ export const App = () => (
       <div className="container">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="home" element={<Navigate to="/" />} />
+          <Route path="home" element={<Navigate to="/" replace={true} />} />
           <Route path="/people" element={<PeoplePage />}>
-            <Route path=":slug" element={<PeoplePage />} />
+            <Route path=":personSlug" element={<PeoplePage />} />
           </Route>
-          <Route path="*" element={<h1 className="title">Page not found</h1>} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
     </main>
