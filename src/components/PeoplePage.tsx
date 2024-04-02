@@ -1,43 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import { Loader } from './Loader';
-import { getPeople } from '../api';
-import { Person } from '../types';
-import { PeopleTable } from './PeopleTable';
+import { getPeople } from "../api";
+import { Person } from "../types";
+import { PeopleTable } from "./PeopleTable";
 
 export const PeoplePage = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [error, setError] = useState<boolean>(false);
+  const [people, setPeople] = useState<Person[] | []>([]);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    setIsLoading(true);
+
     getPeople()
       .then(setPeople)
-      .catch(() => setError(true));
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
     <div className="container">
       <h1 className="title">People Page</h1>
 
-      <div className="block">
-        <div className="box table-container">
-          {error && (
-            <>
-              <p data-cy="peopleLoadingError" className="has-text-danger">
-                Something went wrong
-              </p>
+      <PeopleTable
+        people={people}
+        isError={isError}
+        isLoading={isLoading}
+      />
 
-              <p data-cy="noPeopleMessage">There are no people on the server</p>
-            </>
-          )}
-
-          {!people.length && !error ? (
-            <Loader />
-          ) : (
-            <PeopleTable people={people} />
-          )}
-        </div>
-      </div>
     </div>
   );
 };
