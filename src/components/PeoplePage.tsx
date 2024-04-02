@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { getPeople } from "../api";
-import { Person } from "../types";
-import { PeopleTable } from "./PeopleTable";
+import { getPeople } from '../api';
+import { Person } from '../types';
+import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[] | []>([]);
@@ -22,12 +22,7 @@ export const PeoplePage = () => {
     <div className="container">
       <h1 className="title">People Page</h1>
 
-      <PeopleTable
-        people={people}
-        isError={isError}
-        isLoading={isLoading}
-      />
-
+      <PeopleTable people={people} isError={isError} isLoading={isLoading} />
     </div>
   );
 };

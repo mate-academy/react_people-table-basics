@@ -10,7 +10,11 @@ interface Props {
 
 const tableParameters = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
-export const PeopleTable: React.FC<Props> = ({ people, isError, isLoading }) => (
+export const PeopleTable: React.FC<Props> = ({
+  people,
+  isError,
+  isLoading,
+}) => (
   <div className="block">
     <div className="box table-container">
       {isError && (
@@ -19,10 +23,9 @@ export const PeopleTable: React.FC<Props> = ({ people, isError, isLoading }) => 
         </p>
       )}
 
-      { people.length === 0
-        && !isLoading
-        && !isError
-        && <p data-cy="noPeopleMessage">There are no people on the server</p>}
+      {people.length === 0 && !isLoading && !isError && (
+        <p data-cy="noPeopleMessage">There are no people on the server</p>
+      )}
 
       {isLoading && <Loader />}
 
@@ -49,4 +52,3 @@ export const PeopleTable: React.FC<Props> = ({ people, isError, isLoading }) => 
     </div>
   </div>
 );
-
