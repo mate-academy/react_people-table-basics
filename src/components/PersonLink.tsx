@@ -53,7 +53,7 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
         {fatherSlug ? (
           <Link to={`../${fatherSlug.slug}`}>{fatherName}</Link>
         ) : (
-          motherName || emptyField
+          fatherName || emptyField
         )}
       </td>
     </tr>
