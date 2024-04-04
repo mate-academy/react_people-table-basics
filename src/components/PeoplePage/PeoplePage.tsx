@@ -24,6 +24,7 @@ export const PeoplePage = () => {
         setLoading(false);
       }
     };
+
     load();
   }, []);
 

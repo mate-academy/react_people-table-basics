@@ -8,6 +8,7 @@ export const matchParents = (people: Person[]) => {
     const father = child.fatherName
       ? people.find(f => f.name === child.fatherName) || null
       : null;
+
     return { ...child, mother, father };
   });
 };

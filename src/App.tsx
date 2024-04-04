@@ -10,6 +10,7 @@ import { PeoplePage } from './components/PeoplePage/PeoplePage';
 
 export const App = () => {
   const { pathname } = useLocation();
+
   return (
     <div data-cy="app">
       <nav
