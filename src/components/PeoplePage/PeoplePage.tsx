@@ -7,7 +7,6 @@ import cn from 'classnames';
 
 export const PeoplePage = () => {
   const { slug } = useParams();
-  const selectedPersonSlug = slug;
 
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
@@ -17,9 +16,8 @@ export const PeoplePage = () => {
     setLoading(true);
     getPeople()
       .then(setPeople)
-      .catch(error => {
+      .catch(() => {
         setErrorMessage(true);
-        throw error;
       })
       .finally(() => setLoading(false));
   }, []);
@@ -66,8 +64,7 @@ export const PeoplePage = () => {
                     data-cy="person"
                     key={person.name}
                     className={cn({
-                      'has-background-warning':
-                        person.slug === selectedPersonSlug,
+                      'has-background-warning': person.slug === slug,
                     })}
                   >
                     <td>
