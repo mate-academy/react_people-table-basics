@@ -1,3 +1,4 @@
+import React from 'react';
 import { PeopleTable } from '../../components/PeopleTable';
 
 export const PeoplePage = () => {

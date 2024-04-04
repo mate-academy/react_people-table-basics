@@ -8,6 +8,7 @@ import { App } from './App';
 import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
 import { PageNotFound } from './pages/PageNotFound';
+import React from 'react';
 
 function RedirectToRoot() {
   return <Navigate to="/" replace />;
