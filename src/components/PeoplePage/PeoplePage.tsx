@@ -28,7 +28,8 @@ export const PeoplePage = () => {
               {error}
             </p>
           )}
-          {people.length > 0 && <PeopleTable people={people} />}
+
+          {!!people.length && <PeopleTable people={people} />}
           {people.length < 1 && !isLoading && !error && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}

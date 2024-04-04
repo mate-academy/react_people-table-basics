@@ -1,13 +1,12 @@
-import classNames from 'classnames';
 import './App.scss';
-import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
-import { Home } from './components/Home/Home';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
+import Navigation from './components/Navigation/Navigation';
+import { PageNotFound } from './components/PageNotFound/PageNotFound';
+import { HomePage } from './components/HomePage/HomePage';
 
 export const App = () => {
-  const getLinkClass = ({ isActive }: { isActive: boolean }) =>
-    classNames('navbar-item', { 'has-background-grey-lighter': isActive });
-
   return (
     <div data-cy="app">
       <nav
@@ -17,30 +16,19 @@ export const App = () => {
         aria-label="main navigation"
       >
         <div className="container">
-          <div className="navbar-brand">
-            <NavLink to="/" className={getLinkClass}>
-              Home
-            </NavLink>
-
-            <NavLink to="/people" className={getLinkClass}>
-              People
-            </NavLink>
-          </div>
+          <Navigation />
         </div>
       </nav>
 
       <main className="section">
         <div className="container">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="home" element={<Navigate to="/" replace />} />
             <Route path="/people" element={<PeoplePage />}>
               <Route path=":slug" element={<PeoplePage />} />
             </Route>
-            <Route
-              path="*"
-              element={<h1 className="title">Page not found</h1>}
-            />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>
       </main>

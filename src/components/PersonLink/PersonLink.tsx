@@ -7,6 +7,10 @@ type Props = {
 };
 export const PersonLink: React.FC<Props> = ({ person }) => {
   const { slug } = useParams();
+  const { name, sex, born, died, fatherName, motherName, mother, father } =
+    person;
+  const female = sex === 'f';
+  const notParents = '-';
 
   return (
     <tr
@@ -16,36 +20,33 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       <td>
         <Link
           to={person.slug}
-          className={classNames('', {
-            'has-text-danger': person.sex === 'f',
+          className={classNames({
+            'has-text-danger': female,
           })}
         >
-          {person.name}
+          {name}
         </Link>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-      {person.mother ? (
-        <td>
-          <Link
-            to={`/people/${person.mother.slug}`}
-            className="has-text-danger"
-          >
-            {person.mother.name}
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>
+        {mother ? (
+          <Link to={`/people/${mother.slug}`} className="has-text-danger">
+            {mother.name}
           </Link>
-        </td>
-      ) : (
-        <td>{person.motherName || '-'}</td>
-      )}
-      {person.father ? (
-        <td>
-          <Link to={`/people/${person.father.slug}`}>{person.father.name}</Link>
-        </td>
-      ) : (
-        <td>{person.fatherName || '-'}</td>
-      )}
+        ) : (
+          motherName || notParents
+        )}
+      </td>
+      <td>
+        {father ? (
+          <Link to={`/people/${father.slug}`}>{father.name}</Link>
+        ) : (
+          fatherName || notParents
+        )}
+      </td>
     </tr>
   );
 };
