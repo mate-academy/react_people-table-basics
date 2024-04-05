@@ -2,14 +2,15 @@ import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
-  people: Person[] | null;
+  people: Person[];
 };
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const preparedPeople = people?.map(person => ({
     ...person,
-    mother: people.find(p => p.name === person.motherName),
-    father: people.find(p => p.name === person.fatherName),
+    mother: people.find(personItem => personItem.name === person.motherName),
+    father: people.find(personItem => personItem.name === person.fatherName),
   }));
+  const columnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
   return (
     <div>
@@ -19,12 +20,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       >
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Sex</th>
-            <th>Born</th>
-            <th>Died</th>
-            <th>Mother</th>
-            <th>Father</th>
+            {columnNames.map(name => (
+              <th key={name}>{name}</th>
+            ))}
           </tr>
         </thead>
 
