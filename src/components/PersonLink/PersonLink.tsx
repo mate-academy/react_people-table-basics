@@ -31,7 +31,10 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
 
       <td>
         {person.mother ? (
-          <NavLink to={`/people/${person.mother.slug}`} className="has-text-danger">
+          <NavLink
+            to={`/people/${person.mother.slug}`}
+            className="has-text-danger"
+          >
             {person.motherName}
           </NavLink>
         ) : (
@@ -40,7 +43,9 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       </td>
       <td>
         {person.father ? (
-          <NavLink to={`/people/${person.father.slug}`}>{person.fatherName}</NavLink>
+          <NavLink to={`/people/${person.father.slug}`}>
+            {person.fatherName}
+          </NavLink>
         ) : (
           person.fatherName || noParent
         )}
