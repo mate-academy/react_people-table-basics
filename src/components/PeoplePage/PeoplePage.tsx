@@ -46,7 +46,9 @@ export const PeoplePage = () => {
                       <>
                         <table
                           data-cy="peopleTable"
-                          className="table is-striped is-hoverable is-narrow is-fullwidth"
+                          className="table
+                          is-striped
+                          is-hoverable is-narrow is-fullwidth"
                         >
                           <thead>
                             <tr>
@@ -61,7 +63,11 @@ export const PeoplePage = () => {
 
                           <tbody>
                             {people.map(person => (
-                              <PersonItem person={person} people={people} />
+                              <PersonItem
+                                key={person.slug}
+                                person={person}
+                                people={people}
+                              />
                             ))}
                           </tbody>
                         </table>

@@ -1,6 +1,6 @@
-import classNames from "classnames";
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import classNames from 'classnames';
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { Person } from '../../types';
 
 interface Props {
@@ -11,8 +11,8 @@ export const PersonItem: React.FC<Props> = ({ person, people }) => {
   const { personId } = useParams();
   const { motherName, fatherName } = person;
 
-  const motherNameFounded = people.find(person => person.name === motherName);
-  const fatherNameFounded = people.find(person => person.name === fatherName);
+  const motherNameFounded = people.find(human => human.name === motherName);
+  const fatherNameFounded = people.find(human => human.name === fatherName);
 
   return (
     <tr
@@ -55,7 +55,9 @@ export const PersonItem: React.FC<Props> = ({ person, people }) => {
       <td>
         {person.fatherName ? (
           fatherNameFounded ? (
-            <Link to={`/people/${fatherNameFounded.slug}`}>{person.fatherName}</Link>
+            <Link to={`/people/${fatherNameFounded.slug}`}>
+              {person.fatherName}
+            </Link>
           ) : (
             <span>{person.fatherName}</span>
           )
