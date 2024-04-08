@@ -8,6 +8,7 @@ import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { ErrorPage } from './components/ErrorPage/ErrorPage';
 import { App } from './App';
+import React from 'react';
 
 export const Root = () => {
   return (

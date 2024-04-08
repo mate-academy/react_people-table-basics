@@ -3,6 +3,7 @@ import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { PersonItem } from '../PersonItems/PersonItem';
+import React from 'react';
 
 export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(false);
