@@ -17,7 +17,7 @@ function getExtendedPersonList(data: Person[]): Person[] {
 
 export const PeopleTable = () => {
   const [data, setData] = useState<Person[]>([]);
-  const [isloading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
   const { personSlug } = useParams();
@@ -47,7 +47,7 @@ export const PeopleTable = () => {
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {isloading ? (
+          {isLoading ? (
             <Loader />
           ) : hasError ? (
             <p data-cy="peopleLoadingError" className="has-text-danger">
