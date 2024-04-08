@@ -45,7 +45,7 @@ export const Human: React.FC<Props> = ({ person, people }) => {
             {motherName}
           </Link>
         ) : (
-          <p>{motherName}</p>
+          motherName || '-'
         )}
       </td>
 
@@ -53,7 +53,7 @@ export const Human: React.FC<Props> = ({ person, people }) => {
         {father ? (
           <Link to={`/people/${father.slug}`}>{fatherName}</Link>
         ) : (
-          <p>{fatherName}</p>
+          fatherName || '-'
         )}
       </td>
     </tr>
