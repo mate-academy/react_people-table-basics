@@ -15,6 +15,7 @@ export const PeoplePage: React.FC = () => {
       .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, []);
+
   return (
     <>
       <h1 className="title">People Page</h1>

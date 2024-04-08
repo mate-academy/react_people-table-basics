@@ -4,4 +4,5 @@ import { createRoot } from 'react-dom/client';
 import { Root } from './Root';
 
 const component = document.getElementById('root') as HTMLDivElement;
+
 createRoot(component).render(<Root />);
