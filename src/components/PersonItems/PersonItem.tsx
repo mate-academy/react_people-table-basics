@@ -6,7 +6,6 @@ import { PersonLink } from '../PersonLink/PersonLink';
 
 interface Props {
   person: Person;
-  // people: Person[];
 }
 
 export const PersonItem: React.FC<Props> = ({ person }) => {
