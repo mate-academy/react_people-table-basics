@@ -2,10 +2,9 @@ import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { PeoplePage } from './components/PeoplePage';
 import classNames from 'classnames';
+import React from 'react';
 
 export const App = () => {
-
-
   return (
     <div data-cy="app">
       <nav
@@ -51,7 +50,10 @@ export const App = () => {
 
             <Route path="/" element={<h1 className="title">Home Page</h1>} />
             <Route path="home" element={<Navigate to="/" replace />} />
-            <Route path="*" element={<p>Page not found</p>} />
+            <Route
+              path="*"
+              element={<h1 className="title">Page not found</h1>}
+            />
           </Routes>
         </div>
       </main>

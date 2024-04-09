@@ -4,6 +4,7 @@ import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { PeopleList } from '../PeopleList';
 import { useParams } from 'react-router-dom';
+import React from 'react';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -17,11 +18,7 @@ export const PeoplePage = () => {
     getPeople()
       .then(setPeople)
       .catch(() => {
-        if (people.length === 0) {
-          setErrorMessage('There are no people on the server');
-        } else {
-          setErrorMessage('Something went wrong');
-        }
+        setErrorMessage('something went wrong');
       })
       .finally(() => setIsLoading(false));
   }, [errorMessage]);
@@ -35,17 +32,23 @@ export const PeoplePage = () => {
           {isLoading ? (
             <Loader />
           ) : (
-            <PeopleList people={people} personId={personId} />
+            <>
+              {errorMessage && (
+                <p data-cy="peopleLoadingError" className="has-text-danger">
+                  {errorMessage}
+                </p>
+              )}
+
+              {!people?.length && (
+                <p data-cy="noPeopleMessage">
+                  There are no people on the server
+                </p>
+              )}
+            </>
           )}
-          {errorMessage && (
-            <p
-              data-cy={
-                people.length === 0 ? 'noPeopleMessage' : 'peopleLoadingError'
-              }
-              className={people.length === 0 ? '' : 'has-text-danger'}
-            >
-              {errorMessage}
-            </p>
+
+          {!!people.length && (
+            <PeopleList people={people} personId={personId} />
           )}
         </div>
       </div>

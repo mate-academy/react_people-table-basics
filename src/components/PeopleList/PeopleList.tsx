@@ -1,3 +1,4 @@
+import React from 'react';
 import { Person } from '../../types';
 import { PeopleItem } from '../PeopleItem';
 

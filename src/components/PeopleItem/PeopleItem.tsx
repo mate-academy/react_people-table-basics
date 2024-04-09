@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 import classNames from 'classnames';
+import React from 'react';
 
 type Props = {
   person: Person;
