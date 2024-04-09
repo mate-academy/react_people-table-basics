@@ -12,7 +12,7 @@ export const PeopleTable: React.FC = () => {
   const [error, setError] = useState(false);
 
   const { slug } = useParams();
-  const selectedPersonName = slug ? slug : 0;
+  const selectedPersonName = slug ? slug : null;
 
   useEffect(() => {
     setIsLoading(true);
@@ -76,7 +76,7 @@ export const PeopleTable: React.FC = () => {
                 {people.map(person => {
                   return (
                     <tr
-                      key={slug}
+                      key={person.slug}
                       data-cy="person"
                       className={classNames({
                         'has-background-warning':
