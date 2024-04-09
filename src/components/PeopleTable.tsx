@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import React from 'react';
 import { PersonType } from '../types';
 import { Person } from './Person';
@@ -8,6 +7,24 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
+  const peopleWithParents = people.map(person => {
+    const updatedPerson = { ...person };
+
+    if (updatedPerson.motherName) {
+      updatedPerson.mother = people.find(
+        pers => pers.name === updatedPerson.motherName,
+      );
+    }
+
+    if (updatedPerson.fatherName) {
+      updatedPerson.father = people.find(
+        pers => pers.name === updatedPerson.fatherName,
+      );
+    }
+
+    return updatedPerson;
+  });
+
   return (
     <table
       data-cy="peopleTable"
@@ -25,19 +42,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => {
-          if (person.motherName) {
-            person.mother = people.find(
-              pers => pers.name === person.motherName,
-            );
-          }
-
-          if (person.fatherName) {
-            person.father = people.find(
-              pers => pers.name === person.fatherName,
-            );
-          }
-
+        {peopleWithParents.map(person => {
           return <Person person={person} key={person.slug} />;
         })}
       </tbody>
