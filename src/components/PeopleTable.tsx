@@ -25,17 +25,24 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
 
       <tbody>
         {people.map(person => {
-          const { motherName, fatherName } = person;
+          const { motherName, fatherName, slug } = person;
 
           const mother = motherName
-            ? people.find(person => person.name === motherName)?.slug
+            ? people.find(character => character.name === motherName)?.slug
             : undefined;
 
           const father = fatherName
-            ? people.find(person => person.name === fatherName)?.slug
+            ? people.find(character => character.name === fatherName)?.slug
             : undefined;
 
-          return <PersonInfo person={person} mother={mother} father={father} />;
+          return (
+            <PersonInfo
+              person={person}
+              mother={mother}
+              father={father}
+              key={slug}
+            />
+          );
         })}
       </tbody>
     </table>
