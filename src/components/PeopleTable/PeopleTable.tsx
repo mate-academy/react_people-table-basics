@@ -1,29 +1,31 @@
+import React from 'react';
 import { useEffect, useState, useMemo } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
-import { PersonItem } from '../PersonItem';
-import React from 'react';
+import { PersonLink } from '../PersonLink';
+
+const preparePeopleWithLinks = (peopleList: Person[]) => {
+  return peopleList.map(person => {
+    const { fatherName, motherName } = person;
+
+    return {
+      ...person,
+      fatherNameLink:
+        peopleList.find(candidate => candidate.name === fatherName)?.slug ||
+        null,
+      motherNameLink:
+        peopleList.find(candidate => candidate.name === motherName)?.slug ||
+        null,
+    };
+  });
+};
 
 export const PeopleTable = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const isPeopleEmpty = people.length === 0;
-
-  const preparePeopleWithLinks = (peopleList: Person[]) => {
-    return peopleList.map(person => {
-      const { fatherName, motherName } = person;
-
-      return {
-        ...person,
-        fatherNameLink:
-          peopleList.find(p => p.name === fatherName)?.slug || null,
-        motherNameLink:
-          peopleList.find(p => p.name === motherName)?.slug || null,
-      };
-    });
-  };
+  const isPeopleEmpty = !people.length;
 
   const preparedPeople = useMemo(
     () => preparePeopleWithLinks(people),
@@ -34,13 +36,11 @@ export const PeopleTable = () => {
     setIsLoading(true);
     getPeople()
       .then(setPeople)
-      .then(() => {
-        setIsLoading(false);
-      })
       .catch(() => {
         setIsError(true);
         setIsLoading(false);
-      });
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -77,7 +77,7 @@ export const PeopleTable = () => {
 
               <tbody>
                 {preparedPeople.map(person => (
-                  <PersonItem key={person.slug} person={person} />
+                  <PersonLink key={person.slug} person={person} />
                 ))}
               </tbody>
             </table>

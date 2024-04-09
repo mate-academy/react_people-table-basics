@@ -7,12 +7,8 @@ import {
 import { App } from './App';
 import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
-import { PageNotFound } from './pages/PageNotFound';
+import { NotFoundPage } from './pages/NotFoundPage';
 import React from 'react';
-
-function RedirectToRoot() {
-  return <Navigate to="/" replace />;
-}
 
 export const Root = () => {
   return (
@@ -20,9 +16,9 @@ export const Root = () => {
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
-          <Route path="/home" element={<RedirectToRoot />} />
+          <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="/people/:personId?" element={<PeoplePage />} />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </Router>
