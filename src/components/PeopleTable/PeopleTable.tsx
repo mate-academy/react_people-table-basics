@@ -1,6 +1,8 @@
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink/PersonLink';
 
+const COLUMN_NAMES = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 interface Props {
   people: Person[];
 }
@@ -12,8 +14,6 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     father: people.find(personItem => personItem.name === person.fatherName),
   }));
 
-  const columnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
-
   return (
     <table
       data-cy="peopleTable"
@@ -21,7 +21,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          {columnNames.map(name => (
+          {COLUMN_NAMES.map(name => (
             <th key={name}>{name}</th>
           ))}
         </tr>
