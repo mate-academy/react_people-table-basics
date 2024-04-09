@@ -4,7 +4,6 @@ import { PersonType } from '../types';
 import { getPeople } from '../api';
 import { PeopleTable } from '../components/PeopleTable';
 
-
 export const PeoplePage = () => {
   const [people, setPeople] = useState<PersonType[]>([]);
   const [isError, setIsError] = useState(false);

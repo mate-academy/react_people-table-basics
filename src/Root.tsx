@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   Navigate,
   Route,
@@ -11,7 +9,6 @@ import { PeoplePage } from './pages/PeoplePage';
 import { HomePage } from './pages/HomePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
-
 export const Root = () => {
   return (
     <Router>
@@ -22,7 +19,7 @@ export const Root = () => {
 
           <Route path="people">
             <Route index element={<PeoplePage />} />
-            <Route path=':personSlug' element={<PeoplePage />} />
+            <Route path=":personSlug" element={<PeoplePage />} />
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />

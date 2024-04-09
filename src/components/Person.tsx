@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import { PersonType } from '../types';
 import { PersonLink } from './PersonLink';
@@ -9,11 +10,10 @@ type Props = {
 };
 
 export const Person: React.FC<Props> = ({ person }) => {
-  const { born, died, sex, motherName, fatherName, mother, father, slug } = person;
+  const { born, died, sex, motherName, fatherName, mother, father, slug } =
+    person;
 
   const { personSlug } = useParams();
-
-  console.log(person);
 
   return (
     <tr
@@ -29,15 +29,9 @@ export const Person: React.FC<Props> = ({ person }) => {
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
-      <td>{mother
-        ? <PersonLink person={mother} />
-        : motherName || '-'}
-      </td>
+      <td>{mother ? <PersonLink person={mother} /> : motherName || '-'}</td>
 
-      <td>{father
-        ? <PersonLink person={father} />
-        : fatherName || '-'}
-      </td>
+      <td>{father ? <PersonLink person={father} /> : fatherName || '-'}</td>
     </tr>
   );
 };
