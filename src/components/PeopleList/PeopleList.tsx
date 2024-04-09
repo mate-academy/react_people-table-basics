@@ -4,19 +4,25 @@ import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { PersonItem } from '../PersonItem/PersonItem';
 
+const errorMessages = {
+  somethingWentWrong: 'Something went wrong',
+  noPeopleOnTheServer: 'There are no people on the server',
+};
+
 export const PeopleList: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     getPeople()
       .then(data => {
         setPeople(data);
         setIsLoading(false);
+        setIsError(false);
       })
       .catch(() => {
-        setErrorMessage('Something went wrong');
+        setIsError(true);
       })
       .finally(() => setIsLoading(false));
   }, []);
@@ -26,13 +32,13 @@ export const PeopleList: React.FC = () => {
       <div className="box table-container">
         {isLoading && <Loader />}
 
-        {!isLoading && !!errorMessage && (
+        {!isLoading && isError && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
+            {errorMessages.somethingWentWrong}
           </p>
         )}
 
-        {!isLoading && !errorMessage && people.length > 0 && (
+        {!isLoading && !isError && people.length > 0 && (
           <table
             data-cy="peopleTable"
             className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -73,8 +79,8 @@ export const PeopleList: React.FC = () => {
           </table>
         )}
 
-        {!isLoading && !people.length && !errorMessage && (
-          <p data-cy="noPeopleMessage">{errorMessage}</p>
+        {!isLoading && !people.length && !isError && (
+          <p data-cy="noPeopleMessage">{errorMessages.noPeopleOnTheServer}</p>
         )}
       </div>
     </div>
