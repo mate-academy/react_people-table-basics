@@ -20,9 +20,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       className="table is-striped is-hoverable is-narrow is-fullwidth"
     >
       <thead>
-        {columnNames.map(name => (
-          <tr key={name}>{name}</tr>
-        ))}
+        <tr>
+          {columnNames.map(name => (
+            <th key={name}>{name}</th>
+          ))}
+        </tr>
       </thead>
 
       <tbody>
