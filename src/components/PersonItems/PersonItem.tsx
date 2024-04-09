@@ -1,18 +1,18 @@
 import classNames from 'classnames';
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 interface Props {
   person: Person;
-  people: Person[];
+  // people: Person[];
 }
-export const PersonItem: React.FC<Props> = ({ person, people }) => {
-  const { personId } = useParams();
-  const { motherName, fatherName } = person;
 
-  const motherNameFounded = people.find(human => human.name === motherName);
-  const fatherNameFounded = people.find(human => human.name === fatherName);
+export const PersonItem: React.FC<Props> = ({ person }) => {
+  const { personId } = useParams();
+  const { sex, born, died, motherName, fatherName, mother, father } = person;
+  const haveNoParent = '-';
 
   return (
     <tr
@@ -20,49 +20,34 @@ export const PersonItem: React.FC<Props> = ({ person, people }) => {
       className={classNames({
         'has-background-warning': personId === person.slug,
       })}
-      key={person.slug}
     >
       <td>
-        <Link
-          to={`/people/${person.slug}`}
-          className={classNames({
-            'has-text-danger': person.sex === 'f',
-          })}
-        >
-          {person.name}
-        </Link>
+        <PersonLink person={person} />
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
       <td>
-        {person.motherName ? (
-          motherNameFounded ? (
-            <Link
-              className="has-text-danger"
-              to={`/people/${motherNameFounded.slug}`}
-            >
-              {person.motherName}
-            </Link>
-          ) : (
-            <span>{person.motherName}</span>
-          )
+        {motherName ? (
+          <>
+            {!!mother && <PersonLink person={mother} />}
+
+            {!mother && <span>{motherName}</span>}
+          </>
         ) : (
-          '-'
+          haveNoParent
         )}
       </td>
       <td>
-        {person.fatherName ? (
-          fatherNameFounded ? (
-            <Link to={`/people/${fatherNameFounded.slug}`}>
-              {person.fatherName}
-            </Link>
-          ) : (
-            <span>{person.fatherName}</span>
-          )
+        {fatherName ? (
+          <>
+            {!!father && <PersonLink person={father} />}
+
+            {!father && <span>{fatherName}</span>}
+          </>
         ) : (
-          '-'
+          haveNoParent
         )}
       </td>
     </tr>

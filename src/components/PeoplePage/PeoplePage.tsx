@@ -4,11 +4,18 @@ import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { PersonItem } from '../PersonItems/PersonItem';
 import React from 'react';
+import { TableNames } from '../../types/TableNames';
 
 export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [people, setPeople] = useState<Person[]>([]);
+
+  const preparedPeople = people.map(personValue => ({
+    ...personValue,
+    mother: people.find(human => human.name === personValue.motherName),
+    father: people.find(human => human.name === personValue.fatherName),
+  }));
 
   useEffect(() => {
     setIsLoading(true);
@@ -39,40 +46,33 @@ export const PeoplePage = () => {
                   <Loader />
                 ) : (
                   <>
-                    {!people.length ? (
+                    {!preparedPeople.length && (
                       <p data-cy="noPeopleMessage">
                         There are no people on the server
                       </p>
-                    ) : (
-                      <>
-                        <table
-                          data-cy="peopleTable"
-                          className="table
+                    )}
+
+                    {!!preparedPeople.length && (
+                      <table
+                        data-cy="peopleTable"
+                        className="table
                           is-striped
                           is-hoverable is-narrow is-fullwidth"
-                        >
-                          <thead>
-                            <tr>
-                              <th>Name</th>
-                              <th>Sex</th>
-                              <th>Born</th>
-                              <th>Died</th>
-                              <th>Mother</th>
-                              <th>Father</th>
-                            </tr>
-                          </thead>
-
-                          <tbody>
-                            {people.map(person => (
-                              <PersonItem
-                                key={person.slug}
-                                person={person}
-                                people={people}
-                              />
+                      >
+                        <thead>
+                          <tr>
+                            {Object.values(TableNames).map(item => (
+                              <th key={item}>{item}</th>
                             ))}
-                          </tbody>
-                        </table>
-                      </>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          {preparedPeople.map(person => (
+                            <PersonItem key={person.slug} person={person} />
+                          ))}
+                        </tbody>
+                      </table>
                     )}
                   </>
                 )}
