@@ -13,9 +13,9 @@ import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 createRoot(document.getElementById('root') as HTMLDivElement).render(
   <Router>
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route path="/" element={<App />}>
         <Route index element={<HomePage />} />
-        <Route path='home/' element={<Navigate to="/" replace />}>
+        <Route path='home/' element={<Navigate to="/" replace />} />
         <Route path="people/">
           <Route path=":selectedSlug?" element={<PeoplePage />}/>
         </Route>
