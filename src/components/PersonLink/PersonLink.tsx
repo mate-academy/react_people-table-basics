@@ -2,6 +2,9 @@ import { Link, useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import classNames from 'classnames';
 
+const NO_PARENTS = '-';
+const FEMALE = 'f';
+
 interface Props {
   person: Person;
 }
@@ -10,8 +13,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
   const { slug } = useParams();
   const { name, sex, born, died, fatherName, motherName, mother, father } =
     person;
-  const female = sex === 'f';
-  const notParents = '-';
+  const female = sex === FEMALE;
 
   return (
     <tr
@@ -38,14 +40,14 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
             {mother.name}
           </Link>
         ) : (
-          motherName || notParents
+          motherName || NO_PARENTS
         )}
       </td>
       <td>
         {father ? (
           <Link to={`/people/${father.slug}`}>{father.name}</Link>
         ) : (
-          fatherName || notParents
+          fatherName || NO_PARENTS
         )}
       </td>
     </tr>

@@ -10,23 +10,23 @@ import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
 import { App } from './App';
-import { Home } from './pages/Home';
-import { People } from './pages/People';
-import { NotFound } from './pages/NotFound';
+import { HomePage } from './pages/HomePage';
+import { PeoplePage } from './pages/PeoplePage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 createRoot(document.getElementById('root') as HTMLDivElement).render(
   <Router>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route index element={<Home />} />
+        <Route index element={<HomePage />} />
 
         <Route path="home" element={<Navigate to=".." replace />} />
 
-        <Route path="/people" element={<People />}>
-          <Route path=":slug" element={<People />} />
+        <Route path="/people" element={<PeoplePage />}>
+          <Route path=":slug" element={<PeoplePage />} />
         </Route>
 
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   </Router>,

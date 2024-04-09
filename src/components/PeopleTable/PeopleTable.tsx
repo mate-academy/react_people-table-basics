@@ -12,6 +12,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     father: people.find(personItem => personItem.name === person.fatherName),
   }));
 
+  const columnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
   return (
     <table
       data-cy="peopleTable"
@@ -19,12 +21,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {columnNames.map(name => (
+            <th key={name}>{name}</th>
+          ))}
         </tr>
       </thead>
 

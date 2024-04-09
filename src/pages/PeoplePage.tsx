@@ -4,16 +4,18 @@ import { Person } from '../types';
 import { getPeople } from '../api';
 import { PeopleTable } from '../components/PeopleTable/PeopleTable';
 
-export const People = () => {
+export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const isServerEmpty = !people.length && !isLoading && !errorMessage;
 
   useEffect(() => {
     setIsLoading(true);
     getPeople()
       .then(setPeople)
-      .catch(() => setError('Something went wrong'))
+      .catch(() => setErrorMessage('Something went wrong'))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -24,15 +26,15 @@ export const People = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {error && (
+          {errorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
-              {error}
+              {errorMessage}
             </p>
           )}
 
           {!!people.length && <PeopleTable people={people} />}
 
-          {!people.length && !isLoading && !error && (
+          {isServerEmpty && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
         </div>
