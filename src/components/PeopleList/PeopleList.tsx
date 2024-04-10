@@ -4,10 +4,10 @@ import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { PersonItem } from '../PersonItem/PersonItem';
 
-const errorMessages = {
-  somethingWentWrong: 'Something went wrong',
-  noPeopleOnTheServer: 'There are no people on the server',
-};
+enum ErrorMessages {
+  SomethingWentWrong = 'Something went wrong',
+  NoPeopleOnTheServer = 'There are no people on the server',
+}
 
 export const PeopleList: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -15,72 +15,78 @@ export const PeopleList: React.FC = () => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    getPeople()
-      .then(data => {
-        setPeople(data);
-        setIsLoading(false);
+    const fetchData = async () => {
+      try {
+        const fetchedPeople = await getPeople();
+
+        const preparedPeople = fetchedPeople.map(person => {
+          const mother = person.motherName
+            ? fetchedPeople.find(p => p.name === person.motherName) ?? null
+            : null;
+
+          const father = person.fatherName
+            ? fetchedPeople.find(p => p.name === person.fatherName) ?? null
+            : null;
+
+          return {
+            ...person,
+            mother,
+            father,
+          };
+        });
+
+        setPeople(preparedPeople as Person[]);
         setIsError(false);
-      })
-      .catch(() => {
+      } catch (error) {
         setIsError(true);
-      })
-      .finally(() => setIsLoading(false));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  const loadingAndError = !isLoading && isError;
+  const shouldRenderTable = !isLoading && !isError && !!people.length;
+  const noPeople = !isLoading && !people.length && !isError;
+
+  const columns = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
   return (
     <div className="block">
       <div className="box table-container">
         {isLoading && <Loader />}
 
-        {!isLoading && isError && (
+        {loadingAndError && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
-            {errorMessages.somethingWentWrong}
+            {ErrorMessages.SomethingWentWrong}
           </p>
         )}
 
-        {!isLoading && !isError && people.length > 0 && (
+        {shouldRenderTable && (
           <table
             data-cy="peopleTable"
             className="table is-striped is-hoverable is-narrow is-fullwidth"
           >
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
+                {columns.map(columnName => (
+                  <th key={columnName}>{columnName}</th>
+                ))}
               </tr>
             </thead>
 
             <tbody>
               {people.map(person => {
-                const motherLink = person.motherName
-                  ? people.find(el => el.name === person.motherName)?.slug ??
-                    null
-                  : null;
-
-                const fatherLink = person.fatherName
-                  ? people.find(el => el.name === person.fatherName)?.slug ??
-                    null
-                  : null;
-
-                return (
-                  <PersonItem
-                    person={person}
-                    key={person.slug}
-                    motherLink={motherLink}
-                    fatherLink={fatherLink}
-                  />
-                );
+                return <PersonItem person={person} key={person.slug} />;
               })}
             </tbody>
           </table>
         )}
 
-        {!isLoading && !people.length && !isError && (
-          <p data-cy="noPeopleMessage">{errorMessages.noPeopleOnTheServer}</p>
+        {noPeople && (
+          <p data-cy="noPeopleMessage">{ErrorMessages.NoPeopleOnTheServer}</p>
         )}
       </div>
     </div>

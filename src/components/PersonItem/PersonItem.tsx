@@ -1,20 +1,19 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import classNames from 'classnames';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   person: Person;
-  fatherLink: string | null;
-  motherLink: string | null;
 };
 
-export const PersonItem: React.FC<Props> = ({
-  person,
-  fatherLink,
-  motherLink,
-}) => {
+export const PersonItem: React.FC<Props> = ({ person }) => {
   const { slug } = useParams();
+
+  const GENDER_FEMALE = 'f';
+  const { name, sex, born, died, motherName, fatherName, mother, father } =
+    person;
 
   return (
     <tr
@@ -25,33 +24,38 @@ export const PersonItem: React.FC<Props> = ({
       })}
     >
       <td>
-        <Link
+        <PersonLink
           to={`../people/${person.slug}`}
-          className={person.sex === 'f' ? 'has-text-danger' : ''}
+          className={classNames({
+            'has-text-danger': sex === GENDER_FEMALE,
+          })}
         >
-          {person.name}
-        </Link>
+          {name}
+        </PersonLink>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
 
       <td>
-        {motherLink && person.motherName ? (
-          <Link to={`../people/${motherLink}`} className="has-text-danger">
-            {person.motherName}
-          </Link>
+        {mother?.name && motherName ? (
+          <PersonLink
+            to={`../people/${mother.slug}`}
+            className="has-text-danger"
+          >
+            {motherName}
+          </PersonLink>
         ) : (
-          <p>{person.motherName || '-'}</p>
+          <p>{motherName || '-'}</p>
         )}
       </td>
 
       <td>
-        {fatherLink && person.fatherName ? (
-          <Link to={`../people/${fatherLink}`}>{person.fatherName}</Link>
+        {father && fatherName ? (
+          <PersonLink to={`../people/${father.slug}`}>{fatherName}</PersonLink>
         ) : (
-          <p>{person.fatherName || '-'}</p>
+          <p>{fatherName || '-'}</p>
         )}
       </td>
     </tr>
