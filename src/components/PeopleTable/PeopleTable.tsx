@@ -1,5 +1,5 @@
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink/PersonLink';
+import { PersonTableRow } from '../PersonTableRow/PersonTableRow';
 
 const COLUMN_NAMES = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
@@ -29,7 +29,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
 
       <tbody>
         {preparedPeople.map(person => (
-          <PersonLink key={person.slug} person={person} />
+          <PersonTableRow key={person.slug} person={person} />
         ))}
       </tbody>
     </table>
