@@ -36,45 +36,43 @@ export const PeoplePage = () => {
 
         <div className="block">
           <div className="box table-container">
-            {isError ? (
-              <p data-cy="peopleLoadingError" className="has-text-danger">
-                Something went wrong
-              </p>
+            {isLoading ? (
+              <Loader />
             ) : (
               <>
-                {isLoading ? (
-                  <Loader />
-                ) : (
-                  <>
-                    {!preparedPeople.length && (
-                      <p data-cy="noPeopleMessage">
-                        There are no people on the server
-                      </p>
-                    )}
+                {isError && (
+                  <p data-cy="peopleLoadingError" className="has-text-danger">
+                    Something went wrong
+                  </p>
+                )}
 
-                    {!!preparedPeople.length && (
-                      <table
-                        data-cy="peopleTable"
-                        className="table
+                {!preparedPeople.length && !isError && (
+                  <p data-cy="noPeopleMessage">
+                    There are no people on the server
+                  </p>
+                )}
+
+                {!!preparedPeople.length && !isError && (
+                  <table
+                    data-cy="peopleTable"
+                    className="table
                           is-striped
                           is-hoverable is-narrow is-fullwidth"
-                      >
-                        <thead>
-                          <tr>
-                            {Object.values(TableNames).map(item => (
-                              <th key={item}>{item}</th>
-                            ))}
-                          </tr>
-                        </thead>
+                  >
+                    <thead>
+                      <tr>
+                        {Object.values(TableNames).map(item => (
+                          <th key={item}>{item}</th>
+                        ))}
+                      </tr>
+                    </thead>
 
-                        <tbody>
-                          {preparedPeople.map(person => (
-                            <PersonItem key={person.slug} person={person} />
-                          ))}
-                        </tbody>
-                      </table>
-                    )}
-                  </>
+                    <tbody>
+                      {preparedPeople.map(person => (
+                        <PersonItem key={person.slug} person={person} />
+                      ))}
+                    </tbody>
+                  </table>
                 )}
               </>
             )}
