@@ -1,5 +1,5 @@
 import React from 'react';
-import { Person } from '../../../types';
+import { Person } from '../../types';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 

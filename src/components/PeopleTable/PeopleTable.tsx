@@ -1,31 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Loader } from '../Loader';
-import { getPeople } from '../../../api';
-import { Person } from '../../../types';
+import { PersonLink } from '../PersonLink';
 import classNames from 'classnames';
-import { PersonLink } from '../PersonLink/PersonLink';
-import { useParams } from 'react-router-dom';
+import { Person } from '../../types';
 
-export const PeopleTable: React.FC = () => {
-  const [people, setPeople] = useState<Person[] | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+interface PeopleTableProps {
+  people: Person[] | null;
+  isLoading: boolean;
+  error: boolean;
+  selectedPersonName: string | null;
+}
 
-  const { slug } = useParams();
-  const selectedPersonName = slug ? slug : null;
-
-  useEffect(() => {
-    setIsLoading(true);
-    getPeople()
-      .then(setPeople)
-      .catch(() => {
-        setError(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
+export const PeopleTable: React.FC<PeopleTableProps> = ({
+  people,
+  isLoading,
+  error,
+  selectedPersonName,
+}) => {
   const getPerson = (data: Person[], name: string | null) => {
     if (!name) {
       return null;
@@ -44,7 +35,6 @@ export const PeopleTable: React.FC = () => {
 
   return (
     <>
-      <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
           {isLoading && <Loader />}

@@ -1,8 +1,8 @@
 import './App.scss';
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
-import { NotFoundPage } from './components/Loader/NotFoundPage/NotFoundPage';
+import { NotFoundPage } from './components/NotFoundPage';
 import classNames from 'classnames';
-import { PeopleTable } from './components/Loader/PeopleTable/PeopleTable';
+import { PeoplePage } from './components/PeoplePage';
 
 export const App = () => {
   return (
@@ -45,8 +45,8 @@ export const App = () => {
             <Route path="/" element={<h1 className="title">Home Page</h1>} />
             <Route path="/home" element={<Navigate to="/" replace={true} />} />
             <Route path="people">
-              <Route index element={<PeopleTable />} />
-              <Route path=":slug" element={<PeopleTable />} />
+              <Route index element={<PeoplePage />} />
+              <Route path=":slug" element={<PeoplePage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
