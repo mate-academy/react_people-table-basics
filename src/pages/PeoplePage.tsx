@@ -4,30 +4,24 @@ import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { ErrorMessage } from '../types/ErrorMessage';
+import { getPreparedPeople } from '../services/getPreparedPeople';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const isError = !isLoading && !people.length && !errorMessage;
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
 
-    const timer = setTimeout(() => {
-      getPeople()
-        .then(setPeople)
-        .catch(() => setErrorMessage(ErrorMessage.TableLoadingError))
-        .finally(() => setLoading(false));
-    }, 1000);
-
-    return () => clearTimeout(timer);
+    getPeople()
+      .then(setPeople)
+      .catch(() => setErrorMessage(ErrorMessage.TableLoadingError))
+      .finally(() => setIsLoading(false));
   }, [setPeople]);
 
-  const updatedPeople = people.map(person => ({
-    ...person,
-    mother: people.find(p => p.name === person.motherName),
-    father: people.find(p => p.name === person.fatherName),
-  }));
+  const updatedPeople = getPreparedPeople(people);
 
   return (
     <div className="container">
@@ -35,19 +29,19 @@ export const PeoplePage: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && <Loader />}
+          {isLoading && <Loader />}
 
-          {errorMessage && (
+          {errorMessage === ErrorMessage.TableLoadingError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               {ErrorMessage.TableLoadingError}
             </p>
           )}
 
-          {!loading && !people.length && !errorMessage && (
+          {isError && (
             <p data-cy="noPeopleMessage">{ErrorMessage.TableIsEmpty}</p>
           )}
 
-          {people.length > 0 && <PeopleTable people={updatedPeople} />}
+          {!!people.length && <PeopleTable people={updatedPeople} />}
         </div>
       </div>
     </div>
