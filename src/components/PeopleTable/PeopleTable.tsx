@@ -1,12 +1,9 @@
-import { Link, useParams } from 'react-router-dom';
-
+import { PersonLink } from '../PersonLink/PersonLink';
 import { usePeople } from '../context/PeopleContext';
 
-import cn from 'classnames';
-
 export const PeopleTable: React.FC = () => {
+  const columns = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
   const { people } = usePeople();
-  const { path } = useParams();
 
   const preparedPeople = people.map(person => ({
     ...person,
@@ -23,75 +20,16 @@ export const PeopleTable: React.FC = () => {
         >
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Sex</th>
-              <th>Born</th>
-              <th>Died</th>
-              <th>Mother</th>
-              <th>Father</th>
+              {columns.map(name => (
+                <th key={name}>{name}</th>
+              ))}
             </tr>
           </thead>
 
           <tbody>
-            {preparedPeople.map(person => {
-              const {
-                name,
-                sex,
-                born,
-                died,
-                fatherName,
-                motherName,
-                slug,
-                mother,
-                father,
-              } = person;
-
-              const male = sex === 'm';
-
-              return (
-                <tr
-                  data-cy="person"
-                  key={slug}
-                  className={cn({
-                    'has-background-warning': slug === path,
-                  })}
-                >
-                  <td>
-                    <Link
-                      to={slug}
-                      className={cn({
-                        'has-text-danger': !male,
-                      })}
-                    >
-                      {name}
-                    </Link>
-                  </td>
-
-                  <td>{sex}</td>
-                  <td>{born}</td>
-                  <td>{died}</td>
-
-                  <td>
-                    {mother && (
-                      <Link
-                        className="has-text-danger"
-                        to={`/people/${mother.slug}`}
-                      >
-                        {motherName}
-                      </Link>
-                    )}
-                    {!mother && (motherName || '-')}
-                  </td>
-
-                  <td>
-                    {father && (
-                      <Link to={`/people/${father.slug}`}>{fatherName}</Link>
-                    )}
-                    {!father && (fatherName || '-')}
-                  </td>
-                </tr>
-              );
-            })}
+            {preparedPeople.map(person => (
+              <PersonLink key={person.slug} person={person} />
+            ))}
           </tbody>
         </table>
       </div>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Person } from '../../types/Person';
-import { getPeople } from '../../api';
+import { getPeople } from '../../utils/api';
 
 interface PeopleContextType {
   people: Person[];
