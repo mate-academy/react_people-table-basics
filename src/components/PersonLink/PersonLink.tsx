@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import { Person } from '../../types';
+import { CustomLink } from '../CustomLink';
 
 type Props = {
   person: Person;
@@ -10,9 +11,7 @@ type Props = {
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
   const { slug } = useParams();
-  const isDanger = person.sex === 'f';
-
-  const { mother, father } = person;
+  const { mother, father, sex, born, died } = person;
 
   return (
     <tr
@@ -20,37 +19,36 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       className={cn({ 'has-background-warning': person.slug === slug })}
     >
       <td>
-        <Link
-          to={person.slug}
-          className={cn({
-            'has-text-danger': isDanger,
-          })}
-        >
-          {person.name}
-        </Link>
+        <CustomLink to={person.slug} name={person.name} sex={sex} />
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
 
-      {mother ? (
-        <td>
-          <Link to={`/people/${mother.slug}`} className="has-text-danger">
-            {mother.name}
-          </Link>
-        </td>
-      ) : (
-        <td>{person.motherName || '-'}</td>
-      )}
+      <td>
+        {mother ? (
+          <CustomLink
+            to={`/people/${mother.slug}`}
+            name={mother.name}
+            sex={mother.sex}
+          />
+        ) : (
+          person.motherName || '-'
+        )}
+      </td>
 
-      {father ? (
-        <td>
-          <Link to={`/people/${father.slug}`}>{father.name}</Link>
-        </td>
-      ) : (
-        <td>{person.fatherName || '-'}</td>
-      )}
+      <td>
+        {father ? (
+          <CustomLink
+            to={`/people/${father.slug}`}
+            name={father.name}
+            sex={father.sex}
+          />
+        ) : (
+          person.fatherName || '-'
+        )}
+      </td>
     </tr>
   );
 };
