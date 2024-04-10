@@ -1,7 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
+import { PersonName } from '../PersonName';
 import { Sex } from '../../types/Sex';
 
 type PersonLinkProps = {
@@ -12,57 +13,54 @@ type PersonLinkProps = {
 };
 
 export const PersonLink: React.FC<PersonLinkProps> = ({
-  person: currentPerson,
+  person: {
+    name,
+    slug,
+    sex,
+    born,
+    died,
+    motherName,
+    fatherName,
+    motherNameLink,
+    fatherNameLink,
+  },
 }) => {
   const { personId } = useParams();
-  const renderPersonName = (person: Person) => {
-    return (
-      <Link
-        to={`/people/${person.slug}`}
-        className={classNames({
-          'has-text-danger': person.sex === Sex.Female,
-        })}
-      >
-        {person.name}
-      </Link>
-    );
-  };
 
   return (
     <tr
       data-cy="person"
-      key={currentPerson.slug}
+      key={slug}
       className={classNames({
-        'has-background-warning': personId === currentPerson.slug,
+        'has-background-warning': personId === slug,
       })}
     >
-      <td>{renderPersonName(currentPerson)}</td>
-      <td>{currentPerson.sex}</td>
-      <td>{currentPerson.born}</td>
-      <td>{currentPerson.died}</td>
       <td>
-        {currentPerson.motherName ? (
-          currentPerson.motherNameLink ? (
-            <Link
-              className="has-text-danger"
-              to={`/people/${currentPerson.motherNameLink}`}
-            >
-              {currentPerson.motherName}
-            </Link>
-          ) : (
-            <span>{currentPerson.motherName}</span>
-          )
+        <PersonName name={name} slug={slug} sex={sex} />
+      </td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      <td>
+        {motherNameLink ? (
+          <PersonName
+            name={motherName || undefined}
+            slug={motherNameLink}
+            sex={Sex.Female}
+          />
         ) : (
-          '-'
+          <span>{motherName || '-'}</span>
         )}
       </td>
       <td>
-        {currentPerson.fatherNameLink ? (
-          <Link to={`/people/${currentPerson.fatherNameLink}`}>
-            {currentPerson.fatherName}
-          </Link>
+        {fatherNameLink ? (
+          <PersonName
+            name={fatherName || undefined}
+            slug={fatherNameLink}
+            sex={Sex.Male}
+          />
         ) : (
-          <span>{currentPerson.fatherName || '-'}</span>
+          <span>{fatherName || '-'}</span>
         )}
       </td>
     </tr>

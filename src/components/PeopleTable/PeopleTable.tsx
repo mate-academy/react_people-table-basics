@@ -21,6 +21,8 @@ const preparePeopleWithLinks = (peopleList: Person[]) => {
   });
 };
 
+const tableFields = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 export const PeopleTable = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +57,7 @@ export const PeopleTable = () => {
             </p>
           )}
 
-          {!isLoading && isPeopleEmpty && (
+          {!isLoading && !isError && isPeopleEmpty && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
@@ -66,12 +68,9 @@ export const PeopleTable = () => {
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
+                  {tableFields.map(field => (
+                    <th key={field}>{field}</th>
+                  ))}
                 </tr>
               </thead>
 
