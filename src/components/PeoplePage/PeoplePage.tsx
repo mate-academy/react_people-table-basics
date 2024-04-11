@@ -3,8 +3,8 @@ import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { PeopleList } from '../PeopleList';
-import { useParams } from 'react-router-dom';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -17,7 +17,7 @@ export const PeoplePage = () => {
     setIsLoading(true);
     getPeople()
       .then(setPeople)
-      .catch((error) => {
+      .catch(error => {
         setErrorMessage(`Something went wrong: ${error.message}`);
       })
       .finally(() => setIsLoading(false));

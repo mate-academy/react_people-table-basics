@@ -12,7 +12,7 @@ type Props = {
 
 const FEMALE_SEX = 'f';
 
-export const PeopleItem: React.FC<Props> = ({ person, personId, people }) => {
+export const PeopleTable: React.FC<Props> = ({ person, personId, people }) => {
   const { motherName, fatherName, name, sex, born, died } = person;
 
   const isSelected = (human: Person) => human.slug === personId;
@@ -47,22 +47,10 @@ export const PeopleItem: React.FC<Props> = ({ person, personId, people }) => {
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {motherFind ? (
-          <PersonLink person={motherName} slug={motherFind?.slug} sex={true} />
-        ) : motherName ? (
-          motherName
-        ) : (
-          '-'
-        )}
+        {motherFind ? <PersonLink person={motherFind} /> : motherName || '-'}
       </td>
       <td>
-        {fatherFind ? (
-          <PersonLink person={fatherName} slug={fatherFind?.slug} sex={false} />
-        ) : fatherName ? (
-          fatherName
-        ) : (
-          '-'
-        )}
+        {fatherFind ? <PersonLink person={fatherFind} /> : fatherName || '-'}
       </td>
     </tr>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Person } from '../../types';
-import { PeopleItem } from '../PeopleItem';
+import { PeopleTable } from '../PeopleItem';
 
 type Props = {
   people: Person[];
@@ -23,7 +23,7 @@ export const PeopleList: React.FC<Props> = ({ people, personId }) => (
 
     <tbody>
       {people.map(person => (
-        <PeopleItem
+        <PeopleTable
           people={people}
           person={person}
           personId={personId}
