@@ -27,14 +27,24 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <Human
-            key={person.slug}
-            person={person}
-            people={people}
-            personSlug={slug}
-          />
-        ))}
+        {people.map(person => {
+          const personMother = people.find(
+            human => human.name === person.motherName,
+          );
+          const personFather = people.find(
+            human => human.name === person.fatherName,
+          );
+
+          return (
+            <Human
+              key={person.slug}
+              person={person}
+              personMother={personMother}
+              personFather={personFather}
+              personSlug={slug}
+            />
+          );
+        })}
       </tbody>
     </table>
   );

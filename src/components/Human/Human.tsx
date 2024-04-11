@@ -4,15 +4,18 @@ import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   person: Person;
-  people: Person[];
+  personMother?: Person;
+  personFather?: Person;
   personSlug?: string;
 };
 
-export const Human: React.FC<Props> = ({ person, people, personSlug }) => {
+export const Human: React.FC<Props> = ({
+  person,
+  personMother,
+  personFather,
+  personSlug,
+}) => {
   const { sex, born, died, fatherName, motherName, slug } = person;
-
-  const personMother = people.find(human => human.name === motherName);
-  const personFather = people.find(human => human.name === fatherName);
 
   return (
     <tr

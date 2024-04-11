@@ -12,12 +12,13 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import { App } from './App';
 import { HomePage } from './Pages/HomePage';
 import { PeoplePage } from './Pages/PeoplePage';
+import { ErrorPage } from './Pages/ErrorPage';
 
 createRoot(document.getElementById('root') as HTMLDivElement).render(
   <Router>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="*" element={<h1 className="title">Page not found</h1>} />
+        <Route path="*" element={<ErrorPage />} />
         <Route path="home" element={<Navigate to="/" replace />} />
         <Route index element={<HomePage />} />
         <Route path="people">
