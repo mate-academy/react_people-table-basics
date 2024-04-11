@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Loader } from '../Loader/Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
-import { PersonItem } from '../PersonItem/PersonItem';
+import { preparePeople } from '../../utils/helpers';
+import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 enum ErrorMessages {
   SomethingWentWrong = 'Something went wrong',
@@ -18,24 +19,9 @@ export const PeopleList: React.FC = () => {
     const fetchData = async () => {
       try {
         const fetchedPeople = await getPeople();
+        const preparedPeople = preparePeople(fetchedPeople);
 
-        const preparedPeople = fetchedPeople.map(person => {
-          const mother = person.motherName
-            ? fetchedPeople.find(p => p.name === person.motherName) ?? null
-            : null;
-
-          const father = person.fatherName
-            ? fetchedPeople.find(p => p.name === person.fatherName) ?? null
-            : null;
-
-          return {
-            ...person,
-            mother,
-            father,
-          };
-        });
-
-        setPeople(preparedPeople as Person[]);
+        setPeople(preparedPeople);
         setIsError(false);
       } catch (error) {
         setIsError(true);
@@ -51,8 +37,6 @@ export const PeopleList: React.FC = () => {
   const shouldRenderTable = !isLoading && !isError && !!people.length;
   const noPeople = !isLoading && !people.length && !isError;
 
-  const columns = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
-
   return (
     <div className="block">
       <div className="box table-container">
@@ -64,26 +48,7 @@ export const PeopleList: React.FC = () => {
           </p>
         )}
 
-        {shouldRenderTable && (
-          <table
-            data-cy="peopleTable"
-            className="table is-striped is-hoverable is-narrow is-fullwidth"
-          >
-            <thead>
-              <tr>
-                {columns.map(columnName => (
-                  <th key={columnName}>{columnName}</th>
-                ))}
-              </tr>
-            </thead>
-
-            <tbody>
-              {people.map(person => {
-                return <PersonItem person={person} key={person.slug} />;
-              })}
-            </tbody>
-          </table>
-        )}
+        {shouldRenderTable && <PeopleTable people={people} />}
 
         {noPeople && (
           <p data-cy="noPeopleMessage">{ErrorMessages.NoPeopleOnTheServer}</p>
