@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Person } from '../types';
+import { Person } from '../types/Person';
 import { getPeople } from '../api';
-import { PeopleTable } from './PeopleTable';
-import { Loader } from './Loader';
+import { PeopleTable } from '../components/PeopleTable';
+import { Loader } from '../components/Loader';
 import { Errors } from '../types/Errors';
+import { getPreparedPeople } from '../utils/getPreparedPeople';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -22,16 +23,7 @@ export const PeoplePage = () => {
       .catch(() => setError(Errors.Loading));
   }, []);
 
-  const preparedPeople = people.map(person => {
-    const mother = people.find(woman => woman.name === person.motherName);
-    const father = people.find(man => man.name === person.fatherName);
-
-    return {
-      ...person,
-      mother,
-      father,
-    };
-  });
+  const preparedPeople = getPreparedPeople(people);
 
   return (
     <>
