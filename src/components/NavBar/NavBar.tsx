@@ -1,0 +1,29 @@
+import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
+
+const isActiveLink = ({ isActive }: { isActive: boolean }) => {
+  return classNames('navbar-item', { 'has-background-grey-lighter': isActive });
+};
+
+export default function NavBar() {
+  return (
+    <nav
+      data-cy="nav"
+      className="navbar is-fixed-top has-shadow"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div className="container">
+        <div className="navbar-brand">
+          <NavLink className={isActiveLink} to="/">
+            Home
+          </NavLink>
+
+          <NavLink className={isActiveLink} to="/people">
+            People
+          </NavLink>
+        </div>
+      </div>
+    </nav>
+  );
+}
