@@ -6,7 +6,7 @@ import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
 import { PersonLink } from '../components/PersonLink';
 
-const tableHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+const TABLE_HEADERS = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 const NO_MOTHER = '-';
 const NO_FATHER = '-';
 
@@ -49,7 +49,7 @@ const PeoplePage: React.FC = () => {
           Something went wrong
         </p>
       )}
-      {people.length > 0 && (
+      {!!people.length && (
         <>
           <h1 className="title">People Page</h1>
 
@@ -59,7 +59,7 @@ const PeoplePage: React.FC = () => {
           >
             <thead>
               <tr>
-                {tableHeaders.map(header => (
+                {TABLE_HEADERS.map(header => (
                   <th key={header}>{header}</th>
                 ))}
               </tr>
