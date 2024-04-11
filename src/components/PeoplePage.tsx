@@ -6,10 +6,14 @@ import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
 import { PersonLink } from '../components/PersonLink';
 
+const tableHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+const NO_MOTHER = '-';
+const NO_FATHER = '-';
+
 const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [loadingError, setLoadingError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const preparePeopleData = (persons: Person[]) => {
     return people.map(person => ({
@@ -24,28 +28,28 @@ const PeoplePage: React.FC = () => {
   const { personSlug } = useParams<{ personSlug: string }>();
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     getPeople()
       .then(fetchedPeople => {
         setPeople(fetchedPeople);
       })
       .catch(() => {
-        setLoadingError(true);
+        setHasError(true);
       })
       .finally(() => {
-        setLoading(false);
+        setIsLoading(false);
       });
   }, []);
 
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : loadingError ? (
+      {isLoading && <Loader />}
+      {hasError && (
         <p data-cy="peopleLoadingError" className="has-text-danger">
           Something went wrong
         </p>
-      ) : people.length > 0 ? (
+      )}
+      {people.length > 0 && (
         <>
           <h1 className="title">People Page</h1>
 
@@ -55,12 +59,9 @@ const PeoplePage: React.FC = () => {
           >
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
+                {tableHeaders.map(header => (
+                  <th key={header}>{header}</th>
+                ))}
               </tr>
             </thead>
 
@@ -80,29 +81,22 @@ const PeoplePage: React.FC = () => {
                   <td>{person.born}</td>
                   <td>{person.died}</td>
                   <td>
-                    {person.mother ? (
-                      <PersonLink person={person.mother} />
-                    ) : person.motherName ? (
-                      person.motherName
-                    ) : (
-                      '-'
-                    )}
+                    {person.mother && <PersonLink person={person.mother} />}
+                    {!person.mother && person.motherName && person.motherName}
+                    {!person.mother && !person.motherName && NO_MOTHER}
                   </td>
                   <td>
-                    {person.father ? (
-                      <PersonLink person={person.father} />
-                    ) : person.fatherName ? (
-                      person.fatherName
-                    ) : (
-                      '-'
-                    )}
+                    {person.father && <PersonLink person={person.father} />}
+                    {!person.father && person.fatherName && person.fatherName}
+                    {!person.father && !person.fatherName && NO_FATHER}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </>
-      ) : (
+      )}
+      {!isLoading && !hasError && people.length === 0 && (
         <p data-cy="noPeopleMessage">There are no people on the server</p>
       )}
     </>
