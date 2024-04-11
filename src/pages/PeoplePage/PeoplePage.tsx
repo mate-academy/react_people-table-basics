@@ -10,10 +10,11 @@ export const PeoplePage = () => {
     selectedSlug,
   } = useParams();
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isFailed, setIsFailed] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true)
     getPeople()
       .then(people => {
         setPeople(people);
@@ -29,13 +30,9 @@ export const PeoplePage = () => {
   return (
     <>
       <h1 className="title">People Page</h1>
-      { isLoading
-        ? <Loader />
-        : isFailed
-          ? <LoadingError />
-          : <PeopleTable selectedSlug={selectedSlug} people={people} />
-      }
+      {isLoading && <Loader />}
+      {isFailed && <LoadingError />}
+      {!isLoading && !isFailed && <PeopleTable selectedSlug={selectedSlug} people={people} />}
     </>
-
   );
 }
