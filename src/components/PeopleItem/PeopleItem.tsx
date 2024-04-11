@@ -2,12 +2,16 @@ import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 import classNames from 'classnames';
 import React from 'react';
+import { PersonLink } from '../PersonLink';
 
 type Props = {
   person: Person;
   personId: string;
   people: Person[];
 };
+
+const FEMALE_SEX = 'f';
+
 export const PeopleItem: React.FC<Props> = ({ person, personId, people }) => {
   const { motherName, fatherName, name, sex, born, died } = person;
 
@@ -32,7 +36,7 @@ export const PeopleItem: React.FC<Props> = ({ person, personId, people }) => {
         <Link
           to={`/people/${person.slug}`}
           className={classNames({
-            'has-text-danger': sex === 'f',
+            'has-text-danger': sex === FEMALE_SEX,
           })}
         >
           {name}
@@ -44,9 +48,7 @@ export const PeopleItem: React.FC<Props> = ({ person, personId, people }) => {
       <td>{died}</td>
       <td>
         {motherFind ? (
-          <Link to={`/people/${motherFind.slug}`} className="has-text-danger">
-            {motherName}
-          </Link>
+          <PersonLink person={motherName} slug={motherFind?.slug} sex={true} />
         ) : motherName ? (
           motherName
         ) : (
@@ -55,7 +57,7 @@ export const PeopleItem: React.FC<Props> = ({ person, personId, people }) => {
       </td>
       <td>
         {fatherFind ? (
-          <Link to={`/people/${fatherFind.slug}`}>{fatherName}</Link>
+          <PersonLink person={fatherName} slug={fatherFind?.slug} sex={false} />
         ) : fatherName ? (
           fatherName
         ) : (

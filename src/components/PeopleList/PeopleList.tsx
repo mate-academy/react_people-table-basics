@@ -6,8 +6,7 @@ type Props = {
   people: Person[];
   personId: string;
 };
-
-const columnHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+const COLUMN_HEADERS = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
 export const PeopleList: React.FC<Props> = ({ people, personId }) => (
   <table
@@ -16,7 +15,7 @@ export const PeopleList: React.FC<Props> = ({ people, personId }) => (
   >
     <thead>
       <tr>
-        {columnHeaders.map(header => (
+        {COLUMN_HEADERS.map(header => (
           <th key={header}>{header}</th>
         ))}
       </tr>
