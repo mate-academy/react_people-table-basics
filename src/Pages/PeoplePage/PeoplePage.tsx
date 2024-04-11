@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Loader } from '../components/Loader';
-import { getPeople } from '../api';
-import { Person } from '../types';
-import { PeopleTable } from '../components/People';
+import { Loader } from '../../components/Loader';
+import { getPeople } from '../../api';
+import { Person } from '../../types';
+import { PeopleTable } from '../../components/People';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  const isPeopleErrorShown = !isError && people.length <= 0;
+  const isPeopleTableShown = !isError && people.length > 0;
 
   useEffect(() => {
     getPeople()
       .then(setPeople)
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
+      .catch(() => setIsError(true))
+      .finally(() => setIsLoading(false));
   }, []);
-
-  const isPeopleExist = people.length > 0;
 
   return (
     <>
@@ -24,23 +25,23 @@ export const PeoplePage: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading ? (
+          {isLoading ? (
             <Loader />
           ) : (
             <>
-              {error && (
+              {isError && (
                 <p data-cy="peopleLoadingError" className="has-text-danger">
                   Something went wrong
                 </p>
               )}
 
-              {!error && !isPeopleExist && (
+              {isPeopleErrorShown && (
                 <p data-cy="noPeopleMessage">
                   There are no people on the server
                 </p>
               )}
 
-              {!error && isPeopleExist && <PeopleTable people={people} />}
+              {isPeopleTableShown && <PeopleTable people={people} />}
             </>
           )}
         </div>

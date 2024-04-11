@@ -1,12 +1,23 @@
 import React from 'react';
 import { Person } from '../../types';
-import { Human } from './Human';
+import { PersonItem } from './PersonItem';
 
 type Props = {
   people: Person[];
 };
 
+const prepareVisiblePeople = (people: Person[]) => {
+  return people.map(person => ({
+    ...person,
+    mother: people.find(p => p.name === person.motherName),
+    father: people.find(p => p.name === person.fatherName),
+  }));
+};
+
 export const PeopleTable: React.FC<Props> = ({ people }) => {
+  const visiblePeople = prepareVisiblePeople(people);
+  const columns = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
   return (
     <table
       data-cy="peopleTable"
@@ -14,19 +25,16 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {columns.map(column => (
+            <th key={column}>{column}</th>
+          ))}
         </tr>
       </thead>
 
       <tbody>
-        {people.map(person => {
-          return <Human person={person} people={people} key={person.slug} />;
-        })}
+        {visiblePeople.map(person => (
+          <PersonItem person={person} key={person.slug} />
+        ))}
       </tbody>
     </table>
   );

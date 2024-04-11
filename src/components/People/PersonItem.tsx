@@ -1,13 +1,13 @@
 import cn from 'classnames';
 import { Link, useParams } from 'react-router-dom';
 import { Person } from '../../types';
+import { PersonLink } from './PersonLink';
 
 type Props = {
   person: Person;
-  people: Person[];
 };
 
-export const Human: React.FC<Props> = ({ person, people }) => {
+export const PersonItem: React.FC<Props> = ({ person }) => {
   const {
     name,
     sex,
@@ -15,12 +15,13 @@ export const Human: React.FC<Props> = ({ person, people }) => {
     died,
     fatherName,
     motherName,
+    mother,
+    father,
     slug: personSlug,
   } = person;
   const { slug } = useParams();
 
-  const mother = people.find(p => p.name === motherName);
-  const father = people.find(p => p.name === fatherName);
+  const isPersonFemale = (human: Person) => human.sex === 'f';
 
   return (
     <tr
@@ -29,7 +30,7 @@ export const Human: React.FC<Props> = ({ person, people }) => {
     >
       <td>
         <Link
-          className={cn({ 'has-text-danger': sex === 'f' })}
+          className={cn({ 'has-text-danger': isPersonFemale(person) })}
           to={`/people/${personSlug}`}
         >
           {name}
@@ -41,9 +42,7 @@ export const Human: React.FC<Props> = ({ person, people }) => {
       <td>{died}</td>
       <td>
         {mother ? (
-          <Link className="has-text-danger" to={`/people/${mother.slug}`}>
-            {motherName}
-          </Link>
+          <PersonLink person={mother} isPersonFemale={isPersonFemale} />
         ) : (
           motherName || '-'
         )}
@@ -51,7 +50,7 @@ export const Human: React.FC<Props> = ({ person, people }) => {
 
       <td>
         {father ? (
-          <Link to={`/people/${father.slug}`}>{fatherName}</Link>
+          <PersonLink person={father} isPersonFemale={isPersonFemale} />
         ) : (
           fatherName || '-'
         )}
