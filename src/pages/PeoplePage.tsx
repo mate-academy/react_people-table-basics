@@ -16,7 +16,7 @@ export const PeoplePage = () => {
     getPeople()
       .then(peopleFromServer => {
         setPeople(peopleFromServer);
-        if (peopleFromServer.length === 0) {
+        if (!peopleFromServer.length) {
           setError(Errors.Empty);
         }
       })
@@ -41,7 +41,7 @@ export const PeoplePage = () => {
             <p data-cy="noPeopleMessage">{Errors.Empty}</p>
           )}
 
-          {!error && people.length === 0 ? (
+          {!error && !people.length ? (
             <Loader />
           ) : (
             <PeopleTable people={preparedPeople} />

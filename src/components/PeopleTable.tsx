@@ -6,26 +6,27 @@ export interface Props {
   people: Person[];
 }
 
-export const PeopleTable: FC<Props> = ({ people }) => (
-  <table
-    data-cy="peopleTable"
-    className="table is-striped is-hoverable is-narrow is-fullwidth"
-  >
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Sex</th>
-        <th>Born</th>
-        <th>Died</th>
-        <th>Mother</th>
-        <th>Father</th>
-      </tr>
-    </thead>
+export const PeopleTable: FC<Props> = ({ people }) => {
+  const columnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
-    <tbody>
-      {people.map(person => (
-        <PersonInfo person={person} key={person.slug} />
-      ))}
-    </tbody>
-  </table>
-);
+  return (
+    <table
+      data-cy="peopleTable"
+      className="table is-striped is-hoverable is-narrow is-fullwidth"
+    >
+      <thead>
+        <tr>
+          {columnNames.map(columnName => (
+            <th key={columnName}>{columnName}</th>
+          ))}
+        </tr>
+      </thead>
+
+      <tbody>
+        {people.map(person => (
+          <PersonInfo person={person} key={person.slug} />
+        ))}
+      </tbody>
+    </table>
+  );
+};

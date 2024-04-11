@@ -8,7 +8,8 @@ interface Props {
 }
 
 export const PersonLink: FC<Props> = ({ person }) => {
-  const isFemale = person.sex === 'f';
+  const female = 'f';
+  const isFemale = person.sex === female;
 
   return (
     <Link
