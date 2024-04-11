@@ -1,28 +1,23 @@
+import { PeopleError } from '../../types/enums';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable/PeopleTable';
 import { usePeople } from '../context/PeopleContext';
 
 export const PeoplePage: React.FC = () => {
-  const { isLoading, error, people } = usePeople();
+  const { isLoading, errorMessage, people } = usePeople();
 
   return (
     <>
       <h1 className="title">People Page</h1>
-
-      {isLoading ? (
-        <Loader />
-      ) : error ? (
+      {isLoading && <Loader />}
+      {!isLoading && errorMessage && (
         <p data-cy="peopleLoadingError" className="has-text-danger">
-          {error}
+          {PeopleError.requestErrorDisplay}
         </p>
-      ) : (
-        <>
-          {people.length ? (
-            <PeopleTable />
-          ) : (
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-          )}
-        </>
+      )}
+      {!isLoading && !errorMessage && !!people.length && <PeopleTable />}
+      {!isLoading && (!people.length || errorMessage) && (
+        <p data-cy="noPeopleMessage">{PeopleError.noPeopleMessage}</p>
       )}
     </>
   );

@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Person } from '../../types/Person';
 import { getPeople } from '../../utils/api';
+import { PeopleError } from '../../types/enums';
 
 interface PeopleContextType {
   people: Person[];
-  error: string;
+  errorMessage: PeopleError;
   isLoading: boolean;
 }
 
 const contextValue: PeopleContextType = {
   people: [],
-  error: '',
+  errorMessage: PeopleError.noError,
   isLoading: false,
 };
 
@@ -23,7 +24,7 @@ interface Props {
 
 export const PeopleProvider: React.FC<Props> = ({ children }) => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState(PeopleError.noError);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export const PeopleProvider: React.FC<Props> = ({ children }) => {
 
         setPeople(fetchedPeople);
       } catch {
-        setError('Something went wrong');
+        setErrorMessage(PeopleError.requestError);
       } finally {
         setIsLoading(false);
       }
@@ -45,7 +46,7 @@ export const PeopleProvider: React.FC<Props> = ({ children }) => {
   }, []);
 
   return (
-    <PeopleContext.Provider value={{ people, error, isLoading }}>
+    <PeopleContext.Provider value={{ people, errorMessage, isLoading }}>
       {children}
     </PeopleContext.Provider>
   );
@@ -55,7 +56,7 @@ export const usePeople = () => {
   const context = useContext(PeopleContext);
 
   if (!context) {
-    throw new Error('error');
+    throw new Error(PeopleError.contextError);
   }
 
   return context;
