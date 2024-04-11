@@ -1,5 +1,3 @@
-// PersonLink.jsx
-
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
@@ -11,7 +9,7 @@ export const PersonLink = ({ person }: { person: Person }) => {
     <Link
       to={`/people/${person.slug}`}
       className={classNames({
-        'has-text-danger': person.sex === Sex.Female, // Assuming sex is a string
+        'has-text-danger': person.sex === Sex.Female,
       })}
     >
       {person.name}

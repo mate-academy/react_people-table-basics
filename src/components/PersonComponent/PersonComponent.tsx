@@ -28,14 +28,14 @@ export const PersonComponent: React.FC<Props> = ({ person }) => {
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {mother?.slug ? (
+        {mother ? (
           <PersonLink person={mother} />
         ) : (
           <span>{motherName || '-'}</span>
         )}
       </td>
       <td>
-        {father?.slug ? (
+        {father ? (
           <PersonLink person={father} />
         ) : (
           <span>{fatherName || '-'}</span>
