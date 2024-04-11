@@ -3,6 +3,13 @@ import './App.scss';
 import { PeoplePage } from './components/PeoplePage';
 import classNames from 'classnames';
 import React from 'react';
+import { Layout } from './components/Layout';
+
+const getLinkClassName = ({ isActive }: { isActive: boolean }) => {
+  return classNames('navbar-item', {
+    'has-background-grey-lighter': isActive,
+  });
+};
 
 export const App = () => {
   return (
@@ -15,25 +22,11 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                classNames('navbar-item', {
-                  'has-background-grey-lighter': isActive,
-                })
-              }
-            >
+            <NavLink to="/" className={getLinkClassName}>
               Home
             </NavLink>
 
-            <NavLink
-              to="people"
-              className={({ isActive }) =>
-                classNames('navbar-item', {
-                  'has-background-grey-lighter': isActive,
-                })
-              }
-            >
+            <NavLink to="people" className={getLinkClassName}>
               People
             </NavLink>
           </div>
@@ -43,17 +36,19 @@ export const App = () => {
       <main className="section">
         <div className="container">
           <Routes>
-            <Route path="people">
-              <Route index element={<PeoplePage />} />
-              <Route path=":personId" element={<PeoplePage />} />
-            </Route>
+            <Route path="/" element={<Layout />}>
+              <Route path="people">
+                <Route index element={<PeoplePage />} />
+                <Route path=":personId" element={<PeoplePage />} />
+              </Route>
 
-            <Route path="/" element={<h1 className="title">Home Page</h1>} />
-            <Route path="home" element={<Navigate to="/" replace />} />
-            <Route
-              path="*"
-              element={<h1 className="title">Page not found</h1>}
-            />
+              <Route path="/" element={<h1 className="title">Home Page</h1>} />
+              <Route path="home" element={<Navigate to="/" replace />} />
+              <Route
+                path="*"
+                element={<h1 className="title">Page not found</h1>}
+              />
+            </Route>
           </Routes>
         </div>
       </main>

@@ -9,6 +9,8 @@ type Props = {
   people: Person[];
 };
 export const PeopleItem: React.FC<Props> = ({ person, personId, people }) => {
+  const { motherName, fatherName, name, sex, born, died } = person;
+
   const isSelected = (human: Person) => human.slug === personId;
 
   const motherFind = people.find(
@@ -30,32 +32,34 @@ export const PeopleItem: React.FC<Props> = ({ person, personId, people }) => {
         <Link
           to={`/people/${person.slug}`}
           className={classNames({
-            'has-text-danger': person.sex === 'f',
+            'has-text-danger': sex === 'f',
           })}
         >
-          {person.name}
+          {name}
         </Link>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
       <td>
         {motherFind ? (
           <Link to={`/people/${motherFind.slug}`} className="has-text-danger">
-            {person.motherName || '-'}
+            {motherName}
           </Link>
+        ) : motherName ? (
+          motherName
         ) : (
-          person.motherName || '-'
+          '-'
         )}
       </td>
       <td>
         {fatherFind ? (
-          <Link to={`/people/${fatherFind.slug}`}>
-            {person.fatherName || '-'}
-          </Link>
+          <Link to={`/people/${fatherFind.slug}`}>{fatherName}</Link>
+        ) : fatherName ? (
+          fatherName
         ) : (
-          person.fatherName || '-'
+          '-'
         )}
       </td>
     </tr>

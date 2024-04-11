@@ -7,6 +7,8 @@ type Props = {
   personId: string;
 };
 
+const columnHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 export const PeopleList: React.FC<Props> = ({ people, personId }) => (
   <table
     data-cy="peopleTable"
@@ -14,12 +16,9 @@ export const PeopleList: React.FC<Props> = ({ people, personId }) => (
   >
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Sex</th>
-        <th>Born</th>
-        <th>Died</th>
-        <th>Mother</th>
-        <th>Father</th>
+        {columnHeaders.map(header => (
+          <th key={header}>{header}</th>
+        ))}
       </tr>
     </thead>
 

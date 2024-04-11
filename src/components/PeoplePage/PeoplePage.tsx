@@ -17,8 +17,8 @@ export const PeoplePage = () => {
     setIsLoading(true);
     getPeople()
       .then(setPeople)
-      .catch(() => {
-        setErrorMessage('something went wrong');
+      .catch((error) => {
+        setErrorMessage(`Something went wrong: ${error.message}`);
       })
       .finally(() => setIsLoading(false));
   }, [errorMessage]);
