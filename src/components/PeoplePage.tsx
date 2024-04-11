@@ -3,29 +3,25 @@ import { Person } from '../types';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
 import { PeopleTable } from './PeopleTable';
+import { getPreparedPeople } from '../utils/getPreparedPeople';
 
 export const PeoplePage: FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    const fetchPeople = async () => {
-      setHasError('');
+    setIsLoading(true);
 
-      try {
-        const data = await getPeople();
-
-        setPeople(data);
-      } catch {
-        setHasError('something went wrong');
-      } finally {
+    getPeople()
+      .then(setPeople)
+      .catch(() => setErrorMessage('something went wrong'))
+      .finally(() => {
         setIsLoading(false);
-      }
-    };
-
-    fetchPeople();
+      });
   }, []);
+
+  const preparedPeople = getPreparedPeople(people);
 
   return (
     <>
@@ -36,19 +32,19 @@ export const PeoplePage: FC = () => {
             <Loader />
           ) : (
             <>
-              {hasError && (
+              {errorMessage && (
                 <p data-cy="peopleLoadingError" className="has-text-danger">
-                  {hasError}
+                  {errorMessage}
                 </p>
               )}
 
-              {!people.length && (
+              {!people.length && !errorMessage && (
                 <p data-cy="noPeopleMessage">
                   There are no people on the server
                 </p>
               )}
 
-              {!!people.length && <PeopleTable people={people} />}
+              {!!people.length && <PeopleTable people={preparedPeople} />}
             </>
           )}
         </div>

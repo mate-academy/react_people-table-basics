@@ -1,64 +1,56 @@
 import { FC } from 'react';
 import { Person } from '../types';
 import { Link, useParams } from 'react-router-dom';
+import { PersonLink } from './PersonLink';
 import cn from 'classnames';
 
 interface Props {
   person: Person;
-  people: Person[];
 }
 
-export const PersonInfo: FC<Props> = ({ person, people }) => {
-  const { sex, born, died, name, fatherName, motherName, slug } = person;
+const FEMALE = 'f';
+const MISSING_PARENT = '-';
+
+export const PersonInfo: FC<Props> = ({ person }) => {
+  const {
+    slug,
+    name,
+    sex,
+    born,
+    died,
+    fatherName,
+    motherName,
+    mother,
+    father,
+  } = person;
   const { personSlug } = useParams();
-  const FEMALE = 'f';
-
-  const motherSlug = people.find(
-    ({ name: nameOfPerson }) => nameOfPerson === motherName,
-  );
-
-  const fatherSlug = people.find(
-    ({ name: nameOfPerson }) => nameOfPerson === fatherName,
-  );
+  const selectedUser = personSlug === slug;
 
   return (
     <tr
       data-cy="person"
+      key={slug}
       className={cn({
-        'has-background-warning': slug === personSlug,
+        'has-background-warning': selectedUser,
       })}
     >
       <td>
         <Link
+          to={`../people/${slug}`}
           className={cn({ 'has-text-danger': sex === FEMALE })}
-          to={`/people/${slug}`}
         >
           {name}
         </Link>
       </td>
 
       <td>{sex}</td>
-
       <td>{born}</td>
-
       <td>{died}</td>
-
       <td>
-        {motherSlug ? (
-          <Link className="has-text-danger" to={`/people/${motherSlug.slug}`}>
-            {motherSlug.name}
-          </Link>
-        ) : (
-          motherName || '-'
-        )}
+        {mother ? <PersonLink person={mother} /> : motherName || MISSING_PARENT}
       </td>
-
       <td>
-        {fatherSlug ? (
-          <Link to={`/people/${fatherSlug.slug}`}>{fatherSlug.name}</Link>
-        ) : (
-          fatherName || '-'
-        )}
+        {father ? <PersonLink person={father} /> : fatherName || MISSING_PARENT}
       </td>
     </tr>
   );

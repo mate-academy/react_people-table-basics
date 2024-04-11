@@ -6,7 +6,7 @@ interface Props {
   people: Person[];
 }
 
-const tableItems = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+const TABLE_ITEMS = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
 export const PeopleTable: FC<Props> = ({ people }) => {
   return (
@@ -16,7 +16,7 @@ export const PeopleTable: FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          {tableItems.map(item => (
+          {TABLE_ITEMS.map(item => (
             <th key={item}>{item}</th>
           ))}
         </tr>

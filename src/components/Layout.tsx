@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { NavPage } from './NavPage';
+import { Nav } from './Nav';
 import { Outlet } from 'react-router-dom';
 
 export const Layout: FC = () => {
   return (
     <div data-cy="app">
-      <NavPage />
+      <Nav />
 
       <main className="section">
         <div className="container">

@@ -7,7 +7,7 @@ const setIsActive = ({ isActive }: { isActive: boolean }) =>
     'has-background-grey-lighter': isActive,
   });
 
-export const NavPage: FC = () => {
+export const Nav: FC = () => {
   return (
     <nav
       data-cy="nav"
