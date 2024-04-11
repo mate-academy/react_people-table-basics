@@ -3,6 +3,7 @@ import { Loader } from '../components/Loader';
 import { getPeople } from '../api';
 import { Person } from '../types';
 import { PeopleTable } from '../components/PeopleTable';
+import { getPreparedPeople } from '../utils/getPreparedPeople';
 
 export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +20,8 @@ export const PeoplePage = () => {
         setIsLoading(false);
       });
   }, []);
+
+  const preparedPeople = getPreparedPeople(people);
 
   return (
     <>
@@ -38,7 +41,7 @@ export const PeoplePage = () => {
           )}
 
           {!isLoading && !error && !!people.length && (
-            <PeopleTable people={people} />
+            <PeopleTable people={preparedPeople} />
           )}
         </div>
       </div>

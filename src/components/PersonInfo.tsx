@@ -2,29 +2,42 @@ import React from 'react';
 import { Person } from '../types';
 import classNames from 'classnames';
 import { Link, useParams } from 'react-router-dom';
+import { PersonLink } from './PersonLink';
 
 type Props = {
   person: Person;
-  mother: string | undefined;
-  father: string | undefined;
 };
 
-export const PersonInfo: React.FC<Props> = ({ person, mother, father }) => {
-  const { slug, name, sex, born, died, fatherName, motherName } = person;
+const FEMALE = 'f';
+const MISSING_PARENT = '-';
+
+const PersonInfo: React.FC<Props> = ({ person }) => {
+  const {
+    slug,
+    name,
+    sex,
+    born,
+    died,
+    fatherName,
+    motherName,
+    mother,
+    father,
+  } = person;
   const { userSlug } = useParams();
+  const selectedUser = userSlug === slug;
 
   return (
     <tr
       data-cy="person"
       key={slug}
       className={classNames({
-        'has-background-warning': userSlug === slug,
+        'has-background-warning': selectedUser,
       })}
     >
       <td>
         <Link
           to={`../people/${slug}`}
-          className={classNames({ 'has-text-danger': sex === 'f' })}
+          className={classNames({ 'has-text-danger': sex === FEMALE })}
         >
           {name}
         </Link>
@@ -34,21 +47,13 @@ export const PersonInfo: React.FC<Props> = ({ person, mother, father }) => {
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {motherName && mother ? (
-          <Link to={`../people/${mother}`} className="has-text-danger">
-            {motherName}
-          </Link>
-        ) : (
-          <p>{motherName || '-'}</p>
-        )}
+        {mother ? <PersonLink person={mother} /> : motherName || MISSING_PARENT}
       </td>
       <td>
-        {fatherName && father ? (
-          <Link to={`../people/${father}`}>{fatherName}</Link>
-        ) : (
-          <p>{fatherName || '-'}</p>
-        )}
+        {father ? <PersonLink person={father} /> : fatherName || MISSING_PARENT}
       </td>
     </tr>
   );
 };
+
+export default PersonInfo;
