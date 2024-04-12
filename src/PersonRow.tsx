@@ -7,7 +7,7 @@ interface Props {
   person: Person;
 }
 
-export const PersonLink: React.FC<Props> = ({ person }) => {
+export const PersonRow: React.FC<Props> = ({ person }) => {
   const { name, sex, born, died, fatherName, motherName, mother, father } =
     person;
 
