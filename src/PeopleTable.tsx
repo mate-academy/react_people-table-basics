@@ -1,5 +1,5 @@
 import { Person } from './types';
-import { PersonLink } from './PersonLink';
+import { PersonRow } from './PersonRow';
 
 type Props = {
   people: Person[];
