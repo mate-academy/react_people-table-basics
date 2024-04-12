@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 
-const handleStyleChange = ({ isActive }: { isActive: boolean }) =>
+const getLinkClasses = ({ isActive }: { isActive: boolean }) =>
   classNames('navbar-item', { 'has-background-grey-lighter': isActive });
 
 export const NavMenu = () => (
@@ -13,11 +13,11 @@ export const NavMenu = () => (
   >
     <div className="container">
       <div className="navbar-brand">
-        <NavLink className={handleStyleChange} to="/">
+        <NavLink className={getLinkClasses} to="/">
           Home
         </NavLink>
 
-        <NavLink className={handleStyleChange} to="/people">
+        <NavLink className={getLinkClasses} to="/people">
           People
         </NavLink>
       </div>
