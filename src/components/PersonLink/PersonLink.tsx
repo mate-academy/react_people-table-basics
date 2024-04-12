@@ -7,7 +7,8 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
-  const isFemale = person.sex === 'f';
+  const FEMALE = 'f';
+  const isFemale = person.sex === FEMALE;
 
   return (
     <Link

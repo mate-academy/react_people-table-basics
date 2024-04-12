@@ -9,6 +9,7 @@ type Props = {
 
 export const PeopleList: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
+  const tableColumnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
   return (
     <table
@@ -17,12 +18,9 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {tableColumnNames.map(columnName => (
+            <th key={columnName}>{columnName}</th>
+          ))}
         </tr>
       </thead>
 
