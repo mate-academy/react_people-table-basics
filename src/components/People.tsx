@@ -8,7 +8,7 @@ import { PersonLink } from './PersonLink';
 
 export const People = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const { personSlug } = useParams();
 
@@ -16,7 +16,7 @@ export const People = () => {
     getPeople()
       .then(setPeople)
       .catch(() => setErrorMessage('Something went wrong'))
-      .finally(() => setLoading(false));
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -25,7 +25,7 @@ export const People = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && <Loader />}
+          {isLoading && <Loader />}
 
           {errorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
