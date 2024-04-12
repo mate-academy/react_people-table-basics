@@ -1,13 +1,14 @@
-import { Person } from "./types";
-import { PersonLink } from "./PersonLink";
+import { Person } from './types';
+import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[];
-}
+};
+
+const PEOPLE_STATUS = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-
-  const choosenPeople = people.map(person => ({
+  const preparedPeople = people.map(person => ({
     ...person,
     mother: people.find(
       personElement => personElement.name === person.motherName,
@@ -24,17 +25,14 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {PEOPLE_STATUS.map((status, index) => (
+            <th key={index}>{status}</th>
+          ))}
         </tr>
       </thead>
 
       <tbody>
-        {choosenPeople.map(person => (
+        {preparedPeople.map(person => (
           <PersonLink key={person.slug} person={person} />
         ))}
       </tbody>

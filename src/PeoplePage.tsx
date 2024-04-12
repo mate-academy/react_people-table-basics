@@ -1,27 +1,27 @@
-import { Loader } from "./components/Loader";
-import { useEffect, useState } from "react";
-import { Person } from "./types";
-import { getPeople } from "./api";
-import { PeopleTable } from "./PeopleTable";
-
+import { Loader } from './components/Loader';
+import { useEffect, useState } from 'react';
+import { Person } from './types';
+import { getPeople } from './api';
+import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [error, setError] = useState('');
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-
-    useEffect(() => {
-      getPeople()
-        .then(data => {
-          setIsLoading(true);
-          setPeople(data);
-        })
-        .catch(() => setError('Something went wrong'))
-        .finally(() => {
-          setIsLoading(false);
-          })
-    }, []);
+  useEffect(() => {
+    getPeople()
+      .then(data => {
+        setIsLoading(true);
+        setPeople(data);
+      })
+      .catch(e => {
+        setError(`Something went wrong: ${e.message}`);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
     <div className="container">
@@ -35,8 +35,8 @@ export const PeoplePage: React.FC = () => {
               {error}
             </p>
           )}
-      
-          {!people.length && !isLoading && !error  && (
+
+          {!people.length && !isLoading && !error && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
@@ -45,4 +45,4 @@ export const PeoplePage: React.FC = () => {
       </div>
     </div>
   );
-}
+};
