@@ -4,10 +4,10 @@ import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   person: Person;
-  personSlug?: string;
+  selectedSlug?: string;
 };
 
-export const Human: React.FC<Props> = ({ person, personSlug }) => {
+export const Human: React.FC<Props> = ({ person, selectedSlug }) => {
   const { sex, born, died, fatherName, motherName, slug, mother, father } =
     person;
 
@@ -15,7 +15,7 @@ export const Human: React.FC<Props> = ({ person, personSlug }) => {
     <tr
       data-cy="person"
       className={classNames({
-        'has-background-warning': personSlug === slug,
+        'has-background-warning': selectedSlug === slug,
       })}
     >
       <td>
