@@ -5,10 +5,17 @@ import { PeopleTable } from '../PeopleItem';
 type Props = {
   people: Person[];
   personId: string;
+  getFather: (name: string | null) => Person | undefined;
+  getMother: (name: string | null) => Person | undefined;
 };
 const COLUMN_HEADERS = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
-export const PeopleList: React.FC<Props> = ({ people, personId }) => (
+export const PeopleList: React.FC<Props> = ({
+  people,
+  personId,
+  getFather,
+  getMother,
+}) => (
   <table
     data-cy="peopleTable"
     className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -23,7 +30,13 @@ export const PeopleList: React.FC<Props> = ({ people, personId }) => (
 
     <tbody>
       {people.map(person => (
-        <PeopleTable person={person} personId={personId} key={person.slug} />
+        <PeopleTable
+          person={person}
+          personId={personId}
+          key={person.slug}
+          getFather={getFather}
+          getMother={getMother}
+        />
       ))}
     </tbody>
   </table>

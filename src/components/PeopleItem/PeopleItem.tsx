@@ -6,20 +6,22 @@ import { PersonLink } from '../PersonLink';
 type Props = {
   person: Person;
   personId: string;
+  getFather: (name: string | null) => Person | undefined;
+  getMother: (name: string | null) => Person | undefined;
 };
 
-export const PeopleTable: React.FC<Props> = ({ person, personId }) => {
-  const { motherName, fatherName, sex, born, died, mother, father } = person;
+export const PeopleTable: React.FC<Props> = ({
+  person,
+  personId,
+  getFather,
+  getMother,
+}) => {
+  const { motherName, fatherName, sex, born, died } = person;
 
   const isSelected = (human: Person) => human.slug === personId;
 
-  // const motherFind = people.find(
-  //   ({ name: personName }) => personName === person.motherName,
-  // );
-
-  // const fatherFind = people.find(
-  //   ({ name: personName }) => personName === person.fatherName,
-  // );
+  const mother = getMother(motherName);
+  const father = getFather(fatherName);
 
   return (
     <tr

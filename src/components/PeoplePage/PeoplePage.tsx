@@ -23,6 +23,12 @@ export const PeoplePage = () => {
       .finally(() => setIsLoading(false));
   }, [errorMessage]);
 
+  const getFather = (name: string | null) =>
+    people.find(person => person.name === name);
+
+  const getMother = (name: string | null) =>
+    people.find(person => person.name === name);
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -48,7 +54,12 @@ export const PeoplePage = () => {
           )}
 
           {!!people.length && (
-            <PeopleList people={people} personId={personId} />
+            <PeopleList
+              people={people}
+              personId={personId}
+              getFather={getFather}
+              getMother={getMother}
+            />
           )}
         </div>
       </div>
