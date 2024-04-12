@@ -14,11 +14,25 @@ export const PeoplePage: React.FC = () => {
 
     getPeople()
       .then(setPeople)
-      .catch(() => setErrorMessage('Something went wrong'))
+      .catch(() => setErrorMessage('Unable to load people list'))
       .finally(() => {
         setIsloading(false);
       });
   }, []);
+
+  function getPersonMother(motherName: string | null) {
+    return people.find(person => person.name === motherName);
+  }
+
+  function getPersonFather(fatherName: string | null) {
+    return people.find(person => person.name === fatherName);
+  }
+
+  const allPeople = people.map(person => ({
+    ...person,
+    mother: getPersonMother(person.motherName),
+    father: getPersonFather(person.fatherName),
+  }));
 
   return (
     <>
@@ -38,7 +52,7 @@ export const PeoplePage: React.FC = () => {
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!isLoading && !errorMessage && <PeopleList people={people} />}
+          {!isLoading && !errorMessage && <PeopleList people={allPeople} />}
         </div>
       </div>
     </>

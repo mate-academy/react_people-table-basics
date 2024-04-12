@@ -2,6 +2,11 @@ import { NavLink, Outlet } from 'react-router-dom';
 import './App.scss';
 import classNames from 'classnames';
 
+const getLinkCLass = ({ isActive }: { isActive: boolean }) =>
+  classNames('navbar-item', {
+    'has-background-grey-lighter': isActive,
+  });
+
 export const App = () => (
   <div data-cy="app">
     <nav
@@ -12,25 +17,11 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink
-            className={({ isActive }) =>
-              classNames('navbar-item', {
-                'has-background-grey-lighter': isActive,
-              })
-            }
-            to="/"
-          >
+          <NavLink className={getLinkCLass} to="/">
             Home
           </NavLink>
 
-          <NavLink
-            className={({ isActive }) =>
-              classNames('navbar-item', {
-                'has-background-grey-lighter': isActive,
-              })
-            }
-            to="/people"
-          >
+          <NavLink className={getLinkCLass} to="/people">
             People
           </NavLink>
         </div>
