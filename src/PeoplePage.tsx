@@ -10,11 +10,10 @@ export const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
+
     getPeople()
-      .then(data => {
-        setIsLoading(true);
-        setPeople(data);
-      })
+      .then(setPeople)
       .catch(e => {
         setError(`Something went wrong: ${e.message}`);
       })

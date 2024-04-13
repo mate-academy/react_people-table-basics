@@ -1,5 +1,5 @@
 import { Person } from './types';
-import { PersonLink } from './PersonLink';
+import { PersonRow } from './PersonRow';
 
 type Props = {
   people: Person[];
@@ -33,7 +33,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
 
       <tbody>
         {preparedPeople.map(person => (
-          <PersonLink key={person.slug} person={person} />
+          <PersonRow key={person.slug} person={person} />
         ))}
       </tbody>
     </table>
