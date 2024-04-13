@@ -14,8 +14,8 @@ export const PeopleList: FC = () => {
   useEffect(() => {
     setIsLoading(true);
     getPeople()
-      .then(people => {
-        setPeople(people);
+      .then(person => {
+        setPeople(person);
       })
       .catch(() => {
         setIsError(true);

@@ -6,6 +6,7 @@ const isActiveClass = ({ isActive }: { isActive: boolean }) =>
   classNames('navbar-item', {
     'has-background-grey-lighter': isActive,
   });
+
 export const Navbar: FC = () => {
   return (
     <div className="navbar-brand">
