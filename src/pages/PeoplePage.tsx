@@ -7,12 +7,8 @@ import PeopleTable from '../components/PeopleTable/PeopleTable';
 const preperadPeople = (people: Person[]) => {
   return people.map(person => ({
     ...person,
-    mother: people.find(
-      current => current.name === person.motherName,
-    ),
-    father: people.find(
-      current => current.name === person.fatherName,
-    ),
+    mother: people.find(current => current.name === person.motherName),
+    father: people.find(current => current.name === person.fatherName),
   }));
 };
 

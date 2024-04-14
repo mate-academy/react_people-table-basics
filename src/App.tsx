@@ -2,6 +2,7 @@ import cn from 'classnames';
 import { NavLink, Outlet } from 'react-router-dom';
 
 import './App.scss';
+import React from 'react';
 
 const getLinkClass = ({ isActive }: { isActive: boolean }) =>
   cn('navbar-item', {
