@@ -1,3 +1,4 @@
+import React from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { App } from './App';
 import PageNotFound from './pages/PageNotFound';
