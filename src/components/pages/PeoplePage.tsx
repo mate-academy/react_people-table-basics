@@ -48,8 +48,8 @@ export const PeoplePage = () => {
             </p>
           )}
           {showNoPeopleMessage && (
-              <p data-cy="noPeopleMessage">There are no people on the server</p>
-            )}
+            <p data-cy="noPeopleMessage">There are no people on the server</p>
+          )}
 
           <table
             data-cy="peopleTable"
