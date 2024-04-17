@@ -25,7 +25,7 @@ export const People: React.FC = () => {
 
         throw error;
       });
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
