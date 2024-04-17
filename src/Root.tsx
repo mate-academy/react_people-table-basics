@@ -10,9 +10,10 @@ export const Root = () => (
       <Route path="/" element={<App />}>
         <Route index element={<HomePage />} />
         <Route path="/home" element={<Navigate to="/" replace={true} />} />
-        <Route path="people">
-          <Route path=":slug" element={<PeoplePage />} />
-        </Route>
+        <Route path="/people" element={<PeoplePage />}>
+        <Route index element={<PeoplePage />} />
+        <Route path=":personId" element={<PeoplePage />} />
+      </Route>
         <Route path="*" element={<h1 className="title">Page not found</h1>} />
       </Route>
     </Routes>
