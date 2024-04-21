@@ -24,6 +24,7 @@ const router = createHashRouter([
         children: [
           {
             path: ':personSlug',
+            element: <People />,
           },
         ],
       },

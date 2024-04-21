@@ -5,14 +5,12 @@ import { PersonLink } from './PersonLink';
 
 type Props = {
   person: Person;
-  people: Person[];
 };
 
-export const PersonItem: React.FC<Props> = ({ people, person }) => {
-  const { sex, born, died, fatherName, motherName, slug } = person;
+export const PersonItem: React.FC<Props> = ({ person }) => {
+  const { sex, born, died, fatherName, motherName, slug, mother, father } =
+    person;
   const { personSlug } = useParams();
-  const personMother = people.find(p => p.name === motherName);
-  const personFather = people.find(p => p.name === fatherName);
 
   return (
     <tr
@@ -30,11 +28,11 @@ export const PersonItem: React.FC<Props> = ({ people, person }) => {
       <td>{died}</td>
       <td>
         {(!motherName && '-') ||
-          (!personMother ? motherName : <PersonLink person={personMother} />)}
+          (!mother ? motherName : <PersonLink person={mother} />)}
       </td>
       <td>
         {(!fatherName && '-') ||
-          (!personFather ? fatherName : <PersonLink person={personFather} />)}
+          (!father ? fatherName : <PersonLink person={father} />)}
       </td>
     </tr>
   );

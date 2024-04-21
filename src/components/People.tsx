@@ -4,6 +4,13 @@ import { getPeople } from '../api';
 import { Person } from '../types';
 import { PersonItem } from './PersonItem';
 
+const preparePeople = (people: Person[]) =>
+  people.map(person => ({
+    ...person,
+    mother: people.find(p => p.name === person.motherName),
+    father: people.find(p => p.name === person.fatherName),
+  }));
+
 export const People = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +21,11 @@ export const People = () => {
     setHasError(false);
 
     getPeople()
-      .then(peopleFromServer => setPeople(peopleFromServer))
+      .then(peopleFromServer => {
+        const preparedPeople = preparePeople(peopleFromServer);
+
+        setPeople(preparedPeople);
+      })
       .catch(() => setHasError(true))
       .finally(() => setIsLoading(false));
   }, []);
@@ -50,11 +61,7 @@ export const People = () => {
 
                 <tbody>
                   {people.map(person => (
-                    <PersonItem
-                      key={person.slug}
-                      person={person}
-                      people={people}
-                    />
+                    <PersonItem key={person.slug} person={person} />
                   ))}
                 </tbody>
               </table>
