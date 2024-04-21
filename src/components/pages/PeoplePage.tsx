@@ -31,7 +31,8 @@ export const PeoplePage = () => {
   }, []);
 
   const dataExists = !isLoading && !hasError && peopleData.length > 0;
-  const showNoPeopleMessage = !isLoading && !hasError && peopleData.length === 0;
+  const noPeopleData = peopleData.length === 0;
+  const showNoPeopleMessage = !isLoading && !hasError && noPeopleData;
 
   return (
     <div className="container">
