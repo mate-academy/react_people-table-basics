@@ -32,7 +32,7 @@ export const PeoplePage = () => {
 
   const dataExists = !isLoading && !hasError && peopleData.length > 0;
 
-  const showNoPeopleMessage = !dataExists && !preparedPeopleData.length;
+  const showNoPeopleMessage = !isLoading && !hasError && peopleData.length === 0;
 
   return (
     <div className="container">
@@ -47,7 +47,7 @@ export const PeoplePage = () => {
               Something went wrong
             </p>
           )}
-          {showNoPeopleMessage && !!preparedPeopleData.length && (
+          {showNoPeopleMessage && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
