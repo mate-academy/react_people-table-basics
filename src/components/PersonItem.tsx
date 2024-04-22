@@ -27,12 +27,16 @@ export const PersonItem: React.FC<Props> = ({ person }) => {
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {(!motherName && '-') ||
-          (!mother ? motherName : <PersonLink person={mother} />)}
+        {mother
+          ? <PersonLink person={mother} />
+          : motherName || '-'
+        }
       </td>
       <td>
-        {(!fatherName && '-') ||
-          (!father ? fatherName : <PersonLink person={father} />)}
+        {father
+          ? <PersonLink person={father} />
+          : fatherName || '-'
+        }
       </td>
     </tr>
   );
