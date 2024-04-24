@@ -10,7 +10,7 @@ export const PeoplePage = () => {
 
   useEffect(() => {
     setIsloading(true);
-    
+
     getPeople()
       .then(peopleFromServer => {
         setPeople(peopleFromServer);
@@ -24,6 +24,7 @@ export const PeoplePage = () => {
         setIsloading(false);
       });
   }, []);
+
   return (
     <>
       <h1 className="title">People Page</h1>
