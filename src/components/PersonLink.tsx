@@ -1,14 +1,12 @@
-import classNames from "classnames";
-import { Person } from "../types";
-import { Link, useParams } from "react-router-dom";
-import { useContext } from "react";
-import { PeopleContext } from "./PeopleContext";
+import classNames from 'classnames';
+import { Person } from '../types';
+import { Link, useParams } from 'react-router-dom';
+import { useContext } from 'react';
+import { PeopleContext } from './PeopleContext';
 
 type Props = {
   person: Person;
-}
-
-
+};
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
   const { name, sex, born, died, fatherName, motherName } = person;
@@ -23,20 +21,24 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       return (
         <Link
           to={`/people/${targetPerson.slug}`}
-          className={classNames({ 'has-text-danger': targetPerson.sex === 'f' })}
+          className={classNames({
+            'has-text-danger': targetPerson.sex === 'f',
+          })}
         >
           {targetPerson.name}
         </Link>
-      )}
+      );
+    }
 
     return undefined;
   };
 
   return (
-    <tr data-cy="person"
-      className={
-        classNames({ 'has-background-warning': person.slug === selectedPerson })
-      }
+    <tr
+      data-cy="person"
+      className={classNames({
+        'has-background-warning': person.slug === selectedPerson,
+      })}
       key={person.slug}
     >
       <td>
@@ -53,16 +55,16 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       <td>{died}</td>
       <td>
         {motherName
-          ? (isPersonInList(motherName)
+          ? isPersonInList(motherName)
             ? isPersonInList(motherName)
-            : motherName)
+            : motherName
           : '-'}
       </td>
       <td>
-      {fatherName
-          ? (isPersonInList(fatherName)
+        {fatherName
+          ? isPersonInList(fatherName)
             ? isPersonInList(fatherName)
-            : fatherName)
+            : fatherName
           : '-'}
       </td>
     </tr>
