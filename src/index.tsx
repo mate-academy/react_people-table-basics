@@ -14,6 +14,7 @@ import React from 'react';
 import { GlobalProvider } from './context/reducer';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { HomePage } from './components/HomePage/HomaPage';
+import { PageNotFound } from './components/PageNotFound/PageNotFound';
 
 createRoot(document.getElementById('root') as HTMLDivElement).render(
   <Router>
@@ -26,6 +27,8 @@ createRoot(document.getElementById('root') as HTMLDivElement).render(
           <Route path="/people" element={<PeoplePage />}>
             <Route path=":slugName" element={<PeoplePage />} />
           </Route>
+
+          <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
     </GlobalProvider>
