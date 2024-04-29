@@ -4,32 +4,26 @@ import { getPeople } from '../api';
 import { useEffect, useState } from 'react';
 import { PersonType } from '../types';
 import { Person } from './Person';
+import { findParents } from '../utils/findParents';
 
 export const PeoplePage = () => {
-  const [people, setPeople] = useState<PersonType[] | null>(null);
+  const [people, setPeople] = useState<PersonType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const { personSlug } = useParams();
+
+  const COLUMNS = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+  const isNotPeopleListEmpty = !isLoading && !errorMessage && people.length;
+  const isPeopleListEmpty = !isLoading && !errorMessage && !people.length;
 
   useEffect(() => {
     setIsLoading(true);
 
     getPeople()
       .then(peopleFromServer => {
-        const preparedPeople = peopleFromServer.map(person => ({ ...person }));
+        const peopleClone = peopleFromServer.map(person => ({ ...person }));
 
-        preparedPeople.forEach(person => {
-          Object.assign(person, {
-            mother:
-              preparedPeople.find(
-                mother => mother.name === person.motherName,
-              ) || null,
-            father:
-              preparedPeople.find(
-                father => father.name === person.fatherName,
-              ) || null,
-          });
-        });
+        const preparedPeople = findParents(peopleClone);
 
         setPeople(preparedPeople);
       })
@@ -51,23 +45,20 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {people && !people.length && (
+          {isPeopleListEmpty && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!errorMessage && people && people.length > 0 && (
+          {isNotPeopleListEmpty && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
+                  {COLUMNS.map(column => (
+                    <th key={column}>{column}</th>
+                  ))}
                 </tr>
               </thead>
 
