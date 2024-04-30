@@ -1,10 +1,12 @@
 import React from 'react';
 import { Person } from '../types';
-import { PersonLink } from './Loader/PersonLink';
+import PersonInfo from './PersonInfo';
 
 type Props = {
   people: Person[];
 };
+
+const LIST_CELLS = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   return (
@@ -14,19 +16,18 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {LIST_CELLS.map(cell => (
+            <th key={cell}>{cell}</th>
+          ))}
         </tr>
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <PersonLink key={person.name} person={person} people={people} />
-        ))}
+        {people.map(person => {
+          const { slug } = person;
+
+          return <PersonInfo person={person} key={slug} />;
+        })}
       </tbody>
     </table>
   );

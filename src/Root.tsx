@@ -5,26 +5,21 @@ import {
   Navigate,
 } from 'react-router-dom';
 import { App } from './App';
-import { HomePage } from './components/Loader/HomePage';
-import { PeoplePage } from './components/Loader/PeoplePage';
+import { HomePage } from './pages/HomePage';
+import { NotFoundPage } from './pages/NotFoundPage';
+import { PeoplePage } from './pages/PeoplePage';
 import React from 'react';
 
-export const Root = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<HomePage />} />
-          <Route path="home" element={<Navigate to="/" replace />} />
+export const Root = () => (
+  <Router>
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route index element={<HomePage />} />
+        <Route path="home" element={<Navigate to="/" replace />} />
+        <Route path="people/:userSlug?" element={<PeoplePage />} />
 
-          <Route path="people">
-            <Route index element={<PeoplePage />} />
-            <Route path=":slugParam" element={<PeoplePage />} />
-          </Route>
-
-          <Route path="*" element={<h1 className="title">Page not found</h1>} />
-        </Route>
-      </Routes>
-    </Router>
-  );
-};
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
+  </Router>
+);
