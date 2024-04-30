@@ -9,7 +9,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Sex } from '../../types/Sex';
 
 export const PeoplePage: React.FC = () => {
-  const { people, fetch, message } = useContext(StateContex);
+  const { people, isLoading, message } = useContext(StateContex);
   const dispatch = useContext(DispatchContext);
 
   const checkPerents = (perent: Person, sex: Sex) => {
@@ -51,7 +51,7 @@ export const PeoplePage: React.FC = () => {
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {fetch ? (
+          {isLoading ? (
             <Loader />
           ) : message === SwithchError.Empty ? (
             <p data-cy="noPeopleMessage">There are no people on the server</p>

@@ -11,7 +11,7 @@ type Action =
 
 interface State {
   people: Person[];
-  fetch: boolean;
+  isLoading: boolean;
   message: SwithchError;
 }
 
@@ -26,13 +26,13 @@ const reducer = (state: State, action: Action) => {
     case 'setFetch':
       return {
         ...state,
-        fetch: true,
+        isLoading: true,
       };
 
     case 'disableFetch':
       return {
         ...state,
-        fetch: false,
+        isLoading: false,
       };
 
     case 'setSwitchError':
@@ -45,7 +45,7 @@ const reducer = (state: State, action: Action) => {
 
 const initialState: State = {
   people: [],
-  fetch: false,
+  isLoading: false,
   message: SwithchError.Default,
 };
 
