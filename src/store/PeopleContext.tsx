@@ -1,6 +1,6 @@
 import React from 'react';
-import { State } from '../../types/State';
-import { Action } from '../../types/Action';
+import { State } from '../types/State';
+import { Action } from '../types/Action';
 
 const initialState: State = {
   people: [],
