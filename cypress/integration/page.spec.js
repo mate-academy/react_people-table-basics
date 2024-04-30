@@ -1,3 +1,4 @@
+
 /// <reference types="Cypress" />
 
 const ACTIVE_NAV_LINK_CLASS = 'has-background-grey-lighter';
