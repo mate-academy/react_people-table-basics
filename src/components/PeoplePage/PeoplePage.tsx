@@ -12,7 +12,7 @@ export const PeoplePage: React.FC = () => {
   const { people, fetch, message } = useContext(StateContex);
   const dispatch = useContext(DispatchContext);
 
-  const checkPeopleFather = (perent: Person, sex: Sex) => {
+  const checkPerents = (perent: Person, sex: Sex) => {
     switch (sex) {
       case Sex.m:
         return people.find(person => person.name === perent.fatherName);
@@ -97,38 +97,31 @@ export const PeoplePage: React.FC = () => {
                     <td>{p.born}</td>
                     <td>{p.died}</td>
 
-                    {p.motherName ? (
-                      <td>
-                        {checkPeopleFather(p, Sex.f) ? (
-                          <Link
-                            to={`${checkPeopleFather(p, Sex.f)?.slug}`}
-                            className="has-text-danger"
-                          >
-                            {p.motherName}
-                          </Link>
-                        ) : (
-                          <p>{p.motherName}</p>
-                        )}
-                      </td>
-                    ) : (
-                      <td>-</td>
-                    )}
+                    <td>
+                      {checkPerents(p, Sex.f) ? (
+                        <Link
+                          to={`${checkPerents(p, Sex.f)?.slug}`}
+                          className="has-text-danger"
+                        >
+                          {p.motherName}
+                        </Link>
+                      ) : (
+                        <p>{p.motherName || '-'}</p>
+                      )}
+                    </td>
 
-                    {p.fatherName ? (
-                      <td>
-                        {checkPeopleFather(p, Sex.m) ? (
-                          <a
-                            href={`#/people/${checkPeopleFather(p, Sex.m)?.slug}`}
-                          >
-                            {p.fatherName}
-                          </a>
-                        ) : (
-                          <p>{p.fatherName}</p>
-                        )}
-                      </td>
-                    ) : (
-                      <td>-</td>
-                    )}
+                    <td>
+                      {checkPerents(p, Sex.m) ? (
+                        <Link
+                          to={`${checkPerents(p, Sex.m)?.slug}`}
+                          className="has-text-danger"
+                        >
+                          {p.fatherName}
+                        </Link>
+                      ) : (
+                        <p>{p.fatherName || '-'}</p>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
