@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { Loader } from "../Loader";
-import { Person } from "../../types";
-import { getPeople } from "../../api";
-import { PersonLink } from "../PersonLink/PersonLink";
+import { useEffect, useState } from 'react';
+import { Loader } from '../Loader';
+import { Person } from '../../types';
+import { getPeople } from '../../api';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -13,8 +13,8 @@ export const PeoplePage = () => {
     getPeople()
       .then(setPeople)
       .catch(() => setIsError(true))
-      .finally(() => setIsLoading(false))
-  }, [])
+      .finally(() => setIsLoading(false));
+  }, []);
 
   return (
     <>
@@ -52,12 +52,21 @@ export const PeoplePage = () => {
 
               <tbody>
                 {people.map((person, index) => {
-                  const mother = people.find(per => per.name === person.motherName);
-                  const father = people.find(per => per.name === person.fatherName);
+                  const mother = people.find(
+                    per => per.name === person.motherName,
+                  );
+                  const father = people.find(
+                    per => per.name === person.fatherName,
+                  );
 
                   return (
-                    <PersonLink person={person} key={index} mother={mother} father={father}/>
-                  )
+                    <PersonLink
+                      person={person}
+                      key={index}
+                      mother={mother}
+                      father={father}
+                    />
+                  );
                 })}
               </tbody>
             </table>

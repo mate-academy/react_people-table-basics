@@ -1,7 +1,7 @@
 import cn from 'classnames';
 
 import './App.scss';
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
@@ -18,17 +18,21 @@ export const App = () => (
         <div className="navbar-brand">
           <NavLink
             to="/"
-            className={({ isActive }) => cn('navbar-item', {
-              'has-background-grey-lighter': isActive,
-            })}
+            className={({ isActive }) =>
+              cn('navbar-item', {
+                'has-background-grey-lighter': isActive,
+              })
+            }
           >
             Home
           </NavLink>
 
           <NavLink
-            className={({ isActive }) => cn('navbar-item', {
-              'has-background-grey-lighter': isActive,
-            })}
+            className={({ isActive }) =>
+              cn('navbar-item', {
+                'has-background-grey-lighter': isActive,
+              })
+            }
             to="/people"
           >
             People
@@ -40,13 +44,13 @@ export const App = () => (
     <main className="section">
       <div className="container">
         <Routes>
-          <Route path='/' element={<HomePage />}/>
-          <Route path='/people'>
-            <Route path=':userFromId?' element={<PeoplePage />}/>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<Navigate to="/" replace={true} />} />
+          <Route path="/people">
+            <Route path=":userFromId?" element={<PeoplePage />} />
           </Route>
-          <Route path='*' element={<NotFoundPage />}/>
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
-
       </div>
     </main>
   </div>
