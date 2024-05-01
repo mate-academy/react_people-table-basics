@@ -10,10 +10,8 @@ export const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [hasLoadingError, setHasLoadingError] = useState<boolean>(false);
 
-  // Fetch `people` when `PeoplePage` is opened
   useEffect(() => {
     setIsLoading(true);
-    // Fetch people
     getPeople()
       .then((peopleFromApi: Person[]) =>
         setPeople(getPeopleWithParents(peopleFromApi)),

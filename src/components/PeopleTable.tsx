@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import { Person } from '../types';
 import { PersonRow } from './PersonRow';
 
@@ -7,8 +6,6 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  // const [chosenPerson, sethosenPerson] = useState<Person | null>(null);
-
   return (
     <table
       data-cy="peopleTable"
