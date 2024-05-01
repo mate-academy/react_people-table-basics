@@ -1,5 +1,7 @@
+import classNames from 'classnames';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
+import { useParams } from 'react-router-dom';
 
 type Props = {
   person: Person;
@@ -8,8 +10,15 @@ type Props = {
 export const PersonRow: React.FC<Props> = ({ person }) => {
   const { sex, born, died, fatherName, motherName, mother, father } = person;
 
+  const { personSlug } = useParams();
+
+  const isChosen = person.slug === personSlug;
+
   return (
-    <tr data-cy="person">
+    <tr
+      className={classNames({ 'has-background-warning': isChosen })}
+      data-cy="person"
+    >
       <td>
         <PersonLink person={person} />
       </td>
