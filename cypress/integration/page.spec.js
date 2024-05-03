@@ -16,15 +16,12 @@ const page = {
   mockLessPeople: () => cy.intercept('**/people.json', { fixture: 'lessPeople' }).as('peopleData'),
   mockNoPeople: () => cy.intercept('**/people.json', { body: [] }).as('peopleData'),
   mockPeopleError: () => {
-    const responseErrorStub = {
+    const errorResponse = {
       statusCode: 404,
       body: '404 Not Found!',
-      headers: {
-        'x-not-found': 'true',
-      },
     };
 
-    return cy.intercept('**/people.json', responseErrorStub).as('peopleData')
+    return cy.intercept('**/people.json', errorResponse).as('peopleData')
   },
 
   visit: (url) => {
@@ -46,7 +43,7 @@ const page = {
   assetTitle: text => page.title()
     .should('have.length', 1)
     .and('have.text', text),
-};
+}
 
 let failed = false;
 
@@ -350,124 +347,127 @@ describe('', () => {
       page.people()
         .should('have.length', 6);
     });
-  });
 
-  describe('People table', () => {
-    beforeEach(() => {
-      page.mockPeople();
-      page.visit('/#/people');
-    });
+    describe('People table', () => {
+      beforeEach(() => {
+        page.mockPeople();
+        page.visit('/#/people');
+      });
 
-    it('should have all the required columns', () => {
-      page.heading().should('have.length', 6);
+      it('should have all the required columns', () => {
+        page.heading().should('have.length', 6);
 
-      page.heading().eq(0).should('have.text', 'Name');
-      page.heading().eq(1).should('have.text', 'Sex');
-      page.heading().eq(2).should('have.text', 'Born');
-      page.heading().eq(3).should('have.text', 'Died');
-      page.heading().eq(4).should('have.text', 'Mother');
-      page.heading().eq(5).should('have.text', 'Father');
-    });
+        page.heading().eq(0).should('have.text', 'Name');
+        page.heading().eq(1).should('have.text', 'Sex');
+        page.heading().eq(2).should('have.text', 'Born');
+        page.heading().eq(3).should('have.text', 'Died');
+        page.heading().eq(4).should('have.text', 'Mother');
+        page.heading().eq(5).should('have.text', 'Father');
+      });
 
-    it('should show all the people', () => {
-      page.people()
-        .should('have.length', 39);
-    });
+      it('should show all the people', () => {
+        page.people()
+          .should('have.length', 39);
+      });
 
-    it('should render all required person data', () => {
-      page.people().eq(1).find('td').eq(0).should('have.text', 'Emma de Milliano');
-      page.people().eq(1).find('td').eq(1).should('have.text', 'f');
-      page.people().eq(1).find('td').eq(2).should('have.text', '1876');
-      page.people().eq(1).find('td').eq(3).should('have.text', '1956');
-      page.people().eq(1).find('td').eq(4).should('have.text', 'Sophia van Damme');
-      page.people().eq(1).find('td').eq(5).should('have.text', 'Petrus de Milliano');
-    });
+      it('should render all required person data', () => {
+        page.people().eq(1).find('td').eq(0).should('have.text', 'Emma de Milliano');
+        page.people().eq(1).find('td').eq(1).should('have.text', 'f');
+        page.people().eq(1).find('td').eq(2).should('have.text', '1876');
+        page.people().eq(1).find('td').eq(3).should('have.text', '1956');
+        page.people().eq(1).find('td').eq(4).should('have.text', 'Sophia van Damme');
+        page.people().eq(1).find('td').eq(5).should('have.text', 'Petrus de Milliano');
+      });
 
-    it('should have red names for women', () => {
-      page.people().eq(1)
-        .find('td').eq(0)
-        .find('a')
-        .should('have.class', 'has-text-danger');
-    });
+      it('should have red names for women', () => {
+        page.people().eq(1)
+          .find('td').eq(0)
+          .find('a')
+          .should('have.class', 'has-text-danger');
+      });
 
-    it('should have blue names for men', () => {
-      page.people().eq(3)
-        .find('td').eq(0)
-        .find('a')
-        .should('not.have.class', 'has-text-danger');
-    });
+      it('should have blue names for men', () => {
+        page.people().eq(3)
+          .find('td').eq(0)
+          .find('a')
+          .should('not.have.class', 'has-text-danger');
+      });
 
-    it('should have correct links as person names', () => {
-      page.people().eq(1)
-        .find('td').eq(0)
-        .find('a')
-        .should('have.attr', 'href', '#/people/emma-de-milliano-1876')
-        .and('have.text', 'Emma de Milliano');
+      it('should have correct links as person names', () => {
+        page.people().eq(1)
+          .find('td').eq(0)
+          .find('a')
+          .should('have.attr', 'href', '#/people/emma-de-milliano-1876')
+          .and('have.text', 'Emma de Milliano');
 
-      page.people().eq(3)
-        .find('td').eq(0)
-        .find('a')
-        .should('have.attr', 'href', '#/people/jan-van-brussel-1714')
-        .and('have.text', 'Jan van Brussel');
-    });
+        page.people().eq(3)
+          .find('td').eq(0)
+          .find('a')
+          .should('have.attr', 'href', '#/people/jan-van-brussel-1714')
+          .and('have.text', 'Jan van Brussel');
+      });
 
-    it('should not have a selected person', () => {
-      cy.get('[data-cy="person"].' + SELECTED_PERSON_CLASS)
-        .should('not.exist');
-    });
+      it('should not have a selected person', () => {
+        page.mockPeople();
+        page.visit('/#/people');
 
-    it('should allow to select a person', () => {
-      page.people().eq(1)
-        .find('td').eq(0)
-        .find('a')
-        .click();
+        cy.get('[data-cy="person"].' + SELECTED_PERSON_CLASS)
+          .should('not.exist');
+      });
 
-      page.assertHash('#/people/emma-de-milliano-1876')
+      it('should allow to select a person', () => {
+        page.people().eq(1)
+          .find('td').eq(0)
+          .find('a')
+          .click();
 
-      page.people().eq(1)
-        .should('have.class', SELECTED_PERSON_CLASS);
-    });
+        page.assertHash('#/people/emma-de-milliano-1876')
 
-    it('should have a red link to a mother', () => {
-      page.people().eq(0)
-        .find('td').eq(4)
-        .contains('a', 'Maria van Brussel')
-        .should('have.attr', 'href', '#/people/maria-van-brussel-1801')
-        .and('have.class', 'has-text-danger')
-    });
+        page.people().eq(1)
+          .should('have.class', SELECTED_PERSON_CLASS);
+      });
 
-    it('should have a link to a father', () => {
-      page.people().eq(4)
-        .find('td').eq(5)
-        .contains('a', 'Emile Haverbeke')
-        .should('have.attr', 'href', '#/people/emile-haverbeke-1877')
-        .and('not.have.class', 'has-text-danger')
-    });
+      it('should have a red link to a mother', () => {
+        page.people().eq(0)
+          .find('td').eq(4)
+          .contains('a', 'Maria van Brussel')
+          .should('have.attr', 'href', '#/people/maria-van-brussel-1801')
+          .and('have.class', 'has-text-danger')
+      });
 
-    it('should have a text name if the mother is not in the table', () => {
-      page.people().eq(1)
-        .find('td').eq(4)
-        .find('a')
-        .should('not.exist')
-    });
+      it('should have a link to a father', () => {
+        page.people().eq(4)
+          .find('td').eq(5)
+          .contains('a', 'Emile Haverbeke')
+          .should('have.attr', 'href', '#/people/emile-haverbeke-1877')
+          .and('not.have.class', 'has-text-danger')
+      });
 
-    it('should have a text name if the father is not in the table', () => {
-      page.people().eq(1)
-        .find('td').eq(5)
-        .find('a')
-        .should('not.exist')
-    });
+      it('should have a text name if the mother is not in the table', () => {
+        page.people().eq(1)
+          .find('td').eq(4)
+          .find('a')
+          .should('not.exist')
+      });
 
-    it('should have an empty cell if the motherName is not given', () => {
-      page.people().eq(20)
-        .find('td').eq(4)
-        .should('have.text', '-')
-    });
+      it('should have a text name if the father is not in the table', () => {
+        page.people().eq(1)
+          .find('td').eq(5)
+          .find('a')
+          .should('not.exist')
+      });
 
-    it('should have an empty cell if the fatherName is not given', () => {
-      page.people().eq(20)
-        .find('td').eq(5)
-        .should('have.text', '-')
+      it('should have an empty cell if the motherName is not given', () => {
+        page.people().eq(20)
+          .find('td').eq(4)
+          .should('have.text', '-')
+      });
+
+      it('should have an empty cell if the fatherName is not given', () => {
+        page.people().eq(20)
+          .find('td').eq(5)
+          .should('have.text', '-')
+      });
     });
   });
 
@@ -495,17 +495,24 @@ describe('', () => {
       page.peopleTable().should('exist');
     });
 
-    it('should highlight person with given slug', () => {
-      page.people().eq(1)
-        .should('have.class', SELECTED_PERSON_CLASS)
-    });
-
     it('should have one selected person', () => {
+      page.people().eq(1)
+        .should('have.class', SELECTED_PERSON_CLASS);
+
       cy.get('[data-cy="person"].' + SELECTED_PERSON_CLASS)
         .should('have.length', 1);
     });
 
+    it('should highlight person with given slug', () => {
+      page.visit('/#/people/jan-van-brussel-1714');
+
+      page.people().eq(3)
+        .should('have.class', SELECTED_PERSON_CLASS)
+    });
+
     it('should allow to select another person', () => {
+      page.visit('/#/people/jan-van-brussel-1714');
+
       page.people().eq(3)
         .find('td').eq(0)
         .find('a')
