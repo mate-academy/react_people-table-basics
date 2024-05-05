@@ -12,9 +12,13 @@ export const People = () => {
   const [isError, setIsError] = useState(false);
   const { slug } = useParams();
 
-  function addParents(person: Person, people: Person[]) {
-    const mother = people.find(pers => pers.name === person.motherName);
-    const father = people.find(pers => pers.name === person.fatherName);
+  function addParents(person: Person, peopleFromServer: Person[]) {
+    const mother = peopleFromServer.find(
+      pers => pers.name === person.motherName,
+    );
+    const father = peopleFromServer.find(
+      pers => pers.name === person.fatherName,
+    );
 
     return { ...person, father, mother };
   }
@@ -23,11 +27,7 @@ export const People = () => {
     setIsLoading(true);
     getPeople()
       .then(result => {
-        setPeople(() => {
-          console.log(result.map(person => addParents(person, result)));
-
-          return result.map(person => addParents(person, result));
-        });
+        setPeople(result.map(person => addParents(person, result)));
         setTimeout(() => setIsLoading(false), 300);
       })
       .catch(() => {
