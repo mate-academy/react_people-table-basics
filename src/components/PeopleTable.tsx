@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const PeopleTable = ({ people }: Props) => {
-  const { slug } = useParams();
+  const { personSlug } = useParams();
 
   return (
     <table
@@ -28,34 +28,30 @@ export const PeopleTable = ({ people }: Props) => {
 
       <tbody>
         {people.map(person => {
+          const { slug, born, died, sex, fatherName, motherName } = person;
+          const mother = people.find(p => p.name === person.motherName);
+          const father = people.find(p => p.name === person.fatherName);
+
           return (
             <tr
               data-cy="person"
               key={person.slug}
               className={cn({
-                'has-background-warning': person.slug === slug,
+                'has-background-warning': slug === personSlug,
               })}
             >
               <td>
                 <LinkPerson person={person} />
               </td>
 
-              <td>{person.sex}</td>
-              <td>{person.born}</td>
-              <td>{person.died}</td>
+              <td>{sex}</td>
+              <td>{born}</td>
+              <td>{died}</td>
               <td>
-                {person.mother ? (
-                  <LinkPerson person={person.mother} />
-                ) : (
-                  person.motherName || '-'
-                )}
+                {mother ? <LinkPerson person={mother} /> : motherName || '-'}
               </td>
               <td>
-                {person.father ? (
-                  <LinkPerson person={person.father} />
-                ) : (
-                  person.fatherName || '-'
-                )}
+                {father ? <LinkPerson person={father} /> : fatherName || '-'}
               </td>
             </tr>
           );
