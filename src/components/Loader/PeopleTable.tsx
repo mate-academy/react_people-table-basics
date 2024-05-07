@@ -51,32 +51,24 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>{person.born}</td>
               <td>{person.died}</td>
               <td>
-                {person.motherName ? (
-                  getSlug(person.motherName) ? (
-                    <Link
-                      className="has-text-danger"
-                      to={`/people/${getSlug(person.motherName)}`}
-                    >
-                      {person.motherName}
-                    </Link>
-                  ) : (
-                    person.motherName
-                  )
+                {getSlug(person.motherName || '') ? (
+                  <Link
+                    className="has-text-danger"
+                    to={`/people/${getSlug(person.motherName || '')}`}
+                  >
+                    {person.motherName}
+                  </Link>
                 ) : (
-                  '-'
+                  person.motherName || '-'
                 )}
               </td>
               <td>
-                {person.fatherName ? (
-                  getSlug(person.fatherName) ? (
-                    <Link to={`/people/${getSlug(person.fatherName)}`}>
-                      {person.fatherName}
-                    </Link>
-                  ) : (
-                    person.fatherName
-                  )
+                {getSlug(person.fatherName || '') ? (
+                  <Link to={`/people/${getSlug(person.fatherName || '')}`}>
+                    {person.fatherName}
+                  </Link>
                 ) : (
-                  '-'
+                  person.fatherName || '-'
                 )}
               </td>
             </tr>
