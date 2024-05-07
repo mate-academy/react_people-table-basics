@@ -11,6 +11,7 @@ const isActiveClass = ({ isActive }: { isActive: boolean }) =>
 export const App = () => {
   const location = useLocation();
   const { errorMessage } = useContext(PeopleContext);
+
   return (
     <>
       {errorMessage ? (
