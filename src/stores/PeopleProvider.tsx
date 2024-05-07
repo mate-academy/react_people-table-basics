@@ -40,6 +40,7 @@ export const PeopleProvider: React.FC<Props> = ({ children }) => {
     const fetchePeople = async () => {
       try {
         const getPerson = await getPeople();
+
         setPeople(getPerson);
       } catch (error) {
         setErrorMessage('Something went wrong');
@@ -64,6 +65,7 @@ export const PeopleProvider: React.FC<Props> = ({ children }) => {
     loader,
     setLoader,
   };
+
   return (
     <PeopleContext.Provider value={peopleTools}>
       {children}

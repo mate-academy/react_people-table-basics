@@ -13,7 +13,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
 
     return findSlug ? findSlug.slug : '';
   };
+
   const { slug } = useParams();
+
   return (
     <>
       <h1 className="title">People Page</h1>
