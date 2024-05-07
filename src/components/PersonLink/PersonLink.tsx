@@ -10,8 +10,8 @@ type Props = {
 
 const PersonLink: React.FC<Props> = ({ person, mother, father }) => {
   const { slug } = useParams();
-  const isMotherName = person.motherName ? person.motherName : '-';
-  const isFatherName = person.fatherName ? person.fatherName : '-';
+  const motherName = person.motherName ? person.motherName : '-';
+  const fatherName = person.fatherName ? person.fatherName : '-';
 
   return (
     <tr
@@ -39,14 +39,14 @@ const PersonLink: React.FC<Props> = ({ person, mother, father }) => {
             {mother.name}
           </Link>
         ) : (
-          isMotherName
+          motherName
         )}
       </td>
       <td>
         {father ? (
           <Link to={`../${father.slug}`}>{father.name}</Link>
         ) : (
-          isFatherName
+          fatherName
         )}
       </td>
     </tr>

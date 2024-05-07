@@ -6,8 +6,8 @@ import { getPeople } from '../../api';
 
 const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsloading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading, setIsloading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     setIsloading(true);
