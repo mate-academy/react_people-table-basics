@@ -7,18 +7,14 @@ import { PeopleTable } from '../components/peopleTable';
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [fetchError, setFetchError] = useState(false);
-  const [renderTable, setRenderTable] = useState(false);
-  const [showLoader, setShowLoader] = useState(true);
+  const [showLoader, setShowLoader] = useState(false);
 
   useEffect(() => {
+    setShowLoader(true);
+
     getPeople()
       .then(peops => {
         setPeople(peops);
-        setFetchError(false);
-
-        if (peops.length > 0) {
-          setRenderTable(true);
-        }
       })
       .catch(() => setFetchError(true))
       .finally(() => setShowLoader(false));
@@ -38,11 +34,11 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {renderTable && people.length === 0 && (
+          {people.length === 0 && !showLoader && !fetchError && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {renderTable && people.length > 0 && (
+          {people.length > 0 && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
