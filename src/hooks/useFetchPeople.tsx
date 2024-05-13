@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Person } from '../types';
-import { API_URL, ERROR_MESSAGE } from '../constants';
+import { API_URL, ERROR_MESSAGE, TIME_LOADING } from '../constants';
 
 export const useFetchPeople = () => {
   const [dataPeople, setDataPeople] = useState<Person[]>([]);
@@ -18,7 +18,7 @@ export const useFetchPeople = () => {
       .finally(() => {
         setTimeout(() => {
           setIsLoading(false);
-        }, 1000);
+        }, TIME_LOADING);
       })
       .catch(() => {
         setErrorMessage(ERROR_MESSAGE);
