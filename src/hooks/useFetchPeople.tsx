@@ -16,7 +16,9 @@ export const useFetchPeople = () => {
         setDataPeople(people);
       })
       .finally(() => {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
       })
       .catch(() => {
         setErrorMessage(ERROR_MESSAGE);

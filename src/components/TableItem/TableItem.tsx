@@ -18,9 +18,7 @@ export const TableItem: React.FC<Props> = ({ person, slug, people }) => {
       data-cy="person"
     >
       <td>
-        <PersonLink people={people} person={person}>
-          {person.name}
-        </PersonLink>
+        <PersonLink people={people}>{person.name}</PersonLink>
       </td>
 
       <td>{person.sex}</td>
@@ -28,14 +26,10 @@ export const TableItem: React.FC<Props> = ({ person, slug, people }) => {
       <td>{person.died}</td>
 
       <td>
-        <PersonLink people={people} person={person}>
-          {person.motherName}
-        </PersonLink>
+        <PersonLink people={people}>{person.motherName}</PersonLink>
       </td>
       <td>
-        <PersonLink people={people} person={person}>
-          {person.fatherName}
-        </PersonLink>
+        <PersonLink people={people}>{person.fatherName}</PersonLink>
       </td>
     </tr>
   );

@@ -6,12 +6,11 @@ import { Person } from '../../types';
 import { getPerson } from '../../utils';
 
 type Props = {
-  person: Person;
-  people?: Person[];
+  people: Person[];
   children: React.ReactNode;
 };
 
-export const PersonLink: React.FC<Props> = ({ person, children, people }) => {
+export const PersonLink: React.FC<Props> = ({ people, children }) => {
   const result = getPerson(people, children);
 
   if (!children) {
@@ -25,7 +24,7 @@ export const PersonLink: React.FC<Props> = ({ person, children, people }) => {
   return (
     <Link
       className={cn({
-        'has-text-danger': person.sex === 'f',
+        'has-text-danger': result.sex === 'f',
       })}
       to={`/people/${result.slug}`}
     >
