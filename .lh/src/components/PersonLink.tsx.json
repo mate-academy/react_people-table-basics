@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/PersonLink.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1715706233040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1715706302235,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import React from 'react';\n import { Person } from '../types/Person';\n \n interface Props {\n-  person: Person;\n+  person: Person | ;\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   if (person) {\n"
+                },
+                {
+                    "date": 1715706327670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n import React from 'react';\n import { Person } from '../types/Person';\n \n interface Props {\n-  person: Person | ;\n+  person: Person | undefined;\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   if (person) {\n     return <a href={`#/people/${person.slug}`}>{person.name}</a>;\n   } else {\n-    return <span>{person.name}</span>;\n+    return <span>-</span>;\n   }\n };\n"
+                }
+            ],
+            "date": 1715706233040,
+            "name": "Commit-0",
+            "content": "import React from 'react';\nimport { Person } from '../types/Person';\n\ninterface Props {\n  person: Person;\n}\n\nexport const PersonLink: React.FC<Props> = ({ person }) => {\n  if (person) {\n    return <a href={`#/people/${person.slug}`}>{person.name}</a>;\n  } else {\n    return <span>{person.name}</span>;\n  }\n};\n"
+        }
+    ]
+}

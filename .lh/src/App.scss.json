@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/App.scss",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1715706688429,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1715706695638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n iframe {\n   display: none;\n }\n .has-text-danger {\n-  color: red !important; // Ustawiamy kolor czerwony dla klasy has-text-danger\n+  color: red !important;\n }\n"
+                },
+                {
+                    "date": 1715706742912,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n iframe {\n   display: none;\n }\n .has-text-danger {\n-  color: red !important;\n+  color: red ;\n }\n"
+                },
+                {
+                    "date": 1715706841235,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n iframe {\n   display: none;\n }\n-.has-text-danger {\n-  color: red ;\n+\n+.female-name {\n+  color: red;\n }\n"
+                }
+            ],
+            "date": 1715706688429,
+            "name": "Commit-0",
+            "content": "iframe {\n  display: none;\n}\n.has-text-danger {\n  color: red !important; // Ustawiamy kolor czerwony dla klasy has-text-danger\n}\n"
+        }
+    ]
+}

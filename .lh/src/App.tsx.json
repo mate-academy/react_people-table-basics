@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 182,
+            "activePatchIndex": 186,
             "patches": [
                 {
                     "date": 1715685726243,
@@ -736,6 +736,22 @@
                 {
                     "date": 1715698101173,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,33 @@\n+import './App.scss';\n+import { NavBar } from './components/NavBar';\n+import { PeopleTable } from './components/PeopleTable';\n+import { Route, Routes, Navigate } from 'react-router-dom';\n+import { useState } from 'react';\n+import { Home } from './components/Home';\n+import { PeopleNotFound } from './components/PeopleNotFound';\n+import { PeoplePage } from './components/PeoplePage';\n+\n+export const App = () => {\n+  const [loading, setLoading] = useState<boolean>(false);\n+\n+  return (\n+    <div data-cy=\"app\">\n+      <NavBar />\n+\n+      <main className=\"section\">\n+        <div className=\"container\">\n+          <Routes>\n+            <Route path=\"/\" element={<Home />} />\n+            <Route path=\"/home\" element={<Navigate to=\"/\" replace />} />\n+            <Route\n+              path=\"/people\"\n+              element={<PeoplePage loading={loading} setLoading={setLoading} />}\n+            />\n+\n+            <Route path=\"*\" element={<PeopleNotFound />} />\n+          </Routes>\n+        </div>\n+      </main>\n+    </div>\n+  );\n+};\n"
+                },
+                {
+                    "date": 1715706486966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n import './App.scss';\n import { NavBar } from './components/NavBar';\n-import { PeopleTable } from './components/PeopleTable';\n import { Route, Routes, Navigate } from 'react-router-dom';\n import { useState } from 'react';\n import { Home } from './components/Home';\n import { PeopleNotFound } from './components/PeopleNotFound';\n import { PeoplePage } from './components/PeoplePage';\n \n+\n export const App = () => {\n   const [loading, setLoading] = useState<boolean>(false);\n \n   return (\n@@ -30,35 +30,4 @@\n       </main>\n     </div>\n   );\n };\n-import './App.scss';\n-import { NavBar } from './components/NavBar';\n-import { PeopleTable } from './components/PeopleTable';\n-import { Route, Routes, Navigate } from 'react-router-dom';\n-import { useState } from 'react';\n-import { Home } from './components/Home';\n-import { People } from './components/People';\n-import { PeopleNotFound } from './components/PeopleNotFound';\n-import { PeoplePage } from './components/PeoplePage';\n-\n-export const App = () => {\n-  const [loading, setLoading] = useState<boolean>(false);\n-\n-  return (\n-    <div data-cy=\"app\">\n-      <NavBar />\n-\n-      <main className=\"section\">\n-        <div className=\"container\">\n-          <Routes>\n-            <Route path=\"/\" element={<Home />} />\n-            <Route path=\"/home\" element={<Navigate to=\"/\" replace />} />\n-            <Route path=\"/people\" element={<PeoplePage loading={loading} setLoading={setLoading} />} />\n-\n-            <Route path=\"*\" element={<PeopleNotFound />} />\n-          </Routes>\n-        </div>\n-      </main>\n-    </div>\n-  );\n-};\n"
+                },
+                {
+                    "date": 1715706492045,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n import { useState } from 'react';\n import { Home } from './components/Home';\n import { PeopleNotFound } from './components/PeopleNotFound';\n import { PeoplePage } from './components/PeoplePage';\n+import { }\n \n-\n export const App = () => {\n   const [loading, setLoading] = useState<boolean>(false);\n \n   return (\n"
+                },
+                {
+                    "date": 1715706497100,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import { useState } from 'react';\n import { Home } from './components/Home';\n import { PeopleNotFound } from './components/PeopleNotFound';\n import { PeoplePage } from './components/PeoplePage';\n-import { }\n+import { Person}\n \n export const App = () => {\n   const [loading, setLoading] = useState<boolean>(false);\n \n"
+                },
+                {
+                    "date": 1715706515022,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n import { useState } from 'react';\n import { Home } from './components/Home';\n import { PeopleNotFound } from './components/PeopleNotFound';\n import { PeoplePage } from './components/PeoplePage';\n-import { Person}\n \n export const App = () => {\n   const [loading, setLoading] = useState<boolean>(false);\n \n"
                 }
             ],
             "date": 1715685726243,
