@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/api.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1715686893357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1715686906240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n function wait(delay: number) {\n   return new Promise(resolve => setTimeout(resolve, delay));\n }\n \n-export async function getPeople(): Promise<Person[]> {\n+export function getPeople(): Promise<Person[]> {\n   // keep this delay for testing purpose\n-  await wait(500);\n-  const response = await fetch(API_URL);\n-  return await response.json();\n+  return wait(500)\n+    .then(() => fetch(API_URL))\n+    .then(response => response.json());\n }\n"
+                }
+            ],
+            "date": 1715686893357,
+            "name": "Commit-0",
+            "content": "import { Person } from './types/Person';\n\n// eslint-disable-next-line operator-linebreak\nconst API_URL =\n  'https://mate-academy.github.io/react_people-table/api/people.json';\n\nfunction wait(delay: number) {\n  return new Promise(resolve => setTimeout(resolve, delay));\n}\n\nexport async function getPeople(): Promise<Person[]> {\n  // keep this delay for testing purpose\n  await wait(500);\n  const response = await fetch(API_URL);\n  return await response.json();\n}\n"
+        }
+    ]
+}
