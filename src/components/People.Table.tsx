@@ -10,11 +10,13 @@ export const PeopleTable = () => {
     const fetchPersons = async () => {
       try {
         const data = await getPeople();
+
         setUsers(data);
-      } catch (error) {
+      } catch (err) {
         setError('Error');
       }
     };
+
     fetchPersons();
   }, []);
 
@@ -41,9 +43,7 @@ export const PeopleTable = () => {
         {users.map(person => (
           <tr data-cy="person" key={person.name}>
             <td>
-              <a
-                href={`#/people/${person.name.replace(/\s+/g, '-').toLowerCase()}`}
-              >
+              <a href={`#/people/${person.name.toLowerCase()}`}>
                 {person.name}
               </a>
             </td>

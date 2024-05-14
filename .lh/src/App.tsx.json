@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 10,
+            "activePatchIndex": 11,
             "patches": [
                 {
                     "date": 1715685726243,
@@ -48,6 +48,10 @@
                 {
                     "date": 1715686458983,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';\n \n import './App.scss';\n import { NavBar } from './components/NavBar';\n+import { PeopleTable } from './components/People.Table';\n \n export const App = () => (\n   <div data-cy=\"app\">\n <NavBar />\n@@ -23,9 +24,9 @@\n             </p>\n \n             <p data-cy=\"noPeopleMessage\">There are no people on the server</p>\n \n-            <People/>\n+            <PeopleTable />\n           </div>\n         </div>\n       </div>\n     </main>\n"
+                },
+                {
+                    "date": 1715687816092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n import { Loader } from './components/Loader';\n-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';\n+// import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';\n \n import './App.scss';\n import { NavBar } from './components/NavBar';\n import { PeopleTable } from './components/People.Table';\n \n export const App = () => (\n   <div data-cy=\"app\">\n-<NavBar />\n+    <NavBar />\n \n     <main className=\"section\">\n       <div className=\"container\">\n         <h1 className=\"title\">Home Page</h1>\n"
                 }
             ],
             "date": 1715685726243,

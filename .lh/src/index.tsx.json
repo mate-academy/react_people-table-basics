@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/index.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1715688166228,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1715688171995,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n import { createRoot } from 'react-dom/client';\n import { HashRouter as Router } from 'react-router-dom';\n-import \n \n import 'bulma/css/bulma.css';\n import '@fortawesome/fontawesome-free/css/all.css';\n \n"
+                }
+            ],
+            "date": 1715688166228,
+            "name": "Commit-0",
+            "content": "import { createRoot } from 'react-dom/client';\nimport { HashRouter as Router } from 'react-router-dom';\nimport \n\nimport 'bulma/css/bulma.css';\nimport '@fortawesome/fontawesome-free/css/all.css';\n\nimport { App } from './App';\n\ncreateRoot(document.getElementById('root') as HTMLDivElement).render(\n  <Router>\n    <App />\n  </Router>,\n);\n"
+        }
+    ]
+}

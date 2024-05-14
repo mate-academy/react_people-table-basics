@@ -1,5 +1,5 @@
 import { Loader } from './components/Loader';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+// import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import './App.scss';
 import { NavBar } from './components/NavBar';
