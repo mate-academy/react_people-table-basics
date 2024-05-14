@@ -1,34 +1,50 @@
 import { Loader } from './components/Loader';
-// import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
 import './App.scss';
 import { NavBar } from './components/NavBar';
-import { PeopleTable } from './components/People.Table';
+import { PeopleTable } from './components/PeopleTable';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { useState } from 'react';
 
-export const App = () => (
-  <div data-cy="app">
-    <NavBar />
+export const App = () => {
+  const [loading, setLoading] = useState<boolean>(false);
 
-    <main className="section">
-      <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
+  return (
+    <Router>
+      <div data-cy="app">
+        <NavBar />
 
-        <div className="block">
-          <div className="box table-container">
-            <Loader />
+        <main className="section">
+          <div className="container">
+            <Switch>
+              <Route exact path="/">
+                <h1 className="title">Home Page</h1>
+              </Route>
+              <Route path="/people">
+                <h1 className="title">People Page</h1>
+                <PeopleTable setLoading={setLoading} />
+              </Route>
 
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
+              <Route>
+                <h1 className="title">Page not found</h1>
+              </Route>
+            </Switch>
 
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
+            <div className="block">
+              <div className="box table-container">
+                {loading && <Loader />}
 
-            <PeopleTable />
+                <p data-cy="peopleLoadingError" className="has-text-danger">
+                  Something went wrong
+                </p>
+
+                <p data-cy="noPeopleMessage">
+                  There are no people on the server
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
+        </main>
       </div>
-    </main>
-  </div>
-);
+    </Router>
+  );
+};

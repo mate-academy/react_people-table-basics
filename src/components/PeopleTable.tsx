@@ -2,23 +2,31 @@ import { useEffect, useState } from 'react';
 import { getPeople } from '../api';
 import { Person } from '../types/Person';
 
-export const PeopleTable = () => {
+interface Props {
+  setLoading: (setLoading: boolean) => void;
+}
+
+export const PeopleTable: React.FC<Props> = ({ setLoading }) => {
   const [users, setUsers] = useState<Person[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPersons = async () => {
       try {
+        setLoading(true);
         const data = await getPeople();
 
         setUsers(data);
+        setLoading(false);
       } catch (err) {
+        setLoading(false);
+
         setError('Error');
       }
     };
 
     fetchPersons();
-  }, []);
+  }, [setLoading]);
 
   if (error) {
     return <p>{error}</p>;

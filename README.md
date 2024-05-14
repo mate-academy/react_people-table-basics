@@ -11,7 +11,7 @@ Implement the `App` with 2 pages and ability to select a person in the table.
 1. Implement `NotFoundPage` with a title `Page not found` that is shown for all the other URLs;
 1. Add the `Navbar` with 2 links `Home` and `People`. Active one should have the `has-background-grey-lighter` class;
 1. Use `HashRouter` to be able to share a link to any page on Github pages;
-1. Fetch `people` from [the API](https://mate-academy.github.io/react_people-table/api/people.json) when `PeoplePage` is opened;
++ Fetch `people` from [the API](https://mate-academy.github.io/react_people-table/api/people.json) when `PeoplePage` is opened;
 1. Pass `people` to `PeopleTable` component and render as a table (see the given markup);
 1. Make each name in the table a link a to `/people/:slug` (including mother and father)
     - create the `<PersonLink person={person} />` and use it for all existing people;

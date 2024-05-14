@@ -1,0 +1,58 @@
+{
+    "sourceFile": "src/components/PeopleTable.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1715690909890,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1715690915155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n import { useEffect, useState } from 'react';\n import { getPeople } from '../api';\n import { Person } from '../types/Person';\n \n+interface P\n \n-\n export const PeopleTable = () => {\n   const [users, setUsers] = useState<Person[]>([]);\n   const [error, setError] = useState<string | null>(null);\n \n"
+                },
+                {
+                    "date": 1715690931380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,11 @@\n import { useEffect, useState } from 'react';\n import { getPeople } from '../api';\n import { Person } from '../types/Person';\n \n-interface P\n+interface Props {\n+  setLoading\n+}\n \n export const PeopleTable = () => {\n   const [users, setUsers] = useState<Person[]>([]);\n   const [error, setError] = useState<string | null>(null);\n"
+                },
+                {
+                    "date": 1715690937789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { getPeople } from '../api';\n import { Person } from '../types/Person';\n \n interface Props {\n-  setLoading\n+  setLoading: ()\n }\n \n export const PeopleTable = () => {\n   const [users, setUsers] = useState<Person[]>([]);\n"
+                },
+                {
+                    "date": 1715690947848,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { getPeople } from '../api';\n import { Person } from '../types/Person';\n \n interface Props {\n-  setLoading: ()\n+  setLoading: (setLoading) => void;\n }\n \n export const PeopleTable = () => {\n   const [users, setUsers] = useState<Person[]>([]);\n"
+                },
+                {
+                    "date": 1715690954260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,12 +2,12 @@\n import { getPeople } from '../api';\n import { Person } from '../types/Person';\n \n interface Props {\n-  setLoading: (setLoading) => void;\n+  setLoading: (setLoading: boolean) => void;\n }\n \n-export const PeopleTable = () => {\n+export const PeopleTable = ({}) => {\n   const [users, setUsers] = useState<Person[]>([]);\n   const [error, setError] = useState<string | null>(null);\n \n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1715690962719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n interface Props {\n   setLoading: (setLoading: boolean) => void;\n }\n \n-export const PeopleTable = ({}) => {\n+export const PeopleTable: = ({setLoading}) => {\n   const [users, setUsers] = useState<Person[]>([]);\n   const [error, setError] = useState<string | null>(null);\n \n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1715690968529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n interface Props {\n   setLoading: (setLoading: boolean) => void;\n }\n \n-export const PeopleTable: = ({setLoading}) => {\n+export const PeopleTable: React.FC<> = ({setLoading}) => {\n   const [users, setUsers] = useState<Person[]>([]);\n   const [error, setError] = useState<string | null>(null);\n \n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1715691048513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,15 +5,16 @@\n interface Props {\n   setLoading: (setLoading: boolean) => void;\n }\n \n-export const PeopleTable: React.FC<> = ({setLoading}) => {\n+export const PeopleTable: React.FC<Props> = ({setLoading}) => {\n   const [users, setUsers] = useState<Person[]>([]);\n   const [error, setError] = useState<string | null>(null);\n \n   useEffect(() => {\n     const fetchPersons = async () => {\n       try {\n+        set\n         const data = await getPeople();\n \n         setUsers(data);\n       } catch (err) {\n"
+                },
+                {
+                    "date": 1715691064929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n         setLoading(true);\n         const data = await getPeople();\n \n         setUsers(data);\n-        set\n+        setL\n       } catch (err) {\n         setError('Error');\n       }\n     };\n"
+                },
+                {
+                    "date": 1715692008873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,86 @@\n+import { useEffect, useState } from 'react';\n+import { getPeople } from '../api';\n+import { Person } from '../types/Person';\n+\n+interface Props {\n+  setLoading: (setLoading: boolean) => void;\n+}\n+\n+export const PeopleTable: React.FC<Props> = ({ setLoading }) => {\n+  const [users, setUsers] = useState<Person[]>([]);\n+  const [error, setError] = useState<string | null>(null);\n+\n+  useEffect(() => {\n+    const fetchPersons = async () => {\n+      try {\n+        setLoading(true);\n+        const data = await getPeople();\n+\n+        setUsers(data);\n+        setLoading(false);\n+      } catch (err) {\n+        setLoading(false);\n+\n+        setError('Error');\n+      }\n+    };\n+\n+    fetchPersons();\n+  }, [setLoading]);\n+\n+  if (error) {\n+    return <p>{error}</p>;\n+  }\n+\n+  return (\n+    <table\n+      data-cy=\"peopleTable\"\n+      className=\"table is-striped is-hoverable is-narrow is-fullwidth\"\n+    >\n+      <thead>\n+        <tr>\n+          <th>Name</th>\n+          <th>Sex</th>\n+          <th>Born</th>\n+          <th>Died</th>\n+          <th>Mother</th>\n+          <th>Father</th>\n+        </tr>\n+      </thead>\n+      <tbody>\n+        {users.map(person => (\n+          <tr data-cy=\"person\" key={person.name}>\n+            <td>\n+              <a href={`#/people/${person.name.toLowerCase()}`}>\n+                {person.name}\n+              </a>\n+            </td>\n+            <td>{person.sex}</td>\n+            <td>{person.born}</td>\n+            <td>{person.died}</td>\n+            <td>\n+              {' '}\n+              {person.motherName ? (\n+                <a href={`#/people/${person.mother?.slug}`}>\n+                  {person.motherName}\n+                </a>\n+              ) : (\n+                '-'\n+              )}\n+            </td>\n+            <td>\n+              {' '}\n+              {person.fatherName ? (\n+                <a href={`#/people/${person.father?.slug}`}>\n+                  {person.fatherName}\n+                </a>\n+              ) : (\n+                '-'\n+              )}\n+            </td>\n+          </tr>\n+        ))}\n+      </tbody>\n+    </table>\n+  );\n+};\n"
+                }
+            ],
+            "date": 1715690909890,
+            "name": "Commit-0",
+            "content": "import { useEffect, useState } from 'react';\nimport { getPeople } from '../api';\nimport { Person } from '../types/Person';\n\n\n\nexport const PeopleTable = () => {\n  const [users, setUsers] = useState<Person[]>([]);\n  const [error, setError] = useState<string | null>(null);\n\n  useEffect(() => {\n    const fetchPersons = async () => {\n      try {\n        const data = await getPeople();\n\n        setUsers(data);\n      } catch (err) {\n        setError('Error');\n      }\n    };\n\n    fetchPersons();\n  }, []);\n\n  if (error) {\n    return <p>{error}</p>;\n  }\n\n  return (\n    <table\n      data-cy=\"peopleTable\"\n      className=\"table is-striped is-hoverable is-narrow is-fullwidth\"\n    >\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Sex</th>\n          <th>Born</th>\n          <th>Died</th>\n          <th>Mother</th>\n          <th>Father</th>\n        </tr>\n      </thead>\n      <tbody>\n        {users.map(person => (\n          <tr data-cy=\"person\" key={person.name}>\n            <td>\n              <a href={`#/people/${person.name.toLowerCase()}`}>\n                {person.name}\n              </a>\n            </td>\n            <td>{person.sex}</td>\n            <td>{person.born}</td>\n            <td>{person.died}</td>\n            <td>\n              {' '}\n              {person.motherName ? (\n                <a href={`#/people/${person.mother?.slug}`}>\n                  {person.motherName}\n                </a>\n              ) : (\n                '-'\n              )}\n            </td>\n            <td>\n              {' '}\n              {person.fatherName ? (\n                <a href={`#/people/${person.father?.slug}`}>\n                  {person.fatherName}\n                </a>\n              ) : (\n                '-'\n              )}\n            </td>\n          </tr>\n        ))}\n      </tbody>\n    </table>\n  );\n};\n"
+        }
+    ]
+}

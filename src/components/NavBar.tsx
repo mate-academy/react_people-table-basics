@@ -1,4 +1,13 @@
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+
 export const NavBar = () => {
+  const [isActive, setIsActive] = useState<string>('');
+
+  const handleClick = (link: string) => {
+    setIsActive(link);
+  };
+
   return (
     <nav
       data-cy="nav"
@@ -8,16 +17,21 @@ export const NavBar = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
+          <NavLink
+            className={`navbar-item ${isActive === 'home' && 'has-background-grey-lighter'}`}
+            to="/"
+            onClick={() => handleClick('home')}
+          >
             Home
-          </a>
+          </NavLink>
 
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
+          <NavLink
+            className={`navbar-item ${isActive === 'people' && 'has-background-grey-lighter'}`}
+            to="/people"
+            onClick={() => handleClick('people')}
           >
             People
-          </a>
+          </NavLink>
         </div>
       </div>
     </nav>
