@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 17,
             "patches": [
                 {
                     "date": 1715706233040,
@@ -16,6 +16,66 @@
                 {
                     "date": 1715706327670,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n import React from 'react';\n import { Person } from '../types/Person';\n \n interface Props {\n-  person: Person | ;\n+  person: Person | undefined;\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   if (person) {\n     return <a href={`#/people/${person.slug}`}>{person.name}</a>;\n   } else {\n-    return <span>{person.name}</span>;\n+    return <span>-</span>;\n   }\n };\n"
+                },
+                {
+                    "date": 1715709536534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,36 @@\n+import React from 'react';\n+import { Person } from '../types/Person';\n+\n+interface Props {\n+  person: Person | undefined;\n+}\n+\n+export const PersonLink: React.FC<Props> = ({ person }) => {\n+  if (person) {\n+    return <a href={`#/people/${person.slug}`}>{person.name}</a>;\n+  } else {\n+    return <span>-</span>;\n+  }\n+};\n+\n+\n+  {/* <td>\n+                  {' '}\n+                  {person.motherName ? (\n+                    <a href={`#/people/${person.mother?.slug}`}>\n+                      {person.motherName}\n+                    </a>\n+                  ) : (\n+                    '-'\n+                  )}\n+                </td>\n+                <td>\n+                  {' '}\n+                  {person.fatherName ? (\n+                    <a href={`#/people/${person.father?.slug}`}>\n+                      {person.fatherName}\n+                    </a>\n+                  ) : (\n+                    '-'\n+                  )}\n+                </td> */}\n"
+                },
+                {
+                    "date": 1715709561481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,16 +6,16 @@\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   if (person) {\n-    return <a href={`#/people/${person.slug}`}>{person.name}</a>;\n+    return <a href={`#/people/${person.mother?.slug}`}{person.name}</a>;\n   } else {\n     return <span>-</span>;\n   }\n };\n \n-\n-  {/* <td>\n+{\n+  /* <td>\n                   {' '}\n                   {person.motherName ? (\n                     <a href={`#/people/${person.mother?.slug}`}>\n                       {person.motherName}\n@@ -32,19 +32,6 @@\n                     </a>\n                   ) : (\n                     '-'\n                   )}\n-                </td> */}\n-import React from 'react';\n-import { Person } from '../types/Person';\n-\n-interface Props {\n-  person: Person | undefined;\n+                </td> */\n }\n-\n-export const PersonLink: React.FC<Props> = ({ person }) => {\n-  if (person) {\n-    return <a href={`#/people/${person.slug}`}>{person.name}</a>;\n-  } else {\n-    return <span>-</span>;\n-  }\n-};\n"
+                },
+                {
+                    "date": 1715709566785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   if (person) {\n-    return <a href={`#/people/${person.mother?.slug}`}{person.name}</a>;\n+    return <a href={`#/people/${person.mother?.slug}`}>{person.name}</a>;\n   } else {\n     return <span>-</span>;\n   }\n };\n"
+                },
+                {
+                    "date": 1715709575140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   if (person) {\n-    return <a href={`#/people/${person.mother?.slug}`}>{person.name}</a>;\n+    return <a href={`#/people/${person.?.slug}`}>{person.name}</a>;\n   } else {\n     return <span>-</span>;\n   }\n };\n"
+                },
+                {
+                    "date": 1715709670116,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,37 @@\n+import React from 'react';\n+import { Person } from '../types/Person';\n+\n+interface Props {\n+  person: Person | undefined;\n+}\n+\n+export const PersonLink: React.FC<Props> = ({ person }) => {\n+  if (person) {\n+    return <a href={`#/people/${person.slug}`}>{person.name}</a>;\n+  } else {\n+    return <span>-</span>;\n+  }\n+};\n+\n+{\n+  /* <td>\n+                  {' '}\n+                  {person.motherName ? (\n+                    <a href={`#/people/${person.mother?.slug}`}>\n+                      {person.motherName}\n+                    </a>\n+                  ) : (\n+                    '-'\n+                  )}\n+                </td>\n+                <td>\n+                  {' '}\n+                  {person.fatherName ? (\n+                    <a href={`#/people/${person.father?.slug}`}>\n+                      {person.fatherName}\n+                    </a>\n+                  ) : (\n+                    '-'\n+                  )}\n+                </td> */\n+}\n"
+                },
+                {
+                    "date": 1715709903303,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,64 +11,4 @@\n   } else {\n     return <span>-</span>;\n   }\n };\n-\n-{\n-  /* <td>\n-                  {' '}\n-                  {person.motherName ? (\n-                    <a href={`#/people/${person.mother?.slug}`}>\n-                      {person.motherName}\n-                    </a>\n-                  ) : (\n-                    '-'\n-                  )}\n-                </td>\n-                <td>\n-                  {' '}\n-                  {person.fatherName ? (\n-                    <a href={`#/people/${person.father?.slug}`}>\n-                      {person.fatherName}\n-                    </a>\n-                  ) : (\n-                    '-'\n-                  )}\n-                </td> */\n-}\n-import React from 'react';\n-import { Person } from '../types/Person';\n-\n-interface Props {\n-  person: Person | undefined;\n-}\n-\n-export const PersonLink: React.FC<Props> = ({ person }) => {\n-  if (person) {\n-    return <a href={`#/people/${person.?.slug}`}>{person.name}</a>;\n-  } else {\n-    return <span>-</span>;\n-  }\n-};\n-\n-{\n-  /* <td>\n-                  {' '}\n-                  {person.motherName ? (\n-                    <a href={`#/people/${person.mother?.slug}`}>\n-                      {person.motherName}\n-                    </a>\n-                  ) : (\n-                    '-'\n-                  )}\n-                </td>\n-                <td>\n-                  {' '}\n-                  {person.fatherName ? (\n-                    <a href={`#/people/${person.father?.slug}`}>\n-                      {person.fatherName}\n-                    </a>\n-                  ) : (\n-                    '-'\n-                  )}\n-                </td> */\n-}\n"
+                },
+                {
+                    "date": 1715709960175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n import { Person } from '../types/Person';\n \n interface Props {\n   person: Person | undefined;\n+  s\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   if (person) {\n"
+                },
+                {
+                    "date": 1715709966933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { Person } from '../types/Person';\n \n interface Props {\n   person: Person | undefined;\n-  s\n+  slug: string;\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   if (person) {\n"
+                },
+                {
+                    "date": 1715709979808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,17 @@\n+import React from 'react';\n+import { Person } from '../types/Person';\n+\n+interface Props {\n+  person: {\n+    slug: string;\n+    name: string;\n+  };\n+}\n+\n+export const PersonLink: React.FC<Props> = ({ person }) => {\n+  if (person) {\n+    return <a href={`#/people/${person.slug}`}>{person.name}</a>;\n+  } else {\n+    return <span>-</span>;\n+  }\n+};\n"
+                },
+                {
+                    "date": 1715709998267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,16 @@\n+import React from 'react';\n+\n+interface Props {\n+  person: {\n+    slug: string;\n+    name: string;\n+  };\n+}\n+\n+export const PersonLink: React.FC<Props> = ({ person }) => {\n+  if (person) {\n+    return <a href={`#/people/${person.slug}`}>{person.name}</a>;\n+  } else {\n+    return <span>-</span>;\n+  }\n+};\n"
+                },
+                {
+                    "date": 1715710746924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,41 +8,9 @@\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   if (person) {\n-    return <a href={`#/people/${person.slug}`}>{person.name}</a>;\n+    return <a href={`#/people/${person.slug}`}>{person.name.trim}</a>;\n   } else {\n     return <span>-</span>;\n   }\n };\n-import React from 'react';\n-import { Person } from '../types/Person';\n-\n-interface Props {\n-  person: {\n-    slug: string;\n-    name: string;\n-  };\n-}\n-\n-export const PersonLink: React.FC<Props> = ({ person }) => {\n-  if (person) {\n-    return <a href={`#/people/${person.slug}`}>{person.name}</a>;\n-  } else {\n-    return <span>-</span>;\n-  }\n-};\n-import React from 'react';\n-import { Person } from '../types/Person';\n-\n-interface Props {\n-  person: Person | undefined;\n-  slug: string;\n-}\n-\n-export const PersonLink: React.FC<Props> = ({ person }) => {\n-  if (person) {\n-    return <a href={`#/people/${person.slug}`}>{person.name}</a>;\n-  } else {\n-    return <span>-</span>;\n-  }\n-};\n"
+                },
+                {
+                    "date": 1715710807469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n-  if (person) {\n-    return <a href={`#/people/${person.slug}`}>{person.name.trim}</a>;\n+   (person) {\n+    return <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>;\n   } else {\n     return <span>-</span>;\n   }\n };\n"
+                },
+                {
+                    "date": 1715710816451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n-   (person) {\n+   return (person) ? {\n     return <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>;\n   } else {\n     return <span>-</span>;\n   }\n"
+                },
+                {
+                    "date": 1715710823896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n-   return (person) ? {\n-    return <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>;\n+   return (person) ? \n+     <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>;\n   } else {\n     return <span>-</span>;\n   }\n };\n"
+                },
+                {
+                    "date": 1715710832805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n-   return (person) ? \n-     <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>;\n-  } else {\n-    return <span>-</span>;\n-  }\n+  return person ? (\n+    <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>\n+  ) : (\n+    <span>-</span>\n+  );\n };\n"
                 }
             ],
             "date": 1715706233040,

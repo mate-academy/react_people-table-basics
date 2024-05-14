@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getPeople } from '../api';
 import { Person } from '../types/Person';
 import { Loader } from './Loader';
+import { PersonLink } from './PersonLink';
 
 interface Props {
   setLoading: (setLoading: boolean) => void;
@@ -67,29 +68,36 @@ export const PeopleTable: React.FC<Props> = ({ setLoading, loading }) => {
             {users.map(person => (
               <tr data-cy="person" key={person.name}>
                 <td>
-                  <a href={`#/people/${person.name.toLowerCase()}`}>
-                    {person.name}
+                  <a
+                    className={person.sex === 'female' ? 'has-text-danger' : ''}
+                    href={`#/people/${person.name.toLowerCase().trim()}`}
+                  >
+                    {person.name.trim()}
                   </a>
                 </td>
                 <td>{person.sex}</td>
                 <td>{person.born}</td>
                 <td>{person.died}</td>
                 <td>
-                  {' '}
-                  {person.motherName ? (
-                    <a href={`#/people/${person.mother?.slug}`}>
-                      {person.motherName}
-                    </a>
+                  {person && person.motherName ? (
+                    <PersonLink
+                      person={{
+                        slug: person.mother?.slug ?? '',
+                        name: person.motherName,
+                      }}
+                    />
                   ) : (
                     '-'
                   )}
                 </td>
                 <td>
-                  {' '}
-                  {person.fatherName ? (
-                    <a href={`#/people/${person.father?.slug}`}>
-                      {person.fatherName}
-                    </a>
+                  {person && person.fatherName ? (
+                    <PersonLink
+                      person={{
+                        slug: person.father?.slug ?? '',
+                        name: person.fatherName,
+                      }}
+                    />
                   ) : (
                     '-'
                   )}
@@ -98,7 +106,6 @@ export const PeopleTable: React.FC<Props> = ({ setLoading, loading }) => {
             ))}
           </tbody>
         </table>
-        {loading && <Loader />}
       </div>
     </div>
   );
