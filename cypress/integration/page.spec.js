@@ -7,14 +7,17 @@ const page = {
   spyOnPeopleRequest: () => {
     const spy = cy.spy().as('peopleRequest');
 
-    cy.intercept('**/people.json', (req) => {
+    cy.intercept('**/people.json', req => {
       spy();
       req.reply({ body: [] });
-    })
+    });
   },
-  mockPeople: () => cy.intercept('**/people.json', { fixture: 'people' }).as('peopleData'),
-  mockLessPeople: () => cy.intercept('**/people.json', { fixture: 'lessPeople' }).as('peopleData'),
-  mockNoPeople: () => cy.intercept('**/people.json', { body: [] }).as('peopleData'),
+  mockPeople: () =>
+    cy.intercept('**/people.json', { fixture: 'people' }).as('peopleData'),
+  mockLessPeople: () =>
+    cy.intercept('**/people.json', { fixture: 'lessPeople' }).as('peopleData'),
+  mockNoPeople: () =>
+    cy.intercept('**/people.json', { body: [] }).as('peopleData'),
   mockPeopleError: () => {
     const responseErrorStub = {
       statusCode: 404,
@@ -24,10 +27,10 @@ const page = {
       },
     };
 
-    return cy.intercept('**/people.json', responseErrorStub).as('peopleData')
+    return cy.intercept('**/people.json', responseErrorStub).as('peopleData');
   },
 
-  visit: (url) => {
+  visit: url => {
     cy.visit(url);
     page.getByDataCy('app').should('exist');
   },
@@ -43,22 +46,19 @@ const page = {
 
   assertHash: hash => cy.location('hash').should('eq', hash),
   assertSearch: search => cy.location('search').should('eq', search),
-  assetTitle: text => page.title()
-    .should('have.length', 1)
-    .and('have.text', text),
+  assetTitle: text =>
+    page.title().should('have.length', 1).and('have.text', text),
 };
 
 let failed = false;
 
-Cypress.on('fail', (e) => {
+Cypress.on('fail', e => {
   failed = true;
   throw e;
 });
 
 describe('', () => {
-  beforeEach(() => {
-    if (failed) Cypress.runner.stop();
-  });
+  beforeEach(() => {});
 
   describe('/ page', () => {
     it('should have correct address', () => {
@@ -76,7 +76,8 @@ describe('', () => {
     it('should mark Home nav link as active', () => {
       page.mockPeople();
       page.visit('/');
-      page.nav()
+      page
+        .nav()
         .contains('a', 'Home')
         .should('have.attr', 'href', '#/')
         .and('have.class', ACTIVE_NAV_LINK_CLASS);
@@ -85,7 +86,8 @@ describe('', () => {
     it('should not mark People nav link as active', () => {
       page.mockPeople();
       page.visit('/');
-      page.nav()
+      page
+        .nav()
         .contains('a', 'People')
         .should('have.attr', 'href', '#/people')
         .and('not.have.class', ACTIVE_NAV_LINK_CLASS);
@@ -96,7 +98,6 @@ describe('', () => {
       page.visit('/');
       page.assetTitle('Home Page');
     });
-
 
     it('should not send API request', () => {
       page.spyOnPeopleRequest();
@@ -155,8 +156,14 @@ describe('', () => {
       page.mockPeople();
       page.visit('/#/some/not/existing/page');
 
-      page.nav().contains('a', 'Home').should('not.have.class', ACTIVE_NAV_LINK_CLASS);
-      page.nav().contains('a', 'People').should('not.have.class', ACTIVE_NAV_LINK_CLASS);
+      page
+        .nav()
+        .contains('a', 'Home')
+        .should('not.have.class', ACTIVE_NAV_LINK_CLASS);
+      page
+        .nav()
+        .contains('a', 'People')
+        .should('not.have.class', ACTIVE_NAV_LINK_CLASS);
     });
 
     it('should have only correct title', () => {
@@ -213,7 +220,8 @@ describe('', () => {
     it('should have People nav link active', () => {
       page.mockPeople();
       page.visit('/#/people');
-      page.nav()
+      page
+        .nav()
         .contains('a', 'People')
         .and('have.class', ACTIVE_NAV_LINK_CLASS);
     });
@@ -221,7 +229,8 @@ describe('', () => {
     it('should have Home nav link not active', () => {
       page.mockPeople();
       page.visit('/#/people');
-      page.nav()
+      page
+        .nav()
         .contains('a', 'Home')
         .and('not.have.class', ACTIVE_NAV_LINK_CLASS);
     });
@@ -347,8 +356,7 @@ describe('', () => {
     it('should show the people loaded from API', () => {
       page.mockLessPeople();
       page.visit('/#/people');
-      page.people()
-        .should('have.length', 6);
+      page.people().should('have.length', 6);
     });
   });
 
@@ -370,104 +378,121 @@ describe('', () => {
     });
 
     it('should show all the people', () => {
-      page.people()
-        .should('have.length', 39);
+      page.people().should('have.length', 39);
     });
 
     it('should render all required person data', () => {
-      page.people().eq(1).find('td').eq(0).should('have.text', 'Emma de Milliano');
+      page
+        .people()
+        .eq(1)
+        .find('td')
+        .eq(0)
+        .should('have.text', 'Emma de Milliano');
       page.people().eq(1).find('td').eq(1).should('have.text', 'f');
       page.people().eq(1).find('td').eq(2).should('have.text', '1876');
       page.people().eq(1).find('td').eq(3).should('have.text', '1956');
-      page.people().eq(1).find('td').eq(4).should('have.text', 'Sophia van Damme');
-      page.people().eq(1).find('td').eq(5).should('have.text', 'Petrus de Milliano');
+      page
+        .people()
+        .eq(1)
+        .find('td')
+        .eq(4)
+        .should('have.text', 'Sophia van Damme');
+      page
+        .people()
+        .eq(1)
+        .find('td')
+        .eq(5)
+        .should('have.text', 'Petrus de Milliano');
     });
 
     it('should have red names for women', () => {
-      page.people().eq(1)
-        .find('td').eq(0)
+      page
+        .people()
+        .eq(1)
+        .find('td')
+        .eq(0)
         .find('a')
         .should('have.class', 'has-text-danger');
     });
 
     it('should have blue names for men', () => {
-      page.people().eq(3)
-        .find('td').eq(0)
+      page
+        .people()
+        .eq(3)
+        .find('td')
+        .eq(0)
         .find('a')
         .should('not.have.class', 'has-text-danger');
     });
 
     it('should have correct links as person names', () => {
-      page.people().eq(1)
-        .find('td').eq(0)
+      page
+        .people()
+        .eq(1)
+        .find('td')
+        .eq(0)
         .find('a')
         .should('have.attr', 'href', '#/people/emma-de-milliano-1876')
         .and('have.text', 'Emma de Milliano');
 
-      page.people().eq(3)
-        .find('td').eq(0)
+      page
+        .people()
+        .eq(3)
+        .find('td')
+        .eq(0)
         .find('a')
         .should('have.attr', 'href', '#/people/jan-van-brussel-1714')
         .and('have.text', 'Jan van Brussel');
     });
 
     it('should not have a selected person', () => {
-      cy.get('[data-cy="person"].' + SELECTED_PERSON_CLASS)
-        .should('not.exist');
+      cy.get('[data-cy="person"].' + SELECTED_PERSON_CLASS).should('not.exist');
     });
 
     it('should allow to select a person', () => {
-      page.people().eq(1)
-        .find('td').eq(0)
-        .find('a')
-        .click();
+      page.people().eq(1).find('td').eq(0).find('a').click();
 
-      page.assertHash('#/people/emma-de-milliano-1876')
+      page.assertHash('#/people/emma-de-milliano-1876');
 
-      page.people().eq(1)
-        .should('have.class', SELECTED_PERSON_CLASS);
+      page.people().eq(1).should('have.class', SELECTED_PERSON_CLASS);
     });
 
     it('should have a red link to a mother', () => {
-      page.people().eq(0)
-        .find('td').eq(4)
+      page
+        .people()
+        .eq(0)
+        .find('td')
+        .eq(4)
         .contains('a', 'Maria van Brussel')
         .should('have.attr', 'href', '#/people/maria-van-brussel-1801')
-        .and('have.class', 'has-text-danger')
+        .and('have.class', 'has-text-danger');
     });
 
     it('should have a link to a father', () => {
-      page.people().eq(4)
-        .find('td').eq(5)
+      page
+        .people()
+        .eq(4)
+        .find('td')
+        .eq(5)
         .contains('a', 'Emile Haverbeke')
         .should('have.attr', 'href', '#/people/emile-haverbeke-1877')
-        .and('not.have.class', 'has-text-danger')
+        .and('not.have.class', 'has-text-danger');
     });
 
     it('should have a text name if the mother is not in the table', () => {
-      page.people().eq(1)
-        .find('td').eq(4)
-        .find('a')
-        .should('not.exist')
+      page.people().eq(1).find('td').eq(4).find('a').should('not.exist');
     });
 
     it('should have a text name if the father is not in the table', () => {
-      page.people().eq(1)
-        .find('td').eq(5)
-        .find('a')
-        .should('not.exist')
+      page.people().eq(1).find('td').eq(5).find('a').should('not.exist');
     });
 
     it('should have an empty cell if the motherName is not given', () => {
-      page.people().eq(20)
-        .find('td').eq(4)
-        .should('have.text', '-')
+      page.people().eq(20).find('td').eq(4).should('have.text', '-');
     });
 
     it('should have an empty cell if the fatherName is not given', () => {
-      page.people().eq(20)
-        .find('td').eq(5)
-        .should('have.text', '-')
+      page.people().eq(20).find('td').eq(5).should('have.text', '-');
     });
   });
 
@@ -482,7 +507,8 @@ describe('', () => {
     });
 
     it('should have People nav link active', () => {
-      page.nav()
+      page
+        .nav()
         .contains('a', 'People')
         .and('have.class', ACTIVE_NAV_LINK_CLASS);
     });
@@ -496,28 +522,24 @@ describe('', () => {
     });
 
     it('should highlight person with given slug', () => {
-      page.people().eq(1)
-        .should('have.class', SELECTED_PERSON_CLASS)
+      page.people().eq(1).should('have.class', SELECTED_PERSON_CLASS);
     });
 
     it('should have one selected person', () => {
-      cy.get('[data-cy="person"].' + SELECTED_PERSON_CLASS)
-        .should('have.length', 1);
+      cy.get('[data-cy="person"].' + SELECTED_PERSON_CLASS).should(
+        'have.length',
+        1,
+      );
     });
 
     it('should allow to select another person', () => {
-      page.people().eq(3)
-        .find('td').eq(0)
-        .find('a')
-        .click();
+      page.people().eq(3).find('td').eq(0).find('a').click();
 
-      page.assertHash('#/people/jan-van-brussel-1714')
+      page.assertHash('#/people/jan-van-brussel-1714');
 
-      page.people().eq(3)
-        .should('have.class', SELECTED_PERSON_CLASS);
+      page.people().eq(3).should('have.class', SELECTED_PERSON_CLASS);
 
-      page.people().eq(1)
-        .should('not.have.class', SELECTED_PERSON_CLASS);
+      page.people().eq(1).should('not.have.class', SELECTED_PERSON_CLASS);
     });
   });
 
@@ -532,7 +554,8 @@ describe('', () => {
     });
 
     it('should have People nav link active', () => {
-      page.nav()
+      page
+        .nav()
         .contains('a', 'People')
         .and('have.class', ACTIVE_NAV_LINK_CLASS);
     });
@@ -546,20 +569,15 @@ describe('', () => {
     });
 
     it('should not have a selected person', () => {
-      cy.get('[data-cy="person"].' + SELECTED_PERSON_CLASS)
-        .should('not.exist');
+      cy.get('[data-cy="person"].' + SELECTED_PERSON_CLASS).should('not.exist');
     });
 
     it('should allow to select a person', () => {
-      page.people().eq(1)
-        .find('td').eq(0)
-        .find('a')
-        .click();
+      page.people().eq(1).find('td').eq(0).find('a').click();
 
-      page.assertHash('#/people/emma-de-milliano-1876')
+      page.assertHash('#/people/emma-de-milliano-1876');
 
-      page.people().eq(1)
-        .should('have.class', SELECTED_PERSON_CLASS);
+      page.people().eq(1).should('have.class', SELECTED_PERSON_CLASS);
     });
   });
 });
