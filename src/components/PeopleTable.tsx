@@ -31,7 +31,19 @@ export const PeopleTable: React.FC<Props> = ({ setLoading, loading }) => {
   }, [setLoading]);
 
   if (error) {
-    return <p>{error}</p>;
+    return (
+      <p data-cy="peopleLoadingError" className="has-text-danger">
+        Something went wrong
+      </p>
+    );
+  }
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (users.length === 0) {
+    return <p data-cy="noPeopleMessage">There are no people on the server</p>;
   }
 
   return (
@@ -87,10 +99,6 @@ export const PeopleTable: React.FC<Props> = ({ setLoading, loading }) => {
           </tbody>
         </table>
         {loading && <Loader />}
-        <p data-cy="peopleLoadingError" className="has-text-danger">
-          Something went wrong
-        </p>
-        <p data-cy="noPeopleMessage">There are no people on the server</p>
       </div>
     </div>
   );
