@@ -1,8 +1,21 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export const NavBar = () => {
+  const location = useLocation();
   const [isActive, setIsActive] = useState<string>('');
+
+  useEffect(() => {
+    const currentLink = location.pathname;
+
+    if (currentLink === '/' || currentLink === '/home') {
+      setIsActive('home');
+    } else if (currentLink.startsWith('/people')) {
+      setIsActive('people');
+    } else {
+      setIsActive('');
+    }
+  }, [location]);
 
   const handleClick = (link: string) => {
     setIsActive(link);

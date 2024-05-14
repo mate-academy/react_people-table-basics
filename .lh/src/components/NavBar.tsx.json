@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 34,
+            "activePatchIndex": 35,
             "patches": [
                 {
                     "date": 1715686311119,
@@ -144,6 +144,10 @@
                 {
                     "date": 1715692660816,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n       aria-label=\"main navigation\"\n     >\n       <div className=\"container\">\n         <div className=\"navbar-brand\">\n-          <NavLink className={`navbar-item ${isActive === 'home' && 'has-background-grey-lighter'}`} to=\"/\" onClick={()=> handleClick()}>\n+          <NavLink className={`navbar-item ${isActive === 'home' && 'has-background-grey-lighter'}`} to=\"/\" onClick={()=> handleClick('')}>\n             Home\n           </NavLink>\n \n           <NavLink\n"
+                },
+                {
+                    "date": 1715698838578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,40 @@\n+import { useState } from 'react';\n+import { NavLink } from 'react-router-dom';\n+\n+export const NavBar = () => {\n+  const location\n+  const [isActive, setIsActive] = useState<string>('');\n+\n+  const handleClick = (link: string) => {\n+    setIsActive(link);\n+  };\n+\n+  return (\n+    <nav\n+      data-cy=\"nav\"\n+      className=\"navbar is-fixed-top has-shadow\"\n+      role=\"navigation\"\n+      aria-label=\"main navigation\"\n+    >\n+      <div className=\"container\">\n+        <div className=\"navbar-brand\">\n+          <NavLink\n+            className={`navbar-item ${isActive === 'home' && 'has-background-grey-lighter'}`}\n+            to=\"/\"\n+            onClick={() => handleClick('home')}\n+          >\n+            Home\n+          </NavLink>\n+\n+          <NavLink\n+            className={`navbar-item ${isActive === 'people' && 'has-background-grey-lighter'}`}\n+            to=\"/people\"\n+            onClick={() => handleClick('people')}\n+          >\n+            People\n+          </NavLink>\n+        </div>\n+      </div>\n+    </nav>\n+  );\n+};\n"
                 }
             ],
             "date": 1715686311119,
