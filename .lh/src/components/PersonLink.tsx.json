@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 17,
+            "activePatchIndex": 25,
             "patches": [
                 {
                     "date": 1715706233040,
@@ -76,6 +76,38 @@
                 {
                     "date": 1715710832805,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n-   return (person) ? \n-     <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>;\n-  } else {\n-    return <span>-</span>;\n-  }\n+  return person ? (\n+    <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>\n+  ) : (\n+    <span>-</span>\n+  );\n };\n"
+                },
+                {
+                    "date": 1715753520920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n+  console.log()\n   return person ? (\n     <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>\n   ) : (\n     <span>-</span>\n"
+                },
+                {
+                    "date": 1715754359882,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n-  console.log()\n+  // console.log(person)\n   return person ? (\n     <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>\n   ) : (\n     <span>-</span>\n"
+                },
+                {
+                    "date": 1715754929007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,16 @@\n+import React from 'react';\n+\n+interface Props {\n+  person: {\n+    slug: string;\n+    name: string;\n+  };\n+}\n+\n+export const PersonLink: React.FC<Props> = ({ person }) => {\n+  // console.log(person)\n+  return person ? (\n+    <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>\n+  ) : (\n+   \n+};\n"
+                },
+                {
+                    "date": 1715754945802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,26 +8,9 @@\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   // console.log(person)\n-  return person ? (\n+  return person(\n     <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>\n-  ) : (\n-   \n-};\n-import React from 'react';\n+  )\n \n-interface Props {\n-  person: {\n-    slug: string;\n-    name: string;\n-  };\n-}\n-\n-export const PersonLink: React.FC<Props> = ({ person }) => {\n-  // console.log(person)\n-  return person ? (\n-    <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>\n-  ) : (\n-    <span>-</span>\n-  );\n };\n"
+                },
+                {
+                    "date": 1715754953235,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,6 @@\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   // console.log(person)\n-  return person(\n-    <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>\n-  )\n-\n+  return <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>;\n };\n"
+                },
+                {
+                    "date": 1715754961030,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,6 +8,6 @@\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   // console.log(person)\n-  return <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>;\n+  return <Link href={`#/people/${person.slug}`}>{person.name.trim()}</Link>;\n };\n"
+                },
+                {
+                    "date": 1715754971226,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+import React from 'react';\n+import { Link } from 'react-router-dom';\n+\n+interface Props {\n+  person: {\n+    slug: string;\n+    name: string;\n+  };\n+}\n+\n+export const PersonLink: React.FC<Props> = ({ person }) => {\n+  // console.log(person)\n+  return <Link to={`#/people/${person.slug}`}>{person.name.trim()}</Link>;\n+};\n"
+                },
+                {
+                    "date": 1715755553241,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,19 +9,6 @@\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   // console.log(person)\n-  return <Link to={`#/people/${person.slug}`}>{person.name.trim()}</Link>;\n+  return <Link to={`/people/${person.slug}`}>{person.name.trim()}</Link>;\n };\n-import React from 'react';\n-\n-interface Props {\n-  person: {\n-    slug: string;\n-    name: string;\n-  };\n-}\n-\n-export const PersonLink: React.FC<Props> = ({ person }) => {\n-  // console.log(person)\n-  return <Link href={`#/people/${person.slug}`}>{person.name.trim()}</Link>;\n-};\n"
                 }
             ],
             "date": 1715706233040,

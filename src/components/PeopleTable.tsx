@@ -1,17 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getPeople } from '../api';
 import { Person } from '../types/Person';
 import { Loader } from './Loader';
 import { PersonLink } from './PersonLink';
+import { Link } from 'react-router-dom';
 
-interface Props {
-  setLoading: (setLoading: boolean) => void;
-  loading: boolean;
-}
-
-export const PeopleTable: React.FC<Props> = ({ setLoading, loading }) => {
+export const PeopleTable: React.FC = () => {
   const [users, setUsers] = useState<Person[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const people = useMemo(
+    () =>
+      users.map(user => ({
+        ...user,
+        mother: users.find(u => u.name === user.motherName),
+        father: users.find(u => u.name === user.fatherName),
+      })),
+    [users],
+  );
 
   useEffect(() => {
     const fetchPersons = async () => {
@@ -65,41 +71,31 @@ export const PeopleTable: React.FC<Props> = ({ setLoading, loading }) => {
             </tr>
           </thead>
           <tbody>
-            {users.map(person => (
+            {people.map(person => (
               <tr data-cy="person" key={person.name}>
                 <td>
-                  <a
-                    className={person.sex === 'female' ? 'has-text-danger' : ''}
-                    href={`#/people/${person.name.toLowerCase().trim()}`}
+                  <Link
+                    className={person.sex === 'f' ? 'has-text-danger' : ''}
+                    to={`/people/${person.slug}`}
                   >
                     {person.name.trim()}
-                  </a>
+                  </Link>
                 </td>
                 <td>{person.sex}</td>
                 <td>{person.born}</td>
                 <td>{person.died}</td>
                 <td>
-                  {person && person.motherName ? (
-                    <PersonLink
-                      person={{
-                        slug: person.mother?.slug ?? '',
-                        name: person.motherName,
-                      }}
-                    />
+                  {person && person.mother ? (
+                    <PersonLink person={person?.mother} />
                   ) : (
-                    '-'
+                    person.motherName ?? '-'
                   )}
                 </td>
                 <td>
-                  {person && person.fatherName ? (
-                    <PersonLink
-                      person={{
-                        slug: person.father?.slug ?? '',
-                        name: person.fatherName,
-                      }}
-                    />
+                  {person && person.father ? (
+                    <PersonLink person={person?.father} />
                   ) : (
-                    '-'
+                    person.fatherName ?? '-'
                   )}
                 </td>
               </tr>

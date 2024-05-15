@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 186,
+            "activePatchIndex": 188,
             "patches": [
                 {
                     "date": 1715685726243,
@@ -752,6 +752,14 @@
                 {
                     "date": 1715706515022,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n import { useState } from 'react';\n import { Home } from './components/Home';\n import { PeopleNotFound } from './components/PeopleNotFound';\n import { PeoplePage } from './components/PeoplePage';\n-import { Person}\n \n export const App = () => {\n   const [loading, setLoading] = useState<boolean>(false);\n \n"
+                },
+                {
+                    "date": 1715753354497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n             <Route path=\"/\" element={<Home />} />\n             <Route path=\"/home\" element={<Navigate to=\"/\" replace />} />\n             <Route\n               path=\"/people\"\n-              element={<PeoplePage loading={loading} setLoading={setLoading} />}\n+              element={<PeoplePage />}\n             />\n \n             <Route path=\"*\" element={<PeopleNotFound />} />\n           </Routes>\n"
+                },
+                {
+                    "date": 1715753360199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,8 @@\n import { PeopleNotFound } from './components/PeopleNotFound';\n import { PeoplePage } from './components/PeoplePage';\n \n export const App = () => {\n-  const [loading, setLoading] = useState<boolean>(false);\n-\n   return (\n     <div data-cy=\"app\">\n       <NavBar />\n \n@@ -17,12 +15,9 @@\n         <div className=\"container\">\n           <Routes>\n             <Route path=\"/\" element={<Home />} />\n             <Route path=\"/home\" element={<Navigate to=\"/\" replace />} />\n-            <Route\n-              path=\"/people\"\n-              element={<PeoplePage />}\n-            />\n+            <Route path=\"/people\" element={<PeoplePage />} />\n \n             <Route path=\"*\" element={<PeopleNotFound />} />\n           </Routes>\n         </div>\n"
                 }
             ],
             "date": 1715685726243,

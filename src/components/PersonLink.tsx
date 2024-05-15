@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface Props {
   person: {
@@ -8,9 +9,6 @@ interface Props {
 }
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
-  return person ? (
-    <a href={`#/people/${person.slug}`}>{person.name.trim()}</a>
-  ) : (
-    <span>-</span>
-  );
+  // console.log(person)
+  return <Link to={`/people/${person.slug}`}>{person.name.trim()}</Link>;
 };
