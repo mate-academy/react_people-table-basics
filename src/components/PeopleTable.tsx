@@ -3,12 +3,14 @@ import { getPeople } from '../api';
 import { Person } from '../types/Person';
 import { Loader } from './Loader';
 import { PersonLink } from './PersonLink';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import classNames from 'classnames';
 
 export const PeopleTable: React.FC = () => {
   const [users, setUsers] = useState<Person[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const { selected } = useParams();
   const people = useMemo(
     () =>
       users.map(user => ({
@@ -72,7 +74,13 @@ export const PeopleTable: React.FC = () => {
           </thead>
           <tbody>
             {people.map(person => (
-              <tr data-cy="person" key={person.name}>
+              <tr
+                className={classNames({
+                  'has-background-warning': selected === person.slug,
+                })}
+                data-cy="person"
+                key={person.name}
+              >
                 <td>
                   <Link
                     className={person.sex === 'f' ? 'has-text-danger' : ''}

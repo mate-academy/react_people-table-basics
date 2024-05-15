@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 25,
+            "activePatchIndex": 32,
             "patches": [
                 {
                     "date": 1715706233040,
@@ -108,6 +108,34 @@
                 {
                     "date": 1715755553241,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,19 +9,6 @@\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   // console.log(person)\n-  return <Link to={`#/people/${person.slug}`}>{person.name.trim()}</Link>;\n+  return <Link to={`/people/${person.slug}`}>{person.name.trim()}</Link>;\n };\n-import React from 'react';\n-\n-interface Props {\n-  person: {\n-    slug: string;\n-    name: string;\n-  };\n-}\n-\n-export const PersonLink: React.FC<Props> = ({ person }) => {\n-  // console.log(person)\n-  return <Link href={`#/people/${person.slug}`}>{person.name.trim()}</Link>;\n-};\n"
+                },
+                {
+                    "date": 1715756157421,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,6 +9,7 @@\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   // console.log(person)\n-  return <Link to={`/people/${person.slug}`}>{person.name.trim()}</Link>;\n+  return <Link                     className={person.sex === 'f' ? 'has-text-danger' : ''}\n+  to={`/people/${person.slug}`}>{person.name.trim()}</Link>;\n };\n"
+                },
+                {
+                    "date": 1715756168962,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,7 +9,13 @@\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n   // console.log(person)\n-  return <Link                     className={person.sex === 'f' ? 'has-text-danger' : ''}\n-  to={`/people/${person.slug}`}>{person.name.trim()}</Link>;\n+  return (\n+    <Link\n+      className={person?.sex === 'f' ? 'has-text-danger' : ''}\n+      to={`/people/${person.slug}`}\n+    >\n+      {person.name.trim()}\n+    </Link>\n+  );\n };\n"
+                },
+                {
+                    "date": 1715756174654,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n export const PersonLink: React.FC<Props> = ({ person }) => {\n   // console.log(person)\n   return (\n     <Link\n-      className={person?.sex === 'f' ? 'has-text-danger' : ''}\n+      className={person.sex === 'f' ? 'has-text-danger' : ''}\n       to={`/people/${person.slug}`}\n     >\n       {person.name.trim()}\n     </Link>\n"
+                },
+                {
+                    "date": 1715756180388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n interface Props {\n   person: {\n     slug: string;\n     name: string;\n+    \n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n"
+                },
+                {
+                    "date": 1715756185503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n interface Props {\n   person: {\n     slug: string;\n     name: string;\n-    \n+    sex: \n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n"
+                },
+                {
+                    "date": 1715756191421,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n interface Props {\n   person: {\n     slug: string;\n     name: string;\n-    sex: \n+    sex: f | 'm'\n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n"
+                },
+                {
+                    "date": 1715756228896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n interface Props {\n   person: {\n     slug: string;\n     name: string;\n-    sex: f | 'm'\n+    sex: 'string;\n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n"
                 }
             ],
             "date": 1715706233040,

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 188,
+            "activePatchIndex": 190,
             "patches": [
                 {
                     "date": 1715685726243,
@@ -760,6 +760,14 @@
                 {
                     "date": 1715753360199,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,8 @@\n import { PeopleNotFound } from './components/PeopleNotFound';\n import { PeoplePage } from './components/PeoplePage';\n \n export const App = () => {\n-  const [loading, setLoading] = useState<boolean>(false);\n-\n   return (\n     <div data-cy=\"app\">\n       <NavBar />\n \n@@ -17,12 +15,9 @@\n         <div className=\"container\">\n           <Routes>\n             <Route path=\"/\" element={<Home />} />\n             <Route path=\"/home\" element={<Navigate to=\"/\" replace />} />\n-            <Route\n-              path=\"/people\"\n-              element={<PeoplePage />}\n-            />\n+            <Route path=\"/people\" element={<PeoplePage />} />\n \n             <Route path=\"*\" element={<PeopleNotFound />} />\n           </Routes>\n         </div>\n"
+                },
+                {
+                    "date": 1715755809374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n import './App.scss';\n import { NavBar } from './components/NavBar';\n import { Route, Routes, Navigate } from 'react-router-dom';\n-import { useState } from 'react';\n import { Home } from './components/Home';\n import { PeopleNotFound } from './components/PeopleNotFound';\n import { PeoplePage } from './components/PeoplePage';\n \n@@ -15,9 +14,9 @@\n         <div className=\"container\">\n           <Routes>\n             <Route path=\"/\" element={<Home />} />\n             <Route path=\"/home\" element={<Navigate to=\"/\" replace />} />\n-            <Route path=\"/people\" element={<PeoplePage />} />\n+            <Route path=\"/people/\" element={<PeoplePage />} />\n \n             <Route path=\"*\" element={<PeopleNotFound />} />\n           </Routes>\n         </div>\n"
+                },
+                {
+                    "date": 1715755815737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         <div className=\"container\">\n           <Routes>\n             <Route path=\"/\" element={<Home />} />\n             <Route path=\"/home\" element={<Navigate to=\"/\" replace />} />\n-            <Route path=\"/people/\" element={<PeoplePage />} />\n+            <Route path=\"/people/:selecte\" element={<PeoplePage />} />\n \n             <Route path=\"*\" element={<PeopleNotFound />} />\n           </Routes>\n         </div>\n"
                 }
             ],
             "date": 1715685726243,
