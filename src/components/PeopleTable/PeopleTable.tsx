@@ -16,7 +16,7 @@ export const PeopleTable = ({ peoples }: Props) => {
         <tr
           key={people.name}
           data-cy="person"
-          className={cn('', {
+          className={cn({
             'has-background-warning': people.slug === newId,
           })}
         >

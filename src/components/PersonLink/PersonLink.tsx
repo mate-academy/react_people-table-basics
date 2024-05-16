@@ -10,8 +10,8 @@ export const PersonLink = ({ slug, name, isDangerous }: Props) => {
   if (slug) {
     return (
       <a
+        className={cn({ 'has-text-danger': isDangerous })}
         href={`#/people/${slug}`}
-        className={cn('', { 'has-text-danger': isDangerous })}
       >
         {name}
       </a>
