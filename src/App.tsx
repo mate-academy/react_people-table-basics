@@ -21,6 +21,7 @@ export const App = () => {
           </Routes>
         </div>
       </main>
+      <div></div>
     </div>
   );
 };
