@@ -1,5 +1,5 @@
 import './App.scss';
-import { NavBar } from './components/NavBar';
+import { NavBar } from './components/NavigationBar';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { Home } from './components/Home';
 import { PeopleNotFound } from './components/PeopleNotFound';
@@ -21,7 +21,6 @@ export const App = () => {
           </Routes>
         </div>
       </main>
-      <div></div>
     </div>
   );
 };

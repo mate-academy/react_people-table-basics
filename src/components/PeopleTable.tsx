@@ -5,6 +5,7 @@ import { Loader } from './Loader';
 import { PersonLink } from './PersonLink';
 import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames';
+import React from 'react';
 
 export const PeopleTable: React.FC = () => {
   const [users, setUsers] = useState<Person[]>([]);
