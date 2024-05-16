@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 32,
+            "activePatchIndex": 33,
             "patches": [
                 {
                     "date": 1715706233040,
@@ -136,6 +136,10 @@
                 {
                     "date": 1715756228896,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n interface Props {\n   person: {\n     slug: string;\n     name: string;\n-    sex: f | 'm'\n+    sex: 'string;\n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n"
+                },
+                {
+                    "date": 1715871842064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,14 +4,13 @@\n interface Props {\n   person: {\n     slug: string;\n     name: string;\n-    sex: 'string;\n+    sex: string;\n   };\n }\n \n export const PersonLink: React.FC<Props> = ({ person }) => {\n-  // console.log(person)\n   return (\n     <Link\n       className={person.sex === 'f' ? 'has-text-danger' : ''}\n       to={`/people/${person.slug}`}\n"
                 }
             ],
             "date": 1715706233040,
