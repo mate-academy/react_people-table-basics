@@ -3,6 +3,7 @@ import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { PersonLink } from '../PersonLink';
+import { modifyPerson } from '../../utils/modifyPerson';
 
 export const People = () => {
   const [people, setPeople] = useState<Person[]>();
@@ -59,15 +60,7 @@ export const People = () => {
 
                   <tbody>
                     {people?.map(person => {
-                      const mother = people.find(
-                        possibleMother =>
-                          possibleMother.name === person.motherName,
-                      );
-                      const father = people.find(
-                        possibleFather =>
-                          possibleFather.name === person.fatherName,
-                      );
-                      const modifiedPerson = { ...person, mother, father };
+                      const modifiedPerson = modifyPerson(people, person);
 
                       return (
                         <PersonLink person={modifiedPerson} key={person.slug} />
