@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Person } from '../../types';
 
 type Props = {
@@ -15,12 +15,12 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
   return (
     <>
       <td>
-        <Link
-          to={`#/people/${person.slug}`}
+        <NavLink
+          to={`/people/${person.slug}`}
           className={person.sex === 'f' ? 'has-text-danger' : ''}
         >
           {person.name}
-        </Link>
+        </NavLink>
       </td>
 
       <td>{person.sex}</td>
@@ -28,18 +28,21 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
       <td>{person.died}</td>
       <td>
         {mother ? (
-          <Link to={`#/people/${mother.slug}`} className="has-text-danger">
+          <NavLink to={`/people/${mother.slug}`} className="has-text-danger">
             {mother.name}
-          </Link>
+          </NavLink>
         ) : (
           person.motherName || '-'
         )}
       </td>
       <td>
         {father ? (
-          <Link to={`#/people/${father.slug}`} className="has-text-danger">
+          <NavLink
+            to={`/people/${father.slug}`}
+            className={person.sex === 'f' ? 'has-text-danger' : ''}
+          >
             {father.name}
-          </Link>
+          </NavLink>
         ) : (
           person.fatherName || '-'
         )}

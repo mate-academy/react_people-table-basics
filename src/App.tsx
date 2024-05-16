@@ -12,7 +12,7 @@ export const App = () => (
       <div className="container">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/people" element={<PeoplePage />} />
+          <Route path="/people/:selectedPerson?" element={<PeoplePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
