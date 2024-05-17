@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/components/PeopleTable.tsx/PeopleTable.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1715683033402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1715683048692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { FC } from 'react';\n import { usePeople } from '../../providers/PeopleProvider';\n-import { PersonLink } from '../PersonLink';\n+import { PersonPage } from '../PersonPage';\n import classNames from 'classnames';\n \n export const PeopleTable: FC = () => {\n   const { people, activePerson } = usePeople();\n@@ -31,24 +31,24 @@\n             })}\n             data-cy=\"person\"\n           >\n             <td className=\"has-text-danger\">\n-              <PersonLink person={p} />\n+              <PersonPage person={p} />\n             </td>\n \n             <td>{p.sex}</td>\n             <td>{p.born}</td>\n             <td>{p.died}</td>\n             <td>\n               {p.mother ? (\n-                <PersonLink person={p.mother} />\n+                <PersonPage person={p.mother} />\n               ) : (\n                 p.motherName || '-'\n               )}\n             </td>\n             <td>\n               {p.father ? (\n-                <PersonLink person={p.father} />\n+                <PersonPage person={p.father} />\n               ) : (\n                 p.fatherName || '-'\n               )}\n             </td>\n"
+                },
+                {
+                    "date": 1715683072329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import { FC } from 'react';\n import { usePeople } from '../../providers/PeopleProvider';\n import { PersonPage } from '../PersonPage';\n import classNames from 'classnames';\n+import { Person } from '../../types';\n \n export const PeopleTable: FC = () => {\n   const { people, activePerson } = usePeople();\n \n@@ -22,9 +23,9 @@\n         </tr>\n       </thead>\n \n       <tbody>\n-        {people.map(p => (\n+        {people.map((p: Person) => (\n           <tr\n             key={p.slug}\n             className={classNames({\n               'has-background-warning': p.slug === activePerson?.slug,\n"
+                },
+                {
+                    "date": 1715683113366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { FC } from 'react';\n import { usePeople } from '../../providers/PeopleProvider';\n-import { PersonPage } from '../PersonPage';\n+import { PersonPage } from '../PersonPage/PersonPage';\n import classNames from 'classnames';\n import { Person } from '../../types';\n \n export const PeopleTable: FC = () => {\n"
+                }
+            ],
+            "date": 1715683033402,
+            "name": "Commit-0",
+            "content": "import { FC } from 'react';\nimport { usePeople } from '../../providers/PeopleProvider';\nimport { PersonLink } from '../PersonLink';\nimport classNames from 'classnames';\n\nexport const PeopleTable: FC = () => {\n  const { people, activePerson } = usePeople();\n\n  return (\n    <table\n      data-cy=\"peopleTable\"\n      className=\"table is-striped is-hoverable is-narrow is-fullwidth\"\n    >\n      <thead>\n        <tr>\n          <th>Name</th>\n          <th>Sex</th>\n          <th>Born</th>\n          <th>Died</th>\n          <th>Mother</th>\n          <th>Father</th>\n        </tr>\n      </thead>\n\n      <tbody>\n        {people.map(p => (\n          <tr\n            key={p.slug}\n            className={classNames({\n              'has-background-warning': p.slug === activePerson?.slug,\n            })}\n            data-cy=\"person\"\n          >\n            <td className=\"has-text-danger\">\n              <PersonLink person={p} />\n            </td>\n\n            <td>{p.sex}</td>\n            <td>{p.born}</td>\n            <td>{p.died}</td>\n            <td>\n              {p.mother ? (\n                <PersonLink person={p.mother} />\n              ) : (\n                p.motherName || '-'\n              )}\n            </td>\n            <td>\n              {p.father ? (\n                <PersonLink person={p.father} />\n              ) : (\n                p.fatherName || '-'\n              )}\n            </td>\n          </tr>\n        ))}\n      </tbody>\n    </table>\n  );\n};\n"
+        }
+    ]
+}
