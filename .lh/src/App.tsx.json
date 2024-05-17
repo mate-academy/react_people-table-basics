@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 20,
+            "activePatchIndex": 21,
             "patches": [
                 {
                     "date": 1715669687510,
@@ -88,6 +88,10 @@
                 {
                     "date": 1715700999511,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n           <NavLink\n             to=\"/people\"\n             className={({ isActive }) =>\n               classNames('navbar-item', {\n-                'is-active': isActive,\n+                'has-background-grey-lighter': isActive,\n               })\n             }\n           >\n             People\n"
+                },
+                {
+                    "date": 1715931711628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n     <main className=\"section\">\n       <div className=\"container\">\n         <Routes>\n           <Route path=\"/\" element={<HomePage />} />\n-          <Route path=\"/home\" element={<Navigate to=\"/\" />} />\n+          <Route path=\"/home\" element={<Navigate to=\"/\" replace />} />\n           <Route path=\"/people\">\n             <Route\n               index\n               element={\n"
                 }
             ],
             "date": 1715669687510,
