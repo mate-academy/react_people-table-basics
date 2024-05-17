@@ -9,15 +9,20 @@ export const PeopleTable = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     setError(false);
 
     getPeople()
-      .then(result => setPeople(result))
+      .then(result => {
+        setPeople(result);
+        setInitialLoad(false);
+      })
       .catch(() => {
         setError(true);
+        setInitialLoad(false);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -35,11 +40,11 @@ export const PeopleTable = () => {
           </p>
         )}
 
-        {!error && !loading && people.length === 0 && (
+        {!error && !loading && !initialLoad && people.length === 0 && (
           <p data-cy="noPeopleMessage">There are no people on the server</p>
         )}
 
-        {!error && !loading && (
+        {!error && !loading && people.length > 0 && (
           <table
             data-cy="peopleTable"
             className="table is-striped is-hoverable is-narrow is-fullwidth"
