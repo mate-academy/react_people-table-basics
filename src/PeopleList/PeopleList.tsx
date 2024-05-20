@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Link, useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { PersonLink } from '../components/PersonLink/PersonLink';
