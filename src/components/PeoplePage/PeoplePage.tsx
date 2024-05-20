@@ -47,7 +47,7 @@ export const PeoplePage = () => {
               {peoples.map(people => (
                 <tr data-cy="person" key={people.slug}>
                   <td>
-                    <a href="#/people/jan-van-brussel-1714">Jan van Brussel</a>
+                    <a href="#/people/jan-van-brussel-1714">{people.name}</a>
                   </td>
 
                   <td>{people.sex}</td>
