@@ -19,10 +19,7 @@ export const App = () => (
             Home
           </NavLink>
 
-          <NavLink
-            className={getLinkActive}
-            to="people"
-          >
+          <NavLink className={getLinkActive} to="people">
             People
           </NavLink>
         </div>

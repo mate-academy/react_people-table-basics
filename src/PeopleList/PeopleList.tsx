@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const PeopleList: React.FC<Props> = ({ people }) => {
-  const {personSlug} = useParams();
+  const { personSlug } = useParams();
   // const selectedPers = people.find(pers => pers.slug === personSlug);
 
   return (
@@ -28,7 +28,13 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
 
       <tbody>
         {people.map(person => (
-          <tr data-cy="person" key={person.slug} className={person.slug === personSlug ? 'has-background-warning' : ''}>
+          <tr
+            data-cy="person"
+            key={person.slug}
+            className={
+              person.slug === personSlug ? 'has-background-warning' : ''
+            }
+          >
             <td>
               <Link
                 className={person.sex === 'f' ? 'has-text-danger' : ''}
