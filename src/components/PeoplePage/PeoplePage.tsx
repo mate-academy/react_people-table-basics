@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { getPeoples } from '../../services/people';
@@ -13,6 +14,11 @@ export const PeoplePage = () => {
       .then(setPeoples)
       .finally(() => setLoading(false));
   }, []);
+
+  const findMother = (mother: string | null) => {
+    const found = peoples.find(people => people.name === mother);
+    return found;
+  }
 
   return (
     <div className="container">
@@ -47,14 +53,33 @@ export const PeoplePage = () => {
               {peoples.map(people => (
                 <tr data-cy="person" key={people.slug}>
                   <td>
-                    <a href="#/people/jan-van-brussel-1714">{people.name}</a>
+                    <a 
+                      href="#/people/jan-van-brussel-1714"
+                      className={cn({
+                        'has-text-danger': people.sex === 'f',
+                      })}
+                    >
+                      {people.name}
+                    </a>
                   </td>
 
                   <td>{people.sex}</td>
-                  <td>1714</td>
-                  <td>1748</td>
-                  <td>Joanna van Rooten</td>
-                  <td>Jacobus van Brussel</td>
+                  <td>{people.born}</td>
+                  <td>{people.died}</td>
+                  <td>
+                    {findMother(people.motherName) === undefined ? people.motherName : (
+                      <a 
+                      href="#/people/jan-van-brussel-1714"
+                      className={cn({
+                        'has-text-danger': people.sex === 'f',
+                      })}
+                    >
+                      {people.motherName}
+                    </a>
+                    )}
+                    
+                  </td>
+                  <td>{people.fatherName}</td>
                 </tr>
               ))}
 
