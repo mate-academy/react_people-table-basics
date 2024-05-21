@@ -3,6 +3,7 @@ import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import classNames from 'classnames';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
 const getLinkClass = ({ isActive }: { isActive: boolean }) =>
   classNames('navbar-item', {
@@ -37,6 +38,8 @@ export const App = () => {
           <Route path="/home" element={<Navigate to="/" replace />} />
 
           <Route path="/people" element={<PeoplePage />} />
+
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
     </div>
