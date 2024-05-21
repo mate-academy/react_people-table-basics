@@ -4,6 +4,7 @@ import { Person } from '../../types';
 import { useEffect, useState } from 'react';
 import { getPeople } from '../../api';
 import { Loader } from '../../components/Loader';
+import './PeopleTable.scss';
 
 function findParents(people: Person[]) {
   return people.map(person => {
