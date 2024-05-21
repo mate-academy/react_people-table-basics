@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { PersonLink } from '../components/PersonLink/PersonLink';
 
@@ -36,12 +36,7 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
             }
           >
             <td>
-              <Link
-                className={person.sex === 'f' ? 'has-text-danger' : ''}
-                to={`/people/${person.slug}`}
-              >
-                {person.name}
-              </Link>
+              <PersonLink person={person} />
             </td>
 
             <td>{person.sex}</td>
