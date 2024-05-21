@@ -8,15 +8,12 @@ export const PeoplePage = () => {
   const [peoples, setPeoples] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [isHiding, setIsHiding] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    setIsHiding(true);
     getPeople()
       .then(peopless => {
         setPeoples(peopless);
-        setIsHiding(false);
       })
       .catch(() => {
         setIsError(true);
@@ -39,11 +36,11 @@ export const PeoplePage = () => {
               Something went wrong
             </p>
           )}
-          {peoples.length === 0 && !isError && !isHiding && (
+          {peoples.length === 0 && !isError && !loading && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!isHiding && (
+          {!loading && !isError && peoples.length > 0 && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"

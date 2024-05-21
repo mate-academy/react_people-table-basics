@@ -37,23 +37,19 @@ export const PersonLink: React.FC<Props> = ({ person, peoples }) => {
       <td>{person.born}</td>
       <td>{person.died}</td>
       <td>
-        {person.motherName === null ? (
-          '-'
-        ) : foundMother === undefined ? (
-          person.motherName
-        ) : (
+        {foundMother ? (
           <Link to={`/people/${foundMother.slug}`} className="has-text-danger">
             {foundMother.name}
           </Link>
+        ) : (
+          person.motherName || '-'
         )}
       </td>
       <td>
-        {person.fatherName === null ? (
-          '-'
-        ) : foundFather === undefined ? (
-          person.fatherName
-        ) : (
+        {foundFather ? (
           <Link to={`/people/${foundFather.slug}`}>{foundFather.name}</Link>
+        ) : (
+          person.fatherName || '-'
         )}
       </td>
     </tr>
