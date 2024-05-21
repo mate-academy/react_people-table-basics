@@ -1,8 +1,8 @@
-import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
-import { getPeoples } from '../../services/people';
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink/PersonLink';
+import { getPeople } from '../../api';
 
 export const PeoplePage = () => {
   const [peoples, setPeoples] = useState<Person[]>([]);
@@ -13,33 +13,18 @@ export const PeoplePage = () => {
   useEffect(() => {
     setLoading(true);
     setIsHiding(true);
-
-    setTimeout(() => {
-      getPeoples()
-        .then(peopless => {
-          setPeoples(peopless);
-          setIsHiding(false);
-        })
-        .catch(() => {
-          setIsError(true);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 1000);
+    getPeople()
+      .then(peopless => {
+        setPeoples(peopless);
+        setIsHiding(false);
+      })
+      .catch(() => {
+        setIsError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
-
-  const findMother = (mother: string | null) => {
-    const found = peoples.find(people => people.name === mother);
-
-    return found;
-  };
-
-  const findFather = (father: string | null) => {
-    const found = peoples.find(people => people.name === father);
-
-    return found;
-  };
 
   return (
     <div className="container">
@@ -76,43 +61,11 @@ export const PeoplePage = () => {
 
               <tbody>
                 {peoples.map(people => (
-                  <tr data-cy="person" key={people.slug}>
-                    <td>
-                      <a
-                        href="#/people/jan-van-brussel-1714"
-                        className={cn({
-                          'has-text-danger': people.sex === 'f',
-                        })}
-                      >
-                        {people.name}
-                      </a>
-                    </td>
-
-                    <td>{people.sex}</td>
-                    <td>{people.born}</td>
-                    <td>{people.died}</td>
-                    <td>
-                      {findMother(people.motherName) === undefined ? (
-                        people.motherName
-                      ) : (
-                        <a
-                          href="#/people/jan-van-brussel-1714"
-                          className="has-text-danger"
-                        >
-                          {people.motherName}
-                        </a>
-                      )}
-                    </td>
-                    <td>
-                      {findFather(people.fatherName) === undefined ? (
-                        people.fatherName
-                      ) : (
-                        <a href="#/people/jan-van-brussel-1714">
-                          {people.fatherName}
-                        </a>
-                      )}
-                    </td>
-                  </tr>
+                  <PersonLink
+                    person={people}
+                    key={people.slug}
+                    peoples={peoples}
+                  />
                 ))}
               </tbody>
             </table>
