@@ -9,7 +9,6 @@ type Props = {
 
 export const PeopleList: React.FC<Props> = ({ people }) => {
   const { personSlug } = useParams();
-  // const selectedPers = people.find(pers => pers.slug === personSlug);
 
   return (
     <table
@@ -51,7 +50,7 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
             <td>
               {people.find(persName => person.motherName === persName.name) ? (
                 <PersonLink
-                  person={people.find(p => p.name == person.motherName)!}
+                  person={people.find(p => p.name === person.motherName)!}
                 />
               ) : person.motherName ? (
                 person.motherName
