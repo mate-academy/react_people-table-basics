@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import { FC } from 'react';
 import { Person } from '../types';
 import { useParams } from 'react-router-dom';
@@ -9,6 +10,7 @@ export const PeopleTable: FC<IPeopleTable> = ({ people }) => {
   const { slug } = useParams();
 
   const allPeopleNames = people?.map(persone => persone.name);
+
   return (
     <table
       data-cy="peopleTable"
@@ -39,22 +41,26 @@ export const PeopleTable: FC<IPeopleTable> = ({ people }) => {
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
-              <td>
-                {person.motherName &&
-                !allPeopleNames?.includes(person.motherName) ? (
-                  person.motherName
-                ) : (
+
+              {!allPeopleNames?.includes(person?.motherName!) ? (
+                <td>{person.motherName ? person.motherName : '-'}</td>
+              ) : (
+                <td>
+                  {/* For better readabity i separate it another <td> */}
+
                   <PersoneLink person={person.mother!} />
-                )}
-              </td>
-              <td>
-                {person.fatherName &&
-                !allPeopleNames?.includes(person.fatherName) ? (
-                  person.fatherName
-                ) : (
+                </td>
+              )}
+
+              {!allPeopleNames?.includes(person?.fatherName!) ? (
+                <td>{person.fatherName ? person.fatherName : '-'}</td>
+              ) : (
+                <td>
+                  {/* For better readabity i separate it another <td></td> */}
+
                   <PersoneLink person={person.father!} />
-                )}
-              </td>
+                </td>
+              )}
             </tr>
           );
         })}

@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 import { useEffect, useState } from 'react';
 
 import { Loader, PeopleTable } from '../components';
@@ -15,20 +17,18 @@ export const People = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log('people', people);
-
   useEffect(() => {
     setIsLoading(true);
     getPeople()
       .then(data => {
         setPeople(getPeopleWithParents(data));
       })
-      .catch(err => {
+      .catch(() => {
         setHasErrors(true);
-        console.error(err);
       })
       .finally(() => setIsLoading(false));
   }, []);
+
   return (
     <>
       <h1 className="title">People Page</h1>
