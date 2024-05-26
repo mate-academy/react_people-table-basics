@@ -5,26 +5,10 @@ import classNames from 'classnames';
 
 interface Props {
   person: Person;
-  womenNames: Person[];
-  manNames: Person[];
 }
 
-export const PeopleTable: React.FC<Props> = (
-  { person, womenNames, manNames }
-) => {
+export const PeopleTable: React.FC<Props> = ({ person }) => {
   const { peopleSlug } = useParams();
-
-  const linkWomansNames =
-    womenNames.some((woman) => woman.name === person.motherName);
-  const linkMansNames =
-    manNames.some((man) => man.name === person.fatherName);
-
-  const womanSlug = womenNames.find(
-    woman => woman.name === person.motherName
-  )?.slug || '';
-  const manSlug = manNames.find(
-    man => man.name === person.fatherName
-  )?.slug || '';
 
   return (
     <tr
@@ -45,26 +29,34 @@ export const PeopleTable: React.FC<Props> = (
       <td>{person.born}</td>
       <td>{person.died}</td>
       <td>
-        {linkWomansNames ? (
-          <Link to={`/people/${womanSlug}`} className={classNames({ "has-text-danger": linkWomansNames })}>
-            {person.motherName || '-'}
-          </Link>
-        ) : (
-          <span>
-            {person.motherName || '-'}
-          </span>
-        )}
+        {person.mother
+          ? (
+            <Link
+              to={`/people/${person.mother.slug}`}
+              className={classNames(
+                { "has-text-danger": person.mother.sex === 'f' },
+              )}
+            >
+              {person.mother.name}
+            </Link>
+          )
+          : person.motherName || '-'
+        }
       </td>
       <td>
-        {linkMansNames ? (
-          <Link to={`/people/${manSlug}`}>
-            {person.fatherName || '-'}
-          </Link>
-        ) : (
-          <span>
-            {person.fatherName || '-'}
-          </span>
-        )}
+        {person.father
+          ? (
+            <Link
+              to={`/people/${person.father.slug}`}
+              className={classNames(
+                { "has-text-danger": person.father.sex === 'f' },
+              )}
+            >
+              {person.father.name}
+            </Link>
+          )
+          : person.fatherName || '-'
+        }
       </td>
     </tr>
   );

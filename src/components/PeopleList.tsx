@@ -8,18 +8,6 @@ export const PeopleList: React.FC = () => {
   const [people, setPeople] = React.useState<Person[]>([]);
   const [getError, setGetError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
-  const { womenNames, manNames } = people.reduce<
-  { womenNames: Person[]; manNames: Person[]; }
-  >((acc, person) => {
-    if (person.sex === 'f') {
-      acc.womenNames.push(person);
-    } else if (person.sex === 'm') {
-      acc.manNames.push(person);
-    }
-
-    return acc;
-  }, { womenNames: [], manNames: [] });
-
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,7 +15,17 @@ export const PeopleList: React.FC = () => {
       try {
         const response = await client.get<Person[]>('/people.json');
 
-        setPeople(response);
+        const preparedPeople = response.map(person => ({
+          ...person,
+          mother: response.find(
+            mother => mother.name === person.motherName,
+          ),
+          father: response.find(
+            father => father.name === person.fatherName,
+          ),
+        }));
+
+        setPeople(preparedPeople);
       } catch (error) {
         setGetError(true);
       } finally {
@@ -75,8 +73,6 @@ export const PeopleList: React.FC = () => {
                   <PeopleTable
                     key={person.slug}
                     person={person}
-                    womenNames={womenNames}
-                    manNames={manNames}
                   />
                 );
               })}
