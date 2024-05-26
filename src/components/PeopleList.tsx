@@ -7,13 +7,23 @@ import { PeopleTable } from './PeopleTable';
 export const PeopleList: React.FC = () => {
   const [people, setPeople] = React.useState<Person[]>([]);
   const [getError, setGetError] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const womanNames = people.filter((person) => person.sex === 'f');
-  const manNames = people.filter((person) => person.sex === 'm');
+  const [isLoading, setIsLoading] = React.useState(true);
+  const { womenNames, manNames } = people.reduce<
+  { womenNames: Person[]; manNames: Person[]; }
+  >((acc, person) => {
+    if (person.sex === 'f') {
+      acc.womenNames.push(person);
+    } else if (person.sex === 'm') {
+      acc.manNames.push(person);
+    }
+
+    return acc;
+  }, { womenNames: [], manNames: [] });
+
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchPeople = async () => {
-      setIsLoading(true);
       try {
         const response = await client.get<Person[]>('/people.json');
 
@@ -39,11 +49,11 @@ export const PeopleList: React.FC = () => {
           </p>
         )}
 
-        {!isLoading && !getError && people.length === 0 && (
+        {!isLoading && !getError && !people.length && (
           <p data-cy="noPeopleMessage">There are no people on the server</p>
         )}
 
-        {!isLoading && !getError && people.length > 0 && (
+        {!isLoading && !getError && people.length && (
           <table
             data-cy="peopleTable"
             className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -65,7 +75,7 @@ export const PeopleList: React.FC = () => {
                   <PeopleTable
                     key={person.slug}
                     person={person}
-                    womanNames={womanNames}
+                    womenNames={womenNames}
                     manNames={manNames}
                   />
                 );
