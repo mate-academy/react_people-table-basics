@@ -1,6 +1,6 @@
 import './App.scss';
 import { Outlet } from 'react-router-dom';
-import NavPage from './pages/nav/nav.page';
+import NavBar from './pages/nav/navbar';
 
 export const App = () => {
   return (
@@ -11,7 +11,7 @@ export const App = () => {
         role="navigation"
         aria-label="main navigation"
       >
-        <NavPage />
+        <NavBar />
       </nav>
 
       <main className="section">

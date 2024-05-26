@@ -1,28 +1,24 @@
+/* eslint-disable no-param-reassign */
 import { useEffect, useState } from 'react';
 import { Loader } from '../../components/Loader';
 import { getPeople } from '../../api';
 import { Person } from './../../types/Person';
-import { PersonLink } from '../person-link/person.link';
+import { PersonLink } from '../person-select/person.select';
 import { useParams } from 'react-router-dom';
 
 export default function PeoplePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [people, setPeople] = useState<Person[]>([]);
-  const [selectedPersonSlug, setSelectedPersonSlug] = useState<string | null>(
-    null,
-  );
   const [error, setError] = useState<string | null>(null);
   const { slug: targetPersonSlug } = useParams<{ slug: string }>();
 
   useEffect(() => {
+    setIsLoading(true);
     getPeople()
       .then(fetchedPeople => {
         setPeople(fetchedPeople);
-        setIsLoading(false);
-        setError(null);
       })
       .catch(() => {
-        setIsLoading(false);
         setError('Something went wrong');
       })
       .finally(() => {
@@ -30,12 +26,43 @@ export default function PeoplePage() {
       });
   }, []);
 
-  const handlePersonClick = (slug: string | null) => {
-    setSelectedPersonSlug(slug);
-  };
-
   const shouldApplyBackground = (slug: string) =>
     targetPersonSlug === slug ? 'has-background-warning' : '';
+
+  const peopleMap = people.reduce(
+    (acc, person) => {
+      acc[person.name] = person;
+
+      return acc;
+    },
+    {} as Record<string, Person>,
+  );
+
+  const personFields = (person: Person) => [
+    {
+      key: 'name',
+      value: <PersonLink person={person}>{person.name}</PersonLink>,
+    },
+    { key: 'sex', value: person.sex },
+    { key: 'born', value: person.born },
+    { key: 'died', value: person.died },
+    {
+      key: 'mother',
+      value: (
+        <PersonLink person={peopleMap[person.motherName]}>
+          {person.motherName ? person.motherName : '-'}
+        </PersonLink>
+      ),
+    },
+    {
+      key: 'father',
+      value: (
+        <PersonLink person={peopleMap[person.fatherName]}>
+          {person.fatherName ? person.fatherName : '-'}
+        </PersonLink>
+      ),
+    },
+  ];
 
   return (
     <>
@@ -72,45 +99,14 @@ export default function PeoplePage() {
                     data-cy="person"
                     className={shouldApplyBackground(person.slug)}
                   >
-                    <td className={shouldApplyBackground(person.slug)}>
-                      <PersonLink
-                        person={person}
-                        onClick={() => handlePersonClick(person.slug)}
+                    {personFields(person).map(field => (
+                      <td
+                        key={field.key}
+                        className={shouldApplyBackground(person.slug)}
                       >
-                        {person.name}
-                      </PersonLink>
-                    </td>
-                    <td className={shouldApplyBackground(person.slug)}>
-                      {person.sex}
-                    </td>
-                    <td className={shouldApplyBackground(person.slug)}>
-                      {person.born}
-                    </td>
-                    <td className={shouldApplyBackground(person.slug)}>
-                      {person.died}
-                    </td>
-                    <td className={shouldApplyBackground(person.slug)}>
-                      <PersonLink
-                        person={people.find(p => p.name === person.motherName)}
-                        onClick={() => handlePersonClick(person.motherName)}
-                      >
-                        {person.motherName ? person.motherName : '-'}
-                      </PersonLink>
-                    </td>
-                    <td
-                      className={
-                        selectedPersonSlug === person.slug
-                          ? 'has-background-warning'
-                          : ''
-                      }
-                    >
-                      <PersonLink
-                        person={people.find(p => p.name === person.fatherName)}
-                        onClick={() => handlePersonClick(person.fatherName)}
-                      >
-                        {person.fatherName ? person.fatherName : '-'}
-                      </PersonLink>
-                    </td>
+                        {field.value}
+                      </td>
+                    ))}
                   </tr>
                 ))}
               </tbody>

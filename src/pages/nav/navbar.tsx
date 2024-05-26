@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-export default function NavPage() {
+export default function NavBar() {
   const getLinkClass = ({ isActive }: { isActive: boolean }) =>
     `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`;
 

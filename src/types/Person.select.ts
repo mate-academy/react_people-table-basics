@@ -1,6 +1,6 @@
 import { Person } from './Person';
 
 export type PersonLinkProps = {
-  person: Person | undefined;
+  person?: Person;
   children: React.ReactNode;
 };
