@@ -6,7 +6,6 @@ import {
   Navigate,
 } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import Navbar from './components/Navbar/Navbar';
 import DefaultLayout from './layouts/default.layout';
 import PageNotFound from './pages/PageNotFound';
 import PeoplePage from './pages/PeoplePage';
@@ -14,7 +13,6 @@ import { PeopleTable } from './components/PersonTable/PersonTable';
 
 export const App = () => (
   <Router>
-    <Navbar />
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
         <Route index element={<HomePage />} />

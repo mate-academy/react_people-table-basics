@@ -8,25 +8,23 @@ const Navbar = () => {
     });
 
   return (
-    <div data-cy="app">
-      <nav
-        data-cy="nav"
-        className="navbar is-fixed-top has-shadow"
-        role="navigation"
-        aria-label="main navigation"
-      >
-        <div className="container">
-          <div className="navbar-brand">
-            <NavLink to="/" className={isLinkActive}>
-              Home
-            </NavLink>
-            <NavLink to="/people" className={isLinkActive}>
-              People
-            </NavLink>
-          </div>
+    <nav
+      data-cy="nav"
+      className="navbar is-fixed-top has-shadow"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div className="container">
+        <div className="navbar-brand">
+          <NavLink to="/" className={isLinkActive}>
+            Home
+          </NavLink>
+          <NavLink to="/people" className={isLinkActive}>
+            People
+          </NavLink>
         </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   );
 };
 

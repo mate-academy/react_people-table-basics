@@ -4,7 +4,11 @@ import Navbar from '../components/Navbar/Navbar';
 const DefaultLayout = () => (
   <>
     <Navbar />
-    <Outlet />
+    <div className="section">
+      <div className="container">
+        <Outlet />
+      </div>
+    </div>
   </>
 );
 
