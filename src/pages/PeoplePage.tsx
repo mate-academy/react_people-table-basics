@@ -19,6 +19,7 @@ function PeoplePage() {
           mother: res.find(mother => mother.name === person.motherName) || null,
           father: res.find(father => father.name === person.fatherName) || null,
         }));
+
         setPeople(preparedPeople);
       })
       .catch(() => setErrorMessage('Something went wrong'))
@@ -40,7 +41,7 @@ function PeoplePage() {
                 {errorMessage}
               </p>
 
-              {people.length === 0 && (
+              {!people.length && (
                 <p data-cy="noPeopleMessage">
                   There are no people on the server
                 </p>
