@@ -1,10 +1,12 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
 
-  const isActive = (path: string) => location.pathname === path || (path === "/people" && location.pathname.startsWith("/people"));
+  const isActive = (path: string) =>
+    location.pathname === path ||
+    (path === '/people' && location.pathname.startsWith('/people'));
 
   return (
     <nav
@@ -16,13 +18,13 @@ const Navbar: React.FC = () => {
       <div className="container">
         <div className="navbar-brand">
           <Link
-            className={`navbar-item ${isActive("/") ? 'has-background-grey-lighter' : ''}`}
+            className={`navbar-item ${isActive('/') ? 'has-background-grey-lighter' : ''}`}
             to="/"
           >
             Home
           </Link>
           <Link
-            className={`navbar-item ${isActive("/people") ? 'has-background-grey-lighter' : ''}`}
+            className={`navbar-item ${isActive('/people') ? 'has-background-grey-lighter' : ''}`}
             to="/people"
           >
             People

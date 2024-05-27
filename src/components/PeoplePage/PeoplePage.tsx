@@ -1,9 +1,9 @@
-import PeopleTable from "../PeopleTable/PeopleTable";
-import {Loader} from "../Loader";
-import {getPeople} from "../../api";
-import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {Person} from "../../types";
+import PeopleTable from '../PeopleTable/PeopleTable';
+import { Loader } from '../Loader';
+import { getPeople } from '../../api';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Person } from '../../types';
 
 const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
