@@ -11,7 +11,7 @@ export const PersonLink: React.FC<Props> = ({ parent }) => (
   <NavLink
     to={`/people/${parent.slug}`}
     className={classNames({
-      'has-text-danger': parent.sex === 'f'
+      'has-text-danger': parent.sex === 'f',
     })}
   >
     {parent.name}
