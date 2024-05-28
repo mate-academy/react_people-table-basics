@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { Person } from '../types';
+import PersonName from './PersonName';
 
 interface Props {
   person: Person;
@@ -12,11 +13,11 @@ const PersonLink: FC<Props> = ({ person: currentPerson, people }) => {
   const { slug } = useParams();
 
   const findMother = useMemo(
-    () => people.find(p => p.name === currentPerson.motherName),
+    () => people.find(person => person.name === currentPerson.motherName),
     [currentPerson.motherName, people],
   );
   const findFather = useMemo(
-    () => people.find(p => p.name === currentPerson.fatherName),
+    () => people.find(person => person.name === currentPerson.fatherName),
     [currentPerson.fatherName, people],
   );
 
@@ -45,14 +46,16 @@ const PersonLink: FC<Props> = ({ person: currentPerson, people }) => {
       <td>{currentPerson.born}</td>
       <td>{currentPerson.died}</td>
       <td>
-        {currentPerson.motherName
-          ? renderNameWithLinkOrText(currentPerson.motherName, findMother)
-          : '-'}
+        <PersonName
+          name={currentPerson.motherName || '-'}
+          person={findMother}
+        />
       </td>
       <td>
-        {currentPerson.fatherName
-          ? renderNameWithLinkOrText(currentPerson.fatherName, findFather)
-          : '-'}
+        <PersonName
+          name={currentPerson.fatherName || '-'}
+          person={findFather}
+        />
       </td>
     </tr>
   );
