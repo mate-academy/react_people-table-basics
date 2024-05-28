@@ -5,6 +5,6 @@ import '@fortawesome/fontawesome-free/css/all.css';
 
 import { Root } from './Root';
 
-const container = document.getElementById('root') as HTMLDivElement
+const container = document.getElementById('root') as HTMLDivElement;
 
-createRoot(container).render(<Root />)
+createRoot(container).render(<Root />);

@@ -1,24 +1,34 @@
-import { Link } from "react-router-dom"
-import { Person } from "../../types"
-import classNames from "classnames"
+import { Link } from 'react-router-dom';
+import { Person } from '../../types';
+import classNames from 'classnames';
 
 type Props = {
-  person: Person
-  mothers: Person[]
-  fathers: Person[]
-  currentPath: string
-}
+  person: Person;
+  mothers: Person[];
+  fathers: Person[];
+  currentPath: string;
+};
 
+export const People: React.FC<Props> = ({
+  person,
+  fathers,
+  mothers,
+  currentPath,
+}) => {
+  const currentParent = (parents: Person[], parentName: string | null) =>
+    parents.map(parent => parent.name).includes(`${parentName}`);
 
-export const People: React.FC<Props> = ({ person, fathers, mothers, currentPath }) => {
   return (
-    <tr data-cy="person" key={person.slug} className={classNames({
-      'has-background-warning': currentPath === `/people/${person.slug}`
-    })} >
+    <tr
+      data-cy="person"
+      className={classNames({
+        'has-background-warning': currentPath === `/people/${person.slug}`,
+      })}
+    >
       <td>
         <Link
           to={`/people/${person.slug}`}
-          className={classNames({'has-text-danger': person.sex === 'f'})}
+          className={classNames({ 'has-text-danger': person.sex === 'f' })}
         >
           {person.name}
         </Link>
@@ -29,24 +39,22 @@ export const People: React.FC<Props> = ({ person, fathers, mothers, currentPath 
       <td>{person.died}</td>
 
       <td>
-        {mothers.map(mother => mother.name).includes(person.motherName || '-') ? (
+        {currentParent(mothers, person.motherName) ? (
           <Link
             className="has-text-danger"
-            to={`/people/${mothers
-              .find(mother => mother.name === person.motherName)?.slug}`}
+            to={`/people/${mothers.find(mother => mother.name === person.motherName)?.slug}`}
           >
             {person.motherName}
           </Link>
         ) : (
           `${person.motherName || '-'}`
         )}
-
       </td>
 
       <td>
-        {fathers.map(father => father.name).includes(person.fatherName || '-') ? (
-          <Link to={`/people/${fathers
-            .find(father => father.name === person.fatherName)?.slug}`}
+        {currentParent(fathers, person.fatherName) ? (
+          <Link
+            to={`/people/${fathers.find(father => father.name === person.fatherName)?.slug}`}
           >
             {person.fatherName}
           </Link>
@@ -55,5 +63,5 @@ export const People: React.FC<Props> = ({ person, fathers, mothers, currentPath 
         )}
       </td>
     </tr>
-  )
-}
+  );
+};

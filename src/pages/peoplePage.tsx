@@ -1,33 +1,32 @@
-import { useEffect, useState } from "react";
-import { getPeople } from "../api"
-import { Person } from "../types";
-import { People } from "../components/Loader/person";
-import { Loader } from "../components/Loader";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { getPeople } from '../api';
+import { Person } from '../types';
+import { People } from '../components/Loader/person';
+import { Loader } from '../components/Loader';
+import { useLocation } from 'react-router-dom';
 
 export const PeoplePage = () => {
-  const [people, setPeople] = useState<Person[]>([])
-  const [loader, setLoader] = useState(false)
-  const [errorMessage, setErroroMessage] = useState('')
+  const [people, setPeople] = useState<Person[]>([]);
+  const [loader, setLoader] = useState(false);
+  const [errorMessage, setErroroMessage] = useState('');
   const location = useLocation();
-  const currentPath = location.pathname
+  const currentPath = location.pathname;
 
-  const arrayOfMothers = people.filter(person => person.sex === 'f')
-  const arrayOfFathers = people.filter(person => person.sex === 'm')
+  const arrayOfMothers = people.filter(person => person.sex === 'f');
+  const arrayOfFathers = people.filter(person => person.sex === 'm');
 
   useEffect(() => {
-    setErroroMessage('')
-    setLoader(true)
+    setErroroMessage('');
+    setLoader(true);
     getPeople()
-      .then(people => {
-        setPeople(people)
+      .then(peopleArray => {
+        setPeople(peopleArray);
       })
       .catch(() => setErroroMessage('Something went wrong'))
-      .finally(() => setLoader(false))
-  }, [])
+      .finally(() => setLoader(false));
+  }, []);
 
   return (
-
     <div className="container">
       <h1 className="title">People Page</h1>
       <div className="block">
@@ -40,33 +39,42 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {/* <p data-cy="noPeopleMessage">There are no people on the server</p> */}
-
-          {!loader && !errorMessage && (people.length !== 0 ? (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-              <tbody>
-                {people.map(person => {
-                  return (
-                  <People person={person} fathers={arrayOfFathers} mothers={arrayOfMothers} currentPath={currentPath} />
-                )})}
-              </tbody>
-            </table>
-          ) : (<p data-cy="noPeopleMessage">There are no people on the server</p>))}
+          {!loader &&
+            !errorMessage &&
+            (people.length !== 0 ? (
+              <table
+                data-cy="peopleTable"
+                className="table is-striped is-hoverable is-narrow is-fullwidth"
+              >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Sex</th>
+                    <th>Born</th>
+                    <th>Died</th>
+                    <th>Mother</th>
+                    <th>Father</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {people.map(person => {
+                    return (
+                      <People
+                        person={person}
+                        fathers={arrayOfFathers}
+                        mothers={arrayOfMothers}
+                        currentPath={currentPath}
+                        key={person.slug}
+                      />
+                    );
+                  })}
+                </tbody>
+              </table>
+            ) : (
+              <p data-cy="noPeopleMessage">There are no people on the server</p>
+            ))}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
