@@ -23,13 +23,15 @@ export const PeoplePage = () => {
       <div className="block">
         <div className="box table-container">
           {isLoading && <Loader />}
-          {error && <p data-cy="peopleLoadingError" className="has-text-danger">
-            {error}
-          </p>
-          }
+          {error && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              {error}
+            </p>
+          )}
           {!!people.length && <PeopleTable people={people} />}
           {people.length < 1 && !isLoading && !error && (
-            <p data-cy="noPeopleMessage">There are no people on the server</p>)}
+            <p data-cy="noPeopleMessage">There are no people on the server</p>
+          )}
         </div>
       </div>
     </>
