@@ -3,9 +3,13 @@ import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../../types';
 
+type PeopleMap = {
+  [key: string]: Person | null;
+};
+
 type Props = {
   person: Person;
-  people: Person[];
+  people: PeopleMap;
 };
 
 export const PersonLink: React.FC<Props> = ({ person, people }) => {
@@ -13,8 +17,10 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
 
   const { name, sex, born, died, fatherName, motherName, slug } = person;
 
-  const isMother = people.find(p => p.name === motherName);
-  const isFather = people.find(p => p.name === fatherName);
+  const {
+    [motherName || "null"]: isMother,
+    [fatherName || "null"]: isFather
+  } = people;
 
   return (
     <tr

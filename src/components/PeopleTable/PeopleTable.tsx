@@ -7,6 +7,9 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
+
+  const peopleMap = people.reduce((map, person) => ({ ...map, [person.name]: person }), {});
+
   return (
     <table
       data-cy="peopleTable"
@@ -25,7 +28,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
 
       <tbody>
         {people.map(person => (
-          <PersonLink key={person.name} person={person} people={people} />
+          <PersonLink key={person.name} person={person} people={peopleMap} />
         ))}
       </tbody>
     </table>
