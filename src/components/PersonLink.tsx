@@ -12,10 +12,7 @@ export const PersonLink: FC<TProps> = ({ person }) => {
   const { name, slug, sex } = person;
 
   return (
-    <Link
-      to={`../${slug}`}
-      className={cn('', { 'has-text-danger': sex === 'f' })}
-    >
+    <Link to={`../${slug}`} className={cn({ 'has-text-danger': sex === 'f' })}>
       {name}
     </Link>
   );

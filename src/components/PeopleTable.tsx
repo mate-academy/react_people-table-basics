@@ -31,48 +31,35 @@ export const PeopleTable: FC<TProps> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <tr
-            key={person.name}
-            data-cy="person"
-            className={cn({
-              'has-background-warning': slug === person.slug,
-            })}
-          >
-            <td>
-              <PersonLink person={person} />
-            </td>
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
-            <td>
-              {person.motherName ? (
-                findPersonByName(person.motherName) ? (
-                  <PersonLink
-                    person={findPersonByName(person.motherName) as Person}
-                  />
-                ) : (
-                  person.motherName
-                )
-              ) : (
-                '-'
-              )}
-            </td>
-            <td>
-              {person.fatherName ? (
-                findPersonByName(person.fatherName) ? (
-                  <PersonLink
-                    person={findPersonByName(person.fatherName) as Person}
-                  />
-                ) : (
-                  person.fatherName
-                )
-              ) : (
-                '-'
-              )}
-            </td>
-          </tr>
-        ))}
+        {people.map(person => {
+          const mother = person.motherName
+            ? findPersonByName(person.motherName)
+            : null;
+          const father = person.fatherName
+            ? findPersonByName(person.fatherName)
+            : null;
+          const hasMotherName = person.motherName || '-';
+          const hasFatherName = person.fatherName || '-';
+
+          return (
+            <tr
+              key={person.name}
+              data-cy="person"
+              className={cn({
+                'has-background-warning': slug === person.slug,
+              })}
+            >
+              <td>
+                <PersonLink person={person} />
+              </td>
+              <td>{person.sex}</td>
+              <td>{person.born}</td>
+              <td>{person.died}</td>
+              <td>{mother ? <PersonLink person={mother} /> : hasMotherName}</td>
+              <td>{father ? <PersonLink person={father} /> : hasFatherName}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
