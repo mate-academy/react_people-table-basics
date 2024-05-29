@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Person } from '../../types';
 
 type PeopleMap = {
-  [key: string]: Person | null;
+  [key: string]: Person;
 };
 
 type Props = {
