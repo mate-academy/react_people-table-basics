@@ -1,6 +1,5 @@
 import './App.scss';
 import { Navigate, Route, Routes } from 'react-router-dom';
-
 import { People } from './components/People';
 import { NavBar } from './components/Navbar';
 

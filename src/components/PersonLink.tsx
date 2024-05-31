@@ -7,14 +7,11 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ person, people }) => {
-  const motherLinkExist = people.find(
-    person1 => person1.name === person.motherName,
-  );
-  const fatherLinkExist = people.find(
-    person1 => person1.name === person.fatherName,
-  );
   const { slug } = useParams();
-  console.log(slug);
+  const { motherName, fatherName } = person;
+  const motherLinkExist = people.find(person1 => person1.name === motherName);
+  const fatherLinkExist = people.find(person1 => person1.name === fatherName);
+
   return (
     <tr
       data-cy="person"

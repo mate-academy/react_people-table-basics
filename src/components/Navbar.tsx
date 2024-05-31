@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-
+import { NavLink } from 'react-router-dom';
+import { getLinkClass } from '../utils/getLinkClass';
 export const NavBar = () => {
   return (
     <nav
@@ -10,25 +10,11 @@ export const NavBar = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? 'navbar-item has-background-grey-lighter'
-                : 'navbar-item'
-            }
-            to="/"
-          >
+          <NavLink className={getLinkClass} to="/">
             Home
           </NavLink>
 
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? 'navbar-item has-background-grey-lighter'
-                : 'navbar-item'
-            }
-            to="/people"
-          >
+          <NavLink className={getLinkClass} to="/people">
             People
           </NavLink>
         </div>
