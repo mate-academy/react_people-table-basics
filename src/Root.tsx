@@ -13,15 +13,8 @@ export const Root = () => (
       <Route path="/" element={<App />}>
         <Route index element={<h1 className="title">Home Page</h1>}></Route>
         <Route path="home" element={<Navigate to={'/'} replace />}></Route>
+
         <Route path="people">
-          <Route
-            index
-            element={
-              <>
-                <h1 className="title">People Page</h1> <People />{' '}
-              </>
-            }
-          ></Route>
           <Route
             path=":slug?"
             element={
@@ -31,6 +24,7 @@ export const Root = () => (
             }
           ></Route>
         </Route>
+        
         <Route
           path="*"
           element={<h1 className="title">Page not found</h1>}

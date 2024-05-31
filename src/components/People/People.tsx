@@ -90,7 +90,7 @@ export const People = () => {
                   >
                     <td>
                       <Link
-                        to={`/people/${person.slug}`}
+                        to={`../${person.slug}`}
                         className={cn('', {
                           'has-text-danger': person.sex === 'f',
                         })}
@@ -105,7 +105,7 @@ export const People = () => {
                       {motherSlug ? (
                         <Link
                           className="has-text-danger"
-                          to={`/people/${motherSlug}`}
+                          to={`../${motherSlug}`}
                         >
                           {person.motherName || '-'}
                         </Link>
@@ -115,7 +115,7 @@ export const People = () => {
                     </td>
                     <td>
                       {fatherSlug ? (
-                        <Link to={`/people/${fatherSlug}`}>
+                        <Link to={`../${fatherSlug}`}>
                           {person.fatherName || '-'}
                         </Link>
                       ) : (
