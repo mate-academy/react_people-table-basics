@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { getPeople } from '../../api';
 import { Loader } from '../Loader';
 import { Person } from '../../types';
 import cn from 'classnames';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 enum Message {
   peopleLoadingError = 'Something went wrong',
@@ -17,6 +18,9 @@ export const People = () => {
   const [dataLoader, setDataLoader] = useState(false);
 
   const { slug } = useParams();
+  const navigate = useNavigate();
+
+  const REDIRECT_TIME = 3000;
 
   useEffect(() => {
     setLoading(true);
@@ -25,7 +29,10 @@ export const People = () => {
         setPeople([...res]);
         setDataLoader(true);
       })
-      .catch(() => setError(Message.peopleLoadingError))
+      .catch(() => {
+        setError(Message.peopleLoadingError);
+        setTimeout(() => navigate('/'), REDIRECT_TIME);
+      })
       .finally(() => {
         setLoading(false);
       });
