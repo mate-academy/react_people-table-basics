@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Person } from '../../types';
+import cn from 'classnames';
 
 type Props = {
   people: Person[];
@@ -29,53 +30,53 @@ export const PersonLink: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => {
-          return (
-            <tr
-              data-cy="person"
-              key={person.slug}
-              className={
-                person === selectedPerson ? 'has-background-warning' : undefined
-              }
-            >
+        {people.map(person => (
+          <tr
+            data-cy="person"
+            key={person.slug}
+            className={cn({
+              'has-background-warning': person === selectedPerson,
+            })}
+          >
+            <td>
+              <Link
+                to={`../${person.slug}`}
+                className={cn({
+                  'has-text-danger': person.sex === 'f',
+                })}
+              >
+                {person.name}
+              </Link>
+            </td>
+
+            <td>{person.sex}</td>
+            <td>{person.born}</td>
+            <td>{person.died}</td>
+
+            {!!person.mother ? (
               <td>
                 <Link
-                  to={`../${person.slug}`}
-                  className={person.sex === 'f' ? 'has-text-danger' : undefined}
+                  to={`../${person.mother.slug}`}
+                  className="has-text-danger"
                 >
-                  {person.name}
+                  {person.mother.name}
                 </Link>
               </td>
+            ) : (
+              <td>{!!person.motherName ? person.motherName : '-'}</td>
+            )}
 
-              <td>{person.sex}</td>
-              <td>{person.born}</td>
-              <td>{person.died}</td>
-
-              {!!person.mother ? (
-                <td>
-                  <Link
-                    to={`../${person.mother.slug}`}
-                    className="has-text-danger"
-                  >
-                    {person.mother.name}
-                  </Link>
-                </td>
-              ) : (
-                <td>{!!person.motherName ? person.motherName : '-'}</td>
-              )}
-
-              {!!person.father ? (
-                <td>
-                  <Link to={`../${person.father.slug}`}>
-                    {person.father.name}
-                  </Link>
-                </td>
-              ) : (
-                <td>{!!person.fatherName ? person.fatherName : '-'}</td>
-              )}
-            </tr>
-          );
-        })}
+            {!!person.father ? (
+              <td>
+                <Link to={`../${person.father.slug}`}>
+                  {person.father.name}
+                </Link>
+              </td>
+            ) : (
+              <td>{!!person.fatherName ? person.fatherName : '-'}</td>
+            )}
+          </tr>
+        ))}
       </tbody>
     </table>
   );

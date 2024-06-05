@@ -7,10 +7,10 @@ import { PersonLink } from '../components/PersonLink';
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
 
     getPeople()
       .then(loadedPeople => {
@@ -27,12 +27,8 @@ export const PeoplePage = () => {
 
         setPeople(lPeople);
       })
-      .catch(() => {
-        setError(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      .catch(() => setError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -41,7 +37,7 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && <Loader />}
+          {isLoading && <Loader />}
 
           {error && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
@@ -49,7 +45,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!people.length && !loading && (
+          {!people.length && !isLoading && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
