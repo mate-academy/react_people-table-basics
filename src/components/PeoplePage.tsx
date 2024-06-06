@@ -11,10 +11,22 @@ export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getPeople()
-      .then(setPeople)
-      .catch(() => setErrorMessage('Something went wrong'))
-      .finally(() => setIsLoading(false));
+    const fetchPeople = async () => {
+      setIsLoading(true);
+      setErrorMessage('');
+
+      try {
+        const data = await getPeople();
+
+        setPeople(data);
+      } catch {
+        setErrorMessage('Something went wrong');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPeople();
   }, []);
 
   return (
@@ -29,19 +41,17 @@ export const PeoplePage = () => {
 
           <div className="column">
             <div className="box table-container">
-              {isLoading && <Loader />}
-
-              {errorMessage && (
+              {isLoading ? (
+                <Loader />
+              ) : errorMessage ? (
                 <p data-cy="peopleLoadingError">{errorMessage}</p>
-              )}
-
-              {!people.length && !isLoading && !errorMessage && (
+              ) : !people.length ? (
                 <p data-cy="noPeopleMessage">
                   There are no people on the server
                 </p>
+              ) : (
+                <PeopleTable people={people} />
               )}
-
-              {people.length > 0 && <PeopleTable people={people} />}
             </div>
           </div>
         </div>
