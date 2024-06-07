@@ -9,15 +9,12 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ person, people, isSelected }) => {
-  const personAmongPeople = (name: string | null) =>
-    people.find(per => per.name === name);
-
   const renderPersonName = (name: string | null) => {
     if (!name) {
       return '-';
     }
 
-    const foundPerson = personAmongPeople(name);
+    const foundPerson = people.find(per => per.name === name);
 
     return foundPerson ? (
       <NavLink
