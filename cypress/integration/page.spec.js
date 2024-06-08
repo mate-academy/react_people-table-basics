@@ -10,7 +10,7 @@ const page = {
     cy.intercept('**/people.json', (req) => {
       spy();
       req.reply({ body: [] });
-    })
+    });
   },
   mockPeople: () => cy.intercept('**/people.json', { fixture: 'people' }).as('peopleData'),
   mockLessPeople: () => cy.intercept('**/people.json', { fixture: 'lessPeople' }).as('peopleData'),
@@ -24,7 +24,7 @@ const page = {
       },
     };
 
-    return cy.intercept('**/people.json', responseErrorStub).as('peopleData')
+    return cy.intercept('**/people.json', responseErrorStub).as('peopleData');
   },
 
   visit: (url) => {
@@ -50,10 +50,10 @@ const page = {
 
 let failed = false;
 
-Cypress.on('fail', (e) => {
-  failed = true;
-  throw e;
-});
+// Cypress.on('fail', (e) => {
+//   failed = true;
+//   throw e;
+// });
 
 describe('', () => {
   beforeEach(() => {
@@ -422,7 +422,7 @@ describe('', () => {
         .find('a')
         .click();
 
-      page.assertHash('#/people/emma-de-milliano-1876')
+      page.assertHash('#/people/emma-de-milliano-1876');
 
       page.people().eq(1)
         .should('have.class', SELECTED_PERSON_CLASS);
@@ -433,7 +433,7 @@ describe('', () => {
         .find('td').eq(4)
         .contains('a', 'Maria van Brussel')
         .should('have.attr', 'href', '#/people/maria-van-brussel-1801')
-        .and('have.class', 'has-text-danger')
+        .and('have.class', 'has-text-danger');
     });
 
     it('should have a link to a father', () => {
@@ -441,33 +441,33 @@ describe('', () => {
         .find('td').eq(5)
         .contains('a', 'Emile Haverbeke')
         .should('have.attr', 'href', '#/people/emile-haverbeke-1877')
-        .and('not.have.class', 'has-text-danger')
+        .and('not.have.class', 'has-text-danger');
     });
 
     it('should have a text name if the mother is not in the table', () => {
       page.people().eq(1)
         .find('td').eq(4)
         .find('a')
-        .should('not.exist')
+        .should('not.exist');
     });
 
     it('should have a text name if the father is not in the table', () => {
       page.people().eq(1)
         .find('td').eq(5)
         .find('a')
-        .should('not.exist')
+        .should('not.exist');
     });
 
     it('should have an empty cell if the motherName is not given', () => {
       page.people().eq(20)
         .find('td').eq(4)
-        .should('have.text', '-')
+        .should('have.text', '-');
     });
 
     it('should have an empty cell if the fatherName is not given', () => {
       page.people().eq(20)
         .find('td').eq(5)
-        .should('have.text', '-')
+        .should('have.text', '-');
     });
   });
 
@@ -497,7 +497,7 @@ describe('', () => {
 
     it('should highlight person with given slug', () => {
       page.people().eq(1)
-        .should('have.class', SELECTED_PERSON_CLASS)
+        .should('have.class', SELECTED_PERSON_CLASS);
     });
 
     it('should have one selected person', () => {
@@ -511,7 +511,7 @@ describe('', () => {
         .find('a')
         .click();
 
-      page.assertHash('#/people/jan-van-brussel-1714')
+      page.assertHash('#/people/jan-van-brussel-1714');
 
       page.people().eq(3)
         .should('have.class', SELECTED_PERSON_CLASS);
@@ -556,7 +556,7 @@ describe('', () => {
         .find('a')
         .click();
 
-      page.assertHash('#/people/emma-de-milliano-1876')
+      page.assertHash('#/people/emma-de-milliano-1876');
 
       page.people().eq(1)
         .should('have.class', SELECTED_PERSON_CLASS);
