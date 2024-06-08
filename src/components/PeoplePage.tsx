@@ -1,22 +1,27 @@
 import { PeopleTable } from './PeopleTable';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Person } from '../types';
 import { Loader } from './Loader';
 import { useParams } from 'react-router-dom';
+import { getPeople } from '../api';
 
-type Props = {
-  people: Person[];
-  loading: boolean;
-  errorMessage: boolean;
-};
-
-export const PeoplePage: React.FC<Props> = ({
-  people,
-  loading,
-  errorMessage,
-}) => {
+export const PeoplePage: React.FC = () => {
+  const [people, setPeople] = useState<Person[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
   const { slug } = useParams();
   const selectedPerson = slug ? people.find(p => p.slug === slug) : null;
+
+  useEffect(() => {
+    setLoading(true);
+
+    getPeople()
+      .then(setPeople)
+      .catch(() => setErrorMessage(true))
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <>
