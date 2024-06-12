@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Loader } from '../components/Loader';
 import { PeopleContext } from '../store/PeopleContext';
 import classNames from 'classnames';
-import { Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 
 export const PeoplePage = () => {
   const { isLoading, people, errorMessage } = useContext(PeopleContext);
@@ -59,6 +59,9 @@ export const PeoplePage = () => {
                     slug,
                   } = person;
 
+                  const motherPerson = motherName? getParent(motherName) : null;
+                  const fatherPerson = fatherName ? getParent(fatherName) : null;
+
                   return (
                     <tr
                       key={slug}
@@ -68,36 +71,36 @@ export const PeoplePage = () => {
                       })}
                     >
                       <td>
-                        <a
+                        <Link
                           className={classNames({
                             'has-text-danger': sex === 'f',
                           })}
-                          href={`#/people/${slug}`}
+                          to={`/people/${slug}`}
                         >
                           {name}
-                        </a>
+                        </Link>
                       </td>
                       <td>{sex}</td>
                       <td>{born}</td>
                       <td>{died}</td>
-                      {motherName && getParent(motherName) ? (
+                      {motherName && motherPerson ? (
                         <td>
-                          <a
+                          <Link
                             className="has-text-danger"
-                            href={`#/people/${getParent(motherName)?.slug}`}
+                            to={`/people/${motherPerson.slug}`}
                           >
                             {motherName}
-                          </a>
+                          </Link>
                         </td>
                       ) : (
                         <td>{motherName ? motherName : '-'}</td>
                       )}
 
-                      {fatherName && getParent(fatherName) ? (
+                      {fatherName && fatherPerson ? (
                         <td>
-                          <a href={`#/people/${getParent(fatherName)?.slug}`}>
+                          <Link to={`/people/${fatherPerson.slug}`}>
                             {fatherName}
-                          </a>
+                          </Link>
                         </td>
                       ) : (
                         <td>{fatherName ? fatherName : '-'}</td>

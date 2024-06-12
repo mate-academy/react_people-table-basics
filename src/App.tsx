@@ -1,14 +1,8 @@
 import classNames from 'classnames';
 import './App.scss';
-import { NavLink, Navigate, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
 export const App = () => {
-  const { pathname } = useLocation();
-
-  if (pathname === '/home') {
-    return <Navigate to="/" replace />;
-  }
-
   const getLinkClass = ({ isActive }: { isActive: boolean }) => {
     return classNames('navbar-item', {
       'has-background-grey-lighter': isActive,
