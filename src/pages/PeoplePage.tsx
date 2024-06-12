@@ -58,6 +58,7 @@ export const PeoplePage = () => {
                     motherName,
                     slug,
                   } = person;
+
                   return (
                     <tr
                       key={slug}

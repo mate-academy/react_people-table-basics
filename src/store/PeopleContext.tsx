@@ -45,7 +45,7 @@ export const PeopleProvider: React.FC<Props> = ({ children }) => {
       pathname,
       errorMessage,
     }),
-    [people, isLoading, pathname],
+    [people, isLoading, pathname, errorMessage],
   );
 
   return (
