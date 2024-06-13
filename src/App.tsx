@@ -3,38 +3,38 @@ import './App.scss';
 import { NavLink, Outlet } from 'react-router-dom';
 
 export const App = () => {
-  const setActiveLink = ({isActive} : {isActive: boolean}) => {
-    return classNames('navbar-item', {'has-background-grey-lighter' : isActive});
-  }
+  const setActiveLink = ({ isActive }: { isActive: boolean }) => {
+    return classNames('navbar-item', {
+      'has-background-grey-lighter': isActive,
+    });
+  };
 
   return (
-  <div data-cy="app">
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <NavLink className={setActiveLink} to="/">
-            Home
-          </NavLink>
+    <div data-cy="app">
+      <nav
+        data-cy="nav"
+        className="navbar is-fixed-top has-shadow"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div className="container">
+          <div className="navbar-brand">
+            <NavLink className={setActiveLink} to="/">
+              Home
+            </NavLink>
 
-          <NavLink
-            className={setActiveLink}
-            to="/people"
-          >
-            People
-          </NavLink>
+            <NavLink className={setActiveLink} to="/people">
+              People
+            </NavLink>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
 
-    <main className="section">
-      <div className="container">
-        <Outlet />
-      </div>
-    </main>
-  </div>
-)};
+      <main className="section">
+        <div className="container">
+          <Outlet />
+        </div>
+      </main>
+    </div>
+  );
+};
