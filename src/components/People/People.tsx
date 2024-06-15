@@ -5,11 +5,9 @@ import { Loader } from '../Loader';
 import { Person } from '../../types';
 import cn from 'classnames';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Message } from '../../types/Message';
 
-enum Message {
-  peopleLoadingError = 'Something went wrong',
-  noPeopleMessage = 'There are no people on the server',
-}
+const REDIRECT_TIME = 3000;
 
 export const People = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -19,8 +17,6 @@ export const People = () => {
 
   const { slug } = useParams();
   const navigate = useNavigate();
-
-  const REDIRECT_TIME = 3000;
 
   useEffect(() => {
     setLoading(true);
@@ -53,12 +49,12 @@ export const People = () => {
 
         {error === Message.peopleLoadingError && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
+            {Message.somethingWrong}
           </p>
         )}
 
         {error === Message.noPeopleMessage && (
-          <p data-cy="noPeopleMessage">There are no people on the server</p>
+          <p data-cy="noPeopleMessage">{Message.noPeopleMessage}</p>
         )}
 
         {canShowTable && (

@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import './App.scss';
 import { NavLink, Outlet } from 'react-router-dom';
+import { RoutesName } from './types/RoutesName';
 
 export const App = () => {
   const getLinkClass = ({ isActive }: { isActive: boolean }) => {
@@ -17,11 +18,11 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <NavLink className={getLinkClass} to="/">
+            <NavLink className={getLinkClass} to={RoutesName.home}>
               Home
             </NavLink>
 
-            <NavLink className={getLinkClass} to="/people">
+            <NavLink className={getLinkClass} to={RoutesName.people}>
               People
             </NavLink>
           </div>
