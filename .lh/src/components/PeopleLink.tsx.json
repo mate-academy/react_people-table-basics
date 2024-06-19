@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/PeopleLink.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1715942860128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1715942860128,
+            "name": "Commit-0",
+            "content": "import { Link } from 'react-router-dom';\nimport classNames from 'classnames';\nimport { Person } from '../types';\nimport React from 'react';\n\ntype Props = {\n  person: Person;\n};\n\nexport const PeopleLink: React.FC<Props> = ({ person }) => {\n  const { slug, sex, name } = person;\n\n  return (\n    <Link\n      to={`./${slug}`}\n      className={classNames({\n        'has-text-danger': sex === 'f',\n      })}\n    >\n      {name}\n    </Link>\n  );\n};\n"
+        }
+    ]
+}

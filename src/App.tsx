@@ -1,5 +1,7 @@
+//re-commit 19.06
+
 import { NavLink, Outlet, Navigate, useLocation } from 'react-router-dom';
-import cn from 'classnames';
+import classNames from 'classnames';
 
 import './App.scss';
 import React from 'react';
@@ -24,7 +26,7 @@ export const App = () => {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                cn('navbar-item', {
+                classNames('navbar-item', {
                   'has-background-grey-lighter': isActive,
                 })
               }
@@ -35,7 +37,7 @@ export const App = () => {
             <NavLink
               to="/people"
               className={({ isActive }) =>
-                cn('navbar-item', {
+                classNames('navbar-item', {
                   'has-background-grey-lighter': isActive,
                 })
               }
