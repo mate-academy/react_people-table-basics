@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import { getPeople } from "../../api";
-import { Loader } from "../Loader"
-import { Person } from "../../types";
-import { PeopleTable } from "../PeopleTable/PeopleTable";
+import { useEffect, useState } from 'react';
+import { getPeople } from '../../api';
+import { Loader } from '../Loader';
+import { Person } from '../../types';
+import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [ErrorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
 
   useEffect(() => {
     setErrorMessage('');
@@ -31,17 +30,15 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {ErrorMessage.length > 0 &&
+          {!!ErrorMessage.length && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               {ErrorMessage}
             </p>
-          }
+          )}
 
           {isLoading ? <Loader /> : <PeopleTable people={addedPeople} />}
         </div>
       </div>
     </>
-
-
-  )
-}
+  );
+};

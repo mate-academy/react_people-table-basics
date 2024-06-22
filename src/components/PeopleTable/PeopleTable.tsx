@@ -8,8 +8,7 @@ interface Props {
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   return (
     <>
-      {!people.length
-        ? (
+      {!people.length ? (
         <p data-cy="noPeopleMessage">There are no people on the server</p>
       ) : (
         <table
