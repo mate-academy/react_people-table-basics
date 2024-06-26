@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/components/Main.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1715938477955,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1715938883581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,10 @@\n+import React from 'react';\n+import { Outlet } from 'react-router-dom';\n+\n+export const Mai = React.memo(() => (\n+  <main className=\"section\">\n+    <div className=\"container\">\n+      <Outlet />\n+    </div>\n+  </main>\n+));\n"
+                },
+                {
+                    "date": 1715939592495,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,20 +1,11 @@\n+/* eslint-disable react/display-name */\n import React from 'react';\n import { Outlet } from 'react-router-dom';\n \n-export const Mai = React.memo(() => (\n+export const Main = React.memo(() => (\n   <main className=\"section\">\n     <div className=\"container\">\n       <Outlet />\n     </div>\n   </main>\n ));\n-import React from 'react';\n-import { Outlet } from 'react-router-dom';\n-\n-export const MainSection = React.memo(() => (\n-  <main className=\"section\">\n-    <div className=\"container\">\n-      <Outlet />\n-    </div>\n-  </main>\n-));\n"
+                }
+            ],
+            "date": 1715938477955,
+            "name": "Commit-0",
+            "content": "import React from 'react';\nimport { Outlet } from 'react-router-dom';\n\nexport const MainSection = React.memo(() => (\n  <main className=\"section\">\n    <div className=\"container\">\n      <Outlet />\n    </div>\n  </main>\n));\n"
+        }
+    ]
+}

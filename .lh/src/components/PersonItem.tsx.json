@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/components/PersonItem.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1715940019618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1715940025470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,19 +26,9 @@\n \n       <td>{sex}</td>\n       <td>{born}</td>\n       <td>{died}</td>\n-      <td>\n-        {mother\n-          ? <PersonLink person={mother} />\n-          : motherName || '-'\n-        }\n-      </td>\n-      <td>\n-        {father\n-          ? <PersonLink person={father} />\n-          : fatherName || '-'\n-        }\n-      </td>\n+      <td>{mother ? <PersonLink person={mother} /> : motherName || '-'}</td>\n+      <td>{father ? <PersonLink person={father} /> : fatherName || '-'}</td>\n     </tr>\n   );\n };\n"
+                },
+                {
+                    "date": 1715942782833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import { useParams } from 'react-router-dom';\n-import cn from 'classnames';\n+import classNames from 'classnames';\n import { Person } from '../types';\n import { PersonLink } from './PersonLink';\n import React from 'react';\n \n"
+                },
+                {
+                    "date": 1715942787999,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,34 @@\n+import { useParams } from 'react-router-dom';\n+import classNames from 'classnames';\n+import { Person } from '../types';\n+import { PersonLink } from './PersonLink';\n+import React from 'react';\n+\n+type Props = {\n+  person: Person;\n+};\n+\n+export const PersonItem: React.FC<Props> = ({ person }) => {\n+  const { sex, born, died, fatherName, motherName, slug, mother, father } =\n+    person;\n+  const { personSlug } = useParams();\n+\n+  return (\n+    <tr\n+      data-cy=\"person\"\n+      className={classNames({\n+        'has-background-warning': personSlug === slug,\n+      })}\n+    >\n+      <td>\n+        <PersonLink person={person} />\n+      </td>\n+\n+      <td>{sex}</td>\n+      <td>{born}</td>\n+      <td>{died}</td>\n+      <td>{mother ? <PersonLink person={mother} /> : motherName || '-'}</td>\n+      <td>{father ? <PersonLink person={father} /> : fatherName || '-'}</td>\n+    </tr>\n+  );\n+};\n"
+                },
+                {
+                    "date": 1715942836969,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,34 @@\n+import { useParams } from 'react-router-dom';\n+import classNames from 'classnames';\n+import { Person } from '../types';\n+import { PersonLink } from './PeopleLink';\n+import React from 'react';\n+\n+type Props = {\n+  person: Person;\n+};\n+\n+export const PersonItem: React.FC<Props> = ({ person }) => {\n+  const { sex, born, died, fatherName, motherName, slug, mother, father } =\n+    person;\n+  const { personSlug } = useParams();\n+\n+  return (\n+    <tr\n+      data-cy=\"person\"\n+      className={classNames({\n+        'has-background-warning': personSlug === slug,\n+      })}\n+    >\n+      <td>\n+        <PersonLink person={person} />\n+      </td>\n+\n+      <td>{sex}</td>\n+      <td>{born}</td>\n+      <td>{died}</td>\n+      <td>{mother ? <PersonLink person={mother} /> : motherName || '-'}</td>\n+      <td>{father ? <PersonLink person={father} /> : fatherName || '-'}</td>\n+    </tr>\n+  );\n+};\n"
+                }
+            ],
+            "date": 1715940019618,
+            "name": "Commit-0",
+            "content": "import { useParams } from 'react-router-dom';\nimport cn from 'classnames';\nimport { Person } from '../types';\nimport { PersonLink } from './PersonLink';\nimport React from 'react';\n\ntype Props = {\n  person: Person;\n};\n\nexport const PersonItem: React.FC<Props> = ({ person }) => {\n  const { sex, born, died, fatherName, motherName, slug, mother, father } =\n    person;\n  const { personSlug } = useParams();\n\n  return (\n    <tr\n      data-cy=\"person\"\n      className={cn({\n        'has-background-warning': personSlug === slug,\n      })}\n    >\n      <td>\n        <PersonLink person={person} />\n      </td>\n\n      <td>{sex}</td>\n      <td>{born}</td>\n      <td>{died}</td>\n      <td>\n        {mother\n          ? <PersonLink person={mother} />\n          : motherName || '-'\n        }\n      </td>\n      <td>\n        {father\n          ? <PersonLink person={father} />\n          : fatherName || '-'\n        }\n      </td>\n    </tr>\n  );\n};\n"
+        }
+    ]
+}

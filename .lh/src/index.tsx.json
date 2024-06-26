@@ -1,0 +1,66 @@
+{
+    "sourceFile": "src/index.tsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 12,
+            "patches": [
+                {
+                    "date": 1715766341729,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1715766348344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+import { createRoot } from 'react-dom/client';\n+import { HashRouter as Router } from 'react-router-dom';\n+\n+import 'bulma/css/bulma.css';\n+import '@fortawesome/fontawesome-free/css/all.css';\n+\n+import App from './App';\n+import React = require('react');\n+\n+createRoot(document.getElementById('root') as HTMLDivElement).render(\n+  <Router>\n+    <App />\n+  </Router>,\n+);\n"
+                },
+                {
+                    "date": 1715766355522,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+import { createRoot } from 'react-dom/client';\n+import { HashRouter as Router } from 'react-router-dom';\n+\n+import 'bulma/css/bulma.css';\n+import '@fortawesome/fontawesome-free/css/all.css';\n+\n+import { App } from './App';\n+import React = require('react');\n+\n+createRoot(document.getElementById('root') as HTMLDivElement).render(\n+  <Router>\n+    <App />\n+  </Router>,\n+);\n"
+                },
+                {
+                    "date": 1715938967919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,40 +3,11 @@\n \n import 'bulma/css/bulma.css';\n import '@fortawesome/fontawesome-free/css/all.css';\n \n-import { App } from './App';\n-import React = require('react');\n+import { App } from './App'\n \n createRoot(document.getElementById('root') as HTMLDivElement).render(\n   <Router>\n     <App />\n   </Router>,\n );\n-import { createRoot } from 'react-dom/client';\n-import { HashRouter as Router } from 'react-router-dom';\n-\n-import 'bulma/css/bulma.css';\n-import '@fortawesome/fontawesome-free/css/all.css';\n-\n-import App from './App';\n-import React = require('react');\n-\n-createRoot(document.getElementById('root') as HTMLDivElement).render(\n-  <Router>\n-    <App />\n-  </Router>,\n-);\n-import { createRoot } from 'react-dom/client';\n-import { HashRouter as Router } from 'react-router-dom';\n-\n-import 'bulma/css/bulma.css';\n-import '@fortawesome/fontawesome-free/css/all.css';\n-\n-import { App } from './App';\n-import React = require('react');\n-\n-createRoot(document.getElementById('root') as HTMLDivElement).render(\n-  <Router>\n-    <App />\n-  </Router>,\n-);\n"
+                },
+                {
+                    "date": 1715938973434,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+import { createRoot } from 'react-dom/client';\n+import { HashRouter as Router } from 'react-router-dom';\n+\n+import 'bulma/css/bulma.css';\n+import '@fortawesome/fontawesome-free/css/all.css';\n+\n+import { App } from './App';\n+import React from 'react';\n+\n+createRoot(document.getElementById('root') as HTMLDivElement).render(\n+  <Router>\n+    <App />\n+  </Router>,\n+);\n"
+                },
+                {
+                    "date": 1715939009709,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,17 +11,4 @@\n   <Router>\n     <App />\n   </Router>,\n );\n-import { createRoot } from 'react-dom/client';\n-import { HashRouter as Router } from 'react-router-dom';\n-\n-import 'bulma/css/bulma.css';\n-import '@fortawesome/fontawesome-free/css/all.css';\n-\n-import { App } from './App'\n-\n-createRoot(document.getElementById('root') as HTMLDivElement).render(\n-  <Router>\n-    <App />\n-  </Router>,\n-);\n"
+                },
+                {
+                    "date": 1715939495380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n import 'bulma/css/bulma.css';\n import '@fortawesome/fontawesome-free/css/all.css';\n \n-import { App } from './App';\n+import App from './App';\n import React from 'react';\n \n createRoot(document.getElementById('root') as HTMLDivElement).render(\n   <Router>\n"
+                },
+                {
+                    "date": 1715939502785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+import { createRoot } from 'react-dom/client';\n+import { HashRouter as Router } from 'react-router-dom';\n+\n+import 'bulma/css/bulma.css';\n+import '@fortawesome/fontawesome-free/css/all.css';\n+\n+import App from './App';\n+import React = require('react');\n+\n+createRoot(document.getElementById('root') as HTMLDivElement).render(\n+  <Router>\n+    <App />\n+  </Router>,\n+);\n"
+                },
+                {
+                    "date": 1715939609483,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,25 +4,10 @@\n import 'bulma/css/bulma.css';\n import '@fortawesome/fontawesome-free/css/all.css';\n \n import App from './App';\n-import React = require('react');\n \n createRoot(document.getElementById('root') as HTMLDivElement).render(\n   <Router>\n     <App />\n   </Router>,\n );\n-import { createRoot } from 'react-dom/client';\n-import { HashRouter as Router } from 'react-router-dom';\n-\n-import 'bulma/css/bulma.css';\n-import '@fortawesome/fontawesome-free/css/all.css';\n-\n-import App from './App';\n-import React from 'react';\n-\n-createRoot(document.getElementById('root') as HTMLDivElement).render(\n-  <Router>\n-    <App />\n-  </Router>,\n-);\n"
+                },
+                {
+                    "date": 1715942809308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,41 @@\n+import { createRoot } from 'react-dom/client';\n+import { RouterProvider, createHashRouter } from 'react-router-dom';\n+\n+import 'bulma/css/bulma.css';\n+import '@fortawesome/fontawesome-free/css/all.css';\n+\n+import { App } from './App';\n+import { Home } from './components/Home';\n+import { ErrorPage } from './components/Error';\n+import { People } from './components/People';\n+\n+const router = createHashRouter([\n+  {\n+    path: '/',\n+    element: <App />,\n+    children: [\n+      {\n+        path: '/',\n+        element: <Home />,\n+      },\n+      {\n+        path: '/people',\n+        element: <People />,\n+        children: [\n+          {\n+            path: ':personSlug',\n+            element: <People />,\n+          },\n+        ],\n+      },\n+      {\n+        path: '*',\n+        element: <ErrorPage />,\n+      },\n+    ],\n+  },\n+]);\n+\n+createRoot(document.getElementById('root') as HTMLDivElement).render(\n+  <RouterProvider router={router} />,\n+);\n"
+                },
+                {
+                    "date": 1715942897666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,41 @@\n+import { createRoot } from 'react-dom/client';\n+import { RouterProvider, createHashRouter } from 'react-router-dom';\n+\n+import 'bulma/css/bulma.css';\n+import '@fortawesome/fontawesome-free/css/all.css';\n+\n+import { App } from './App';\n+import { Home } from './components/Home';\n+import { Error } from './components/Error';\n+import { People } from './components/People';\n+\n+const router = createHashRouter([\n+  {\n+    path: '/',\n+    element: <App />,\n+    children: [\n+      {\n+        path: '/',\n+        element: <Home />,\n+      },\n+      {\n+        path: '/people',\n+        element: <People />,\n+        children: [\n+          {\n+            path: ':personSlug',\n+            element: <People />,\n+          },\n+        ],\n+      },\n+      {\n+        path: '*',\n+        element: <ErrorPage />,\n+      },\n+    ],\n+  },\n+]);\n+\n+createRoot(document.getElementById('root') as HTMLDivElement).render(\n+  <RouterProvider router={router} />,\n+);\n"
+                },
+                {
+                    "date": 1715942903371,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n import { App } from './App';\n import { Home } from './components/Home';\n import { Error } from './components/Error';\n import { People } from './components/People';\n+import React from 'react';\n \n const router = createHashRouter([\n   {\n     path: '/',\n"
+                },
+                {
+                    "date": 1715948300755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,56 +2,15 @@\n import { RouterProvider, createHashRouter } from 'react-router-dom';\n \n import 'bulma/css/bulma.css';\n import '@fortawesome/fontawesome-free/css/all.css';\n-\n-import { App } from './App';\n-import { Home } from './components/Home';\n import { Error } from './components/Error';\n import { People } from './components/People';\n-import React from 'react';\n-\n-const router = createHashRouter([\n-  {\n-    path: '/',\n-    element: <App />,\n-    children: [\n-      {\n-        path: '/',\n-        element: <Home />,\n-      },\n-      {\n-        path: '/people',\n-        element: <People />,\n-        children: [\n-          {\n-            path: ':personSlug',\n-            element: <People />,\n-          },\n-        ],\n-      },\n-      {\n-        path: '*',\n-        element: <ErrorPage />,\n-      },\n-    ],\n-  },\n-]);\n-\n-createRoot(document.getElementById('root') as HTMLDivElement).render(\n-  <RouterProvider router={router} />,\n-);\n-import { createRoot } from 'react-dom/client';\n-import { RouterProvider, createHashRouter } from 'react-router-dom';\n-\n-import 'bulma/css/bulma.css';\n-import '@fortawesome/fontawesome-free/css/all.css';\n-\n import { App } from './App';\n import { Home } from './components/Home';\n-import { ErrorPage } from './components/Error';\n-import { People } from './components/People';\n \n+import React from 'react';\n+\n const router = createHashRouter([\n   {\n     path: '/',\n     element: <App />,\n@@ -71,26 +30,13 @@\n         ],\n       },\n       {\n         path: '*',\n-        element: <ErrorPage />,\n+        element: <Error />,\n       },\n     ],\n   },\n ]);\n \n createRoot(document.getElementById('root') as HTMLDivElement).render(\n   <RouterProvider router={router} />,\n );\n-import { createRoot } from 'react-dom/client';\n-import { HashRouter as Router } from 'react-router-dom';\n-\n-import 'bulma/css/bulma.css';\n-import '@fortawesome/fontawesome-free/css/all.css';\n-\n-import App from './App';\n-\n-createRoot(document.getElementById('root') as HTMLDivElement).render(\n-  <Router>\n-    <App />\n-  </Router>,\n-);\n"
+                }
+            ],
+            "date": 1715766341729,
+            "name": "Commit-0",
+            "content": "import { createRoot } from 'react-dom/client';\nimport { HashRouter as Router } from 'react-router-dom';\n\nimport 'bulma/css/bulma.css';\nimport '@fortawesome/fontawesome-free/css/all.css';\n\nimport { App } from './App';\nimport React = require('react');\n\ncreateRoot(document.getElementById('root') as HTMLDivElement).render(\n  <Router>\n    <App />\n  </Router>,\n);\n"
+        }
+    ]
+}
