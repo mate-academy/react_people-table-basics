@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { Loader } from '../components/Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
+import { PersonLink } from '../components/PersonLink/PersonLink';
 
 function getPeopleWithParents(people: Person[]) {
   const peopleWithParents = [...people].map(person => {
@@ -15,11 +16,15 @@ function getPeopleWithParents(people: Person[]) {
       child.mother = mother;
     }
 
+    child.motherName = child.motherName ? child.motherName : '-';
+
     const father = people.find(parent => parent.name === person.fatherName);
 
     if (mother) {
       child.father = father;
     }
+
+    child.fatherName = child.fatherName ? child.fatherName : '-';
 
     return child;
   });
@@ -93,17 +98,16 @@ export const PeoplePage = () => {
 
                   <tbody>
                     {people.map(person => {
-                      const motherName = person.motherName
-                        ? person.motherName
-                        : '-';
-                      const motherInBase = person.mother;
-
-                      const fatherName = person.fatherName
-                        ? person.fatherName
-                        : '-';
-                      const fatherInBase = person.father;
-
-                      const { name, born, died, sex, slug } = person;
+                      const {
+                        born,
+                        died,
+                        sex,
+                        slug,
+                        fatherName,
+                        father,
+                        motherName,
+                        mother,
+                      } = person;
 
                       return (
                         <tr
@@ -114,36 +118,22 @@ export const PeoplePage = () => {
                           })}
                         >
                           <td>
-                            <Link
-                              to={`/people/${slug}`}
-                              className={classNames({
-                                'has-text-danger': sex === 'f',
-                              })}
-                            >
-                              {name}
-                            </Link>
+                            <PersonLink person={person} />
                           </td>
 
                           <td>{sex}</td>
                           <td>{born}</td>
                           <td>{died}</td>
                           <td>
-                            {motherName && motherInBase ? (
-                              <Link
-                                to={`/people/${motherInBase.slug}`}
-                                className="has-text-danger"
-                              >
-                                {motherName}
-                              </Link>
+                            {motherName && mother ? (
+                              <PersonLink person={mother} />
                             ) : (
                               motherName
                             )}
                           </td>
                           <td>
-                            {fatherName && fatherInBase ? (
-                              <Link to={`/people/${fatherInBase.slug}`}>
-                                {fatherName}
-                              </Link>
+                            {fatherName && father ? (
+                              <PersonLink person={father} />
                             ) : (
                               fatherName
                             )}
