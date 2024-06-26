@@ -5,27 +5,23 @@ import { Person } from '../types';
 import { Loader } from '../components/Loader';
 
 export const PeoplePage = () => {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<Person[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [peopleFromServer, setPeopleFromServer] = useState<Person[]>([]);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
 
     getPeople()
-      .then(setData)
-      .catch(() => {
-        setHasError(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      .then(setPeopleFromServer)
+      .catch(() => setHasError(true))
+      .finally(() => setIsLoading(false));
   }, []);
 
-  const people: Person[] = data.map(person => ({
+  const people: Person[] = peopleFromServer.map(person => ({
     ...person,
-    mother: data.find(p => p.name === person.motherName),
-    father: data.find(p => p.name === person.fatherName),
+    mother: peopleFromServer.find(p => p.name === person.motherName),
+    father: peopleFromServer.find(p => p.name === person.fatherName),
   }));
 
   return (
@@ -34,7 +30,7 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && <Loader />}
+          {isLoading && <Loader />}
 
           {hasError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
@@ -42,11 +38,13 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {people.length < 1 && !loading && !hasError && (
+          {!people.length && !isLoading && !hasError && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!loading && !hasError && people.length > 0 && <PeopleTable people={people} />}
+          {!isLoading && !hasError && !!people.length && (
+            <PeopleTable people={people} />
+          )}
         </div>
       </div>
     </>
