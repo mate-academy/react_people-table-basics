@@ -1,5 +1,5 @@
-import { useContext, useEffect } from "react";
-import { PeopleContext } from "../../peopleContext";
+import { useContext, useEffect } from 'react';
+import { PeopleContext } from '../../peopleContext';
 
 export const HomePage = () => {
   const { setLoader } = useContext(PeopleContext);

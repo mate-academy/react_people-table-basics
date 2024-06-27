@@ -1,5 +1,5 @@
-import { useContext, useEffect } from "react";
-import { PeopleContext } from "../../peopleContext";
+import { useContext, useEffect } from 'react';
+import { PeopleContext } from '../../peopleContext';
 
 export const NotFound = () => {
   const { setLoader } = useContext(PeopleContext);
@@ -8,7 +8,5 @@ export const NotFound = () => {
     setLoader(true);
   });
 
-  return (
-    <h1 className="title">Page not found</h1>
-  );
+  return <h1 className="title">Page not found</h1>;
 };

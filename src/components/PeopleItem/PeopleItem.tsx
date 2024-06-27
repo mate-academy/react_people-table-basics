@@ -45,19 +45,17 @@ export const PeopleItem: React.FC<Props> = ({
   return (
     <tr
       data-cy="person"
-      className={classNames('', {
+      className={classNames({
         'has-background-warning': current?.name === person.name,
       })}
     >
       <td>
         <Link
           to={`/people/${person.slug}`}
-          className={classNames('', {
+          className={classNames({
             'has-text-danger': person.sex === 'f',
           })}
-          onClick={() => {
-            setCurrent(person);
-          }}
+          onClick={() => setCurrent(person)}
         >
           {person.name}
         </Link>

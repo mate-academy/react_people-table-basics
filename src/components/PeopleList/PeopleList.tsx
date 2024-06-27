@@ -8,12 +8,8 @@ export const PeopleList = () => {
   return (
     <tbody>
       {people.map((person, _, array) => {
-        const motherLink = array.find(
-          item => person.motherName === item.name,
-        );
-        const fatherLink = array.find(
-          item => person.fatherName === item.name,
-        );
+        const motherLink = array.find(item => person.motherName === item.name);
+        const fatherLink = array.find(item => person.fatherName === item.name);
 
         return (
           <PeopleItem
