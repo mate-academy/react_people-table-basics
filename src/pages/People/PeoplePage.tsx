@@ -26,7 +26,7 @@ export const PeoplePage = () => {
       .finally(() => {
         setLoader(false);
       });
-  }, []);
+  }, [setLoader, setPeople, setWarning]);
 
   return (
     <div className="container">
