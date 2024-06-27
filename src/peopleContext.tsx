@@ -1,5 +1,5 @@
-import React, { useMemo, useState, useEffect } from 'react';
-import { getPeople } from './api';
+import React, { useMemo, useState } from 'react';
+// import { getPeople } from './api';
 
 import { Person } from './types';
 
@@ -13,6 +13,7 @@ type ContextType = {
   current: Person | null;
   currentPage: string;
   warning: string;
+  setWarning: (warn: string) => void;
   setPeople: (value: Person[]) => void;
   setCurrent: (value: Person | null) => void;
   setLoader: (value: boolean) => void;
@@ -25,6 +26,7 @@ export const PeopleContext = React.createContext<ContextType>({
   current: null,
   currentPage: '/',
   warning: '',
+  setWarning: () => {},
   setPeople: () => {},
   setCurrent: () => {},
   setLoader: () => {},
@@ -38,31 +40,6 @@ export const PeopleProvider: React.FC<Props> = ({ children }) => {
   const [people, setPeople] = useState<Person[]>([]);
   const [current, setCurrent] = useState<Person | null>(null);
 
-  useEffect(() => {
-    if (currentPage === '/') {
-      setLoader(true);
-    }
-
-    if (currentPage === '/people') {
-      getPeople()
-        .then(res => {
-          if (!res) {
-            setWarning('There are no people on the server');
-          } else {
-            setWarning('');
-          }
-
-          setPeople([...res]);
-        })
-        .catch((error) => {
-          setWarning('Something went wrong');
-          throw error;
-        })
-        .finally(() => {
-          setLoader(false);
-        });
-    }
-  }, [currentPage]);
 
   const value = useMemo(
     () => ({
@@ -71,6 +48,7 @@ export const PeopleProvider: React.FC<Props> = ({ children }) => {
       current,
       currentPage,
       warning,
+      setWarning,
       setPeople,
       setCurrent,
       setLoader,
