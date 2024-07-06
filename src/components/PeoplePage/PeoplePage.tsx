@@ -4,14 +4,10 @@ import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
 import { Person } from '../../types';
 
-const preparePeople = (people: Person[]) => {
+const preparePeople = (people: Person[]): Person[] => {
   return people.map(child => {
-    const mother = people.find(
-      person => person.name === child.motherName,
-    );
-    const father = people.find(
-      person => person.name === child.fatherName,
-    );
+    const mother = people.find(person => person.name === child.motherName);
+    const father = people.find(person => person.name === child.fatherName);
 
     let result = { ...child };
 
@@ -25,7 +21,7 @@ const preparePeople = (people: Person[]) => {
 
     return result;
   });
-}
+};
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
