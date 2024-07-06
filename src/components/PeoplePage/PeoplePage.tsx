@@ -41,11 +41,11 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {people.length === 0 && !loading && !error && (
+          {!people.length && !loading && !error && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {people.length > 0 && (
+          {!!people.length && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -64,14 +64,7 @@ export const PeoplePage = () => {
               <tbody>
                 {people.map(person => {
                   const {
-                    born,
-                    died,
-                    fatherName,
-                    motherName,
-                    sex,
-                    slug,
-                    mother,
-                    father,
+                    born, died, fatherName, motherName, sex, slug, mother,father,
                   } = person;
 
                   return (
