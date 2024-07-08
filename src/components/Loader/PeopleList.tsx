@@ -1,6 +1,6 @@
-import { Person } from "../../types";
-import { Loader } from "./Loader";
-import { PeopleItem } from "./PeopleItem";
+import { Person } from '../../types';
+import { Loader } from './Loader';
+import { PeopleItem } from './PeopleItem';
 
 type PeoplePageProps = {
   people: Person[];
@@ -8,13 +8,15 @@ type PeoplePageProps = {
   loadingPeople: boolean;
 };
 
-export const PeopleList: React.FC<PeoplePageProps> = ({ loadingPeople, error, people }) => {
+export const PeopleList: React.FC<PeoplePageProps> = ({
+  loadingPeople,
+  error,
+  people,
+}) => {
   return (
     <div className="block">
       <div className="box table-container">
-        {loadingPeople && (
-        <Loader />
-        )}
+        {loadingPeople && <Loader />}
 
         {error && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
@@ -40,7 +42,7 @@ export const PeopleList: React.FC<PeoplePageProps> = ({ loadingPeople, error, pe
 
             <tbody>
               {people.map((person: Person) => (
-                <PeopleItem person={person} />
+                <PeopleItem key={person.slug} person={person} />
               ))}
             </tbody>
           </table>

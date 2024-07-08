@@ -20,21 +20,20 @@ export const App = () => {
     setLoadingPeople(true);
 
     getPeople()
-      .then((people) => {
-        const peopleWithParents = people.map((person) => {
+      .then(peopl => {
+        const peopleWithParents = peopl.map(person => {
           return {
             ...person,
-            mother: people.find((p) => p.name === person.motherName),
-            father: people.find((p) => p.name === person.fatherName),
+            mother: peopl.find(p => p.name === person.motherName),
+            father: peopl.find(p => p.name === person.fatherName),
           };
         });
+
         setPeople(peopleWithParents);
       })
       .catch(() => setError(true))
       .finally(() => setLoadingPeople(false));
   }, []);
-
-  console.log(people);
 
   return (
     <div data-cy="app">
@@ -63,16 +62,22 @@ export const App = () => {
             <Route path="home" element={<Navigate to="/" replace={true} />} />
             <Route
               path="/people/:personId?"
-              element={<PeoplePage
-              loadingPeople={loadingPeople}
-              error={error}
-              people={people}
-            />} />
+              element={
+                <PeoplePage
+                  loadingPeople={loadingPeople}
+                  error={error}
+                  people={people}
+                />
+              }
+            />
 
-            <Route path="*" element={<h1 className="title">Page not found</h1>} />
+            <Route
+              path="*"
+              element={<h1 className="title">Page not found</h1>}
+            />
           </Routes>
-      </div>
-    </main>
-  </div>
-);
+        </div>
+      </main>
+    </div>
+  );
 };

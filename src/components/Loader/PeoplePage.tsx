@@ -1,5 +1,5 @@
-import { Person } from "../../types";
-import { PeopleList } from "./PeopleList";
+import { Person } from '../../types';
+import { PeopleList } from './PeopleList';
 
 type PeoplePageProps = {
   people: Person[];
@@ -7,7 +7,11 @@ type PeoplePageProps = {
   loadingPeople: boolean;
 };
 
-export const PeoplePage: React.FC<PeoplePageProps> = ({ loadingPeople, error, people }) => {
+export const PeoplePage: React.FC<PeoplePageProps> = ({
+  loadingPeople,
+  error,
+  people,
+}) => {
   return (
     <>
       <h1 className="title">People Page</h1>
