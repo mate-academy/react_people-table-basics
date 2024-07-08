@@ -30,28 +30,28 @@ export const PeopleItem: React.FC<PersonPageProps> = ({ person }) => {
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
-      {person.mother ? (
-        <td>
+      <td>
+        {person.mother ? (
           <NavLink
             to={`/people/${person.mother.slug}`}
             className="has-text-danger"
           >
             {person.motherName}
           </NavLink>
-        </td>
-      ) : (
-        <td>{person.motherName || '-'}</td>
-      )}
+        ) : (
+          person.motherName || '-'
+        )}
+      </td>
 
-      {person.father ? (
-        <td>
+      <td>
+        {person.father ? (
           <NavLink to={`/people/${person.father.slug}`}>
             {person.fatherName}
           </NavLink>
-        </td>
-      ) : (
-        <td>{person.fatherName || '-'}</td>
-      )}
+        ) : (
+          person.fatherName || '-'
+        )}
+      </td>
     </tr>
   );
 };

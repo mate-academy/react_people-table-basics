@@ -16,15 +16,15 @@ export const PeopleList: React.FC<PeoplePageProps> = ({
   return (
     <div className="block">
       <div className="box table-container">
-        {loadingPeople && <Loader />}
-
         {error && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             Something went wrong
           </p>
         )}
 
-        {!loadingPeople && (
+        {loadingPeople ? (
+          <Loader />
+        ) : (
           <table
             data-cy="peopleTable"
             className="table is-striped is-hoverable is-narrow is-fullwidth"
