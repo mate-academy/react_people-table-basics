@@ -3,30 +3,40 @@ import { Loader } from './Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { PeopleTable } from './PeopleTable';
+import { PeoplePageStatus } from '../types/types';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [status, setStatus] = useState(PeoplePageStatus.Loading);
 
   const loadPeople = async () => {
-    setIsLoading(true);
-    setError(false);
+    setStatus(PeoplePageStatus.Loading);
 
     try {
       const loadedPeople = await getPeople();
 
       setPeople(
-        loadedPeople.map((person, _index, peopleToMap) => ({
-          ...person,
-          mother: peopleToMap.find(mother => mother.name === person.motherName),
-          father: peopleToMap.find(father => father.name === person.fatherName),
-        })),
+        loadedPeople.map((personToMap, _index, peopleToMap) =>
+          peopleToMap.reduce(
+            (person, parent) => ({
+              ...person,
+              mother:
+                parent.name === person.motherName ? parent : person.mother,
+              father:
+                parent.name === person.fatherName ? parent : person.father,
+            }),
+            personToMap,
+          ),
+        ),
       );
+
+      if (loadedPeople.length) {
+        setStatus(PeoplePageStatus.Success);
+      } else {
+        setStatus(PeoplePageStatus.Idle);
+      }
     } catch {
-      setError(true);
-    } finally {
-      setIsLoading(false);
+      setStatus(PeoplePageStatus.Error);
     }
   };
 
@@ -36,20 +46,27 @@ export const PeoplePage: React.FC = () => {
 
   let content: React.JSX.Element;
 
-  if (isLoading) {
-    content = <Loader />;
-  } else if (error) {
-    content = (
-      <p data-cy="peopleLoadingError" className="has-text-danger">
-        Something went wrong
-      </p>
-    );
-  } else if (!people.length) {
-    content = (
-      <p data-cy="noPeopleMessage">There are no people on the server</p>
-    );
-  } else {
-    content = <PeopleTable people={people} />;
+  switch (status) {
+    case PeoplePageStatus.Success:
+      content = <PeopleTable people={people} />;
+      break;
+    case PeoplePageStatus.Idle:
+      content = (
+        <p data-cy="noPeopleMessage">There are no people on the server</p>
+      );
+      break;
+    case PeoplePageStatus.Loading:
+      content = <Loader />;
+      break;
+    case PeoplePageStatus.Error:
+      content = (
+        <p data-cy="peopleLoadingError" className="has-text-danger">
+          Something went wrong
+        </p>
+      );
+      break;
+    default:
+      throw new Error('People page status is not valid!!!');
   }
 
   return (
