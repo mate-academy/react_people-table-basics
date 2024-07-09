@@ -7,22 +7,18 @@ import { useParams } from 'react-router-dom';
 export const PeoplePage = () => {
   const [peopleList, setPeopleList] = useState<Person[]>([]);
   const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { peopleSlug } = useParams();
 
   useEffect(() => {
-    setIsLoading(true);
-
     getPeople()
       .then(res => {
-        const peopleRes: Person[] = [];
-
-        res.map(person => {
+        const peopleRes: Person[] = res.map(person => {
           const mother = res.find(p => p.name === person.motherName);
           const father = res.find(p => p.name === person.fatherName);
 
-          peopleRes.push({ ...person, mother: mother, father: father });
+          return { ...person, mother, father };
         });
         setPeopleList(peopleRes);
       })
@@ -35,19 +31,15 @@ export const PeoplePage = () => {
       <h1 className="title">People Page</h1>
       <div className="block">
         <div className="box table-container">
-          {isLoading && <Loader />}
-
-          {hasError && (
+          {isLoading ? (
+            <Loader />
+          ) : hasError ? (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
-          )}
-
-          {peopleList.length === 0 && !isLoading && (
+          ) : peopleList.length === 0 ? (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
-          )}
-
-          {peopleList.length > 0 && (
+          ) : (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"

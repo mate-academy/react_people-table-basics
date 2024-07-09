@@ -1,6 +1,4 @@
 export interface Person {
-  setFather(father: Person | undefined): void;
-  setMother(mother: Person | undefined): void;
   name: string;
   sex: string;
   born: number;
