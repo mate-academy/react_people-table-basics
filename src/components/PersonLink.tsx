@@ -12,13 +12,13 @@ export const PersonLink: React.FC<Props> = ({ people, person }) => {
       return;
     }
 
-    const person = people.find(person => name === person.name);
+    const pers = people.find(item => name === item.name);
 
-    if (!person) {
+    if (!pers) {
       return;
     }
 
-    return person.slug;
+    return pers.slug;
   };
 
   const { slug } = useParams();
@@ -26,7 +26,6 @@ export const PersonLink: React.FC<Props> = ({ people, person }) => {
   return (
     <tr
       data-cy="person"
-      key={person.slug}
       className={slug === person.slug ? 'has-background-warning' : ''}
     >
       <td>
