@@ -16,7 +16,7 @@ export const PersonItem: React.FC<Props> = ({ person }) => {
   return (
     <tr
       data-cy="person"
-      className={cn({'has-background-warning': personSlug === slug })}
+      className={cn({ 'has-background-warning': personSlug === slug })}
     >
       <td>
         <PersonLink person={person} />
