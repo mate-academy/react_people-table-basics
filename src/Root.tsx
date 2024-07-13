@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Navigate,
   Route,
@@ -8,21 +9,24 @@ import { App } from './App';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PeoplePage } from './pages/PeoplePage';
 import { HomePage } from './pages/HomePage';
+import { PeopleProvider } from './store/PeopleProvider';
 
 export const Root = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<HomePage />} />
-          <Route path="home" element={<Navigate to="/" replace />} />
-          <Route path="people">
-            <Route index element={<PeoplePage />} />
-            <Route path=":slug" element={<PeoplePage />} />
+    <PeopleProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<HomePage />} />
+            <Route path="home" element={<Navigate to="/" replace />} />
+            <Route path="people">
+              <Route index element={<PeoplePage />} />
+              <Route path=":slug" element={<PeoplePage />} />
+            </Route>
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </Router>
+        </Routes>
+      </Router>{' '}
+    </PeopleProvider>
   );
 };

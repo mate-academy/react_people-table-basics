@@ -1,15 +1,7 @@
+import React from 'react';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
-
-export enum AppRoutes {
-  HOME = 'Home',
-  PEOPLE = 'People',
-}
-
-export const RoutePath: Record<AppRoutes, string> = {
-  [AppRoutes.HOME]: 'home',
-  [AppRoutes.PEOPLE]: 'people',
-};
+import { RoutePath } from '../config/routerConfig';
 
 export const Navbar = ({}) => {
   const linkClasses = ({ isActive }: { isActive: boolean }) =>
@@ -27,7 +19,7 @@ export const Navbar = ({}) => {
           {Object.entries(RoutePath).map(
             ([routeName, path]: [string, string]) => {
               return (
-                <NavLink to={path} className={linkClasses}>
+                <NavLink key={path} to={path} className={linkClasses}>
                   {routeName}
                 </NavLink>
               );

@@ -1,25 +1,44 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable no-param-reassign */
+import React, { useContext, useEffect, useState } from 'react';
 import { Loader } from '../components/Loader';
-import { Person } from '../types';
 import { getPeople } from '../api';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { PeopleContext } from '../store/PeopleProvider';
+import { PersonLink } from '../components/PersonLink';
+import classNames from 'classnames';
 
 export const PeoplePage = () => {
-  const [peoples, setPeoples] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setisError] = useState<boolean>(false);
-  // const { slug } = useParams();
+  const { state, dispatch } = useContext(PeopleContext);
+  const { people } = state;
 
-  // useEffect(() => {}, [slug]);
+  const { slug } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
     setisError(false);
     getPeople()
-      .then(setPeoples)
+      .then(data => {
+        data.forEach(person => {
+          const father = data.find(p => p.name === person.fatherName);
+          const mother = data.find(p => p.name === person.motherName);
+
+          if (father) {
+            person.father = father;
+          }
+
+          if (mother) {
+            person.mother = mother;
+          }
+        });
+
+        return data;
+      })
+      .then(data => dispatch({ type: 'load', payload: [...data] }))
       .catch(() => setisError(true))
       .finally(() => setIsLoading(false));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="container">
@@ -35,56 +54,66 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!isLoading && peoples.length === 0 && !isError && (
+          {!isLoading && people.length === 0 && !isError && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          <table
-            data-cy="peopleTable"
-            className="table is-striped is-hoverable is-narrow is-fullwidth"
-          >
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
-              </tr>
-            </thead>
+          {!isLoading && !isError && (
+            <table
+              data-cy="peopleTable"
+              className="table is-striped is-hoverable is-narrow is-fullwidth"
+            >
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sex</th>
+                  <th>Born</th>
+                  <th>Died</th>
+                  <th>Mother</th>
+                  <th>Father</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              {!!peoples.length &&
-                peoples.map(person => (
-                  <tr key={person.slug} data-cy="person">
-                    <td>
-                      <a href="#/people/philibert-haverbeke-1907">
-                        {person.name}
-                      </a>
-                    </td>
+              <tbody>
+                {!!people.length &&
+                  people.map(person => (
+                    <tr
+                      key={person.slug}
+                      data-cy="person"
+                      className={classNames({
+                        'has-background-warning': slug === person.slug,
+                      })}
+                    >
+                      <td>
+                        <PersonLink person={person} />
+                      </td>
 
-                    <td>{person.sex}</td>
-                    <td>{person.born}</td>
-                    <td>{person.died}</td>
+                      <td>{person.sex}</td>
+                      <td>{person.born}</td>
+                      <td>{person.died}</td>
 
-                    <td>
-                      <Link
-                        className="has-text-danger"
-                        to={`/people/${person}`}
-                      >
-                        {person.motherName !== null ? person.motherName : '-'}
-                      </Link>
-                    </td>
+                      <td>
+                        {person.mother ? (
+                          <PersonLink person={person.mother} />
+                        ) : person.motherName ? (
+                          person.motherName
+                        ) : (
+                          <>{'-'}</>
+                        )}
+                      </td>
 
-                    <td>
-                      <Link to="#/people/emile-haverbeke-1877">
-                        {person.fatherName !== null ? person.fatherName : '-'}
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              {/* <tr data-cy="person">
+                      <td>
+                        {person.father ? (
+                          <PersonLink person={person.father} />
+                        ) : person.fatherName ? (
+                          person.fatherName
+                        ) : (
+                          <>{'-'}</>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                {/* <tr data-cy="person">
                 <td>
                   <a href="#/people/jan-van-brussel-1714">Jan van Brussel</a>
                 </td>
@@ -183,8 +212,9 @@ export const PeoplePage = () => {
                   </a>
                 </td>
               </tr> */}
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </div>
