@@ -1,4 +1,3 @@
-import React from 'react';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { RoutePath } from '../config/routerConfig';

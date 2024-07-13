@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Loader } from '../components/Loader';
 import { getPeople } from '../api';
 import { useParams } from 'react-router-dom';
