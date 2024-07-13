@@ -13,7 +13,6 @@ export function getPeople(): Promise<Person[]> {
   return wait(100)
     .then(() => fetch(API_URL))
     .then(response => {
-      console.log(response.json);
       return response.json();
     });
 }
