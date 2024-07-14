@@ -54,11 +54,11 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!isLoading && !!people.length && !isError && (
+          {!isLoading && people.length === 0 && !isError && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!isLoading && !isError && (
+          {!isLoading && !isError && people.length !== 0 && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -75,44 +75,43 @@ export const PeoplePage = () => {
               </thead>
 
               <tbody>
-                {!!people.length &&
-                  people.map(person => (
-                    <tr
-                      key={person.slug}
-                      data-cy="person"
-                      className={classNames({
-                        'has-background-warning': slug === person.slug,
-                      })}
-                    >
-                      <td>
-                        <PersonLink person={person} />
-                      </td>
+                {people.map(person => (
+                  <tr
+                    key={person.slug}
+                    data-cy="person"
+                    className={classNames({
+                      'has-background-warning': slug === person.slug,
+                    })}
+                  >
+                    <td>
+                      <PersonLink person={person} />
+                    </td>
 
-                      <td>{person.sex}</td>
-                      <td>{person.born}</td>
-                      <td>{person.died}</td>
+                    <td>{person.sex}</td>
+                    <td>{person.born}</td>
+                    <td>{person.died}</td>
 
-                      <td>
-                        {person.mother ? (
-                          <PersonLink person={person.mother} />
-                        ) : person.motherName ? (
-                          person.motherName
-                        ) : (
-                          <>{'-'}</>
-                        )}
-                      </td>
+                    <td>
+                      {person.mother ? (
+                        <PersonLink person={person.mother} />
+                      ) : person.motherName ? (
+                        person.motherName
+                      ) : (
+                        <>{'-'}</>
+                      )}
+                    </td>
 
-                      <td>
-                        {person.father ? (
-                          <PersonLink person={person.father} />
-                        ) : person.fatherName ? (
-                          person.fatherName
-                        ) : (
-                          <>{'-'}</>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                    <td>
+                      {person.father ? (
+                        <PersonLink person={person.father} />
+                      ) : person.fatherName ? (
+                        person.fatherName
+                      ) : (
+                        <>{'-'}</>
+                      )}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           )}
