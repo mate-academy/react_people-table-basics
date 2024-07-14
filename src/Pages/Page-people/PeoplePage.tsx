@@ -3,7 +3,6 @@ import { Loader } from '../../components/Loader';
 import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { useParams } from 'react-router-dom';
-import React from 'react';
 
 export const PeoplePage = () => {
   const [peopleList, setPeopleList] = useState<Person[]>([]);
@@ -21,6 +20,7 @@ export const PeoplePage = () => {
 
           return { ...person, mother, father };
         });
+
         setPeopleList(peopleRes);
       })
       .catch(() => setHasError(true))

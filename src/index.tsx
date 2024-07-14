@@ -11,7 +11,6 @@ import { App } from './App';
 import { HomePage } from './Pages/Page-home/PageHome';
 import { PeoplePage } from './Pages/Page-people/PeoplePage';
 import { PageNotFound } from './Pages/Page-not-found/PageNotFound';
-import React from 'react';
 
 createRoot(document.getElementById('root') as HTMLDivElement).render(
   <Router>
