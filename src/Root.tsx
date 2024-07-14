@@ -9,6 +9,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { PeoplePage } from './pages/PeoplePage';
 import { HomePage } from './pages/HomePage';
 import { PeopleProvider } from './store/PeopleProvider';
+import React from 'react';
 
 export const Root = () => {
   return (
