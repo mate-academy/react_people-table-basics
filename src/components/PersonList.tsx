@@ -49,7 +49,7 @@ export const PersonList = () => {
               </p>
             )}
 
-            {!loading && !peopleFromApi.length && (
+            {!loading && !error && !peopleFromApi.length && (
               <p data-cy="noPeopleMessage">There are no people on the server</p>
             )}
             {loading ? (
@@ -57,66 +57,70 @@ export const PersonList = () => {
             ) : (
               <table
                 data-cy="peopleTable"
+                // eslint-disable-next-line max-len
                 className="table is-striped is-hoverable is-narrow is-fullwidth"
               >
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Born</th>
-                    <th>Died</th>
-                    <th>Mother</th>
-                    <th>Father</th>
-                  </tr>
-                </thead>
+                {peopleFromApi.length > 0 && (
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Sex</th>
+                      <th>Born</th>
+                      <th>Died</th>
+                      <th>Mother</th>
+                      <th>Father</th>
+                    </tr>
+                  </thead>
+                )}
 
                 <tbody>
-                  {peopleFromApi.map(person => (
-                    <tr
-                      data-cy="person"
-                      key={person.slug}
-                      className={classNames({
-                        'has-background-warning':
-                          selectedPerson === person.slug,
-                      })}
-                    >
-                      <td>
-                        <NavLink
-                          to={`/people/${person.slug}`}
-                          className={classNames({
-                            'has-text-danger': person.sex === 'f',
-                          })}
-                        >
-                          {person.name}
-                        </NavLink>
-                      </td>
-
-                      <td>{person.sex}</td>
-                      <td>{person.born}</td>
-                      <td>{person.died}</td>
-                      <td>
-                        {person.mother ? (
+                  {peopleFromApi.length > 0 &&
+                    peopleFromApi.map(person => (
+                      <tr
+                        data-cy="person"
+                        key={person.slug}
+                        className={classNames({
+                          'has-background-warning':
+                            selectedPerson === person.slug,
+                        })}
+                      >
+                        <td>
                           <NavLink
-                            to={`/people/${person.mother.slug}`}
-                            className="has-text-danger"
+                            to={`/people/${person.slug}`}
+                            className={classNames({
+                              'has-text-danger': person.sex === 'f',
+                            })}
                           >
-                            {person.motherName}
+                            {person.name}
                           </NavLink>
-                        ) : (
-                          person.motherName || '-'
-                        )}
-                      </td>
-                      <td>
-                        {person.father ? (
-                          <NavLink to={`/people/${person.father.slug}`}>
-                            {person.fatherName}
-                          </NavLink>
-                        ) : (
-                          person.fatherName || '-'
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                        </td>
+
+                        <td>{person.sex}</td>
+                        <td>{person.born}</td>
+                        <td>{person.died}</td>
+                        <td>
+                          {person.mother ? (
+                            <NavLink
+                              to={`/people/${person.mother.slug}`}
+                              className="has-text-danger"
+                            >
+                              {person.motherName}
+                            </NavLink>
+                          ) : (
+                            person.motherName || '-'
+                          )}
+                        </td>
+                        <td>
+                          {person.father ? (
+                            <NavLink to={`/people/${person.father.slug}`}>
+                              {person.fatherName}
+                            </NavLink>
+                          ) : (
+                            person.fatherName || '-'
+                          )}
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             )}
