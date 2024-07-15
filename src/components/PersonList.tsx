@@ -12,7 +12,7 @@ export const PersonList = () => {
 
   const { slug } = useParams();
 
-  const selectedPerson = slug ? slug : '';
+  const selectedPerson = slug || '';
 
   useEffect(() => {
     setLoading(true);
