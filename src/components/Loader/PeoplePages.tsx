@@ -1,5 +1,5 @@
 import { Person } from '../../types';
-import { PeopleList } from './PeopleList';
+import { PeopleList } from './PeopleLists';
 
 type PeoplePageProps = {
   people: Person[];

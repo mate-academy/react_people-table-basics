@@ -1,6 +1,6 @@
 import { Person } from '../../types';
 import { Loader } from './Loader';
-import { PeopleItem } from './PeopleItem';
+import { PeopleItem } from './PeopleItems';
 
 type PeoplePageProps = {
   people: Person[];
