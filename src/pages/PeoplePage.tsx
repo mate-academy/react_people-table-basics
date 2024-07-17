@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PeopleTable } from '../components/PeopleTable';
 import { Loader } from '../components/Loader';
 import { Person } from '../types';
