@@ -8,35 +8,31 @@ import { PersonLink } from './PersonLink';
 import React from 'react';
 
 export const PeoplePage: React.FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const { slug } = useParams();
+
   const { state, dispatch } = useContext(PeopleContext);
   const { people } = state;
-  const { slug } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
     setError(false);
     getPeople()
       .then(data => {
-        data.forEach(person => {
+        const updatedPeople = data.map(person => {
           const father = data.find(p => p.name === person.fatherName);
           const mother = data.find(p => p.name === person.motherName);
 
-          if (father) {
-            // eslint-disable-next-line no-param-reassign
-            person.father = father;
-          }
-
-          if (mother) {
-            // eslint-disable-next-line no-param-reassign
-            person.mother = mother;
-          }
+          return {
+            ...person,
+            father: father ? { ...father } : undefined,
+            mother: mother ? { ...mother } : undefined,
+          };
         });
 
-        return data;
+        dispatch({ type: 'load', payload: updatedPeople });
       })
-      .then(data => dispatch({ type: 'load', payload: [...data] }))
       .catch(() => setError(true))
       .finally(() => setIsLoading(false));
   }, [dispatch]);
@@ -95,20 +91,16 @@ export const PeoplePage: React.FC = () => {
                     <td>
                       {person.mother ? (
                         <PersonLink person={person.mother} />
-                      ) : person.motherName ? (
-                        person.motherName
                       ) : (
-                        <>{'-'}</>
+                        person.motherName || '-'
                       )}
                     </td>
 
                     <td>
                       {person.father ? (
                         <PersonLink person={person.father} />
-                      ) : person.fatherName ? (
-                        person.fatherName
                       ) : (
-                        <>{'-'}</>
+                        person.fatherName || '-'
                       )}
                     </td>
                   </tr>
