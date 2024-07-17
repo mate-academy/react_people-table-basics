@@ -1,7 +1,7 @@
 import './App.scss';
 import { Routes, Route, Navigate, NavLink } from 'react-router-dom';
 import classNames from 'classnames';
-import { PeoplePage } from './components/Loader/PeoplePages';
+import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { useEffect, useState } from 'react';
 import { getPeople } from './api';
 import { Person } from './types';

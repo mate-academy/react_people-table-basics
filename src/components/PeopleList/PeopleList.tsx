@@ -1,6 +1,6 @@
 import { Person } from '../../types';
-import { Loader } from './Loader';
-import { PeopleItem } from './PeopleItems';
+import { Loader } from '../Loader/Loader';
+import { PeopleItem } from '../PeopleItem/PeopleItem';
 
 type PeoplePageProps = {
   people: Person[];
@@ -22,7 +22,7 @@ export const PeopleList: React.FC<PeoplePageProps> = ({
           </p>
         )}
 
-        {loadingPeople === false && people.length === 0 && (
+        {!loadingPeople && people.length === 0 &&  (
           <p data-cy="noPeopleMessage">There are no people on the server</p>
         )}
 
