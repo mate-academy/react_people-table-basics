@@ -1,167 +1,83 @@
-import { Loader } from './components/Loader';
-
 import './App.scss';
+import { Routes, Route, Navigate, NavLink } from 'react-router-dom';
+import classNames from 'classnames';
+import { PeoplePage } from './components/PeoplePage/PeoplePage';
+import { useEffect, useState } from 'react';
+import { getPeople } from './api';
+import { Person } from './types';
 
-export const App = () => (
-  <div data-cy="app">
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
-            Home
-          </a>
+export const App = () => {
+  const [people, setPeople] = useState<Person[]>([]);
+  const [loadingPeople, setLoadingPeople] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
 
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
-          >
-            People
-          </a>
-        </div>
-      </div>
-    </nav>
+  const getLinkClass = ({ isActive }: { isActive: boolean }) =>
+    classNames('navbar-item', {
+      'has-background-grey-lighter': isActive,
+    });
 
-    <main className="section">
-      <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
+  useEffect(() => {
+    setLoadingPeople(true);
 
-        <div className="block">
-          <div className="box table-container">
-            <Loader />
+    getPeople()
+      .then(peopl => {
+        const peopleWithParents = peopl.map(person => {
+          return {
+            ...person,
+            mother: peopl.find(p => p.name === person.motherName),
+            father: peopl.find(p => p.name === person.fatherName),
+          };
+        });
 
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
+        setPeople(peopleWithParents);
+      })
+      .catch(() => setError(true))
+      .finally(() => setLoadingPeople(false));
+  }, []);
 
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/jan-van-brussel-1714">Jan van Brussel</a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1714</td>
-                  <td>1748</td>
-                  <td>Joanna van Rooten</td>
-                  <td>Jacobus van Brussel</td>
-                </tr>
-
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/philibert-haverbeke-1907">
-                      Philibert Haverbeke
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1907</td>
-                  <td>1997</td>
-
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/emma-de-milliano-1876"
-                    >
-                      Emma de Milliano
-                    </a>
-                  </td>
-
-                  <td>
-                    <a href="#/people/emile-haverbeke-1877">Emile Haverbeke</a>
-                  </td>
-                </tr>
-
-                <tr data-cy="person" className="has-background-warning">
-                  <td>
-                    <a href="#/people/jan-frans-van-brussel-1761">
-                      Jan Frans van Brussel
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1761</td>
-                  <td>1833</td>
-                  <td>-</td>
-
-                  <td>
-                    <a href="#/people/jacobus-bernardus-van-brussel-1736">
-                      Jacobus Bernardus van Brussel
-                    </a>
-                  </td>
-                </tr>
-
-                <tr data-cy="person">
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/lievijne-jans-1542"
-                    >
-                      Lievijne Jans
-                    </a>
-                  </td>
-
-                  <td>f</td>
-                  <td>1542</td>
-                  <td>1582</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/bernardus-de-causmaecker-1721">
-                      Bernardus de Causmaecker
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1721</td>
-                  <td>1789</td>
-
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/livina-haverbeke-1692"
-                    >
-                      Livina Haverbeke
-                    </a>
-                  </td>
-
-                  <td>
-                    <a href="#/people/lieven-de-causmaecker-1696">
-                      Lieven de Causmaecker
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+  return (
+    <div data-cy="app">
+      <nav
+        data-cy="nav"
+        className="navbar is-fixed-top has-shadow"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div className="container">
+          <div className="navbar-brand">
+            <NavLink className={getLinkClass} to="/">
+              Home
+            </NavLink>
+            <NavLink className={getLinkClass} to="/people">
+              People
+            </NavLink>
           </div>
         </div>
-      </div>
-    </main>
-  </div>
-);
+      </nav>
+
+      <main className="section">
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<h1 className="title">Home Page</h1>} />
+            <Route path="home" element={<Navigate to="/" replace={true} />} />
+            <Route
+              path="/people/:personId?"
+              element={
+                <PeoplePage
+                  loadingPeople={loadingPeople}
+                  error={error}
+                  people={people}
+                />
+              }
+            />
+
+            <Route
+              path="*"
+              element={<h1 className="title">Page not found</h1>}
+            />
+          </Routes>
+        </div>
+      </main>
+    </div>
+  );
+};
