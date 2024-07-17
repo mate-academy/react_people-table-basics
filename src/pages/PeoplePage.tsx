@@ -25,7 +25,6 @@ export const PeoplePage = () => {
     mother: people.find(pers => pers.name === person.motherName),
     father: people.find(pers => pers.name === person.fatherName),
   }));
-  // debugger
 
   return (
     <>
