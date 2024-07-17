@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Navigate,
   Route,
@@ -8,7 +9,6 @@ import { PeoplePage, PeopleProvider } from './components/PeoplePage';
 import { App } from './App';
 import { HomePage } from './components/HomePage';
 import { NotFoundPage } from './components/NotFoundPage';
-import React from 'react';
 
 export const Root: React.FC = () => {
   return (
