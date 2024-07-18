@@ -2,13 +2,12 @@ import { useEffect, useState } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
-import { PeopleTable } from '../PeopleTable/PeopleTable';
+import { PeopleTable } from '../PeopleTable';
 
 export const PeoplePage = () => {
   const [persons, setPersons] = useState<Person[]>([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  //const { personSlug } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
@@ -38,10 +37,6 @@ export const PeoplePage = () => {
               {errorMessage}
             </p>
           )}
-
-          {/* <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
-          </p> */}
 
           {!persons.length && !isLoading && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>

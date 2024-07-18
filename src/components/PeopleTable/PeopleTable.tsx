@@ -63,7 +63,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
 
             <td>
               {person.father ? (
-                <Link to={`/people/${person.father.slug}`}>{person.fatherName}</Link>
+                <Link to={`/people/${person.father.slug}`}>
+                  {person.fatherName}
+                </Link>
               ) : (
                 person.fatherName || '-'
               )}
