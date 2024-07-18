@@ -4,6 +4,8 @@ import { getPeople } from '../api';
 
 import { Person } from '../types';
 
+import { updatePeopleWithParents } from '../servise/updatePeople';
+
 import { PeopleTable } from '../components/PeopleTable';
 import { Loader } from '../components/Loader';
 
@@ -16,18 +18,16 @@ export const PeoplePage = () => {
     setIsLoading(true);
 
     getPeople()
-      .then(setPeople)
+      .then(peopleData => {
+        const updatedPeople = updatePeopleWithParents(peopleData);
+
+        setPeople(updatedPeople);
+      })
       .catch(() => setError(true))
       .finally(() => {
         setIsLoading(false);
       });
   }, []);
-
-  const updatedPeople: Person[] = people.map(person => ({
-    ...person,
-    mother: people.find(pers => pers.name === person.motherName),
-    father: people.find(pers => pers.name === person.fatherName),
-  }));
 
   return (
     <>
@@ -63,7 +63,7 @@ export const PeoplePage = () => {
                 </tr>
               </thead>
 
-              <PeopleTable people={updatedPeople} />
+              <PeopleTable people={updatePeopleWithParents(people)} />
             </table>
           )}
         </div>
