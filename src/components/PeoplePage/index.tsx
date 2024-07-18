@@ -37,7 +37,7 @@ export const PeoplePage = () => {
           )}
 
           {!loading && !people.length && (
-            <p data-cy="noPeopleMessage">'There are no people on the server'</p>
+            <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
           {!loading && people.length !== 0 && (
@@ -61,6 +61,7 @@ export const PeoplePage = () => {
                   ({ name, sex, born, died, fatherName, motherName, slug }) => {
                     const father = findParent(fatherName);
                     const mother = findParent(motherName);
+
                     return (
                       <tr
                         key={slug}
