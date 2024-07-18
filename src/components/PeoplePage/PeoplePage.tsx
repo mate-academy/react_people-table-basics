@@ -1,19 +1,17 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
-import { PeopleContext } from './PeopleContext';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import classNames from 'classnames';
 import { PersonLink } from './PersonLink';
 import React from 'react';
+import { Person } from '../../types/Person';
 
 export const PeoplePage: React.FC = () => {
+  const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const { slug } = useParams();
-
-  const { state, dispatch } = useContext(PeopleContext);
-  const { people } = state;
 
   useEffect(() => {
     setIsLoading(true);
@@ -31,11 +29,11 @@ export const PeoplePage: React.FC = () => {
           };
         });
 
-        dispatch({ type: 'load', payload: updatedPeople });
+        setPeople(updatedPeople);
       })
       .catch(() => setError(true))
       .finally(() => setIsLoading(false));
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="container">
