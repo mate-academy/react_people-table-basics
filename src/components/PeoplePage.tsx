@@ -12,10 +12,6 @@ export const PeoplePage = () => {
   const [peopleLoadError, setPeopleLoadError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { personSlug } = useParams();
-  const normalizePersonSlugToArr = personSlug?.split('-');
-  const normalizePersonSlug = normalizePersonSlugToArr?.slice(0, normalizePersonSlugToArr.length - 1).join(' ');
-
-
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,8 +21,6 @@ export const PeoplePage = () => {
       .catch(() => setPeopleLoadError('Something went wrong'))
       .finally(() => setIsLoading(false));
   }, []);
-
-
 
   return (
     <>
@@ -63,51 +57,60 @@ export const PeoplePage = () => {
               </thead>
 
               <tbody>
-                {people.map(({
-                    name,
-                    sex,
-                    born,
-                    died,
-                    motherName,
-                    fatherName,
-                    slug,
-                  }) => {
-                  const mother = people.find(person => person.name === motherName);
-                  const father = people.find(person => person.name === fatherName);
+                {people.map(
+                  ({ name, sex, born, died, motherName, fatherName, slug }) => {
+                    const mother = people.find(
+                      person => person.name === motherName,
+                    );
+                    const father = people.find(
+                      person => person.name === fatherName,
+                    );
 
-                  return (
-                    <tr data-cy="person" key={uuidv4()} className={cn({"has-background-warning": name.toLowerCase() === normalizePersonSlug})}>
-                      <td>
-                        <Link to={slug} className={cn({"has-text-danger": sex === 'f'})}>{name}</Link>
-                      </td>
-
-                      <td>{sex}</td>
-                      <td>{born}</td>
-                      <td>{died}</td>
-
-                      <td>
-                        {mother ? (
+                    return (
+                      <tr
+                        data-cy="person"
+                        key={uuidv4()}
+                        className={cn({
+                          'has-background-warning': slug === personSlug,
+                        })}
+                      >
+                        <td>
                           <Link
-                            className={cn({ 'has-text-danger': motherName })}
-                            to={mother.slug}
+                            to={slug}
+                            className={cn({ 'has-text-danger': sex === 'f' })}
                           >
-                            {motherName}
+                            {name}
                           </Link>
-                        ) : (
-                          <p>{motherName || '-'}</p>
-                        )}
-                      </td>
+                        </td>
 
-                      <td>
-                        {father ? (
-                          <Link to={father.slug}>{fatherName}</Link>
-                        ) : (
-                          <p>{fatherName || '-'}</p>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
+                        <td>{sex}</td>
+                        <td>{born}</td>
+                        <td>{died}</td>
+
+                        <td>
+                          {mother ? (
+                            <Link
+                              className={cn({ 'has-text-danger': motherName })}
+                              to={mother.slug}
+                            >
+                              {motherName}
+                            </Link>
+                          ) : (
+                            <p>{motherName || '-'}</p>
+                          )}
+                        </td>
+
+                        <td>
+                          {father ? (
+                            <Link to={father.slug}>{fatherName}</Link>
+                          ) : (
+                            <p>{fatherName || '-'}</p>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  },
+                )}
               </tbody>
             </table>
           )}
