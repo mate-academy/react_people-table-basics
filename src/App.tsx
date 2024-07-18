@@ -1,11 +1,6 @@
 import './App.scss';
-import classNames from 'classnames';
 import { NavLink, Outlet } from 'react-router-dom';
-
-const getLinkClass = ({ isActive }: { isActive: boolean }) =>
-  classNames('navbar-item', {
-    'has-background-grey-lighter': isActive,
-  });
+import { getLinkClass } from './utils/helpers';
 
 export const App = () => (
   <div data-cy="app">
@@ -31,7 +26,6 @@ export const App = () => (
     <main className="section">
       <div className="container">
         <Outlet />
-
       </div>
     </main>
   </div>

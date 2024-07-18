@@ -3,6 +3,7 @@ import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { PeopleTable } from '../PeopleTable';
+import { ErrorMessages } from '../../types/errorMessages';
 
 export const PeoplePage = () => {
   const [persons, setPersons] = useState<Person[]>([]);
@@ -14,7 +15,7 @@ export const PeoplePage = () => {
 
     getPeople()
       .then(setPersons)
-      .catch(() => setErrorMessage('Something went wrong'))
+      .catch(() => setErrorMessage(ErrorMessages.PeopleLoadError))
       .finally(() => setIsLoading(false));
   }, []);
 
