@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Loader } from '../components/Loader';
 import { Person as PersonType } from '../types';
 import { getPeople } from '../api';
-import { PersonLink } from '../components/PersonLink/PersonLink';
+import { Person } from '../components/Person/Person';
 import { getPeopleWithParents } from '../helpers';
 
 export const PeoplePage: React.FC = () => {
@@ -59,7 +59,7 @@ export const PeoplePage: React.FC = () => {
 
               <tbody>
                 {peopleWithParents.map(person => (
-                  <PersonLink person={person} key={person.name} />
+                  <Person person={person} key={person.name} />
                 ))}
               </tbody>
             </table>
