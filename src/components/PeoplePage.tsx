@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import cn from 'classnames';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { v4 as uuidv4 } from 'uuid';
 import { Link, useParams } from 'react-router-dom';
 import { getPeople } from '../api';
 import { Person } from '../types';
@@ -67,7 +69,7 @@ export const PeoplePage = () => {
                     return (
                       <tr
                         data-cy="person"
-                        key={slug}
+                        key={uuidv4()}
                         className={cn({
                           'has-background-warning': slug === personSlug,
                         })}
