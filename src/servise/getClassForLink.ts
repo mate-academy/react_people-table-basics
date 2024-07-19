@@ -4,6 +4,6 @@ export const getClassForLink = ({
   isActive,
 }: {
   isActive: boolean;
-}): string | undefined => {
+}): string => {
   return cn('navbar-item', { 'has-background-grey-lighter': isActive });
 };

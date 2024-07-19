@@ -14,6 +14,9 @@ export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  const emptyPeopleTable = !people.length && !isLoading && !error;
+  const personInfo = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
   useEffect(() => {
     setIsLoading(true);
 
@@ -43,7 +46,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!people.length && !isLoading && !error && (
+          {emptyPeopleTable && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
@@ -54,12 +57,9 @@ export const PeoplePage = () => {
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
+                  {personInfo.map((person, id) => (
+                    <th key={id}>{person}</th>
+                  ))}
                 </tr>
               </thead>
 

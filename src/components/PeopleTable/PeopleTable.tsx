@@ -10,6 +10,11 @@ interface Props {
   people: Person[];
 }
 
+enum Constants {
+  FEMALE = 'f',
+  HYPHEN = '-',
+}
+
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
 
@@ -39,7 +44,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               <PersonLink
                 person={person}
                 className={cn({
-                  'has-text-danger': sex === 'f',
+                  'has-text-danger': sex === Constants.FEMALE,
                 })}
               >
                 {name}
@@ -56,7 +61,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
                   {motherName}
                 </PersonLink>
               ) : (
-                motherName || '-'
+                motherName || Constants.HYPHEN
               )}
             </td>
 
@@ -64,7 +69,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               {father ? (
                 <PersonLink person={father}>{fatherName}</PersonLink>
               ) : (
-                fatherName || '-'
+                fatherName || Constants.HYPHEN
               )}
             </td>
           </tr>
