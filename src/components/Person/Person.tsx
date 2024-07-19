@@ -11,6 +11,7 @@ type Props = {
 export const Person: React.FC<Props> = ({ person }) => {
   const { personSlug } = useParams();
   const { sex, born, died, fatherName, motherName, mother, father } = person;
+  const EMPTY_VALUE = '-';
 
   return (
     <tr
@@ -25,9 +26,13 @@ export const Person: React.FC<Props> = ({ person }) => {
       <td>{born}</td>
       <td>{died}</td>
 
-      <td>{mother ? <PersonLink person={mother} /> : motherName || '-'}</td>
+      <td>
+        {mother ? <PersonLink person={mother} /> : motherName || EMPTY_VALUE}
+      </td>
 
-      <td>{father ? <PersonLink person={father} /> : fatherName || '-'}</td>
+      <td>
+        {father ? <PersonLink person={father} /> : fatherName || EMPTY_VALUE}
+      </td>
     </tr>
   );
 };

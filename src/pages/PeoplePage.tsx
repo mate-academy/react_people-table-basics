@@ -13,7 +13,7 @@ export const PeoplePage: React.FC = () => {
   useEffect(() => {
     setIsLoading(true);
     getPeople()
-      .then(data => setPeople(data))
+      .then(setPeople)
       .catch(() => setError('Something went wrong'))
       .finally(() => setIsLoading(false));
   }, []);
