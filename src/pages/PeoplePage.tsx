@@ -10,6 +10,8 @@ export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<PersonType[]>([]);
   const [error, setError] = useState('');
 
+  const TABLE_THS = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
   useEffect(() => {
     setIsLoading(true);
     getPeople()
@@ -22,6 +24,8 @@ export const PeoplePage: React.FC = () => {
     () => getPeopleWithParents(people),
     [people],
   );
+
+  const showNoPeopleMessage = !peopleWithParents.length && !error && !isLoading;
 
   return (
     <React.Fragment>
@@ -37,7 +41,7 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {!peopleWithParents.length && !error && !isLoading && (
+          {showNoPeopleMessage && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
@@ -48,12 +52,9 @@ export const PeoplePage: React.FC = () => {
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
+                  {TABLE_THS.map(th => (
+                    <th key={th}>{th}</th>
+                  ))}
                 </tr>
               </thead>
 
