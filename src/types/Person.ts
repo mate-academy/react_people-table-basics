@@ -1,11 +1,17 @@
 export interface Person {
+  fatherName: string;
+  motherName: string;
   name: string;
   sex: string;
   born: number;
   died: number;
-  fatherName: string | null;
-  motherName: string | null;
+  mother: {
+    name: string;
+    slug: string;
+  };
+  father: {
+    name: string;
+    slug: string;
+  };
   slug: string;
-  mother?: Person;
-  father?: Person;
 }
