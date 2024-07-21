@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Person } from '../types/Person';
 import { PersonLink } from './PersonLink';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -14,6 +14,12 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     urlSlug || null,
   );
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (urlSlug) {
+      setSelectedPerson(urlSlug);
+    }
+  }, [urlSlug]);
 
   const handlePersonClick = (slug: string) => {
     setSelectedPerson(slug);
@@ -48,12 +54,10 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               className={classNames({
                 'has-background-warning': person.slug === selectedPerson,
               })}
-              onClick={() => handlePersonClick(person.slug)}
             >
               <td>
                 <PersonLink person={person} onClick={handlePersonClick} />
               </td>
-
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
