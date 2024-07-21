@@ -14,10 +14,6 @@ export const PersonLink: React.FC<Props> = ({ person, findParent }) => {
   const father = findParent(fatherName);
   const mother = findParent(motherName);
 
-  console.log('slug:', slug);
-  console.log('personSlug:', personSlug);
-  console.log('Condition met:', slug === personSlug);
-
   return (
     <tr
       data-cy="person"
