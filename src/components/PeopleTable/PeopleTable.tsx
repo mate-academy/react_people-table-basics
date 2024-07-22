@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
-import { PersonRow } from '../PersonRow';
+import { PersonLink } from '../PersonLink';
+import { PeopleTableLink } from '../PeopleTableLink';
 
 type Props = {
   people: Person[];
@@ -10,6 +11,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
   const selectedSlug = slug;
 
+  const columnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
   const getParent = (parentName: string | null) => {
     if (!parentName) {
       return '-';
@@ -17,7 +20,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
 
     const parent = people.find(person => person.name === parentName);
 
-    return parent ? <PersonRow person={parent} /> : parentName;
+    return parent ? <PersonLink person={parent} /> : parentName;
   };
 
   return (
@@ -27,37 +30,20 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {columnNames.map(name => (
+            <th key={name}>{name}</th>
+          ))}
         </tr>
       </thead>
       <tbody>
-        {people.map(person => {
-          const { sex, born, died, fatherName, motherName } = person;
-
-          return (
-            <tr
-              key={person.slug}
-              data-cy="person"
-              className={
-                selectedSlug === person.slug ? 'has-background-warning' : ''
-              }
-            >
-              <td>
-                <PersonRow person={person} />
-              </td>
-              <td>{sex}</td>
-              <td>{born}</td>
-              <td>{died}</td>
-              <td>{getParent(motherName)}</td>
-              <td>{getParent(fatherName)}</td>
-            </tr>
-          );
-        })}
+        {people.map(person => (
+          <PeopleTableLink
+            key={person.slug}
+            person={person}
+            selectedSlug={selectedSlug}
+            getParent={getParent}
+          />
+        ))}
       </tbody>
     </table>
   );
