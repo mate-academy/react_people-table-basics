@@ -4,12 +4,12 @@ import { getPeople } from '../api';
 import { Person } from '../types';
 import React from 'react';
 type PeoplesContextType = {
-  persons: Person[];
+  people: Person[];
   isLoading: boolean;
   errorMessage: string;
 };
 export const PeoplesContext = React.createContext<PeoplesContextType>({
-  persons: [],
+  people: [],
   isLoading: false,
   errorMessage: '',
 });
@@ -29,7 +29,7 @@ export const PeoplesProvider: FC<Props> = ({ children }) => {
       .finally(() => setisLoading(false));
   }, []);
   const value = {
-    persons: people,
+    people,
     isLoading,
     errorMessage,
   };

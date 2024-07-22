@@ -4,16 +4,25 @@ import React, { FC } from 'react';
 
 import { Person } from '../types';
 
+const MISSING_NAME = '-';
+
 type Props = {
   person: Person;
-  persons: Person[];
+  people: Person[];
   slug: string | undefined;
 };
-export const PersonRow: FC<Props> = ({ person, persons, slug }) => {
-  const { sex, born, died } = person;
-  const personMother = persons.find(p => p.name === person.motherName);
-  const personFather = persons.find(p => p.name === person.fatherName);
-  const missingName = '-';
+export const PersonRow: FC<Props> = ({ person, people, slug }) => {
+  const { sex, born, died, motherName, fatherName } = person;
+  const personMother = people.find(p => p.name === motherName);
+  const personFather = people.find(p => p.name === fatherName);
+
+  const renderPerson = (name: string | null, human: Person | undefined) => {
+    if (!name) {
+      return MISSING_NAME;
+    }
+
+    return human ? <PersonLink person={human} /> : name;
+  };
 
   return (
     <tr
@@ -30,28 +39,8 @@ export const PersonRow: FC<Props> = ({ person, persons, slug }) => {
       <td>{born}</td>
       <td>{died}</td>
 
-      <td>
-        {person.motherName ? (
-          personMother ? (
-            <PersonLink person={personMother} />
-          ) : (
-            person.motherName
-          )
-        ) : (
-          missingName
-        )}
-      </td>
-      <td>
-        {person.fatherName ? (
-          personFather ? (
-            <PersonLink person={personFather} />
-          ) : (
-            person.fatherName
-          )
-        ) : (
-          missingName
-        )}
-      </td>
+      <td>{renderPerson(motherName, personMother)}</td>
+      <td>{renderPerson(fatherName, personFather)}</td>
     </tr>
   );
 };

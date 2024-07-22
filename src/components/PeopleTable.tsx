@@ -7,10 +7,10 @@ import { useParams } from 'react-router-dom';
 import { PersonRow } from './PersonRow';
 
 type Props = {
-  persons: Person[];
+  people: Person[];
 };
 
-export const PeopleTable: FC<Props> = ({ persons }) => {
+export const PeopleTable: FC<Props> = ({ people }) => {
   const { slug } = useParams();
   const tableTitles = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
@@ -28,11 +28,11 @@ export const PeopleTable: FC<Props> = ({ persons }) => {
       </thead>
 
       <tbody>
-        {persons.map(person => (
+        {people.map(person => (
           <PersonRow
             person={person}
             slug={slug}
-            persons={persons}
+            people={people}
             key={uuidv4()}
           />
         ))}
