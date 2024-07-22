@@ -23,6 +23,13 @@ export const PeoplePage = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
+  const isError = !isLoading && peopleError;
+  const hasPeople = people.length > 0 && !isLoading;
+
+  const tableHeaders = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+  const FEMALE_SEX = 'f';
+  const NO_PARENT_NAME = '-';
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -30,27 +37,26 @@ export const PeoplePage = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {!isLoading && peopleError && (
+          {isError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               {peopleError}
             </p>
           )}
+
           {!people.length && !isLoading && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
-          {people.length > 0 && !isLoading && (
+
+          {hasPeople && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
+                  {tableHeaders.map(header => (
+                    <th key={header}>{header}</th>
+                  ))}
                 </tr>
               </thead>
 
@@ -80,7 +86,9 @@ export const PeoplePage = () => {
                       <td>
                         <Link
                           to={slug}
-                          className={cn({ 'has-text-danger': sex === 'f' })}
+                          className={cn({
+                            'has-text-danger': sex === FEMALE_SEX,
+                          })}
                         >
                           {name}
                         </Link>
@@ -99,7 +107,7 @@ export const PeoplePage = () => {
                             {mother.name}
                           </Link>
                         ) : (
-                          motherName || '-'
+                          motherName || NO_PARENT_NAME
                         )}
                       </td>
 
@@ -107,7 +115,7 @@ export const PeoplePage = () => {
                         {father ? (
                           <Link to={father.slug}>{father.name}</Link>
                         ) : (
-                          fatherName || '-'
+                          fatherName || NO_PARENT_NAME
                         )}
                       </td>
                     </tr>
