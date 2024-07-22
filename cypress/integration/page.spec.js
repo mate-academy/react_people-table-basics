@@ -56,9 +56,9 @@ Cypress.on('fail', (e) => {
 });
 
 describe('', () => {
-  beforeEach(() => {
-    if (failed) Cypress.runner.stop();
-  });
+  // beforeEach(() => {
+  //   if (failed) Cypress.runner.stop();
+  // });
 
   describe('/ page', () => {
     it('should have correct address', () => {
