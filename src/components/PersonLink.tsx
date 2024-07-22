@@ -1,71 +1,63 @@
-import { Link } from 'react-router-dom';
 import { Person } from '../types';
 import classNames from 'classnames';
+import { CustomLink } from './CustomLink';
+import { SexType } from '../types/SexType';
 
 type Props = {
   person: Person;
   selectedPerson: string;
-  getMotherSlug: (person: Person) => string;
-  getFaterSlug: (person: Person) => string;
 };
 
-export const PersonLink: React.FC<Props> = ({
-  person,
-  selectedPerson,
-  getMotherSlug,
-  getFaterSlug,
-}) => {
+export const EMPTY = '-';
+
+export const PersonLink: React.FC<Props> = ({ person, selectedPerson }) => {
+  const {
+    name,
+    sex,
+    slug,
+    born,
+    died,
+    motherName,
+    fatherName,
+    mother,
+    father,
+  } = person;
+
   return (
     <tr
       data-cy="person"
-      key={person.name}
+      key={name}
       className={classNames({
-        'has-background-warning': person.slug === selectedPerson,
+        'has-background-warning': slug === selectedPerson,
       })}
     >
-      <td>
-        <Link
-          className={classNames({
-            'has-text-danger': person.sex === 'f',
-          })}
-          to={`/people/${person.slug}`}
-        >
-          {person.name}
-        </Link>
-      </td>
+      <td>{<CustomLink name={name} slug={slug} sex={sex} />}</td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
 
       <td>
-        {person.motherName ? (
-          getMotherSlug(person) ? (
-            <Link
-              className="has-text-danger"
-              to={`/people/${getMotherSlug(person)}`}
-            >
-              {person.motherName}
-            </Link>
-          ) : (
-            <span>{person.motherName}</span>
-          )
+        {motherName ? (
+          <CustomLink
+            name={motherName}
+            sex={SexType.female}
+            slug={mother?.slug}
+          />
         ) : (
-          <span>-</span>
+          <span>{EMPTY}</span>
         )}
       </td>
 
       <td>
-        {person.fatherName ? (
-          getFaterSlug(person) ? (
-            <Link to={`/people/${getFaterSlug(person)}`}>
-              {person.fatherName}
-            </Link>
-          ) : (
-            <span>{person.fatherName}</span>
-          )
+        {fatherName ? (
+          <CustomLink
+            name={fatherName}
+            sex={SexType.male}
+            slug={father?.slug}
+          />
         ) : (
-          <span>-</span>
+          <span>{EMPTY}</span>
         )}
       </td>
     </tr>

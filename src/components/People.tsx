@@ -5,38 +5,40 @@ import { Person } from '../types';
 import { useParams } from 'react-router-dom';
 import { PersonLink } from './PersonLink';
 
+const tableColumns = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
 export const People = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [people, setPeople] = useState<Person[]>([]);
+
+  const peopleNoExist = !isLoading && people.length === 0;
+  const peopleDoExist = !isLoading && people.length > 0;
 
   const getPeopleData = async () => {
     setIsLoading(true);
     try {
       const peopleData = await getPeople();
 
-      setPeople(peopleData);
+      const peopleWithParents = peopleData.map(person => {
+        const father = peopleData.find(guy => person.fatherName === guy.name);
+        const mother = peopleData.find(
+          woman => person.motherName === woman.name,
+        );
+
+        return {
+          ...person,
+          father: father,
+          mother: mother,
+        };
+      });
+
+      setPeople(peopleWithParents);
     } catch {
       setError(true);
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const getFaterSlug = (person: Person) => {
-    const searchedGuy = people.find(
-      somebody => somebody.name === person.fatherName,
-    );
-
-    return searchedGuy?.slug || '';
-  };
-
-  const getMotherSlug = (person: Person) => {
-    const searchedWoman = people.find(
-      somebody => somebody.name === person.motherName,
-    );
-
-    return searchedWoman?.slug || '';
   };
 
   useEffect(() => {
@@ -60,23 +62,20 @@ export const People = () => {
             </p>
           )}
 
-          {!isLoading && people.length === 0 && (
+          {peopleNoExist && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!isLoading && people.length > 0 && (
+          {peopleDoExist && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
+                  {tableColumns.map(column => (
+                    <th key={column}>{column}</th>
+                  ))}
                 </tr>
               </thead>
 
@@ -86,8 +85,6 @@ export const People = () => {
                     key={person.name}
                     person={person}
                     selectedPerson={selectedPerson}
-                    getMotherSlug={getMotherSlug}
-                    getFaterSlug={getFaterSlug}
                   />
                 ))}
               </tbody>
