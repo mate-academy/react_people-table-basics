@@ -26,6 +26,9 @@ export const PeoplePage = () => {
     fetchData();
   }, []);
 
+  const noDataAvailable = !isLoading && !errorMessage && people.length === 0;
+  const dataAvailable = !isLoading && !errorMessage && people.length > 0;
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -39,13 +42,11 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!isLoading && !errorMessage && people.length === 0 && (
+          {noDataAvailable && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!isLoading && !errorMessage && people.length > 0 && (
-            <PeopleTable people={people} />
-          )}
+          {dataAvailable && <PeopleTable people={people} />}
         </div>
       </div>
     </>

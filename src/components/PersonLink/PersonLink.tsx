@@ -7,25 +7,29 @@ type Props = {
   onClick: (slug: string) => void;
 };
 
+const FEMALE = 'f';
+
 export const PersonLink: React.FC<Props> = ({ person, onClick }) => {
+  const { slug, name, sex } = person;
+
   if (!person) {
     return <span>-</span>;
   }
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    onClick(person.slug);
+    onClick(slug);
   };
 
   return (
     <Link
-      to={`/people/${person.slug}`}
+      to={`/people/${slug}`}
       onClick={handleClick}
       className={cn({
-        'has-text-danger': person.sex === 'f',
+        'has-text-danger': sex === FEMALE,
       })}
     >
-      {person.name}
+      {name}
     </Link>
   );
 };
