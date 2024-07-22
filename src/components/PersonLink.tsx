@@ -6,11 +6,13 @@ type Props = {
   person?: Person;
 };
 export const PersonLink: FC<Props> = ({ person }) => {
+  const female = 'f';
+
   return (
     <Link
       to={`/people/${person?.slug}`}
       className={classNames({
-        'has-text-danger': person?.sex === 'f',
+        'has-text-danger': person?.sex === female,
       })}
     >
       {person?.name}

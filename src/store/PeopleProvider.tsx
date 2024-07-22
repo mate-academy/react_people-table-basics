@@ -5,32 +5,32 @@ import { Person } from '../types';
 import React from 'react';
 type PeoplesContextType = {
   persons: Person[];
-  loading: boolean;
+  isLoading: boolean;
   errorMessage: string;
 };
 export const PeoplesContext = React.createContext<PeoplesContextType>({
   persons: [],
-  loading: false,
+  isLoading: false,
   errorMessage: '',
 });
 type Props = {
   children: React.ReactNode;
 };
 export const PeoplesProvider: FC<Props> = ({ children }) => {
-  const [persons, setPersons] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [people, setPeople] = useState<Person[]>([]);
+  const [isLoading, setisLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    setLoading(true);
+    setisLoading(true);
     getPeople()
-      .then(people => setPersons(people))
+      .then(setPeople)
       .catch(() => setErrorMessage('Something went wrong'))
-      .finally(() => setLoading(false));
+      .finally(() => setisLoading(false));
   }, []);
   const value = {
-    persons,
-    loading,
+    persons: people,
+    isLoading,
     errorMessage,
   };
 
