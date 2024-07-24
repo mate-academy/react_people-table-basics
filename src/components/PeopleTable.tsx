@@ -14,32 +14,24 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
   const getPersonByName = (name: string | null) =>
     people.find(person => person.name === name);
 
-  const getParentTableData = (person: Person, forMother: boolean) => {
-    if (forMother) {
-      return (
-        <td>
-          {person.motherName === null ? (
-            '-'
-          ) : getPersonByName(person.motherName) ? (
-            <PersonLink person={getPersonByName(person.motherName) as Person} />
-          ) : (
-            person.motherName
-          )}
-        </td>
-      );
-    } else {
-      return (
-        <td>
-          {person.fatherName === null ? (
-            '-'
-          ) : getPersonByName(person.fatherName) ? (
-            <PersonLink person={getPersonByName(person.fatherName) as Person} />
-          ) : (
-            person.fatherName
-          )}
-        </td>
-      );
-    }
+  const getParentTableData = (
+    person: Person,
+    parentKey: 'motherName' | 'fatherName',
+  ) => {
+    const parentName = person[parentKey];
+    const parent = getPersonByName(parentName);
+
+    return (
+      <td>
+        {parentName === null ? (
+          '-'
+        ) : parent ? (
+          <PersonLink person={parent} />
+        ) : (
+          parentName
+        )}
+      </td>
+    );
   };
 
   return (
@@ -72,8 +64,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
-            {getParentTableData(person, true)}
-            {getParentTableData(person, false)}
+            {getParentTableData(person, 'motherName')}
+            {getParentTableData(person, 'fatherName')}
           </tr>
         ))}
       </tbody>
