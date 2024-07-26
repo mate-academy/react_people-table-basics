@@ -8,5 +8,4 @@ interface Person {
   motherName: string;
   slug: string;
   motherSlug?: string;
-  fatherSlug?: string;
 }

@@ -55,7 +55,7 @@ export const PeopleTable: React.FC<PeopleTableProps> = ({ people }) => {
                 {motherPerson ? (
                   <PersonLink person={motherPerson} />
                 ) : (
-                  <span>{motherName ? motherName : '-'}</span>
+                  <span>{motherName || '-'}</span>
                 )}
               </td>
 
