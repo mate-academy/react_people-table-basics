@@ -5,7 +5,7 @@ type Props = {
   person: Person;
 };
 
-export const PersonItem: React.FC<Props> = ({ person }) => {
+export const PersonLink: React.FC<Props> = ({ person }) => {
   return (
     <tr data-cy="person">
       <td>
@@ -17,7 +17,10 @@ export const PersonItem: React.FC<Props> = ({ person }) => {
       <td>{person.died}</td>
 
       <td>
-        <Link className="has-text-danger" to={`/people/${person.mother?.slug}`}>
+        <Link
+          className={person.sex === 'f' ? 'has-text-danger' : ''}
+          to={`/people/${person.mother?.slug}`}
+        >
           {person.motherName}
         </Link>
       </td>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
-import { PersonItem } from '../PersonItem';
 import { Loader } from '../Loader';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 export const PeopleTable = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -54,7 +54,7 @@ export const PeopleTable = () => {
 
       <tbody>
         {people.map((person: Person) => (
-          <PersonItem key={person.slug} person={person} />
+          <PersonLink key={person.slug} person={person} />
         ))}
         {/* // #region initialPosts */}
         {/* <tr data-cy="person">

@@ -14,7 +14,3 @@ export function getPeople(): Promise<Person[]> {
     .then(() => fetch(API_URL))
     .then(response => response.json());
 }
-
-// export const getTodos = () => {
-//   return client.get<Todo[]>(`/todos?userId=${USER_ID}`);
-// };
