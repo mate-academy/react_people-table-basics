@@ -21,9 +21,19 @@ export const PeopleTable = () => {
     const getPeopleFromServer = async () => {
       try {
         setLoading(true);
-        const response = await getPeople();
+        const peopleFromServer = await getPeople();
 
-        setPeople(response);
+        const peopleWithParents = peopleFromServer.map(person => ({
+          ...person,
+          mother: peopleFromServer.find(
+            parent => parent.name === person.motherName,
+          ),
+          father: peopleFromServer.find(
+            parent => parent.name === person.fatherName,
+          ),
+        }));
+
+        setPeople(peopleWithParents);
       } catch {
         handleError('Something went wrong');
       } finally {
@@ -54,7 +64,7 @@ export const PeopleTable = () => {
 
       <tbody>
         {people.map((person: Person) => (
-          <PersonLink key={person.slug} person={person} />
+          <PersonLink key={person.slug} person={person} people={people} />
         ))}
         {/* // #region initialPosts */}
         {/* <tr data-cy="person">
