@@ -1,6 +1,11 @@
 import { Loader } from './components/Loader';
 
 import './App.scss';
+import { Outlet } from 'react-router-dom';
+// import classNames from 'classnames';
+
+// const getLinkClass = ({ isActive }: { isActive: boolean }) =>
+//   classNames('navbar-item', { 'has-background-grey-lighter': isActive });
 
 export const App = () => (
   <div data-cy="app">
@@ -28,21 +33,19 @@ export const App = () => (
 
     <main className="section">
       <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
+        {/* <h1 className="title">Home Page</h1> */}
+        {/* <h1 className="title">People Page</h1> */}
+        {/* <h1 className="title">Page not found</h1> */}
 
         <div className="block">
           <div className="box table-container">
             <Loader />
 
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
+           
+            <Outlet />
 
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
 
-            <table
+            {/* <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
             >
@@ -158,7 +161,7 @@ export const App = () => (
                   </td>
                 </tr>
               </tbody>
-            </table>
+            </table> */}
           </div>
         </div>
       </div>
