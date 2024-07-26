@@ -64,7 +64,7 @@ export const PeopleTable = () => {
 
       <tbody>
         {people.map((person: Person) => (
-          <PersonLink key={person.slug} person={person} people={people} />
+          <PersonLink key={person.slug} person={person} />
         ))}
         {/* // #region initialPosts */}
         {/* <tr data-cy="person">

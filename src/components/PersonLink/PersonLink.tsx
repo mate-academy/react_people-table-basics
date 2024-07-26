@@ -1,14 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Person } from '../../types';
+import classNames from 'classnames';
 
 type Props = {
   person: Person;
-  people: Person[];
 };
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
+  const { slug } = useParams();
+
   return (
-    <tr data-cy="person">
+    <tr
+      data-cy="person"
+      className={classNames({ 'has-background-warning': person.slug === slug })}
+    >
       <td>
         <Link
           to={`/people/${person.slug}`}
@@ -42,10 +47,6 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       ) : (
         <td>{person.fatherName ? person.fatherName : '-'}</td>
       )}
-
-      {/* <td>
-        <Link to={`/people/:${person.fatherName}?`}>{person.fatherName}</Link>
-      </td> */}
     </tr>
   );
 };
