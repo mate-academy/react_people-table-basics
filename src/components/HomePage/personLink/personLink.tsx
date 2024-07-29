@@ -28,11 +28,15 @@ export const PersonLink: React.FC<PersonLinkProps> = ({
   const hasFather = findPersonSlugByName(person.fatherName ?? undefined);
 
   const isFather = classNames({
-    'has-text-danger': people.find(p => p.name === fatherName)?.sex === 'f',
+    'has-text-danger':
+      people.find(currentPerson => currentPerson.name === fatherName)?.sex ===
+      'f',
     'is-disabled': !hasFather,
   });
   const isMother = classNames({
-    'has-text-danger': people.find(p => p.name === motherName)?.sex === 'f',
+    'has-text-danger':
+      people.find(currentPerson => currentPerson.name === motherName)?.sex ===
+      'f',
     'is-disabled': !hasMother,
   });
 
