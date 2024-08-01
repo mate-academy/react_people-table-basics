@@ -30,12 +30,8 @@ export const PeopleTable = ({ people }: PeopleTableProps) => {
         {people?.map((person) => {
           const { slug, sex, born, died, fatherName, motherName } = person;
 
-          const motherPerson = people.find(
-            (p) => p.name === motherName,
-          );
-          const fatherPerson = people.find(
-            (p) => p.name === fatherName,
-          );
+          const motherPerson = people.find((p) => p.name === motherName);
+          const fatherPerson = people.find((p) => p.name === fatherName);
 
           return (
             <tr
