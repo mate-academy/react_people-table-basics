@@ -13,7 +13,6 @@ import { App } from './App';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
-import React from 'react';
 
 createRoot(document.getElementById('root') as HTMLDivElement).render(
   <Router>

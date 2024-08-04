@@ -1,4 +1,3 @@
-import React from 'react';
 import { Person } from '../../types';
 import { PersonLink } from './PersonLink';
 
