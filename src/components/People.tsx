@@ -6,10 +6,8 @@ import { PersonLink } from './PersonLink';
 import { getPeopleWithParents } from '../utils/utils';
 
 export const People: React.FC = () => {
-  const [peopleFromServer, setPeopleFromServer] = useState<Person[] | null>(
-    null,
-  );
-  const [error, setError] = useState<string | null>(null);
+  const [peopleFromServer, setPeopleFromServer] = useState<Person[]|null>(null);
+  const [error, setError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isArr = Array.isArray(peopleFromServer);
 
@@ -23,7 +21,7 @@ export const People: React.FC = () => {
           setIsLoading(true);
         }
       } catch {
-        setError('ERROR');
+        setError(true);
         setIsLoading(true);
       }
     };
@@ -39,7 +37,7 @@ export const People: React.FC = () => {
         <div className="box table-container">
           {!isLoading && <Loader />}
 
-          {error === 'ERROR' && (
+          {error && (
             <>
               <p data-cy="peopleLoadingError" className="has-text-danger">
                 Something went wrong
@@ -49,7 +47,7 @@ export const People: React.FC = () => {
             </>
           )}
 
-          {isArr && peopleFromServer.length > 0 && (
+          {(isArr && peopleFromServer.length > 0) && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -66,7 +64,7 @@ export const People: React.FC = () => {
               </thead>
 
               <tbody>
-                {isArr &&
+                {
                   peopleFromServer.map(person => (
                     <PersonLink person={person} key={person.name} />
                   ))}
