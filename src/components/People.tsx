@@ -6,8 +6,12 @@ import { PersonLink } from './PersonLink';
 import { getPeopleWithParents } from '../utils/utils';
 
 export const People: React.FC = () => {
-  const [peopleFromServer, setPeopleFromServer] = useState<Person[] | null>(null);
+  const [peopleFromServer, setPeopleFromServer] = useState<Person[] | null>(
+    null,
+  );
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const isArr = Array.isArray(peopleFromServer);
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -16,9 +20,11 @@ export const People: React.FC = () => {
 
         if (Array.isArray(data)) {
           setPeopleFromServer(getPeopleWithParents(data));
+          setIsLoading(true);
         }
       } catch {
         setError('ERROR');
+        setIsLoading(true);
       }
     };
 
@@ -31,7 +37,7 @@ export const People: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {peopleFromServer === null && error === null && <Loader />}
+          {!isLoading && <Loader />}
 
           {error === 'ERROR' && (
             <>
@@ -43,7 +49,7 @@ export const People: React.FC = () => {
             </>
           )}
 
-          {(Array.isArray(peopleFromServer) && peopleFromServer.length > 0) && (
+          {isArr && peopleFromServer.length > 0 && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -60,23 +66,21 @@ export const People: React.FC = () => {
               </thead>
 
               <tbody>
-                {Array.isArray(peopleFromServer) &&
+                {isArr &&
                   peopleFromServer.map(person => (
                     <PersonLink person={person} key={person.name} />
                   ))}
               </tbody>
             </table>
           )}
-          {
-            (Array.isArray(peopleFromServer) && peopleFromServer.length === 0) && (
-              <table
-                data-cy="noPeopleMessage"
-                className="table is-striped is-hoverable is-narrow is-fullwidth"
-              >
-                no people
-              </table>
-            )
-          }
+          {isArr && peopleFromServer.length === 0 && (
+            <table
+              data-cy="noPeopleMessage"
+              className="table is-striped is-hoverable is-narrow is-fullwidth"
+            >
+              no people
+            </table>
+          )}
         </div>
       </div>
     </>

@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { Person } from '../types';
 import { Link, NavLink, useParams } from 'react-router-dom';
 import { isParentsExist } from '../utils/utils';
+import { Sex } from '../types/enum';
 
 type PersonLinkProps = {
   person: Person;
@@ -30,7 +31,7 @@ export const PersonLink: React.FC<PersonLinkProps> = ({ person }) => {
       <td>
         <NavLink
           to={`/people/${slug}`}
-          className={classNames({ 'has-text-danger': sex === 'f' })}
+          className={classNames({ 'has-text-danger': sex === Sex.f })}
         >
           {name}
         </NavLink>
@@ -40,12 +41,12 @@ export const PersonLink: React.FC<PersonLinkProps> = ({ person }) => {
       <td>{born}</td>
       <td>{died}</td>
 
-      {mother && mother.sex === 'f' ? (
+      {mother && mother.sex === Sex.f ? (
         <td>
           <Link
             to={`/people/${mother.slug}`}
             className={classNames({
-              'has-text-danger': mother && mother.sex === 'f',
+              'has-text-danger': mother && mother.sex === Sex.f,
             })}
           >
             {isParentsExist(motherName)}
@@ -55,7 +56,7 @@ export const PersonLink: React.FC<PersonLinkProps> = ({ person }) => {
         <td>{isParentsExist(motherName)}</td>
       )}
 
-      {father && father.sex === 'm' ? (
+      {father && father.sex === Sex.m ? (
         <td>
           <Link to={`/people/${father.slug}`}>
             {isParentsExist(fatherName)}
