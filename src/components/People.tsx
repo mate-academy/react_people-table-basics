@@ -6,7 +6,7 @@ import { PersonLink } from './PersonLink';
 import { getPeopleWithParents } from '../utils/utils';
 
 export const People: React.FC = () => {
-  const [peopleFromServer, setPeopleFromServer] = useState<Person[]>([]);
+  const [peopleFromServer, setPeopleFromServer] = useState<Person[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export const People: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {peopleFromServer.length === 0 && error === null && <Loader />}
+          {peopleFromServer === null && error === null && <Loader />}
 
           {error === 'ERROR' && (
             <>
@@ -43,7 +43,7 @@ export const People: React.FC = () => {
             </>
           )}
 
-          {peopleFromServer.length > 0 && (
+          {(Array.isArray(peopleFromServer) && peopleFromServer.length > 0) && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -67,6 +67,16 @@ export const People: React.FC = () => {
               </tbody>
             </table>
           )}
+          {
+            (Array.isArray(peopleFromServer) && peopleFromServer.length === 0) && (
+              <table
+                data-cy="noPeopleMessage"
+                className="table is-striped is-hoverable is-narrow is-fullwidth"
+              >
+                no people
+              </table>
+            )
+          }
         </div>
       </div>
     </>
