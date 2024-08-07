@@ -1,8 +1,10 @@
 import './App.scss';
-import { NavLink, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import classNames from 'classnames';
-import { People } from './components/People/PeopleList';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { PeoplePage } from './components/People/PeopleList';
 import { useEffect } from 'react';
+import { Home } from './components/Home/Home';
+import { NotFound } from './components/NotFound/NotFound';
+import { NavBar } from './components/NavBar/NavBar';
 
 export const App = () => {
   const navigate = useNavigate();
@@ -23,41 +25,16 @@ export const App = () => {
         aria-label="main navigation"
       >
         <div className="container">
-          <div className="navbar-brand">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                classNames('navbar-item', {
-                  'has-background-grey-lighter': isActive,
-                })
-              }
-            >
-              Home
-            </NavLink>
-
-            <NavLink
-              to="/people"
-              className={({ isActive }) =>
-                classNames('navbar-item', {
-                  'has-background-grey-lighter': isActive,
-                })
-              }
-            >
-              People
-            </NavLink>
-          </div>
+          <div className="navbar-brand">{<NavBar />}</div>
         </div>
       </nav>
 
       <main className="section">
         <div className="container">
           <Routes>
-            <Route
-              path="/"
-              element={<h1 className="title">Home Page</h1>}
-            ></Route>
-            <Route path="/people/:id?" element={<People />}></Route>
-            <Route path="*" element={<h1 className="title">Page not found</h1>}></Route>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/people/:id?" element={<PeoplePage />}></Route>
+            <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </div>
       </main>

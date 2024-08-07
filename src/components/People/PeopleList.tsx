@@ -1,21 +1,24 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
 import { Person as PersonType } from '../../types';
 import { Person } from '../Person';
 
-export const People: React.FC = () => {
+const columnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
+export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<PersonType[]>([]);
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchPeople = async () => {
       try {
-        const list = await getPeople();
-        setPeople(list);
+        const peopleList = await getPeople();
+
+        setPeople(peopleList);
       } catch {
-        setError('Something went wrong');
+        setErrorMessage('Something went wrong');
       } finally {
         setIsLoading(false);
       }
@@ -23,24 +26,6 @@ export const People: React.FC = () => {
 
     fetchPeople();
   }, []);
-
-  const nameColor = (parentName: string | null) => {
-    if (parentName === null) {
-      return;
-    }
-
-    const insideNameList = people.find(el => el.name === parentName)?.sex;
-
-    if (insideNameList === 'f') {
-      return 'f';
-    }
-
-    if (insideNameList === 'm') {
-      return 'm';
-    }
-
-    return;
-  };
 
   const findSlug = (parentName: string | null) => {
     return people.find(el => el.name === parentName)?.slug;
@@ -52,48 +37,41 @@ export const People: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {error && (
+          {errorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {isLoading ? (
-            <Loader />
-          ) : !!people.length ? (
+          {isLoading && <Loader />}
+
+          {!isLoading && people.length > 0 && (
             <table
               data-cy="peopleTable"
               className="table is-striped is-hoverable is-narrow is-fullwidth"
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
+                  {columnNames.map(name => (
+                    <th key={name}>{name}</th>
+                  ))}
                 </tr>
               </thead>
 
               <tbody>
-                {people.map(el => (
+                {people.map(person => (
                   <Person
-                    key={el.slug}
-                    name={el.name}
-                    sex={el.sex}
-                    born={el.born}
-                    died={el.died}
-                    mother={el.motherName}
-                    father={el.fatherName}
-                    slug={el.slug}
-                    nameColor={nameColor}
+                    key={person.slug}
+                    person={person}
+                    people={people}
                     findSlug={findSlug}
                   />
                 ))}
               </tbody>
             </table>
-          ) : (
+          )}
+
+          {!isLoading && people.length === 0 && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
         </div>
