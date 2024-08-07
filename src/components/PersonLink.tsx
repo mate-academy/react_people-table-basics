@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { Person } from '../types';
+import { Person, Sex } from '../types';
 import classNames from 'classnames';
 
 interface Props {
@@ -24,7 +24,7 @@ export const PersonLink: React.FC<Props> = ({ person, findParent }) => {
       <td>
         <Link
           to={`/people/${slug}`}
-          className={classNames({ 'has-text-danger': sex === 'f' })}
+          className={classNames({ 'has-text-danger': sex === Sex.female })}
         >
           {name}
         </Link>
@@ -35,7 +35,7 @@ export const PersonLink: React.FC<Props> = ({ person, findParent }) => {
       <td>{died}</td>
       <td>
         {!mother ? (
-          motherName || '-'
+          motherName || Sex.empty
         ) : (
           <Link className="has-text-danger" to={`/people/${mother.slug}`}>
             {motherName}
@@ -44,7 +44,7 @@ export const PersonLink: React.FC<Props> = ({ person, findParent }) => {
       </td>
       <td>
         {!father ? (
-          fatherName || '-'
+          fatherName || Sex.empty
         ) : (
           <Link to={`/people/${father.slug}`}>{fatherName}</Link>
         )}
