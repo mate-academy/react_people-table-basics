@@ -1,31 +1,10 @@
-import cn from 'classnames';
 import './App.scss';
-import { NavLink, Outlet } from 'react-router-dom';
-
-const pickClass = ({ isActive }: { isActive: boolean }) =>
-  cn('navbar-item', {
-    'has-background-grey-lighter': isActive,
-  });
+import { Outlet } from 'react-router-dom';
+import { Navbar } from './NavBar';
 
 export const App = () => (
   <div data-cy="app">
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <NavLink className={pickClass} to="/">
-            Home
-          </NavLink>
-          <NavLink className={pickClass} to="/people">
-            People
-          </NavLink>
-        </div>
-      </div>
-    </nav>
+    <Navbar />
 
     <main className="section">
       <div className="container">
