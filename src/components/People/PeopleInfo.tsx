@@ -1,6 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
 import { Person } from '../../types';
-import classNames from 'classnames';
+import cn from 'classnames';
+
+enum Gender {
+  Female = 'f',
+  Male = 'm',
+}
 
 type Props = {
   person: Person;
@@ -17,13 +22,13 @@ export const PeopleInfo = ({ person, people }: Props) => {
   return (
     <tr
       data-cy="person"
-      className={classNames({
+      className={cn({
         'has-background-warning': identity === slug,
       })}
     >
       <td>
         <Link
-          className={`${sex === 'f' && 'has-text-danger'}`}
+          className={cn({ 'has-text-danger': sex === Gender.Female })}
           to={`/people/${slug}`}
         >
           {name}
@@ -36,7 +41,9 @@ export const PeopleInfo = ({ person, people }: Props) => {
       <td>
         {motherInlist ? (
           <Link
-            className={`${motherInlist.sex === 'f' && 'has-text-danger'}`}
+            className={cn({
+              'has-text-danger': motherInlist.sex === Gender.Female,
+            })}
             to={`/people/${motherInlist.slug}`}
           >
             {motherInlist.name}
@@ -48,7 +55,9 @@ export const PeopleInfo = ({ person, people }: Props) => {
       <td>
         {fatherInlist ? (
           <Link
-            className={`${fatherInlist.sex === 'f' && 'has-text-danger'}`}
+            className={cn({
+              'has-text-danger': fatherInlist.sex === Gender.Female,
+            })}
             to={`/people/${fatherInlist.slug}`}
           >
             {fatherInlist.name}
