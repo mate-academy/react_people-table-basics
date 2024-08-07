@@ -7,15 +7,16 @@ type Props = {
   people: Person[];
 };
 
+const COLUMN_NAMES = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+const NO_PARENT_PLACEHOLDER = '-';
+
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
   const selectedSlug = slug;
 
-  const columnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
-
   const getParent = (parentName: string | null) => {
     if (!parentName) {
-      return '-';
+      return NO_PARENT_PLACEHOLDER;
     }
 
     const parent = people.find(person => person.name === parentName);
@@ -30,7 +31,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          {columnNames.map(name => (
+          {COLUMN_NAMES.map(name => (
             <th key={name}>{name}</th>
           ))}
         </tr>

@@ -6,16 +6,16 @@ import { Person } from '../../types';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     setErrorMessage('');
-    setIsloading(true);
+    setIsLoading(true);
     getPeople()
       .then(setPeople)
       .catch(() => setErrorMessage('Something went wrong'))
-      .finally(() => setIsloading(false));
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
