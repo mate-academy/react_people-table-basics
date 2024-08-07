@@ -22,6 +22,7 @@ export const App = () => (
           >
             Home
           </NavLink>
+          </NavLink>
 
           <NavLink
             className={({ isActive }: { isActive: boolean }) =>
@@ -30,6 +31,7 @@ export const App = () => (
             to="/people"
           >
             People
+          </NavLink>
           </NavLink>
         </div>
       </div>
