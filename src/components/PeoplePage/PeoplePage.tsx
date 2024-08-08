@@ -4,7 +4,7 @@ import { PeopleTable } from '../PeopleTable';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 
-function assignParents(people: Person[]) {
+function getPeopleWithParents(people: Person[]) {
   const copyPeople = [...people];
 
   for (const copyPerson of copyPeople) {
@@ -30,13 +30,13 @@ export const PeoplePage = () => {
   useEffect(() => {
     getPeople()
       .then(data => {
-        const peopleWithParents = assignParents(data);
-
+        const peopleWithParents = getPeopleWithParents(data);
         setPeople(peopleWithParents);
-        setIsLoading(false);
       })
       .catch(() => {
         setError('Loading error');
+      })
+      .finally(() => {
         setIsLoading(false);
       });
   }, []);
@@ -44,15 +44,16 @@ export const PeoplePage = () => {
   return (
     <>
       <h1 className="title">People Page</h1>
-      {isLoading ? (
-        <Loader />
-      ) : error ? (
+      {isLoading && <Loader />}
+      {!isLoading && error && (
         <p className="has-text-danger" data-cy="peopleLoadingError">
           {error}
         </p>
-      ) : people.length !== 0 ? (
+      )}
+      {!isLoading && !error && people.length !== 0 && (
         <PeopleTable people={people} />
-      ) : (
+      )}
+      {!isLoading && !error && people.length === 0 && (
         <p data-cy="noPeopleMessage">No people</p>
       )}
     </>

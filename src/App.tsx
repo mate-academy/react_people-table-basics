@@ -1,4 +1,3 @@
-
 import { Navbar } from './components/Navbar';
 import './App.scss';
 import { AppRoutes } from './AppRoutes';
