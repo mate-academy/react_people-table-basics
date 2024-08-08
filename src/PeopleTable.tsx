@@ -7,8 +7,8 @@ interface Props {
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const linkParents = people.map(person => ({
     ...person,
-    mother: people.find(currPerson => currPerson.name === person.motherName),
-    father: people.find(currPerson => currPerson.name === person.fatherName),
+    mother: people.find(curPerson => curPerson.name === person.motherName),
+    father: people.find(curPerson => curPerson.name === person.fatherName),
   }));
 
   return (
