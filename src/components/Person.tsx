@@ -10,34 +10,39 @@ interface Props {
   findSlug: (parentName: string | null) => string | undefined;
 }
 
+enum Sex {
+  male = 'm',
+  female = 'f',
+}
+
 export const Person: React.FC<Props> = ({ person, people, findSlug }) => {
   const { name, sex, born, died, motherName, fatherName, slug } = person;
   const location = useLocation();
 
   const getGenderClassName = (parentName: string | null) => {
-    const parent = people.find(el => el.name === parentName);
+    const parent = people.find(personage => personage.name === parentName);
 
-    if (parent?.sex === 'f') {
+    if (parent?.sex === Sex.female) {
       return 'has-text-danger';
     }
 
-    if (parent?.sex === 'm') {
+    if (parent?.sex === Sex.male) {
       return '';
     }
 
-    return undefined;
+    return;
   };
 
   return (
     <tr
       data-cy="person"
-      className={
-        location.pathname.includes(slug) ? 'has-background-warning' : undefined
-      }
+      className={classNames({
+        'has-background-warning': location.pathname.includes(slug),
+      })}
     >
       <td>
         <a
-          className={classNames({ 'has-text-danger': sex === 'f' })}
+          className={classNames({ 'has-text-danger': sex === Sex.female })}
           href={`#/people/${slug}`}
         >
           {name}

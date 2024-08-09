@@ -4,6 +4,10 @@ import { getPeople } from '../../api';
 import { Person as PersonType } from '../../types';
 import { Person } from '../Person';
 
+export enum Errors {
+  error = 'Something went wrong',
+}
+
 const columnNames = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
 
 export const PeoplePage: React.FC = () => {
@@ -18,7 +22,7 @@ export const PeoplePage: React.FC = () => {
 
         setPeople(peopleList);
       } catch {
-        setErrorMessage('Something went wrong');
+        setErrorMessage(Errors.error);
       } finally {
         setIsLoading(false);
       }
@@ -28,7 +32,7 @@ export const PeoplePage: React.FC = () => {
   }, []);
 
   const findSlug = (parentName: string | null) => {
-    return people.find(el => el.name === parentName)?.slug;
+    return people.find(person => person.name === parentName)?.slug;
   };
 
   return (
@@ -71,7 +75,7 @@ export const PeoplePage: React.FC = () => {
             </table>
           )}
 
-          {!isLoading && people.length === 0 && (
+          {!isLoading && !people.length && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
         </div>
