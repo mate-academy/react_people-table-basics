@@ -3,7 +3,6 @@ import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
 import { NotFoundPage } from './components/PageNotFound';
 
-
 export const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />

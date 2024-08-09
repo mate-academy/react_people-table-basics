@@ -2,7 +2,6 @@ import React from 'react';
 import { Person } from '../../types';
 import { PersonRow } from '../PersonRow';
 
-
 interface Props {
   people: Person[];
 }
@@ -17,13 +16,13 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          {columns.map((column) => (
+          {columns.map(column => (
             <th key={column}>{column}</th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {people.map((person) => (
+        {people.map(person => (
           <PersonRow key={person.slug} person={person} />
         ))}
       </tbody>
