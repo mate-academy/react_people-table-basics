@@ -3,6 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { FC } from 'react';
 
+enum Sex {
+  Female = 'f',
+  Male = 'm',
+}
+
 type Props = {
   people: Person[];
 };
@@ -10,10 +15,8 @@ type Props = {
 export const TabPeople: FC<Props> = ({ people }) => {
   const { slug } = useParams();
 
-  const mother = (person: Person) =>
-    people.find(per => per.name === person.motherName);
-  const father = (person: Person) =>
-    people.find(per => per.name === person.fatherName);
+  const findPersonByName = (name: string | undefined) =>
+    people.find(person => person.name === name);
 
   return (
     <table
@@ -31,50 +34,60 @@ export const TabPeople: FC<Props> = ({ people }) => {
         </tr>
       </thead>
       <tbody>
-        {people.map(person => (
-          <tr
-            data-cy="person"
-            key={person.slug}
-            className={classNames({
-              'has-background-warning': slug === person.slug,
-            })}
-          >
-            <td>
-              <Link
-                to={`/people/${person.slug}`}
-                className={classNames({
-                  'has-text-danger': person.sex === 'f',
-                })}
-              >
-                {person.name}
-              </Link>
-            </td>
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
-            <td>
-              {person.motherName && mother(person)?.slug ? (
+        {people.map(
+          ({
+            name,
+            sex,
+            born,
+            died,
+            motherName,
+            fatherName,
+            slug: personSlug,
+          }) => (
+            <tr
+              data-cy="person"
+              key={personSlug}
+              className={classNames({
+                'has-background-warning': slug === personSlug,
+              })}
+            >
+              <td>
                 <Link
-                  to={`/people/${mother(person)?.slug}`}
-                  className="has-text-danger"
+                  to={`/people/${personSlug}`}
+                  className={classNames({
+                    'has-text-danger': sex === Sex.Female,
+                  })}
                 >
-                  {person.motherName}
+                  {name}
                 </Link>
-              ) : (
-                <span>{person.motherName || '-'}</span>
-              )}
-            </td>
-            <td>
-              {person.fatherName && father(person)?.slug ? (
-                <Link to={`/people/${father(person)?.slug}`}>
-                  {person.fatherName}
-                </Link>
-              ) : (
-                <span>{person.fatherName || '-'}</span>
-              )}
-            </td>
-          </tr>
-        ))}
+              </td>
+              <td>{sex}</td>
+              <td>{born}</td>
+              <td>{died}</td>
+              <td>
+                {motherName && findPersonByName(motherName)?.slug ? (
+                  <Link
+                    to={`/people/${findPersonByName(motherName)?.slug}`}
+                    className="has-text-danger"
+                  >
+                    {motherName}
+                  </Link>
+                ) : (
+                  <span>{motherName || '-'}</span>
+                )}
+              </td>
+              <td>
+                {fatherName && findPersonByName(fatherName)?.slug ? (
+                  <Link to={`/people/${findPersonByName(fatherName)?.slug}`}>
+                    {fatherName}
+                  </Link>
+                ) : (
+                  <span>{fatherName || '-'}</span>
+                )}
+              </td>
+            </tr>
+          ),
+        )}
       </tbody>
     </table>
   );
