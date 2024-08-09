@@ -10,7 +10,9 @@ export const PeoplePage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
   const { slug } = useParams();
-  const selectedPerson = slug ? people.find(p => p.slug === slug) : null;
+  const selectedPerson = slug
+    ? people.find(person => person.slug === slug)
+    : null;
 
   useEffect(() => {
     setLoading(true);

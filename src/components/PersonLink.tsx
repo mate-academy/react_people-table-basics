@@ -1,6 +1,7 @@
 import React from 'react';
 import { Person } from '../types';
 import { Link, NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 type Props = {
   person: Person;
@@ -14,12 +15,12 @@ export const PersonLink: React.FC<Props> = ({ person, people, isSelected }) => {
       return '-';
     }
 
-    const foundPerson = people.find(per => per.name === name);
+    const foundPerson = people.find(persons => persons.name === name);
 
     return foundPerson ? (
       <NavLink
         to={`/people/${foundPerson.slug}`}
-        className={foundPerson.sex === 'f' ? 'has-text-danger' : ''}
+        className={classNames({ 'has-text-danger': foundPerson.sex === 'f' })}
       >
         {name}
       </NavLink>

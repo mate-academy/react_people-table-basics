@@ -22,7 +22,7 @@ export const PeopleTable: React.FC<Props> = ({
           </p>
         )}
 
-        {people.length === 0 && (
+        {!people.length && (
           <p data-cy="noPeopleMessage">There are no people on the server</p>
         )}
         <table
