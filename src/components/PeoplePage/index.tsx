@@ -16,9 +16,9 @@ export const PeoplePage = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const errorReasons = !isLoading && errorMessage;
-  const emptyData = !isLoading && !people.length;
-  const existPeople = !isLoading && people.length !== 0;
+  const isErrorPresent = !isLoading && errorMessage;
+  const isDataEmpty = !isLoading && !people.length;
+  const isPeopleAvailable = !isLoading && people.length !== 0;
 
   return (
     <>
@@ -27,17 +27,17 @@ export const PeoplePage = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {errorReasons && (
+          {isErrorPresent && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               {errorMessage}
             </p>
           )}
 
-          {emptyData && (
+          {isDataEmpty && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {existPeople && <PeopleTable people={people} />}
+          {isPeopleAvailable && <PeopleTable people={people} />}
         </div>
       </div>
     </>
