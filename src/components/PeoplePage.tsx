@@ -1,28 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Loader } from './Loader';
+import { useValues } from '../PeopleContext';
 import { Table } from './Table';
-import { Person } from '../types';
-import { getPeople } from '../api';
-import { ErrorMessages } from '../types/ErrorMessages';
 
 export const PeoplePage: React.FC = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsloading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const fetchPeople = async () => {
-    setIsloading(true);
-
-    try {
-      const loadedPeople = await getPeople();
-
-      setPeople(loadedPeople);
-    } catch {
-      setErrorMessage(ErrorMessages.PeopleLoadError);
-    } finally {
-      setIsloading(false);
-    }
-  };
+  const { people, isLoading, errorMessage, fetchPeople } = useValues();
 
   useEffect(() => {
     fetchPeople();
@@ -46,7 +28,7 @@ export const PeoplePage: React.FC = () => {
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!!people.length && !isLoading && <Table people={people} />}
+          {!!people.length && !isLoading && <Table />}
         </div>
       </div>
     </>

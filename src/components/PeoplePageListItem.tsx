@@ -2,14 +2,15 @@ import React from 'react';
 import { Person } from '../types';
 import { Link, useParams } from 'react-router-dom';
 import cn from 'classnames';
+import { useValues } from '../PeopleContext';
 
 type Props = {
   person: Person;
-  people: Person[];
 };
 
-export const PeoplePageListItem: React.FC<Props> = ({ person, people }) => {
+export const PeoplePageListItem: React.FC<Props> = ({ person }) => {
   const { name, sex, born, died, motherName, fatherName, slug } = person;
+  const { people } = useValues();
   const { slug: slugName } = useParams();
 
   const mother = people.find(p => p.name === motherName);

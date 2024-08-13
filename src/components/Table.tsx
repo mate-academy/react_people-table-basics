@@ -1,12 +1,10 @@
 import React from 'react';
 import { PeoplePageList } from './PeoplePageList';
-import { Person } from '../types';
+import { useValues } from '../PeopleContext';
 
-type Props = {
-  people: Person[];
-}
+export const Table: React.FC = () => {
+  const { people } = useValues();
 
-export const Table: React.FC<Props> = ({ people }) => {
   return (
     <>
       {!people.length ? (
@@ -28,7 +26,7 @@ export const Table: React.FC<Props> = ({ people }) => {
           </thead>
 
           <tbody>
-            <PeoplePageList people={people} />
+            <PeoplePageList />
           </tbody>
         </table>
       )}
