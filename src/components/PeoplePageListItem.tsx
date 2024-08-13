@@ -21,7 +21,7 @@ export const PeoplePageListItem: React.FC<Props> = ({ person }) => {
     father,
   } = person;
   const { people } = useValues();
-  const { slugName } = useParams();
+  const { slug: slugName } = useParams();
 
   const extendedPerson: Person = {
     ...person,

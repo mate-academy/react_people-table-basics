@@ -15,7 +15,7 @@ export const App = () => {
             <Route path="/home" element={<Navigate to="/" replace={true} />} />
             <Route path="people">
               <Route index element={<PeoplePage />} />
-              <Route path=":slugName" element={<PeoplePage />} />
+              <Route path=":slug" element={<PeoplePage />} />
             </Route>
             <Route
               path="*"
