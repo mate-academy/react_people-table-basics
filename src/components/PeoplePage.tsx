@@ -20,11 +20,11 @@ export const PeoplePage: React.FC = () => {
 
           {isError && !isLoading && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
-              {}
+              Something went wrong
             </p>
           )}
 
-          {!people.length && !isLoading && (
+          {!people.length && !isLoading && !isError && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
