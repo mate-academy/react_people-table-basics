@@ -1,6 +1,6 @@
 import React from 'react';
 import { Person } from '../types';
-import { NavLink, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { useValues } from '../PeopleContext';
 
@@ -22,12 +22,12 @@ export const PeoplePageListItem: React.FC<Props> = ({ person }) => {
       className={cn({ 'has-background-warning': slugName === slug })}
     >
       <td>
-        <NavLink
+        <Link
           to={`/people/${slug}`}
           className={cn({ 'has-text-danger': sex === 'f' })}
         >
           {name}
-        </NavLink>
+        </Link>
       </td>
 
       <td>{sex}</td>
@@ -36,12 +36,9 @@ export const PeoplePageListItem: React.FC<Props> = ({ person }) => {
 
       <td>
         {mother ? (
-          <NavLink
-            to={`/people/${mother.slug}`}
-            className="has-text-danger"
-          >
+          <Link to={`/people/${mother.slug}`} className="has-text-danger">
             {motherName || '-'}
-          </NavLink>
+          </Link>
         ) : (
           <p>{motherName || '-'}</p>
         )}
@@ -49,9 +46,7 @@ export const PeoplePageListItem: React.FC<Props> = ({ person }) => {
 
       <td>
         {father ? (
-          <NavLink to={`/people/${father.slug}`}>
-            {fatherName || '-'}
-          </NavLink>
+          <Link to={`/people/${father.slug}`}>{fatherName || '-'}</Link>
         ) : (
           <p>{fatherName || '-'}</p>
         )}
