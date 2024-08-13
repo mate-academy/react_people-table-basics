@@ -51,11 +51,9 @@ export const PeoplePage = () => {
                   <th>Father</th>
                 </tr>
               </thead>
-
               <tbody>
                 {people.map(person => (
-                  // eslint-disable-next-line react/jsx-key
-                  <PersonLink person={person} people={people} />
+                  <PersonLink person={person} people={people} key={person.id} />
                 ))}
               </tbody>
             </table>
