@@ -8,6 +8,7 @@ import React, {
 import { PeopleContextValue } from './types/ContextValues';
 import { getPeople } from './api';
 import { Person } from './types';
+import { ErrorMessages } from './types/ErrorMessages';
 
 export const PeopleContext = createContext<PeopleContextValue | null>(null);
 
@@ -18,7 +19,7 @@ type Props = {
 export const PeopleProvider: React.FC<Props> = ({ children }) => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsloading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const fetchPeople = useCallback(async () => {
     setIsloading(true);
@@ -28,7 +29,7 @@ export const PeopleProvider: React.FC<Props> = ({ children }) => {
 
       setPeople(loadedPeople);
     } catch {
-      setIsError(true);
+      setErrorMessage(ErrorMessages.PeopleLoadError);
     } finally {
       setIsloading(false);
     }
@@ -38,10 +39,10 @@ export const PeopleProvider: React.FC<Props> = ({ children }) => {
     () => ({
       people,
       isLoading,
-      isError,
+      errorMessage,
       fetchPeople,
     }),
-    [people, isLoading, isError, fetchPeople],
+    [people, isLoading, errorMessage, fetchPeople],
   );
 
   return (

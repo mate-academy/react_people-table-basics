@@ -9,25 +9,12 @@ type Props = {
 };
 
 export const PeoplePageListItem: React.FC<Props> = ({ person }) => {
-  const {
-    name,
-    sex,
-    born,
-    died,
-    motherName,
-    fatherName,
-    slug,
-    mother,
-    father,
-  } = person;
+  const { name, sex, born, died, motherName, fatherName, slug } = person;
   const { people } = useValues();
   const { slug: slugName } = useParams();
 
-  const extendedPerson: Person = {
-    ...person,
-    mother: mother || people.find(p => p.name === motherName),
-    father: father || people.find(p => p.name === fatherName),
-  };
+  const mother = people.find(p => p.name === motherName);
+  const father = people.find(p => p.name === fatherName);
 
   return (
     <tr
@@ -46,10 +33,11 @@ export const PeoplePageListItem: React.FC<Props> = ({ person }) => {
       <td>{sex}</td>
       <td>{born}</td>
       <td>{died}</td>
+
       <td>
-        {extendedPerson.mother ? (
+        {mother ? (
           <NavLink
-            to={`/people/${extendedPerson.mother.slug}`}
+            to={`/people/${mother.slug}`}
             className="has-text-danger"
           >
             {motherName || '-'}
@@ -58,9 +46,10 @@ export const PeoplePageListItem: React.FC<Props> = ({ person }) => {
           <p>{motherName || '-'}</p>
         )}
       </td>
+
       <td>
-        {extendedPerson.father ? (
-          <NavLink to={`/people/${extendedPerson.father.slug}`}>
+        {father ? (
+          <NavLink to={`/people/${father.slug}`}>
             {fatherName || '-'}
           </NavLink>
         ) : (

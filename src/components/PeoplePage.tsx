@@ -4,7 +4,7 @@ import { useValues } from '../PeopleContext';
 import { Table } from './Table';
 
 export const PeoplePage: React.FC = () => {
-  const { people, isLoading, isError, fetchPeople } = useValues();
+  const { people, isLoading, errorMessage, fetchPeople } = useValues();
 
   useEffect(() => {
     fetchPeople();
@@ -18,13 +18,13 @@ export const PeoplePage: React.FC = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {isError && !isLoading && (
+          {errorMessage && !isLoading && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
+              {errorMessage}
             </p>
           )}
 
-          {!people.length && !isLoading && !isError && (
+          {!people.length && !isLoading && !errorMessage && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
