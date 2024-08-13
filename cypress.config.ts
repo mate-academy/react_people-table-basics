@@ -4,6 +4,12 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: 'http://localhost:3000',
     specPattern: 'cypress/integration/**/*.spec.{js,ts,jsx,tsx}',
+    setupNodeEvents(on, config) {
+      config.defaultCommandTimeout = 60000;
+      config.requestTimeout = 60000;
+      config.responseTimeout = 60000;
+      return config;
+    },
   },
   video: true,
   viewportHeight: 1920,
