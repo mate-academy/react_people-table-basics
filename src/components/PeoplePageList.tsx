@@ -1,13 +1,15 @@
-import { useValues } from '../PeopleContext';
+import { Person } from '../types';
 import { PeoplePageListItem } from './PeoplePageListItem';
 
-export const PeoplePageList: React.FC = () => {
-  const { people } = useValues();
+type Props = {
+  people: Person[];
+}
 
+export const PeoplePageList: React.FC<Props> = ({ people }) => {
   return (
     <>
       {people.map(person => (
-        <PeoplePageListItem person={person} key={person.slug} />
+        <PeoplePageListItem person={person} key={person.slug} people={people} />
       ))}
     </>
   );
