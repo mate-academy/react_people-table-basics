@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Person } from '../types/Person';
-import { PersonLink } from './PersonLink';
 import { useNavigate, useParams } from 'react-router-dom';
-import classNames from 'classnames';
+import { PersonRow } from './PersonRow';
 
 interface Props {
   people: Person[];
@@ -26,6 +25,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     navigate(`/people/${slug}`, { replace: true });
   };
 
+  const columns = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
   return (
     <table
       data-cy="peopleTable"
@@ -33,51 +34,22 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {columns.map(column => (
+            <th key={column}>{column}</th>
+          ))}
         </tr>
       </thead>
 
       <tbody>
-        {people.map(person => {
-          const mother = people.find(p => p.name === person.motherName);
-          const father = people.find(p => p.name === person.fatherName);
-
-          return (
-            <tr
-              key={person.slug}
-              data-cy="person"
-              className={classNames({
-                'has-background-warning': person.slug === selectedPerson,
-              })}
-            >
-              <td>
-                <PersonLink person={person} onClick={handlePersonClick} />
-              </td>
-              <td>{person.sex}</td>
-              <td>{person.born}</td>
-              <td>{person.died}</td>
-              <td>
-                {mother ? (
-                  <PersonLink person={mother} onClick={handlePersonClick} />
-                ) : (
-                  person.motherName || '-'
-                )}
-              </td>
-              <td>
-                {father ? (
-                  <PersonLink person={father} onClick={handlePersonClick} />
-                ) : (
-                  person.fatherName || '-'
-                )}
-              </td>
-            </tr>
-          );
-        })}
+        {people.map(person => (
+          <PersonRow
+            key={person.slug}
+            person={person}
+            selectedPerson={selectedPerson}
+            onPersonClick={handlePersonClick}
+            people={people}
+          />
+        ))}
       </tbody>
     </table>
   );
