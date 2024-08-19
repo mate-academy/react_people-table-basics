@@ -9,7 +9,7 @@ export const People = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/people.json')
+    fetch('https://mate-academy.github.io/react_people-table/api/people.json')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
