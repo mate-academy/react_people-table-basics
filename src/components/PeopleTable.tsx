@@ -1,46 +1,39 @@
-import { useContext, useEffect } from 'react';
-import { DispatchContext, StatesContext } from '../context/Store';
-import { getPeople } from '../api';
+import { useContext } from 'react';
+import { StatesContext } from '../context/Store';
+import { PersonLink } from './PersonLink';
 
 export const PeopleTable = () => {
-  const { people } = useContext(StatesContext);
-  const dispatch = useContext(DispatchContext);
+  const { people, isLoading, errorMessage } = useContext(StatesContext);
 
-  useEffect(() => {
-    getPeople()
-      .then(peopleFromServer => dispatch({ type: 'loadPeople', payload: peopleFromServer, }))
-      .catch(() => console.log('error'));
-  }, []);
+  const findPersonByName = (name: string) => {
+    return people.find(person => person.name === name);
+  };
 
   return (
     <table
       data-cy="peopleTable"
       className="table is-striped is-hoverable is-narrow is-fullwidth"
     >
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
-        </tr>
-      </thead>
+      {!isLoading && !errorMessage && (
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Sex</th>
+            <th>Born</th>
+            <th>Died</th>
+            <th>Mother</th>
+            <th>Father</th>
+          </tr>
+        </thead>
+      )}
       <tbody>
         {people.map(person => {
           return (
-            <tr data-cy="person" key={person.slug}>
-              <td>
-                <a href="#/people/:slug">{person.name}</a>
-              </td>
-
-              <td>{person.sex}</td>
-              <td>{person.born}</td>
-              <td>{person.died}</td>
-              <td>{person.motherName}</td>
-              <td>{person.fatherName}</td>
-            </tr>
+            <PersonLink
+              findPersonByName={findPersonByName}
+              person={person}
+              key={person.slug}
+            />
           );
         })}
 

@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState } from 'react';
+import { createContext, useReducer } from 'react';
 import { Person } from '../types';
 import { States } from '../types/States';
 
@@ -8,12 +8,14 @@ type DispatchContextType = {
 
 type Action =
   | { type: 'loadPeople'; payload: Person[] }
-  | { type: 'startUpdate'; payload: boolean }
-  | { type: 'stopUpdate'; payload: boolean };
+  | { type: 'startLoading' }
+  | { type: 'stopLoading' }
+  | { type: 'setErrorMessage' };
 
 const initialStates: States = {
   people: [],
   isLoading: false,
+  errorMessage: '',
 };
 
 function reducer(states: States, action: Action) {
@@ -23,11 +25,14 @@ function reducer(states: States, action: Action) {
     case 'loadPeople':
       newStates = { ...newStates, people: action.payload };
       break;
-    case 'startUpdate':
-      newStates = { ...newStates, isLoading: action.payload };
+    case 'startLoading':
+      newStates = { ...newStates, isLoading: true };
       break;
-    case 'stopUpdate':
-      newStates = { ...newStates, isLoading: action.payload };
+    case 'stopLoading':
+      newStates = { ...newStates, isLoading: false };
+      break;
+    case 'setErrorMessage':
+      newStates = { ...newStates, errorMessage: 'Something went wrong' };
       break;
     default:
       return states;
