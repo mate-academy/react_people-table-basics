@@ -1,12 +1,12 @@
-import classNames from "classnames";
-import React from "react";
-import { Link, useParams } from "react-router-dom";
-import { Person } from "../types";
+import classNames from 'classnames';
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { Person } from '../types';
 
 type Props = {
   people: Person;
   allPeople: Person[];
-}
+};
 
 export const PersonLink: React.FC<Props> = ({ people, allPeople }) => {
   const { selectedPeople } = useParams();
@@ -18,10 +18,15 @@ export const PersonLink: React.FC<Props> = ({ people, allPeople }) => {
     <tr
       key={people.slug}
       data-cy="person"
-      className={classNames({ 'has-background-warning': selectedPeople === people.slug })}
+      className={classNames({
+        'has-background-warning': selectedPeople === people.slug,
+      })}
     >
       <td>
-        <Link className={classNames({ 'has-text-danger': people.sex === 'f' })} to={`${people.slug}`}>
+        <Link
+          className={classNames({ 'has-text-danger': people.sex === 'f' })}
+          to={`${people.slug}`}
+        >
           {people.name}
         </Link>
       </td>
@@ -40,16 +45,13 @@ export const PersonLink: React.FC<Props> = ({ people, allPeople }) => {
         )}
       </td>
 
-
       <td>
         {father ? (
-        <Link to={father.slug}>
-          {father.name}
-        </Link>
-      ) : (
-        people.fatherName || '-'
+          <Link to={father.slug}>{father.name}</Link>
+        ) : (
+          people.fatherName || '-'
         )}
       </td>
     </tr>
-  )
+  );
 };

@@ -15,8 +15,8 @@ export const App = () => (
           <NavLink
             to="/"
             className={({ isActive }) =>
-              classNames("navbar-item", {
-                "has-background-grey-lighter": isActive,
+              classNames('navbar-item', {
+                'has-background-grey-lighter': isActive,
               })
             }
           >
@@ -26,8 +26,8 @@ export const App = () => (
           <NavLink
             to="people"
             className={({ isActive }) =>
-              classNames("navbar-item", {
-                "has-background-grey-lighter": isActive,
+              classNames('navbar-item', {
+                'has-background-grey-lighter': isActive,
               })
             }
           >

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Loader } from "../components/Loader";
-import { Person } from "../types";
-import { PersonLink } from "../components/PersonLink";
+import { useEffect, useState } from 'react';
+import { Loader } from '../components/Loader';
+import { Person } from '../types';
+import { PersonLink } from '../components/PersonLink';
 
 export const People = () => {
   const [peoplesFromServer, setPeoplesFromServer] = useState<Person[]>([]);
@@ -9,14 +9,15 @@ export const People = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/people.json")
-      .then((response) => {
+    fetch('/api/people.json')
+      .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
+
         return response.json();
       })
-      .then((data) => {
+      .then(data => {
         setPeoplesFromServer(data);
         setLoading(false);
       })
@@ -39,9 +40,7 @@ export const People = () => {
             </p>
           )}
 
-          {loading && !error && (
-            <Loader />
-          )}
+          {loading && !error && <Loader />}
 
           {!loading && !hasPeople && !error && (
             <p data-cy="noPeopleMessage">There are no people available</p>
@@ -65,7 +64,11 @@ export const People = () => {
 
               <tbody>
                 {peoplesFromServer.map(people => (
-                  <PersonLink key={people.slug} people={people} allPeople={peoplesFromServer} />
+                  <PersonLink
+                    key={people.slug}
+                    people={people}
+                    allPeople={peoplesFromServer}
+                  />
                 ))}
               </tbody>
             </table>
@@ -74,4 +77,4 @@ export const People = () => {
       </div>
     </>
   );
-}
+};
