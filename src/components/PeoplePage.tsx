@@ -18,7 +18,7 @@ export const PeoplePage = () => {
       .finally(() => {
         dispatch({ type: 'stopLoading' });
       });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="container">

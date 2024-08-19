@@ -1,7 +1,7 @@
-import { Person } from "./Person";
+import { Person } from './Person';
 
 export interface States {
-  people: Person[],
-  isLoading: boolean,
-  errorMessage: string,
+  people: Person[];
+  isLoading: boolean;
+  errorMessage: string;
 }

@@ -8,5 +8,5 @@ import { GlobalStateProvider } from './context/Store';
 createRoot(document.getElementById('root') as HTMLDivElement).render(
   <GlobalStateProvider>
     <Root />
-  </GlobalStateProvider>
+  </GlobalStateProvider>,
 );

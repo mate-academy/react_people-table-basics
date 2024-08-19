@@ -5,6 +5,7 @@ import './App.scss';
 const getLinkClass = ({ isActive }: { isActive: boolean }) => {
   return cn('navbar-item', { 'has-background-grey-lighter': isActive });
 };
+
 export const App = () => (
   <div data-cy="app">
     <nav
