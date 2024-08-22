@@ -11,6 +11,26 @@ export const PersonItem: FC<PropType> = ({ person }) => {
   const { slug } = useParams();
   const { sex, name, born, died } = person;
 
+  const renderParentLink = (
+    parent: Person | undefined,
+    parentName: string | null,
+    linkClass?: string,
+  ) => {
+    if (parent) {
+      return (
+        <Link className={linkClass} to={`/people/${parent.slug}`}>
+          {parent.name}
+        </Link>
+      );
+    }
+
+    if (parentName) {
+      return parentName;
+    }
+
+    return '-';
+  };
+
   return (
     <tr
       data-cy="person"
@@ -31,28 +51,9 @@ export const PersonItem: FC<PropType> = ({ person }) => {
       <td>{born}</td>
       <td>{died}</td>
       <td>
-        {person.mother ? (
-          <Link
-            className="has-text-danger"
-            to={`/people/${person.mother.slug}`}
-          >
-            {person.mother.name}
-          </Link>
-        ) : person.motherName ? (
-          person.motherName
-        ) : (
-          '-'
-        )}
+        {renderParentLink(person.mother, person.motherName, 'has-text-danger')}
       </td>
-      <td>
-        {person.father ? (
-          <Link to={`/people/${person.father.slug}`}>{person.father.name}</Link>
-        ) : person.fatherName ? (
-          person.fatherName
-        ) : (
-          '-'
-        )}
-      </td>
+      <td>{renderParentLink(person.father, person.fatherName)}</td>
     </tr>
   );
 };
