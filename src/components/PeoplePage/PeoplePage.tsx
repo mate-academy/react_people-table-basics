@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
@@ -10,6 +11,7 @@ export const PeoplePage: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
+    setErrorMessage('');
     setIsLoading(true);
 
     getPeople()
