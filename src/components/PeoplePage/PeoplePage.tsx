@@ -6,25 +6,31 @@ import { Link, useParams } from 'react-router-dom';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const { slug } = useParams<{ slug?: string }>();
 
   useEffect(() => {
-    setLoading(true);
-    getPeople()
-      .then(data => {
-        setPeople(data);
-      })
-      .catch(() => {
-        setError('Something went wrong');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [slug]);
+    if (people.length === 0) {
+      setLoading(true);
+      getPeople()
+        .then(data => {
+          setPeople(data);
+        })
+        .catch(() => {
+          setError('Something went wrong');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }, [people.length]);
 
   const namesSet = new Set(people.map(person => person.name));
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -32,15 +38,13 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && <Loader />}
-
           {error && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               {error}
             </p>
           )}
 
-          {!loading && people.length === 0 && (
+          {!error && people.length === 0 && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
