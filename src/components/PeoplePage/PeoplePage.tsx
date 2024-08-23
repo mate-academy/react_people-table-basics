@@ -15,9 +15,7 @@ export const PeoplePage: React.FC = () => {
     setIsLoading(true);
 
     getPeople()
-      .then(data => {
-        setPeople(data);
-      })
+      .then(setPeople)
       .catch(() => setErrorMessage('Something went wrong'))
       .finally(() => setIsLoading(false));
   }, []);
