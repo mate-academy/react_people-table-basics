@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 export type Loader<T> = { value: T; isReady: boolean; isError: boolean };
 
 export function useLoader<T>(
-  promise: Promise<T | undefined>,
+  promise: Promise<T>,
   initialValue: T,
   deps: React.DependencyList,
 ): Loader<T> {
@@ -19,9 +19,7 @@ export function useLoader<T>(
       try {
         const newValue = await promise;
 
-        if (newValue !== undefined) {
-          setValue(newValue);
-        }
+        setValue(newValue);
       } catch {
         setIsError(true);
       }
