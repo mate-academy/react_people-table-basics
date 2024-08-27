@@ -39,7 +39,7 @@ export const People = () => {
             </p>
           )}
 
-          {peaopleData?.length <= 0 && (
+          {peaopleData && peaopleData.length <= 0 && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
