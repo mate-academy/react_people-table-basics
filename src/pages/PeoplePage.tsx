@@ -4,6 +4,7 @@ import { getPeople } from '../api';
 import { Person } from '../types';
 import classNames from 'classnames';
 import { Link, useParams } from 'react-router-dom';
+import { RoutesPathes } from '../helper/Routes';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -51,7 +52,7 @@ export const PeoplePage = () => {
                 </p>
               )}
 
-              {people.length === 0 && (
+              {!people.length && (
                 <p data-cy="noPeopleMessage">
                   There are no people on the server
                 </p>
@@ -83,7 +84,7 @@ export const PeoplePage = () => {
                     >
                       <td>
                         <Link
-                          to={`/people/${person.slug}`}
+                          to={`${RoutesPathes.PEOPLE}/${person.slug}`}
                           className={classNames({
                             'has-text-danger': person.sex === 'f',
                           })}
@@ -99,7 +100,7 @@ export const PeoplePage = () => {
                         {!person.motherName && '-'}
                         {person.mother ? (
                           <Link
-                            to={`/people/${person.mother?.slug}`}
+                            to={`${RoutesPathes.PEOPLE}/${person.mother?.slug}`}
                             className={classNames({
                               'has-text-danger': person.mother.sex === 'f',
                             })}
@@ -114,7 +115,7 @@ export const PeoplePage = () => {
                         {!person.fatherName && '-'}
                         {person.father ? (
                           <Link
-                            to={`/people/${person.father?.slug}`}
+                            to={`${RoutesPathes.PEOPLE}/${person.father?.slug}`}
                             className={classNames({
                               'has-text-danger': person.father.sex === 'f',
                             })}
