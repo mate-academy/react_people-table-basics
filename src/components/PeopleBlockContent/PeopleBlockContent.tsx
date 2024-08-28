@@ -3,7 +3,7 @@ import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
-import { PersonLink } from '../PersonLink';
+import { PersonItem } from '../PersonItems';
 import { preparedPeopleInfo } from '../../helpers/preparedPeopleInfo';
 
 export const PeopleBlockContent = () => {
@@ -37,7 +37,7 @@ export const PeopleBlockContent = () => {
     return (
       <PeopleTable>
         {fullPeopleInfo.map(person => (
-          <PersonLink key={person.slug} person={person} />
+          <PersonItem key={person.slug} person={person} />
         ))}
       </PeopleTable>
     );
