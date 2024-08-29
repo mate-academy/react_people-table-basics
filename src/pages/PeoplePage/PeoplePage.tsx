@@ -10,8 +10,6 @@ enum Status {
   Fulfilled = 'fulfilled',
   Rejected = 'rejected',
 }
-// <tr data-cy="person" className="has-background-warning"> - selected
-// <a className="has-text-danger" href="#/people/lievijne-jans-1542"> - female
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -40,7 +38,6 @@ export const PeoplePage = () => {
   useEffect(() => {
     fetchPeople();
   }, []);
-
 
   return (
     <>
@@ -72,7 +69,7 @@ export const PeoplePage = () => {
 
                 <tbody>
                   {people.map(person => (
-                    <PersonLink key={person.slug} {...person} people={people}/>
+                    <PersonLink key={person.slug} {...person} people={people} />
                   ))}
                 </tbody>
               </table>
