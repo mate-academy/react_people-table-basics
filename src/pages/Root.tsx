@@ -8,16 +8,17 @@ import { App } from '../components/App/App';
 import { HomePage } from './HomePage';
 import { PeoplePage } from './PeoplePage';
 import { NotFoundPage } from './NotFoundPage';
+import { URLS } from '../enums/URLS';
 
 export const Root = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<App />}>
+        <Route path={URLS.home} element={<App />}>
           <Route index element={<HomePage />} />
-          <Route path="home" element={<Navigate to="/" replace />} />
-          <Route path="people/:slug?" element={<PeoplePage />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path={URLS.fakeHome} element={<Navigate to="/" replace />} />
+          <Route path={URLS.peopleWithSlug} element={<PeoplePage />} />
+          <Route path={URLS.pageNotFound} element={<NotFoundPage />} />
         </Route>
       </Routes>
     </Router>

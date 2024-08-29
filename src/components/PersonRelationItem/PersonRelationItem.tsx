@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { FC } from 'react';
 import { Person } from '../../types';
 import { findPersonSlugByName } from '../../helpers/helpers';
+import { URLS } from '../../enums/URLS';
 
 interface Props {
   keyValue: string | null;
@@ -21,7 +22,7 @@ export const PersonRelationItem: FC<Props> = ({
       return (
         <Link
           className={woman ? 'has-text-danger' : ''}
-          to={`/people/${slugValue}`}
+          to={`/${URLS.people}/${slugValue}`}
         >
           {keyValue}
         </Link>
