@@ -1,6 +1,9 @@
 import { Person } from '../types';
-import { Link, useOutletContext, useParams } from 'react-router-dom';
+import { useOutletContext, useParams } from 'react-router-dom';
 import { PersonLink } from './PersonLink';
+import { findPersonSlugByName } from '../helpers/helpers';
+// eslint-disable-next-line max-len
+import { PersonRelationItem } from '../components/PersonRelationItem/PersonRelationItem';
 
 interface Props {
   peopleList: Person[];
@@ -10,33 +13,6 @@ interface Props {
 export const PeopleTable = () => {
   const { peopleList, isError } = useOutletContext<Props>();
   const { slug } = useParams();
-
-  const findPersonSlugByName = (name: string | null): string | null => {
-    const person = peopleList.find(p => p.name === name);
-
-    return person ? person.slug : null;
-  };
-
-  const renderItems = (key: string | null, woman?: string | null) => {
-    const slugValue = findPersonSlugByName(key);
-
-    if (key) {
-      if (slugValue) {
-        return (
-          <Link
-            className={woman ? 'has-text-danger' : ''}
-            to={`/people/${slugValue}`}
-          >
-            {key}
-          </Link>
-        );
-      }
-
-      return `${key}`;
-    }
-
-    return '-';
-  };
 
   return (
     <table
@@ -58,7 +34,7 @@ export const PeopleTable = () => {
         {!isError &&
           (peopleList.length ? (
             peopleList.map(person => {
-              const woman = findPersonSlugByName(person.motherName);
+              const woman = findPersonSlugByName(person.motherName, peopleList);
 
               return (
                 <tr
@@ -74,8 +50,23 @@ export const PeopleTable = () => {
                   <td>{person.sex}</td>
                   <td>{person.born}</td>
                   <td>{person.died}</td>
-                  <td>{renderItems(person.motherName, woman)}</td>
-                  <td>{renderItems(person.fatherName)}</td>
+                  <td>
+                    {
+                      <PersonRelationItem
+                        keyValue={person.motherName}
+                        peopleList={peopleList}
+                        woman={woman}
+                      />
+                    }
+                  </td>
+                  <td>
+                    {
+                      <PersonRelationItem
+                        keyValue={person.fatherName}
+                        peopleList={peopleList}
+                      />
+                    }
+                  </td>
                 </tr>
               );
             })
