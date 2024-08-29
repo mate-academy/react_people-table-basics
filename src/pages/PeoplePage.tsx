@@ -2,7 +2,7 @@ import { usePeopleService } from '../services/usePeopleService';
 import { useEffect, useState } from 'react';
 import { Person } from '../types';
 import { Loader } from '../components/Loader';
-import { Outlet } from 'react-router-dom';
+import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage = () => {
   const { isLoading, getPeople, isError } = usePeopleService();
@@ -19,7 +19,7 @@ export const PeoplePage = () => {
     </p>
   );
   const content = !isLoading ? (
-    <Outlet context={{ peopleList, isError }} />
+    <PeopleTable peopleList={peopleList} isError={isError} />
   ) : null;
 
   return (

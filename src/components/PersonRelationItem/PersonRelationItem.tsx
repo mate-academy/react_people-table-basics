@@ -9,7 +9,11 @@ interface Props {
   peopleList: Person[];
 }
 
-export const PersonRelationItem: FC<Props> = ({ keyValue, woman, peopleList }) => {
+export const PersonRelationItem: FC<Props> = ({
+  keyValue,
+  woman,
+  peopleList,
+}) => {
   const slugValue = findPersonSlugByName(keyValue, peopleList);
 
   if (keyValue) {

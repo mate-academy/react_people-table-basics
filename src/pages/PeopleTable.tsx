@@ -1,17 +1,17 @@
 import { Person } from '../types';
-import { useOutletContext, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { PersonLink } from './PersonLink';
 import { findPersonSlugByName } from '../helpers/helpers';
 // eslint-disable-next-line max-len
 import { PersonRelationItem } from '../components/PersonRelationItem/PersonRelationItem';
+import { FC } from 'react';
 
 interface Props {
   peopleList: Person[];
   isError: boolean;
 }
 
-export const PeopleTable = () => {
-  const { peopleList, isError } = useOutletContext<Props>();
+export const PeopleTable: FC<Props> = ({ peopleList, isError }) => {
   const { slug } = useParams();
 
   return (
