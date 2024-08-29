@@ -41,7 +41,6 @@ export const PersonLink: React.FC<Props> = ({
     return parentName || '-';
   };
 
-
   return (
     <tr
       data-cy="person"
