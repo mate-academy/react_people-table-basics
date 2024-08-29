@@ -8,10 +8,9 @@ import { FC } from 'react';
 
 interface Props {
   peopleList: Person[];
-  isError: boolean;
 }
 
-export const PeopleTable: FC<Props> = ({ peopleList, isError }) => {
+export const PeopleTable: FC<Props> = ({ peopleList }) => {
   const { slug } = useParams();
 
   return (
@@ -31,48 +30,41 @@ export const PeopleTable: FC<Props> = ({ peopleList, isError }) => {
       </thead>
 
       <tbody>
-        {!isError &&
-          (peopleList.length ? (
-            peopleList.map(person => {
-              const woman = findPersonSlugByName(person.motherName, peopleList);
+        {peopleList.map(person => {
+          const woman = findPersonSlugByName(person.motherName, peopleList);
 
-              return (
-                <tr
-                  key={person.slug}
-                  data-cy="person"
-                  className={
-                    slug === person.slug ? 'has-background-warning' : ''
-                  }
-                >
-                  <td>
-                    <PersonLink person={person} />
-                  </td>
-                  <td>{person.sex}</td>
-                  <td>{person.born}</td>
-                  <td>{person.died}</td>
-                  <td>
-                    {
-                      <PersonRelationItem
-                        keyValue={person.motherName}
-                        peopleList={peopleList}
-                        woman={woman}
-                      />
-                    }
-                  </td>
-                  <td>
-                    {
-                      <PersonRelationItem
-                        keyValue={person.fatherName}
-                        peopleList={peopleList}
-                      />
-                    }
-                  </td>
-                </tr>
-              );
-            })
-          ) : (
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-          ))}
+          return (
+            <tr
+              key={person.slug}
+              data-cy="person"
+              className={slug === person.slug ? 'has-background-warning' : ''}
+            >
+              <td>
+                <PersonLink person={person} />
+              </td>
+              <td>{person.sex}</td>
+              <td>{person.born}</td>
+              <td>{person.died}</td>
+              <td>
+                {
+                  <PersonRelationItem
+                    keyValue={person.motherName}
+                    peopleList={peopleList}
+                    woman={woman}
+                  />
+                }
+              </td>
+              <td>
+                {
+                  <PersonRelationItem
+                    keyValue={person.fatherName}
+                    peopleList={peopleList}
+                  />
+                }
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

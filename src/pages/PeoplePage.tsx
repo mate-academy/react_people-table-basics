@@ -12,15 +12,22 @@ export const PeoplePage = () => {
     getPeople().then(setPeopleList);
   }, []);
 
-  const loading = isLoading ? <Loader /> : null;
-  const error = !isError ? null : (
+  const loading = isLoading && <Loader />;
+  const error = isError && (
     <p data-cy="peopleLoadingError" className="has-text-danger">
       Something went wrong
     </p>
   );
-  const content = !isLoading ? (
-    <PeopleTable peopleList={peopleList} isError={isError} />
-  ) : null;
+  const isEmptyList = !(loading || isError || peopleList.length) && (
+    <p data-cy="noPeopleMessage">There are no people on the server</p>
+  );
+
+  const content = !(
+    isLoading ||
+    isError ||
+    !peopleList.length ||
+    isEmptyList
+  ) && <PeopleTable peopleList={peopleList} />;
 
   return (
     <>
@@ -30,6 +37,7 @@ export const PeoplePage = () => {
           <div className="box table-container">
             {loading}
             {error}
+            {isEmptyList}
             {content}
           </div>
         </div>
