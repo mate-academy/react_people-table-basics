@@ -3,17 +3,18 @@ import { App } from './App';
 import { HomePage } from './Pages/HomePage';
 import { PeoplePage } from './Pages/PeoplePage';
 import { NotFound } from './Pages/NotFound';
+import { Path } from './types';
 
 export const Root: React.FC = () => (
   <HashRouter>
     <Routes>
-      <Route path="/" element={<App />}>
+      <Route path={Path.main} element={<App />}>
         <Route index element={<HomePage />} />
-        <Route path="home" element={<HomePage />} />
-        <Route path="people" element={<PeoplePage />}>
-          <Route path=":personSlug?" element={<PeoplePage />} />
+        <Route path={Path.home} element={<HomePage />} />
+        <Route path={Path.people} element={<PeoplePage />}>
+          <Route path={Path.personSlug} element={<PeoplePage />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route path={Path.other} element={<NotFound />} />
       </Route>
     </Routes>
   </HashRouter>

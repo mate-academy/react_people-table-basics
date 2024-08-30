@@ -33,15 +33,17 @@ export const PeopleBlockContent = () => {
     return <Loader />;
   }
 
-  if (!!people.length) {
-    return (
-      <PeopleTable>
-        {fullPeopleInfo.map(person => (
-          <PersonItem key={person.slug} person={person} />
-        ))}
-      </PeopleTable>
-    );
-  } else {
-    return <p data-cy="noPeopleMessage">There are no people on the server</p>;
-  }
+  return (
+    <>
+      {!!people.length ? (
+        <PeopleTable>
+          {fullPeopleInfo.map(person => (
+            <PersonItem key={person.slug} person={person} />
+          ))}
+        </PeopleTable>
+      ) : (
+        <p data-cy="noPeopleMessage">There are no people on the server</p>
+      )}
+    </>
+  );
 };
