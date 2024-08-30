@@ -7,14 +7,16 @@ type Props = {
 };
 
 export const PersonLink = ({ person }: Props) => {
-  const { personSlug } = useParams();
+  const { peopleId } = useParams();
+
+  console.log(peopleId);
 
   return (
     <tr
       data-cy="person"
       key={person.name}
       className={classNames({
-        'has-background-warning': personSlug === person.slug,
+        'has-background-warning': peopleId === person.slug,
       })}
     >
       <td>
