@@ -9,8 +9,6 @@ type Props = {
 export const PersonLink = ({ person }: Props) => {
   const { peopleId } = useParams();
 
-  console.log(peopleId);
-
   return (
     <tr
       data-cy="person"
