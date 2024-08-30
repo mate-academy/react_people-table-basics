@@ -1,7 +1,7 @@
 export enum URLS {
   home = '/',
   fakeHome = 'home',
-  people = 'people',
+  people = '/people',
   peopleWithSlug = 'people/:slug?',
   pageNotFound = '*',
 }

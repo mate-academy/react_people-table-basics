@@ -16,7 +16,10 @@ export const Root = () => {
       <Routes>
         <Route path={URLS.home} element={<App />}>
           <Route index element={<HomePage />} />
-          <Route path={URLS.fakeHome} element={<Navigate to="/" replace />} />
+          <Route
+            path={URLS.fakeHome}
+            element={<Navigate to={URLS.home} replace />}
+          />
           <Route path={URLS.peopleWithSlug} element={<PeoplePage />} />
           <Route path={URLS.pageNotFound} element={<NotFoundPage />} />
         </Route>

@@ -22,7 +22,7 @@ export const PersonRelationItem: FC<Props> = ({
       return (
         <Link
           className={woman ? 'has-text-danger' : ''}
-          to={`/${URLS.people}/${slugValue}`}
+          to={`${URLS.people}/${slugValue}`}
         >
           {keyValue}
         </Link>

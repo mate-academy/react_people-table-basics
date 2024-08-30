@@ -1,6 +1,7 @@
 import './App.scss';
 import { NavLink, Outlet } from 'react-router-dom';
 import classNames from 'classnames';
+import { URLS } from '../../enums/URLS';
 
 export const App = () => {
   const isLinkActive = ({ isActive }: { isActive: boolean }) => {
@@ -19,11 +20,11 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <NavLink className={isLinkActive} to="/">
+            <NavLink className={isLinkActive} to={URLS.home}>
               Home
             </NavLink>
 
-            <NavLink className={isLinkActive} to="/people">
+            <NavLink className={isLinkActive} to={URLS.people}>
               People
             </NavLink>
           </div>
