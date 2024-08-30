@@ -1,11 +1,6 @@
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
-import { Person } from '../../types';
-
-enum Sex {
-  female = 'f',
-  male = 'm',
-}
+import { Person, Sex } from '../../types';
 
 type Props = {
   person: Person;
