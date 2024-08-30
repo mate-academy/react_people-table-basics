@@ -51,7 +51,11 @@ export const PeoplePage = () => {
 
               <tbody>
                 {people.map(person => (
-                  <PersonLink key={person.name} person={person} />
+                  <PersonLink
+                    key={person.name}
+                    person={person}
+                    people={people}
+                  />
                 ))}
               </tbody>
             </table>

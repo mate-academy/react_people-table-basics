@@ -4,10 +4,17 @@ import { Link, useParams } from 'react-router-dom';
 
 type Props = {
   person: Person;
+  people: Person[];
 };
 
-export const PersonLink = ({ person }: Props) => {
+export const PersonLink = ({ person, people }: Props) => {
   const { peopleId } = useParams();
+
+  const mum =
+    people.find(mumPerson => mumPerson.name === person.motherName) || null;
+
+  const dad =
+    people.find(dadPerson => dadPerson.name === person.fatherName) || null;
 
   return (
     <tr
@@ -31,8 +38,24 @@ export const PersonLink = ({ person }: Props) => {
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
-      <td>{person.motherName ? person.motherName : '-'}</td>
-      <td>{person.fatherName ? person.fatherName : '-'}</td>
+
+      {mum ? (
+        <td>
+          <Link to={`/people/${mum.slug}`} className="has-text-danger">
+            {person.motherName}
+          </Link>
+        </td>
+      ) : (
+        <td>{person.motherName || '-'}</td>
+      )}
+
+      {dad ? (
+        <td>
+          <Link to={`/people/${dad.slug}`}>{person.fatherName}</Link>
+        </td>
+      ) : (
+        <td>{person.fatherName || '-'}</td>
+      )}
     </tr>
   );
 };
