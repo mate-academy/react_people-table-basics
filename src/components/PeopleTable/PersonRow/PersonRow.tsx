@@ -22,10 +22,10 @@ export const PeopleRow: React.FC<Props> = ({
   );
   const mother = useMemo(() => {
     return findParentInTable(personToRender.motherName);
-  }, [findParentInTable]);
+  }, [findParentInTable, personToRender.motherName]);
   const father = useMemo(() => {
     return findParentInTable(personToRender.fatherName);
-  }, [findParentInTable]);
+  }, [findParentInTable, personToRender.fatherName]);
 
   return (
     <tr

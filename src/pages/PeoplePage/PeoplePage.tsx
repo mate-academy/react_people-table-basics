@@ -21,8 +21,8 @@ export const PeoplePage = () => {
   useEffect(() => {
     setArePeopleLoading(true);
     getPeople()
-      .then(people => {
-        setPeople(people);
+      .then(peopleFromServer => {
+        setPeople(peopleFromServer);
         setArePeopleLoading(false);
         setIsLoadingSuccessful(true);
       })
