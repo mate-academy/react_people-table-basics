@@ -23,12 +23,10 @@ export const PeoplePage = () => {
     getPeople()
       .then(peopleFromServer => {
         setPeople(peopleFromServer);
-        setArePeopleLoading(false);
         setIsLoadingSuccessful(true);
       })
-      .catch(() => {
+      .finally(() => {
         setArePeopleLoading(false);
-        setIsLoadingSuccessful(false);
       });
   }, []);
 
