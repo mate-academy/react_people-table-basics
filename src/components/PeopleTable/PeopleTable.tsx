@@ -16,6 +16,32 @@ export const PeopleTable: React.FC<Props> = ({
   motherSlug,
   fatherSlug,
 }) => {
+  const getMotherName = () => {
+    if (person.motherName) {
+      return motherSlug ? (
+        <Link className="has-text-danger" to={`/people/${motherSlug}`}>
+          {person.motherName}
+        </Link>
+      ) : (
+        person.motherName
+      );
+    }
+
+    return '-';
+  };
+
+  const getFatherName = () => {
+    if (person.fatherName) {
+      return fatherSlug ? (
+        <Link to={`/people/${fatherSlug}`}>{person.fatherName}</Link>
+      ) : (
+        person.fatherName
+      );
+    }
+
+    return '-';
+  };
+
   return (
     <tr
       data-cy="person"
@@ -36,30 +62,8 @@ export const PeopleTable: React.FC<Props> = ({
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
-      <td>
-        {person.motherName ? (
-          motherSlug ? (
-            <Link className="has-text-danger" to={`/people/${motherSlug}`}>
-              {person.motherName}
-            </Link>
-          ) : (
-            person.motherName
-          )
-        ) : (
-          '-'
-        )}
-      </td>
-      <td>
-        {person.fatherName ? (
-          fatherSlug ? (
-            <Link to={`/people/${fatherSlug}`}>{person.fatherName}</Link>
-          ) : (
-            person.fatherName
-          )
-        ) : (
-          '-'
-        )}
-      </td>
+      <td>{getMotherName()}</td>
+      <td>{getFatherName()}</td>
     </tr>
   );
 };
