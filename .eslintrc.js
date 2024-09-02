@@ -4,4 +4,7 @@ module.exports = {
     'plugin:cypress/recommended',
   ],
   rules: {},
+  "parserOptions": {
+    "project": "**/tsconfig.json"
+  }
 };
