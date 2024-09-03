@@ -1,34 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
-
 import { Person } from '../types';
 import { getPeople } from '../api';
+import { preparePeople } from '../utils/preparePeople';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setError(false);
-    setLoading(true);
+    setIsLoading(true);
     getPeople()
-      .then(peopleFromServer =>
-        peopleFromServer.map(person => ({
-          ...person,
-          mother: peopleFromServer.find(
-            mother => mother.name === person.motherName,
-          ),
-
-          father: peopleFromServer.find(
-            father => father.name === person.fatherName,
-          ),
-        })),
-      )
+      .then(peopleFromServer => preparePeople(peopleFromServer))
       .then(setPeople)
       .catch(() => setError(true))
-      .finally(() => setLoading(false));
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -37,7 +26,7 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && <Loader />}
+          {isLoading && <Loader />}
 
           {error && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
@@ -45,7 +34,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!people.length && !error && !loading && (
+          {!people.length && !error && !isLoading && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
