@@ -4,15 +4,15 @@ import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   person: Person;
-  personSlug?: string;
+  selectedPersonSlug?: string;
 };
 
-export const PersonItem = ({ person, personSlug }: Props) => {
+export const PersonItem = ({ person, selectedPersonSlug }: Props) => {
   return (
     <tr
       data-cy="person"
       className={classNames({
-        'has-background-warning': person.slug === personSlug,
+        'has-background-warning': person.slug === selectedPersonSlug,
       })}
     >
       <td>
@@ -25,19 +25,15 @@ export const PersonItem = ({ person, personSlug }: Props) => {
       <td>
         {person.mother ? (
           <PersonLink person={person.mother} />
-        ) : person.motherName ? (
-          person.motherName
         ) : (
-          '-'
+          person.motherName ?? '-'
         )}
       </td>
       <td>
         {person.father ? (
           <PersonLink person={person.father} />
-        ) : person.fatherName ? (
-          person.fatherName
         ) : (
-          '-'
+          person.fatherName ?? '-'
         )}
       </td>
     </tr>

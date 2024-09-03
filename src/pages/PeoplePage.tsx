@@ -3,10 +3,11 @@ import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable/PeopleTable';
 import { Person } from '../types';
 import { getPeople } from '../api';
+import { getPreparedPeople } from '../utils/getPreparedPeople';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
@@ -14,16 +15,7 @@ export const PeoplePage = () => {
     setHasError(false);
     getPeople()
       .then(peopleFromServer => {
-        const preparedPeople = peopleFromServer.map(person => ({
-          ...person,
-          mother: peopleFromServer.find(
-            mother => mother.name === person.motherName,
-          ),
-
-          father: peopleFromServer.find(
-            father => father.name === person.fatherName,
-          ),
-        }));
+        const preparedPeople = getPreparedPeople(peopleFromServer);
 
         setPeople(preparedPeople);
       })

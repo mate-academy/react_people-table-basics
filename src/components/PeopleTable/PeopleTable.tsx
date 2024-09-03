@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const PeopleTable = ({ people }: Props) => {
-  const { personSlug } = useParams();
+  const { selectedPersonSlug } = useParams();
 
   return (
     <table
@@ -30,7 +30,7 @@ export const PeopleTable = ({ people }: Props) => {
           <PersonItem
             key={person.slug}
             person={person}
-            personSlug={personSlug}
+            selectedPersonSlug={selectedPersonSlug}
           />
         ))}
       </tbody>
