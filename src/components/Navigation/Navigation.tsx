@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
+import { PATHS } from '../../utils/const';
 
 const getLinkClass = ({ isActive }: { isActive: boolean }) =>
   classNames('navbar-item', {
@@ -16,11 +17,11 @@ export const Navigation = () => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink className={getLinkClass} to="/">
+          <NavLink className={getLinkClass} to={`${PATHS.home}`}>
             Home
           </NavLink>
 
-          <NavLink className={getLinkClass} to="/people">
+          <NavLink className={getLinkClass} to={`${PATHS.people}`}>
             People
           </NavLink>
         </div>

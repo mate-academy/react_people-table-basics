@@ -2,5 +2,7 @@
 export const API_URL =
   'https://mate-academy.github.io/react_people-table/api/people.json';
 
-export const HOME = '/';
-export const PEOPLE_LIST = '/people';
+export const PATHS = {
+  home: '/',
+  people: '/people',
+};

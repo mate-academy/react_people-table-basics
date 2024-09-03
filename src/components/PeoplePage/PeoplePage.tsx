@@ -3,6 +3,7 @@ import { getPeople } from '../../api';
 import { Loader } from '../Loader';
 import { PeopleTable } from '../PeopleTable';
 import { Person } from '../../types';
+import { getPreparedPerson } from '../../utils/getPreparedPeople';
 
 export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -24,6 +25,8 @@ export const PeoplePage = () => {
     };
   }, []);
 
+  const preparedPeople = getPreparedPerson(peopleList);
+
   return (
     <div data-cy="app">
       <main className="section">
@@ -42,7 +45,7 @@ export const PeoplePage = () => {
                   There are no people on the server
                 </p>
               )}
-              {peopleList.length > 0 && <PeopleTable people={peopleList} />}
+              {peopleList.length > 0 && <PeopleTable people={preparedPeople} />}
             </div>
           </div>
         </div>

@@ -1,13 +1,10 @@
 import { Person } from '../../types';
-import { getPreparedPerson } from '../../utils/getPreparedPeople';
 import { TablePerson } from '../TablePerson';
 
 type Props = {
   people: Person[];
 };
 export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const preparedPeople = getPreparedPerson(people);
-
   return (
     <table
       data-cy="peopleTable"
@@ -25,8 +22,8 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {preparedPeople.map(person => (
-          <TablePerson person={person} key={person.name} />
+        {people.map(person => (
+          <TablePerson person={person} key={person.slug} />
         ))}
       </tbody>
     </table>
