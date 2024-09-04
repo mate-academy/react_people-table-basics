@@ -42,7 +42,7 @@ export const PeoplePage = () => {
               Something went wrong
             </p>
           )}
-          {peopleList.length === 0 && !isLoading && !isError && (
+          {!peopleList.length && !isLoading && !isError && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
           {peopleList.length > 0 && <PeopleTable peopleList={peopleList} />}

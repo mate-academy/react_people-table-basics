@@ -7,7 +7,7 @@ interface PersonLinkProps {
   sex: string;
 }
 
-const PersonLink: React.FC<PersonLinkProps> = ({ name, slug, sex }) => {
+export const PersonLink: React.FC<PersonLinkProps> = ({ name, slug, sex }) => {
   return (
     <Link
       className={classNames({
@@ -19,5 +19,3 @@ const PersonLink: React.FC<PersonLinkProps> = ({ name, slug, sex }) => {
     </Link>
   );
 };
-
-export default PersonLink;

@@ -1,5 +1,3 @@
-//import { Loader } from './components/Loader';
-
 import './App.scss';
 import { Nav } from './components/Nav';
 import { Outlet } from 'react-router-dom';
