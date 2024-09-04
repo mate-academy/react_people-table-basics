@@ -3,6 +3,7 @@ import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable/PeopleTable';
 import { Person } from '../types';
+import { transformPeople } from '../utils/transformPeople';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -18,29 +19,7 @@ export const PeoplePage: React.FC = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const peopleWithParents = people.map(currentPerson => {
-    const mother =
-      currentPerson.motherName &&
-      people.find(
-        person =>
-          person.name === currentPerson.motherName &&
-          person.born < currentPerson.born,
-      );
-
-    const father =
-      currentPerson.fatherName &&
-      people.find(
-        person =>
-          person.name === currentPerson.fatherName &&
-          person.born < currentPerson.born,
-      );
-
-    return {
-      ...currentPerson,
-      ...(mother ? { mother } : {}),
-      ...(father ? { father } : {}),
-    };
-  });
+  const peopleWithParents = transformPeople(people);
 
   return (
     <>
@@ -55,7 +34,7 @@ export const PeoplePage: React.FC = () => {
             </p>
           )}
 
-          {!isLoading && !error && peopleWithParents.length === 0 && (
+          {!isLoading && !error && !peopleWithParents.length && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
