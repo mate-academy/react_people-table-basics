@@ -5,6 +5,10 @@ import { getPeople } from '../../api';
 import { Person } from '../../types';
 import { Outlet } from 'react-router-dom';
 
+const getParent = (peopleList: Person[], name: string | null) => {
+  return peopleList.find(person => person.name === name);
+};
+
 export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [peopleList, setPeopleList] = useState<Person[]>([]);
@@ -15,7 +19,13 @@ export const PeoplePage = () => {
 
     getPeople()
       .then(result => {
-        setPeopleList(result);
+        setPeopleList(
+          result.map(person => ({
+            ...person,
+            mother: getParent(result, person.motherName),
+            father: getParent(result, person.fatherName),
+          })),
+        );
       })
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
