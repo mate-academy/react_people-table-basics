@@ -7,22 +7,21 @@ type Props = {
   findParentPerson: (parentName: string) => Person | undefined;
 };
 
-const getLinkClass = (person: Person) => {
-  return classNames({ 'has-text-danger': person.sex === 'f' });
-};
+const getLinkClass = (person: Person) =>
+  classNames({ 'has-text-danger': person.sex === 'f' });
 
 export const PersonLink: React.FC<Props> = ({ person, findParentPerson }) => {
   const { slug } = useParams();
 
   const renderParentLink = (parentName: string | null) => {
     if (!parentName) {
-      return null;
+      return '-';
     }
 
     const parent = findParentPerson(parentName);
 
     if (!parent) {
-      return null;
+      return parentName;
     }
 
     return (
@@ -35,16 +34,13 @@ export const PersonLink: React.FC<Props> = ({ person, findParentPerson }) => {
   return (
     <tr
       data-cy="person"
-      className={classNames({
-        'has-background-warning': slug === person.slug,
-      })}
+      className={classNames({ 'has-background-warning': slug === person.slug })}
     >
       <td>
         <Link className={getLinkClass(person)} to={`/people/${person.slug}`}>
           {person.name}
         </Link>
       </td>
-
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
