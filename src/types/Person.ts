@@ -7,5 +7,6 @@ export interface Person {
   motherName: string | null;
   slug: string;
   mother?: Person;
+  motherSlug?: string;
   father?: Person;
 }
