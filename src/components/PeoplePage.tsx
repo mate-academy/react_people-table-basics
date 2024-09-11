@@ -32,8 +32,6 @@ export const PeoplePage = () => {
   return (
     <>
       <h1 className="title">People Page</h1>
-
-      <input type="text" onChange={e => e} />
       <div className="block">
         <div className="box table-container">
           {!loaded && <Loader />}
