@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import cn from 'classnames'
+
 
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { Loader } from '../Loader';
-import { PersonLink } from '../PersonLink/PersonLink';
+
 import { useParams } from 'react-router-dom';
+import { PersonDetails } from '../PersonDetails/PersonDetails';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const {slug} = useParams();
+  const { slug } = useParams();
 
   useEffect(() => {
     setLoading(true);
@@ -44,11 +45,11 @@ export const PeoplePage: React.FC = () => {
               </p>
             )}
 
-            {!loading && !error && people.length === 0 && (
+            {!loading && !error && !people.length && (
               <p data-cy="noPeopleMessage">There are no people on the server</p>
             )}
 
-            {!loading && !error && people.length > 0 && (
+            {!loading && !error && !!people.length && (
               <table
                 data-cy="peopleTable"
                 className="table is-striped is-hoverable is-narrow is-fullwidth"
@@ -65,42 +66,12 @@ export const PeoplePage: React.FC = () => {
                 </thead>
                 <tbody>
                   {people.map(person => (
-                    <tr
-                      key={person.slug}
-                      data-cy="person"
-                      className={cn({'has-background-warning':slug === person.slug})}
-                    >
-                      <td>
-                        <PersonLink person={person}/>
-                      </td>
-                      <td>{person.sex}</td>
-                      <td>{person.born}</td>
-                      <td>{person.died}</td>
-                      <td>
-                      {person.motherName ? (
-                        findPersonByName(person.motherName) ?
-                        (<PersonLink person={findPersonByName(person.motherName)} />
-                        ) : (
-                          person.motherName
-                        )
-
-                        ) : (
-                          "-"
-                        )}
-                      </td>
-                      <td>
-                      {person.fatherName ? (
-                        findPersonByName(person.fatherName) ?
-                        (<PersonLink person={findPersonByName(person.fatherName)} />
-                        ) : (
-                          person.fatherName
-                        )
-
-                        ) : (
-                          "-"
-                        )}
-                      </td>
-                    </tr>
+                     <PersonDetails
+                        key={person.slug}
+                        person={person}
+                        isSelected={slug === person.slug}
+                        findPersonByName={findPersonByName}
+                     />
                   ))}
                 </tbody>
               </table>

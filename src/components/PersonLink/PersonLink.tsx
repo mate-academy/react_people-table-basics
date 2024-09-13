@@ -1,22 +1,26 @@
 import React from 'react';
-import cn from 'classnames'
+import cn from 'classnames';
 import { Person } from '../../types';
 import { Link } from 'react-router-dom';
+import { sexEnum } from '../../types/enums';
 
 type Props = {
-  person?:Person
+  person?: Person;
 };
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
-  if(!person) {
-    return  <span>-</span>
+  if (!person) {
+    return <span>-</span>;
   }
 
-  const { name, slug, sex} = person
+  const { name, slug, sex } = person;
 
   return (
-    <Link to={`/people/${slug}`} className={cn({'has-text-danger': sex === 'f'})}>
+    <Link
+      to={`/people/${slug}`}
+      className={cn({ 'has-text-danger': sex === sexEnum.Femeil })}
+    >
       {name}
     </Link>
-  )
+  );
 };

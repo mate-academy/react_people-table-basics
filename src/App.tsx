@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import './App.scss';
 
@@ -16,14 +17,19 @@ export const App: React.FC = () => {
         <div className="container">
           <div className="navbar-brand">
             <Link
-              className={`navbar-item ${location.pathname === '/' ? 'has-background-grey-lighter' : ''}`}
+              className={cn('navbar-item', {
+                'has-background-grey-lighter': location.pathname === '/',
+              })}
               to="/"
             >
               Home
             </Link>
 
             <Link
-              className={`navbar-item ${location.pathname.startsWith('/people') ? 'has-background-grey-lighter' : ''}`}
+              className={cn('navbar-item', {
+                'has-background-grey-lighter':
+                  location.pathname.startsWith('/people'),
+              })}
               to="/people"
             >
               People

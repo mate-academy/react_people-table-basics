@@ -1,7 +1,12 @@
-import { Navigate, Route, HashRouter as Router, Routes } from "react-router-dom";
-import { App } from "./App";
-import { HomePage } from "./components/HomePage/HomePage";
-import { PeoplePage } from "./components/PeoplePage/PeoplePage";
+import {
+  Navigate,
+  Route,
+  HashRouter as Router,
+  Routes,
+} from 'react-router-dom';
+import { App } from './App';
+import { HomePage } from './components/HomePage/HomePage';
+import { PeoplePage } from './components/PeoplePage/PeoplePage';
 
 export const Root = () => (
   <Router>
