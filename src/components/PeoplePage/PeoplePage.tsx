@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { Loader } from '../Loader';
@@ -66,12 +65,12 @@ export const PeoplePage: React.FC = () => {
                 </thead>
                 <tbody>
                   {people.map(person => (
-                     <PersonDetails
-                        key={person.slug}
-                        person={person}
-                        isSelected={slug === person.slug}
-                        findPersonByName={findPersonByName}
-                     />
+                    <PersonDetails
+                      key={person.slug}
+                      person={person}
+                      isSelected={slug === person.slug}
+                      findPersonByName={findPersonByName}
+                    />
                   ))}
                 </tbody>
               </table>
