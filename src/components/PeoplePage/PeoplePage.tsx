@@ -32,61 +32,26 @@ export const PeoplePage = () => {
     }));
   }, [people]);
 
-  // function getContent() {
-  //   if (isLoading) {
-  //     return <Loader />;
-  //   }
-
-  //   if (people.length) {
-  //     return <PeopleTable people={peopleWithParents} />;
-  //   }
-
-  //   if (errorMessage) {
-  //     return (
-  //       <p data-cy="peopleLoadingError" className="has-text-danger">
-  //         {errorMessage}
-  //       </p>
-  //     );
-  //   }
-
-  //   return <p data-cy="noPeopleMessage">There are no people on the server</p>;
-  // }
-
-  function getContent() {
-    if (isLoading) {
-      return <Loader />;
-    }
-
-    if (errorMessage) {
-      return (
-        <p data-cy="peopleLoadingError" className="has-text-danger">
-          {errorMessage}
-        </p>
-      );
-    }
-
-    return false;
-  }
-
   return (
     <>
       <h1 className="title">People Page</h1>
 
       <div className="block">
         <div className="box table-container">
-          {getContent()}
+          {isLoading && <Loader />}
 
-          {/* {!people.length ? (
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-          ) : (
-            <PeopleTable people={peopleWithParents} />
-          )} */}
-
-          {isLoading && !people.length ? (
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-          ) : (
-            <PeopleTable people={peopleWithParents} />
+          {errorMessage && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              {errorMessage}
+            </p>
           )}
+
+          {!isLoading &&
+            (!people.length ? (
+              <p data-cy="noPeopleMessage">There are no people on the server</p>
+            ) : (
+              <PeopleTable people={peopleWithParents} />
+            ))}
         </div>
       </div>
     </>
