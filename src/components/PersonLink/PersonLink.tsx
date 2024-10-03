@@ -1,10 +1,10 @@
+import { PersonType } from '../../types';
 import { Link } from 'react-router-dom';
-import { Person } from '../../types';
 import { FC } from 'react';
 import React from 'react';
 
 interface Props {
-  person: Person;
+  person: PersonType;
 }
 
 export const PersonLink: FC<Props> = ({ person }) => {
