@@ -35,7 +35,7 @@ export const Person: FC<Props> = ({ people, person: personData }) => {
         <PersonLink person={personData} />
       </td>
 
-      <td>{sex === 'f' ? 'f' : 'm'}</td>
+      <td>{sex}</td>
       <td>{born}</td>
       <td>{died || '-'}</td>
       <td>{mother ? <PersonLink person={mother} /> : isMotherName}</td>
