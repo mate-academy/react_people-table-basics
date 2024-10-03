@@ -14,10 +14,11 @@ export const PeoplePage = () => {
     getPeople()
       .then(data => {
         setPeople(data);
-        setIsLoading(false);
       })
       .catch(() => {
         setError('Something went wrong');
+      })
+      .finally(() => {
         setIsLoading(false);
       });
   }, []);
