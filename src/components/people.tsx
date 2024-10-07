@@ -27,7 +27,7 @@ export const People = () => {
       .then(fetchedPeople => {
         setPerson(fetchedPeople);
       })
-      .catch(err => {
+      .catch(() => {
         setError('Unable to load people: ');
       })
       .finally(() => setIsLoading(false));
