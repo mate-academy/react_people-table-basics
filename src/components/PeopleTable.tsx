@@ -2,7 +2,7 @@ import { Person } from '../types';
 import PersonLink from './PersonLink';
 
 type Props = {
-  people: Person[] | null;
+  people: Person[];
 };
 
 const PeopleTable: React.FC<Props> = ({ people }) => {

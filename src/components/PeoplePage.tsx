@@ -30,10 +30,13 @@ const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {isLoading && <Loader />}
-          {isError && <ErrorMessage />}
-          {!isLoading && !people?.length && <NotPeople />}
-          {!isLoading && !isError && people?.length && (
+          {isLoading ? (
+            <Loader />
+          ) : isError ? (
+            <ErrorMessage />
+          ) : !people?.length ? (
+            <NotPeople />
+          ) : (
             <PeopleTable people={people} />
           )}
         </div>
