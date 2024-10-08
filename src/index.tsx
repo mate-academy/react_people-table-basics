@@ -20,7 +20,7 @@ createRoot(document.getElementById('root') as HTMLDivElement).render(
           <Route index element={<h1 className="title">Home Page</h1>} />
           <Route path="home" element={<Navigate to="/" replace />} />
           <Route
-            path="people"
+            path="people/:personId?"
             element={
               <>
                 <h1 className="title">People Page</h1>
@@ -28,6 +28,7 @@ createRoot(document.getElementById('root') as HTMLDivElement).render(
               </>
             }
           />
+
           <Route path="*" element={<h1 className="title">Page not found</h1>} />
         </Route>
       </Routes>

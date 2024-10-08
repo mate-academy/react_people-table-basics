@@ -1,25 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from 'react';
 import { getPeople } from '../api';
 import { MyContext } from './state';
-import classNames from 'classnames';
 import { Loader } from './Loader';
 import { Error } from './error';
-import { Link } from 'react-router-dom';
+import { Person } from './person';
+import { Person as PersonType } from '../types';
 
 export const People = () => {
-  const {
-    person,
-    setPerson,
-    error,
-    setError,
-    setIsLoading,
-    isLoading,
-    setSelectedPerson,
-    selectedPerson,
-  } = useContext(MyContext);
-
-  const getPeopleClass = (name: string) =>
-    classNames({ 'has-background-warning': selectedPerson === name });
+  const { person, setPerson, error, setError, setIsLoading, isLoading } =
+    useContext(MyContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -61,35 +51,8 @@ export const People = () => {
             </thead>
 
             <tbody>
-              {person.map(pers => {
-                const { name, sex, born, died, fatherName, motherName, slug } =
-                  pers;
-
-                return (
-                  <tr
-                    data-cy="person"
-                    key={name}
-                    className={getPeopleClass(name)}
-                    onClick={() => setSelectedPerson(name)}
-                  >
-                    <td>
-                      <Link
-                        to={`#/people/${slug}`}
-                        className={classNames({
-                          'has-text-danger': sex === 'f',
-                        })}
-                      >
-                        {name}
-                      </Link>
-                    </td>
-
-                    <td>{sex}</td>
-                    <td>{born}</td>
-                    <td>{died}</td>
-                    <td>{motherName ? motherName : '-'}</td>
-                    <td>{fatherName ? fatherName : '-'}</td>
-                  </tr>
-                );
+              {person.map((pers: PersonType) => {
+                return <Person key={pers.slug} pers={pers} />;
               })}
             </tbody>
           </table>
