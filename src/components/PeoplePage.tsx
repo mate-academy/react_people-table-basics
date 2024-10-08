@@ -8,20 +8,34 @@ import NotPeople from './NotPeople';
 
 const PeoplePage = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    let isMounted = true;
+
     setIsLoading(true);
 
     getPeople()
-      .then(setPeople)
+      .then(data => {
+        if (isMounted) {
+          setPeople(data);
+        }
+      })
       .catch(() => {
-        setIsError(true);
+        if (isMounted) {
+          setIsError(true);
+        }
       })
       .finally(() => {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (

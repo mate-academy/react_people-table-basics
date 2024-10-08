@@ -11,14 +11,17 @@ const PersonLink: React.FC<Props> = ({ person, people }) => {
   const params = useParams();
   const { sex, name, born, died, fatherName, motherName, slug } = person;
 
-  const mother = motherName ? people.find(p => p.name === motherName) : null;
+  const parents = people.filter(
+    p => p.name === motherName || p.name === fatherName,
+  );
 
-  const father = fatherName ? people.find(p => p.name === fatherName) : null;
+  const mother = parents.find(p => p.name === motherName) || null;
+  const father = parents.find(p => p.name === fatherName) || null;
 
   return (
     <tr
       data-cy="person"
-      className={cn({ 'has-background-warning': params.slug === slug })}
+      className={cn({ 'has-background-warning': params?.slug === slug })}
     >
       <td>
         <Link
