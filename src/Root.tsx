@@ -10,9 +10,7 @@ export const Root = () => {
       <Routes>
         <Route element={<App />}>
           <Route path="/:home?" element={<HomePage />} />
-          <Route path="/people" element={<PeoplePage />}>
-            <Route path=":slug" element={<PeoplePage />} />
-          </Route>
+          <Route path="/people/:slug?" element={<PeoplePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

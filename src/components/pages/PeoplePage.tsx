@@ -12,11 +12,14 @@ export const PeoplePage = () => {
   useEffect(() => {
     getPeople()
       .then(data => {
+        const peopleByName: { [key: string]: Person } = {};
+
+        data.forEach(person => (peopleByName[person.name] = person));
         const dataUpdated = data.map(p => {
           return {
             ...p,
-            mother: data.find(person => person.name === p.motherName),
-            father: data.find(person => person.name === p.fatherName),
+            mother: peopleByName[p.motherName || ''],
+            father: peopleByName[p.fatherName || ''],
           };
         });
 
