@@ -4,6 +4,7 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
+
 import { App } from './App';
 import { HomePage } from './components/pages/HomePage';
 import { PeoplePage } from './components/pages/PeoplePage';

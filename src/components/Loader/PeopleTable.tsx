@@ -1,7 +1,9 @@
-import { Person } from '../../types';
 import React from 'react';
-import { PersonLink } from './PersonLink';
 import { useParams } from 'react-router-dom';
+
+import { Person } from '../../types';
+import { PersonLink } from './PersonLink';
+
 
 interface Props {
   people: Person[];

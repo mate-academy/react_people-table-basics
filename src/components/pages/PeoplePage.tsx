@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
+
 import { Loader } from '../Loader';
 import { PeopleTable } from '../Loader/PeopleTable';
 import { getPeople } from '../services/api';
-import { useEffect, useState } from 'react';
 import { Person } from '../../types';
 
 export const PeoplePage = () => {
