@@ -3,24 +3,18 @@ import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 import classNames from 'classnames';
 import { useContext } from 'react';
-import { PeopleContex } from '../../peopleContext';
+import { PeopleContext } from '../../peopleContext';
+import { getPersonByName } from '../../utils/getPeopleByName';
 
 type Props = {
   person: Person;
-};
-
-const getPersonByName = (
-  name: string | null,
-  people: Person[],
-): Person | undefined => {
-  return people.find(person => person.name === name);
 };
 
 export const PersonItem: React.FC<Props> = ({ person }) => {
   const { slug: userId, sex, born, died, fatherName, motherName } = person;
   const { slug: selectedUserId } = useParams();
 
-  const people = useContext(PeopleContex);
+  const people = useContext(PeopleContext);
   const mother = getPersonByName(motherName, people);
   const father = getPersonByName(fatherName, people);
 

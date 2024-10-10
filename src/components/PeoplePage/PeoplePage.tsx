@@ -3,7 +3,7 @@ import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 import { PeopleTable } from '../PeopleTable';
-import { PeopleContex } from '../../peopleContext';
+import { PeopleContext } from '../../peopleContext';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -37,9 +37,9 @@ export const PeoplePage = () => {
           {!loading && !error && people.length <= 0 && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
-          <PeopleContex.Provider value={people}>
-            {people.length > 0 && <PeopleTable />}
-          </PeopleContex.Provider>
+          <PeopleContext.Provider value={people}>
+            {<PeopleTable />}
+          </PeopleContext.Provider>
         </div>
       </div>
     </>

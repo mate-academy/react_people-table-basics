@@ -1,9 +1,13 @@
 import { useContext } from 'react';
 import { PersonItem } from '../PersonItem';
-import { PeopleContex } from '../../peopleContext';
+import { PeopleContext } from '../../peopleContext';
 
 export const PeopleTable: React.FC = () => {
-  const people = useContext(PeopleContex);
+  const people = useContext(PeopleContext);
+
+  if (!people.length) {
+    return;
+  }
 
   return (
     <table
