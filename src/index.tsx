@@ -9,5 +9,5 @@ import { App } from './App';
 createRoot(document.getElementById('root') as HTMLDivElement).render(
   <HashRouter>
     <App />
-  </HashRouter>
+  </HashRouter>,
 );
