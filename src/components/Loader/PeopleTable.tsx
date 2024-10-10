@@ -1,7 +1,7 @@
 import { Person } from '../../types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { PersonLink } from './PersonLink';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 interface Props {
   people: Person[];
@@ -9,22 +9,6 @@ interface Props {
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
-  const [isValidSlug, setIsValidSlug] = useState(true);
-  const navigator = useNavigate();
-
-  useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
-
-    if (!!slug && !people.find(p => p.slug === slug)) {
-      setIsValidSlug(false);
-      timer = setTimeout(() => {
-        setIsValidSlug(true);
-        navigator(-1);
-      }, 2000);
-    }
-
-    return () => clearTimeout(timer);
-  }, [slug]);
 
   return (
     <table
@@ -43,15 +27,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {isValidSlug ? (
-          people.map(person => (
-            <PersonLink person={person} key={person.slug} activeSlug={slug} />
-          ))
-        ) : (
-          <tr>
-            <td>No such person</td>
-          </tr>
-        )}
+        {people.map(person => (
+          <PersonLink person={person} key={person.slug} activeSlug={slug} />
+        ))}
       </tbody>
     </table>
   );
