@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import './App.scss';
 import { NavBar } from './components/NavBar';
-
 export const App = () => (
   <div data-cy="app">
 
@@ -15,5 +14,4 @@ export const App = () => (
       </div>
     </main>
   </div>
-
 );
