@@ -345,10 +345,11 @@ describe('', () => {
     });
 
     it('should show the people loaded from API', () => {
-      page.mockLessPeople();
+      page.mockPeople();
       page.visit('/#/people');
-      page.people()
-        .should('have.length', 6);
+      cy.wait('@peopleData');
+      page.getByDataCy('personRow-emma-de-milliano-1876').should('exist');
+      page.getByDataCy('personName-emma-de-milliano-1876').should('have.text', 'Emma de Milliano');
     });
   });
 
@@ -370,8 +371,20 @@ describe('', () => {
     });
 
     it('should show all the people', () => {
-      page.people()
-        .should('have.length', 39);
+      cy.wait('@peopleData');
+
+      cy.get('[data-cy="peopleTable"]')
+        .should('be.visible')
+        .and('exist');
+
+      cy.get('[data-cy^="personRow-"]')
+        .should('have.length', 10);
+
+      cy.get('[data-cy="personName-emma-de-milliano-1876"]')
+        .should('have.text', 'Emma de Milliano');
+
+      cy.get('[data-cy="personName-john-doe-1880"]')
+        .should('have.text', 'John Doe');
     });
 
     it('should render all required person data', () => {
