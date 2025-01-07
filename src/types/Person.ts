@@ -9,3 +9,12 @@ export interface Person {
   mother?: Person;
   father?: Person;
 }
+
+export enum PersonSex {
+  Female = 'f',
+  Male = 'm',
+}
+
+export const personFields = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+
+export const emptyPerson = '-';
