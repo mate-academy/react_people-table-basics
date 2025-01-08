@@ -1,6 +1,12 @@
-import { Loader } from './components/Loader';
+import React from 'react';
+import { NavLink, Routes, Route } from 'react-router-dom';
 
 import './App.scss';
+import { PeoplePages } from './components/PeoplePages';
+import classNames from 'classNames';
+
+const isActivePage = ({ isActive }: { isActive: boolean }) =>
+  classNames('navbar-item', { 'has-background-grey-lighter': isActive });
 
 export const App = () => (
   <div data-cy="app">
@@ -12,53 +18,32 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
+          <NavLink className={isActivePage} to="">
             Home
-          </a>
+          </NavLink>
 
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
-          >
+          <NavLink className={isActivePage} to="people">
             People
-          </a>
+          </NavLink>
         </div>
       </div>
     </nav>
 
     <main className="section">
       <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
-
-        <div className="block">
-          <div className="box table-container">
-            <Loader />
-
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
-
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr data-cy="person">
+        <Routes>
+          <Route path="">
+            <Route index element={<h1 className="title">Home Page</h1>} />
+            <Route path="people/:index?" element={<PeoplePages />} />
+            <Route
+              path="*"
+              element={<h1 className="title">Page not found</h1>}
+            />
+          </Route>
+        </Routes>
+      </div>
+    </main>
+    {/* <tr data-cy="person">
                   <td>
                     <a href="#/people/jan-van-brussel-1714">Jan van Brussel</a>
                   </td>
@@ -156,12 +141,6 @@ export const App = () => (
                       Lieven de Causmaecker
                     </a>
                   </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </main>
+                </tr> */}
   </div>
 );
