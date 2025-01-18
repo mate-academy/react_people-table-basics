@@ -1,0 +1,38 @@
+import { NavLink } from 'react-router-dom';
+
+export function NavBar() {
+  return (
+    <nav
+      data-cy="nav"
+      className="navbar is-fixed-top has-shadow"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div className="container">
+        <div className="navbar-brand">
+          <NavLink
+            to="/"
+            className={({ isActive }: { isActive: boolean }) =>
+              isActive
+                ? 'navbar-item has-background-grey-lighter'
+                : 'navbar-item'
+            }
+          >
+            Home
+          </NavLink>
+
+          <NavLink
+            className={({ isActive }: { isActive: boolean }) =>
+              isActive
+                ? 'navbar-item has-background-grey-lighter'
+                : 'navbar-item'
+            }
+            to="people"
+          >
+            People
+          </NavLink>
+        </div>
+      </div>
+    </nav>
+  );
+}
