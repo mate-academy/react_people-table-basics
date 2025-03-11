@@ -17,102 +17,106 @@ export const PeopleList: React.FC<Props> = ({ people }) => {
   return (
     <div className="block">
       {loading && <Loader />}
-      {!isDataLoaded && (
-        <>
-          <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
-          </p>
 
-          <p data-cy="noPeopleMessage">There are no people on the server</p>
-        </>
+      {!loading && people.length === 0 && (
+        <p data-cy="noPeopleMessage">There are no people on the server</p>
       )}
-      `{' '}
-      <div className="box table-container">
-        <table
-          data-cy="peopleTable"
-          className="table is-striped is-hoverable is-narrow is-fullwidth"
-        >
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Sex</th>
-              <th>Born</th>
-              <th>Died</th>
-              <th>Mother</th>
-              <th>Father</th>
-            </tr>
-          </thead>
 
-          <tbody>
-            {people.map(person => {
-              const {
-                name,
-                sex,
-                born,
-                died,
-                fatherName,
-                motherName,
-                mother,
-                father,
-              } = person;
+      {!loading && !isDataLoaded && (
+        <p data-cy="peopleLoadingError" className="has-text-danger">
+          Something went wrong
+        </p>
+      )}
 
-              return (
-                <tr
-                  data-cy="person"
-                  key={person.slug}
-                  className={
-                    person.slug === validActivePerson
-                      ? 'has-background-warning'
-                      : ''
-                  }
-                >
-                  <td>
-                    <Link
-                      className={sex === 'f' ? 'has-text-danger' : ''}
-                      to={`../${person.slug}`}
-                    >
-                      {name}
-                    </Link>
-                  </td>
+      {!loading && isDataLoaded && people.length !== 0 && (
+        <div className="box table-container">
+          <table
+            data-cy="peopleTable"
+            className="table is-striped is-hoverable is-narrow is-fullwidth"
+          >
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Sex</th>
+                <th>Born</th>
+                <th>Died</th>
+                <th>Mother</th>
+                <th>Father</th>
+              </tr>
+            </thead>
 
-                  <td>{sex}</td>
-                  <td>{born}</td>
-                  <td>{died}</td>
+            <tbody>
+              {people.map(person => {
+                const {
+                  name,
+                  sex,
+                  born,
+                  died,
+                  fatherName,
+                  motherName,
+                  mother,
+                  father,
+                } = person;
 
-                  {mother && motherName !== null ? (
+                return (
+                  <tr
+                    data-cy="person"
+                    key={person.slug}
+                    className={
+                      person.slug === validActivePerson
+                        ? 'has-background-warning'
+                        : ''
+                    }
+                  >
                     <td>
-                      {motherName !== null ? (
-                        <Link
-                          className="has-text-danger"
-                          to={`../${mother.slug}`}
-                        >
-                          {motherName}
-                        </Link>
-                      ) : (
-                        '-'
-                      )}
+                      <Link
+                        className={sex === 'f' ? 'has-text-danger' : ''}
+                        to={`../${person.slug}`}
+                      >
+                        {name}
+                      </Link>
                     </td>
-                  ) : (
-                    <td>{motherName !== null ? motherName : '-'}</td>
-                  )}
 
-                  {father && fatherName !== null ? (
-                    <td>
-                      {fatherName !== null ? (
-                        <Link to={`../${father.slug}`}>{fatherName}</Link>
-                      ) : (
-                        '-'
-                      )}
-                    </td>
-                  ) : (
-                    <td>{fatherName !== null ? fatherName : '-'}</td>
-                  )}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+                    <td>{sex}</td>
+                    <td>{born}</td>
+                    <td>{died}</td>
+
+                    {mother && motherName !== null ? (
+                      <td>
+                        {motherName !== null ? (
+                          <Link
+                            className="has-text-danger"
+                            to={`../${mother.slug}`}
+                          >
+                            {motherName}
+                          </Link>
+                        ) : (
+                          '-'
+                        )}
+                      </td>
+                    ) : (
+                      <td>{motherName !== null ? motherName : '-'}</td>
+                    )}
+
+                    {father && fatherName !== null ? (
+                      <td>
+                        {fatherName !== null ? (
+                          <Link to={`../${father.slug}`}>{fatherName}</Link>
+                        ) : (
+                          '-'
+                        )}
+                      </td>
+                    ) : (
+                      <td>{fatherName !== null ? fatherName : '-'}</td>
+                    )}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
     </div>
   );
 };
