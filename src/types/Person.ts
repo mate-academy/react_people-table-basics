@@ -3,9 +3,10 @@ export interface Person {
   sex: string;
   born: number;
   died: number;
-  fatherName: string | null;
-  motherName: string | null;
+  motherName?: string | null;
+  fatherName?: string | null;
   slug: string;
-  mother?: Person;
-  father?: Person;
+  isSelected?: boolean;
+  mother?: Person | null;
+  father?: Person | null;
 }
