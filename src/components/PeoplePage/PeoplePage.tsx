@@ -104,13 +104,12 @@ export const PeoplePage = () => {
                             })}
                             key={person.slug}
                           >
-                            <td>
-                              <Link
-                                to="#/people/jan-van-brussel-1714"
-                                className={classNames({
-                                  'has-text-danger': person.sex === 'f',
-                                })}
-                              >
+                            <td
+                              className={classNames({
+                                'has-text-danger': person.sex === 'f',
+                              })}
+                            >
+                              <Link to={`/people/${person.slug}`}>
                                 {person.name}
                               </Link>
                             </td>
@@ -120,28 +119,26 @@ export const PeoplePage = () => {
                             <td>{person.died}</td>
                             <td>
                               {!person.motherName ? (
-                                '-' // 1. Если нет person.fatherName, то просто "-"
+                                '-'
                               ) : person.mother === undefined ? (
-                                person.motherName // 2. Если fatherName есть, но father отсутствует
+                                person.motherName
                               ) : (
                                 <Link
                                   className="has-text-danger"
-                                  to={`/people/${person.mother.slug}`} // 3. Если есть и fatherName, и father
+                                  to={`/people/${person.mother.slug}`}
                                 >
-                                  {person.motherName}
+                                  {person.mother.name}
                                 </Link>
                               )}
                             </td>
                             <td>
                               {!person.fatherName ? (
-                                '-' // 1. Если нет person.fatherName, то просто "-"
+                                '-'
                               ) : person.father === undefined ? (
-                                person.fatherName // 2. Если fatherName есть, но father отсутствует
+                                person.fatherName
                               ) : (
-                                <Link
-                                  to={`/people/${person.father.slug}`} // 3. Если есть и fatherName, и father
-                                >
-                                  {person.fatherName}
+                                <Link to={`/people/${person.father.slug}`}>
+                                  {person.father.name}
                                 </Link>
                               )}
                             </td>
