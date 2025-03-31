@@ -1,167 +1,172 @@
-import { Loader } from './components/Loader';
+import { useEffect, useState } from 'react'
+import { NavLink, Navigate, Route, Routes, useParams } from 'react-router-dom'
+import { getPeople } from './api'
+import './App.scss'
+import { Loader } from './components/Loader'
+import { Person } from './types/Person'
 
-import './App.scss';
+const PersonLink = ({ person }: { person?: Person }) => {
+  if (!person) {
+    return <span>-</span>;
+  }
 
-export const App = () => (
-  <div data-cy="app">
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
+  return (
+    <NavLink
+      to={`/people/${person.slug}`}
+      className={person.sex === 'f' ? 'has-text-danger' : ''}
     >
-      <div className="container">
-        <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
-            Home
-          </a>
+      {person.name}
+    </NavLink>
+  );
+};
 
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
-          >
-            People
-          </a>
-        </div>
-      </div>
-    </nav>
+const HomePage = () => <h1 className="title">Home Page</h1>;
 
-    <main className="section">
-      <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
+const PeoplePage = () => {
+  const [people, setPeople] = useState<Person[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
-        <div className="block">
-          <div className="box table-container">
-            <Loader />
+  useEffect(() => {
+    getPeople()
+      .then(setPeople)
+      .catch(setError)
+      .finally(() => setLoading(false));
+  }, []);
 
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
+  if (loading) {
+    return <Loader />;
+  }
 
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
+  if (error) {
+    return (
+      <p className="has-text-danger " data-cy="peopleLoadingError">
+        Failed to load people.
+      </p>
+    );
+  }
 
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
+  if (people.length === 0) {
+    return <p data-cy="noPeopleMessage">There are no people on the server</p>;
+  }
 
-              <tbody>
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/jan-van-brussel-1714">Jan van Brussel</a>
-                  </td>
+  return (
+    <div>
+      <h1 className="title">People Page</h1>
+      <table
+        className="table is-striped is-hoverable is-narrow is-fullwidth"
+        data-cy="peopleTable"
+      >
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Sex</th>
+            <th>Born</th>
+            <th>Died</th>
+            <th>Mother</th>
+            <th>Father</th>
+          </tr>
+        </thead>
+        <tbody>
+          {people.map(person => (
+            <tr key={person.slug} data-cy="person">
+              <td>
+                <PersonLink person={person} />
+              </td>
+              <td>{person.sex}</td>
+              <td>{person.born}</td>
+              <td>{person.died}</td>
+              <td>{person.motherName ? person.motherName : '-'}</td>
+              <td>{person.fatherName ? person.fatherName : '-'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
-                  <td>m</td>
-                  <td>1714</td>
-                  <td>1748</td>
-                  <td>Joanna van Rooten</td>
-                  <td>Jacobus van Brussel</td>
-                </tr>
+const PersonPage = () => {
+  const { slug } = useParams();
+  const [person, setPerson] = useState<Person | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/philibert-haverbeke-1907">
-                      Philibert Haverbeke
-                    </a>
-                  </td>
+  useEffect(() => {
+    getPeople()
+      .then(people => {
+        const foundPerson = people.find(p => p.slug === slug) || null;
 
-                  <td>m</td>
-                  <td>1907</td>
-                  <td>1997</td>
+        setPerson(foundPerson);
+      })
+      .catch(setError)
+      .finally(() => setLoading(false));
+  }, [slug]);
 
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/emma-de-milliano-1876"
-                    >
-                      Emma de Milliano
-                    </a>
-                  </td>
+  if (loading) {
+    return <Loader />;
+  }
 
-                  <td>
-                    <a href="#/people/emile-haverbeke-1877">Emile Haverbeke</a>
-                  </td>
-                </tr>
+  if (error) {
+    return <p className="has-text-danger">Failed to load person.</p>;
+  }
 
-                <tr data-cy="person" className="has-background-warning">
-                  <td>
-                    <a href="#/people/jan-frans-van-brussel-1761">
-                      Jan Frans van Brussel
-                    </a>
-                  </td>
+  if (!person) {
+    return <p className="has-text-danger">Person not found.</p>;
+  }
 
-                  <td>m</td>
-                  <td>1761</td>
-                  <td>1833</td>
-                  <td>-</td>
+  return (
+    <div>
+      <h1 className="title">{person.name}</h1>
+      <p>Born: {person.born}</p>
+      <p>Died: {person.died}</p>
+      <p>Mother: {person.motherName ? person.motherName : '-'}</p>
+      <p>Father: {person.fatherName ? person.fatherName : '-'}</p>
+    </div>
+  );
+};
 
-                  <td>
-                    <a href="#/people/jacobus-bernardus-van-brussel-1736">
-                      Jacobus Bernardus van Brussel
-                    </a>
-                  </td>
-                </tr>
+const NotFoundPage = () => <h1 className="title">Page not found</h1>;
 
-                <tr data-cy="person">
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/lievijne-jans-1542"
-                    >
-                      Lievijne Jans
-                    </a>
-                  </td>
-
-                  <td>f</td>
-                  <td>1542</td>
-                  <td>1582</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/bernardus-de-causmaecker-1721">
-                      Bernardus de Causmaecker
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1721</td>
-                  <td>1789</td>
-
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/livina-haverbeke-1692"
-                    >
-                      Livina Haverbeke
-                    </a>
-                  </td>
-
-                  <td>
-                    <a href="#/people/lieven-de-causmaecker-1696">
-                      Lieven de Causmaecker
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+export const App = () => {
+  return (
+    <>
+      <div data-cy="app">
+        <nav className="navbar  has-shadow" data-cy="nav">
+          <div className="container">
+            <div className="navbar-brand">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`
+                }
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/people"
+                className={({ isActive }) =>
+                  `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`
+                }
+              >
+                People
+              </NavLink>
+            </div>
           </div>
-        </div>
+        </nav>
+
+        <main className="section">
+          <div className="container">
+            <Routes>
+              <Route path="/home" element={<Navigate to="/" replace />} />
+              <Route path="/" element={<HomePage />} />
+              <Route path="/people" element={<PeoplePage />} />
+              <Route path="/people/:slug" element={<PersonPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </div>
+        </main>
       </div>
-    </main>
-  </div>
-);
+    </>
+  );
+};
