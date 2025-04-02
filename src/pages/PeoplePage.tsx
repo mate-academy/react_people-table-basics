@@ -5,10 +5,10 @@ import { Person } from '../types/Person';
 import { Link, useParams } from 'react-router-dom';
 
 export const PeoplePage = () => {
+  const { slug } = useParams<{ slug: string }>();
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { slug } = useParams<{ slug: string }>();
 
   useEffect(() => {
     getPeople()
