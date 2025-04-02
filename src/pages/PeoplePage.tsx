@@ -75,28 +75,28 @@ export const PeoplePage = () => {
                     <td>
                       {person.motherName &&
                       people.find(m => m.name === person.motherName) ? (
-                          <Link
-                            to={`/people/${people.find(m => m.name === person.motherName)?.slug}`}
-                            className="has-text-danger"
-                          >
+                        <Link
+                          to={`/people/${people.find(m => m.name === person.motherName)?.slug}`}
+                          className="has-text-danger"
+                        >
                           {person.motherName}
-                          </Link>
-                        ) : (
-                          person.motherName || '-'
-                        )}
+                        </Link>
+                      ) : (
+                        person.motherName || '-'
+                      )}
                     </td>
                     <td>
                       {person.fatherName &&
                       people.find(f => f.name === person.fatherName) ? (
-                          <Link
+                        <Link
                           to={`/people/${people.find(f => f.name === person.fatherName)?.slug}`}
-                            className="has-text-link"
-                          >
-                            {person.fatherName}
-                          </Link>
-                        ) : (
-                          person.fatherName || '-'
-                        )}
+                          className="has-text-link"
+                        >
+                          {person.fatherName}
+                        </Link>
+                      ) : (
+                        person.fatherName || '-'
+                      )}
                     </td>
                   </tr>
                 ))}
