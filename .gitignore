@@ -14,4 +14,4 @@ reports
 cypress/screenshots
 cypress/videos
 package.json
-package-lock.jsongit add ./src
+package-lock.json
