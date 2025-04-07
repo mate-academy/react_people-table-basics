@@ -1,6 +1,6 @@
-export interface Person {
+export type Person = {
   name: string;
-  sex: string;
+  sex: 'm' | 'f';
   born: number;
   died: number;
   fatherName: string | null;
@@ -8,4 +8,10 @@ export interface Person {
   slug: string;
   mother?: Person;
   father?: Person;
-}
+};
+
+export type PeopleContextType = {
+  people: Person[];
+  isLoading: boolean;
+  hasError: boolean;
+};
