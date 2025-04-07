@@ -21,6 +21,7 @@ Implement the `App` with 2 pages and ability to select a person in the table.
 1. Highlight the row of the selected person with the `has-background-warning` class;
 
 ## Instructions
+
 - Install Prettier Extention and use this [VSCode settings](https://mate-academy.github.io/fe-program/tools/vscode/settings.json) to enable format on save.
 - Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
 - Use the [React TypeScript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript).
