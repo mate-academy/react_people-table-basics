@@ -5,18 +5,18 @@ import {
   Navigate,
 } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
-import { PeoplePage } from './pages/PersonPage';
 import { NotFound } from './pages/NotFoundPage';
 import { App } from './App';
+import { PersonPage } from './pages/PersonPage';
 
 export const Root = () => (
   <Router>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="/home" element={<Navigate to="/" replace/>} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
         <Route index element={<HomePage />} />
-        <Route path="/people" element={<PeoplePage />}>
-          <Route path=":slug?" element={<PeoplePage />} />
+        <Route path="/people" element={<PersonPage />}>
+          <Route path=":slug?" element={<PersonPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>

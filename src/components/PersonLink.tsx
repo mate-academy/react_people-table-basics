@@ -47,6 +47,6 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
           person.fatherName || '-'
         )}
       </td>
-    </tr>
+    </tr> 
   );
 };

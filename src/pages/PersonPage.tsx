@@ -4,7 +4,7 @@ import { Person } from '../types';
 import { getPeople } from '../api';
 import { PeopleTable } from '../components/PeopleTable';
 
-export const PeoplePage = () => {
+export const PersonPage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
