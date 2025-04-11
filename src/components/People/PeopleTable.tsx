@@ -25,13 +25,13 @@ export const PeopleTable = () => {
       </thead>
 
       <tbody>
-        {people.map((person, index) => {
+        {people.map(person => {
           const mother = people.find(p => p.name === person.motherName);
           const father = people.find(p => p.name === person.fatherName);
 
           return (
             <tr
-              key={index}
+              key={person.slug}
               data-cy="person"
               className={classNames(
                 person.slug === slug && 'has-background-warning',
