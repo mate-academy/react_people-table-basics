@@ -1,17 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 import classNames from 'classnames';
-// import classNames from 'classnames';
 
 type PersonLinkProps = {
   person: Person;
-  // setSelected: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const PersonLink: React.FC<PersonLinkProps> = ({
-  person,
-  // setSelected,
-}) => {
+export const PersonLink: React.FC<PersonLinkProps> = ({ person }) => {
   const { name, sex, slug } = person;
 
   return (

@@ -8,7 +8,6 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [hasError, setHasError] = useState(false);
   const [loading, setLoading] = useState(false);
-  // const [selected, setSelected] = useState<Person | null>(null);
 
   useEffect(() => {
     setLoading(true);
