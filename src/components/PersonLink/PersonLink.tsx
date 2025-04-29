@@ -13,7 +13,6 @@ export const PersonLink: React.FC<PersonLinkProps> = ({ person }) => {
     <Link
       to={`/people/${slug}`}
       className={classNames({ 'has-text-danger': sex === 'f' })}
-      // onClick={() => setSelected(slug)}
     >
       {name}
     </Link>

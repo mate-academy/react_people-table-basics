@@ -36,7 +36,7 @@ export const PeopleTable: React.FC<PeopleTableProps> = ({ people }) => {
                 data-cy="person"
                 key={slug}
                 className={classNames({
-                  'has-background-warning': slugs === slug,
+                  'has-background-warning': slugs?.includes(slug) && slugs,
                 })}
               >
                 <td>
