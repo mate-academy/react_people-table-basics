@@ -4,7 +4,11 @@ import { Person } from './types/Person';
 const API_URL =
   'https://mate-academy.github.io/react_people-table/api/people.json';
 
-function wait(delay: number) {
+export const getSlug = (name: string, born: number) => {
+  return `${name.toLowerCase().replace(/\s+/g, '-')}-${born}`;
+};
+
+export function wait(delay: number) {
   return new Promise(resolve => setTimeout(resolve, delay));
 }
 
