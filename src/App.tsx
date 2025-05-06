@@ -17,14 +17,14 @@ export const App = () => {
             <div className="navbar-brand">
               <Link
                 className={`navbar-item ${location.pathname === '/' ? 'has-background-grey-lighter' : ''}`}
-                to="../"
+                to="/"
               >
                 Home
               </Link>
 
               <Link
                 className={`navbar-item ${location.pathname === '/people' ? 'has-background-grey-lighter' : ''}`}
-                to="../people"
+                to="/people"
               >
                 People
               </Link>

@@ -7,15 +7,21 @@ import { Link } from 'react-router-dom';
 export const People = () => {
   const [persons, setPersons] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
-  const [erroMessage] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState<Person>();
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-      await wait(2000);
-      getPeople().then(setPersons);
-      setLoading(false);
+      try {
+        setLoading(true);
+        setHasError(false);
+        await wait(2000);
+        getPeople().then(setPersons);
+      } catch (error) {
+        setHasError(true);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
@@ -24,13 +30,15 @@ export const People = () => {
   return (
     <>
       <h1 className="title">People Page</h1>
-      {erroMessage && (
+      {hasError && (
         <p data-cy="peopleLoadingError" className="has-text-danger">
           Something went wrong
         </p>
       )}
+      {!persons && (
+        <p data-cy="noPeopleMessage">There are no people on the server</p>
+      )}
 
-      <p data-cy="noPeopleMessage">There are no people on the server</p>
       {loading ? (
         <Loader />
       ) : (
@@ -69,10 +77,10 @@ export const People = () => {
                 <td>{person.born}</td>
                 <td>{person.died}</td>
                 <td>
-                  {person.motherName && person.motherName && (
+                  {person.motherName && (
                     <Link
                       className="has-text-danger"
-                      to={`#/people/${person.motherName.toLowerCase().replace(/\s+/g, '-')}`}
+                      to={`#/people/${person.slug.toLowerCase().replace(/\s+/g, '-')}`}
                     >
                       {person.motherName}
                     </Link>
@@ -80,10 +88,10 @@ export const People = () => {
                 </td>
 
                 <td>
-                  {person.fatherName && person.fatherName && (
+                  {person.fatherName && (
                     <Link
                       className="has-text-danger"
-                      to={`#/people/${person.fatherName.toLowerCase().replace(/\s+/g, '-')}`}
+                      to={`/people/${person.slug.toLowerCase().replace(/\s+/g, '-')}`}
                     >
                       {person.fatherName}
                     </Link>
