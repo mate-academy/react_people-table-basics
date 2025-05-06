@@ -3,6 +3,7 @@ import { Person } from '../types';
 import { getPeople, wait } from '../api';
 import { Loader } from '../components/Loader';
 import { Link } from 'react-router-dom';
+import { getSlug } from '../api';
 
 export const People = () => {
   const [persons, setPersons] = useState<Person[]>([]);
@@ -35,7 +36,7 @@ export const People = () => {
           Something went wrong
         </p>
       )}
-      {!persons && (
+      {persons.length === 0 && (
         <p data-cy="noPeopleMessage">There are no people on the server</p>
       )}
 
@@ -58,47 +59,67 @@ export const People = () => {
           </thead>
 
           <tbody>
-            {persons.map(person => (
-              <tr
-                className={
-                  selectedPerson && selectedPerson.name === person.name
-                    ? 'has-background-warning'
-                    : ''
-                }
-                onClick={() => setSelectedPerson(person)}
-                key={person.name}
-                data-cy="person"
-              >
-                <td>
-                  <Link to={`#/${person.name}`}>{person.name}</Link>
-                </td>
+            {persons.map(person => {
+              const mother = persons.find(p => p.name === person.motherName);
+              const father = persons.find(p => p.name === person.fatherName);
 
-                <td>{person.sex}</td>
-                <td>{person.born}</td>
-                <td>{person.died}</td>
-                <td>
-                  {person.motherName && (
-                    <Link
-                      className="has-text-danger"
-                      to={`#/people/${person.slug.toLowerCase().replace(/\s+/g, '-')}`}
-                    >
-                      {person.motherName}
+              return (
+                <tr
+                  className={
+                    selectedPerson && selectedPerson.name === person.name
+                      ? 'has-background-warning'
+                      : ''
+                  }
+                  onClick={() => setSelectedPerson(person)}
+                  key={person.name}
+                  data-cy="person"
+                >
+                  <td>
+                    <Link to={`/people/${getSlug(person.name, person.born)}`}>
+                      {' '}
+                      {person.name}{' '}
                     </Link>
-                  )}
-                </td>
+                  </td>
 
-                <td>
-                  {person.fatherName && (
-                    <Link
-                      className="has-text-danger"
-                      to={`/people/${person.slug.toLowerCase().replace(/\s+/g, '-')}`}
-                    >
-                      {person.fatherName}
-                    </Link>
-                  )}
-                </td>
-              </tr>
-            ))}
+                  <td>{person.sex}</td>
+                  <td>{person.born}</td>
+                  <td>{person.died}</td>
+                  <td>
+                    {person.motherName ? (
+                      mother ? (
+                        <Link
+                          className="has-text-danger"
+                          to={`/people/${getSlug(mother.name, mother.born)}`}
+                        >
+                          {person.motherName}
+                        </Link>
+                      ) : (
+                        person.motherName
+                      )
+                    ) : (
+                      '-'
+                    )}
+                  </td>
+
+                  <td>
+                    {person.fatherName ? (
+                      father ? (
+                        <Link
+                          className="has-text-danger"
+                          to={`/people/${getSlug(father.name, father.born)}`}
+                        >
+                          {person.fatherName}
+                        </Link>
+                      ) : (
+                        person.fatherName
+                      )
+                    ) : (
+                      '-'
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}
