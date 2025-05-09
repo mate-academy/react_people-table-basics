@@ -87,7 +87,7 @@ describe('', () => {
       page.visit('/');
       page.nav()
         .contains('a', 'People')
-        .should('have.attr', 'href', '#/people')
+        .should('have.attr', 'href', '#/person')
         .and('not.have.class', ACTIVE_NAV_LINK_CLASS);
     });
 
@@ -111,7 +111,7 @@ describe('', () => {
       page.loader().should('not.exist');
     });
 
-    it('should not have the `no people` message', () => {
+    it('should not have the `no person` message', () => {
       page.mockNoPeople();
       page.visit('/');
       page.noPeopleMessage().should('not.exist');
@@ -123,7 +123,7 @@ describe('', () => {
       page.peopleLoadingError().should('not.exist');
     });
 
-    it('should not have people table', () => {
+    it('should not have person table', () => {
       page.mockPeople();
       page.visit('/');
       page.peopleTable().should('not.exist');
@@ -178,7 +178,7 @@ describe('', () => {
       page.loader().should('not.exist');
     });
 
-    it('should not have the `no people` message', () => {
+    it('should not have the `no person` message', () => {
       page.mockNoPeople();
       page.visit('/#/some/not/existing/page');
       page.noPeopleMessage().should('not.exist');
@@ -190,18 +190,18 @@ describe('', () => {
       page.peopleLoadingError().should('not.exist');
     });
 
-    it('should not have people table', () => {
+    it('should not have person table', () => {
       page.mockPeople();
       page.visit('/#/some/not/existing/page');
       page.peopleTable().should('not.exist');
     });
   });
 
-  describe('#/people page', () => {
+  describe('#/person page', () => {
     it('should have correct address', () => {
       page.mockPeople();
       page.visit('/#/people');
-      page.assertHash('#/people');
+      page.assertHash('#/person');
     });
 
     it('should have navigation', () => {
@@ -238,14 +238,14 @@ describe('', () => {
       cy.get('@peopleRequest').should('have.been.calledOnce');
     });
 
-    it('should show loader before the people are loaded', () => {
+    it('should show loader before the person are loaded', () => {
       cy.clock();
       page.mockPeople();
       page.visit('/#/people');
       page.loader().should('exist');
     });
 
-    it('should hide loader after people are loaded', () => {
+    it('should hide loader after person are loaded', () => {
       cy.clock();
       page.mockPeople();
       page.visit('/#/people');
@@ -253,7 +253,7 @@ describe('', () => {
       page.loader().should('not.exist');
     });
 
-    it('should hide loader if no people were loaded', () => {
+    it('should hide loader if no person were loaded', () => {
       cy.clock();
       page.mockNoPeople();
       page.visit('/#/people');
@@ -261,7 +261,7 @@ describe('', () => {
       page.loader().should('not.exist');
     });
 
-    it('should hide loader on people loading error', () => {
+    it('should hide loader on person loading error', () => {
       cy.clock();
       page.mockNoPeople();
       page.visit('/#/people');
@@ -269,25 +269,25 @@ describe('', () => {
       page.loader().should('not.exist');
     });
 
-    it('should show the `no people` message if API sent no people', () => {
+    it('should show the `no person` message if API sent no person', () => {
       page.mockNoPeople();
       page.visit('/#/people');
       page.noPeopleMessage().should('exist');
     });
 
-    it('should not show the `no people` message if people are not empty', () => {
+    it('should not show the `no person` message if person are not empty', () => {
       page.mockPeople();
       page.visit('/#/people');
       page.noPeopleMessage().should('not.exist');
     });
 
-    it('should not show the `no people` message on people loading error', () => {
+    it('should not show the `no person` message on person loading error', () => {
       page.mockPeopleError();
       page.visit('/#/people');
       page.noPeopleMessage().should('not.exist');
     });
 
-    it('should not show the `no people` message before an empty response received', () => {
+    it('should not show the `no person` message before an empty response received', () => {
       cy.clock();
       page.mockNoPeople();
       page.visit('/#/people');
@@ -300,13 +300,13 @@ describe('', () => {
       page.peopleLoadingError().should('exist');
     });
 
-    it('should not show loading error if people were loaded', () => {
+    it('should not show loading error if person were loaded', () => {
       page.mockPeople();
       page.visit('/#/people');
       page.peopleLoadingError().should('not.exist');
     });
 
-    it('should not show loading error if API send no people', () => {
+    it('should not show loading error if API send no person', () => {
       page.mockPeopleError();
       page.visit('/#/people');
       page.peopleLoadingError().should('not.exist');
@@ -319,32 +319,32 @@ describe('', () => {
       page.peopleLoadingError().should('not.exist');
     });
 
-    it('should show people table if people are loaded', () => {
+    it('should show person table if person are loaded', () => {
       page.mockPeople();
       page.visit('/#/people');
       page.peopleTable().should('exist');
     });
 
-    it('should not show people table if API sent no people', () => {
+    it('should not show person table if API sent no person', () => {
       page.mockNoPeople();
       page.visit('/#/people');
       page.peopleTable().should('not.exist');
     });
 
-    it('should not show people table on people loading error', () => {
+    it('should not show person table on person loading error', () => {
       page.mockPeopleError();
       page.visit('/#/people');
       page.peopleTable().should('not.exist');
     });
 
-    it('should not show people table before a response received', () => {
+    it('should not show person table before a response received', () => {
       cy.clock();
       page.mockPeople();
       page.visit('/#/people');
       page.peopleTable().should('not.exist');
     });
 
-    it('should show the people loaded from API', () => {
+    it('should show the person loaded from API', () => {
       page.mockLessPeople();
       page.visit('/#/people');
       page.people()
@@ -369,7 +369,7 @@ describe('', () => {
       page.heading().eq(5).should('have.text', 'Father');
     });
 
-    it('should show all the people', () => {
+    it('should show all the person', () => {
       page.people()
         .should('have.length', 39);
     });
@@ -401,13 +401,13 @@ describe('', () => {
       page.people().eq(1)
         .find('td').eq(0)
         .find('a')
-        .should('have.attr', 'href', '#/people/emma-de-milliano-1876')
+        .should('have.attr', 'href', '#/person/emma-de-milliano-1876')
         .and('have.text', 'Emma de Milliano');
 
       page.people().eq(3)
         .find('td').eq(0)
         .find('a')
-        .should('have.attr', 'href', '#/people/jan-van-brussel-1714')
+        .should('have.attr', 'href', '#/person/jan-van-brussel-1714')
         .and('have.text', 'Jan van Brussel');
     });
 
@@ -422,7 +422,7 @@ describe('', () => {
         .find('a')
         .click();
 
-      page.assertHash('#/people/emma-de-milliano-1876')
+      page.assertHash('#/person/emma-de-milliano-1876')
 
       page.people().eq(1)
         .should('have.class', SELECTED_PERSON_CLASS);
@@ -432,7 +432,7 @@ describe('', () => {
       page.people().eq(0)
         .find('td').eq(4)
         .contains('a', 'Maria van Brussel')
-        .should('have.attr', 'href', '#/people/maria-van-brussel-1801')
+        .should('have.attr', 'href', '#/person/maria-van-brussel-1801')
         .and('have.class', 'has-text-danger')
     });
 
@@ -440,7 +440,7 @@ describe('', () => {
       page.people().eq(4)
         .find('td').eq(5)
         .contains('a', 'Emile Haverbeke')
-        .should('have.attr', 'href', '#/people/emile-haverbeke-1877')
+        .should('have.attr', 'href', '#/person/emile-haverbeke-1877')
         .and('not.have.class', 'has-text-danger')
     });
 
@@ -471,14 +471,14 @@ describe('', () => {
     });
   });
 
-  describe('#/people/:correct-slug page', () => {
+  describe('#/person/:correct-slug page', () => {
     beforeEach(() => {
       page.mockPeople();
       page.visit('/#/people/emma-de-milliano-1876');
     });
 
     it('should have correct address', () => {
-      page.assertHash('#/people/emma-de-milliano-1876');
+      page.assertHash('#/person/emma-de-milliano-1876');
     });
 
     it('should have People nav link active', () => {
@@ -491,7 +491,7 @@ describe('', () => {
       page.assetTitle('People Page');
     });
 
-    it('should have people table', () => {
+    it('should have person table', () => {
       page.peopleTable().should('exist');
     });
 
@@ -511,7 +511,7 @@ describe('', () => {
         .find('a')
         .click();
 
-      page.assertHash('#/people/jan-van-brussel-1714')
+      page.assertHash('#/person/jan-van-brussel-1714')
 
       page.people().eq(3)
         .should('have.class', SELECTED_PERSON_CLASS);
@@ -521,14 +521,14 @@ describe('', () => {
     });
   });
 
-  describe('#/people/:wrong-slug page', () => {
+  describe('#/person/:wrong-slug page', () => {
     beforeEach(() => {
       page.mockPeople();
       page.visit('/#/people/non-existing-slug');
     });
 
     it('should have correct address', () => {
-      page.assertHash('#/people/non-existing-slug');
+      page.assertHash('#/person/non-existing-slug');
     });
 
     it('should have People nav link active', () => {
@@ -541,7 +541,7 @@ describe('', () => {
       page.assetTitle('People Page');
     });
 
-    it('should have people table', () => {
+    it('should have person table', () => {
       page.peopleTable().should('exist');
     });
 
@@ -556,7 +556,7 @@ describe('', () => {
         .find('a')
         .click();
 
-      page.assertHash('#/people/emma-de-milliano-1876')
+      page.assertHash('#/person/emma-de-milliano-1876')
 
       page.people().eq(1)
         .should('have.class', SELECTED_PERSON_CLASS);
