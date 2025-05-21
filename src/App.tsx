@@ -1,4 +1,4 @@
-import { Outlet, NavLink, useParams, Navigate } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import './App.scss';
 
@@ -8,8 +8,6 @@ export const getLinkClass = ({ isActive }: { isActive: boolean }) =>
   });
 
 export const App = () => {
-  const params = useParams();
-
   return (
     <>
       <div data-cy="app">
@@ -35,7 +33,6 @@ export const App = () => {
         <main className="section">
           <div className="container">
             <div className="block">
-              {params['*'] === 'home' && <Navigate to=".." replace={true} />}
               <Outlet />
             </div>
           </div>
