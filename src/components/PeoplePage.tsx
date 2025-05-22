@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { PersonData } from './PersonData';
 
 export const PeoplePage = () => {
-  const [people, setPeople] = useState<Person[] | null>();
+  const [people, setPeople] = useState<Person[] | null>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const location = useLocation();
