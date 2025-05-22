@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { PersonData } from './PersonData';
 
 export const PeoplePage = () => {
-  const [people, setPeople] = useState<Person[] | null>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const location = useLocation();
@@ -36,7 +36,7 @@ export const PeoplePage = () => {
               </p>
             )}
 
-            {people?.length === 0 && (
+            {people.length === 0 && !isLoading && (
               <p data-cy="noPeopleMessage">There are no people on the server</p>
             )}
 
