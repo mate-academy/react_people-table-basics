@@ -41,7 +41,7 @@ export const PeoplePage = () => {
       {!isLoading && !hasError && (
         <PeopleTable
           people={people}
-          selectedSlug={slug || ''}
+          selectedSlug={slug || null}
           PersonLinkComponent={PersonLink}
           getPersonByName={getPersonByName}
         />
