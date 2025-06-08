@@ -40,12 +40,7 @@ const PeopleTable: React.FC<Props> = ({ people, selectedPersonSlug }) => {
               }
             >
               <td>
-                <a
-                  href={`#/people/${person.slug}`}
-                  className={person.sex === 'f' ? 'has-text-danger' : ''}
-                >
-                  {person.name}
-                </a>
+                <PersonLink person={person} />
               </td>
 
               <td>{person.sex}</td>
