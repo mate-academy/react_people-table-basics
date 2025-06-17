@@ -1,7 +1,8 @@
 import { useLocation, Navigate, Routes, Route } from 'react-router-dom';
 import { NavBar } from './components/NavBar';
 import { PeoplePage } from './components/PeoplePage';
-import { PeopleList } from './components/PeopleList';
+import { HomePage } from './components/HomePage';
+import { NotFoundPage } from './components/NotFoundPage';
 
 export const App = () => {
   const location = useLocation();
@@ -16,15 +17,12 @@ export const App = () => {
       <main className="section">
         <div className="container">
           <Routes>
-            <Route path="/" element={<h1 className="title">Home Page</h1>} />
+            <Route path="/" element={<HomePage />} />
             <Route path="people" element={<PeoplePage />}>
-              <Route index element={<PeopleList />} />
-              <Route path=":slug" element={<PeopleList />} />
+              <Route index element={<PeoplePage />} />
+              <Route path=":slug" element={<PeoplePage />} />
             </Route>
-            <Route
-              path="*"
-              element={<h1 className="title">Page not found</h1>}
-            />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </main>
