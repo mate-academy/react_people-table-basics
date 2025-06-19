@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../api';
 import { Person } from '../types/Person';
-import { Loader } from '../components/Loader';
+import { Loader } from '../components/Loader/Loader';
 import { PersonLink } from '../components/PersonLink/PersonLink';
 
 export const PersonDetailsPage = () => {
