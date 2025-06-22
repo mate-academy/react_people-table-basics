@@ -1,56 +1,59 @@
 import { useEffect, useState } from 'react';
 import { Person } from '../../types/Person';
-import { getPeople } from '../../api';
 import { Errors } from '../../errors';
-import { ErrorsMessage } from '../../types/ErrorsMessages';
+import { ErrorsKey } from '../../types/ErrosKey';
 import { TableHead } from '../TableHead';
 import { Loader } from '../Loader';
 import { TableBody } from '../TableBody/TableBody';
+import { getPeople } from '../../api';
 
-export const TablePeople = () => {
+export const PeopleTable = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [error, setErrors] = useState<ErrorsMessage | null>(null);
+  const [errorsKey, setErrorsKey] = useState<ErrorsKey | null>(null);
 
   const handleGetPeople = () => {
     setLoading(true);
 
     getPeople()
-      .then(setPeople)
-      .catch(() => {
-        setErrors(Errors.defaultError);
-        setLoading(false);
+      .then(data => {
+        setPeople(data);
+        if (data.length === 0) {
+          setErrorsKey('noPeopleMessage');
+        }
       })
-      .finally(() => setLoading(false));
+      .catch(() => {
+        setErrorsKey('peopleLoadingError');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
     handleGetPeople();
   }, []);
-  {
-    /* <p data-cy="peopleLoadingError" className="has-text-danger">
-          Something went wrong
-        </p>
-
-        <p data-cy="noPeopleMessage">There are no people on the server</p> */
-  }
 
   return (
-    <div className="block">
-      <div className="box table-container">
-        {loading ? (
-          <Loader />
-        ) : (
-          <table
-            data-cy="peopleTable"
-            className="table is-striped is-hoverable is-narrow is-fullwidth"
-          >
-            <TableHead />
-            <TableBody people={people} />
-          </table>
-        )}
+    <>
+      <h1 className="title">People Page</h1>
+      <div className="block">
+        <div className="box table-container">
+          {loading ? (
+            <Loader />
+          ) : errorsKey ? (
+            <p data-cy={errorsKey}>{Errors[errorsKey]}</p>
+          ) : (
+            <table
+              data-cy="peopleTable"
+              className="table is-striped is-hoverable is-narrow is-fullwidth"
+            >
+              <TableHead />
+              <TableBody people={people} />
+            </table>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };

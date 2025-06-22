@@ -1,4 +1,4 @@
 export const Errors = {
-  defaultError: 'Something went wrong',
-  noPeopleError: 'There are no people on the server',
+  peopleLoadingError: 'Something went wrong',
+  noPeopleMessage: 'There are no people on the server',
 } as const;

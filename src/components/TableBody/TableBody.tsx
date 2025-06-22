@@ -1,37 +1,52 @@
-import { Person } from '../../types';
 import cn from 'classnames';
-import { ParentLink } from '../ParentLink/ParentLink';
+import { useParams } from 'react-router-dom';
+import { Person } from '../../types/Person';
+import { PersonLink } from '../PersonLink';
 
 interface TableBodyProps {
   people: Person[];
 }
 
 export const TableBody: React.FC<TableBodyProps> = ({ people }) => {
+  const { slug } = useParams();
+  const selectedUserSlug = slug;
+
   return (
     <tbody>
-      {people.map(person => (
-        <tr data-cy="person" key={person.slug}>
-          <td>
-            <a
-              href={`#/people/${person.slug}`}
-              className={cn({ 'has-text-danger': person.sex === 'f' })}
-            >
-              {person.name}
-            </a>
-          </td>
+      {people.map(person => {
+        const mother =
+          people.find(parent => parent.name === person.motherName) || null;
+        const father =
+          people.find(parent => parent.name === person.fatherName) || null;
 
-          <td>{person.sex}</td>
-          <td>{person.born}</td>
-          <td>{person.died}</td>
-          <td>
-            <ParentLink parentName={person.motherName} people={people} />
-          </td>
+        return (
+          <tr
+            data-cy="person"
+            key={person.slug}
+            className={cn({
+              'has-background-warning': selectedUserSlug === person.slug,
+            })}
+          >
+            <td>
+              <PersonLink
+                person={selectedUserSlug === person.slug ? null : person}
+                personName={person.name}
+              />
+            </td>
 
-          <td>
-            <ParentLink parentName={person.fatherName} people={people} />
-          </td>
-        </tr>
-      ))}
+            <td>{person.sex}</td>
+            <td>{person.born}</td>
+            <td>{person.died}</td>
+            <td>
+              <PersonLink person={mother} personName={person.motherName} />
+            </td>
+
+            <td>
+              <PersonLink person={father} personName={person.fatherName} />
+            </td>
+          </tr>
+        );
+      })}
     </tbody>
   );
 };
