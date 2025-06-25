@@ -7,7 +7,12 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import { App } from './App';
 
 createRoot(document.getElementById('root') as HTMLDivElement).render(
-  <Router>
+  <Router
+    future={{
+      v7_startTransition: true,
+      v7_relativeSplatPath: true,
+    }}
+  >
     <App />
   </Router>,
 );
