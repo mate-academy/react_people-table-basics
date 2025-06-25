@@ -9,3 +9,8 @@ export interface Person {
   mother?: Person;
   father?: Person;
 }
+
+export type ExtendedPerson = Person & {
+  motherObject: Person | null;
+  fatherObject: Person | null;
+};
