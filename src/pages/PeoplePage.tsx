@@ -29,7 +29,7 @@ export const PeoplePage = () => {
 
   useEffect(() => {
     fetchPeople();
-  }, [slug]);
+  }, []);
 
   return (
     <>
