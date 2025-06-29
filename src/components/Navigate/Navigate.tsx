@@ -1,3 +1,1 @@
-export const Navigate = () => {
-  
-};
+export const Navigate = () => {};

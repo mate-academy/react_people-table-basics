@@ -7,6 +7,7 @@ import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
+import { PeopleTable } from './components/PeopleTable/PeopleTable';
 
 export const App = () => (
   <div data-cy="app">
@@ -33,6 +34,7 @@ export const App = () => (
         <div className="block">
           <div className="box table-container">
             <Loader />
+            <PeopleTable />
 
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
