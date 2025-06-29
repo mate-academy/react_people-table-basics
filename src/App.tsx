@@ -1,5 +1,6 @@
 import { Loader } from './components/Loader';
-
+import { Home } from './components/Home/Home';
+import { People } from './components/People/People';
 import './App.scss';
 
 export const App = () => (
@@ -11,18 +12,8 @@ export const App = () => (
       aria-label="main navigation"
     >
       <div className="container">
-        <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
-            Home
-          </a>
-
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
-          >
-            People
-          </a>
-        </div>
+        <Home />
+        <People />
       </div>
     </nav>
 
