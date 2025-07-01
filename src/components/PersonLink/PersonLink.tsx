@@ -22,7 +22,7 @@ export const PersonLink = ({
     <tr data-cy="person" className={isSelected ? 'has-background-warning' : ''}>
       <td>
         <Link
-          to={person.slug}
+          to={`/people/${person.slug}`}
           className={`${person.sex === 'f' && 'has-text-danger'}`}
         >
           {person.name}
@@ -34,7 +34,10 @@ export const PersonLink = ({
       <td>{person.died}</td>
       <td>
         {motherInAPI ? (
-          <Link to={`${motherInAPI}`} className={`${'has-text-danger'}`}>
+          <Link
+            to={`/people/${motherInAPI}`}
+            className={`${'has-text-danger'}`}
+          >
             {person.motherName ? person.motherName : '-'}
           </Link>
         ) : (
@@ -43,7 +46,7 @@ export const PersonLink = ({
       </td>
       <td>
         {fatherInAPI ? (
-          <Link to={`${fatherInAPI}`}>
+          <Link to={`/people/${fatherInAPI}`}>
             {person.fatherName ? person.fatherName : '-'}
           </Link>
         ) : (
