@@ -41,7 +41,9 @@ export const PeopleTable = ({ people, selectedPersonId }: Props) => {
             <td>
               {person.motherName ? (
                 <PersonLink
-                  person={person}
+                  person={
+                    people.find(p => p.name === person.motherName) || null
+                  }
                   people={people}
                   name={person.motherName}
                 />
@@ -52,7 +54,9 @@ export const PeopleTable = ({ people, selectedPersonId }: Props) => {
             <td>
               {person.fatherName ? (
                 <PersonLink
-                  person={person}
+                  person={
+                    people.find(p => p.name === person.fatherName) || null
+                  }
                   people={people}
                   name={person.fatherName}
                 />
