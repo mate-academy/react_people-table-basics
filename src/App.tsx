@@ -29,6 +29,7 @@ export const App = () => {
             <Route path="/people" element={<PeoplePage />} />
             <Route path="/people" element={<Error />} />
             <Route path="*" element={<NotFoundPage />} />
+            <Route path="/people/:slug" element={<PeoplePage />} />
           </Routes>
         </div>
       </main>
