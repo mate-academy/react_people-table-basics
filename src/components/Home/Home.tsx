@@ -4,6 +4,7 @@ export const Home = () => {
   const location = useLocation();
   // Home fica ativo quando estamos na rota '/' (quando foi clicado)
   const isActive = location.pathname === '/';
+  const navigate = useNavigate();
 
   return (
     <div className="navbar-brand">

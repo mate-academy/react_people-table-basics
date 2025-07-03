@@ -1,13 +1,31 @@
-import { Home } from './components/Home/Home';
-import { People } from './components/People/People';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { Error } from './components/Error/Error';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import './App.scss';
-import { Route, Routes } from 'react-router-dom';
+import {
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 
 export const App = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  // Home fica ativo quando estamos na rota '/' (quando foi clicado)
+  const isActive =
+    location.pathname === '/' || location.pathname.startsWith('/people');
+
+  const handleHomeClick = () => {
+    navigate('/');
+  };
+
+  const handlePeopleClick = () => {
+    navigate('/people');
+  };
+
   return (
     <div data-cy="app">
       <nav
@@ -17,8 +35,23 @@ export const App = () => {
         aria-label="main navigation"
       >
         <div className="container">
-          <Home />
-          <People />
+          <div className="navbar-brand">
+            <Link
+              to="/"
+              className={`navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`}
+              onClick={handleHomeClick}
+            >
+              Home
+            </Link>
+
+            <Link
+              to="/people"
+              className={`navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`}
+              onClick={handlePeopleClick}
+            >
+              People
+            </Link>
+          </div>
         </div>
       </nav>
 
