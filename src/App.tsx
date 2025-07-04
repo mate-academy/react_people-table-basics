@@ -16,6 +16,7 @@ export const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/people" element={<PeoplePage />} />
             <Route path="*" element={<NotFoundPage />} />
+            <Route path="/people/:slug" element={<PeoplePage />} />
           </Routes>
         </div>
       </main>

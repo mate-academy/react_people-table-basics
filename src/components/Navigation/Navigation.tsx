@@ -14,6 +14,7 @@ export const Navigation = () => {
         <div className="navbar-brand">
           <Link
             to="/"
+            replace
             className={`navbar-item ${location.pathname === '/' ? 'has-background-grey-lighter' : ''}`}
           >
             Home

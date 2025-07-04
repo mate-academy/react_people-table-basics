@@ -20,7 +20,6 @@ export const PeoplePage = () => {
         setTimeout(() => {
           setIsLoading(false);
         }, 300);
-        // Handle error silently or use proper error handling
       });
   }, []);
 
