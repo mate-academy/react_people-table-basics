@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Person } from '../types';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../api';
-import { PersonTable } from '../components/PeopleTable';
+import { PeopleTable } from '../components/PeopleTable';
 import { Loader } from '../components/Loader';
 
 export const PeoplePage: React.FC = () => {
@@ -38,7 +38,7 @@ export const PeoplePage: React.FC = () => {
             no people
           </p>
         ) : (
-          <PersonTable people={people} selectedSlug={slug} />
+          <PeopleTable people={people} selectedSlug={slug} />
         )}
       </div>
     </div>

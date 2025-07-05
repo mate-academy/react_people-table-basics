@@ -8,7 +8,7 @@ type Props = {
   selectedSlug?: string;
 };
 
-export const PersonTable: React.FC<Props> = ({ people, selectedSlug }) => {
+export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
   const findPersonByName = (name?: string | null) =>
     people.find(p => p.name === name);
 
