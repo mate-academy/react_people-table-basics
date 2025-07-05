@@ -15,8 +15,8 @@ export const App = () => {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/people" element={<PeoplePage />} />
-            <Route path="*" element={<NotFoundPage />} />
             <Route path="/people/:slug" element={<PeoplePage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </main>

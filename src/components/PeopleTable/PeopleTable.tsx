@@ -5,9 +5,11 @@ import { PersonLink } from '../PersonLink';
 export const PeopleTable = ({
   isLoading,
   people,
+  selectedSlug,
 }: {
   isLoading: boolean;
   people: Person[];
+  selectedSlug?: string;
 }) => {
   if (isLoading) {
     return <Loader />;
@@ -31,7 +33,13 @@ export const PeopleTable = ({
 
       <tbody>
         {people.map(person => (
-          <tr data-cy="person" key={person.name}>
+          <tr
+            data-cy="person"
+            key={person.name}
+            className={
+              person.slug === selectedSlug ? 'has-background-warning' : ''
+            }
+          >
             <td>
               <PersonLink name={person.name} allPeople={people} />
             </td>
