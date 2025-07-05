@@ -30,8 +30,6 @@ export const App = () => (
 
     <main className="section">
       <div className="container">
-        {/* <HomePage />
-        <PeoplePage /> */}
         <Outlet />
       </div>
     </main>

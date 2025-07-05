@@ -16,9 +16,9 @@ export const Root = () => (
 
         <Route path="home" element={<Navigate to="/" replace />} />
 
-        <Route path="/people/:slug?" element={<PeoplePage />} />
+        <Route path="people/:slug?" element={<PeoplePage />} />
 
-        <Route path="*" element={<h1 className="title" >Page not found</h1>} />
+        <Route path="*" element={<h1 className="title">Page not found</h1>} />
       </Route>
     </Routes>
   </Router>

@@ -15,7 +15,7 @@ export const PeoplePage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    setError(false)
+    setError(false);
 
     getPeople()
       .then(data => {
@@ -43,69 +43,73 @@ export const PeoplePage = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {error && <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
-          </p>}
+          {error && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+          )}
 
-        {!isLoading && !error && people.length === 0 && <p data-cy="noPeopleMessage">
-            There are no people on the server
-          </p>}
+          {!isLoading && !error && people.length === 0 && (
+            <p data-cy="noPeopleMessage">There are no people on the server</p>
+          )}
 
-          {!isLoading && !error && people.length > 0 && <table
-            data-cy="peopleTable"
-            className="table is-striped is-hoverable is-narrow is-fullwidth"
-          >
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {people.map(person => (
-                <tr
-                  key={person.slug}
-                  data-cy="person"
-                  className={classNames('', {
-                    'has-background-warning': person.slug === slug,
-                  })}
-                >
-                  <td>
-                    <PersonLink person={person} />
-                  </td>
-
-                  <td>{person.sex}</td>
-                  <td>{person.born}</td>
-                  <td>{person.died}</td>
-
-                  <td>
-                    {person.mother ? (
-                      <PersonLink person={person.mother} />
-                    ) : person.motherName ? (
-                      person.motherName
-                    ) : (
-                      '-'
-                    )}
-                  </td>
-
-                  <td>
-                    {person.father ? (
-                      <PersonLink person={person.father} />
-                    ) : person.fatherName ? (
-                      person.fatherName
-                    ) : (
-                      '-'
-                    )}
-                  </td>
+          {!isLoading && !error && people.length > 0 && (
+            <table
+              data-cy="peopleTable"
+              className="table is-striped is-hoverable is-narrow is-fullwidth"
+            >
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sex</th>
+                  <th>Born</th>
+                  <th>Died</th>
+                  <th>Mother</th>
+                  <th>Father</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>}
+              </thead>
+
+              <tbody>
+                {people.map(person => (
+                  <tr
+                    key={person.slug}
+                    data-cy="person"
+                    className={classNames('', {
+                      'has-background-warning': person.slug === slug,
+                    })}
+                  >
+                    <td>
+                      <PersonLink person={person} />
+                    </td>
+
+                    <td>{person.sex}</td>
+                    <td>{person.born}</td>
+                    <td>{person.died}</td>
+
+                    <td>
+                      {person.mother ? (
+                        <PersonLink person={person.mother} />
+                      ) : person.motherName ? (
+                        person.motherName
+                      ) : (
+                        '-'
+                      )}
+                    </td>
+
+                    <td>
+                      {person.father ? (
+                        <PersonLink person={person.father} />
+                      ) : person.fatherName ? (
+                        person.fatherName
+                      ) : (
+                        '-'
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </>
