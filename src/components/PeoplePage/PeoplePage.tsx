@@ -64,9 +64,7 @@ export const PeoplePage = () => {
                   <tr
                     key={p.slug}
                     data-cy="person"
-                    className={
-                      slug === p.slug ? 'has-background-warning' : ''
-                    }
+                    className={slug === p.slug ? 'has-background-warning' : ''}
                   >
                     <td>
                       {p.sex === 'f' ? (
