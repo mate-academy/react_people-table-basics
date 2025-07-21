@@ -1,6 +1,5 @@
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import './App.scss';
-import React from 'react';
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import classNames from 'classnames';
 
