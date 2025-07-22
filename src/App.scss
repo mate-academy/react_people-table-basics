@@ -1,3 +1,7 @@
 iframe {
   display: none;
 }
+
+.table.is-striped.is-hoverable.is-narrow.is-fullwidth tr.has-background-warning {
+  background-color: #ffdd57 !important;
+}
