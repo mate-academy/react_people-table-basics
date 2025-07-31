@@ -3,7 +3,7 @@ import { Loader } from '../Loader';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 import classNames from 'classnames';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { PersonLink } from '../PersonLink';
 
 export const PeoplePage: React.FC = () => {
@@ -72,14 +72,10 @@ export const PeoplePage: React.FC = () => {
                     })}
                   >
                     <td>
-                      <Link
-                        className={classNames({
-                          'has-text-danger': person.sex === 'f',
-                        })}
-                        to={`/people/${person.slug}`}
-                      >
-                        {person.name}
-                      </Link>
+                      <PersonLink
+                        person={person}
+                        name={person.name}
+                      ></PersonLink>
                     </td>
 
                     <td>{person.sex}</td>
