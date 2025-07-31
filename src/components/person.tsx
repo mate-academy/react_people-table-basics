@@ -42,27 +42,29 @@ export const Personn: React.FC<Props> = ({
       <td>{person.born}</td>
       <td>{person.died}</td>
       <td>
-        {mother ? (
-          <NavLink
-            to={`/people/${mother.slug}`}
-            className={person.motherName ? 'has-text-danger' : 'has-text-black'}
-          >
-            {mother ? mother.name : '-'}
-          </NavLink>
+        {person.motherName ? (
+          mother ? (
+            <NavLink to={`/people/${mother.slug}`} className="has-text-danger">
+              {mother.name}
+            </NavLink>
+          ) : (
+            <span>{person.motherName}</span>
+          )
         ) : (
-          <p>-</p>
+          <span>-</span>
         )}
       </td>
       <td>
-        {father ? (
-          <NavLink
-            to={`/people/${father.slug}`}
-            className={person.fatherName ? 'has-text-link' : 'has-text-black'}
-          >
-            {father ? father.name : '-'}
-          </NavLink>
+        {person.fatherName ? (
+          father ? (
+            <NavLink to={`/people/${father.slug}`} className="has-text-link">
+              {father.name}
+            </NavLink>
+          ) : (
+            <span>{person.fatherName}</span>
+          )
         ) : (
-          <p>-</p>
+          <span>-</span>
         )}
       </td>
     </tr>

@@ -6,6 +6,7 @@ import { LayOut } from './components/Loader/layOut';
 import { HomePage } from './components/mainSections/HomePage';
 import { PeoplePage } from './components/mainSections/peoplePage';
 import { BlockOfPeople } from './components/blockOfPeople';
+import { NotFoundPage } from './components/mainSections/notFoundPage';
 
 export const App = () => (
   <div data-cy="app">
@@ -17,6 +18,7 @@ export const App = () => (
           <Route path="" element={<BlockOfPeople />} />
           <Route path=":slug" element={<BlockOfPeople />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   </div>

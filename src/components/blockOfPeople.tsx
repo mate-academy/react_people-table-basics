@@ -35,7 +35,7 @@ export const BlockOfPeople = () => {
             </p>
           </>
         )}
-        {isError && !isLoading && (
+        {people.length === 0 && !isError && !isLoading && (
           <p data-cy="noPeopleMessage">There are no people on the server</p>
         )}
 

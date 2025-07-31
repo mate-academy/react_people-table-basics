@@ -1,4 +1,4 @@
-export const notFoundPage = () => {
+export const NotFoundPage = () => {
   return (
     <main className="section">
       <div className="container">
