@@ -39,7 +39,7 @@ export const App = () => (
       <div className="container">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<Navigate to="/" />} />
+          <Route path="/home" element={<Navigate to="/" replace />} />
 
           <Route path="/people" element={<PeoplePage />}>
             <Route path=":slug" element={<PeoplePage />} />

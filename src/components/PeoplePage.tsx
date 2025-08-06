@@ -16,9 +16,15 @@ export const PeoplePage: React.FC = () => {
         const response = await fetch(
           'https://mate-academy.github.io/react_people-table/api/people.json',
         );
-        const data = await response.json();
+        const data: Person[] = await response.json();
 
-        setPeople(data);
+        const peopleWithParents = data.map((person: Person) => ({
+          ...person,
+          mother: data.find(p => p.name === person.motherName) || undefined,
+          father: data.find(p => p.name === person.fatherName) || undefined,
+        }));
+
+        setPeople(peopleWithParents);
       } catch (error) {
         setHasError(true);
       } finally {

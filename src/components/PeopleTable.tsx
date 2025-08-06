@@ -34,32 +34,22 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
             }
           >
             <td>
-              <PersonLink person={person} />
+              <PersonLink person={person} fallbackName={person.name} />
             </td>
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
             <td>
-              {person.motherName ? (
-                person.mother ? (
-                  <PersonLink person={person.mother} />
-                ) : (
-                  person.motherName
-                )
-              ) : (
-                '-'
-              )}
+              <PersonLink
+                person={person.mother}
+                fallbackName={person.motherName}
+              />
             </td>
             <td>
-              {person.fatherName ? (
-                person.father ? (
-                  <PersonLink person={person.father} />
-                ) : (
-                  person.fatherName
-                )
-              ) : (
-                '-'
-              )}
+              <PersonLink
+                person={person.father}
+                fallbackName={person.fatherName}
+              />
             </td>
           </tr>
         ))}
