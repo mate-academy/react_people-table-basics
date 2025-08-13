@@ -1,24 +1,18 @@
-interface Props {
-  name: string;
-  people: Person[];
-}
 import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 import classNames from 'classnames';
 
-const PersonLink = ({ people, name }: Props) => {
-  const currentPerson = people.find(person => person.name === name);
+interface Props {
+  person: Person;
+}
 
-  if (!currentPerson) {
-    return <>{name}</>;
-  }
-
+const PersonLink = ({ person }: Props) => {
   return (
     <Link
-      to={`/people/${currentPerson.slug}`}
-      className={classNames({ 'has-text-danger': currentPerson.sex === 'f' })}
+      to={`/people/${person.slug}`}
+      className={classNames({ 'has-text-danger': person.sex === 'f' })}
     >
-      {name}
+      {person.name}
     </Link>
   );
 };
