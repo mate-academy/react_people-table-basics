@@ -26,11 +26,11 @@ export const PeoplePage: React.FC = () => {
   }
 
   if (error) {
-    <WrongMessage />;
+    return <WrongMessage />;
   }
 
   if (people.length === 0) {
-    <NoPeopleMessage />;
+    return <NoPeopleMessage />;
   }
 
   return <PeopleTable people={people} slug={slug} />;
