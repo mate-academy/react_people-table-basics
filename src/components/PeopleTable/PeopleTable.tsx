@@ -1,33 +1,13 @@
-import { useEffect, useState } from 'react';
 import { Person } from '../../types/Person';
-import { getPeople } from '../../api';
-import { useParams } from 'react-router-dom';
-import { Loader } from '../Loader';
-import { WrongMessage } from '../WrongMessage';
-import { NoPeopleMessage } from '../NoPeopleMessage';
 import { PersonLink } from '../PersonLink';
 
-export const PeopleTable = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const { slug } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [error, SetError] = useState(false);
+interface PeopleTableProps {
+  people: Person[];
+  slug?: string;
+}
 
-  useEffect(() => {
-    setLoading(true);
-    getPeople()
-      .then(data => setPeople(data))
-      .catch(() => SetError(true))
-      .finally(() => setLoading(false));
-  }, []);
-
-  return loading ? (
-    <Loader />
-  ) : error ? (
-    <WrongMessage />
-  ) : people.length === 0 ? (
-    <NoPeopleMessage />
-  ) : (
+export const PeopleTable: React.FC<PeopleTableProps> = ({ people, slug }) => {
+  return (
     <>
       <h1 className="title">People Page</h1>
 
