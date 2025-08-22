@@ -10,6 +10,7 @@ function PeoplePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  // slug from the URL
   const { slug } = useParams();
   const navigate = useNavigate();
 
