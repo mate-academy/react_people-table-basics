@@ -1,14 +1,14 @@
-import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import PersonLink from './PersonLink';
 import classNames from 'classnames';
 
 type Props = {
   people: Person[];
+  selectedSlug: string | null;
+  onSelect: (slug: string) => void;
 };
 
-function PeopleTable({ people }: Props) {
-  const { slug: selectedSlug } = useParams();
+function PeopleTable({ people, selectedSlug, onSelect }: Props) {
   const peopleMap = new Map(people.map(p => [p.name, p]));
 
   const getPersonCell = (name: string | null): string | JSX.Element => {
@@ -49,8 +49,12 @@ function PeopleTable({ people }: Props) {
                 'has-background-warning': isSelected,
               })}
               data-cy="person"
+              onClick={() => onSelect(slug)}
+              style={{ cursor: 'pointer' }}
             >
-              <td>{<PersonLink person={person} />}</td>
+              <td>
+                <PersonLink person={person} />
+              </td>
               <td>{sex}</td>
               <td>{born}</td>
               <td>{died}</td>
