@@ -1,13 +1,11 @@
-import { createRoot } from 'react-dom/client';
-import { HashRouter as Router } from 'react-router-dom';
+// incluindo PR
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './App.scss'; // A importação correta do arquivo de estilos
 
-import 'bulma/css/bulma.css';
-import '@fortawesome/fontawesome-free/css/all.css';
-
-import { App } from './App';
-
-createRoot(document.getElementById('root') as HTMLDivElement).render(
-  <Router>
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
     <App />
-  </Router>,
+  </React.StrictMode>,
 );

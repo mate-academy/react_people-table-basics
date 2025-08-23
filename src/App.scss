@@ -1,3 +1,10 @@
-iframe {
-  display: none;
+/* src/App.scss */
+/* stylelint-disable */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* stylelint-enable */
+
+body {
+  font-family: Inter, sans-serif;
 }
