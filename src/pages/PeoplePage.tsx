@@ -15,7 +15,6 @@ const PeoplePage: React.FC = () => {
     getPeople()
       .then(peopleFromAPI => {
         setPeople(peopleFromAPI);
-        // console.log(peopleFromAPI);
       })
       .catch(() => {
         setError('Unable to load the data');
@@ -44,7 +43,7 @@ const PeoplePage: React.FC = () => {
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!loading && !error && (
+          {!loading && !error && people.length > 0 && (
             <PeopleTable people={people} selectedSlug={slug || ''} />
           )}
         </div>
