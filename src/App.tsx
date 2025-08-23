@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import PeoplePage from './pages/PeoplePage';
 import NotFoundPage from './pages/NotFoundPage';
 import { useEffect } from 'react';
+import NavBar from './components/NavBar';
 
 export const App = () => {
   // цього класу не вистача шоб виглядало як на референсі.
@@ -19,35 +20,7 @@ export const App = () => {
 
   return (
     <div data-cy="app">
-      <nav
-        data-cy="nav"
-        className="navbar is-fixed-top has-shadow"
-        role="navigation"
-        aria-label="main navigation"
-      >
-        <div className="container">
-          <div className="navbar-brand">
-            <NavLink
-              className={({ isActive }) =>
-                'navbar-item' + (isActive ? ' has-background-grey-lighter' : '')
-              }
-              to="/"
-            >
-              Home
-            </NavLink>
-
-            <NavLink
-              className={({ isActive }) =>
-                'navbar-item' + (isActive ? ' has-background-grey-lighter' : '')
-              }
-              to="/people"
-            >
-              People
-            </NavLink>
-          </div>
-        </div>
-      </nav>
-
+      <NavBar />
       <main className="section">
         <div className="container">
           <Routes>
