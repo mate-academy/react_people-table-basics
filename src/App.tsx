@@ -35,25 +35,20 @@ const App: React.FC = () => {
         </NavLink>
       </nav>
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div data-cy="app" className="p-8">
-              <h1 className="title">Home Page</h1>
-            </div>
-          }
-        />
+      {/* общий контейнер для всех страниц */}
+      <div data-cy="app" className="p-8">
+        <Routes>
+          <Route path="/" element={<h1 className="title">Home Page</h1>} />
+          <Route path="/people" element={<PeoplePage />} />
+          <Route path="/people/:slug" element={<PeoplePage />} />
 
-        <Route path="/people" element={<PeoplePage />} />
-        <Route path="/people/:slug" element={<PeoplePage />} />
+          {/* redirect /home -> / */}
+          <Route path="/home" element={<Navigate to="/" replace />} />
 
-        {/* redirect /home -> / */}
-        <Route path="/home" element={<Navigate to="/" replace />} />
-
-        {/* catch-all */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+          {/* catch-all */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
     </>
   );
 };
