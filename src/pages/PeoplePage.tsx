@@ -4,7 +4,6 @@ import { Person } from '../types/Person';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PersonTable/PeopleTable';
 import { useParams } from 'react-router-dom';
-import React from 'react';
 
 export default function PeoplePage() {
   const [people, setPeople] = useState<Person[]>([]);
