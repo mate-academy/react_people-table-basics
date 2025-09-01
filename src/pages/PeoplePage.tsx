@@ -84,14 +84,7 @@ const PeoplePage = () => {
                     })}
                   >
                     <td>
-                      <a
-                        href={`#/people/${person.slug}`}
-                        className={cn({
-                          'has-text-danger': person.sex === 'f',
-                        })}
-                      >
-                        {person.name}
-                      </a>
+                      <PersonLink name={person.name} people={people} />
                     </td>
                     <td>{person.sex}</td>
                     <td>{person.born}</td>
