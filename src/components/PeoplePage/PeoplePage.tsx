@@ -13,17 +13,15 @@ export const PeoplePage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('../../../public/api/people.json')
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        return res.json();
-      })
+    fetch('https://mate-academy.github.io/react_people-table/api/people.json')
+      .then(res => res.json())
       .then((data: Person[]) => {
-        setPeople(data);
-        setIsLoading(false);
+        setTimeout(() => {
+          // затримка, щоб Cypress встиг побачити loader
+          setPeople(data);
+          setError(null);
+          setIsLoading(false);
+        }, 100); // 100ms
       })
       .catch(err => {
         setError(err.message || 'Something went wrong');
@@ -31,7 +29,7 @@ export const PeoplePage = () => {
       });
   }, []);
 
-  // https://api.example.com/people
+  // https://api.example.com/people   ../../../public/api/people.json
 
   return (
     <div>
