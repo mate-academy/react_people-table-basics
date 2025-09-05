@@ -1,5 +1,5 @@
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink';
+import { PersonCell } from '../PersonCell';
 
 type Props = {
   people: Person[];
@@ -23,7 +23,7 @@ export function PeopleTable({ people }: Props) {
 
       <tbody>
         {people.map(person => (
-          <PersonLink person={person} key={person.slug} />
+          <PersonCell person={person} key={person.slug} />
         ))}
       </tbody>
     </table>

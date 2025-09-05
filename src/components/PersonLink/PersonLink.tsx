@@ -1,35 +1,26 @@
-import classNames from 'classnames';
-import { Person } from '../../types';
-import { Link, useParams } from 'react-router-dom';
-import { ParentLink } from '../ParentLink';
+import { Link } from 'react-router-dom';
 
 type Props = {
-  person: Person;
+  person: {
+    name: string;
+    slug: string | undefined;
+    sex: string;
+  };
 };
-export function PersonLink({ person }: Props) {
-  const { personId } = useParams();
 
+export function PersonLink({ person }: Props) {
   return (
-    <tr
-      data-cy="person"
-      className={classNames({
-        'has-background-warning': person.slug === personId,
-      })}
-    >
-      <td>
+    <td>
+      {person.slug ? (
         <Link
           to={person.slug}
-          className={classNames({ 'has-text-danger': person.sex === 'f' })}
+          className={`${person.sex === 'f' ? 'has-text-danger' : ''}`}
         >
           {person.name}
         </Link>
-      </td>
-
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-      <ParentLink parentName={person.motherName} parent={person.mother} />
-      <ParentLink parentName={person.fatherName} parent={person.father} />
-    </tr>
+      ) : (
+        person.name
+      )}
+    </td>
   );
 }
