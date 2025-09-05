@@ -5,7 +5,7 @@ import { getPeople } from '../api';
 import PeopleTable from '../components/PeopleTable';
 import { useParams } from 'react-router-dom';
 
-export const PeoplePage: React.FC = () => {
+const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

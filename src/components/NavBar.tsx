@@ -1,6 +1,7 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Navigation = () => {
+const NavBar = () => {
   return (
     <nav
       data-cy="nav"
@@ -33,4 +34,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default NavBar;
