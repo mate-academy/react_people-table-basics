@@ -5,8 +5,6 @@ import { PeoplePage } from './pages/PeoplePage';
 import { NotFoundPage } from './pages/NotFounPage';
 import { HomePage } from './pages/HomePage';
 
-
-
 export const App = () => (
   <div data-cy="app">
     <Navbar />

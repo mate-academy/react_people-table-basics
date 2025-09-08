@@ -6,14 +6,18 @@ export const Navbar = () => (
       <div className="navbar-brand">
         <NavLink
           to="/"
-          className={({ isActive }) => `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`}
+          className={({ isActive }) =>
+            `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`
+          }
         >
           Home
         </NavLink>
 
         <NavLink
           to="/people"
-          className={({ isActive }) => `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`}
+          className={({ isActive }) =>
+            `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`
+          }
         >
           People
         </NavLink>
