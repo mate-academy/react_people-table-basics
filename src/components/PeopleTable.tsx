@@ -7,7 +7,10 @@ interface Props {
 }
 
 export const PeopleTable = ({ people, selectedSlug }: Props) => (
-  <table className="table is-striped is-hoverable is-narrow is-fullwidth" data-cy="peopleTable">
+  <table
+    className="table is-striped is-hoverable is-narrow is-fullwidth"
+    data-cy="peopleTable"
+  >
     <thead>
     <tr>
       <th>Name</th>
@@ -20,25 +23,38 @@ export const PeopleTable = ({ people, selectedSlug }: Props) => (
     </thead>
     <tbody>
     {people.map(p => {
+      const mother = people.find(m => m.name === p.motherName);
+      const father = people.find(f => f.name === p.fatherName);
+
       return (
         <tr
           key={p.slug}
           className={p.slug === selectedSlug ? 'has-background-warning' : ''}
           data-cy="person"
         >
-          <td><PersonLink person={p} /></td>
+          <td>
+            <PersonLink person={p} />
+          </td>
           <td>{p.sex}</td>
           <td>{p.born}</td>
           <td>{p.died}</td>
           <td>
-            {p.motherName
-              ? <PersonLink person={people.find(m => m.name === p.motherName) || { name: p.motherName } as Person} />
-              : <span>-</span>}
+            {!p.motherName ? (
+              <span>-</span>
+            ) : mother ? (
+              <PersonLink person={mother} />
+            ) : (
+              <span>{p.motherName}</span>
+            )}
           </td>
           <td>
-            {p.fatherName
-              ? <PersonLink person={people.find(f => f.name === p.fatherName) || { name: p.fatherName } as Person} />
-              : <span>-</span>}
+            {!p.fatherName ? (
+              <span>-</span>
+            ) : father ? (
+              <PersonLink person={father} />
+            ) : (
+              <span>{p.fatherName}</span>
+            )}
           </td>
         </tr>
       );
