@@ -18,6 +18,7 @@ export const Navigation = () => {
               })
             }
             to="/"
+            end
           >
             Home
           </NavLink>

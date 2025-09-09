@@ -4,7 +4,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { PageNotFound } from './components/PageNotFound/PageNotFound';
-
 export const App = () => (
   <div data-cy="app">
     <Navigation />
@@ -14,7 +13,7 @@ export const App = () => (
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
-          <Route path="people/" element={<PeoplePage />} />
+          <Route path="/people" element={<PeoplePage />} />
           <Route path="/people/:slug" element={<PeoplePage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

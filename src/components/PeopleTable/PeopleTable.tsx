@@ -7,7 +7,7 @@ interface Props {
   selectedSlug?: string;
 }
 
-export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
+export const PeopleTable = ({ people, selectedSlug }: Props) => {
   return (
     <table
       data-cy="peopleTable"
@@ -34,7 +34,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
             })}
           >
             <td>
-              <PersonLink personName={person.name} people={people} />
+              <PersonLink person={person} />
             </td>
 
             <td>{person.sex}</td>
@@ -42,14 +42,26 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
             <td>{person.died}</td>
             <td>
               {person.motherName ? (
-                <PersonLink personName={person.motherName} people={people} />
+                people.find(p => p.name === person.motherName) ? (
+                  <PersonLink
+                    person={people.find(p => p.name === person.motherName)!}
+                  />
+                ) : (
+                  person.motherName
+                )
               ) : (
                 '-'
               )}
             </td>
             <td>
               {person.fatherName ? (
-                <PersonLink personName={person.fatherName} people={people} />
+                people.find(p => p.name === person.fatherName) ? (
+                  <PersonLink
+                    person={people.find(p => p.name === person.fatherName)!}
+                  />
+                ) : (
+                  person.fatherName
+                )
               ) : (
                 '-'
               )}
