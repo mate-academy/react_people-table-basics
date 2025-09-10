@@ -1,27 +1,22 @@
 import React from 'react';
 import { Person } from '../types';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 type Props = {
-  person: string | null;
-  people: Person[];
+  person: Person | undefined;
 };
 
-export const PersonLink: React.FC<Props> = ({ person, people }) => {
-  const personFound = people.find(p => p.name === person);
-
+export const PersonLink: React.FC<Props> = ({ person }) => {
+  if (!person) {
+    return null;
+  }
   return (
-    <>
-      {personFound ? (
-        <Link
-          className={personFound.sex === 'f' ? 'has-text-danger' : ''}
-          to={`/people/${personFound.slug}`}
-        >
-          {personFound.name}
-        </Link>
-      ) : (
-        person || '-'
-      )}
-    </>
+    <Link
+      to={`/people/${person.slug}`}
+      className={classNames({ 'has-text-danger': person.sex === 'f' })}
+    >
+      {person.name}
+    </Link>
   );
 };

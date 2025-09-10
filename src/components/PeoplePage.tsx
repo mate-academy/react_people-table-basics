@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Person } from '../types';
 import { getPeople } from '../api';
-import { useParams } from 'react-router-dom';
 import { Loader } from './Loader';
 import { PeopleTable } from './PeopleTable';
 
@@ -28,8 +27,6 @@ export const PeoplePage: React.FC = () => {
     loadPeople();
   }, []);
 
-  const { slug } = useParams<{ slug: string }>();
-
   return (
     <div className="block">
       <h1 className="title">People Page</h1>
@@ -47,7 +44,7 @@ export const PeoplePage: React.FC = () => {
         )}
 
         {!loading && !error && people.length > 0 && (
-          <PeopleTable people={people} selectedSlug={slug} />
+          <PeopleTable people={people} />
         )}
       </div>
     </div>
