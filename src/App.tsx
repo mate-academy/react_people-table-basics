@@ -16,7 +16,7 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <NavLink to="/" className={linkClass}>
+          <NavLink to="/" end className={linkClass}>
             Home
           </NavLink>
           <NavLink to="/people" className={linkClass}>
