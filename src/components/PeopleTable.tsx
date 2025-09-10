@@ -1,113 +1,100 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Loader } from './Loader';
 import { PersonLink } from './PersonLink';
 import { Person } from '../types';
-import { getPeople } from '../api';
-import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
-export const PeopleTable = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+type Props = {
+  people: Person[];
+  loading: boolean;
+  error: string;
+};
 
-  const { slug } = useParams();
+export const PeopleTable: React.FC<Props> = ({ people, loading, error }) => {
+  const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
 
-  const selectedPerson = people.find(person => person.slug === slug);
+  if (loading) {
+    return <Loader />;
+  }
 
-  useEffect(() => {
-    setLoading(true);
-    getPeople()
-      .then(setPeople)
-      .catch(() => {
-        setError('Something went wrong');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  if (error) {
+    return (
+      <p data-cy="peopleLoadingError" className="has-text-danger">
+        {error}
+      </p>
+    );
+  }
+
+  if (!people.length) {
+    return <p data-cy="noPeopleMessage">There are no people on the server</p>;
+  }
 
   return (
     <div className="block">
       <div className="box table-container">
-        {loading && <Loader />}
+        <table
+          data-cy="peopleTable"
+          className="table is-striped is-hoverable is-narrow is-fullwidth"
+        >
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Sex</th>
+              <th>Born</th>
+              <th>Died</th>
+              <th>Mother</th>
+              <th>Father</th>
+            </tr>
+          </thead>
 
-        {error && (
-          <p data-cy="peopleLoadingError" className="has-text-danger">
-            {error}
-          </p>
-        )}
+          <tbody>
+            {people.map(person => {
+              const {
+                sex,
+                born,
+                died,
+                fatherName,
+                motherName,
+                slug: personSlug,
+              } = person;
 
-        {!people.length && !error && !loading && (
-          <p data-cy="noPeopleMessage">There are no people on the server</p>
-        )}
+              const mother = people.find(p => p.name === person.motherName);
+              const father = people.find(p => p.name === person.fatherName);
 
-        {!error && !loading && !!people.length && (
-          <table
-            data-cy="peopleTable"
-            className="table is-striped is-hoverable is-narrow is-fullwidth"
-          >
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {people.map(person => {
-                const {
-                  sex,
-                  born,
-                  died,
-                  fatherName,
-                  motherName,
-                  slug: personSlug,
-                } = person;
-
-                const mother = people.find(p => p.name === person.motherName);
-                const father = people.find(p => p.name === person.fatherName);
-
-                return (
-                  <tr
-                    key={personSlug}
-                    data-cy="person"
-                    className={classNames('', {
-                      'has-background-warning':
-                        personSlug === selectedPerson?.slug,
-                    })}
-                  >
-                    <td>
-                      <PersonLink person={person} />
-                    </td>
-
-                    <td>{sex}</td>
-                    <td>{born}</td>
-                    <td>{died}</td>
-                    <td>
-                      {mother ? (
-                        <PersonLink person={mother} />
-                      ) : (
-                        motherName || '-'
-                      )}
-                    </td>
-                    <td>
-                      {father ? (
-                        <PersonLink person={father} />
-                      ) : (
-                        fatherName || '-'
-                      )}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        )}
+              return (
+                <tr
+                  key={personSlug}
+                  data-cy="person"
+                  onClick={() => setSelectedSlug(personSlug)}
+                  className={classNames('', {
+                    'has-background-warning': personSlug === selectedSlug,
+                  })}
+                >
+                  <td>
+                    <PersonLink person={person} />
+                  </td>
+                  <td>{sex}</td>
+                  <td>{born}</td>
+                  <td>{died}</td>
+                  <td>
+                    {mother ? (
+                      <PersonLink person={mother} />
+                    ) : (
+                      motherName || '-'
+                    )}
+                  </td>
+                  <td>
+                    {father ? (
+                      <PersonLink person={father} />
+                    ) : (
+                      fatherName || '-'
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );
