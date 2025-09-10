@@ -3,12 +3,12 @@ import { Person } from '../types';
 import { Link } from 'react-router-dom';
 
 type Props = {
-  personName: string | null;
+  person: string | null;
   people: Person[];
 };
 
-export const PersonLink: React.FC<Props> = ({ personName, people }) => {
-  const personFound = people.find(p => p.name === personName);
+export const PersonLink: React.FC<Props> = ({ person, people }) => {
+  const personFound = people.find(p => p.name === person);
 
   return (
     <>
@@ -20,7 +20,7 @@ export const PersonLink: React.FC<Props> = ({ personName, people }) => {
           {personFound.name}
         </Link>
       ) : (
-        personName || '-'
+        person || '-'
       )}
     </>
   );
