@@ -8,7 +8,10 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ person, name }) => {
-  if (!person) return <>{name}</>;
+  if (!person) {
+    return <>{name}</>;
+  }
+
   return (
     <Link
       className={person.sex === 'f' ? 'has-text-danger' : undefined}
