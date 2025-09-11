@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
