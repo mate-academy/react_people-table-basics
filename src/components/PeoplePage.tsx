@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Person } from '../types/Person';
-import { Loader } from '../components/Loader';
+
 import { PeopleTable } from './PeopleTable';
 import { getPeople } from '../api';
+import { Loader } from './Loader/Loader';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
