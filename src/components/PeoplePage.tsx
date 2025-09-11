@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { getPeople } from '../api';
 import { useEffect, useState } from 'react';
 import { Person } from '../types/Person';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from './PeopleTable';
+import { getPeople } from '../api';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
