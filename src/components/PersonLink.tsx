@@ -1,19 +1,22 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { Person } from '../types';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
-export const PersonLink: React.FC<{
-  person: Person | undefined;
-  name: string;
-}> = ({ person, name }) => {
-  if (!person) {
-    return <span>{name}</span>;
-  }
+type Props = {
+  person: Person;
+};
 
-  const linkClass = person.sex === 'f' ? 'has-text-danger' : '';
-
+export const PersonLink: React.FC<Props> = ({ person }) => {
   return (
-    <Link to={`/people/${person.slug}`} className={linkClass}>
-      {name}
+    <Link
+      to={`./${person.slug}`}
+      className={classNames({
+        'has-text-danger': person.sex === 'f',
+        'has-text-info': person.sex === 'm',
+      })}
+    >
+      {person.name}
     </Link>
   );
 };

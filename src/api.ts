@@ -9,13 +9,8 @@ function wait(delay: number) {
 }
 
 export function getPeople(): Promise<Person[]> {
+  // keep this delay for testing purpose
   return wait(500)
     .then(() => fetch(API_URL))
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to fetch people');
-      }
-
-      return response.json();
-    });
+    .then(response => response.json());
 }

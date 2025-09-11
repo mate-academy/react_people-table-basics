@@ -1,34 +1,38 @@
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-export const Navbar: React.FC = () => {
-  const location = useLocation();
-
-  const isHomeActive = location.pathname === '/';
-  const isPeopleActive = location.pathname.startsWith('/people');
-
+export const NavBar = () => {
   return (
     <nav
-      data-cy="nav"
       className="navbar is-fixed-top has-shadow"
+      data-cy="nav"
       role="navigation"
       aria-label="main navigation"
     >
       <div className="container">
-        <div className="navbar-brand">
-          <Link
-            className={`navbar-item ${isHomeActive ? 'has-background-grey-lighter' : ''}`}
-            to="/"
-          >
-            Home
-          </Link>
+        <ul className="navbar-brand">
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`
+              }
+              end
+            >
+              Home
+            </NavLink>
+          </li>
 
-          <Link
-            className={`navbar-item ${isPeopleActive ? 'has-background-grey-lighter' : ''}`}
-            to="/people"
-          >
-            People
-          </Link>
-        </div>
+          <li>
+            <NavLink
+              to="/people"
+              className={({ isActive }) =>
+                `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`
+              }
+            >
+              People
+            </NavLink>
+          </li>
+        </ul>
       </div>
     </nav>
   );

@@ -1,50 +1,58 @@
-import { useEffect, useState } from 'react';
-import { Person } from '../types/Person';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../api';
+import { useEffect, useState } from 'react';
+import { Person } from '../types/Person';
+import { Loader } from '../components/Loader';
 import { PeopleTable } from './PeopleTable';
-import { Loader } from './Loader';
 
-export const PeoplePage: React.FC = () => {
+export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const { slug } = useParams<{ slug?: string }>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  const { personSlug } = useParams();
+
+  const handleLoadPeople = async () => {
+    try {
+      const apiPeople = await getPeople();
+
+      setPeople(apiPeople);
+    } catch (error) {
+      setIsError(true);
+    }
+
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    setLoading(true);
-    setError(false);
-
-    getPeople()
-      .then(data => {
-        setPeople(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError(true);
-        setLoading(false);
-      });
+    handleLoadPeople();
   }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (isError) {
+    return (
+      <p data-cy="peopleLoadingError" className="has-text-danger">
+        Something went wrong
+      </p>
+    );
+  }
 
   return (
     <>
       <h1 className="title">People Page</h1>
 
-      {loading && <Loader />}
-
-      {error && (
-        <p data-cy="peopleLoadingError" className="has-text-danger">
-          Something went wrong
-        </p>
-      )}
-
-      {!loading && !error && people.length === 0 && (
-        <p data-cy="noPeopleMessage">There are no people on the server</p>
-      )}
-
-      {!loading && !error && people.length > 0 && (
-        <PeopleTable people={people} selectedSlug={slug} />
-      )}
+      <div className="block">
+        <div className="box table-container">
+          {people.length === 0 ? (
+            <p data-cy="noPeopleMessage">There are no people on the server</p>
+          ) : (
+            <PeopleTable people={people} selectedPersonSlug={personSlug} />
+          )}
+        </div>
+      </div>
     </>
   );
 };
