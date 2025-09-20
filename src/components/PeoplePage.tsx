@@ -1,116 +1,60 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Person } from '../types/Person';
+import { getPeople } from '../api';
+import { PeopleTable } from './PeopleTable';
 import { Loader } from './Loader';
-import { PeopleContext } from '../contexts/PeopleContext';
-import { useParams, Link } from 'react-router-dom';
-import classNames from 'classnames';
 
 export const PeoplePage: React.FC = () => {
-  const { people, error, selectedPerson, setSelectedPerson } =
-    useContext(PeopleContext);
-
+  const [people, setPeople] = useState<Person[] | null>(null);
+  const [error, setError] = useState(false);
   const { peopleId } = useParams();
+  const [selectedPerson, setSelectedPerson] = useState<string | null>(
+    peopleId || null,
+  );
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchPeople() {
+      try {
+        const data = await getPeople();
+
+        setPeople(data);
+      } catch {
+        setError(true);
+      }
+    }
+
+    fetchPeople();
+  }, []);
 
   useEffect(() => {
     if (peopleId) {
       setSelectedPerson(peopleId);
     }
-  }, [peopleId, setSelectedPerson]);
+  }, [peopleId]);
+
+  const handleSelect = (slug: string) => {
+    navigate(`/people/${slug}`);
+  };
 
   return (
     <div className="block">
-      <div className="box table-container">
-        {!people && <Loader />}
+      <h1 className="title">People Page</h1>
 
-        {error && (
-          <p data-cy="peopleLoadingError" className="has-text-danger">
-            Something went wrong
-          </p>
-        )}
+      {people === null && <Loader />}
+      {error && <p className="has-text-danger">Something went wrong</p>}
+      {people && people.length === 0 && (
+        <p>There are no people on the server</p>
+      )}
 
-        {people.length === 0 && (
-          <p data-cy="noPeopleMessage">There are no people on the server</p>
-        )}
-
-        <table
-          data-cy="peopleTable"
-          className="table is-striped is-hoverable is-narrow is-fullwidth"
-        >
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Sex</th>
-              <th>Born</th>
-              <th>Died</th>
-              <th>Mother</th>
-              <th>Father</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {people.map(person => (
-              <tr
-                data-cy="person"
-                key={person.name}
-                onClick={() => {
-                  if (person.name === selectedPerson) {
-                    setSelectedPerson(null);
-                  } else {
-                    setSelectedPerson(person.name);
-                  }
-                }}
-                className={classNames({
-                  'has-background-warning': person.name === selectedPerson,
-                })}
-              >
-                <td>
-                  <Link to={`/people/${person.name}-${person.born}`}>
-                    {person.name}
-                  </Link>
-                </td>
-
-                <td>{person.sex}</td>
-                <td>{person.born}</td>
-                <td>{person.died}</td>
-
-                <td>
-                  <td>
-                    {person.motherName ? (
-                      people.find(p => p.name === person.motherName) ? (
-                        <Link
-                          to={`/people/${person.motherName}-${people.find(p => p.name === person.motherName)!.born}`}
-                          className="has-text-danger"
-                        >
-                          {person.motherName}
-                        </Link>
-                      ) : (
-                        person.motherName
-                      )
-                    ) : (
-                      '-'
-                    )}
-                  </td>
-                </td>
-
-                <td>
-                  {person.fatherName ? (
-                    people.find(p => p.name === person.fatherName) ? (
-                      <Link
-                        to={`/people/${person.fatherName}-${people.find(p => p.name === person.fatherName)!.born}`}
-                      >
-                        {person.fatherName}
-                      </Link>
-                    ) : (
-                      person.fatherName
-                    )
-                  ) : (
-                    '-'
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {people && people.length > 0 && (
+        <PeopleTable
+          people={people}
+          selectedPerson={selectedPerson}
+          onSelect={handleSelect}
+        />
+      )}
     </div>
   );
 };
