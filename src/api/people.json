@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Jan van Brussel",
+    "slug": "jan-van-brussel-1714",
+    "sex": "m",
+    "born": 1714,
+    "died": 1748,
+    "fatherName": "Jacobus van Brussel",
+    "motherName": "Joanna van Rooten"
+  },
+  {
+    "name": "Philibert Haverbeke",
+    "slug": "philibert-haverbeke-1907",
+    "sex": "m",
+    "born": 1907,
+    "died": 1997,
+    "fatherName": "Emile Haverbeke",
+    "motherName": "Emma de Milliano"
+  },
+  {
+    "name": "Jan Frans van Brussel",
+    "slug": "jan-frans-van-brussel-1761",
+    "sex": "m",
+    "born": 1761,
+    "died": 1833,
+    "fatherName": "Jacobus Bernardus van Brussel",
+    "motherName": ""
+  },
+  {
+    "name": "Lievijne Jans",
+    "slug": "lievijne-jans-1542",
+    "sex": "f",
+    "born": 1542,
+    "died": 1582,
+    "fatherName": "",
+    "motherName": ""
+  },
+  {
+    "name": "Bernardus de Causmaecker",
+    "slug": "bernardus-de-causmaecker-1721",
+    "sex": "m",
+    "born": 1721,
+    "died": 1789,
+    "fatherName": "Lieven de Causmaecker",
+    "motherName": "Livina Haverbeke"
+  },
+  {
+    "name": "Emma de Milliano",
+    "slug": "emma-de-milliano-1876",
+    "sex": "f",
+    "born": 1876,
+    "died": 1956,
+    "fatherName": "",
+    "motherName": ""
+  },
+  {
+    "name": "Emile Haverbeke",
+    "slug": "emile-haverbeke-1877",
+    "sex": "m",
+    "born": 1877,
+    "died": 1968,
+    "fatherName": "",
+    "motherName": ""
+  },
+  {
+    "name": "Jacobus Bernardus van Brussel",
+    "slug": "jacobus-bernardus-van-brussel-1736",
+    "sex": "m",
+    "born": 1736,
+    "died": 1809,
+    "fatherName": "",
+    "motherName": ""
+  },
+  {
+    "name": "Livina Haverbeke",
+    "slug": "livina-haverbeke-1692",
+    "sex": "f",
+    "born": 1692,
+    "died": 1740,
+    "fatherName": "",
+    "motherName": ""
+  },
+  {
+    "name": "Lieven de Causmaecker",
+    "slug": "lieven-de-causmaecker-1696",
+    "sex": "m",
+    "born": 1696,
+    "died": 1754,
+    "fatherName": "",
+    "motherName": ""
+  },
+  {
+    "name": "Joanna van Rooten",
+    "slug": "joanna-van-rooten-0",
+    "sex": "f",
+    "born": 1690,
+    "died": 1720,
+    "fatherName": "",
+    "motherName": ""
+  },
+  {
+    "name": "Jacobus van Brussel",
+    "slug": "jacobus-van-brussel-0",
+    "sex": "m",
+    "born": 1688,
+    "died": 1725,
+    "fatherName": "",
+    "motherName": ""
+  }
+]
