@@ -1,3 +1,29 @@
 iframe {
   display: none;
 }
+
+/* src/components/PeopleTable/PeopleTable.scss */
+
+/* garantir que a tabela do componente seja o escopo */
+.table-container {
+  /* linha selecionada: amarelo suave */
+  table tr.is-selected {
+    background-color: #fff8c2 !important;
+  }
+
+  /* fallback para hover/seleção caso Bulma aplique variantes */
+  table tr.is-selected td {
+    background-color: #fff8c2 !important;
+  }
+
+  /* cores explícitas para links de pessoa, com maior especificidade */
+  a.person-link--female.has-text-danger,
+  a.person-link--female {
+    color: #d9534f !important; /* vermelho */
+  }
+
+  a.person-link--male.has-text-primary,
+  a.person-link--male {
+    color: #3273dc !important; /* azul */
+  }
+}

@@ -1,0 +1,31 @@
+/* src/components/PeopleTable/PeopleTable.scss */
+
+/* Escopo do componente */
+.table-container {
+  /* linha selecionada: amarelo suave (maior especificidade para sobrepor regras conflitantes) */
+  table tr.is-selected,
+  table tr.is-selected td {
+    background-color: #fff8c2 !important;
+    color: #000 !important;
+  }
+
+  /* Garantir contraste ao passar o mouse em linhas selecionadas */
+  table tr.is-selected:hover,
+  table tr.is-selected:hover td {
+    background-color: #fff6b8 !important;
+  }
+
+  /* Cores explícitas para links de pessoa (especificidade + !important para anular overrides) */
+  a.person-link--female,
+  a.person-link--female.has-text-danger {
+    color: #d9534f !important; /* vermelho */
+  }
+
+  a.person-link--male,
+  a.person-link--male.has-text-primary {
+    color: #3273dc !important; /* azul */
+  }
+
+  /* Se houver outras regras globais interferindo (ex: .has-text-primary alterada),
+     assegure-se que essas regras do componente vençam por especificidade. */
+}
