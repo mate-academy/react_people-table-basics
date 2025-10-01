@@ -47,7 +47,10 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <td>{person.died}</td>
             <td>
               {(() => {
-                if (person.motherName === null) {
+                if (
+                  person.motherName == null ||
+                  person.motherName.trim() === ''
+                ) {
                   return '-';
                 }
 
@@ -62,7 +65,10 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             </td>
             <td>
               {(() => {
-                if (person.fatherName === null) {
+                if (
+                  person.fatherName == null ||
+                  person.fatherName.trim() === ''
+                ) {
                   return '-';
                 }
 
