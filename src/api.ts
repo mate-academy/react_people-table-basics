@@ -1,16 +1,12 @@
-import { Person } from './types/Person';
+// src/api.ts
+export const getPeople = async () => {
+  const response = await fetch(
+    'https://mate-academy.github.io/react_people-table/api/people.json',
+  );
 
-// eslint-disable-next-line operator-linebreak
-const API_URL =
-  'https://mate-academy.github.io/react_people-table/api/people.json';
+  if (!response.ok) {
+    throw new Error('Failed to fetch people');
+  }
 
-function wait(delay: number) {
-  return new Promise(resolve => setTimeout(resolve, delay));
-}
-
-export function getPeople(): Promise<Person[]> {
-  // keep this delay for testing purpose
-  return wait(500)
-    .then(() => fetch(API_URL))
-    .then(response => response.json());
-}
+  return response.json();
+};
