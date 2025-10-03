@@ -9,7 +9,7 @@ const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  const { person: selectedSlug } = useParams<{ person?: string }>();
+  const { slug: selectedSlug } = useParams<{ slug?: string }>();
 
   useEffect(() => {
     api
