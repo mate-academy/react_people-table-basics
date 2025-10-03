@@ -12,13 +12,16 @@ export function getPeople(): Promise<Person[]> {
   // keep this delay for testing purpose
   return wait(500)
     .then(() => fetch(API_URL))
-    .then(async (response) => {
+    .then(async response => {
       if (!response.ok) {
         // Try to read error text, fallback to status text/code
         const text = await response.text().catch(() => '');
-        const message = text || response.statusText || `HTTP ${response.status}`;
+        const message =
+          text || response.statusText || `HTTP ${response.status}`;
+
         throw new Error(message);
       }
+
       return response.json() as Promise<Person[]>;
     });
 }
