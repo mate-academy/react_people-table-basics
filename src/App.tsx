@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import './App.scss';
 import { Link } from 'react-router-dom';
 import HomePage from './components/HomePage/HomePage';
@@ -19,20 +19,23 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <Link className={
-              location.pathname === '/'
-                ? 'navbar-item has-background-grey-lighter'
-                : 'navbar-item'
-            } to="/">
+            <Link
+              className={
+                location.pathname === '/'
+                  ? 'navbar-item has-background-grey-lighter'
+                  : 'navbar-item'
+              }
+              to="/"
+            >
               Home
             </Link>
 
             <Link
               className={
-              isPeople
-                ? 'navbar-item has-background-grey-lighter'
-                : 'navbar-item'
-            }
+                isPeople
+                  ? 'navbar-item has-background-grey-lighter'
+                  : 'navbar-item'
+              }
               to="/people"
             >
               People
@@ -50,7 +53,6 @@ export const App = () => {
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-
     </div>
   );
-}
+};

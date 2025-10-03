@@ -10,7 +10,11 @@ type Props = {
 export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
   const byName = useMemo(() => {
     const m = new Map<string, Person>();
-    for (const p of people) m.set(p.name, p);
+
+    for (const p of people) {
+      m.set(p.name, p);
+    }
+
     return m;
   }, [people]);
 
@@ -36,8 +40,12 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
 
       <tbody>
         {people.map(person => {
-          const mother = person.motherName ? byName.get(person.motherName) : undefined;
-          const father = person.fatherName ? byName.get(person.fatherName) : undefined;
+          const mother = person.motherName
+            ? byName.get(person.motherName)
+            : undefined;
+          const father = person.fatherName
+            ? byName.get(person.fatherName)
+            : undefined;
           const isSelected = selectedSlug === person.slug;
 
           return (
@@ -53,14 +61,26 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
               <td>{person.born}</td>
               <td>{person.died}</td>
               <td>
-                {person.motherName
-                  ? (mother ? <PersonLink person={mother} /> : person.motherName)
-                  : '-'}
+                {person.motherName ? (
+                  mother ? (
+                    <PersonLink person={mother} />
+                  ) : (
+                    person.motherName
+                  )
+                ) : (
+                  '-'
+                )}
               </td>
               <td>
-                {person.fatherName
-                  ? (father ? <PersonLink person={father} /> : person.fatherName)
-                  : '-'}
+                {person.fatherName ? (
+                  father ? (
+                    <PersonLink person={father} />
+                  ) : (
+                    person.fatherName
+                  )
+                ) : (
+                  '-'
+                )}
               </td>
             </tr>
           );
