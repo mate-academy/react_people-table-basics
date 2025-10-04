@@ -6,7 +6,11 @@ type Props = {
   person: Person;
 };
 
-export const PersonLink: React.FC<Props> = ({ person }) => {
+export const PersonLink = ({ person }: Props) => {
+  if (!person.slug) {
+    return null;
+  }
+
   return (
     <Link
       className={classNames({ 'has-text-danger': person.sex === 'f' })}
