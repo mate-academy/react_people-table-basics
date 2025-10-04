@@ -1,16 +1,27 @@
 import { Person } from './types/Person';
+import { API_CONFIG } from './constants';
 
-// eslint-disable-next-line operator-linebreak
-const API_URL =
-  'https://mate-academy.github.io/react_people-table/api/people.json';
+const API_URL = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.PEOPLE}`;
 
-function wait(delay: number) {
-  return new Promise(resolve => setTimeout(resolve, delay));
-}
+const wait = (delay: number): Promise<void> =>
+  new Promise(resolve => setTimeout(resolve, delay));
 
-export function getPeople(): Promise<Person[]> {
-  // keep this delay for testing purpose
-  return wait(500)
-    .then(() => fetch(API_URL))
-    .then(response => response.json());
-}
+export const getPeople = async (): Promise<Person[]> => {
+  await wait(API_CONFIG.FETCH_DELAY);
+
+  const response = await fetch(API_URL);
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch people: ${response.status} ${response.statusText}`,
+    );
+  }
+
+  const data = await response.json();
+
+  if (!Array.isArray(data)) {
+    throw new Error('Invalid response format: expected array');
+  }
+
+  return data;
+};
