@@ -8,7 +8,11 @@ type Props = {
 
 export const PersonLink = ({ person }: Props) => {
   if (!person.slug) {
-    return null;
+    return (
+      <span className={classNames({ 'has-text-danger': person.sex === 'f' })}>
+        {person.name}
+      </span>
+    );
   }
 
   return (
