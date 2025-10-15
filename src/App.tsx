@@ -1,17 +1,16 @@
 import './App.scss';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import {
+  Navigate,
+  NavLink,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import HomePage from './HomePage';
 import PeoplePage from './PeoplePage';
 import PageNotFound from './PageNotFound';
 import classNames from 'classnames';
 
 export const App = () => {
-  const currentLocation = useLocation();
-  // const navigate = useNavigate();
-  // if (currentLocation.pathname === '/home') {
-  //   navigate('/', { replace: true });
-  // }
-
   return (
     <div data-cy="app">
       <nav
@@ -22,24 +21,27 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <a
-              className={classNames('navbar-item', {
-                'has-background-grey-lighter': currentLocation.pathname === '/',
-              })}
-              href="#/"
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                classNames('navbar-item', {
+                  'has-background-grey-lighter': isActive,
+                })
+              }
             >
               Home
-            </a>
+            </NavLink>
 
-            <a
-              className={classNames('navbar-item', {
-                'has-background-grey-lighter':
-                  currentLocation.pathname.startsWith('/people'),
-              })}
-              href="#/people"
+            <NavLink
+              to="/people"
+              className={({ isActive }) =>
+                classNames('navbar-item', {
+                  'has-background-grey-lighter': isActive,
+                })
+              }
             >
               People
-            </a>
+            </NavLink>
           </div>
         </div>
       </nav>
