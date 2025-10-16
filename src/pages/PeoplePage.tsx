@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Loader } from '../components/Loader';
 import { Person } from '../types';
 import { getPeople } from '../api';
-import { PersonLink } from '../components/Loader/PersonLink';
+import { PeopleTable } from '../components/PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -37,31 +37,7 @@ export const PeoplePage = () => {
           )}
 
           {!loading && !errorMessage && people.length > 0 && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map(person => (
-                  <PersonLink
-                    person={person}
-                    key={person.name}
-                    people={people}
-                  />
-                ))}
-              </tbody>
-            </table>
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
