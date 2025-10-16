@@ -11,17 +11,9 @@ export const PersonRow = ({ person, people }: Props) => {
   const { slug } = useParams();
   const isSelected = slug === person.slug;
 
-  const mother = people.find(
-    per =>
-      `${person.motherName?.toLowerCase().trim().replaceAll(' ', '-')}-${per.born}` ===
-      per.slug,
-  );
+  const mother = people.find(p => p.name.trim() === person.motherName?.trim());
 
-  const father = people.find(
-    per =>
-      `${person.fatherName?.toLowerCase().trim().replaceAll(' ', '-')}-${per.born}` ===
-      per.slug,
-  );
+  const father = people.find(p => p.name.trim() === person.fatherName?.trim());
 
   return (
     <tr data-cy="person" className={isSelected ? 'has-background-warning' : ''}>
