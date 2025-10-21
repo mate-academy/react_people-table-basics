@@ -1,15 +1,8 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
 import React from 'react';
-
+import { NavLink, Outlet } from 'react-router-dom';
 import './App.scss';
 
 export const App: React.FC = () => {
-  const location = useLocation();
-  const currentPath = location.pathname;
-  const isHomeActive = currentPath === '/' || currentPath === '/home';
-  const isPeopleActive =
-    currentPath === '/people' || currentPath.startsWith('/people/');
-
   return (
     <div data-cy="app">
       <nav
@@ -20,19 +13,24 @@ export const App: React.FC = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <Link
+            <NavLink
               to="/"
-              className={`navbar-item ${isHomeActive ? 'has-background-grey-lighter' : ''}`}
+              end
+              className={({ isActive }) =>
+                `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`
+              }
             >
               Home
-            </Link>
+            </NavLink>
 
-            <Link
-              className={`navbar-item ${isPeopleActive ? 'has-background-grey-lighter' : ''}`}
+            <NavLink
               to="/people"
+              className={({ isActive }) =>
+                `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`
+              }
             >
               People
-            </Link>
+            </NavLink>
           </div>
         </div>
       </nav>

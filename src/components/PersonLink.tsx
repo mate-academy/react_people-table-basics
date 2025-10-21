@@ -3,7 +3,7 @@ import { Person } from '../types';
 import { Link } from 'react-router-dom';
 
 type Props = {
-  person: Person | null;
+  person?: Person | null;
   fallbackName?: string | null;
 };
 
