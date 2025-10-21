@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
 import { PersonLink } from '../PersonLink';
 import classNames from 'classnames';
@@ -35,34 +35,40 @@ export const PeopleList: React.FC<Props> = ({
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <tr
-            key={person.slug}
-            data-cy="person"
-            className={classNames({
-              'has-background-warning': person.slug === currentSelectedSlug,
-            })}
-            onClick={() => onSelect?.(person.slug)}
-          >
-            <td>
-              <Link
-                to={`/people/${person.slug}`}
-                className={person.sex === 'f' ? 'has-text-danger' : ''}
-              >
-                {person.name}
-              </Link>
-            </td>
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
-            <td>
-              <PersonLink name={person.motherName || null} people={people} />
-            </td>
-            <td>
-              <PersonLink name={person.fatherName || null} people={people} />
-            </td>
-          </tr>
-        ))}
+        {people.map(person => {
+          const mother = people.find(p => p.name === person.motherName) || null;
+          const father = people.find(p => p.name === person.fatherName) || null;
+
+          return (
+            <tr
+              key={person.slug}
+              data-cy="person"
+              className={classNames({
+                'has-background-warning': person.slug === currentSelectedSlug,
+              })}
+              onClick={() => onSelect?.(person.slug)}
+            >
+              <td>
+                <PersonLink person={person} />
+              </td>
+              <td>{person.sex}</td>
+              <td>{person.born}</td>
+              <td>{person.died}</td>
+              <td>
+                <PersonLink
+                  person={mother}
+                  fallbackName={person.motherName || null}
+                />
+              </td>
+              <td>
+                <PersonLink
+                  person={father}
+                  fallbackName={person.fatherName || null}
+                />
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

@@ -3,27 +3,25 @@ import { Person } from '../types';
 import { Link } from 'react-router-dom';
 
 type Props = {
-  name: string | null;
-  people: Person[];
+  person: Person | null;
+  fallbackName?: string | null;
 };
 
-export const PersonLink: React.FC<Props> = ({ name, people }) => {
-  if (!name) {
+export const PersonLink: React.FC<Props> = ({ person, fallbackName }) => {
+  if (!person && !fallbackName) {
     return <span>-</span>;
   }
 
-  const foundPerson = people.find(person => person.name === name);
-
-  if (!foundPerson) {
-    return <span>{name}</span>;
+  if (!person) {
+    return <span>{fallbackName}</span>;
   }
 
   return (
     <Link
-      to={`/people/${foundPerson.slug}`}
-      className={foundPerson.sex === 'f' ? 'has-text-danger' : ''}
+      to={`/people/${person.slug}`}
+      className={person.sex === 'f' ? 'has-text-danger' : ''}
     >
-      {foundPerson.name}
+      {person.name}
     </Link>
   );
 };
