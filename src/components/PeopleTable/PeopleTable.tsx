@@ -8,13 +8,26 @@ type Props = {
   people: Person[];
 };
 
+const TABLE_FIELDS = ['Name', 'Sex', 'Born', 'Died', 'Mother', 'Father'];
+const NO_PARENT = '-'; // Аж плакати хочеться
+
 const PeopleTable: React.FC<Props> = ({ people }) => {
   const { personSlug: selectedPersonSlug } = useParams();
 
-  const findPersonByName = (name: string | null): Person | void => {
-    if (name) {
-      return people.find(person => person.name === name);
+  const findPersonByName = (name: string | null): Person | undefined => {
+    return name ? people.find(person => person.name === name) : undefined;
+  };
+
+  const renderParentCell = (name: string | null, parent?: Person) => {
+    if (!name) {
+      return NO_PARENT;
     }
+
+    if (parent) {
+      return <PersonLink person={parent} />;
+    }
+
+    return name;
   };
 
   return (
@@ -24,12 +37,9 @@ const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {TABLE_FIELDS.map(field => (
+            <th key={field}>{field}</th>
+          ))}
         </tr>
       </thead>
 
@@ -53,30 +63,8 @@ const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
-
-              <td>
-                {person.motherName ? (
-                  mother ? (
-                    <PersonLink person={mother} />
-                  ) : (
-                    person.motherName
-                  )
-                ) : (
-                  '-'
-                )}
-              </td>
-
-              <td>
-                {person.fatherName ? (
-                  father ? (
-                    <PersonLink person={father} />
-                  ) : (
-                    person.fatherName
-                  )
-                ) : (
-                  '-'
-                )}
-              </td>
+              <td>{renderParentCell(person.motherName, mother)}</td>
+              <td>{renderParentCell(person.fatherName, father)}</td>
             </tr>
           );
         })}

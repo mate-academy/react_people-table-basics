@@ -19,6 +19,10 @@ const PeoplePage: React.FC = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
+  const showError = !isLoading && err;
+  const showNoPeopleMessage = !isLoading && !err && people.length === 0;
+  const showPeopleTable = !isLoading && !err && people.length > 0;
+
   return (
     <div className="container">
       <h1 className="title">People Page</h1>
@@ -27,19 +31,17 @@ const PeoplePage: React.FC = () => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {!isLoading && err && (
+          {showError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               {err}
             </p>
           )}
 
-          {!isLoading && !err && people.length === 0 && (
+          {showNoPeopleMessage && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!isLoading && !err && people.length > 0 && (
-            <PeopleTable people={people} />
-          )}
+          {showPeopleTable && <PeopleTable people={people} />}
         </div>
       </div>
     </div>
