@@ -6,7 +6,7 @@ import PeopleTable from '../../components/PeopleTable';
 
 const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [err, setErr] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
