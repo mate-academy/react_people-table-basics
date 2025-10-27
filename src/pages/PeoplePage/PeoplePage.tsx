@@ -11,17 +11,18 @@ const PeoplePage: React.FC = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    setErr('');
+    setErrorMessage('');
 
     getPeople()
       .then(data => setPeople(data as Person[]))
-      .catch(() => setErr('Something went wrong'))
+      .catch(() => setErrorMessage('Something went wrong'))
       .finally(() => setIsLoading(false));
   }, []);
 
-  const showError = !isLoading && err;
-  const showNoPeopleMessage = !isLoading && !err && people.length === 0;
-  const showPeopleTable = !isLoading && !err && people.length > 0;
+  const showError = !isLoading && errorMessage;
+  const showNoPeopleMessage =
+    !isLoading && !errorMessage && people.length === 0;
+  const showPeopleTable = !isLoading && !errorMessage && people.length > 0;
 
   return (
     <div className="container">
@@ -33,7 +34,7 @@ const PeoplePage: React.FC = () => {
 
           {showError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
-              {err}
+              {errorMessage}
             </p>
           )}
 
