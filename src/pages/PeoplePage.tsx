@@ -4,6 +4,7 @@ import { Person } from '../types';
 import { getPeople } from '../api';
 import { PersonLink } from '../components/PersonLink';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const PeoplePage = () => {
   const { slug } = useParams<{ slug?: string }>();
@@ -11,6 +12,8 @@ export const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getPeople()
@@ -20,9 +23,7 @@ export const PeoplePage = () => {
   }, []);
 
   useEffect(() => {
-    if (slug) {
-      setSelectedPerson(slug);
-    }
+    setSelectedPerson(slug || null);
   }, [slug]);
 
   return (
@@ -70,7 +71,7 @@ export const PeoplePage = () => {
                           ? 'has-background-warning'
                           : ''
                       }
-                      onClick={() => setSelectedPerson(person.slug)}
+                      onClick={() => navigate(`/people/${person.slug}`)}
                     >
                       <td>
                         <PersonLink people={people} name={person.name} />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Person } from '../types';
+import { Link } from 'react-router-dom';
 
 interface PersonLinkProps {
   people: Person[];
@@ -18,11 +19,11 @@ export const PersonLink: React.FC<PersonLinkProps> = ({ people, name }) => {
   }
 
   return (
-    <a
-      href={`#/people/${person.slug}`}
+    <Link
+      to={`/people/${person.slug}`}
       className={person.sex === 'f' ? 'has-text-danger' : ''}
     >
       {person.name}
-    </a>
+    </Link>
   );
 };
