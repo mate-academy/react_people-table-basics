@@ -14,21 +14,15 @@ const NO_PARENT = '-'; // Аж плакати хочеться
 const PeopleTable: React.FC<Props> = ({ people }) => {
   const { personSlug: selectedPersonSlug } = useParams();
 
-  const findPersonByName = (name: string | null): Person | undefined => {
-    return name ? people.find(person => person.name === name) : undefined;
-  };
+  const peopleByName = React.useMemo(() => {
+    const map: Record<string, Person> = {};
 
-  const renderParentCell = (name: string | null, parent?: Person) => {
-    if (!name) {
-      return NO_PARENT;
-    }
+    people.forEach(person => {
+      map[person.name] = person;
+    });
 
-    if (parent) {
-      return <PersonLink person={parent} />;
-    }
-
-    return name;
-  };
+    return map;
+  }, [people]);
 
   return (
     <table
@@ -45,8 +39,8 @@ const PeopleTable: React.FC<Props> = ({ people }) => {
 
       <tbody>
         {people.map(person => {
-          const mother = findPersonByName(person.motherName);
-          const father = findPersonByName(person.fatherName);
+          const mother = peopleByName[person.motherName || ''];
+          const father = peopleByName[person.fatherName || ''];
 
           return (
             <tr
@@ -63,8 +57,20 @@ const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
-              <td>{renderParentCell(person.motherName, mother)}</td>
-              <td>{renderParentCell(person.fatherName, father)}</td>
+              <td>
+                {mother ? (
+                  <PersonLink person={mother} />
+                ) : (
+                  person.motherName || NO_PARENT
+                )}
+              </td>
+              <td>
+                {father ? (
+                  <PersonLink person={father} />
+                ) : (
+                  person.fatherName || NO_PARENT
+                )}
+              </td>
             </tr>
           );
         })}
