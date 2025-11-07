@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPeople } from '../../api';
 import { Loader } from '../../components/Loader';
-import { PeopleTable } from '../../components/PeopleTable';
+
 import { Person } from '../../types';
 import { augmentPeople } from '../../utils';
+import { PeopleTable } from '../../components/PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
