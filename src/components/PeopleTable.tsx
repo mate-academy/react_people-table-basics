@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
 
-type Props = {
+interface Props {
   peoplesFromServer: Person[];
   selectedSlug?: string;
 };

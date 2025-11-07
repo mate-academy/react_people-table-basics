@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { Person } from '../types';
 import { Link } from 'react-router-dom';
 
-type Props = {
+interface Props {
   person: Person | null;
   name: string | null;
 };
