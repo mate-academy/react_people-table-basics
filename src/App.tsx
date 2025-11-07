@@ -1,10 +1,10 @@
-import { Router } from './Router';
+import { AppRouter } from './Router';
 import './App.scss';
 
 export const App = () => (
   <div data-cy="app">
     <main className="section">
-      <Router />
+      <AppRouter />
     </main>
   </div>
 );

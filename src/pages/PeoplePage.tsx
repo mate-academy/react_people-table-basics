@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Person } from '../types';
 import { getPeople } from '../api';
-import { Loader } from './Loader';
-import { PeopleTable } from './PeopleTable';
-import { PeopleLoadingError } from './PeopleLoadingError';
+import { Loader } from '../components/Loader';
+import { PeopleTable } from '../components/PeopleTable';
+import { PeopleLoadingError } from '../components/PeopleLoadingError';
 import { useParams } from 'react-router-dom';
 
 export const PeoplePage = () => {

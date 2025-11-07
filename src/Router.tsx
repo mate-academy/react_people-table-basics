@@ -1,10 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { LayoutPage } from './components/LayoutPage';
-import { HomePage } from './components/HomePage';
-import { PeoplePage } from './components/PeoplePage';
-import { PageNotFound } from './components/PageNotFound';
+import { HomePage } from './pages/HomePage';
+import { PeoplePage } from './pages/PeoplePage';
+import { PageNotFound } from './pages/PageNotFound';
 
-export const Router = () => {
+export const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<LayoutPage />}>
