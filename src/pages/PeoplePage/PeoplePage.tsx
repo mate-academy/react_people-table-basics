@@ -20,6 +20,7 @@ export const PeoplePage: React.FC = () => {
       .then(fetchedPeople => {
         // Augment people with slug and parent links
         const augmentedPeople = augmentPeople(fetchedPeople as Person[]);
+
         setPeople(augmentedPeople);
       })
       .catch(() => {
