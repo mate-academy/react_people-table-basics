@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+//Hashrouter
 import { HashRouter as Router } from 'react-router-dom';
 
 import 'bulma/css/bulma.css';
