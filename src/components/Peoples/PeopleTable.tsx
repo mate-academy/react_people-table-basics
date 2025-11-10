@@ -69,7 +69,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
                 {mother ? (
                   <PeopleLink person={mother} />
                 ) : person.motherName ? (
-                  <span className="has-text-danger">{person.motherName}</span>
+                  <span>{person.motherName}</span>
                 ) : (
                   '-'
                 )}
@@ -78,7 +78,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
                 {father ? (
                   <PeopleLink person={father} />
                 ) : person.fatherName ? (
-                  <span className="has-text-link">{person.fatherName}</span>
+                  <span>{person.fatherName}</span>
                 ) : (
                   '-'
                 )}
