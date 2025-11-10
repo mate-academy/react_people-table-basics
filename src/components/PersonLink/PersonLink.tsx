@@ -1,7 +1,7 @@
 import { Person } from '../../types';
 import cn from 'classnames';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 type Props = {
   person: Person;
@@ -14,11 +14,11 @@ export const PersonLink: React.FC<Props> = ({ person, peopleList }) => {
   const normalizePersonName = (name: string) => {
     const born = peopleList.find(persona => persona.name === name)?.born;
 
-    return `${name}  ${born}`.replaceAll(' ', '-').toLowerCase();
+    return `${name} ${born}`.replaceAll(' ', '-').toLowerCase();
   };
 
   const isPersonExist = (name: string) => {
-    return peopleList.some(peple => peple.name === name);
+    return peopleList.some(persona => persona.name === name);
   };
 
   return (
@@ -31,14 +31,14 @@ export const PersonLink: React.FC<Props> = ({ person, peopleList }) => {
       })}
     >
       <td>
-        <a
-          href={`#/people/${normalizePersonName(person.name)}`}
+        <Link
+          to={`./${normalizePersonName(person.name)}`}
           className={cn({
             'has-text-danger': person.sex === 'f',
           })}
         >
           {person.name}
-        </a>
+        </Link>
       </td>
 
       <td>{person.sex}</td>
@@ -46,12 +46,12 @@ export const PersonLink: React.FC<Props> = ({ person, peopleList }) => {
       <td>{person.died}</td>
       <td>
         {person.motherName && isPersonExist(person.motherName) ? (
-          <a
+          <Link
             className="has-text-danger"
-            href={`#/people/${normalizePersonName(person.motherName)}`}
+            to={`./${normalizePersonName(person.motherName)}`}
           >
             {person.motherName}
-          </a>
+          </Link>
         ) : person.motherName ? (
           <p>{person.motherName}</p>
         ) : (
@@ -60,9 +60,9 @@ export const PersonLink: React.FC<Props> = ({ person, peopleList }) => {
       </td>
       <td>
         {person.fatherName && isPersonExist(person.fatherName) ? (
-          <a href={`#/people/${normalizePersonName(person.fatherName)}`}>
+          <Link to={`./${normalizePersonName(person.fatherName)}`}>
             {person.fatherName}
-          </a>
+          </Link>
         ) : person.fatherName ? (
           <p>{person.fatherName}</p>
         ) : (
