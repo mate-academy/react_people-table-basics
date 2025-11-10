@@ -32,11 +32,11 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {peopleList.length === 0 && !loader && (
+          {peopleList.length === 0 && !loader && !errorMessage && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!loader && <PeopleTable peopleList={peopleList} />}
+          {peopleList.length > 0 && <PeopleTable peopleList={peopleList} />}
         </div>
       </div>
     </>
