@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Person } from '../../types';
 import { PeopleLink } from './PeopleLink';
 import classNames from 'classnames';
@@ -59,14 +58,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
               onClick={() => !selectedSlug && setLocalSelected(person.slug)}
             >
               <td>
-                <Link
-                  to={`/people/${person.slug}`}
-                  className={classNames({
-                    'has-text-danger': person.sex === 'f',
-                  })}
-                >
-                  {person.name}
-                </Link>
+                <PeopleLink person={person} />
               </td>
 
               <td>{person.sex}</td>

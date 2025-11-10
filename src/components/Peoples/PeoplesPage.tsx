@@ -5,11 +5,7 @@ import { PeopleTable } from './PeopleTable';
 import { Person } from '../../types';
 import { getPeople } from '../../api';
 
-interface PeoplePageProps {
-  slug: string;
-}
-
-export const PeoplePage: React.FC<PeoplePageProps> = () => {
+export const PeoplePage: React.FC = () => {
   const { slug } = useParams<{ slug?: string }>();
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
