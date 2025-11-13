@@ -38,7 +38,7 @@ export const PeopleTable = () => {
       })
       .catch(() => {
         setUndefinedError(true);
-        setInterval(() => {
+        setTimeout(() => {
           setUndefinedError(false);
         }, 3000);
       })
@@ -98,7 +98,7 @@ export const PeopleTable = () => {
                       <td>{p.died}</td>
                       <td>
                         {p.motherName ? (
-                          p.mother && people.includes(p.mother) ? (
+                          p.mother ? (
                             <PersonLink person={p.mother} />
                           ) : (
                             p.motherName
@@ -109,7 +109,7 @@ export const PeopleTable = () => {
                       </td>
                       <td>
                         {p.fatherName ? (
-                          p.father && people.includes(p.father) ? (
+                          p.father ? (
                             <PersonLink person={p.father} />
                           ) : (
                             p.fatherName
