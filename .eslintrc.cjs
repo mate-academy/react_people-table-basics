@@ -12,6 +12,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'plugin:cypress/recommended',
   ],
+
   overrides: [
     {
       'files': ['**/*.spec.jsx'],
@@ -37,6 +38,7 @@ module.exports = {
     'prettier'
   ],
   rules: {
+    'prettier/prettier': 'off',
     // JS
     'semi': 'off',
     '@typescript-eslint/semi': ['error', 'always'],
