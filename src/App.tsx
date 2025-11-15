@@ -48,7 +48,7 @@ export const App = () => {
 
             <Route path="/people">
               <Route index element={<PeoplePage />} />
-              <Route path="/people:slug" element={<PeoplePage />} />
+              <Route path=":slug" element={<PeoplePage />} />
             </Route>
 
             <Route path="*" element={<NotFoundPage />} />
