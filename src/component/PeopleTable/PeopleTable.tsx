@@ -41,25 +41,29 @@ export const PeopleTable: React.FC<Prop> = ({
             }
             onClick={() => onSelect?.(person.slug)}
           >
-            <td onClick={e => e.stopPropagation()}>
-              <PersonLink personName={person.name} people={people} />
+            <td>
+              <PersonLink person={person} />
             </td>
 
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
-            <td onClick={e => e.stopPropagation()}>
-              {person.motherName ? (
-                <PersonLink personName={person.motherName} people={people} />
+            <td>
+              {people.find(p => p.name === person.motherName) ? (
+                <PersonLink
+                  person={people.find(p => p.name === person.motherName)!}
+                />
               ) : (
-                '-'
+                person.motherName || '-'
               )}
             </td>
-            <td onClick={e => e.stopPropagation()}>
-              {person.fatherName ? (
-                <PersonLink personName={person.fatherName} people={people} />
+            <td>
+              {people.find(p => p.name === person.fatherName) ? (
+                <PersonLink
+                  person={people.find(p => p.name === person.fatherName)!}
+                />
               ) : (
-                '-'
+                person.fatherName || '-'
               )}
             </td>
           </tr>

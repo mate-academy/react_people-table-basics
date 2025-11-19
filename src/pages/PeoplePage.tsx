@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { PeopleTable } from '../components/Loader/PeopleTable';
+import { PeopleTable } from '../component/PeopleTable/PeopleTable';
 import { Person } from '../types';
 import { Loader } from '../components/Loader';
 
@@ -13,7 +13,7 @@ export const PeoplePage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('./api/people.json')
+    fetch('https://mate-academy.github.io/react_people-table/api/people.json')
       .then(result => result.json())
       .then((data: Person[]) => {
         setPeople(data);
@@ -30,7 +30,7 @@ export const PeoplePage: React.FC = () => {
   };
 
   if (loading) {
-    return <Loader />;
+    return <Loader data-cy="loader" />;
   }
 
   if (error) {
