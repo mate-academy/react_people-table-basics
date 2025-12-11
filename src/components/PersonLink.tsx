@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Person } from '../types';
 
 interface PersonLinkProps {
@@ -9,8 +10,8 @@ export const PersonLink: React.FC<PersonLinkProps> = ({ person }) => {
   const classPerson = person.sex === 'f' ? 'has-text-danger' : '';
 
   return (
-    <a href={`#/people/${person.slug}`} className={classPerson}>
+    <Link to={`/people/${person.slug}`} className={classPerson}>
       {person.name}
-    </a>
+    </Link>
   );
 };

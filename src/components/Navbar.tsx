@@ -1,12 +1,11 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-interface NavbarProps {
-  currentPath: string;
-}
+export const Navbar: React.FC = () => {
+  const location = useLocation();
 
-export const Navbar: React.FC<NavbarProps> = ({ currentPath }) => {
-  const isHome = currentPath === '/' || currentPath === '';
-  const isPeople = currentPath.startsWith('/people');
+  const isHome = location.pathname === '/';
+  const isPeople = location.pathname.startsWith('/people');
 
   return (
     <nav
@@ -17,19 +16,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath }) => {
     >
       <div className="container">
         <div className="navbar-brand">
-          <a
+          <Link
             className={`navbar-item ${isHome ? 'has-background-grey-lighter' : ''}`}
-            href="#/"
+            to="/"
           >
             Home
-          </a>
+          </Link>
 
-          <a
+          <Link
             className={`navbar-item ${isPeople ? 'has-background-grey-lighter' : ''}`}
-            href="#/people"
+            to="/people"
           >
             People
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

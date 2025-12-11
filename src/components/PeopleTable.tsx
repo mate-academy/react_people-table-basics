@@ -1,7 +1,6 @@
 import React from 'react';
 import { Person } from '../types';
 import { PersonLink } from './PersonLink';
-import 'bulma/css/bulma.min.css';
 
 interface PeopleTableProps {
   people: Person[];
@@ -17,9 +16,7 @@ export const PeopleTable: React.FC<PeopleTableProps> = ({
       return null;
     }
 
-    return (
-      people.find(p => p.slug === name) || people.find(p => p.name === name)
-    );
+    return people.find(p => p.name === name);
   };
 
   return (
@@ -40,8 +37,8 @@ export const PeopleTable: React.FC<PeopleTableProps> = ({
 
       <tbody>
         {people.map(person => {
-          const mother = findPersonByName(person.motherName);
-          const father = findPersonByName(person.fatherName);
+          const mother = findPersonByName(person.motherName || null);
+          const father = findPersonByName(person.fatherName || null);
           const isSelected = selectedSlug === person.slug;
 
           return (

@@ -1,5 +1,4 @@
-import React from 'react';
-import { useHashRouter } from './hooks/useHashRouter';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 
 import './App.scss';
@@ -8,37 +7,21 @@ import { PeoplePage } from './pages/PeoplePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { Navbar } from './components/Navbar';
 
-export const App: React.FC = () => {
-  const currentPath = useHashRouter();
-
-  const renderPage = () => {
-    if (currentPath === '/' || currentPath === '') {
-      return <HomePage />;
-    }
-
-    if (currentPath === '/people') {
-      return <PeoplePage selectedSlug={null} />;
-    }
-
-    if (currentPath.startsWith('/people/')) {
-      const slug = currentPath.replace('/people/', '');
-
-      return <PeoplePage selectedSlug={slug} />;
-    }
-
-    return <NotFoundPage />;
-  };
-
+export const App = () => {
   return (
     <div data-cy="app">
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-      />
-      <Navbar currentPath={currentPath} />
+      <Navbar />
 
       <main className="section" style={{ marginTop: '52px' }}>
-        <div className="container">{renderPage()}</div>
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="/people" element={<PeoplePage />} />
+            <Route path="/people/:slug" element={<PeoplePage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
       </main>
     </div>
   );

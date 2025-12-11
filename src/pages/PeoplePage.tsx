@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { getPeople } from '../api';
 import { Person } from '../types';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
 
-interface PeoplePageProps {
-  selectedSlug: string | null;
-}
-
-export const PeoplePage: React.FC<PeoplePageProps> = ({ selectedSlug }) => {
+export const PeoplePage: React.FC = () => {
+  const { slug } = useParams<{ slug?: string }>();
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -46,7 +44,7 @@ export const PeoplePage: React.FC<PeoplePageProps> = ({ selectedSlug }) => {
           )}
 
           {!loading && !error && people.length > 0 && (
-            <PeopleTable people={people} selectedSlug={selectedSlug} />
+            <PeopleTable people={people} selectedSlug={slug || null} />
           )}
         </div>
       </div>
