@@ -7,10 +7,6 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
-  if (!person) {
-    return <>-</>;
-  }
-
   return (
     <Link
       className={person.sex === 'f' ? 'has-text-danger' : ''}
