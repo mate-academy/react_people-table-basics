@@ -9,3 +9,14 @@ export interface Person {
   mother?: Person;
   father?: Person;
 }
+
+export interface PersonLinkProps {
+  person?: Person;
+  name?: string;
+  people: Person[];
+}
+
+export interface PeopleTableProps {
+  people: Person[];
+  selectedSlug?: string;
+}
