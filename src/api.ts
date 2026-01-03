@@ -1,4 +1,4 @@
-import { Person } from './types/Person';
+import { Person } from './types';
 
 // eslint-disable-next-line operator-linebreak
 const API_URL =
@@ -12,5 +12,11 @@ export function getPeople(): Promise<Person[]> {
   // keep this delay for testing purpose
   return wait(500)
     .then(() => fetch(API_URL))
-    .then(response => response.json());
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return response.json();
+    });
 }
