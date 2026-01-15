@@ -20,7 +20,10 @@ export const App = () => (
             to="/"
             end
             className={({ isActive }) =>
-              classNames('navbar-item', { 'is-active': isActive })
+              classNames('navbar-item', {
+                'is-active': isActive,
+                'has-background-grey-lighter': isActive,
+              })
             }
           >
             Home
@@ -29,7 +32,10 @@ export const App = () => (
           <NavLink
             to="/people"
             className={({ isActive }) =>
-              classNames('navbar-item', { 'is-active': isActive })
+              classNames('navbar-item', {
+                'is-active': isActive,
+                'has-background-grey-lighter': isActive,
+              })
             }
           >
             People
@@ -43,7 +49,10 @@ export const App = () => (
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />
-          <Route path="/people" element={<PeoplePage />} />
+          <Route path="/people">
+            <Route index element={<PeoplePage />} />
+            <Route path=":slug" element={<PeoplePage />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
