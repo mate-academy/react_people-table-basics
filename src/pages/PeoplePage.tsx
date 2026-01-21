@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Loader } from '../components/Loader';
 import { Person } from '../types/Person';
-import { useParams } from 'react-router-dom';
-import classNames from 'classnames';
-import { PersonLink } from '../components/PersonLink';
+import { PeopleTable } from '../components/PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[] | null>(null);
@@ -28,12 +26,9 @@ export const PeoplePage = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const { slug } = useParams();
-
   return (
     <>
       <h1 className="title">People Page</h1>
-
       <div className="block">
         <div className="box table-container">
           {loading && <Loader />}
@@ -48,54 +43,8 @@ export const PeoplePage = () => {
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {!loading && !errorMessage && people && people.length > 0 && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map(person => (
-                  <tr
-                    data-cy="person"
-                    key={person.slug}
-                    className={classNames({
-                      'has-background-warning': person.slug === slug,
-                    })}
-                  >
-                    <td>
-                      <PersonLink name={person.name} people={people} />
-                    </td>
-
-                    <td>{person.sex}</td>
-                    <td>{person.born}</td>
-                    <td>{person.died}</td>
-                    <td>
-                      <PersonLink
-                        name={person.motherName || ''}
-                        people={people}
-                      />
-                    </td>
-                    <td>
-                      <PersonLink
-                        name={person.fatherName || ''}
-                        people={people}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          {!loading && !errorMessage && people && (
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
