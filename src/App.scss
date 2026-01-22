@@ -1,3 +1,22 @@
 iframe {
   display: none;
 }
+
+.button.is-small:not(.is-primary):not(.is-info) {
+  background-color: white;
+}
+
+.reset-button-fixed {
+  background-color: transparent !important;
+  color: #3273dc !important;
+  /* Синій колір Bulma */
+  border-color: #3273dc !important;
+  transition: all 0.2s ease !important;
+}
+
+.reset-button-fixed:hover {
+  background-color: #3273dc !important;
+  /* Стає синьою */
+  color: white !important;
+  /* Текст стає білим */
+}
