@@ -27,29 +27,41 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <tr
-            data-cy="person"
-            key={person.slug}
-            className={classNames({
-              'has-background-warning': person.slug === slug,
-            })}
-          >
-            <td>
-              <PersonLink people={people} personName={person.name} />
-            </td>
+        {people.map(person => {
+          const motherObj = people.find(p => p.name === person.motherName);
+          const fatherObj = people.find(p => p.name === person.fatherName);
 
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
-            <td>
-              <PersonLink personName={person.motherName} people={people} />
-            </td>
-            <td>
-              <PersonLink personName={person.fatherName} people={people} />
-            </td>
-          </tr>
-        ))}
+          const mother =
+            motherObj ||
+            (person.motherName ? { name: person.motherName } : null);
+          const father =
+            fatherObj ||
+            (person.fatherName ? { name: person.fatherName } : null);
+
+          return (
+            <tr
+              data-cy="person"
+              key={person.slug}
+              className={classNames({
+                'has-background-warning': person.slug === slug,
+              })}
+            >
+              <td>
+                <PersonLink person={person} />
+              </td>
+
+              <td>{person.sex}</td>
+              <td>{person.born}</td>
+              <td>{person.died}</td>
+              <td>
+                <PersonLink person={mother as Person} />
+              </td>
+              <td>
+                <PersonLink person={father as Person} />
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
