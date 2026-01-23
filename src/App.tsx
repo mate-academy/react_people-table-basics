@@ -3,7 +3,7 @@ import './App.scss';
 import { HomePage } from './components/HomePage';
 import { PeoplePage } from './components/PeoplePage';
 import classNames from 'classnames';
-import { NoFoundPage } from './components/NotFoundPage';
+import { NotFoundPage } from './components/NotFoundPage';
 import { useEffect } from 'react';
 
 export const App = () => {
@@ -47,7 +47,7 @@ export const App = () => {
               <Route path=":slug" element={<PeoplePage />} />
             </Route>
 
-            <Route path="*" element={<NoFoundPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </main>
