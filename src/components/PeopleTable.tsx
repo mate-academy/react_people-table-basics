@@ -1,29 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Person } from '../types';
-import { getPeople } from '../api';
 import classNames from 'classnames';
 import { useParams } from 'react-router-dom';
 import { PersonLink } from './PersonLink';
 import { Loader } from './Loader';
+import { Person } from '../types';
+import React from 'react';
 
-export const PeopleTable = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+interface PeopleTableProps {
+  people: Person[];
+  loading: boolean;
+  error: boolean;
+}
+
+export const PeopleTable: React.FC<PeopleTableProps> = ({
+  people,
+  loading,
+  error,
+}) => {
   const { slug } = useParams();
-
-  useEffect(() => {
-    setLoading(true);
-
-    getPeople()
-      .then(setPeople)
-      .catch(() => {
-        setError(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
 
   return (
     <div className="box table-container">
