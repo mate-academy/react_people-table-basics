@@ -1,5 +1,5 @@
-import { Person } from '../types/Person';
-import { Link } from 'react-router-dom';
+import { Person } from './types/Person';
+import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[];
@@ -23,24 +23,21 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => (
     </thead>
 
     <tbody>
-    {people.map((person) => {
-      const mother = people.find((p) => p.name === person.motherName);
-      const father = people.find((p) => p.name === person.fatherName);
+    {people.map(person => {
+      const mother = people.find(p => p.name === person.motherName);
+      const father = people.find(p => p.name === person.fatherName);
 
       return (
         <tr
           key={person.slug}
           data-cy="person"
-          className={person.slug === selectedSlug ? 'has-background-warning' : ''}
+          className={
+            person.slug === selectedSlug ? 'has-background-warning' : ''
+          }
         >
           {/* Name */}
           <td>
-            <Link
-              to={`/people/${person.slug}`}
-              className={person.sex === 'f' ? 'has-text-danger' : ''}
-            >
-              {person.name}
-            </Link>
+            <PersonLink person={person} />
           </td>
 
           {/* Sex, Born, Died */}
@@ -51,12 +48,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => (
           {/* Mother */}
           <td>
             {mother ? (
-              <Link
-                to={`/people/${mother.slug}`}
-                className={mother.sex === 'f' ? 'has-text-danger' : ''}
-              >
-                {mother.name}
-              </Link>
+              <PersonLink person={mother} />
             ) : (
               person.motherName || '-'
             )}
@@ -65,12 +57,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => (
           {/* Father */}
           <td>
             {father ? (
-              <Link
-                to={`/people/${father.slug}`}
-                className={father.sex === 'f' ? 'has-text-danger' : ''}
-              >
-                {father.name}
-              </Link>
+              <PersonLink person={father} />
             ) : (
               person.fatherName || '-'
             )}

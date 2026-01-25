@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Person } from './types/Person';
 
 type Props = {
@@ -10,11 +11,11 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
   }
 
   return (
-    <a
-      href={`#/people/${person.slug}`}
+    <Link
+      to={`/people/${person.slug}`}
       className={person.sex === 'f' ? 'has-text-danger' : ''}
     >
       {person.name}
-    </a>
+    </Link>
   );
 };
