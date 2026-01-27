@@ -26,9 +26,7 @@ export const PeoplePage = () => {
 
   return (
     <>
-      <h1 title="text" className="title">
-        People Page
-      </h1>
+      <h1 className="title">People Page</h1>
       <PeopleTable people={people} isLoading={isLoading} error={error} />
     </>
   );

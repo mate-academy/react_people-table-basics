@@ -45,52 +45,50 @@ export const PeopleTable: React.FC<Props> = ({ people, isLoading, error }) => {
             </thead>
 
             <tbody>
-              {people.map(person => (
-                <tr
-                  key={person.slug}
-                  data-cy="person"
-                  className={classNames({
-                    'has-background-warning':
-                      location.pathname === `/people/${person.slug}`, //
-                  })}
-                >
-                  <td>
-                    <PersonLink
-                      name={person.name}
-                      sex={person.sex}
-                      people={people}
-                    />
-                  </td>
+              {people.map(person => {
+                const mother = people.find(p => p.name === person.motherName);
+                const father = people.find(p => p.name === person.fatherName);
 
-                  <td>{person.sex}</td>
-                  <td>{person.born}</td>
-                  <td>{person.died}</td>
-
-                  <td>
-                    {person.motherName ? (
-                      <PersonLink
-                        name={person.motherName}
-                        sex="f"
-                        people={people}
-                      />
-                    ) : (
-                      '-'
-                    )}
-                  </td>
-
-                  <td>
-                    {person.fatherName ? (
-                      <PersonLink
-                        name={person.fatherName}
-                        sex="m"
-                        people={people}
-                      />
-                    ) : (
-                      '-'
-                    )}
-                  </td>
-                </tr>
-              ))}
+                return (
+                  <tr
+                    key={person.slug}
+                    data-cy="person"
+                    className={classNames({
+                      'has-background-warning':
+                        location.pathname === `/people/${person.slug}`,
+                    })}
+                  >
+                    <td>
+                      <PersonLink person={person} name={person.name} />
+                    </td>
+                    <td>{person.sex}</td>
+                    <td>{person.born}</td>
+                    <td>{person.died}</td>
+                    <td>
+                      {person.motherName ? (
+                        <PersonLink
+                          person={mother}
+                          name={person.motherName}
+                          sex="f"
+                        />
+                      ) : (
+                        '-'
+                      )}
+                    </td>
+                    <td>
+                      {person.fatherName ? (
+                        <PersonLink
+                          person={father}
+                          name={person.fatherName}
+                          sex="m"
+                        />
+                      ) : (
+                        '-'
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         )}

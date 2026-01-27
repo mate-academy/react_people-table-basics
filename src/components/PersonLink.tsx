@@ -3,19 +3,18 @@ import { Person } from '../types';
 import classNames from 'classnames';
 
 type Props = {
+  person?: Person;
   name: string;
   sex?: string;
-  people: Person[];
 };
 
-export const PersonLink: React.FC<Props> = ({ name, sex, people }) => {
-  const foundPerson = people.find(person => person.name === name);
-  const isFemale = foundPerson?.sex === 'f' || sex === 'f';
+export const PersonLink: React.FC<Props> = ({ person, name, sex }) => {
+  const isFemale = person?.sex === 'f' || sex === 'f';
 
-  if (foundPerson) {
+  if (person) {
     return (
       <Link
-        to={`/people/${foundPerson.slug}`}
+        to={`/people/${person.slug}`}
         className={classNames({ 'has-text-danger': isFemale })}
       >
         {name}
