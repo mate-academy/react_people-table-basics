@@ -43,7 +43,6 @@ export const PeopleTable: React.FC<Props> = ({ people, isLoading, error }) => {
                 <th>Father</th>
               </tr>
             </thead>
-
             <tbody>
               {people.map(person => {
                 const mother = people.find(p => p.name === person.motherName);
@@ -59,31 +58,29 @@ export const PeopleTable: React.FC<Props> = ({ people, isLoading, error }) => {
                     })}
                   >
                     <td>
-                      <PersonLink person={person} name={person.name} />
+                      <PersonLink person={person} />
                     </td>
                     <td>{person.sex}</td>
                     <td>{person.born}</td>
                     <td>{person.died}</td>
                     <td>
-                      {person.motherName ? (
-                        <PersonLink
-                          person={mother}
-                          name={person.motherName}
-                          sex="f"
-                        />
-                      ) : (
+                      {!person.motherName ? (
                         '-'
+                      ) : mother ? (
+                        <PersonLink person={mother} />
+                      ) : (
+                        <span className="has-text-danger">
+                          {person.motherName}
+                        </span>
                       )}
                     </td>
                     <td>
-                      {person.fatherName ? (
-                        <PersonLink
-                          person={father}
-                          name={person.fatherName}
-                          sex="m"
-                        />
-                      ) : (
+                      {!person.fatherName ? (
                         '-'
+                      ) : father ? (
+                        <PersonLink person={father} />
+                      ) : (
+                        <span>{person.fatherName}</span>
                       )}
                     </td>
                   </tr>
