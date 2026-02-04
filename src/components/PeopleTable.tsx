@@ -1,4 +1,5 @@
 import { Person } from '../types/Person';
+import { PersonLink } from './PersonLink';
 
 type Props = {
   people: Person[];
@@ -31,23 +32,16 @@ export const PeopleTable = ({ people, selectedSlug }: Props) => {
 
           const renderParent = (parentName: string | null) => {
             if (!parentName) {
-              return '-';
+              return <span>-</span>;
             }
 
             const parent = findByName(parentName);
 
             if (!parent) {
-              return parentName;
+              return <span>{parentName}</span>;
             }
 
-            return (
-              <a
-                href={`#/people/${parent.slug}`}
-                className={parent.sex === 'f' ? 'has-text-danger' : undefined}
-              >
-                {parent.name}
-              </a>
-            );
+            return <PersonLink person={parent} />;
           };
 
           return (
@@ -57,12 +51,7 @@ export const PeopleTable = ({ people, selectedSlug }: Props) => {
               className={isSelected ? 'has-background-warning' : undefined}
             >
               <td>
-                <a
-                  href={`#/people/${person.slug}`}
-                  className={person.sex === 'f' ? 'has-text-danger' : undefined}
-                >
-                  {person.name}
-                </a>
+                <PersonLink person={person} />
               </td>
 
               <td>{person.sex}</td>
