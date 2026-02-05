@@ -1,30 +1,20 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { Person } from '../types';
 import { Loader } from './Loader';
-import { getPeople } from '../api';
 import { PersonLink } from './PersonLink';
+import { Person } from '../types';
 
-export const PeopleLists = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [peoplesLists, setPeoplesLists] = useState<Person[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+type Props = {
+  isLoading: boolean;
+  peoplesLists: Person[];
+  errorMessage: string | null;
+};
 
+export const PeopleLists: React.FC<Props> = ({
+  isLoading,
+  peoplesLists,
+  errorMessage,
+}) => {
   const { slug } = useParams();
-
-  useEffect(() => {
-    setIsLoading(true);
-    setErrorMessage(null);
-
-    getPeople()
-      .then(data => {
-        setPeoplesLists(data);
-      })
-      .catch(() => {
-        setErrorMessage('Something went wrong');
-      })
-      .finally(() => setIsLoading(false));
-  }, []);
 
   return (
     <div className="box table-container">
@@ -82,14 +72,10 @@ export const PeopleLists = () => {
                   <td>{person.died}</td>
 
                   <td>
-                    {person ? (
-                      <PersonLink
-                        person={mother}
-                        nameFallBack={person.motherName}
-                      />
-                    ) : (
-                      '-'
-                    )}
+                    <PersonLink
+                      person={mother}
+                      nameFallBack={person.motherName}
+                    />
                   </td>
 
                   <td>
