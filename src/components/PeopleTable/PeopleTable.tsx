@@ -1,25 +1,16 @@
-import { useEffect, useState } from 'react';
 import { Loader } from '../Loader';
 import { Person } from '../../types';
-import { getPeople } from '../../api';
 import { PersonLink } from '../PersonLink/PersonLink';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
-export const PeopleTable = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
+type Props = {
+  people: Person[];
+  isLoading: boolean;
+  error: boolean;
+};
 
-  useEffect(() => {
-    setIsLoading(true);
-
-    getPeople()
-      .then(setPeople)
-      .catch(() => setError(true))
-      .finally(() => setIsLoading(false));
-  }, []);
-
+export const PeopleTable: React.FC<Props> = ({ people, isLoading, error }) => {
   const { slug } = useParams();
 
   return (
@@ -37,7 +28,7 @@ export const PeopleTable = () => {
           <p data-cy="noPeopleMessage">There are no people on the server</p>
         )}
 
-        {!isLoading && (
+        {!isLoading && !error && people.length > 0 && (
           <table
             data-cy="peopleTable"
             className="table is-striped is-hoverable is-narrow is-fullwidth"

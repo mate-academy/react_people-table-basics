@@ -19,4 +19,6 @@ export const PersonLink: React.FC<Props> = ({ person, name }) => {
   if (name) {
     return <>{name}</>;
   }
+
+  return null;
 };
