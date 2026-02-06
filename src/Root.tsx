@@ -7,8 +7,8 @@ export const Root = () => (
   <Router>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route index element={<HomePage />} />
-        <Route path="people" element={<PeoplePage />} />
+        <Route path="home" element={<HomePage />} />
+        <Route path="people/:userSlug" element={<PeoplePage />} />
         <Route
           path="*"
           element={

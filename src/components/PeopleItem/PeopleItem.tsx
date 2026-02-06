@@ -1,4 +1,5 @@
 import { Person } from '../../types/Person';
+import { PersonLink } from '../PersonLink';
 
 type Props = {
   person: Person;
@@ -8,7 +9,7 @@ export const PeopleItem = ({ person }: Props) => {
   return (
     <tr data-cy="person">
       <td>
-        <a href="#/people/jan-van-brussel-1714">{person.name}</a>
+        <PersonLink slug={person.slug} name={person.name} />
       </td>
 
       <td>{person.sex}</td>
