@@ -1,13 +1,20 @@
+import classNames from 'classnames';
 import { Person } from '../../types/Person';
 import { PersonLink } from '../PersonLink';
 
 type Props = {
   person: Person;
+  isSelected: boolean;
 };
 
-export const PeopleItem = ({ person }: Props) => {
+export const PeopleItem = ({ person, isSelected }: Props) => {
   return (
-    <tr data-cy="person">
+    <tr
+      data-cy="person"
+      className={classNames({
+        'has-background-warning': isSelected,
+      })}
+    >
       <td>
         <PersonLink slug={person.slug} name={person.name} />
       </td>

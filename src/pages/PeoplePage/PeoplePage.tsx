@@ -5,11 +5,14 @@ import { Loader } from '../../components/Loader';
 import { getPeople } from '../../utils/api';
 import { Person } from '../../types/Person';
 import { PeopleList } from '../../components/PeopleList';
+import { useParams } from 'react-router-dom';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const { slug } = useParams<{ slug?: string }>();
+
 
   useEffect(() => {
     getPeople()
@@ -48,7 +51,7 @@ export const PeoplePage = () => {
                 </tr>
               </thead>
 
-              <PeopleList persons={people} />
+              <PeopleList persons={people}  selectedSlug={slug}/>
             </table>
           )}
 
