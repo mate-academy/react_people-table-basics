@@ -2,7 +2,7 @@ import './App.scss';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { HomePage } from './components/HomePage';
 import { NotFoundPage } from './components/NotFoundPage';
-import { PeoplePage } from './components/People.Page';
+import { PeoplePage } from './components/PeoplePage';
 import { Navbar } from './components/NavBar';
 
 export const App = () => {
