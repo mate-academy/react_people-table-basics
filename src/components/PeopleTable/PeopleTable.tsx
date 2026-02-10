@@ -15,7 +15,7 @@ export const PeopleTable = ({ people }: Props) => {
       return null;
     }
 
-    return people.find(person => person.name === name) || null;
+    return people.find(person => person.name.trim() === name.trim()) || null;
   };
 
   return (
@@ -56,18 +56,22 @@ export const PeopleTable = ({ people }: Props) => {
               <td>{person.died}</td>
 
               <td>
-                {person.motherName ? (
+                {!person.motherName ? (
+                  '-'
+                ) : mother ? (
                   <PersonLink person={mother} name={person.motherName} />
                 ) : (
-                  '-'
+                  person.motherName
                 )}
               </td>
 
               <td>
-                {person.fatherName ? (
+                {!person.fatherName ? (
+                  '-'
+                ) : father ? (
                   <PersonLink person={father} name={person.fatherName} />
                 ) : (
-                  '-'
+                  person.fatherName
                 )}
               </td>
             </tr>
