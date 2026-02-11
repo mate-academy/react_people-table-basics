@@ -33,11 +33,7 @@ export const PeopleTable: React.FC<Props> = ({ people }: Props) => {
             className={slug === person.slug ? 'has-background-warning' : ''}
           >
             <td>
-              <PersonLink
-                personSlug={person.slug}
-                personName={person.name}
-                personSex={person.sex}
-              />
+              <PersonLink person={person} />
             </td>
 
             <td>{person.sex}</td>
@@ -46,11 +42,7 @@ export const PeopleTable: React.FC<Props> = ({ people }: Props) => {
 
             {person.mother ? (
               <td>
-                <PersonLink
-                  personSlug={person.mother.slug}
-                  personName={person.mother.name}
-                  personSex={person.mother.sex}
-                />
+                <PersonLink person={person.mother} />
               </td>
             ) : (
               <td>{person.motherName || '-'}</td>
@@ -58,11 +50,7 @@ export const PeopleTable: React.FC<Props> = ({ people }: Props) => {
 
             {person.father ? (
               <td>
-                <PersonLink
-                  personSlug={person.father.slug}
-                  personName={person.father.name}
-                  personSex={person.father.sex}
-                />
+                <PersonLink person={person.father} />
               </td>
             ) : (
               <td>{person.fatherName || '-'}</td>

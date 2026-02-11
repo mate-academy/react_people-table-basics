@@ -1,22 +1,20 @@
 import { NavLink } from 'react-router-dom';
 
+import { Person } from '../types';
+
 type Props = {
-  personSlug: string;
-  personName: string;
-  personSex: string;
+  person: Person;
 };
 
-export const PersonLink: React.FC<Props> = ({
-  personSlug,
-  personName,
-  personSex,
-}: Props) => {
+export const PersonLink: React.FC<Props> = ({ person }: Props) => {
+  const { sex, slug, name } = person;
+
   return (
     <NavLink
-      className={personSex === 'f' ? 'has-text-danger' : ''}
-      to={`/people/${personSlug}`}
+      className={sex === 'f' ? 'has-text-danger' : ''}
+      to={`/people/${slug}`}
     >
-      {personName}
+      {name}
     </NavLink>
   );
 };
