@@ -1,0 +1,61 @@
+[33m3a1d8ab[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m Сorrection
+[33m99bb5a6[m Fixed3
+[33ma70618a[m Fixed2
+[33mef93c78[m Fixed the error
+[33mc6f1265[m Made changes
+[33mceb28f9[m Fixed
+[33me0a6788[m Solution
+[33me61cdbf[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m Merge pull request #1708 from mykhalenych/bugfix/bulma
+[33mf51f506[m bugfix/bulma changed bulma version
+[33mfcfb2df[m Update test.yml
+[33m3c2f02f[m Merge pull request #1540 from mate-academy/vite-infra
+[33mc0171a2[m add Vite
+[33m6ed04d8[m update react-eslint-config-typescript version
+[33m7108abd[m fix typos in e2e tests
+[33m0ba0625[m fix e2e tests
+[33me2ee3f8[m fix node14 deps
+[33m18cfbcd[m Merge pull request #1289 from mykhalenych/feature/prettier
+[33m8c92749[m feature/prettier updated packages
+[33m2ebd858[m feature/prettier added prettier, updated packages
+[33mb1003f9[m fix deps
+[33mf1e851e[m Update package.json
+[33m3cf64c1[m Update package.json
+[33m8a7400f[m add react-router-dom@latest
+[33mbbf5d2b[m Update README.md
+[33me624559[m stop tests at first fail
+[33m32fc803[m Update package.json
+[33mc3f3245[m add tests, markup and improve description
+[33m3e77af0[m Update README.md
+[33m6405679[m Update README.md
+[33m767bdc4[m Update README.md
+[33md2bb272[m Update README.md
+[33mc48eaac[m Update package.json
+[33m5d8b912[m Update README.md
+[33m362648a[m Merge pull request #148 from mate-academy/fix-description
+[33me05020e[m fix description
+[33m269558f[m Merge pull request #143 from mate-academy/NewTests
+[33m74b0ee7[m Update page.spec.js
+[33mb610666[m NewTests
+[33m46cc104[m NewTests
+[33m30fba24[m NewTests
+[33m5020c4d[m NewTests
+[33mdbd6541[m NewTests
+[33m05477d8[m Merge pull request #123 from mate-academy/mate-scripts-update
+[33m8ec2c38[m Update and init
+[33md420c9a[m Merge pull request #120 from mate-academy/mate-scripts-update
+[33m9bcf8dd[m Update and init
+[33mfced1dc[m Update scripts
+[33m3d42366[m Update workflows
+[33mcdb985b[m fix tests
+[33m6b74225[m Update scripts
+[33m2bc5d09[m Add cypress verify to postinstall
+[33m2ca6353[m Downgrade
+[33mc2ea782[m Restore checklists, update package, fix tests
+[33m57eede3[m Update workflows
+[33m53d66ea[m Component tests and other improvements
+[33m995e530[m Component tests and other improvements
+[33mc77a8d1[m Update repo. Added bulma and js config (#73)
+[33mdbb553d[m Update repo. Added cypress (#72)
+[33m053bd51[m Update README.md
+[33mec8e386[m Update README.md
+[33m520ca00[m Initial commit
