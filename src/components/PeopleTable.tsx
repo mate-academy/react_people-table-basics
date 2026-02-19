@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../types/Person';
@@ -7,21 +8,22 @@ type Props = {
   people: Person[];
 };
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
+export const PeopleTable: FC<Props> = ({ people }) => {
   const { slug } = useParams();
 
-  const byName = new Map<string, Person>();
-  people.forEach(p => byName.set(p.name, p));
+  const peopleByName = new Map<string, Person>();
+
+  people.forEach(p => peopleByName.set(p.name, p));
 
   const renderParent = (parentName?: string) => {
     if (!parentName) {
       return '-';
     }
 
-    const parent = byName.get(parentName);
+    const parent = peopleByName.get(parentName);
 
     if (!parent) {
-      return parentName; // text, not a link
+      return parentName;
     }
 
     return <PersonLink person={parent} />;

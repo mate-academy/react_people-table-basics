@@ -7,8 +7,10 @@ export async function getPeople(): Promise<Person[]> {
   const res = await fetch(API_URL);
 
   if (!res.ok) {
-    throw new Error('Failed to fetch');
+    throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
   }
 
-  return res.json();
+  const data = (await res.json()) as Person[];
+
+  return data;
 }
