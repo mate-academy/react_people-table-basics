@@ -1,4 +1,6 @@
-import { Loader } from './components/Loader';
+import { HomePage, NotFoundPage, PeoplePage } from './Page';
+import { Route, Routes, NavLink, Navigate } from 'react-router-dom';
+import { getActive } from './Const/GetActive';
 
 import './App.scss';
 
@@ -12,23 +14,32 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
+          <NavLink className={getActive} to="/">
             Home
-          </a>
+          </NavLink>
 
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
-          >
+          <NavLink className={getActive} to="/people">
             People
-          </a>
+          </NavLink>
         </div>
       </div>
     </nav>
 
     <main className="section">
       <div className="container">
-        <h1 className="title">Home Page</h1>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/people" element={<PeoplePage />} />
+          <Route path="/people/:slug" element={<PeoplePage />} />
+          <Route path="/home" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
+    </main>
+  </div>
+);
+
+/*        <h1 className="title">Home Page</h1>
         <h1 className="title">People Page</h1>
         <h1 className="title">Page not found</h1>
 
@@ -160,8 +171,4 @@ export const App = () => (
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
-    </main>
-  </div>
-);
+        </div>*/
