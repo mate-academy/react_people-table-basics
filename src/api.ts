@@ -4,7 +4,7 @@ import { Person } from './types/Person';
 const API_URL =
   'https://mate-academy.github.io/react_people-table/api/people.json';
 
-function wait(delay: number) {
+function wait(delay: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, delay));
 }
 
