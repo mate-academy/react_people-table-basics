@@ -1,25 +1,16 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
-import { Person } from './types';
+
 import { PersonLink } from './PersonLink';
+import { PersonWithParents } from './types/PersonWithParents';
 
 interface Props {
-  people: Person[];
+  people: PersonWithParents[];
 }
 
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
-
-  const renderParent = (parentName: string | null) => {
-    if (!parentName) {
-      return '-';
-    }
-
-    const parent = people.find(p => p.name === parentName);
-
-    return parent ? <PersonLink person={parent} /> : parentName;
-  };
 
   return (
     <table
@@ -36,7 +27,6 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           <th>Father</th>
         </tr>
       </thead>
-
       <tbody>
         {people.map(person => (
           <tr
@@ -52,8 +42,20 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
-            <td>{renderParent(person.motherName)}</td>
-            <td>{renderParent(person.fatherName)}</td>
+            <td>
+              {person.motherPerson ? (
+                <PersonLink person={person.motherPerson} />
+              ) : (
+                person.motherName || '-'
+              )}
+            </td>
+            <td>
+              {person.fatherPerson ? (
+                <PersonLink person={person.fatherPerson} />
+              ) : (
+                person.fatherName || '-'
+              )}
+            </td>
           </tr>
         ))}
       </tbody>

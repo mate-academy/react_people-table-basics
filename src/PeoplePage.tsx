@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Loader } from './components/Loader';
 import { PeopleTable } from './PeopleTable';
 import { Person } from './types';
 import { getPeople } from './api';
+import { PersonWithParents } from './types/PersonWithParents';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -17,10 +18,17 @@ export const PeoplePage = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  const enrichedPeople: PersonWithParents[] = useMemo(() => {
+    return people.map(person => ({
+      ...person,
+      motherPerson: people.find(p => p.name === person.motherName) || null,
+      fatherPerson: people.find(p => p.name === person.fatherName) || null,
+    }));
+  }, [people]);
+
   return (
     <>
       <h1 className="title">People Page</h1>
-
       <div className="box table-container">
         {loading && <Loader />}
 
@@ -30,12 +38,14 @@ export const PeoplePage = () => {
           </p>
         )}
 
-        {!loading && !error && people.length === 0 && (
-          <p data-cy="noPeopleMessage">There are no people on the server</p>
-        )}
-
-        {!loading && !error && people.length > 0 && (
-          <PeopleTable people={people} />
+        {!loading && !error && (
+          <>
+            {people.length === 0 ? (
+              <p data-cy="noPeopleMessage">There are no people on the server</p>
+            ) : (
+              <PeopleTable people={enrichedPeople} />
+            )}
+          </>
         )}
       </div>
     </>
