@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import classNames from 'classnames';
 import { Loader } from './components/Loader';
-import { PersonLink } from './PersonLink';
+import { PeopleTable } from './PeopleTable';
 import { Person } from './types';
 import { getPeople } from './api';
 
 export const PeoplePage = () => {
-  const { slug } = useParams();
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -38,46 +35,7 @@ export const PeoplePage = () => {
         )}
 
         {!loading && !error && people.length > 0 && (
-          <table
-            data-cy="peopleTable"
-            className="table is-striped is-hoverable is-narrow is-fullwidth"
-          >
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sex</th>
-                <th>Born</th>
-                <th>Died</th>
-                <th>Mother</th>
-                <th>Father</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {people.map(person => (
-                <tr
-                  key={person.slug}
-                  data-cy="person"
-                  className={classNames({
-                    'has-background-warning': slug === person.slug,
-                  })}
-                >
-                  <td>
-                    <PersonLink name={person.name} people={people} />
-                  </td>
-                  <td>{person.sex}</td>
-                  <td>{person.born}</td>
-                  <td>{person.died}</td>
-                  <td>
-                    <PersonLink name={person.motherName} people={people} />
-                  </td>
-                  <td>
-                    <PersonLink name={person.fatherName} people={people} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <PeopleTable people={people} />
         )}
       </div>
     </>
