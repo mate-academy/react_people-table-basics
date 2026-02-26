@@ -1,0 +1,18 @@
+.navbar-item,
+.navbar-link {
+  color: #485fc7;
+}
+
+a.navbar-item:focus,
+a.navbar-item:focus-within,
+a.navbar-item:hover,
+a.navbar-item.is-active,
+.navbar-link:focus,
+.navbar-link:focus-within,
+.navbar-link:hover,
+.navbar-link.is-active {
+  color: #485fc7;
+  background-color: inherit;
+}
+
+
