@@ -1,4 +1,4 @@
-import { NavLink, Route, Routes, Outlet } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import './NavBar.scss';
 

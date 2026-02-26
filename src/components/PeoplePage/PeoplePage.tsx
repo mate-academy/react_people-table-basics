@@ -38,7 +38,7 @@ export const PeoplePage = () => {
           setIsLoading(false);
         });
     }, 1000);
-  }, []);
+  }, [navigate]);
 
   return (
     <>
