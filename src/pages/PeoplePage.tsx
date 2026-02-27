@@ -25,25 +25,53 @@ export const PeoplePage = () => {
     loadPeople();
   }, []);
 
+  if (loading) {
+    return (
+      <>
+      <h1 className="title">People Page</h1>
+
+      <div className="block">
+        <div className="box table-container">
+           <Loader />
+        </div>
+      </div>
+      </>
+    )
+  }
+
+  if (errorMessage) {
+    return (
+      <>
+      <h1 className="title">People Page</h1>
+
+      <div className="block">
+         <p data-cy="peopleLoadingError" className="has-text-danger">
+              Something went wrong
+            </p>
+      </div>
+      </>
+    )
+  }
+
+  if(people.length === 0) {
+    return (
+       <>
+      <h1 className="title">People Page</h1>
+
+      <div className="block">
+         <p data-cy="noPeopleMessage">There are no people on the server</p>
+      </div>
+      </>
+    )
+  }
   return (
     <>
       <h1 className="title">People Page</h1>
 
       <div className="block">
         <div className="box table-container">
-          {loading &&  people.length === 0 && <Loader />}
+         <PeopleTable people={people} />
 
-          {errorMessage && (
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
-          )}
-
-          {people.length === 0 && (
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
-          )}
-
-          <PeopleTable people={people} />
         </div>
       </div>
     </>
