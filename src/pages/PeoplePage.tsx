@@ -10,7 +10,7 @@ export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
 
   useEffect(() => {
-    const loadPeople = async() => {
+    const loadPeople = async () => {
       try {
         const data = await getPeople();
 
@@ -23,7 +23,7 @@ export const PeoplePage = () => {
     };
 
     loadPeople();
-  });
+  }, []);
 
   return (
     <>
@@ -31,18 +31,19 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && <Loader />}
+          {loading &&  people.length === 0 && <Loader />}
 
-          {errorMessage && <p data-cy="peopleLoadingError" className="has-text-danger">
+          {errorMessage && (
+            <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
-          </p>
-          }
+            </p>
+          )}
 
           {people.length === 0 && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          <PeopleTable people={people}/>
+          <PeopleTable people={people} />
         </div>
       </div>
     </>

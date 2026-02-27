@@ -1,4 +1,4 @@
-import { useMemo} from 'react';
+import { useMemo } from 'react';
 import { Person } from '../../types';
 import { useParams } from 'react-router-dom';
 import { PersonLink } from '../PersonLink/PersonLink';
