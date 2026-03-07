@@ -1,12 +1,10 @@
 import './App.scss';
-import { useState } from 'react';
-import { HomePage } from './pages/HomePage';
-import { PeoplePage } from './pages/PeoplePage';
-
-type Page = 'home' | 'people';
+import cn from 'classnames';
+import { NavLink, Outlet } from 'react-router-dom';
 
 export const App = () => {
-  const [page, setPage] = useState<Page>('home');
+  const getLinkClass = ({ isActive }: { isActive: boolean }) =>
+    cn('navbar-item', { 'has-background-grey-lighter': isActive });
 
   return (
     <div data-cy="app">
@@ -18,28 +16,18 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <a
-              className="navbar-item"
-              href="#/"
-              onClick={() => setPage('home')}
-            >
+            <NavLink to="/" end className={getLinkClass}>
               Home
-            </a>
+            </NavLink>
 
-            <a
-              className="navbar-item has-background-grey-lighter"
-              href="#/people"
-              onClick={() => setPage('people')}
-            >
+            <NavLink to="people" className={getLinkClass}>
               People
-            </a>
+            </NavLink>
           </div>
         </div>
       </nav>
-
       <main className="section">
-        {page === 'home' && <HomePage />}
-        {page === 'people' && <PeoplePage />}
+        <Outlet />
       </main>
     </div>
   );
