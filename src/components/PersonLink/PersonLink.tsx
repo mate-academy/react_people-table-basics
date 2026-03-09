@@ -7,15 +7,13 @@ import { NavLink } from 'react-router-dom';
 type Props = {
   person: Person;
   people: Person[];
-  // selectedPerson: Person | null;
-  personSlug?: string;
+  selectedSlug: string | undefined;
 };
 
 export const PersonLink: React.FC<Props> = ({
   person,
   people,
-  // selectedPerson,
-  personSlug,
+  selectedSlug,
 }) => {
   const { name, sex, born, died, motherName, fatherName, slug } = person;
 
@@ -24,7 +22,7 @@ export const PersonLink: React.FC<Props> = ({
   };
 
   const fillParentCell = (parentName: string | null) => {
-    if (parentName === null) {
+    if (!parentName) {
       return '-';
     }
 
@@ -45,10 +43,8 @@ export const PersonLink: React.FC<Props> = ({
   return (
     <tr
       data-cy="person"
-      key={slug}
       className={cn({
-        'has-background-warning': slug === personSlug,
-        // 'has-background-warning': slug === selectedPerson?.slug,
+        'has-background-warning': slug === selectedSlug,
       })}
     >
       <td>

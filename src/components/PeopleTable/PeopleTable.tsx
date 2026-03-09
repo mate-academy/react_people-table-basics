@@ -1,22 +1,13 @@
 import React from 'react';
 import { PersonLink } from '../PersonLink';
 import { Person } from '../../types';
-import { useParams } from 'react-router-dom';
 
 type Props = {
   people: Person[];
+  selectedSlug: string | undefined;
 };
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
-  const { personSlug } = useParams();
-
-  // const selectedPerson = personSlug
-  //   ? (people.find(man => man.slug === personSlug) ?? null)
-  //   : null;
-
-  // console.log(personSlug);
-  // console.log(selectedPerson);
-
+export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
   return (
     <table
       data-cy="peopleTable"
@@ -39,8 +30,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             key={person.slug}
             person={person}
             people={people}
-            personSlug={personSlug}
-            // selectedPerson={selectedPerson}
+            selectedSlug={selectedSlug}
           />
         ))}
       </tbody>

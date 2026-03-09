@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { PeopleTable } from './../components/PeopleTable/PeopleTable';
 import { Person } from './../types';
@@ -7,12 +8,14 @@ import { Loader } from './../components/Loader';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  const { personSlug } = useParams();
+
   function loadPeople() {
-    setLoading(true);
-    // setErrorMessage('');
+    setIsLoading(true);
 
     getPeople()
       .then(setPeople)
@@ -20,7 +23,8 @@ export const PeoplePage: React.FC = () => {
         setErrorMessage('Something went wrong');
       })
       .finally(() => {
-        setLoading(false);
+        setIsLoading(false);
+        setIsLoaded(true);
       });
   }
 
@@ -32,16 +36,16 @@ export const PeoplePage: React.FC = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && <Loader />}
+          {isLoading && <Loader />}
 
-          {!loading && !errorMessage && people.length > 0 && (
-            <PeopleTable people={people} />
+          {!isLoading && !errorMessage && people.length > 0 && (
+            <PeopleTable people={people} selectedSlug={personSlug} />
           )}
 
-          {!loading && !errorMessage && people.length === 0 && (
+          {!isLoading && isLoaded && !errorMessage && people.length === 0 && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
-          {!loading && errorMessage && (
+          {!isLoading && errorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               {errorMessage}
             </p>
