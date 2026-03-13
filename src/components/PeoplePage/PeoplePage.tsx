@@ -1,18 +1,17 @@
 import { Loader } from '../Loader';
-import { useEffect, useState } from 'react';
-import { API_URL } from '../../constants/api';
-import { Person } from '../../types';
+import { useContext, useEffect, useState } from 'react';
 import { PeopleTable } from '../PeopleTable';
+import { PeopleContext } from '../../context/PeopleContext';
+import { getPeople } from '../../api';
 
 export const PeoplePage = () => {
   const [status, setStatus] = useState('loading');
-  const [people, setPeople] = useState<Person[]>([]);
+  const { setPeople } = useContext(PeopleContext);
 
   useEffect(() => {
     setStatus('loading');
 
-    fetch(`${API_URL}/people.json`)
-      .then(response => response.json())
+    getPeople()
       .then(data => {
         setPeople(data);
         setStatus(data.length === 0 ? 'empty' : 'success');
@@ -20,7 +19,7 @@ export const PeoplePage = () => {
       .catch(() => {
         setStatus('error');
       });
-  }, []);
+  }, [setPeople]);
 
   return (
     <>
@@ -40,7 +39,7 @@ export const PeoplePage = () => {
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
-          {status === 'success' && <PeopleTable people={people} />}
+          {status === 'success' && <PeopleTable />}
         </div>
       </div>
     </>
