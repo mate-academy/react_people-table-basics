@@ -41,7 +41,7 @@ const PeopleTable = ({ people, selectedSlug }: PeopleTableProps) => {
             <td>{person.died}</td>
 
             <td>
-              {people.find(p => p.name === person.motherName) ? (
+              {people.find(mother => mother.name === person.motherName) ? (
                 <PersonLink
                   person={people.find(p => p.name === person.motherName)!}
                 />
@@ -51,7 +51,7 @@ const PeopleTable = ({ people, selectedSlug }: PeopleTableProps) => {
             </td>
 
             <td>
-              {people.find(p => p.name === person.fatherName) ? (
+              {people.find(father => father.name === person.fatherName) ? (
                 <PersonLink
                   person={people.find(p => p.name === person.fatherName)!}
                 />
