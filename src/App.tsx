@@ -1,167 +1,133 @@
+import { useEffect, useState } from 'react';
+import {
+  NavLink,
+  Navigate,
+  Route,
+  Routes,
+  useParams,
+} from 'react-router-dom';
+
+import { getPeople } from './api';
 import { Loader } from './components/Loader';
+import { PeopleTable } from './components/PeopleTable';
+import { Person } from './types/Person';
 
 import './App.scss';
 
-export const App = () => (
-  <div data-cy="app">
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
-            Home
-          </a>
+const Nav = () => (
+  <nav
+    data-cy="nav"
+    className="navbar is-fixed-top has-shadow"
+    role="navigation"
+    aria-label="main navigation"
+  >
+    <div className="container">
+      <div className="navbar-brand">
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) =>
+            `navbar-item${isActive ? ' has-background-grey-lighter' : ''}`
+          }
+        >
+          Home
+        </NavLink>
 
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
-          >
-            People
-          </a>
-        </div>
+        <NavLink
+          to="/people"
+          className={({ isActive }) =>
+            `navbar-item${isActive ? ' has-background-grey-lighter' : ''}`
+          }
+        >
+          People
+        </NavLink>
       </div>
-    </nav>
+    </div>
+  </nav>
+);
 
+const HomePage = () => (
+  <main className="section">
+    <div className="container">
+      <h1 className="title">Home Page</h1>
+    </div>
+  </main>
+);
+
+const NotFoundPage = () => (
+  <main className="section">
+    <div className="container">
+      <h1 className="title">Page not found</h1>
+    </div>
+  </main>
+);
+
+const PeoplePage = () => {
+  const { slug } = useParams<{ slug?: string }>();
+  const [people, setPeople] = useState<Person[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setHasError(false);
+
+    getPeople()
+      .then(data => {
+        setPeople(data || []);
+        setHasError(false);
+      })
+      .catch(() => {
+        setPeople([]);
+        setHasError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  const selectedSlug = slug ?? '';
+  const hasPeople = people.length > 0;
+
+  return (
     <main className="section">
       <div className="container">
-        <h1 className="title">Home Page</h1>
         <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
 
         <div className="block">
           <div className="box table-container">
-            <Loader />
+            {isLoading && <Loader />}
 
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
+            {hasError && !isLoading && (
+              <p data-cy="peopleLoadingError" className="has-text-danger">
+                Something went wrong
+              </p>
+            )}
 
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
+            {!isLoading && !hasError && !hasPeople && (
+              <p data-cy="noPeopleMessage">There are no people on the server</p>
+            )}
 
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/jan-van-brussel-1714">Jan van Brussel</a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1714</td>
-                  <td>1748</td>
-                  <td>Joanna van Rooten</td>
-                  <td>Jacobus van Brussel</td>
-                </tr>
-
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/philibert-haverbeke-1907">
-                      Philibert Haverbeke
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1907</td>
-                  <td>1997</td>
-
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/emma-de-milliano-1876"
-                    >
-                      Emma de Milliano
-                    </a>
-                  </td>
-
-                  <td>
-                    <a href="#/people/emile-haverbeke-1877">Emile Haverbeke</a>
-                  </td>
-                </tr>
-
-                <tr data-cy="person" className="has-background-warning">
-                  <td>
-                    <a href="#/people/jan-frans-van-brussel-1761">
-                      Jan Frans van Brussel
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1761</td>
-                  <td>1833</td>
-                  <td>-</td>
-
-                  <td>
-                    <a href="#/people/jacobus-bernardus-van-brussel-1736">
-                      Jacobus Bernardus van Brussel
-                    </a>
-                  </td>
-                </tr>
-
-                <tr data-cy="person">
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/lievijne-jans-1542"
-                    >
-                      Lievijne Jans
-                    </a>
-                  </td>
-
-                  <td>f</td>
-                  <td>1542</td>
-                  <td>1582</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/bernardus-de-causmaecker-1721">
-                      Bernardus de Causmaecker
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1721</td>
-                  <td>1789</td>
-
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/livina-haverbeke-1692"
-                    >
-                      Livina Haverbeke
-                    </a>
-                  </td>
-
-                  <td>
-                    <a href="#/people/lieven-de-causmaecker-1696">
-                      Lieven de Causmaecker
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            {!isLoading && !hasError && hasPeople && (
+              <PeopleTable people={people} selectedSlug={selectedSlug} />
+            )}
           </div>
         </div>
       </div>
     </main>
+  );
+};
+
+export const App = () => (
+  <div data-cy="app">
+    <Nav />
+
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/home" element={<Navigate replace to="/" />} />
+      <Route path="/people" element={<PeoplePage />} />
+      <Route path="/people/:slug" element={<PeoplePage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   </div>
 );
