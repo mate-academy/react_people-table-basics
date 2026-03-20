@@ -2,19 +2,10 @@ import { Person } from '../types';
 import { NavLink } from 'react-router-dom';
 
 type Props = {
-  person: Person | null;
-  name?: string | null;
+  person: Person;
 };
 
-export default function PersonLink({ person, name }: Props) {
-  if (!person && !name) {
-    return <>-</>;
-  }
-
-  if (!person) {
-    return <>{name}</>;
-  }
-
+export default function PersonLink({ person }: Props) {
   return (
     <NavLink
       to={`/people/${person.slug}`}

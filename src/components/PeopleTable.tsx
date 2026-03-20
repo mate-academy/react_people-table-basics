@@ -44,10 +44,10 @@ export default function PeopleTable({ people, selectedPerson }: Props) {
               <td>{person.born}</td>
               <td>{person.died}</td>
               <td>
-                <PersonLink person={mother} name={person.motherName} />
+                {mother ? <PersonLink person={mother} /> : person.motherName || '-'}
               </td>
               <td>
-                <PersonLink person={father} name={person.fatherName} />
+                {father ? <PersonLink person={father} /> : person.fatherName || '-'}
               </td>
             </tr>
           );
