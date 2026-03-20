@@ -52,7 +52,6 @@ export default function People() {
             <PeopleTable
               people={people}
               selectedPerson={selectedPerson}
-              onSelect={name => setSelectedPerson(name)}
             />
           )}
         </div>

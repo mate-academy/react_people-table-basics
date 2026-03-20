@@ -2,17 +2,14 @@ import { Person } from '../types';
 import { NavLink } from 'react-router-dom';
 
 type Props = {
-  name: string | null;
-  people: Person[];
-  onSelect: (name: string) => void;
+  person: Person | null;
+  name?: string | null;
 };
 
-export default function PersonLink({ name, people, onSelect }: Props) {
-  if (!name) {
+export default function PersonLink({ person, name }: Props) {
+  if (!person && !name) {
     return <>-</>;
   }
-
-  const person = people.find(p => p.name === name);
 
   if (!person) {
     return <>{name}</>;
@@ -21,10 +18,9 @@ export default function PersonLink({ name, people, onSelect }: Props) {
   return (
     <NavLink
       to={`/people/${person.slug}`}
-      onClick={() => onSelect(name)}
       className={person.sex === 'f' ? 'has-text-danger' : ''}
     >
-      {name}
+      {person.name}
     </NavLink>
   );
 }
