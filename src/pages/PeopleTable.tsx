@@ -33,13 +33,12 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           return (
             <tr
               key={person.slug}
-              data-cy="person" // <--- ДОДАЙ ЦЕЙ РЯДОК СЮДИ
+              data-cy="person"
               className={person.slug === slug ? 'has-background-warning' : ''}
             >
               <td>
                 <PersonLink person={person} />
               </td>
-              {/* ... решта комірок <td> без змін */}
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died || '-'}</td>
