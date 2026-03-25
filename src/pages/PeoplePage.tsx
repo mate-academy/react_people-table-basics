@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Person } from './Person';
+import { Person } from '../types/Person';
 import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
