@@ -8,7 +8,7 @@ type Props = {
 
 export const PersonLink = ({ person }: Props) => (
   <Link
-    to={`${person.slug}`}
+    to={`../${person.slug}`}
     className={classNames({
       'has-text-danger': person.sex === 'f',
     })}
