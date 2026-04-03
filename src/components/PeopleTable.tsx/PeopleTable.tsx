@@ -1,5 +1,6 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink.tsx/PersonLink';
 
 type Props = {
   people: Person[];
@@ -36,43 +37,29 @@ export const PeopleTable = ({ people }: Props) => {
               className={person.slug === slug ? 'has-background-warning' : ''}
             >
               <td>
-                <Link
+                {/* <Link
                   to={`/people/${person.slug}`}
                   className={person.sex === 'f' ? 'has-text-danger' : ''}
                 >
                   {person.name}
-                </Link>
+                </Link> */}
+                <PersonLink person={person} />
               </td>
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
               <td>
-                {person.motherName ? (
-                  mother ? (
-                    <Link
-                      to={`/people/${mother.slug}`}
-                      className="has-text-danger"
-                    >
-                      {person.motherName}
-                    </Link>
-                  ) : (
-                    person.motherName
-                  )
+                {mother ? (
+                  <PersonLink person={mother} />
                 ) : (
-                  '-'
+                  person.motherName || '-'
                 )}
               </td>
               <td>
-                {person.fatherName ? (
-                  father ? (
-                    <Link to={`/people/${father.slug}`}>
-                      {person.fatherName}
-                    </Link>
-                  ) : (
-                    person.fatherName
-                  )
+                {father ? (
+                  <PersonLink person={father} />
                 ) : (
-                  '-'
+                  person.fatherName || '-'
                 )}
               </td>
             </tr>
