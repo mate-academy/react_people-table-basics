@@ -1,40 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Loader } from '../Loader';
+import React from 'react';
 import { PersonLink } from '../personlink/personlink';
-import { getPeople } from '../../api';
-import { Person } from '../../types';
-import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
+import { Loader } from '../Loader';
+import {  Person, TableProps } from '../../types';
 
-export const PeopleTable: React.FC = () => {
-  const [person, setPerson] = useState<Person[]>([]);
-  const [isLoading, setIsloading] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
-  const [serveAlone, setServerAlone] = useState<boolean>(false);
 
-  const getError = (message: string) => setErrorMessage(message);
-
-  useEffect(() => {
-    setErrorMessage('');
-    setIsloading(true);
-    getPeople()
-      .then(people => {
-        setPerson(people);
-        setIsloading(false);
-      })
-      .catch(() => getError('Something went wrong'))
-      .finally(() => setServerAlone(true));
-  }, []);
-
-  const { slug } = useParams();
-  const selectedUser = slug;
+export const PeopleTable: React.FC<TableProps> = ({ person, errorMessage, isLoading, serveAlone, selectedUser }) => {
+  const peoples: Record<string, Person> = {}
+  person.forEach((p) => peoples[p.name] = p )
 
   return (
     <div className="block">
       <div className="box table-container">
         {isLoading && <Loader />}
 
-        {errorMessage.length && (
+        {errorMessage && (
           <p data-cy="peopleLoadingError" className="has-text-danger">
             {errorMessage}
           </p>
@@ -59,13 +39,13 @@ export const PeopleTable: React.FC = () => {
                 <th>Father</th>
               </tr>
             </thead>
+            <tbody >
             {person.map(p => {
-              const mother = person.find(m => m.name === p.motherName);
-              const father = person.find(f => f.name === p.fatherName);
+              const mother = peoples[p.motherName || ''];
+              const father = peoples[p.fatherName || ''];
 
               return (
-                <tbody key={p.slug}>
-                  <tr
+                  <tr key={p.slug}
                     data-cy="person"
                     className={classNames({
                       'has-background-warning': selectedUser === p.slug,
@@ -85,9 +65,10 @@ export const PeopleTable: React.FC = () => {
                       <PersonLink person={father} name={p.fatherName} />
                     </td>
                   </tr>
-                </tbody>
+
               );
             })}
+             </tbody>
           </table>
         )}
       </div>
