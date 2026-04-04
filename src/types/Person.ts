@@ -9,3 +9,8 @@ export interface Person {
   mother?: Person;
   father?: Person;
 }
+
+export interface PersonProps {
+  person: Person | undefined;
+  name: string | null;
+}
