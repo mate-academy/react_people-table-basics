@@ -9,3 +9,16 @@ export interface Person {
   mother?: Person;
   father?: Person;
 }
+
+export interface PersonProps {
+  person: Person | undefined;
+  name?: string | null;
+}
+
+export interface TableProps {
+  person: Person[];
+  errorMessage: string;
+  isLoading: boolean;
+  serveAlone: boolean;
+  selectedUser: string | undefined;
+}
