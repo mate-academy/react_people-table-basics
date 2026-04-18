@@ -2,15 +2,12 @@ import { useEffect, useState } from 'react';
 import { Person } from '../types/Person';
 import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
-import { Link, useParams } from 'react-router-dom';
-import { PersonLink } from '../components/PersonLink/PersonLink';
+import { PeopleTable } from '../components/PeopleTable/PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-
-  const { slug } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
@@ -46,70 +43,7 @@ export const PeoplePage = () => {
             )}
 
             {!isLoading && !error && people.length > 0 && (
-              <table
-                data-cy="peopleTable"
-                className="table is-striped is-hoverable is-narrow is-fullwidth"
-              >
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Born</th>
-                    <th>Died</th>
-                    <th>Mother</th>
-                    <th>Father</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {people.map(person => {
-                    const mother =
-                      people.find(p => p.name === person.motherName) || null;
-
-                    const father =
-                      people.find(p => p.name === person.fatherName) || null;
-
-                    return (
-                      <tr
-                        key={person.slug}
-                        data-cy="person"
-                        className={
-                          person.slug === slug
-                            ? 'has-background-warning'
-                            : undefined
-                        }
-                      >
-                        <td>
-                          <Link
-                            to={`/people/${person.slug}`}
-                            className={
-                              person.sex === 'f' ? 'has-text-danger' : undefined
-                            }
-                          >
-                            {person.name}
-                          </Link>
-                        </td>
-                        <td>{person.sex}</td>
-                        <td>{person.born}</td>
-                        <td>{person.died}</td>
-
-                        <td>
-                          <PersonLink
-                            person={mother}
-                            name={person.motherName}
-                          />
-                        </td>
-                        <td>
-                          <PersonLink
-                            person={father}
-                            name={person.fatherName}
-                          />
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+              <PeopleTable people={people} />
             )}
           </div>
         </div>
