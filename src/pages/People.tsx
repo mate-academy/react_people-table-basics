@@ -49,10 +49,7 @@ export default function People() {
           )}
 
           {people.length > 0 && (
-            <PeopleTable
-              people={people}
-              selectedPerson={selectedPerson}
-            />
+            <PeopleTable people={people} selectedPerson={selectedPerson} />
           )}
         </div>
       </div>
