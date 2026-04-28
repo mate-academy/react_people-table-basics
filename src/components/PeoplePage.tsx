@@ -7,14 +7,11 @@ import { PeopleTable } from './PeopleTable';
 
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const { slug } = useParams<{ slug?: string }>();
 
   useEffect(() => {
-    setLoading(true);
-    setError(false);
-
     getPeople()
       .then(setPeople)
       .catch(() => setError(true))
@@ -38,7 +35,11 @@ export const PeoplePage: React.FC = () => {
       )}
 
       {!loading && !error && people.length > 0 && (
-        <PeopleTable people={people} selectedSlug={slug} />
+        <div className="block">
+          <div className="box table-container">
+            <PeopleTable people={people} selectedSlug={slug} />
+          </div>
+        </div>
       )}
     </>
   );

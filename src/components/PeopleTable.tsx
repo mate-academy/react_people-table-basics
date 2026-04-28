@@ -1,6 +1,6 @@
 import React from 'react';
-import { Person } from '../types/Person'; // 1. ИСПРАВЛЯЕМ: Импортируем тип
-import { PersonLink } from './PersonLink'; // Использование одинарных кавычек ''
+import { Person } from '../types/Person';
+import { PersonLink } from './PersonLink';
 
 interface Props {
   people: Person[];
@@ -24,36 +24,41 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => (
     </thead>
 
     <tbody>
-      {people.map(person => (
-        <tr
-          key={person.slug}
-          data-cy="person"
-          className={
-            selectedSlug === person.slug ? 'has-background-warning' : ''
-          }
-        >
-          <td>
-            <PersonLink personName={person.name} people={people} />
-          </td>
-          <td>{person.sex}</td>
-          <td>{person.born}</td>
-          <td>{person.died}</td>
-          <td>
-            {person.motherName ? (
-              <PersonLink personName={person.motherName} people={people} />
-            ) : (
-              '-'
-            )}
-          </td>
-          <td>
-            {person.fatherName ? (
-              <PersonLink personName={person.fatherName} people={people} />
-            ) : (
-              '-'
-            )}
-          </td>
-        </tr>
-      ))}
+      {people.map(person => {
+        const mother = people.find(p => p.name === person.motherName);
+        const father = people.find(p => p.name === person.fatherName);
+
+        return (
+          <tr
+            key={person.slug}
+            data-cy="person"
+            className={
+              selectedSlug === person.slug ? 'has-background-warning' : ''
+            }
+          >
+            <td>
+              <PersonLink person={person} />
+            </td>
+            <td>{person.sex}</td>
+            <td>{person.born}</td>
+            <td>{person.died}</td>
+            <td>
+              {mother ? (
+                <PersonLink person={mother} />
+              ) : (
+                person.motherName || '-'
+              )}
+            </td>
+            <td>
+              {father ? (
+                <PersonLink person={father} />
+              ) : (
+                person.fatherName || '-'
+              )}
+            </td>
+          </tr>
+        );
+      })}
     </tbody>
   </table>
 );

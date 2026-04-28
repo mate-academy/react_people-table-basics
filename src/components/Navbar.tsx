@@ -14,6 +14,7 @@ export const Navbar = () => (
           className={({ isActive }) =>
             `navbar-item ${isActive ? 'has-background-grey-lighter' : ''}`
           }
+          end
         >
           Home
         </NavLink>
