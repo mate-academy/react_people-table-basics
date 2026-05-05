@@ -29,7 +29,7 @@ export const PeoplePage = () => {
     if (people.length === 0) {
       return people;
     } else {
-      return [...people].map(pers => {
+      return people.map(pers => {
         const mother = people.find(person => person.name === pers.motherName);
         const father = people.find(person => person.name === pers.fatherName);
 
@@ -41,6 +41,8 @@ export const PeoplePage = () => {
       });
     }
   }, [people]);
+
+  const isNoPeopleMessage = !isLoading && !errorMessage && people.length === 0;
 
   return (
     <>
@@ -56,7 +58,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!isLoading && !errorMessage && people.length === 0 && (
+          {isNoPeopleMessage && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
