@@ -1,6 +1,8 @@
+export type Gender = 'f' | 'm';
+
 export interface Person {
   name: string;
-  sex: string;
+  sex: Gender;
   born: number;
   died: number;
   fatherName: string | null;
@@ -9,3 +11,5 @@ export interface Person {
   mother?: Person;
   father?: Person;
 }
+
+export default Person;
