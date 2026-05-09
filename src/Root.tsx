@@ -8,16 +8,14 @@ import {
 import { App } from './App';
 import { HomePage } from './pages/HomePage';
 import { PeoplePage } from './pages/PeoplePage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export const Root = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route
-            path="*"
-            element={<h1 className="title">Page not found</h1>}
-          ></Route>
+          <Route path="*" element={<NotFoundPage />}></Route>
 
           <Route index element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" replace />} />

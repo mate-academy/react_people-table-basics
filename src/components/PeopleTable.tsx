@@ -1,25 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { getPeople } from '../api';
+import React from 'react';
 import { Person } from '../types';
 import { Loader } from './Loader';
 import { PersonLink } from './PersonLink';
 
-export const PeopleTable = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+type Props = {
+  people: Person[];
+  errorMessage: string;
+  isLoading: boolean;
+};
 
-  useEffect(() => {
-    setIsLoading(true);
-
-    getPeople()
-      .then(receivedPeople => {
-        setPeople(receivedPeople);
-        setIsLoading(false);
-      })
-      .catch(() => setErrorMessage('Something went wrong'));
-  }, []);
-
+export const PeopleTable: React.FC<Props> = ({
+  people,
+  errorMessage,
+  isLoading,
+}) => {
   return (
     <>
       <div className="box table-container">
@@ -53,7 +47,7 @@ export const PeopleTable = () => {
 
             <tbody>
               {people.map(person => (
-                <PersonLink key={person.born} person={person} people={people} />
+                <PersonLink key={person.slug} person={person} people={people} />
               ))}
             </tbody>
           </table>
