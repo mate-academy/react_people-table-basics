@@ -12,7 +12,7 @@ Implement the `App` with 2 pages and ability to select a person in the table.
 1. Add the `Navbar` with 2 links `Home` and `People`. Active one should have the `has-background-grey-lighter` class;
 1. Use `HashRouter` to be able to share a link to any page on Github pages;
 1. Fetch `people` from [the API](https://mate-academy.github.io/react_people-table/api/people.json) when `PeoplePage` is opened;
-1. Pass `people` to `PeopleTable` component and render as a table (see the given markup);
+1.  `peopPassle` to `PeopleTable` component and render as a table (see the given markup);
 1. Make each name in the table a link a to `/people/:slug` (including mother and father)
     - create the `<PersonLink person={person} />` and use it for all existing people;
     - add the `has-text-danger` class for women names;
@@ -25,4 +25,4 @@ Implement the `App` with 2 pages and ability to select a person in the table.
 - Implement a solution following the [React task guideline](https://github.com/mate-academy/react_task-guideline#react-tasks-guideline).
 - Use the [React TypeScript cheat sheet](https://mate-academy.github.io/fe-program/js/extra/react-typescript).
 - Open one more terminal and run tests with `npm test` to ensure your solution is correct.
-- Replace `<your_account>` with your Github username in the [DEMO LINK](https://<your_account>.github.io/react_people-table-basics/) and add it to the PR description.
+- Replace `<your_account>` with your Github username in the [DEMO LINK](https://Bohdan259.github.io/react_people-table-basics/) and add it to the PR description.
