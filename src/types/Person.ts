@@ -9,3 +9,8 @@ export interface Person {
   mother?: Person;
   father?: Person;
 }
+
+export interface Parents {
+  mother: string | null;
+  father: string | null;
+}
