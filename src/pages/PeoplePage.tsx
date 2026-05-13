@@ -29,6 +29,10 @@ export const PeoplePage = () => {
       .finally(() => setIsLoading(false));
   }, []);
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   if (hasError) {
     return (
       <p data-cy="peopleLoadingError" className="has-text-danger">
@@ -44,11 +48,8 @@ export const PeoplePage = () => {
   return (
     <>
       <h1 className="title">People Page</h1>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <PeopleTable people={people} selectedSlug={slug} />
-      )}
+
+      <PeopleTable people={people} selectedSlug={slug} />
     </>
   );
 };
