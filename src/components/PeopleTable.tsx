@@ -36,7 +36,11 @@ export const PeopleTable = ({ people, selectedSlug }: Props) => {
           <tr
             key={person.slug}
             data-cy="person"
-            className={selectedSlug === person.slug ? 'has-background-warning' : undefined}
+            className={
+              selectedSlug === person.slug
+                ? 'has-background-warning'
+                : undefined
+            }
           >
             <td>
               <PersonLink person={person} />
