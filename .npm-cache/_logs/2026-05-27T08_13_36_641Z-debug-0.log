@@ -1,0 +1,42 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.2.4
+2 info using node@v20.11.0
+3 timing npm:load:whichnode Completed in 1ms
+4 timing config:load:defaults Completed in 3ms
+5 timing config:load:file:C:\nvm\v20.11.0\node_modules\npm\npmrc Completed in 2ms
+6 timing config:load:builtin Completed in 3ms
+7 timing config:load:cli Completed in 1ms
+8 timing config:load:env Completed in 1ms
+9 timing config:load:file:D:\projects\react_people-table-basics\.npmrc Completed in 1ms
+10 timing config:load:project Completed in 1ms
+11 timing config:load:file:C:\Users\inikiforov\.npmrc Completed in 1ms
+12 timing config:load:user Completed in 1ms
+13 timing config:load:file:C:\Program Files\nodejs\etc\npmrc Completed in 1ms
+14 timing config:load:global Completed in 1ms
+15 timing config:load:setEnvs Completed in 1ms
+16 timing config:load Completed in 12ms
+17 timing npm:load:configload Completed in 13ms
+18 timing config:load:flatten Completed in 2ms
+19 timing npm:load:mkdirpcache Completed in 0ms
+20 timing npm:load:mkdirplogs Completed in 1ms
+21 verbose title npm run build
+22 verbose argv "run" "build"
+23 timing npm:load:setTitle Completed in 1ms
+24 timing npm:load:display Completed in 0ms
+25 verbose logfile logs-max:10 dir:d:\projects\react_people-table-basics\.npm-cache\_logs\2026-05-27T08_13_36_641Z-
+26 verbose logfile d:\projects\react_people-table-basics\.npm-cache\_logs\2026-05-27T08_13_36_641Z-debug-0.log
+27 timing npm:load:logFile Completed in 12ms
+28 timing npm:load:timers Completed in 0ms
+29 timing npm:load:configScope Completed in 0ms
+30 timing npm:load Completed in 64ms
+31 silly logfile done cleaning log files
+32 http fetch GET 200 https://registry.npmjs.org/npm 218ms (cache miss)
+33 timing command:run Completed in 2605ms
+34 notice
+34 notice New major version of npm available! 10.2.4 -> 11.15.0
+34 notice Changelog: <https://github.com/npm/cli/releases/tag/v11.15.0>
+34 notice Run `npm install -g npm@11.15.0` to update!
+34 notice
+35 verbose exit 0
+36 timing npm Completed in 2774ms
+37 info ok
