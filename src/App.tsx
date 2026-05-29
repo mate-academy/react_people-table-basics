@@ -1,6 +1,13 @@
-import { Loader } from './components/Loader';
+// import { Loader } from './components/Loader';
+import { NavLink, Outlet } from 'react-router-dom';
 
 import './App.scss';
+import classNames from 'classnames';
+
+const getLinkClass = ({ isActive }: { isActive: boolean }) =>
+  classNames('navbar-item', {
+    'has-background-grey-lighter': isActive,
+  });
 
 export const App = () => (
   <div data-cy="app">
@@ -12,21 +19,24 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
+          <NavLink className={getLinkClass} to="/">
             Home
-          </a>
+          </NavLink>
 
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
-          >
+          <NavLink className={getLinkClass} to="people">
             People
-          </a>
+          </NavLink>
         </div>
       </div>
     </nav>
 
-    <main className="section">
+    <div className="section">
+      <div className="container">
+        <Outlet />
+      </div>
+    </div>
+
+    {/* <main className="section">
       <div className="container">
         <h1 className="title">Home Page</h1>
         <h1 className="title">People Page</h1>
@@ -162,6 +172,6 @@ export const App = () => (
           </div>
         </div>
       </div>
-    </main>
+    </main> */}
   </div>
 );
