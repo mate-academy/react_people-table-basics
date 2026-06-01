@@ -7,11 +7,13 @@ type PersonLinkProps = {
 };
 
 export const PersonLink = ({ person }: PersonLinkProps) => {
+  const isFemale = person.sex === 'f';
+
   return (
     <Link
       to={`/people/${person.slug}`}
       className={classNames({
-        'has-text-danger': person.sex === 'f',
+        'has-text-danger': isFemale,
       })}
     >
       {person.name}
