@@ -63,7 +63,9 @@ export const PeoplePage = () => {
                     <tr
                       data-cy="person"
                       key={person.slug}
-                      className={person.slug === slug ? 'has-background-warning' : ''}
+                      className={
+                        person.slug === slug ? 'has-background-warning' : ''
+                      }
                     >
                       <td>
                         <PersonLink person={person} />
@@ -74,15 +76,19 @@ export const PeoplePage = () => {
                       <td>{person.died}</td>
 
                       <td>
-                        {mother
-                          ? <PersonLink person={mother} />
-                          : person.motherName || '-'}
+                        {mother ? (
+                          <PersonLink person={mother} />
+                        ) : (
+                          person.motherName || '-'
+                        )}
                       </td>
 
                       <td>
-                        {father
-                          ? <PersonLink person={father} />
-                          : person.fatherName || '-'}
+                        {father ? (
+                          <PersonLink person={father} />
+                        ) : (
+                          person.fatherName || '-'
+                        )}
                       </td>
                     </tr>
                   );
