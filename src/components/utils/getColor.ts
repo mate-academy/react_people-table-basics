@@ -1,7 +1,6 @@
 type Params = {
-    isActive: boolean;
-  };
+  isActive: boolean;
+};
 
-  export const getLinkClass = ({ isActive }: Params) => 
-    'navbar-item' + (isActive ? ' has-background-grey-lighter' : '');
-  
+export const getLinkClass = ({ isActive }: Params) =>
+  'navbar-item' + (isActive ? ' has-background-grey-lighter' : '');
