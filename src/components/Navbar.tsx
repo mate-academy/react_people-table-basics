@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { getLinkClass } from './utils/getColor';
 
 export const Navbar = () => (
   <nav
@@ -11,18 +12,14 @@ export const Navbar = () => (
       <div className="navbar-brand">
         <NavLink
           to="/"
-          className={({ isActive }) =>
-            'navbar-item' + (isActive ? ' has-background-grey-lighter' : '')
-          }
+          className={getLinkClass}
         >
           Home
         </NavLink>
 
         <NavLink
           to="/people"
-          className={({ isActive }) =>
-            'navbar-item' + (isActive ? ' has-background-grey-lighter' : '')
-          }
+          className={getLinkClass}
         >
           People
         </NavLink>
