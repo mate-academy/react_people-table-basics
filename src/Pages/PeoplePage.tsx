@@ -12,8 +12,6 @@ export const PeoplePage: React.FC = () => {
   });
 
   useEffect(() => {
-    let timerId: NodeJS.Timeout;
-
     const fetchPeople = async () => {
       setIsLoading(true);
 
@@ -23,29 +21,29 @@ export const PeoplePage: React.FC = () => {
         setPeople(fetchedPeople);
 
         if (fetchedPeople.length === 0) {
-          setIsErrorsLoading({ ...isErrorsLoading, noPeople: true });
+          setIsErrorsLoading(prev => ({ ...prev, noPeople: true }));
         }
       } catch {
-        setIsErrorsLoading({ ...isErrorsLoading, serverError: true });
+        setIsErrorsLoading(prev => ({ ...prev, serverError: true }));
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchPeople();
+  }, []);
 
+  useEffect(() => {
     if (isErrorsLoading.serverError || isErrorsLoading.noPeople) {
-      timerId = setTimeout(() => {
-        setIsErrorsLoading({ serverError: false, noPeople: false });
-      }, 2000);
+      return;
     }
 
-    return () => {
-      if (timerId) {
-        clearTimeout(timerId);
-      }
-    };
-  }, []);
+    const timerId = setTimeout(() => {
+      setIsErrorsLoading({ serverError: false, noPeople: false });
+    }, 2000);
+
+    return () => clearTimeout(timerId);
+  }, [isErrorsLoading.serverError, isErrorsLoading.noPeople]);
 
   return (
     <div className="container">
