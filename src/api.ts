@@ -13,4 +13,12 @@ export function getPeople(): Promise<Person[]> {
   return wait(500)
     .then(() => fetch(API_URL))
     .then(response => response.json());
+  // .then((people: Person[]) => {
+  //   people.forEach(person => {
+  //     person.mother = people.find(p => p.name === person.motherName);
+  //     person.father = people.find(p => p.name === person.fatherName);
+  //   });
+
+  //   return people;
+  // });
 }
