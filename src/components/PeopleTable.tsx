@@ -38,9 +38,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <tr
               data-cy="person"
               key={person.slug}
-              className={
-                person.slug === slug ? 'has-background-warning' : ''
-              }
+              className={person.slug === slug ? 'has-background-warning' : ''}
             >
               <td>
                 <PersonLink person={person} />
