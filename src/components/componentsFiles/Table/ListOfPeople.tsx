@@ -32,23 +32,23 @@ export const ListOfPeople: React.FC<ListProps> = ({ people }) => {
             <td>{person.sex}</td>
             <td>{person.born}</td>
             <td>{person.died}</td>
-            {person.motherName !== null ? (
+            {person.motherName?.trim() ? (
               <td>
                 {findMother !== undefined ? (
                   <PersonLink person={findMother} />
                 ) : (
-                  person.motherName
+                  person.motherName.trim()
                 )}
               </td>
             ) : (
               <td>-</td>
             )}
-            {person.fatherName !== null ? (
+            {person.fatherName?.trim() ? (
               <td>
                 {findFather !== undefined ? (
                   <PersonLink person={findFather} />
                 ) : (
-                  person.fatherName
+                  person.fatherName.trim()
                 )}
               </td>
             ) : (

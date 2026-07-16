@@ -19,7 +19,7 @@ export const PeoplePage = () => {
       .then(setPeople)
       .catch(() => setErrorMessage('Something went wrong'))
       .finally(() => setIsLoading(false));
-  }, []); //я невпевнений чи правильно дістаю список людей, але нехай буде поки так. можливо ші щось підкаже
+  }, []);
 
   return (
     <div>
