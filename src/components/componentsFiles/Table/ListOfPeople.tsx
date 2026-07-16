@@ -10,12 +10,14 @@ export interface ListProps {
 
 export const ListOfPeople: React.FC<ListProps> = ({ people }) => {
   const { slug } = useParams();
+
   //
   return (
     <tbody>
       {people.map(person => {
         const findFather = people.find(p => p.name === person.fatherName);
         const findMother = people.find(p => p.name === person.motherName);
+
         return (
           <tr
             key={person.slug}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { HomePage } from './components/componentsFiles/HomePage';
-import { PageNotFound } from './components/componentsFiles/ErrorMessages/PageNotFound';
+import {
+  PageNotFound /** */,
+} from './components/componentsFiles/ErrorMessages/PageNotFound';
 import { PeoplePage } from './components/componentsFiles/PeoplePage';
 import { Routes, Route, Navigate, NavLink } from 'react-router-dom';
 
