@@ -1,6 +1,7 @@
 import './App.scss';
 import { HomePage } from './components/HomePage';
 import { Navigation } from './components/Navigation';
+import { NotFoundPage } from './components/NotFoundPage';
 import { PeoplePage } from './components/PeoplePage';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
@@ -15,7 +16,7 @@ export const App = () => (
           <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="/people" element={<PeoplePage />} />
           <Route path="/people/:slug" element={<PeoplePage />} />
-          <Route path="*" element={<h1 className="title">Page not found</h1>} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </main>
