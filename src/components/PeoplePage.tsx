@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Loader } from './Loader';
 import { PeopleTable } from './PeopleTable';
 import { Person } from '../types/Person';
-import { getPeople } from '../api'; // Перевір, чи правильно імпортується функція
+import { getPeople } from '../api';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
