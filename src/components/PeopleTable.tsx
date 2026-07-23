@@ -36,8 +36,12 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
         {people.map(person => {
           const isSelected = person.slug === slug;
 
-          const mother = person.mother || (person.motherName ? peopleByName.get(person.motherName) : null);
-          const father = person.father || (person.fatherName ? peopleByName.get(person.fatherName) : null);
+          const mother =
+            person.mother ||
+            (person.motherName ? peopleByName.get(person.motherName) : null);
+          const father =
+            person.father ||
+            (person.fatherName ? peopleByName.get(person.fatherName) : null);
 
           return (
             <tr
