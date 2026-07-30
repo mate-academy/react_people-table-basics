@@ -10,10 +10,9 @@ export const PeoplePage: React.FC = () => {
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
     setHasError(false);
 
-    const timerId = setTimeout(() => {
+    Promise.resolve().then(() => {
       getPeople()
         .then(data => {
           setPeople(data);
@@ -24,9 +23,7 @@ export const PeoplePage: React.FC = () => {
         .finally(() => {
           setIsLoading(false);
         });
-    }, 0);
-
-    return () => clearTimeout(timerId);
+    });
   }, []);
 
   return (
