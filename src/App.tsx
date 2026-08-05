@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import cn from 'classnames';
 import { Loader } from './components/Loader';
-import { List } from './components/Loader/arrayList/list';
+import { PeopleTable } from './components/Loader/arrayList/list';
 import { getPeople } from './api';
 import { Person } from './types/Person';
 import './App.scss';
@@ -86,7 +86,7 @@ export const App: React.FC = () => {
                           <table
                             data-cy="peopleTable"
                             /* eslint-disable-next-line */
-                            className="table is-striped is-hoverable is-narrow is-fullwidth"
+                              className="table is-striped is-hoverable is-narrow is-fullwidth"
                           >
                             <thead>
                               <tr>
@@ -98,7 +98,7 @@ export const App: React.FC = () => {
                                 <th>Father</th>
                               </tr>
                             </thead>
-                            <List todos={todos} />
+                            <PeopleTable people={todos} />
                           </table>
                         )}
                       </div>

@@ -1,25 +1,25 @@
 import React from 'react';
 import { Person } from '../../../types';
-import { Link, useParams } from 'react-router-dom';
+import { Link as PersonLink, useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 interface Props {
-  todos: Person[];
+  people: Person[];
 }
 
-export const List: React.FC<Props> = ({ todos }) => {
+export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams<{ slug?: string }>();
 
   return (
     <tbody>
-      {todos.map(cobj => {
+      {people.map(cobj => {
         const isSelected = cobj.slug === slug;
 
-        const motherPerson = todos.find(
+        const motherPerson = people.find(
           person => person.name === cobj.motherName,
         );
 
-        const fatherPerson = todos.find(
+        const fatherPerson = people.find(
           person => person.name === cobj.fatherName,
         );
 
@@ -30,14 +30,14 @@ export const List: React.FC<Props> = ({ todos }) => {
             className={cn({ 'has-background-warning': isSelected })}
           >
             <td>
-              <Link
+              <PersonLink
                 className={cn({
                   'has-text-danger': cobj.sex === 'f',
                 })}
                 to={`/people/${cobj.slug}`}
               >
                 {cobj.name}
-              </Link>
+              </PersonLink>
             </td>
 
             <td>{cobj.sex}</td>
@@ -47,12 +47,12 @@ export const List: React.FC<Props> = ({ todos }) => {
             <td>
               {cobj.motherName ? (
                 motherPerson ? (
-                  <Link
+                  <PersonLink
                     className="has-text-danger"
                     to={`/people/${motherPerson.slug}`}
                   >
                     {cobj.motherName}
-                  </Link>
+                  </PersonLink>
                 ) : (
                   cobj.motherName
                 )
@@ -64,9 +64,9 @@ export const List: React.FC<Props> = ({ todos }) => {
             <td>
               {cobj.fatherName ? (
                 fatherPerson ? (
-                  <Link to={`/people/${fatherPerson.slug}`}>
+                  <PersonLink to={`/people/${fatherPerson.slug}`}>
                     {cobj.fatherName}
-                  </Link>
+                  </PersonLink>
                 ) : (
                   cobj.fatherName
                 )
