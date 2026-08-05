@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { Loader } from '../../components/Loader/Loader';
+import { PersonLink } from '../../components/PersonLink/PersonLink';
 import { getPeople } from '../../api';
 import { Person } from '../../types/Person';
-
 
 const findPerson = (
   people: Person[],
@@ -95,14 +95,7 @@ export const PeoplePage: React.FC = () => {
                       })}
                     >
                       <td>
-                        <Link
-                          to={`/people/${person.slug}`}
-                          className={classNames({
-                            'has-text-danger': person.sex === 'f',
-                          })}
-                        >
-                          {person.name}
-                        </Link>
+                        <PersonLink person={person} />
                       </td>
 
                       <td>{person.sex}</td>
@@ -110,21 +103,14 @@ export const PeoplePage: React.FC = () => {
                       <td>{person.died}</td>
                       <td>
                         {mother ? (
-                          <Link
-                            to={`/people/${mother.slug}`}
-                            className="has-text-danger"
-                          >
-                            {mother.name}
-                          </Link>
+                          <PersonLink person={mother} />
                         ) : (
                           motherName || '-'
                         )}
                       </td>
                       <td>
                         {father ? (
-                          <Link to={`/people/${father.slug}`}>
-                            {father.name}
-                          </Link>
+                          <PersonLink person={father} />
                         ) : (
                           fatherName || '-'
                         )}
