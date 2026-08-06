@@ -2,12 +2,13 @@ import { Person } from '../types/Person';
 import { PersonLink } from './PersonLink';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
+import { FC } from 'react';
 
 type Props = {
   people: Person[];
 };
 
-export const PeopleTable = ({ people }: Props) => {
+export const PeopleTable: FC<Props> = ({ people }) => {
   const { slug } = useParams();
 
   return (
@@ -27,13 +28,13 @@ export const PeopleTable = ({ people }: Props) => {
       </thead>
 
       <tbody>
-        {people.map(person => {
+        {people.map((person) => {
           const mother = people.find(
-            currentPerson => currentPerson.name === person.motherName,
+            (currentPerson) => currentPerson.name === person.motherName
           );
 
           const father = people.find(
-            currentPerson => currentPerson.name === person.fatherName,
+            (currentPerson) => currentPerson.name === person.fatherName
           );
 
           return (
