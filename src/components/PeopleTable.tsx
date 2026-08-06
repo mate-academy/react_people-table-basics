@@ -28,13 +28,13 @@ export const PeopleTable: FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map((person) => {
+        {people.map(person => {
           const mother = people.find(
-            (currentPerson) => currentPerson.name === person.motherName
+            currentPerson => currentPerson.name === person.motherName,
           );
 
           const father = people.find(
-            (currentPerson) => currentPerson.name === person.fatherName
+            currentPerson => currentPerson.name === person.fatherName,
           );
 
           return (
