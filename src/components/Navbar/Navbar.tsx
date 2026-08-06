@@ -5,7 +5,7 @@ export const Navbar = () => {
 
   return (
     <nav
-      data-cy="Nav"
+      data-cy="nav"
       className="navbar is-fixed-top has-shadow"
       role="navigation"
       aria-label="main navigation"

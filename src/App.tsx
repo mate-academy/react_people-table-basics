@@ -5,8 +5,10 @@ import { HomePage } from './pages/HomePage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PeoplePage } from './pages/PeoplePage';
 
+import './App.scss';
+
 export const App = () => (
-  <>
+  <div data-cy="app">
     <Navbar />
 
     <main className="section">
@@ -16,7 +18,6 @@ export const App = () => (
 
           <Route path="/people">
             <Route index element={<PeoplePage />} />
-
             <Route path=":slug" element={<PeoplePage />} />
           </Route>
 
@@ -26,5 +27,5 @@ export const App = () => (
         </Routes>
       </div>
     </main>
-  </>
+  </div>
 );
