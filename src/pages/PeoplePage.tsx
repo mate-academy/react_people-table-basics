@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Person } from '../types/Person';
 import { getPeople } from '../api';
 import { Loader } from '../components/Loader';
@@ -9,21 +10,30 @@ export const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
+  const { slug } = useParams();
+
   useEffect(() => {
-    setHasError(false);
     setIsLoading(true);
+    setHasError(false);
 
     getPeople()
       .then(data => {
-        setPeople(data);
+        setTimeout(() => {
+          setPeople(data);
+          setIsLoading(false);
+        }, 300);
       })
       .catch(() => {
         setHasError(true);
-      })
-      .finally(() => {
         setIsLoading(false);
       });
   }, []);
+
+  const selectedPerson = people.find(person => person.slug === slug);
+
+  if (!isLoading && !hasError && slug && !selectedPerson) {
+    return <h1 className="title">Page not found</h1>;
+  }
 
   return (
     <>
@@ -31,18 +41,17 @@ export const PeoplePage: React.FC = () => {
 
       {isLoading && <Loader />}
 
-      {!isLoading && hasError && (
+      {!isLoading && hasError && people.length === 0 && (
         <p data-cy="peopleLoadingError" className="has-text-danger">
           Something went wrong
         </p>
       )}
-
       {!isLoading && !hasError && people.length === 0 && (
         <p data-cy="noPeopleMessage">There are no people on the server</p>
       )}
 
       {!isLoading && !hasError && people.length > 0 && (
-        <PeopleTable people={people} />
+        <PeopleTable people={people} selectedPerson={selectedPerson} />
       )}
     </>
   );
