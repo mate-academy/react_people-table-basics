@@ -11,19 +11,18 @@ export const PeoplePage: React.FC = () => {
 
   useEffect(() => {
     setHasError(false);
+    setIsLoading(true);
 
-    Promise.resolve().then(() => {
-      getPeople()
-        .then(data => {
-          setPeople(data);
-        })
-        .catch(() => {
-          setHasError(true);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    });
+    getPeople()
+      .then(data => {
+        setPeople(data);
+      })
+      .catch(() => {
+        setHasError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   return (
