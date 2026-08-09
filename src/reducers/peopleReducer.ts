@@ -20,7 +20,7 @@ export const peopleInitialState: PeopleState = {
 export const peopleReducer = (state: PeopleState, action: PeopleAction) => {
   switch (action.type) {
     case 'FETCH_START':
-      return { ...state, hasError: false };
+      return { ...state, isLoading: true, hasError: false };
 
     case 'FETCH_SUCCESS':
       return { ...state, isLoading: false, people: action.payload };
