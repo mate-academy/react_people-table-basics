@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Loader } from '../components/Loader/Loader';
-import { PeopleTable } from '../components/PeopleTable';
+import { Loader } from './Loader';
+import { PeopleTable } from './PeopleTable';
 import { getPeople } from '../api';
 import { Person } from '../types/Person';
 
