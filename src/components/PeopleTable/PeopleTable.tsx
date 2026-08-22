@@ -27,29 +27,42 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
       </thead>
 
       <tbody>
-        {people.map(person => (
-          <tr
-            key={person.slug}
-            data-cy="person"
-            className={person.slug === slug ? 'has-background-warning' : ''}
-          >
-            <td>
-              <PersonLink name={person.name} people={people} />
-            </td>
+        {people.map(person => {
+          const mother = people.find(p => p.name === person.motherName);
+          const father = people.find(p => p.name === person.fatherName);
 
-            <td>{person.sex}</td>
-            <td>{person.born}</td>
-            <td>{person.died}</td>
+          return (
+            <tr
+              key={person.slug}
+              data-cy="person"
+              className={person.slug === slug ? 'has-background-warning' : ''}
+            >
+              <td>
+                <PersonLink person={person} />
+              </td>
 
-            <td>
-              <PersonLink name={person.motherName} people={people} />
-            </td>
+              <td>{person.sex}</td>
+              <td>{person.born}</td>
+              <td>{person.died}</td>
 
-            <td>
-              <PersonLink name={person.fatherName} people={people} />
-            </td>
-          </tr>
-        ))}
+              <td>
+                {person.motherName && !mother ? (
+                  person.motherName
+                ) : (
+                  <PersonLink person={mother} />
+                )}
+              </td>
+
+              <td>
+                {person.fatherName && !father ? (
+                  person.fatherName
+                ) : (
+                  <PersonLink person={father} />
+                )}
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
