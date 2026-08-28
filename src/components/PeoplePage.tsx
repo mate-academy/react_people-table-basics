@@ -6,8 +6,8 @@ import { Loader } from './Loader';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [ error, setError ] = useState('');
-  const [ loading, setLoading ] = useState(true);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
@@ -48,7 +48,11 @@ export const PeoplePage = () => {
               {people.length > 0 && (
                 <table
                   data-cy="peopleTable"
-                  className="table is-striped is-hoverable is-narrow is-fullwidth"
+                  className={`
+                  table is-striped
+                  is-hoverable
+                  is-narrow
+                  is-fullwidth`}
                 >
                   <thead>
                     <tr>

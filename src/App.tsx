@@ -15,14 +15,20 @@ export const App = () => {
         <div className="container">
           <div className="navbar-brand">
             <Link
-              className={`navbar-item ${pathname === '/' ? 'has-background-grey-lighter' : ''}`}
+              className={`navbar-item ${
+                pathname === '/' ? 'has-background-grey-lighter' : ''
+              }`}
               to="/"
             >
               Home
             </Link>
 
             <Link
-              className={`navbar-item ${pathname.includes('/people') ? 'has-background-grey-lighter' : ''}`}
+              className={`navbar-item ${
+                pathname.includes('/people')
+                  ? 'has-background-grey-lighter'
+                  : ''
+              }`}
               to="/people"
             >
               People

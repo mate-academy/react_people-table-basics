@@ -1,8 +1,8 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import { App } from "../App";
-import { HomePage } from "../components/HomePage";
-import { PeoplePage } from "../components/PeoplePage";
-import { NotFoundPage } from "../components/NotFoundPage";
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { App } from '../App';
+import { HomePage } from '../components/HomePage';
+import { PeoplePage } from '../components/PeoplePage';
+import { NotFoundPage } from '../components/NotFoundPage';
 
 export const Root = () => (
   <Routes>
