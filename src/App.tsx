@@ -2,6 +2,7 @@ import './App.scss';
 import {
   Navigate,
   NavLink,
+  Outlet,
   Route,
   Routes,
   useLocation,
@@ -49,7 +50,7 @@ export const App: React.FC = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="/people" element={<PeoplePage />}>
-              <Route path=":slug" />
+              <Route path=":slug" element={<Outlet />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

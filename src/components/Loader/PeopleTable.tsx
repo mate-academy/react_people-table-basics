@@ -10,7 +10,7 @@ type Props = {
 export const PeopleTable: React.FC<Props> = ({ people }) => {
   const location = useLocation();
 
-  const findPerson = (name: string | null) =>
+  const findPerson = (name: string | null | undefined) =>
     people.find(person => person.name === name);
 
   return (
