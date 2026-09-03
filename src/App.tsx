@@ -7,6 +7,8 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { PeoplePage } from './components/Loader/PeoplePage';
+import { HomePage } from './components/Loader/HomePage';
+import { NotFoundPage } from './components/Loader/NotFoundPage';
 
 export const App: React.FC = () => {
   const location = useLocation();
@@ -44,15 +46,12 @@ export const App: React.FC = () => {
       <main className="section">
         <div className="container">
           <Routes>
-            <Route path="/" element={<h1 className="title">Home Page</h1>} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="/people" element={<PeoplePage />}>
-              <Route path=":slug" element={null} />
+              <Route path=":slug" />
             </Route>
-            <Route
-              path="*"
-              element={<h1 className="title">Page not found</h1>}
-            />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </main>
