@@ -4,6 +4,7 @@ import { Loader } from './Loader/Loader';
 import { PeopleTable } from './PeopleTable';
 import { getPeople } from '../api';
 import { Person } from '../types/Person';
+import '../App.scss';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
