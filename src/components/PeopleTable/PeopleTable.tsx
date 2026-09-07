@@ -43,9 +43,7 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
             <tr
               key={person.slug}
               data-cy="person"
-              className={
-                person.slug === slug ? 'has-background-warning' : ''
-              }
+              className={person.slug === slug ? 'has-background-warning' : ''}
             >
               <td>
                 <PersonLink person={person} />
@@ -56,19 +54,11 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
               <td>{died}</td>
 
               <td>
-                {mother ? (
-                  <PersonLink person={mother} />
-                ) : (
-                  motherName || '-'
-                )}
+                {mother ? <PersonLink person={mother} /> : motherName || '-'}
               </td>
 
               <td>
-                {father ? (
-                  <PersonLink person={father} />
-                ) : (
-                  fatherName || '-'
-                )}
+                {father ? <PersonLink person={father} /> : fatherName || '-'}
               </td>
             </tr>
           );
