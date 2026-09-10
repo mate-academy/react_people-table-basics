@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, NavLink } from 'react-router-dom';
 import './App.scss';
 import Home from './Home';
 import PeoplePage from './PeoplePage';
+import NotFoundPage from './components/NotFoundPage';
 
 export const App = () => {
   return (
@@ -45,21 +46,12 @@ export const App = () => {
       <div className="section">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="home" element={<Navigate to="/" />} />
+          <Route path="home" element={<Navigate to="/" replace />} />
           <Route path="people">
             <Route index element={<PeoplePage />} />
             <Route path=":slug" element={<PeoplePage />} />
           </Route>
-          <Route
-            path="*"
-            element={
-              <div className="section">
-                <div className="container">
-                  <h1 className="title">Page not found</h1>
-                </div>
-              </div>
-            }
-          />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </>
