@@ -9,6 +9,7 @@ const PeoplePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [database, setDatabase] = useState<Person[]>([]);
   const [error, setError] = useState('');
+  const [urlActive, setUrlActive] = useState('');
 
   useEffect(() => {
     getPeople()
@@ -58,9 +59,25 @@ const PeoplePage = () => {
                   <tbody>
                     {database.map(person => {
                       return (
-                        <tr data-cy="person" key={person.slug}>
+                        <tr
+                          className={
+                            urlActive === person.slug
+                              ? 'has-background-warning'
+                              : ''
+                          }
+                          data-cy="person"
+                          key={person.slug}
+                        >
                           <td>
-                            <Link to={`/people/${person.slug}`}>
+                            <Link
+                              className={
+                                person.sex === 'f' ? 'has-text-danger' : ''
+                              }
+                              onClick={() => {
+                                setUrlActive(person.slug);
+                              }}
+                              to={`/people/${person.slug}`}
+                            >
                               {person.name}
                             </Link>
                           </td>
