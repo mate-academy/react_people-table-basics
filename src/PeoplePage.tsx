@@ -32,13 +32,13 @@ const PeoplePage = () => {
                   </p>
                 )}
 
-                {error.length !== 0 && database.length === 0 && (
-                  <p data-cy="noPeopleMessage">
-                    There are no people on the server
-                  </p>
+                {!isLoading && error.length === 0 && database.length === 0 && (
+                  <p data-cy="noPeopleMessage">There are no people</p>
                 )}
 
-                <PersonTable database={database} />
+                {!isLoading && database.length > 0 && (
+                  <PersonTable database={database} />
+                )}
               </div>
             </div>
           </div>
