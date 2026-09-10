@@ -59,41 +59,42 @@ export const PeopleTable: React.FC<Props> = ({
             </thead>
 
             <tbody>
-              {people.map(person => (
-                <tr
-                  key={person.slug}
-                  data-cy="person"
-                  className={classNames({
-                    'has-background-warning': person.slug === slug,
-                  })}
-                >
-                  <td>
-                    <PersonLink person={person} />
-                  </td>
+              {people.map(person => {
+                const mother = findPersonByName(person.motherName);
+                const father = findPersonByName(person.fatherName);
 
-                  <td>{person.sex}</td>
-                  <td>{person.born}</td>
-                  <td>{person.died}</td>
-                  {findPersonByName(person.motherName) !== null ? (
+                return (
+                  <tr
+                    key={person.slug}
+                    data-cy="person"
+                    className={classNames({
+                      'has-background-warning': person.slug === slug,
+                    })}
+                  >
                     <td>
-                      <PersonLink
-                        person={findPersonByName(person.motherName)}
-                      />
+                      <PersonLink person={person} name={person.name} />
                     </td>
-                  ) : (
-                    <td>{person.motherName ? person.motherName : '-'}</td>
-                  )}
-                  {findPersonByName(person.fatherName) !== null ? (
+
+                    <td>{person.sex}</td>
+                    <td>{person.born}</td>
+                    <td>{person.died}</td>
                     <td>
-                      <PersonLink
-                        person={findPersonByName(person.fatherName)}
-                      />
+                      {person.motherName ? (
+                        <PersonLink person={mother} name={person.motherName} />
+                      ) : (
+                        '-'
+                      )}
                     </td>
-                  ) : (
-                    <td>{person.fatherName ? person.fatherName : '-'}</td>
-                  )}
-                </tr>
-              ))}
+                    <td>
+                      {person.fatherName ? (
+                        <PersonLink person={father} name={person.fatherName} />
+                      ) : (
+                        '-'
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         )}
