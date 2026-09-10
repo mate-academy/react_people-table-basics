@@ -29,6 +29,9 @@ const PersonTable = ({ database }: PersonTableProps) => {
 
       <tbody>
         {database.map(person => {
+          const mom = database.find(p => p.name === person.motherName);
+          const dad = database.find(p => p.name === person.fatherName);
+
           return (
             <tr
               className={slug === person.slug ? 'has-background-warning' : ''}
@@ -42,8 +45,13 @@ const PersonTable = ({ database }: PersonTableProps) => {
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
-              <td>{person.motherName || '-'}</td>
-              <td>{person.fatherName || '-'}</td>
+              <td>
+                {mom ? <PersonLink person={mom} /> : person.motherName || '-'}
+              </td>
+
+              <td>
+                {dad ? <PersonLink person={dad} /> : person.fatherName || '-'}
+              </td>
             </tr>
           );
         })}
