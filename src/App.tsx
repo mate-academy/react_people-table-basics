@@ -1,6 +1,7 @@
-import { Loader } from './components/Loader';
-
 import './App.scss';
+import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
+import cn from 'classnames';
+import { PeoplePage } from './pages/PeoplePage';
 
 export const App = () => (
   <div data-cy="app">
@@ -12,22 +13,39 @@ export const App = () => (
     >
       <div className="container">
         <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
+          <NavLink
+            className={({ isActive }) =>
+              cn('navbar-item', { 'has-background-grey-lighter': isActive })
+            }
+            to="/"
+          >
             Home
-          </a>
+          </NavLink>
 
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
+          <NavLink
+            className={({ isActive }) =>
+              cn('navbar-item', { 'has-background-grey-lighter': isActive })
+            }
+            to="/people"
           >
             People
-          </a>
+          </NavLink>
         </div>
       </div>
     </nav>
 
     <main className="section">
       <div className="container">
+        <Routes>
+          <Route path="/" element={<h1 className="title">Home Page</h1>} />
+          <Route path="people">
+            <Route index element={<PeoplePage />} />
+            <Route path=":slug" element={<PeoplePage />} />
+          </Route>
+          <Route path="home" element={<Navigate to="/" replace={true} />} />
+          <Route path="*" element={<h1 className="title">Page not found</h1>} />
+        </Routes>
+        {/*
         <h1 className="title">Home Page</h1>
         <h1 className="title">People Page</h1>
         <h1 className="title">Page not found</h1>
@@ -160,7 +178,7 @@ export const App = () => (
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
       </div>
     </main>
   </div>
