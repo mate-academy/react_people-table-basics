@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 import { Person } from '../../types';
-import { PersonLink } from '../PersonLink/PeronLink';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 type PeopleTableProps = {
   people: Person[];
