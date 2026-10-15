@@ -6,8 +6,10 @@ import '@fortawesome/fontawesome-free/css/all.css';
 
 import { App } from './App';
 
-createRoot(document.getElementById('root') as HTMLDivElement).render(
+const Root = () => (
   <Router>
     <App />
-  </Router>,
+  </Router>
 );
+
+createRoot(document.getElementById('root') as HTMLDivElement).render(<Root />);
