@@ -1,167 +1,121 @@
 import { Loader } from './components/Loader';
+import { PeopleTable } from './components/PeopleTable';
+import { getPeople } from './api';
+import { Person } from './types/Person';
+import {
+  Link,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import './App.scss';
 
-export const App = () => (
-  <div data-cy="app">
-    <nav
-      data-cy="nav"
-      className="navbar is-fixed-top has-shadow"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <a className="navbar-item" href="#/">
-            Home
-          </a>
+const HomePage = () => <h1 className="title">Home Page</h1>;
 
-          <a
-            className="navbar-item has-background-grey-lighter"
-            href="#/people"
-          >
-            People
-          </a>
-        </div>
-      </div>
-    </nav>
+const NotFoundPage = () => <h1 className="title">Page not found</h1>;
 
-    <main className="section">
-      <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
+const PeoplePage = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const [people, setPeople] = useState<Person[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-        <div className="block">
-          <div className="box table-container">
-            <Loader />
+  useEffect(() => {
+    let isMounted = true;
 
-            <p data-cy="peopleLoadingError" className="has-text-danger">
-              Something went wrong
-            </p>
+    getPeople()
+      .then(data => {
+        if (isMounted) {
+          setPeople(data);
+          setIsLoading(false);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setIsError(true);
+          setIsLoading(false);
+        }
+      });
 
-            <p data-cy="noPeopleMessage">There are no people on the server</p>
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
+  return (
+    <>
+      <h1 className="title">People Page</h1>
+
+      {isLoading && <Loader />}
+
+      {!isLoading && isError && (
+        <p data-cy="peopleLoadingError" className="has-text-danger">
+          Something went wrong
+        </p>
+      )}
+
+      {!isLoading && !isError && people && people.length > 0 && (
+        <PeopleTable people={people} selectedSlug={slug} />
+      )}
+
+      {!isLoading && !isError && people && people.length === 0 && (
+        <p data-cy="noPeopleMessage">There are no people on the server</p>
+      )}
+    </>
+  );
+};
+
+export const App = () => {
+  const location = useLocation();
+
+  return (
+    <div data-cy="app">
+      <nav
+        data-cy="nav"
+        className="navbar is-fixed-top has-shadow"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div className="container">
+          <div className="navbar-brand">
+            <Link
+              className={`navbar-item${
+                location.pathname === '/' ? ' has-background-grey-lighter' : ''
+              }`}
+              to="/"
             >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
+              Home
+            </Link>
 
-              <tbody>
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/jan-van-brussel-1714">Jan van Brussel</a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1714</td>
-                  <td>1748</td>
-                  <td>Joanna van Rooten</td>
-                  <td>Jacobus van Brussel</td>
-                </tr>
-
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/philibert-haverbeke-1907">
-                      Philibert Haverbeke
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1907</td>
-                  <td>1997</td>
-
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/emma-de-milliano-1876"
-                    >
-                      Emma de Milliano
-                    </a>
-                  </td>
-
-                  <td>
-                    <a href="#/people/emile-haverbeke-1877">Emile Haverbeke</a>
-                  </td>
-                </tr>
-
-                <tr data-cy="person" className="has-background-warning">
-                  <td>
-                    <a href="#/people/jan-frans-van-brussel-1761">
-                      Jan Frans van Brussel
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1761</td>
-                  <td>1833</td>
-                  <td>-</td>
-
-                  <td>
-                    <a href="#/people/jacobus-bernardus-van-brussel-1736">
-                      Jacobus Bernardus van Brussel
-                    </a>
-                  </td>
-                </tr>
-
-                <tr data-cy="person">
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/lievijne-jans-1542"
-                    >
-                      Lievijne Jans
-                    </a>
-                  </td>
-
-                  <td>f</td>
-                  <td>1542</td>
-                  <td>1582</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-
-                <tr data-cy="person">
-                  <td>
-                    <a href="#/people/bernardus-de-causmaecker-1721">
-                      Bernardus de Causmaecker
-                    </a>
-                  </td>
-
-                  <td>m</td>
-                  <td>1721</td>
-                  <td>1789</td>
-
-                  <td>
-                    <a
-                      className="has-text-danger"
-                      href="#/people/livina-haverbeke-1692"
-                    >
-                      Livina Haverbeke
-                    </a>
-                  </td>
-
-                  <td>
-                    <a href="#/people/lieven-de-causmaecker-1696">
-                      Lieven de Causmaecker
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <Link
+              className={`navbar-item${
+                location.pathname.startsWith('/people')
+                  ? ' has-background-grey-lighter'
+                  : ''
+              }`}
+              to="/people"
+            >
+              People
+            </Link>
           </div>
         </div>
-      </div>
-    </main>
-  </div>
-);
+      </nav>
+
+      <main className="section">
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="/people" element={<PeoplePage />} />
+            <Route path="/people/:slug" element={<PeoplePage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div>
+      </main>
+    </div>
+  );
+};
