@@ -34,7 +34,11 @@ export function PeoplePage() {
       )}
 
       {!isLoading && !errorMessage && peoples.length > 0 && (
-        <Outlet context={peoples} />
+        <div className="block">
+          <div className="box table-container">
+            <Outlet context={peoples} />
+          </div>
+        </div>
       )}
     </>
   );
