@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Loader } from '../components';
-import { PeopleTable } from '../components/PeopleTable';
+import { Loader, PeopleTable } from '../components';
 import { Person } from '../types/Person';
 
 const BASE_URL =
@@ -8,12 +7,14 @@ const BASE_URL =
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     setErrorMessage(false);
+    setIsLoaded(false);
 
     fetch(BASE_URL)
       .then(res => {
@@ -45,6 +46,7 @@ export const PeoplePage = () => {
         });
 
         setPeople(enrichedPeople);
+        setIsLoaded(true);
       })
       .catch(() => setErrorMessage(true))
       .finally(() => setLoading(false));
@@ -64,7 +66,7 @@ export const PeoplePage = () => {
             </p>
           )}
 
-          {!loading && !errorMessage && people.length === 0 && (
+          {!loading && !errorMessage && isLoaded && people.length === 0 && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
