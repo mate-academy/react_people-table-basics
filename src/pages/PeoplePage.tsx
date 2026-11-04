@@ -69,7 +69,11 @@ export const PeoplePage = () => {
 
       <div className="block">
         <div className="box table-container">
-          {loading && <Loader />}
+          {loading && (
+            <div data-cy="loader">
+              <Loader />
+            </div>
+          )}
 
           {!loading && errorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
