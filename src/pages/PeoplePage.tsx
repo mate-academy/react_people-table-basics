@@ -8,13 +8,11 @@ const BASE_URL =
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     setErrorMessage(false);
-    setIsLoaded(false);
 
     fetch(BASE_URL)
       .then(res => {
@@ -25,9 +23,19 @@ export const PeoplePage = () => {
         return res.json();
       })
       .then((data: Person[]) => {
+        if (!Array.isArray(data)) {
+          setPeople([]);
+
+          return;
+        }
+
         const peopleMap = new Map<string, Person>();
 
-        data.forEach(p => peopleMap.set(p.name, p));
+        data.forEach(p => {
+          if (p && p.name) {
+            peopleMap.set(p.name, p);
+          }
+        });
 
         const enrichedPeople = data.map(person => {
           const mother = person.motherName
@@ -46,10 +54,13 @@ export const PeoplePage = () => {
         });
 
         setPeople(enrichedPeople);
-        setIsLoaded(true);
       })
-      .catch(() => setErrorMessage(true))
-      .finally(() => setLoading(false));
+      .catch(() => {
+        setErrorMessage(true);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   return (
@@ -60,13 +71,13 @@ export const PeoplePage = () => {
         <div className="box table-container">
           {loading && <Loader />}
 
-          {errorMessage && (
+          {!loading && errorMessage && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
-          {!loading && !errorMessage && isLoaded && people.length === 0 && (
+          {!loading && !errorMessage && people.length === 0 && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
