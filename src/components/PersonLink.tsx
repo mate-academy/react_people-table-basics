@@ -4,11 +4,12 @@ import { Person } from '../types';
 
 type Props = {
   person: Person | undefined;
+  name: string;
 };
 
-export const PersonLink: React.FC<Props> = ({ person }) => {
+export const PersonLink: React.FC<Props> = ({ person, name }) => {
   if (!person) {
-    return null;
+    return <>{name}</>;
   }
 
   return (
@@ -18,7 +19,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
         'has-text-danger': person.sex === 'f',
       })}
     >
-      {person.name}
+      {name}
     </Link>
   );
 };
