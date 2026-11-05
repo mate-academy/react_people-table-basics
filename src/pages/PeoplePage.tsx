@@ -19,8 +19,11 @@ export const PeoplePage: React.FC = () => {
         return setPeople(resp);
       })
       .catch(error => {
-        setErrorMessage('Something went wrong');
-        throw error;
+        if (error instanceof Error) {
+          setErrorMessage(error.message);
+        } else {
+          setErrorMessage('Something went wrong');
+        }
       })
       .finally(() => {
         setIsLoading(false);

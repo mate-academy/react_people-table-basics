@@ -13,6 +13,7 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
     return people.find(({ name }) => name === parentName);
   }
 
+  const isPersonExist = people.find(({ name }) => name === person.name);
   const mother = findParent(person.motherName);
   const father = findParent(person.fatherName);
   const isActive = person.slug === slug;
@@ -20,12 +21,16 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
   return (
     <tr data-cy="person" className={cn({ 'has-background-warning': isActive })}>
       <td>
-        <Link
-          to={`/people/${person.slug}`}
-          className={cn({ 'has-text-danger': person.sex === 'f' })}
-        >
-          {person.name}
-        </Link>
+        {isPersonExist ? (
+          <Link
+            to={`/people/${person.slug}`}
+            className={cn({ 'has-text-danger': person.sex === 'f' })}
+          >
+            {person.name}
+          </Link>
+        ) : (
+          person.name
+        )}
       </td>
 
       <td>{person.sex}</td>
@@ -33,7 +38,10 @@ export const PersonLink: React.FC<Props> = ({ person, people }) => {
       <td>{person.died}</td>
       <td>
         {mother ? (
-          <Link to={`/people/${mother.slug}`} className="has-text-danger">
+          <Link
+            to={`/people/${mother.slug}`}
+            className={cn({ 'has-text-danger': mother.sex === 'f' })}
+          >
             {mother.name}
           </Link>
         ) : (
