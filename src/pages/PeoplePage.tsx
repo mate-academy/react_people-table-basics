@@ -29,7 +29,7 @@ export const PeoplePage: React.FC = () => {
     <>
       <h1 className="title">People Page</h1>
 
-      {isLoading && <p data-cy="loader"><Loader /></p>}
+      {isLoading && <Loader />}
 
       {isError && (
         <p data-cy="peopleLoadingError" className="has-text-danger">

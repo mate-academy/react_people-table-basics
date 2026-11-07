@@ -10,7 +10,7 @@ const getLinkClass = ({ isActive }: { isActive: boolean }) =>
 export const Navbar: React.FC = () => (
   <nav className="navbar is-light" data-cy="nav">
     <div className="navbar-brand">
-      <NavLink to="/" className={getLinkClass}>
+      <NavLink to="/" end className={getLinkClass}>
         Home
       </NavLink>
       <NavLink to="/people" className={getLinkClass}>
