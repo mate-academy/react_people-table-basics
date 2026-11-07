@@ -32,7 +32,10 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
   };
 
   return (
-    <table className="table is-fullwidth is-striped is-hoverable" data-cy="peopleTable">
+    <table
+      className="table is-fullwidth is-striped is-hoverable"
+      data-cy="peopleTable"
+    >
       <thead>
         <tr>
           <th>Name</th>

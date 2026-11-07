@@ -12,7 +12,7 @@ export const App: React.FC = () => (
   <div data-cy="app">
     <Navbar />
 
-    <div className="section">
+    <main className="section">
       <div className="container">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -26,6 +26,6 @@ export const App: React.FC = () => (
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
-    </div>
+    </main>
   </div>
 );
