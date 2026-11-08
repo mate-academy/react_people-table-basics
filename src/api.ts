@@ -7,4 +7,3 @@ const BASE_URL =
 export const getPeople = (): Promise<Person[]> => {
   return fetch(BASE_URL).then(response => response.json() as Promise<Person[]>);
 };
-
