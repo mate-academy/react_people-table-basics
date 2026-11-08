@@ -16,7 +16,7 @@ export const PeoplePage: React.FC = () => {
     getPeople()
       .then(fetchedPeople => {
         setPeople(fetchedPeople);
-        setIsError(false); // Явно гарантуємо, що помилки немає
+        setIsError(false);
       })
       .catch(() => {
         setIsError(true);
@@ -32,7 +32,7 @@ export const PeoplePage: React.FC = () => {
 
       {isLoading && <Loader />}
 
-      {isError && (
+      {isError && !isLoading && (
         <p data-cy="peopleLoadingError" className="has-text-danger">
           Something went wrong
         </p>
