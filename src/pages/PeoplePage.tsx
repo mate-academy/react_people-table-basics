@@ -29,7 +29,7 @@ export const PeoplePage: React.FC = () => {
     <>
       <h1 className="title">People Page</h1>
 
-      {isLoading && <Loader/>}
+      {isLoading && <Loader />}
 
       {isError && (
         <p data-cy="peopleLoadingError" className="has-text-danger">
@@ -42,7 +42,11 @@ export const PeoplePage: React.FC = () => {
       )}
 
       {!isLoading && !isError && people.length > 0 && (
-        <PeopleTable people={people} />
+        <div className="block">
+          <div className="box table-container">
+            <PeopleTable people={people} />
+          </div>
+        </div>
       )}
     </>
   );
