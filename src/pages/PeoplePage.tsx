@@ -7,11 +7,11 @@ import { Loader } from '../components/Loader';
 export const PeoplePage: React.FC = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false); // Початковий стан — false
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    setIsError(false); // Скидаємо помилку на початку нового запиту
+    setIsError(false);
 
     getPeople()
       .then(fetchedPeople => {
@@ -32,7 +32,6 @@ export const PeoplePage: React.FC = () => {
 
       {isLoading && <Loader />}
 
-      {/* Помилка повинна відображатися ТІЛЬКИ після завершення завантаження, якщо сталася помилка */}
       {!isLoading && isError && (
         <p data-cy="peopleLoadingError" className="has-text-danger">
           Something went wrong
