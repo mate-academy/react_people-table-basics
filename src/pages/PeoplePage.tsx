@@ -9,22 +9,20 @@ export const PeoplePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    setIsLoading(true);
-    setIsError(false);
+useEffect(() => {
+  setIsError(false);
+  getPeople()
+    .then(fetchedPeople => {
+      setPeople(fetchedPeople);
+    })
+    .catch(() => {
+      setIsError(true);
+    })
+    .finally(() => {
+      setIsLoading(false);
+    });
+}, []);
 
-    getPeople()
-      .then(fetchedPeople => {
-        setPeople(fetchedPeople);
-        setIsError(false);
-      })
-      .catch(() => {
-        setIsError(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
 
   return (
     <>

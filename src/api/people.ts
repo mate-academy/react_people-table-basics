@@ -9,6 +9,6 @@ export const getPeople = (): Promise<Person[]> => {
       throw new Error('Failed to fetch people');
     }
 
-    return response.json();
+    return response.json() as Promise<Person[]>;
   });
 };
