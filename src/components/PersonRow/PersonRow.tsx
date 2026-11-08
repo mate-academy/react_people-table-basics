@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { NavLink, useMatch } from 'react-router-dom';
+import { Link, useMatch } from 'react-router-dom';
 
 import { Person } from '../../types';
 
@@ -21,18 +21,14 @@ export const PersonRow: React.FC<Props> = ({ person, mother, father }) => {
       })}
     >
       <td>
-        <NavLink
+        <Link
           to={`/people/${person.slug}`}
-          className={({ isActive }) =>
-            cn({
-              'has-text-danger': person.sex === 'f',
-              // 'has-background-warning': isActive,
-            })
-          }
-          // {cn({ 'has-text-danger': person.sex === 'f' })}
+          className={cn({
+            'has-text-danger': person.sex === 'f',
+          })}
         >
           {person.name}
-        </NavLink>
+        </Link>
       </td>
 
       <td>{person.sex}</td>
@@ -40,9 +36,9 @@ export const PersonRow: React.FC<Props> = ({ person, mother, father }) => {
       <td>{person.died}</td>
       <td>
         {mother ? (
-          <NavLink to={`/people/${mother.slug}`} className="has-text-danger">
+          <Link to={`/people/${mother.slug}`} className="has-text-danger">
             {mother.name}
-          </NavLink>
+          </Link>
         ) : (
           person.motherName || '-'
         )}
@@ -50,7 +46,7 @@ export const PersonRow: React.FC<Props> = ({ person, mother, father }) => {
 
       <td>
         {father ? (
-          <NavLink to={`/people/${father.slug}`}>{father.name}</NavLink>
+          <Link to={`/people/${father.slug}`}>{father.name}</Link>
         ) : (
           person.fatherName || '-'
         )}

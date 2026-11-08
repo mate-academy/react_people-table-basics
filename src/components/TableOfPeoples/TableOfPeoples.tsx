@@ -24,7 +24,7 @@ export const TableOfPeoples: React.FC<Props> = ({ setError }) => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [setError]);
 
   return isLoading ? (
     <Loader />
