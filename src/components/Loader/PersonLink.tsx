@@ -19,7 +19,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       <td>
         <Link
           className={clsx(person.sex === 'f' && 'has-text-danger')}
-          to={`${person.slug}`}
+          to={`/people/${person.slug}`}
         >
           {person.name}
         </Link>
@@ -31,7 +31,10 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
 
       <td>
         {person.mother ? (
-          <Link className="has-text-danger" to={`${person.mother.slug}`}>
+          <Link
+            className="has-text-danger"
+            to={`/people/${person.mother.slug}`}
+          >
             {person.motherName ? `${person.motherName}` : '-'}
           </Link>
         ) : person.motherName ? (
@@ -43,7 +46,7 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
 
       <td>
         {person.father ? (
-          <Link to={`${person.father.slug}`}>
+          <Link to={`/people/${person.father.slug}`}>
             {person.fatherName ? `${person.fatherName}` : '-'}
           </Link>
         ) : person.fatherName ? (
