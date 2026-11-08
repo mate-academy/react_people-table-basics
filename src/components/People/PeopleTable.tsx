@@ -7,7 +7,7 @@ type Props = {
   people: Person[];
 };
 
-export const People: React.FC<Props> = ({ people }) => {
+export const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
 
   // console.log(slug);
@@ -23,12 +23,7 @@ export const People: React.FC<Props> = ({ people }) => {
           data-cy="person"
         >
           <td>
-            <a
-              className={classNames({ 'has-text-danger': person.sex === 'f' })}
-              href={`#/people/${person.slug}`}
-            >
-              {person.name}
-            </a>
+            <PersonLink person={person} />
           </td>
           <td>{person.sex}</td>
           <td>{person.born}</td>

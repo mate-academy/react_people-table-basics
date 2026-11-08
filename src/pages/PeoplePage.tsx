@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Loader } from '../components/Loader';
-import { People } from '../components/People/PeopleTable';
+import { PeopleTable } from '../components/People/PeopleTable';
 import { Person } from '../types';
 import { getPeople } from '../api';
 
@@ -61,7 +61,7 @@ export const PeoplePage: React.FC = () => {
                   <th>Father</th>
                 </tr>
               </thead>
-              <People people={filteredPeople} />
+              <PeopleTable people={filteredPeople} />
             </table>
           )}
         </div>
