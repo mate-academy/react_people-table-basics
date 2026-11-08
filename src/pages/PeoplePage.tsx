@@ -16,6 +16,7 @@ export const PeoplePage: React.FC = () => {
     getPeople()
       .then(fetchedPeople => {
         setPeople(fetchedPeople);
+        setIsError(false); // Явно гарантуємо, що помилки немає
       })
       .catch(() => {
         setIsError(true);
