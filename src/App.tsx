@@ -3,7 +3,7 @@ import { HomePage } from './components/HomePage/HomePage';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate, NavLink } from 'react-router-dom';
 
 import './App.scss';
 
@@ -19,16 +19,27 @@ export const App = () => {
         >
           <div className="container">
             <div className="navbar-brand">
-              <a className="navbar-item" href="#/">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'navbar-item has-background-grey-lighter'
+                    : 'navbar-item'
+                }
+              >
                 Home
-              </a>
+              </NavLink>
 
-              <a
-                className="navbar-item has-background-grey-lighter"
-                href="#/people"
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? 'navbar-item has-background-grey-lighter'
+                    : 'navbar-item'
+                }
+                to="/people"
               >
                 People
-              </a>
+              </NavLink>
             </div>
           </div>
         </nav>
