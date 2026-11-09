@@ -1,4 +1,7 @@
 import { Loader } from './components/Loader';
+import { HomePage } from './components/HomePage/HomePage';
+import { PeoplePage } from './components/PeoplePage/PeoplePage';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
 import './App.scss';
 
@@ -28,9 +31,9 @@ export const App = () => (
 
     <main className="section">
       <div className="container">
-        <h1 className="title">Home Page</h1>
-        <h1 className="title">People Page</h1>
-        <h1 className="title">Page not found</h1>
+        <HomePage />
+        <PeoplePage />
+        <NotFoundPage />
 
         <div className="block">
           <div className="box table-container">
