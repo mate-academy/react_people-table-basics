@@ -1,14 +1,33 @@
+import { useEffect, useState } from 'react';
 import { Person } from '../../types';
 import { Loader } from '../Loader';
-import { PersonComponent } from '../Person/Person';
+import { getPeople } from '../../api';
+import { PeopleTable } from '../PeopleTable/PeopleTable';
 
-type Props = {
-  people: Person[];
-  LoadingError: boolean;
-  isLoading: boolean;
-};
+export const PeoplePage = () => {
+  const [people, setPeople] = useState<Person[]>([]);
+  const [loadingError, setLoadingError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-export const PeoplePage = ({ people, LoadingError, isLoading }: Props) => {
+  useEffect(() => {
+    const loadPeople = async () => {
+      setIsLoading(true);
+      setLoadingError(false);
+
+      try {
+        const peopleFromServer = await getPeople();
+
+        setPeople(peopleFromServer);
+      } catch {
+        setLoadingError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadPeople();
+  }, []);
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -16,36 +35,16 @@ export const PeoplePage = ({ people, LoadingError, isLoading }: Props) => {
         <div className="box table-container">
           {isLoading && <Loader />}
 
-          {LoadingError && (
+          {loadingError && (
             <p data-cy="peopleLoadingError" className="has-text-danger">
               Something went wrong
             </p>
           )}
 
           {!isLoading &&
-            !LoadingError &&
+            !loadingError &&
             (people.length > 0 ? (
-              <table
-                data-cy="peopleTable"
-                className="table is-striped is-hoverable is-narrow is-fullwidth"
-              >
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Sex</th>
-                    <th>Born</th>
-                    <th>Died</th>
-                    <th>Mother</th>
-                    <th>Father</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {people?.map(person => (
-                    <PersonComponent key={person.slug} person={person} people={people} />
-                  ))}
-                </tbody>
-              </table>
+              <PeopleTable people={people} />
             ) : (
               <p data-cy="noPeopleMessage">There are no people on the server</p>
             ))}

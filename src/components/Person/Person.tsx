@@ -1,5 +1,6 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Person } from '../../types';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   person: Person;
@@ -23,12 +24,7 @@ export const PersonComponent = ({ person, people }: Props) => {
       }
     >
       <td>
-        <Link
-          className={person.sex === 'f' ? 'has-text-danger' : ''}
-          to={`/people/${person.slug}`}
-        >
-          {person.name}
-        </Link>
+        <PersonLink person={person} />
       </td>
 
       <td>{person.sex}</td>
@@ -37,9 +33,7 @@ export const PersonComponent = ({ person, people }: Props) => {
 
       {mother ? (
         <td>
-          <Link className="has-text-danger" to={`/people/${mother.slug}`}>
-            {mother.name}
-          </Link>
+          <PersonLink person={mother} />
         </td>
       ) : (
         <td>{person.motherName || '-'}</td>
@@ -47,7 +41,7 @@ export const PersonComponent = ({ person, people }: Props) => {
 
       {father ? (
         <td>
-          <Link to={`/people/${father.slug}`}>{father.name}</Link>
+          <PersonLink person={father} />
         </td>
       ) : (
         <td>{person.fatherName || '-'}</td>

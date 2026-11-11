@@ -1,34 +1,10 @@
 import './App.scss';
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import { PeoplePage } from './components/PeoplePage/PeoplePage';
-import { Person } from './types';
-import { useEffect, useState } from 'react';
-import { getPeople } from './api';
 import { HomePage } from './components/HomePage/HomePage';
+import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 
 export const App = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-  const [LoadingError, setLoadingError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleGetPeople = async () => {
-    setIsLoading(true);
-    setLoadingError(false);
-    try {
-      const peopleFromServer = await getPeople();
-
-      setPeople(peopleFromServer);
-    } catch {
-      setLoadingError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    handleGetPeople();
-  }, []);
-
   return (
     <div data-cy="app">
       <nav
@@ -65,30 +41,9 @@ export const App = () => {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<Navigate to="/" replace />} />
-            <Route
-              path="/people"
-              element={
-                <PeoplePage
-                  people={people}
-                  LoadingError={LoadingError}
-                  isLoading={isLoading}
-                />
-              }
-            />
-            <Route
-              path="/people/:slug"
-              element={
-                <PeoplePage
-                  people={people}
-                  LoadingError={LoadingError}
-                  isLoading={isLoading}
-                />
-              }
-            />
-            <Route
-              path="*"
-              element={<h1 className="title">Page not found</h1>}
-            />
+            <Route path="/people" element={<PeoplePage />} />
+            <Route path="/people/:slug" element={<PeoplePage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </main>
