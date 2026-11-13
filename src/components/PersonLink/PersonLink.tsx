@@ -5,5 +5,12 @@ type Props = {
 };
 
 export const PersonLink: React.FC<Props> = ({ person }) => {
-  return <a>{person.name}</a>;
+  return (
+    <a
+      href={`#/people/${person.slug}`}
+      className={person.sex === 'f' ? 'has-text-danger' : ''}
+    >
+      {person.name}
+    </a>
+  );
 };
