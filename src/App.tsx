@@ -5,7 +5,6 @@ import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { HashRouter, Routes, Route, Navigate, NavLink } from 'react-router-dom';
 
 import './App.scss';
-import { PeopleTable } from './components/PeopleTable/PeopleTable';
 
 export const App = () => {
   return (
