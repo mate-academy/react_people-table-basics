@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import type { Person } from '../types/Person';

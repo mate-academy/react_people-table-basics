@@ -1,4 +1,3 @@
-
 import cn from 'classnames';
 import type { Person } from '../types/Person';
 import { PersonLink } from './PersonLink';

@@ -1,4 +1,3 @@
-
 import { Link, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 
@@ -23,8 +22,7 @@ export const Navbar = () => {
             const isActive =
               link.to === '/'
                 ? pathname === '/'
-                : pathname === link.to ||
-                  pathname.startsWith(`${link.to}/`);
+                : pathname === link.to || pathname.startsWith(`${link.to}/`);
 
             return (
               <Link

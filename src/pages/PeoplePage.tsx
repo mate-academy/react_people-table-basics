@@ -1,12 +1,9 @@
-
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
+import { getPeople } from '../api';
 import type { Person } from '../types/Person';
-
-const API_URL =
-  'https://mate-academy.github.io/react_people-table/api/people.json';
 
 export const PeoplePage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -18,17 +15,7 @@ export const PeoplePage = () => {
   useEffect(() => {
     let cancelled = false;
 
-    setIsLoading(true);
-    setHasError(false);
-
-    fetch(API_URL)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Unable to load people');
-        }
-
-        return response.json() as Promise<Person[]>;
-      })
+    getPeople()
       .then(loadedPeople => {
         if (!cancelled) {
           setPeople(loadedPeople);
@@ -65,9 +52,7 @@ export const PeoplePage = () => {
           )}
 
           {!isLoading && !hasError && people.length === 0 && (
-            <p data-cy="noPeopleMessage">
-              There are no people on the server
-            </p>
+            <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
           {!isLoading && !hasError && people.length > 0 && (
