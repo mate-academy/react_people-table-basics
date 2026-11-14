@@ -1,8 +1,8 @@
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
+import { PersonLink } from '../PersonLink/PersonLink';
 
 import { useState, useEffect } from 'react';
-
 import { Person } from '../../types';
 
 export const PeoplePage = () => {
@@ -52,18 +52,27 @@ export const PeoplePage = () => {
               </thead>
 
               <tbody>
-                {people.map(person => (
-                  <tr key={person.slug} data-cy="person">
-                    <tr>
-                      <td>{person.name}</td>
+                {people.map(person => {
+                  const mother = people.find(
+                    name => name.name === person.motherName,
+                  );
+                  const father = people.find(
+                    name => name.name === person.fatherName,
+                  );
+
+                  return (
+                    <tr key={person.slug} data-cy="person">
+                      <td>
+                        <PersonLink person={person} people={people} />
+                      </td>
                       <td>{person.sex}</td>
                       <td>{person.born}</td>
                       <td>{person.died}</td>
-                      <td>{person.motherName}</td>
-                      <td>{person.fatherName}</td>
+                      <td>{mother?.name ?? '-'}</td>
+                      <td>{father?.name ?? '-'}</td>
                     </tr>
-                  </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           )}
