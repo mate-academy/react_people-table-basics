@@ -1,6 +1,6 @@
 import { Loader } from '../Loader';
 import { getPeople } from '../../api';
-import { PersonLink } from '../PersonLink/PersonLink';
+import { PeopleTable } from '../PeopleTable/PeopleTable';
 
 import { useState, useEffect } from 'react';
 import { Person } from '../../types';
@@ -36,45 +36,7 @@ export const PeoplePage = () => {
           )}
 
           {!loading && !hasError && people.length > 0 && (
-            <table
-              data-cy="peopleTable"
-              className="table is-striped is-hoverable is-narrow is-fullwidth"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Sex</th>
-                  <th>Born</th>
-                  <th>Died</th>
-                  <th>Mother</th>
-                  <th>Father</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {people.map(person => {
-                  const mother = people.find(
-                    name => name.name === person.motherName,
-                  );
-                  const father = people.find(
-                    name => name.name === person.fatherName,
-                  );
-
-                  return (
-                    <tr key={person.slug} data-cy="person">
-                      <td>
-                        <PersonLink person={person} people={people} />
-                      </td>
-                      <td>{person.sex}</td>
-                      <td>{person.born}</td>
-                      <td>{person.died}</td>
-                      <td>{mother?.name ?? '-'}</td>
-                      <td>{father?.name ?? '-'}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <PeopleTable people={people} />
           )}
         </div>
       </div>
