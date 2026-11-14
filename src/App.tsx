@@ -5,6 +5,7 @@ import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { HashRouter, Routes, Route, Navigate, NavLink } from 'react-router-dom';
 
 import './App.scss';
+import { PeopleTable } from './components/PeopleTable/PeopleTable';
 
 export const App = () => {
   return (
@@ -50,6 +51,7 @@ export const App = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/people" element={<PeoplePage />} />
               <Route path="/home" element={<Navigate to="/" replace />} />
+              <Route path="/people/:slug" element={<PeoplePage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>
