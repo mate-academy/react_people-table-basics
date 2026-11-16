@@ -5,6 +5,8 @@ import { PeopleTable } from '../PeopleTable/PeopleTable';
 import { useState, useEffect } from 'react';
 import { Person } from '../../types';
 
+import { useParams } from 'react-router-dom';
+
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(true);
@@ -16,6 +18,9 @@ export const PeoplePage = () => {
       .catch(() => setHasError(true))
       .finally(() => setLoading(false));
   }, []);
+
+  const { slug } = useParams();
+  const selectedPerson = people.find(person => person.slug === slug);
 
   return (
     <>
@@ -36,7 +41,7 @@ export const PeoplePage = () => {
           )}
 
           {!loading && !hasError && people.length > 0 && (
-            <PeopleTable people={people} />
+            <PeopleTable people={people} selectedPerson={selectedPerson}/>
           )}
         </div>
       </div>

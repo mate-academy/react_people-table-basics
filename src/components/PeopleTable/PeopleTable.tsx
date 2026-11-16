@@ -4,9 +4,10 @@ import { PersonLink } from '../PersonLink/PersonLink';
 
 type Props = {
   people: Person[];
+  selectedPerson: Person | undefined;
 };
 
-export const PeopleTable: React.FC<Props> = ({ people }) => {
+export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
   return (
     <table
       data-cy="peopleTable"
@@ -29,7 +30,15 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
           const father = people.find(name => name.name === person.fatherName);
 
           return (
-            <tr key={person.slug} data-cy="person">
+            <tr
+              key={person.slug}
+              data-cy="person"
+              className={
+                person.slug === selectedPerson?.slug
+                  ? 'has-background-warning'
+                  : ''
+              }
+            >
               <td>
                 <PersonLink person={person} people={people} />
               </td>
