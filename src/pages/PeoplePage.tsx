@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
+import { getPeople } from '../api';
 
-import { Loader } from '../components/Loader';
+import { Loader } from '../components/Loader/Loader';
 import { PeopleTable } from '../components/PeopleTable';
 import { Person } from '../types/Person';
-
-const API_URL =
-  'https://mate-academy.github.io/react_people-table/api/people.json';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
@@ -13,15 +11,8 @@ export const PeoplePage = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch(API_URL)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to load people');
-        }
-
-        return response.json();
-      })
-      .then((data: Person[]) => {
+    getPeople()
+      .then(data => {
         setPeople(data);
       })
       .catch(() => {
