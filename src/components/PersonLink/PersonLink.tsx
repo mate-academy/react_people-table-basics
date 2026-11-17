@@ -1,29 +1,30 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Person } from '../../types';
 
 type Props = {
-  people: Person[]; // потрібен повний список для пошуку
-  personName: string | null;
+  person: Person | string | null;
 };
 
-export const PersonLink: React.FC<Props> = ({ personName, people }) => {
-  const foundPerson = people.find(p => p.name === personName);
-
-  if (!personName) {
-    return '-'; // порожнє ім'я
+export const PersonLink: React.FC<Props> = ({ person }) => {
+  if (!person) {
+    return <>-</>;
   }
 
-  if (!foundPerson) {
-    return personName; // немає людини — просто текст
+  if (typeof person === 'string') {
+    return <>{person}</>;
   }
 
-  // Є людина — рендеримо посилання
+  // Se for o objeto Person completo
   return (
-    <a
-      className={classNames({ 'has-text-danger': foundPerson.sex === 'f' })}
-      href={`#/people/${foundPerson.slug}`}
+    <Link
+      to={`/people/${person.slug}`}
+      className={classNames({
+        'has-text-danger': person.sex === 'f',
+      })}
     >
-      {personName}
-    </a>
+      {person.name}
+    </Link>
   );
 };

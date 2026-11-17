@@ -3,6 +3,7 @@ import { Person } from '../../types';
 import { Loader } from '../Loader';
 import { PersonLink } from '../PersonLink';
 import classNames from 'classnames';
+
 type Props = {
   people: Person[];
   isLoading: boolean;
@@ -48,34 +49,33 @@ export const PeopleTable: React.FC<Props> = ({
             </thead>
 
             <tbody>
-              {people.map(person => (
-                <tr
-                  key={person.slug}
-                  data-cy="person"
-                  className={classNames({
-                    'has-background-warning': person.slug === slug,
-                  })}
-                >
-                  <td>
-                    <PersonLink personName={person.name} people={people} />
-                  </td>
-                  <td>{person.sex}</td>
-                  <td>{person.born}</td>
-                  <td>{person.died}</td>
-                  <td>
-                    <PersonLink
-                      personName={person.motherName}
-                      people={people}
-                    />
-                  </td>
-                  <td>
-                    <PersonLink
-                      personName={person.fatherName}
-                      people={people}
-                    />
-                  </td>
-                </tr>
-              ))}
+              {people.map(person => {
+                const mother = people.find(p => p.name === person.motherName);
+                const father = people.find(p => p.name === person.fatherName);
+
+                return (
+                  <tr
+                    key={person.slug}
+                    data-cy="person"
+                    className={classNames({
+                      'has-background-warning': person.slug === slug,
+                    })}
+                  >
+                    <td>
+                      <PersonLink person={person} />
+                    </td>
+                    <td>{person.sex}</td>
+                    <td>{person.born}</td>
+                    <td>{person.died}</td>
+                    <td>
+                      <PersonLink person={mother || person.motherName} />
+                    </td>
+                    <td>
+                      <PersonLink person={father || person.fatherName} />
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         )}
